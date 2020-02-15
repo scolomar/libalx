@@ -23,10 +23,10 @@ RUN	apt-get update							&& \
 	apt-get clean
 
 WORKDIR	/tmp
-RUN		git clone https://github.com/alejandro-colomar/libalx.git	&& \
-		make		-C libalx	-j 8				&& \
-		make install	-C libalx					&& \
-		rm -rf libalx
+RUN	git clone https://github.com/alejandro-colomar/libalx.git	&& \
+	make		-C libalx	-j 8				&& \
+	make install	-C libalx					&& \
+	rm -rf libalx
 
 
 ## Use this container to build programs that depend on libalx.
