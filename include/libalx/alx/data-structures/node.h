@@ -170,7 +170,7 @@ int	alx_node_read		(void *data, size_t size,
  *	ENOANO:	No data pointer in the node.
  */
 __attribute__((nonnull))
-int	alx_node_getdata	(void **restrict data,
+int	alx_node_get_data	(void **restrict data,
 				 const struct Alx_Node *node);
 
 
