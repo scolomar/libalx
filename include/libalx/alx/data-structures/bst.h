@@ -102,10 +102,8 @@ void	alx_bst_deinit		(struct Alx_BST *bst);
  * bst:		Pointer to a BST.
  * data:	Pointer to the first byte of the data to be copied.
  * size:	Size of the data to be copied.
- * cmp:		Comparison function pointer.  This function should return
- *			0:	The node data compares equal to the bst node.
- *			< 0:	The node data goes to the left of the bst node.
- *			> 0:	The node data goes to the right of the bst node.
+ * cmp:		Comparison function pointer.  Return value logic should
+ *			work as in strcmp().
  *
  * return:
  *	0:		OK.
