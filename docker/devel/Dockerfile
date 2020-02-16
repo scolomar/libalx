@@ -27,6 +27,6 @@ RUN	apt-get update							&& \
 ## These commands need to be called from the pparent directory where libalx is.
 # docker container run --user $(id -u):$(id -g) --tty --interactive --volume $PWD:$PWD --workdir $PWD --name libalx-devel alejandrocolomar/libalx:devel bash
 # docker container start code
-# docker container exec --user root --workdir $PWD code make install --directory libalx
-# docker container exec --user root --tty --interactive --workdir $PWD code bash
+# docker container exec --user root --workdir $PWD libalx-devel make install --directory libalx
+# docker container exec --user root --tty --interactive --workdir $PWD libalx-devel bash
 # docker container attach code

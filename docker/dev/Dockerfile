@@ -34,6 +34,6 @@ RUN	git clone https://github.com/alejandro-colomar/libalx.git	&& \
 ## programs are.
 # docker container run --user $(id -u):$(id -g) --tty --interactive --volume $PWD:$PWD --workdir $PWD --name libalx-dev alejandrocolomar/libalx:dev bash
 # docker container start code
-# docker container exec --user root --workdir $PWD code make install --directory <repository_dir>
-# docker container exec --user root --tty --interactive --workdir $PWD code bash
+# docker container exec --user root --workdir $PWD libalx-dev make install --directory <repository_dir>
+# docker container exec --user root --tty --interactive --workdir $PWD libalx-dev bash
 # docker container attach code
