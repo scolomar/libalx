@@ -128,17 +128,18 @@ void	alx_bst_deinit		(struct Alx_BST *bst)
 }
 
 int	alx_bst_insert		(struct Alx_BST *bst,
-				 int64_t key, const void *data, size_t size)
+				 int64_t *key, const void *data, size_t size)
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, key, data, size))
-		return	ENOMEM;
-	return	alx_bst_insert_node(bst, node);
+	if (alx_node_init(&node, *key, data, size))
+		return	-ENOMEM;
+	return	alx_bst_insert_node(bst, node, key);
 }
 
 int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
-				 struct Alx_Node *restrict node)
+				 struct Alx_Node *restrict node,
+				 int64_t *restrict key)
 {
 	enum		{LEFT, RIGHT};
 
@@ -148,6 +149,8 @@ int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 	int		cmp_res;
 
 	bst->nmemb++;
+	if (key)
+		*key	= node->key;
 	if (node->key > bst->key_max)
 		bst->key_max	= node->key;
 	else if (node->key < bst->key_min)
@@ -176,6 +179,8 @@ int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 			if (!bst->dup) {
 				parent->dup += node->dup + 1;
 				bst->nmemb--;
+				if (key)
+					*key	= parent->key;
 				return	EEXIST;
 			}
 			son	= parent->right;

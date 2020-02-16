@@ -71,7 +71,8 @@
  *
  * bst:		Pointer to a pointer to a binary search tree.  A BST will be
  *		allocated, and a pointer to it will be stored in *bst.
- * cmp:		Comparison function pointer.
+ * cmp:		Comparison function pointer.  Return value logic should
+ *			work as in strcmp().
  * dup:		Does the BST accept duplicate members?
  *
  * return:
@@ -100,19 +101,19 @@ void	alx_bst_deinit		(struct Alx_BST *bst);
  * the user to the newly allocated space, and updates any necessary metadata.
  *
  * bst:		Pointer to a BST.
+ * key:		Key value.  If insertion fails with EEXIST, the value
+ *		of the identic node's key will be stored here.
  * data:	Pointer to the first byte of the data to be copied.
  * size:	Size of the data to be copied.
- * cmp:		Comparison function pointer.  Return value logic should
- *			work as in strcmp().
  *
  * return:
  *	0:		OK.
- *	ENOMEM:		Aborted; failure to allocate the node.
+ *	-ENOMEM:	Aborted; failure to allocate the node.
  *	EEXIST:		Aborted; existing equivalent node in the BST.
  */
-__attribute__((nonnull(1), warn_unused_result))
+__attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_bst_insert		(struct Alx_BST *restrict bst,
-				 int64_t key,
+				 int64_t *key,
 				 const void *restrict data, size_t size);
 
 /*
@@ -123,18 +124,17 @@ int	alx_bst_insert		(struct Alx_BST *restrict bst,
  *
  * bst:		Pointer to a BST.
  * node:	Pointer to the node to be prepended.
- * cmp:		Comparison function pointer.  This function should return
- *			0:	The node data compares equal to the bst node.
- *			< 0:	The node data goes to the left of the bst node.
- *			> 0:	The node data goes to the right of the bst node.
+ * key:		Value of the node key, or of the identic node's key if
+ *		insertion failed.
  *
  * return:
  *	0:		OK.
  *	EEXIST:		Aborted; existing equivalent node in the BST.
  */
-__attribute__((nonnull, warn_unused_result))
+__attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
-				 struct Alx_Node *restrict node);
+				 struct Alx_Node *restrict node,
+				 int64_t *restrict key);
 
 /*
  * Deletes all the nodes in the BST.
@@ -177,11 +177,8 @@ int	alx_bst_rightmost_node	(struct Alx_Node **restrict node,
  * node:	Pointer to a pointer to a node.  The pointer to the found node
  *		will be stored here.
  * bst:		Pointer to a BST.
+ * key:		Key value to search for.
  * data:	Data to search for.
- * cmp:		Comparison function pointer.  This function should return
- *			0:	The data compares equal to the bst node.
- *			< 0:	The data goes to the left of the bst node.
- *			> 0:	The data goes to the right of the bst node.
  */
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_bst_find		(struct Alx_Node **restrict node,
@@ -196,11 +193,8 @@ int	alx_bst_find		(struct Alx_Node **restrict node,
  * node:	Pointer to a pointer to a node.  The pointer to the removed
  *		node will be stored here.
  * bst:		Pointer to a BST.
+ * key:		Key value to search for.
  * data:	Data to search for.
- * cmp:		Comparison function pointer.  This function should return
- *			0:	The data compares equal to the bst node.
- *			< 0:	The data goes to the left of the bst node.
- *			> 0:	The data goes to the right of the bst node.
  */
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_bst_remove		(struct Alx_Node **restrict node,
@@ -263,7 +257,8 @@ int	alx_bst_apply_bwd	(struct Alx_BST *restrict bst,
  * Reorder the BST with a new comparison function.
  *
  * bst:		Pointer to a BST.
- * cmp:		Comparison function pointer.
+ * cmp:		Comparison function pointer.  Return value logic should
+ *			work as in strcmp().
  *
  * return:
  *	0:		OK.
