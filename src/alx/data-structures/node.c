@@ -122,7 +122,7 @@ int	alx_node_read		(void *data, size_t size,
 }
 
 int	alx_node_get_data	(void **restrict data,
-				 const struct Alx_Node *node)
+				 struct Alx_Node *node)
 {
 
 	if (!node->buf) {

@@ -171,7 +171,7 @@ int	alx_node_read		(void *data, size_t size,
  */
 __attribute__((nonnull))
 int	alx_node_get_data	(void **restrict data,
-				 const struct Alx_Node *node);
+				 struct Alx_Node *node);
 
 
 /******************************************************************************
