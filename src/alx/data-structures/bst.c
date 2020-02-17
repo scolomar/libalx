@@ -173,12 +173,12 @@ int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 	son	= bst->root;
 	while (son) {
 		parent	= son;
-		cmp_res = bst->cmp(parent->key, node->key, parent->buf->data,
-							node->buf->data);
-		if (cmp_res > 0) {
+		cmp_res = bst->cmp(node->key, parent->key, node->buf->data,
+							parent->buf->data);
+		if (cmp_res < 0) {
 			son	= parent->left;
 			pos	= LEFT;
-		} else if (cmp_res < 0) {
+		} else if (cmp_res > 0) {
 			son	= parent->right;
 			pos	= RIGHT;
 		} else {
@@ -250,10 +250,10 @@ int	alx_bst_find		(struct Alx_Node **restrict node,
 	son	= bst->root;
 	while (son) {
 		parent	= son;
-		cmp_res	= bst->cmp(parent->key, key, parent->buf->data, data);
-		if (cmp_res > 0) {
+		cmp_res	= bst->cmp(key, parent->key, data, parent->buf->data);
+		if (cmp_res < 0) {
 			son	= parent->left;
-		} else if (cmp_res < 0) {
+		} else if (cmp_res > 0) {
 			son	= parent->right;
 		} else {
 			*node	= parent;
