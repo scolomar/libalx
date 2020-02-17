@@ -89,6 +89,7 @@ BASE_OBJ	=							\
 
 ALX_DS_OBJ	=							\
 		$(BUILD_TMP_DIR)/alx/data-structures/bst.o		\
+		$(BUILD_TMP_DIR)/alx/data-structures/dataframe.o	\
 		$(BUILD_TMP_DIR)/alx/data-structures/dyn-array.o	\
 		$(BUILD_TMP_DIR)/alx/data-structures/dyn-buffer.o	\
 		$(BUILD_TMP_DIR)/alx/data-structures/llist.o		\

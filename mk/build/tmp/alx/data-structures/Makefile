@@ -13,6 +13,7 @@
 # dependencies
 OBJ		=							\
 		bst.o							\
+		dataframe.o						\
 		dyn-array.o						\
 		dyn-buffer.o						\
 		llist.o							\
@@ -20,28 +21,44 @@ OBJ		=							\
 		types.o
 
 BST_INC		=							\
-		$(INC_DIR)/libalx/base/compiler/unused.h		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
 		$(INC_DIR)/libalx/alx/data-structures/llist.h		\
 		$(INC_DIR)/libalx/alx/data-structures/node.h		\
 		$(INC_DIR)/libalx/alx/data-structures/types.h		\
+		$(INC_DIR)/libalx/base/compiler/unused.h		\
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
 		$(INC_DIR)/libalx/alx/data-structures/bst.h
 BST_SRC		=							\
 		$(SRC_DIR)/alx/data-structures/bst.c
 
+DF_INC		=							\
+		$(INC_DIR)/libalx/alx/data-structures/bst.h		\
+		$(INC_DIR)/libalx/alx/data-structures/dyn-array.h	\
+		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h	\
+		$(INC_DIR)/libalx/alx/data-structures/llist.h		\
+		$(INC_DIR)/libalx/alx/data-structures/node.h		\
+		$(INC_DIR)/libalx/alx/data-structures/types.h		\
+		$(INC_DIR)/libalx/base/compiler/unused.h		\
+		$(INC_DIR)/libalx/base/stdlib/alloc/frees.h		\
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
+		$(INC_DIR)/libalx/base/stdlib/compare.h		\
+		$(INC_DIR)/libalx/alx/data-structures/dataframe.h
+DF_SRC		=							\
+		$(SRC_DIR)/alx/data-structures/dataframe.c
+
 DYNARR_INC	=							\
+		$(INC_DIR)/libalx/alx/data-structures/llist.h		\
+		$(INC_DIR)/libalx/alx/data-structures/types.h		\
 		$(INC_DIR)/libalx/base/assert/assert.h			\
 		$(INC_DIR)/libalx/base/stdlib/maximum.h			\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
 		$(INC_DIR)/libalx/base/stdlib/alloc/frees.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/reallocarrays.h	\
-		$(INC_DIR)/libalx/alx/data-structures/llist.h		\
-		$(INC_DIR)/libalx/alx/data-structures/types.h		\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-array.h
 DYNARR_SRC	=							\
 		$(SRC_DIR)/alx/data-structures/dyn-array.c
 
 DYNBUF_INC	=							\
+		$(INC_DIR)/libalx/alx/data-structures/types.h		\
 		$(INC_DIR)/libalx/base/assert/assert.h			\
 		$(INC_DIR)/libalx/base/stdlib/maximum.h			\
 		$(INC_DIR)/libalx/base/stdlib/minimum.h			\
@@ -49,27 +66,26 @@ DYNBUF_INC	=							\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/frees.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/reallocs.h		\
-		$(INC_DIR)/libalx/alx/data-structures/types.h		\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h
 DYNBUF_SRC	=							\
 		$(SRC_DIR)/alx/data-structures/dyn-buffer.c
 
 LLIST_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/unused.h		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
 		$(INC_DIR)/libalx/alx/data-structures/bst.h		\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-array.h	\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h	\
 		$(INC_DIR)/libalx/alx/data-structures/node.h		\
 		$(INC_DIR)/libalx/alx/data-structures/types.h		\
+		$(INC_DIR)/libalx/base/compiler/unused.h		\
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
 		$(INC_DIR)/libalx/alx/data-structures/llist.h
 LLIST_SRC	=							\
 		$(SRC_DIR)/alx/data-structures/llist.c
 
 NODE_INC	=							\
-		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
 		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h	\
 		$(INC_DIR)/libalx/alx/data-structures/types.h		\
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
 		$(INC_DIR)/libalx/alx/data-structures/node.h
 NODE_SRC	=							\
 		$(SRC_DIR)/alx/data-structures/node.c
@@ -100,6 +116,9 @@ all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 bst.a.s: $(BST_SRC) $(BST_INC)
 bst.so.s: $(BST_SRC) $(BST_INC)
+
+dataframe.a.s: $(DF_SRC) $(DF_INC)
+dataframe.so.s: $(DF_SRC) $(DF_INC)
 
 dyn-array.a.s: $(DYNARR_SRC) $(DYNARR_INC)
 dyn-array.so.s: $(DYNARR_SRC) $(DYNARR_INC)
