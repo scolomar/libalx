@@ -42,19 +42,13 @@
  ******************************************************************************/
 __attribute__((nonnull, warn_unused_result))
 static
-int	df_cmp_data		(int64_t user_key, int64_t ds_key,
-				 const void *user_data, const void *ds_data);
-#if 0
-__attribute__((warn_unused_result))
-static
-int	df_cmp_key		(int64_t user_key, int64_t ds_key,
-				 const void *user_data, const void *ds_data);
-#endif
+int	df_cmp_data		(const void *user_data, const void *ds_data);
+
 __attribute__((nonnull(1, 2), warn_unused_result))
 static
 int	df_ins_col_value	(struct Alx_DF_Col *col,
 				 const char *restrict value,
-				 int64_t *restrict key, const char **restrict s);
+				 const char **restrict s);
 
 
 /******************************************************************************
@@ -116,7 +110,7 @@ int	alx_df_ins_col		(struct Alx_DataFrame *restrict df,
 		goto free_buf;
 	if (values) {
 		for (ptrdiff_t i = 0; values[i]; i++) {
-			if (df_ins_col_value(&col, values[i], NULL, NULL))
+			if (df_ins_col_value(&col, values[i], NULL))
 				goto free_bst;
 		}
 	}
@@ -162,7 +156,7 @@ int	alx_df_ins_row		(struct Alx_DataFrame *restrict df,
 		return	ENOMEM;
 	if (alx_dynarr_resize(rdata.cells, *df->ncols, 0))
 		goto err;
-	if (alx_node_init(&row, df->rows->key_max + 1, &rdata, sizeof(rdata)))
+	if (alx_node_init(&row, &rdata, sizeof(rdata)))
 		goto err;
 	alx_llist_insert_node_at(df->rows, row, nrow);
 
@@ -246,7 +240,7 @@ int	alx_df_ins_cell	(struct Alx_DataFrame *restrict df,
 		cell.f	= data->f;
 		break;
 	case ALX_DF_TYPE_STR:
-		status	= df_ins_col_value(col, data->s, &cell.key, &cell.s);
+		status	= df_ins_col_value(col, data->s, &cell.s);
 		if (status < 0)
 			return	status;
 		break;
@@ -304,31 +298,15 @@ err:
  ******* static function definitions ******************************************
  ******************************************************************************/
 static
-int	df_cmp_data		(int64_t user_key, int64_t ds_key,
-				 const void *user_data, const void *ds_data)
+int	df_cmp_data		(const void *user_data, const void *ds_data)
 {
-
-	ALX_UNUSED(user_key);
-	ALX_UNUSED(ds_key);
-
 	return	strcasecmp(user_data, ds_data);
 }
-#if 0
-static
-int	df_cmp_key		(int64_t user_key, int64_t ds_key,
-				 const void *user_data, const void *ds_data)
-{
 
-	ALX_UNUSED(user_data);
-	ALX_UNUSED(ds_data);
-
-	return	alx_compare_s64(&user_key, &ds_key);
-}
-#endif
 static
 int	df_ins_col_value	(struct Alx_DF_Col *col,
 				 const char *restrict value,
-				 int64_t *restrict key, const char **restrict s)
+				 const char **restrict s)
 {
 	struct Alx_Node	*node;
 	void			*vp;
@@ -336,7 +314,7 @@ int	df_ins_col_value	(struct Alx_DF_Col *col,
 	int			status2;
 
 	if (col->ltd_values) {
-		if (alx_bst_find(&node, col->values, 0, value))
+		if (alx_bst_find(&node, col->values, value))
 			return	-EACCES;
 		status1	= EEXIST;
 		goto out;
@@ -344,15 +322,11 @@ int	df_ins_col_value	(struct Alx_DF_Col *col,
 
 	if (col->values->cmp != &df_cmp_data)
 		alx_bst_reorder(col->values, &df_cmp_data);
-
-	*key	= col->values->key_max + 1;
-	status1	= alx_bst_insert(col->values, *key, value, strlen(value) + 1, 
+	status1	= alx_bst_insert(col->values, value, strlen(value) + 1, 
 									&node);
 	if (status1 < 0)
 		return	status1;
 out:
-	if (key)
-		*key	= node->key;
 	status2	= alx_node_get_data(&vp, node);
 	if (status2)
 		return	-status2;

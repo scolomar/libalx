@@ -103,7 +103,7 @@ void	bst_to_llist_recursive		(struct Alx_Node *restrict bst,
  ******* global functions *****************************************************
  ******************************************************************************/
 int	alx_bst_init		(struct Alx_BST **restrict bst,
-				 cmp_f *cmp, bool dup)
+				 alx_bst_cmp_f *cmp, bool dup)
 {
 
 	if (alx_mallocarrays(bst, 1))
@@ -111,8 +111,6 @@ int	alx_bst_init		(struct Alx_BST **restrict bst,
 	(*bst)->root	= NULL;
 	(*bst)->nmemb	= 0;
 	(*bst)->cmp	= cmp;
-	(*bst)->key_min	= 0;
-	(*bst)->key_max	= 0;
 	(*bst)->dup	= dup;
 
 	return	0;
@@ -129,13 +127,12 @@ void	alx_bst_deinit		(struct Alx_BST *bst)
 }
 
 int	alx_bst_insert		(struct Alx_BST *restrict bst,
-				 int64_t key,
 				 const void *restrict data, size_t size,
 				 struct Alx_Node **restrict bstnode)
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, key, data, size)) {
+	if (alx_node_init(&node, data, size)) {
 		*bstnode	= NULL;
 		return		-ENOMEM;
 	}
@@ -157,10 +154,6 @@ int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 
 	if (bstnode)
 		*bstnode	= node;
-	if (node->key > bst->key_max)
-		bst->key_max	= node->key;
-	else if (node->key < bst->key_min)
-		bst->key_min	= node->key;
 
 	node->left	= NULL;
 	node->right	= NULL;
@@ -173,8 +166,7 @@ int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 	son	= bst->root;
 	while (son) {
 		parent	= son;
-		cmp_res = bst->cmp(node->key, parent->key, node->buf->data,
-							parent->buf->data);
+		cmp_res	= bst->cmp(node->buf->data, parent->buf->data);
 		if (cmp_res < 0) {
 			son	= parent->left;
 			pos	= LEFT;
@@ -238,7 +230,7 @@ int	alx_bst_rightmost_node	(struct Alx_Node **restrict node,
 
 int	alx_bst_find		(struct Alx_Node **restrict node,
 				 struct Alx_BST *restrict bst,
-				 int64_t key, const void *restrict data)
+				 const void *restrict data)
 {
 	struct Alx_Node	*parent;
 	struct Alx_Node	*son;
@@ -250,7 +242,7 @@ int	alx_bst_find		(struct Alx_Node **restrict node,
 	son	= bst->root;
 	while (son) {
 		parent	= son;
-		cmp_res	= bst->cmp(key, parent->key, data, parent->buf->data);
+		cmp_res	= bst->cmp(data, parent->buf->data);
 		if (cmp_res < 0) {
 			son	= parent->left;
 		} else if (cmp_res > 0) {
@@ -268,10 +260,10 @@ enoent:
 
 int	alx_bst_remove		(struct Alx_Node **restrict node,
 				 struct Alx_BST *restrict bst,
-				 int64_t key, const void *restrict data)
+				 const void *restrict data)
 {
 
-	if (alx_bst_find(node, bst, key, data))
+	if (alx_bst_find(node, bst, data))
 		return	ENOENT;
 	alx_bst_remove_node(bst, *node);
 
@@ -316,7 +308,8 @@ int	alx_bst_apply_bwd	(struct Alx_BST *restrict bst,
 	return	bst_apply_bwd_recursive(bst->root, f, state);
 }
 
-int	alx_bst_reorder	(struct Alx_BST *restrict bst, cmp_f *cmp)
+int	alx_bst_reorder	(struct Alx_BST *restrict bst,
+				 alx_bst_cmp_f *cmp)
 {
 	struct Alx_LinkedList	*list;
 
@@ -338,8 +331,6 @@ void	alx_bst_to_llist	(struct Alx_LinkedList *restrict list,
 	bst_to_llist_recursive(bst->root, list);
 	bst->root	= NULL;
 	bst->nmemb	= 0;
-	bst->key_min	= 0;
-	bst->key_max	= 0;
 }
 
 

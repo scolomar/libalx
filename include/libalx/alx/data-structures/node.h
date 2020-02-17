@@ -74,7 +74,6 @@
  *
  * node:	Pointer to a pointer to a node.  A node will be allocated,
  *		and a pointer to it will be stored in *node.
- * key:		Node key value.
  * data:	Pointer to the first byte of the data to be copied.
  * size:	Size of the data to be copied.
  *
@@ -83,7 +82,7 @@
  *	ENOMEM:		Aborted; failure to allocate the node or the buffer.
  */
 __attribute__((nonnull(1), warn_unused_result))
-int	alx_node_init		(struct Alx_Node **restrict node, int64_t key,
+int	alx_node_init		(struct Alx_Node **restrict node,
 				 const void *restrict data, size_t size);
 
 /*

@@ -34,8 +34,8 @@
 /*
  * Comparison function.  Return value logic should work as in strcmp().
  */
-typedef int	cmp_f	(int64_t user_key, int64_t ds_key,
-			 const void *user_data, const void *ds_data);
+typedef int	alx_bst_cmp_f	(const void *user_data, const void *ds_data)
+__attribute__((nonnull, warn_unused_result));
 
 
 /******************************************************************************
@@ -86,7 +86,6 @@ struct	Alx_DynArr {
 /*
  * Node
  *
- * key:		Key value.
  * buf:		Pointer to a dynamic buffer containing useful data.
  * left:	Pointer to the left node.
  * right:	Pointer to the right node.
@@ -94,7 +93,6 @@ struct	Alx_DynArr {
  * count:	Count (for repeated nodes in trees that don't accept duplicates).
  */
 struct	Alx_Node {
-	int64_t		key;
 	struct Alx_DynBuf	*buf;
 	struct Alx_Node	*left;
 	struct Alx_Node	*right;
@@ -113,8 +111,6 @@ struct	Alx_LinkedList {
 	struct Alx_Node	*head;
 	struct Alx_Node	*tail;
 	ptrdiff_t		nmemb;
-	int64_t		key_min;	/* minimum key in the BST */
-	int64_t		key_max;	/* maximum key in the BST */
 };
 
 /*
@@ -123,9 +119,7 @@ struct	Alx_LinkedList {
 struct	Alx_BST {
 	struct Alx_Node	*root;
 	ptrdiff_t		nmemb;
-	cmp_f			*cmp;		/* comparison function pointer */
-	int64_t		key_min;	/* minimum key in the BST */
-	int64_t		key_max;	/* maximum key in the BST */
+	alx_bst_cmp_f		*cmp;		/* comparison function pointer */
 	bool			dup;		/* Allow for duplicate members? */
 };
 
@@ -133,10 +127,7 @@ struct	Alx_DF_Cell {
 	union {
 		int64_t	i;
 		double		f;
-		struct {
-			int64_t	key;
-			const char	*s;
-		};
+		const char	*s;
 	};
 	int	type;
 	int	err;

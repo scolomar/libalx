@@ -81,7 +81,7 @@
  */
 __attribute__((nonnull, warn_unused_result))
 int	alx_bst_init		(struct Alx_BST **restrict bst,
-				 cmp_f *cmp, bool dup);
+				 alx_bst_cmp_f *cmp, bool dup);
 
 /*
  * Deinitializes bst.
@@ -113,7 +113,6 @@ void	alx_bst_deinit		(struct Alx_BST *bst);
  */
 __attribute__((nonnull(1), warn_unused_result))
 int	alx_bst_insert		(struct Alx_BST *restrict bst,
-				 int64_t key,
 				 const void *restrict data, size_t size,
 				 struct Alx_Node **restrict bstnode);
 
@@ -183,7 +182,7 @@ int	alx_bst_rightmost_node	(struct Alx_Node **restrict node,
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_bst_find		(struct Alx_Node **restrict node,
 				 struct Alx_BST *restrict bst,
-				 int64_t key, const void *restrict data);
+				 const void *restrict data);
 
 /*
  * Removes a node (found by its data) from the BST and updates any necessary
@@ -199,7 +198,7 @@ int	alx_bst_find		(struct Alx_Node **restrict node,
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_bst_remove		(struct Alx_Node **restrict node,
 				 struct Alx_BST *restrict bst,
-				 int64_t key, const void *restrict data);
+				 const void *restrict data);
 
 /*
  * Removes a node from the BST and updates any necessary metadata.
@@ -265,7 +264,8 @@ int	alx_bst_apply_bwd	(struct Alx_BST *restrict bst,
  *	ENOMEM:		Aborted; internal failure.
  */
 __attribute__((nonnull))
-int	alx_bst_reorder		(struct Alx_BST *restrict bst, cmp_f *cmp);
+int	alx_bst_reorder		(struct Alx_BST *restrict bst,
+				 alx_bst_cmp_f *cmp);
 
 /*
  * Moves the BST nodes into an empty linked list.  The BST is empty afterwards.

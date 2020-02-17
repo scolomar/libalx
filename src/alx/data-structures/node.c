@@ -37,13 +37,12 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_node_init		(struct Alx_Node **restrict node, int64_t key,
+int	alx_node_init		(struct Alx_Node **restrict node,
 				 const void *restrict data, size_t size)
 {
 
 	if (alx_node_init_empty(node))
 		goto enomem;
-	(*node)->key	= key;
 	if (!data)
 		return	0;
 
@@ -64,7 +63,6 @@ int	alx_node_init_empty	(struct Alx_Node **node)
 
 	if (alx_mallocarrays(node, 1))
 		return	ENOMEM;
-	(*node)->key	= 0;
 	(*node)->buf	= NULL;
 	(*node)->left	= NULL;
 	(*node)->right	= NULL;
@@ -86,7 +84,6 @@ int	alx_node_init_clone	(struct Alx_Node **restrict clone,
 	if (alx_node_init_empty(clone))
 		goto enomem;
 
-	(*clone)->key	= ref->key;
 	if (alx_dynbuf_init_clone(&(*clone)->buf, ref->buf) == ENOMEM)
 		goto enomem;
 	(*clone)->dup	= ref->dup;

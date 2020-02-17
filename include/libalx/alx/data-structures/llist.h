@@ -102,7 +102,6 @@ void	alx_llist_deinit		(struct Alx_LinkedList *list);
  */
 __attribute__((nonnull(1), warn_unused_result))
 int	alx_llist_prepend		(struct Alx_LinkedList *list,
-					 int64_t key,
 					 const void *data, size_t size);
 
 /*
@@ -131,7 +130,6 @@ void	alx_llist_prepend_node		(struct Alx_LinkedList *list,
  */
 __attribute__((nonnull(1), warn_unused_result))
 int	alx_llist_append		(struct Alx_LinkedList *list,
-					 int64_t key,
 					 const void *data, size_t size);
 
 /*
@@ -158,9 +156,8 @@ void	alx_llist_append_node		(struct Alx_LinkedList *list,
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the node.
  */
-__attribute__((nonnull(1, 5), warn_unused_result))
+__attribute__((nonnull(1, 4), warn_unused_result))
 int	alx_llist_insert_before		(struct Alx_LinkedList *list,
-					 int64_t key,
 					 const void *data, size_t size,
 					 struct Alx_Node *ref);
 
@@ -189,9 +186,8 @@ void	alx_llist_insert_node_before	(struct Alx_LinkedList *list,
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the node.
  */
-__attribute__((nonnull(1, 5), warn_unused_result))
+__attribute__((nonnull(1, 4), warn_unused_result))
 int	alx_llist_insert_after		(struct Alx_LinkedList *list,
-					 int64_t key,
 					 const void *data, size_t size,
 					 struct Alx_Node *ref);
 
@@ -226,7 +222,6 @@ void	alx_llist_insert_node_after	(struct Alx_LinkedList *list,
  */
 __attribute__((nonnull(1), warn_unused_result))
 int	alx_llist_insert_at		(struct Alx_LinkedList *list,
-					 int64_t key,
 					 const void *data, size_t size,
 					 ptrdiff_t pos);
 
@@ -565,7 +560,7 @@ void	alx_llist_to_bst		(struct Alx_BST *restrict bst,
  */
 __attribute__((nonnull, warn_unused_result))
 int	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
-					 cmp_f *cmp);
+					 alx_bst_cmp_f *cmp);
 
 
 /******************************************************************************

@@ -218,7 +218,7 @@ int	alx_dynarr_to_llist	(struct Alx_DynArr *arr,
 
 	cell	= arr->data;
 	for (ptrdiff_t i = 0; i < arr->written; i++) {
-		if (alx_llist_append(list, 0, cell, arr->elsize))
+		if (alx_llist_append(list, cell, arr->elsize))
 			goto err;
 		cell	+= arr->elsize;
 	}

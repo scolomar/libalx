@@ -87,8 +87,6 @@ int	alx_llist_init			(struct Alx_LinkedList **list)
 	(*list)->head		= NULL;
 	(*list)->tail		= NULL;
 	(*list)->nmemb		= 0;
-	(*list)->key_min	= 0;
-	(*list)->key_max	= 0;
 
 	return	0;
 }
@@ -104,12 +102,11 @@ void	alx_llist_deinit		(struct Alx_LinkedList *list)
 }
 
 int	alx_llist_prepend		(struct Alx_LinkedList *list,
-					 int64_t key,
 					 const void *data, size_t size)
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, key, data, size))
+	if (alx_node_init(&node, data, size))
 		return	ENOMEM;
 	alx_llist_prepend_node(list, node);
 
@@ -137,12 +134,11 @@ void	alx_llist_prepend_node		(struct Alx_LinkedList *list,
 }
 
 int	alx_llist_append		(struct Alx_LinkedList *list,
-					 int64_t key,
 					 const void *data, size_t size)
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, key, data, size))
+	if (alx_node_init(&node, data, size))
 		return	ENOMEM;
 	alx_llist_append_node(list, node);
 
@@ -167,20 +163,15 @@ void	alx_llist_append_node		(struct Alx_LinkedList *list,
 
 	list->tail	= node;
 	(list->nmemb)++;
-	if (node->key > list->key_max)
-		list->key_max	= node->key;
-	else if (node->key < list->key_min)
-		list->key_min	= node->key;
 }
 
 int	alx_llist_insert_before		(struct Alx_LinkedList *list,
-					 int64_t key,
 					 const void *data, size_t size,
 					 struct Alx_Node *ref)
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, key, data, size))
+	if (alx_node_init(&node, data, size))
 		return	ENOMEM;
 	alx_llist_insert_node_before(list, node, ref);
 
@@ -208,20 +199,15 @@ void	alx_llist_insert_node_before	(struct Alx_LinkedList *list,
 	ref->left->right	= node;
 	ref->left		= node;
 	(list->nmemb)++;
-	if (node->key > list->key_max)
-		list->key_max	= node->key;
-	else if (node->key < list->key_min)
-		list->key_min	= node->key;
 }
 
 int	alx_llist_insert_after		(struct Alx_LinkedList *list,
-					 int64_t key,
 					 const void *data, size_t size,
 					 struct Alx_Node *ref)
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, key, data, size))
+	if (alx_node_init(&node, data, size))
 		return	ENOMEM;
 	alx_llist_insert_node_after(list, node, ref);
 
@@ -249,20 +235,15 @@ void	alx_llist_insert_node_after	(struct Alx_LinkedList *list,
 	ref->right->left	= node;
 	ref->right		= node;
 	(list->nmemb)++;
-	if (node->key > list->key_max)
-		list->key_max	= node->key;
-	else if (node->key < list->key_min)
-		list->key_min	= node->key;
 }
 
 int	alx_llist_insert_at		(struct Alx_LinkedList *list,
-					 int64_t key,
 					 const void *data, size_t size,
 					 ptrdiff_t pos)
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, key, data, size))
+	if (alx_node_init(&node, data, size))
 		return	ENOMEM;
 	alx_llist_insert_node_at(list, node, pos);
 
@@ -573,7 +554,7 @@ void	alx_llist_to_bst		(struct Alx_BST *restrict bst,
 }
 
 int	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
-					 cmp_f *cmp)
+					 alx_bst_cmp_f *cmp)
 {
 	struct Alx_BST	*bst;
 
@@ -603,10 +584,6 @@ void	add_first_node		(struct Alx_LinkedList *list,
 	list->head	= node;
 	list->tail	= node;
 	list->nmemb	= 1;
-	if (node->key > list->key_max)
-		list->key_max	= node->key;
-	else if (node->key < list->key_min)
-		list->key_min	= node->key;
 }
 
 static
