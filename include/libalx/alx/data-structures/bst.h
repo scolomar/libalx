@@ -101,20 +101,21 @@ void	alx_bst_deinit		(struct Alx_BST *bst);
  * the user to the newly allocated space, and updates any necessary metadata.
  *
  * bst:		Pointer to a BST.
- * key:		Key value.  If insertion fails with EEXIST, the value
- *		of the identic node's key will be stored here.
+ * key:		Key value.
  * data:	Pointer to the first byte of the data to be copied.
  * size:	Size of the data to be copied.
+ * bstnode:	Pointer to the inserted node.
  *
  * return:
  *	0:		OK.
  *	-ENOMEM:	Aborted; failure to allocate the node.
  *	EEXIST:		Aborted; existing equivalent node in the BST.
  */
-__attribute__((nonnull(1, 2), warn_unused_result))
+__attribute__((nonnull(1), warn_unused_result))
 int	alx_bst_insert		(struct Alx_BST *restrict bst,
-				 int64_t *key,
-				 const void *restrict data, size_t size);
+				 int64_t key,
+				 const void *restrict data, size_t size,
+				 struct Alx_Node **restrict bstnode);
 
 /*
  * Inserts an already existing node into the BST.
@@ -124,8 +125,7 @@ int	alx_bst_insert		(struct Alx_BST *restrict bst,
  *
  * bst:		Pointer to a BST.
  * node:	Pointer to the node to be prepended.
- * key:		Value of the node key, or of the identic node's key if
- *		insertion failed.
+ * bstnode:	Pointer to the node, or to the identic node if insertion failed.
  *
  * return:
  *	0:		OK.
@@ -134,7 +134,7 @@ int	alx_bst_insert		(struct Alx_BST *restrict bst,
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 				 struct Alx_Node *restrict node,
-				 int64_t *restrict key);
+				 struct Alx_Node **restrict bstnode);
 
 /*
  * Deletes all the nodes in the BST.

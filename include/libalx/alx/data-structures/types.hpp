@@ -164,7 +164,6 @@ union	Alx_DF_Desc {
 struct	Alx_DF_Col {
 	int			type;
 	struct Alx_DynBuf	*hdr;
-	cmp_f			*cmp;
 	bool			ltd_values;
 	struct Alx_BST		*values;
 	union Alx_DF_Desc	desc;

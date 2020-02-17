@@ -129,21 +129,14 @@ struct	Alx_BST {
 	bool			dup;		/* Allow for duplicate members? */
 };
 
-struct	Alx_DF_Cell_Data {
+struct	Alx_DF_Cell {
 	union {
 		int64_t	i;
 		double		f;
-		const char	*s; /* contains a string */
-	};
-	int	type;
-	int	err;
-};
-
-struct	Alx_DF_Cell_Key {
-	union {
-		int64_t	i;
-		double		f;
-		int64_t	k;
+		struct {
+			int64_t	key;
+			const char	*s;
+		};
 	};
 	int	type;
 	int	err;

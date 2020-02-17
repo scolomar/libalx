@@ -102,7 +102,8 @@ void	bst_to_llist_recursive		(struct Alx_Node *restrict bst,
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_bst_init		(struct Alx_BST **bst, cmp_f *cmp, bool dup)
+int	alx_bst_init		(struct Alx_BST **restrict bst,
+				 cmp_f *cmp, bool dup)
 {
 
 	if (alx_mallocarrays(bst, 1))
@@ -127,19 +128,23 @@ void	alx_bst_deinit		(struct Alx_BST *bst)
 	free(bst);
 }
 
-int	alx_bst_insert		(struct Alx_BST *bst,
-				 int64_t *key, const void *data, size_t size)
+int	alx_bst_insert		(struct Alx_BST *restrict bst,
+				 int64_t key,
+				 const void *restrict data, size_t size,
+				 struct Alx_Node **restrict bstnode)
 {
 	struct Alx_Node	*node;
 
-	if (alx_node_init(&node, *key, data, size))
-		return	-ENOMEM;
-	return	alx_bst_insert_node(bst, node, key);
+	if (alx_node_init(&node, key, data, size)) {
+		*bstnode	= NULL;
+		return		-ENOMEM;
+	}
+	return	alx_bst_insert_node(bst, node, bstnode);
 }
 
 int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 				 struct Alx_Node *restrict node,
-				 int64_t *restrict key)
+				 struct Alx_Node **restrict bstnode)
 {
 	enum		{LEFT, RIGHT};
 
@@ -149,8 +154,9 @@ int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 	int		cmp_res;
 
 	bst->nmemb++;
-	if (key)
-		*key	= node->key;
+
+	if (bstnode)
+		*bstnode	= node;
 	if (node->key > bst->key_max)
 		bst->key_max	= node->key;
 	else if (node->key < bst->key_min)
@@ -179,8 +185,8 @@ int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 			if (!bst->dup) {
 				parent->dup += node->dup + 1;
 				bst->nmemb--;
-				if (key)
-					*key	= parent->key;
+				if (bstnode)
+					*bstnode	= parent;
 				return	EEXIST;
 			}
 			son	= parent->right;
