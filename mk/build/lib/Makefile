@@ -26,6 +26,8 @@ BASE_OBJ	=							\
 		$(BUILD_TMP_DIR)/base/math/prime_defactorization.o	\
 		$(BUILD_TMP_DIR)/base/math/prime_factorization.o	\
 		$(BUILD_TMP_DIR)/base/math/scale_linear.o		\
+		$(BUILD_TMP_DIR)/base/socket/tcp/client.o		\
+		$(BUILD_TMP_DIR)/base/socket/tcp/server.o		\
 		$(BUILD_TMP_DIR)/base/stdint/constants.o		\
 		$(BUILD_TMP_DIR)/base/stdint/types.o			\
 		$(BUILD_TMP_DIR)/base/stdio/fgets.o			\
