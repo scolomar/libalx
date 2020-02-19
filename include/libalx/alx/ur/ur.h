@@ -56,7 +56,7 @@ int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 __attribute__((always_inline, nonnull, warn_unused_result))
-int	ur_init		(struct Alx_UR *restrict ur, int usleep_time,
+int	ur_init		(struct Alx_UR **restrict ur, int usleep_time,
 			 const char *restrict ur_ip,
 			 const char *restrict ur_port)
 {
@@ -66,14 +66,14 @@ int	ur_init		(struct Alx_UR *restrict ur, int usleep_time,
 __attribute__((always_inline, warn_unused_result))
 int	ur_deinit	(struct Alx_UR *restrict ur)
 {
-	return	alx_ur_init(ur);
+	return	alx_ur_deinit(ur);
 }
 
 __attribute__((always_inline, nonnull, warn_unused_result))
 int	ur_cmd		(const struct Alx_UR *restrict ur,
 			 const char *restrict cmd)
 {
-	return	alx_ur_init(ur, cmd);
+	return	alx_ur_cmd(ur, cmd);
 }
 #endif	 /* defined(ALX_NO_PREFIX) */
 
