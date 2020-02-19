@@ -250,6 +250,12 @@ npcomplete: build_dir
 	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
 
+PHONY += ur
+ur: build_dir
+	@echo	"	MAKE	$@"
+	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
+
 
 PHONY += extra
 extra: build_dir

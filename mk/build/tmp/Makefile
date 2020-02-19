@@ -33,7 +33,7 @@ base:
 
 
 PHONY += alx
-alx: data-structures npcomplete
+alx: data-structures npcomplete ur
 
 PHONY += data-structures
 data-structures:
@@ -42,6 +42,10 @@ data-structures:
 PHONY += npcomplete
 npcomplete:
 #	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/alx/npcomplete/
+
+PHONY += ur
+ur:
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/alx/ur/
 
 
 PHONY += extra

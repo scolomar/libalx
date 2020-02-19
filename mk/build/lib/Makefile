@@ -99,6 +99,8 @@ ALX_DS_OBJ	=							\
 		$(BUILD_TMP_DIR)/alx/data-structures/types.o
 ALX_NPC_OBJ	=							\
 		$(BUILD_TMP_DIR)/alx/npcomplete/solver_lut.o
+ALX_UR_OBJ	=							\
+		$(BUILD_TMP_DIR)/alx/ur/ur.o
 
 CURL_OBJ	=							\
 		$(BUILD_TMP_DIR)/extra/curl/fcurl/fclose.o		\
@@ -173,7 +175,7 @@ base: libalx
 
 
 PHONY += alx
-alx: data-structures npcomplete
+alx: data-structures npcomplete ur
 
 PHONY += data-structures
 data-structures: libalx base
@@ -184,6 +186,11 @@ PHONY += npcomplete
 npcomplete: libalx base
 #	$(Q)$(MAKE)	libalx/libalx-npcomplete.a
 #	$(Q)$(MAKE)	libalx/libalx-npcomplete.so
+
+PHONY += ur
+ur: libalx base
+	$(Q)$(MAKE)	libalx/libalx-ur.a
+	$(Q)$(MAKE)	libalx/libalx-ur.so
 
 
 PHONY += extra
@@ -251,6 +258,12 @@ libalx/libalx-npcomplete.a: $(patsubst %.o,%.a.o,$(ALX_NPC_OBJ))
 libalx/libalx-npcomplete.so: $(patsubst %.o,%.so.o,$(ALX_NPC_OBJ))
 	@echo	"	CC	build/lib/$@"
 	$(Q)$(CC) $(LDFLAGS) -o $@ $^ -fopenmp -l alx-base
+
+
+libalx/libalx-ur.a: $(patsubst %.o,%.a.o,$(ALX_UR_OBJ))
+libalx/libalx-ur.so: $(patsubst %.o,%.so.o,$(ALX_UR_OBJ))
+	@echo	"	CC	build/lib/$@"
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^ -l alx-base
 
 libalx/libalx-curl.a: $(patsubst %.o,%.a.o,$(CURL_OBJ))
 libalx/libalx-curl.so: $(patsubst %.o,%.so.o,$(CURL_OBJ))
