@@ -19,6 +19,13 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define ur_init(ur, usleep_time, ur_ip, ur_port)			\
+				alx_ur_init(ur, usleep_time, ur_ip, ur_port)
+#define ur_deinit(ur)		alx_ur_deinit(ur)
+#define ur_cmd(ur, cmd)		alx_ur_cmd(ur, cmd)
+#endif
 
 
 /******************************************************************************

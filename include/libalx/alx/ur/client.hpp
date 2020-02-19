@@ -7,17 +7,40 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/alx/ur/ur.h */
+#pragma once	/* libalx/base/socket/tcp/client.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define tcp_client_open(server_addr, server_port)			\
+				alx_tcp_client_open(server_addr, server_port)
+#endif
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern	"C"
+{
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_tcp_client_open	(const char *restrict server_addr,
+				 const char *restrict server_port);
+}
+
+
+/******************************************************************************
+ ******* namespace ************************************************************
+ ******************************************************************************/
+namespace alx {
 
 
 /******************************************************************************
@@ -28,59 +51,17 @@
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
-struct	Alx_UR {
-	int	sfd;
-	int	usleep;
-};
 
 
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
-int	alx_ur_init	(struct Alx_UR *restrict ur, int usleep_time,
-			 const char *restrict ur_ip,
-			 const char *restrict ur_port);
-
-__attribute__((warn_unused_result))
-int	alx_ur_deinit	(struct Alx_UR *restrict ur);
-
-__attribute__((nonnull, warn_unused_result))
-int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
-			 const char *restrict cmd);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* namespace ************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, warn_unused_result))
-int	ur_init		(struct Alx_UR *restrict ur, int usleep_time,
-			 const char *restrict ur_ip,
-			 const char *restrict ur_port)
-{
-	return	alx_ur_init(ur, usleep_time, ur_ip, ur_port);
-}
-
-__attribute__((always_inline, warn_unused_result))
-int	ur_deinit	(struct Alx_UR *restrict ur)
-{
-	return	alx_ur_init(ur);
-}
-
-__attribute__((always_inline, nonnull, warn_unused_result))
-int	ur_cmd	(const struct Alx_UR *restrict ur,
-			 const char *restrict cmd)
-{
-	return	alx_ur_init(ur, cmd);
-}
-#endif	 /* defined(ALX_NO_PREFIX) */
-
-
-/******************************************************************************
- ******* inline ***************************************************************
- ******************************************************************************/
+}	/* namespace alx */
 
 
 /******************************************************************************
