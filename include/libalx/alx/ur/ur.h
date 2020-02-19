@@ -38,7 +38,7 @@ struct	Alx_UR {
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull, warn_unused_result))
-int	alx_ur_init	(struct Alx_UR *restrict ur, int usleep_time,
+int	alx_ur_init	(struct Alx_UR **restrict ur, int usleep_time,
 			 const char *restrict ur_ip,
 			 const char *restrict ur_port);
 
@@ -70,7 +70,7 @@ int	ur_deinit	(struct Alx_UR *restrict ur)
 }
 
 __attribute__((always_inline, nonnull, warn_unused_result))
-int	ur_cmd	(const struct Alx_UR *restrict ur,
+int	ur_cmd		(const struct Alx_UR *restrict ur,
 			 const char *restrict cmd)
 {
 	return	alx_ur_init(ur, cmd);

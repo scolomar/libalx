@@ -18,6 +18,8 @@
 #include <unistd.h>
 
 #include "libalx/base/socket/tcp/client.h"
+#include "libalx/base/stdlib/alloc/mallocarrays.h"
+#include "libalx/base/stdlib/alloc/frees.h"
 
 
 /******************************************************************************
@@ -38,11 +40,12 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_ur_init	(struct Alx_UR *restrict ur, int usleep_time,
+int	alx_ur_init	(struct Alx_UR **restrict ur, int usleep_time,
 			 const char *restrict ur_ip,
 			 const char *restrict ur_port)
 {
 	int	status;
+	int	sfd;
 
 	if (usleep_time < 0)
 		return	EINVAL;
@@ -50,11 +53,20 @@ int	alx_ur_init	(struct Alx_UR *restrict ur, int usleep_time,
 	if (status)
 		return	status;
 
-	ur->usleep	= usleep_time;
-	ur->sfd		= alx_tcp_client_open(ur_ip, ur_port);
-	if (ur->sfd < 0)
-		return	ur->sfd;
+	sfd	= alx_tcp_client_open(ur_ip, ur_port);
+	if (sfd < 0)
+		return	sfd;
+
+	if (alx_mallocarrays(ur, 1))
+		goto err;
+
+	(*ur)->sfd	= sfd;
+	(*ur)->usleep	= usleep_time;
+
 	return	0;
+err:
+	close(sfd);
+	return	ENOMEM;
 }
 
 int	alx_ur_deinit	(struct Alx_UR *restrict ur)
