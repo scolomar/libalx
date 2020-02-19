@@ -357,6 +357,7 @@ install_alx:
 #	$(Q)$(MAKE)	libalx-npcomplete.a				\
 #			libalx-npcomplete.so				\
 #			libalx-npcomplete.pc
+	$(Q)$(MAKE)	libalx-ur.a	libalx-ur.so	libalx-ur.pc
 	@echo
 
 PHONY += install_extra
