@@ -13,6 +13,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <stdio.h>
 
 
 /******************************************************************************
@@ -70,9 +71,10 @@ int	alx_ur_init	(struct Alx_UR **restrict ur,
 __attribute__((warn_unused_result))
 int	alx_ur_deinit	(struct Alx_UR *restrict ur);
 
-__attribute__((nonnull, warn_unused_result))
+__attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
-			 const char *restrict cmd, int usleep_after);
+			 const char *restrict cmd, int usleep_after,
+			 FILE *restrict ostream);
 
 __attribute__((warn_unused_result))
 struct Alx_UR_Pose alx_ur_pose_xyz(float x, float y, float z,
@@ -81,9 +83,10 @@ __attribute__((warn_unused_result))
 struct Alx_UR_Pose alx_ur_pose_joints(float base, float shoulder, float elbow,
 				      float wrist1, float wrist2, float wrist3);
 
-__attribute__((nonnull, warn_unused_result))
+__attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_ur_movej	(const struct Alx_UR *restrict ur,
-			 const struct Alx_UR_Pose *pose, int usleep_after);
+			 const struct Alx_UR_Pose *pose, int usleep_after,
+			 FILE *restrict ostream);
 
 
 /******************************************************************************
@@ -105,11 +108,34 @@ int	ur_deinit	(struct Alx_UR *restrict ur)
 	return	alx_ur_deinit(ur);
 }
 
-__attribute__((always_inline, nonnull, warn_unused_result))
+__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 int	ur_cmd		(const struct Alx_UR *restrict ur,
-			 const char *restrict cmd, int usleep_after)
+			 const char *restrict cmd, int usleep_after,
+			 FILE *restrict ostream)
 {
-	return	alx_ur_cmd(ur, cmd, usleep_after);
+	return	alx_ur_cmd(ur, cmd, usleep_after, ostream);
+}
+
+__attribute__((always_inline, warn_unused_result))
+struct Alx_UR_Pose ur_pose_xyz(float x, float y, float z,
+			       float rx, float ry, float rz)
+{
+	return	alx_ur_pose_xyz(x, y, z, rx, ry, rz);
+}
+
+__attribute__((always_inline, warn_unused_result))
+struct Alx_UR_Pose ur_pose_joints(float base, float shoulder, float elbow,
+				  float wrist1, float wrist2, float wrist3)
+{
+	return	alx_ur_pose_xyz(base, shoulder, elbow, wrist1, wrist2, wrist3);
+}
+
+__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
+int	ur_movej	(const struct Alx_UR *restrict ur,
+			 const struct Alx_UR_Pose *pose, int usleep_after,
+			 FILE *restrict ostream)
+{
+	return	alx_ur_movej(ur, pose, usleep_after, ostream);
 }
 #endif	 /* defined(ALX_NO_PREFIX) */
 

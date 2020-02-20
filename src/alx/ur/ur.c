@@ -11,6 +11,7 @@
 
 #include <errno.h>
 #include <limits.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -83,7 +84,7 @@ int	alx_ur_deinit	(struct Alx_UR *restrict ur)
 	if (!ur)
 		return	ENOANO;
 
-	status1	= alx_ur_cmd(ur, "halt()", 0);
+	status1	= alx_ur_cmd(ur, "halt()", 0, NULL);
 	status2	= close(ur->sfd);
 
 	if (status2)
@@ -93,7 +94,8 @@ int	alx_ur_deinit	(struct Alx_UR *restrict ur)
 }
 
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
-			 const char *restrict cmd, int usleep_after)
+			 const char *restrict cmd, int usleep_after,
+			 FILE *restrict ostream)
 {
 	ssize_t	n;
 	ssize_t	len;
@@ -108,8 +110,14 @@ int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
 	if (n != len)
 		goto err;
 
+	if (ostream)
+		fprintf(ostream, "%s\n", cmd);
 	return	usleep(usleep_after);
 err:
+	if (ostream) {
+		fprintf(ostream, "%s\n", cmd);
+		fprintf(stderr, "%s\n", cmd);
+	}
 	if (n < 0)
 		return	n;
 	return	(n % INT_MAX) + 1;
@@ -135,7 +143,7 @@ struct Alx_UR_Pose alx_ur_pose_joints(float base, float shoulder, float elbow,
 {
 
 	return	(struct Alx_UR_Pose){
-		.type		= ALX_UR_POSE_XYZ,
+		.type		= ALX_UR_POSE_JOINTS,
 		.base		= base,
 		.shoulder	= shoulder,
 		.elbow		= elbow,
@@ -146,16 +154,17 @@ struct Alx_UR_Pose alx_ur_pose_joints(float base, float shoulder, float elbow,
 }
 
 int	alx_ur_movej	(const struct Alx_UR *restrict ur,
-			 const struct Alx_UR_Pose *pose, int usleep_after)
+			 const struct Alx_UR_Pose *pose, int usleep_after,
+			 FILE *restrict ostream)
 {
 	char		pos[BUFSIZ];
 	char		buf[BUFSIZ];
 
-	if (ur_sprintf_pose(ARRAY_SIZE(buf), pos, pose))
+	if (ur_sprintf_pose(ARRAY_SIZE(pos), pos, pose))
 		return	-1;
 	if (ur_sprintf_movej(ARRAY_SIZE(buf), buf, pos))
 		return	-1;
-	return	alx_ur_cmd(ur, buf, usleep_after);
+	return	alx_ur_cmd(ur, buf, usleep_after, ostream);
 }
 
 
@@ -192,9 +201,9 @@ int	ur_sprintf_movej	(ptrdiff_t nmemb,
 
 	if (alx_strlcpys(str, "movej(", nmemb, NULL))
 		return	-1;
-	if (alx_strscat(nmemb, str, pose))
+	if (alx_strscat(nmemb, str, pose) < 0)
 		return	-1;
-	if (alx_strscat(nmemb, str, ")"))
+	if (alx_strscat(nmemb, str, ")") < 0)
 		return	-1;
 	return	0;
 }
