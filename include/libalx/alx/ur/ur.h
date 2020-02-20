@@ -23,6 +23,11 @@
 /******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
+enum	Alx_UR_Pose_Types {
+	ALX_UR_POSE_NONE,
+	ALX_UR_POSE_XYZ,
+	ALX_UR_POSE_JOINTS
+};
 
 
 /******************************************************************************
@@ -30,6 +35,28 @@
  ******************************************************************************/
 struct	Alx_UR {
 	int	sfd;
+};
+
+struct	Alx_UR_Pose {
+	int	type;
+	union {
+		struct {
+			float	x;
+			float	y;
+			float	z;
+			float	rx;
+			float	ry;
+			float	rz;
+		};
+		struct {
+			float	base;
+			float	shoulder;
+			float	elbow;
+			float	wrist1;
+			float	wrist2;
+			float	wrist3;
+		};
+	};
 };
 
 
@@ -40,13 +67,23 @@ __attribute__((nonnull, warn_unused_result))
 int	alx_ur_init	(struct Alx_UR **restrict ur,
 			 const char *restrict ur_ip,
 			 const char *restrict ur_port);
-
 __attribute__((warn_unused_result))
 int	alx_ur_deinit	(struct Alx_UR *restrict ur);
 
 __attribute__((nonnull, warn_unused_result))
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
 			 const char *restrict cmd, int usleep_after);
+
+__attribute__((warn_unused_result))
+struct Alx_UR_Pose alx_ur_pose_xyz(float x, float y, float z,
+				   float rx, float ry, float rz);
+__attribute__((warn_unused_result))
+struct Alx_UR_Pose alx_ur_pose_joints(float base, float shoulder, float elbow,
+				      float wrist1, float wrist2, float wrist3);
+
+__attribute__((nonnull, warn_unused_result))
+int	alx_ur_movej	(const struct Alx_UR *restrict ur,
+			 const struct Alx_UR_Pose *pose, int usleep_after);
 
 
 /******************************************************************************
