@@ -51,6 +51,10 @@ int	ur_sprintf_func		(ptrdiff_t nmemb,
 				 char str[static restrict nmemb],
 				 const char *restrict func,
 				 const char *restrict arg);
+__attribute__((nonnull, warn_unused_result))
+int	ur_sprintf_msg		(ptrdiff_t nmemb,
+				 char str[static restrict nmemb],
+				 const char *restrict msg);
 
 
 /******************************************************************************
@@ -158,9 +162,12 @@ int	alx_ur_puts	(const struct Alx_UR *restrict ur,
 			 const char *restrict msg, int usleep_after,
 			 FILE *restrict ostream)
 {
+	char	m[BUFSIZ];
 	char	buf[BUFSIZ];
 
-	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "textmsg", msg))
+	if (ur_sprintf_msg(ARRAY_SIZE(m), m, msg))
+		return	-1;
+	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "textmsg", m))
 		return	-1;
 	return	alx_ur_cmd(ur, buf, usleep_after, ostream);
 }
@@ -235,6 +242,20 @@ int	ur_sprintf_func		(ptrdiff_t nmemb,
 	if (alx_strscat(nmemb, str, arg) < 0)
 		return	-1;
 	if (alx_strscat(nmemb, str, ")") < 0)
+		return	-1;
+	return	0;
+}
+
+int	ur_sprintf_msg		(ptrdiff_t nmemb,
+				 char str[static restrict nmemb],
+				 const char *restrict msg)
+{
+
+	if (alx_strlcpys(str, "\"", nmemb, NULL))
+		return	-1;
+	if (alx_strscat(nmemb, str, msg) < 0)
+		return	-1;
+	if (alx_strscat(nmemb, str, "\"") < 0)
 		return	-1;
 	return	0;
 }
