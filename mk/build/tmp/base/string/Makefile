@@ -23,6 +23,7 @@ DIRS		=							\
 OBJ		=							\
 		memchr/memchrend.o					\
 		strcat/strscat.o					\
+		strcat/strscatf.o					\
 		strchr/strcasechr.o					\
 		strchr/strcasechrnul.o					\
 		strchr/strncasechr.o					\
@@ -59,6 +60,12 @@ STRCAT_S_INC	=							\
 		$(INC_DIR)/libalx/base/string/strcat/strscat.h
 STRCAT_S_SRC	=							\
 		$(SRC_DIR)/base/string/strcat/strscat.c
+
+STRCAT_SF_INC	=							\
+		$(INC_DIR)/libalx/base/stdio/printf/snprintfs.h		\
+		$(INC_DIR)/libalx/base/string/strcat/strscatf.h
+STRCAT_SF_SRC	=							\
+		$(SRC_DIR)/base/string/strcat/strscatf.c
 
 STRCHR_CASE_INC	=							\
 		$(INC_DIR)/libalx/base/string/strchr/strcasechr.h
@@ -217,6 +224,9 @@ memchr/memchrend.so.s: $(MEMCHR_END_SRC) $(MEMCHR_END_INC)
 
 strcat/strscat.a.s: $(STRCAT_S_SRC) $(STRCAT_S_INC)
 strcat/strscat.so.s: $(STRCAT_S_SRC) $(STRCAT_S_INC)
+
+strcat/strscatf.a.s: $(STRCAT_SF_SRC) $(STRCAT_SF_INC)
+strcat/strscatf.so.s: $(STRCAT_SF_SRC) $(STRCAT_SF_INC)
 
 strchr/strcasechr.a.s: $(STRCHR_CASE_SRC) $(STRCHR_CASE_INC)
 strchr/strcasechr.so.s: $(STRCHR_CASE_SRC) $(STRCHR_CASE_INC)
