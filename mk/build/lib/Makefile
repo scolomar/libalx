@@ -100,8 +100,8 @@ ALX_DS_OBJ	=							\
 		$(BUILD_TMP_DIR)/alx/data-structures/types.o
 ALX_NPC_OBJ	=							\
 		$(BUILD_TMP_DIR)/alx/npcomplete/solver_lut.o
-ALX_UR_OBJ	=							\
-		$(BUILD_TMP_DIR)/alx/ur/ur.o
+ALX_ROBOT_OBJ	=							\
+		$(BUILD_TMP_DIR)/alx/robot/ur.o
 
 CURL_OBJ	=							\
 		$(BUILD_TMP_DIR)/extra/curl/fcurl/fclose.o		\
@@ -176,7 +176,7 @@ base: libalx
 
 
 PHONY += alx
-alx: data-structures npcomplete ur
+alx: data-structures npcomplete robot
 
 PHONY += data-structures
 data-structures: libalx base
@@ -188,10 +188,10 @@ npcomplete: libalx base
 #	$(Q)$(MAKE)	libalx/libalx-npcomplete.a
 #	$(Q)$(MAKE)	libalx/libalx-npcomplete.so
 
-PHONY += ur
-ur: libalx base
-	$(Q)$(MAKE)	libalx/libalx-ur.a
-	$(Q)$(MAKE)	libalx/libalx-ur.so
+PHONY += robot
+robot: libalx base
+	$(Q)$(MAKE)	libalx/libalx-robot.a
+	$(Q)$(MAKE)	libalx/libalx-robot.so
 
 
 PHONY += extra
@@ -261,8 +261,8 @@ libalx/libalx-npcomplete.so: $(patsubst %.o,%.so.o,$(ALX_NPC_OBJ))
 	$(Q)$(CC) $(LDFLAGS) -o $@ $^ -fopenmp -l alx-base
 
 
-libalx/libalx-ur.a: $(patsubst %.o,%.a.o,$(ALX_UR_OBJ))
-libalx/libalx-ur.so: $(patsubst %.o,%.so.o,$(ALX_UR_OBJ))
+libalx/libalx-robot.a: $(patsubst %.o,%.a.o,$(ALX_ROBOT_OBJ))
+libalx/libalx-robot.so: $(patsubst %.o,%.so.o,$(ALX_ROBOT_OBJ))
 	@echo	"	CC	build/lib/$@"
 	$(Q)$(CC) $(LDFLAGS) -o $@ $^ -l alx-base
 

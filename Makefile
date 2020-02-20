@@ -250,8 +250,8 @@ npcomplete: build_dir
 	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
 
-PHONY += ur
-ur: build_dir
+PHONY += robot
+robot: build_dir
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
 	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
@@ -357,7 +357,7 @@ install_alx:
 #	$(Q)$(MAKE)	libalx-npcomplete.a				\
 #			libalx-npcomplete.so				\
 #			libalx-npcomplete.pc
-	$(Q)$(MAKE)	libalx-ur.a	libalx-ur.so	libalx-ur.pc
+	$(Q)$(MAKE)	libalx-robot.a	libalx-robot.so	libalx-robot.pc
 	@echo
 
 PHONY += install_extra

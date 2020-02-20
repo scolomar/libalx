@@ -18,9 +18,9 @@ UR_INC		=							\
 		$(INC_DIR)/libalx/base/socket/tcp/client.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/callocs.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/frees.h		\
-		$(INC_DIR)/libalx/alx/ur/ur.h
+		$(INC_DIR)/libalx/alx/robot/ur.h
 UR_SRC		=							\
-		$(SRC_DIR)/alx/ur/ur.c
+		$(SRC_DIR)/alx/robot/ur.c
 
 ################################################################################
 # target: dependencies
@@ -31,13 +31,13 @@ all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
 %.a.s:
-	@echo	"	CC	build/tmp/alx/ur/$@"
+	@echo	"	CC	build/tmp/alx/robot/$@"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
 %.so.s:
-	@echo	"	CC	build/tmp/alx/ur/$@"
+	@echo	"	CC	build/tmp/alx/robot/$@"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
 %.o: %.s
-	@echo	"	AS	build/tmp/alx/ur/$@"
+	@echo	"	AS	build/tmp/alx/robot/$@"
 	$(Q)$(AS) $< -o $@
 
 
