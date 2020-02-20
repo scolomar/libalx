@@ -74,7 +74,7 @@ int	alx_ur_deinit	(struct Alx_UR *restrict ur);
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
 			 const char *restrict cmd, int usleep_after,
-			 FILE *restrict ostream);
+			 FILE *restrict log);
 
 __attribute__((warn_unused_result))
 struct Alx_UR_Pose alx_ur_pose_xyz(float x, float y, float z,
@@ -86,17 +86,20 @@ struct Alx_UR_Pose alx_ur_pose_joints(float base, float shoulder, float elbow,
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_ur_puts	(const struct Alx_UR *restrict ur,
 			 const char *restrict msg, int usleep_after,
-			 FILE *restrict ostream);
+			 FILE *restrict log);
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_ur_movej	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
 			 int usleep_after,
-			 FILE *restrict ostream);
+			 FILE *restrict log);
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_ur_movel	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
 			 int usleep_after,
-			 FILE *restrict ostream);
+			 FILE *restrict log);
+__attribute__((nonnull(1), warn_unused_result))
+int	alx_ur_halt	(const struct Alx_UR *restrict ur, int usleep_after,
+			 FILE *restrict log);
 
 
 /******************************************************************************
@@ -121,9 +124,9 @@ int	ur_deinit	(struct Alx_UR *restrict ur)
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 int	ur_cmd		(const struct Alx_UR *restrict ur,
 			 const char *restrict cmd, int usleep_after,
-			 FILE *restrict ostream)
+			 FILE *restrict log)
 {
-	return	alx_ur_cmd(ur, cmd, usleep_after, ostream);
+	return	alx_ur_cmd(ur, cmd, usleep_after, log);
 }
 
 __attribute__((always_inline, warn_unused_result))
@@ -143,25 +146,32 @@ struct Alx_UR_Pose ur_pose_joints(float base, float shoulder, float elbow,
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 int	ur_puts		(const struct Alx_UR *restrict ur,
 			 const char *restrict msg, int usleep_after,
-			 FILE *restrict ostream)
+			 FILE *restrict log)
 {
-	return	alx_ur_puts(ur, msg, usleep_after, ostream);
+	return	alx_ur_puts(ur, msg, usleep_after, log);
 }
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 int	ur_movej	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
 			 int usleep_after,
-			 FILE *restrict ostream)
+			 FILE *restrict log)
 {
-	return	alx_ur_movej(ur, pose, usleep_after, ostream);
+	return	alx_ur_movej(ur, pose, usleep_after, log);
 }
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 int	ur_movel	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
 			 int usleep_after,
-			 FILE *restrict ostream)
+			 FILE *restrict log)
 {
-	return	alx_ur_movel(ur, pose, usleep_after, ostream);
+	return	alx_ur_movel(ur, pose, usleep_after, log);
+}
+__attribute__((always_inline, nonnull(1), warn_unused_result))
+int	ur_halt		(const struct Alx_UR *restrict ur,
+			 int usleep_after,
+			 FILE *restrict log)
+{
+	return	alx_ur_movel(ur, usleep_after, log);
 }
 #endif	 /* defined(ALX_NO_PREFIX) */
 

@@ -45,7 +45,7 @@ static
 int	ur_sprintf_pose		(ptrdiff_t nmemb,
 				 char str[static restrict nmemb],
 				 const struct Alx_UR_Pose *restrict pose);
-__attribute__((nonnull, warn_unused_result))
+__attribute__((nonnull(2, 3), warn_unused_result))
 static
 int	ur_sprintf_func		(ptrdiff_t nmemb,
 				 char str[static restrict nmemb],
@@ -100,7 +100,7 @@ int	alx_ur_deinit	(struct Alx_UR *restrict ur)
 
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
 			 const char *restrict cmd, int usleep_after,
-			 FILE *restrict ostream)
+			 FILE *restrict log)
 {
 	ssize_t	n;
 	ssize_t	len;
@@ -115,12 +115,12 @@ int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
 	if (n != len)
 		goto err;
 
-	if (ostream)
-		fprintf(ostream, "%s\n", cmd);
+	if (log)
+		fprintf(log, "%s\n", cmd);
 	return	usleep(usleep_after);
 err:
-	if (ostream) {
-		fprintf(ostream, "%s\n", cmd);
+	if (log) {
+		fprintf(log, "%s\n", cmd);
 		fprintf(stderr, "%s\n", cmd);
 	}
 	if (n < 0)
@@ -160,7 +160,7 @@ struct Alx_UR_Pose alx_ur_pose_joints(float base, float shoulder, float elbow,
 
 int	alx_ur_puts	(const struct Alx_UR *restrict ur,
 			 const char *restrict msg, int usleep_after,
-			 FILE *restrict ostream)
+			 FILE *restrict log)
 {
 	char	m[BUFSIZ];
 	char	buf[BUFSIZ];
@@ -169,13 +169,13 @@ int	alx_ur_puts	(const struct Alx_UR *restrict ur,
 		return	-1;
 	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "textmsg", m))
 		return	-1;
-	return	alx_ur_cmd(ur, buf, usleep_after, ostream);
+	return	alx_ur_cmd(ur, buf, usleep_after, log);
 }
 
 int	alx_ur_movej	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
 			 int usleep_after,
-			 FILE *restrict ostream)
+			 FILE *restrict log)
 {
 	char	pos[BUFSIZ];
 	char	buf[BUFSIZ];
@@ -184,13 +184,13 @@ int	alx_ur_movej	(const struct Alx_UR *restrict ur,
 		return	-1;
 	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "movej", pos))
 		return	-1;
-	return	alx_ur_cmd(ur, buf, usleep_after, ostream);
+	return	alx_ur_cmd(ur, buf, usleep_after, log);
 }
 
 int	alx_ur_movel	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
 			 int usleep_after,
-			 FILE *restrict ostream)
+			 FILE *restrict log)
 {
 	char	pos[BUFSIZ];
 	char	buf[BUFSIZ];
@@ -199,7 +199,18 @@ int	alx_ur_movel	(const struct Alx_UR *restrict ur,
 		return	-1;
 	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "movel", pos))
 		return	-1;
-	return	alx_ur_cmd(ur, buf, usleep_after, ostream);
+	return	alx_ur_cmd(ur, buf, usleep_after, log);
+}
+
+int	alx_ur_halt	(const struct Alx_UR *restrict ur,
+			 int usleep_after,
+			 FILE *restrict log)
+{
+	char	buf[BUFSIZ];
+
+	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "halt", NULL))
+		return	-1;
+	return	alx_ur_cmd(ur, buf, usleep_after, log);
 }
 
 
@@ -247,6 +258,20 @@ int	ur_sprintf_func		(ptrdiff_t nmemb,
 }
 
 int	ur_sprintf_msg		(ptrdiff_t nmemb,
+				 char str[static restrict nmemb],
+				 const char *restrict msg)
+{
+
+	if (alx_strlcpys(str, "\"", nmemb, NULL))
+		return	-1;
+	if (alx_strscat(nmemb, str, msg) < 0)
+		return	-1;
+	if (alx_strscat(nmemb, str, "\"") < 0)
+		return	-1;
+	return	0;
+}
+
+int	ur_sprintf_pose_add	(ptrdiff_t nmemb,
 				 char str[static restrict nmemb],
 				 const char *restrict msg)
 {
