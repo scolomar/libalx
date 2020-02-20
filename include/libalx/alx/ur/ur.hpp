@@ -21,10 +21,9 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define ur_init(ur, usleep_time, ur_ip, ur_port)			\
-				alx_ur_init(ur, usleep_time, ur_ip, ur_port)
-#define ur_deinit(ur)		alx_ur_deinit(ur)
-#define ur_cmd(ur, cmd)		alx_ur_cmd(ur, cmd)
+#define ur_init(ur, ur_ip, ur_port)	alx_ur_init(ur, ur_ip, ur_port)
+#define ur_deinit(ur)			alx_ur_deinit(ur)
+#define ur_cmd(ur, cmd, usleep_after)	alx_ur_cmd(ur, cmd, usleep_after)
 #endif
 
 
@@ -39,14 +38,14 @@ struct	Alx_UR {
 extern	"C"
 {
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_init	(struct Alx_UR *restrict ur, int usleep_time,
+int	alx_ur_init	(struct Alx_UR *restrict ur,
 			 const char *restrict ur_ip,
 			 const char *restrict ur_port);
 [[gnu::warn_unused_result]]
 int	alx_ur_deinit	(struct Alx_UR *restrict ur);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
-			 const char *restrict cmd);
+			 const char *restrict cmd, int usleep_after);
 }
 
 

@@ -16,6 +16,8 @@ OBJ		=							\
 
 UR_INC		=							\
 		$(INC_DIR)/libalx/base/socket/tcp/client.h		\
+		$(INC_DIR)/libalx/base/stdlib/alloc/callocs.h		\
+		$(INC_DIR)/libalx/base/stdlib/alloc/frees.h		\
 		$(INC_DIR)/libalx/alx/ur/ur.h
 UR_SRC		=							\
 		$(SRC_DIR)/alx/ur/ur.c

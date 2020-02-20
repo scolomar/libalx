@@ -18,7 +18,7 @@
 #include <unistd.h>
 
 #include "libalx/base/socket/tcp/client.h"
-#include "libalx/base/stdlib/alloc/mallocarrays.h"
+#include "libalx/base/stdlib/alloc/callocs.h"
 #include "libalx/base/stdlib/alloc/frees.h"
 
 
@@ -40,28 +40,20 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_ur_init	(struct Alx_UR **restrict ur, int usleep_time,
+int	alx_ur_init	(struct Alx_UR **restrict ur,
 			 const char *restrict ur_ip,
 			 const char *restrict ur_port)
 {
-	int	status;
 	int	sfd;
-
-	if (usleep_time < 0)
-		return	EINVAL;
-	status	= usleep(usleep_time);
-	if (status)
-		return	status;
 
 	sfd	= alx_tcp_client_open(ur_ip, ur_port);
 	if (sfd < 0)
 		return	sfd;
 
-	if (alx_mallocarrays(ur, 1))
+	if (alx_callocs(ur, 1))
 		goto err;
 
 	(*ur)->sfd	= sfd;
-	(*ur)->usleep	= usleep_time;
 
 	return	0;
 err:
@@ -77,7 +69,7 @@ int	alx_ur_deinit	(struct Alx_UR *restrict ur)
 	if (!ur)
 		return	ENOANO;
 
-	status1	= alx_ur_cmd(ur, "halt()");
+	status1	= alx_ur_cmd(ur, "halt()", 0);
 	status2	= close(ur->sfd);
 
 	if (status2)
@@ -87,12 +79,11 @@ int	alx_ur_deinit	(struct Alx_UR *restrict ur)
 }
 
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
-			 const char *restrict cmd)
+			 const char *restrict cmd, int usleep_after)
 {
 	ssize_t	n;
 	ssize_t	len;
 
-	usleep(ur->usleep);
 
 	len	= strlen(cmd);
 	n	= write(ur->sfd, cmd, len);
@@ -104,7 +95,7 @@ int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
 	if (n != len)
 		goto err;
 
-	return	0;
+	return	usleep(usleep_after);
 err:
 	if (n < 0)
 		return	n;
