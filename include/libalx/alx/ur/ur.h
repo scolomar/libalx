@@ -13,6 +13,8 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <stdbool.h>
+#include <stddef.h>
 #include <stdio.h>
 
 
@@ -98,6 +100,10 @@ int	alx_ur_movel	(const struct Alx_UR *restrict ur,
 			 int usleep_after,
 			 FILE *restrict log);
 __attribute__((nonnull(1), warn_unused_result))
+int	alx_ur_Dout_set	(const struct Alx_UR *restrict ur,
+			 ptrdiff_t idx, bool state, int usleep_after,
+			 FILE *restrict log);
+__attribute__((nonnull(1), warn_unused_result))
 int	alx_ur_halt	(const struct Alx_UR *restrict ur, int usleep_after,
 			 FILE *restrict log);
 
@@ -165,6 +171,13 @@ int	ur_movel	(const struct Alx_UR *restrict ur,
 			 FILE *restrict log)
 {
 	return	alx_ur_movel(ur, pose, usleep_after, log);
+}
+__attribute__((always_inline, nonnull(1), warn_unused_result))
+int	ur_Dout_set	(const struct Alx_UR *restrict ur,
+			 ptrdiff_t idx, bool state, int usleep_after,
+			 FILE *restrict log)
+{
+	return	alx_ur_movel(ur, idx, state, usleep_after, log);
 }
 __attribute__((always_inline, nonnull(1), warn_unused_result))
 int	ur_halt		(const struct Alx_UR *restrict ur,

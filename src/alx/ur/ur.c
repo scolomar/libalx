@@ -11,6 +11,7 @@
 
 #include <errno.h>
 #include <limits.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -52,9 +53,15 @@ int	ur_sprintf_func		(ptrdiff_t nmemb,
 				 const char *restrict func,
 				 const char *restrict arg);
 __attribute__((nonnull, warn_unused_result))
+static
 int	ur_sprintf_msg		(ptrdiff_t nmemb,
 				 char str[static restrict nmemb],
 				 const char *restrict msg);
+__attribute__((nonnull, warn_unused_result))
+static
+int	ur_sprintf_Dout_set	(ptrdiff_t nmemb,
+				 char str[static restrict nmemb],
+				 ptrdiff_t idx, bool state);
 
 
 /******************************************************************************
@@ -202,6 +209,17 @@ int	alx_ur_movel	(const struct Alx_UR *restrict ur,
 	return	alx_ur_cmd(ur, buf, usleep_after, log);
 }
 
+int	alx_ur_Dout_set	(const struct Alx_UR *restrict ur,
+			 ptrdiff_t idx, bool state, int usleep_after,
+			 FILE *restrict log)
+{
+	char	buf[BUFSIZ];
+
+	if (ur_sprintf_Dout_set(ARRAY_SIZE(buf), buf, idx, state))
+		return	-1;
+	return	alx_ur_cmd(ur, buf, usleep_after, log);
+}
+
 int	alx_ur_halt	(const struct Alx_UR *restrict ur,
 			 int usleep_after,
 			 FILE *restrict log)
@@ -257,6 +275,7 @@ int	ur_sprintf_func		(ptrdiff_t nmemb,
 	return	0;
 }
 
+static
 int	ur_sprintf_msg		(ptrdiff_t nmemb,
 				 char str[static restrict nmemb],
 				 const char *restrict msg)
@@ -271,17 +290,21 @@ int	ur_sprintf_msg		(ptrdiff_t nmemb,
 	return	0;
 }
 
-int	ur_sprintf_pose_add	(ptrdiff_t nmemb,
+static
+int	ur_sprintf_Dout_set	(ptrdiff_t nmemb,
 				 char str[static restrict nmemb],
-				 const char *restrict msg)
+				 ptrdiff_t idx, bool state)
 {
 
-	if (alx_strlcpys(str, "\"", nmemb, NULL))
+	if (alx_snprintfs(str, NULL, nmemb, "%ti, ", idx))
 		return	-1;
-	if (alx_strscat(nmemb, str, msg) < 0)
-		return	-1;
-	if (alx_strscat(nmemb, str, "\"") < 0)
-		return	-1;
+	if (state) {
+		if (alx_strscat(nmemb, str, "True") < 0)
+			return	-1;
+	} else {
+		if (alx_strscat(nmemb, str, "False") < 0)
+			return	-1;
+	}
 	return	0;
 }
 
