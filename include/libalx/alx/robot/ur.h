@@ -95,6 +95,11 @@ int	alx_ur_movej	(const struct Alx_UR *restrict ur,
 			 int usleep_after,
 			 FILE *restrict log);
 __attribute__((nonnull(1, 2), warn_unused_result))
+int	alx_ur_movej_rel(const struct Alx_UR *restrict ur,
+			 const struct Alx_UR_Pose *restrict pose,
+			 int usleep_after,
+			 FILE *restrict log);
+__attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_ur_movel	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
 			 int usleep_after,
@@ -156,6 +161,7 @@ int	ur_puts		(const struct Alx_UR *restrict ur,
 {
 	return	alx_ur_puts(ur, msg, usleep_after, log);
 }
+
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 int	ur_movej	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
@@ -164,6 +170,16 @@ int	ur_movej	(const struct Alx_UR *restrict ur,
 {
 	return	alx_ur_movej(ur, pose, usleep_after, log);
 }
+
+__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
+int	ur_movej_rel	(const struct Alx_UR *restrict ur,
+			 const struct Alx_UR_Pose *restrict pose,
+			 int usleep_after,
+			 FILE *restrict log)
+{
+	return	alx_ur_movej_rel(ur, pose, usleep_after, log);
+}
+
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 int	ur_movel	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
@@ -172,6 +188,7 @@ int	ur_movel	(const struct Alx_UR *restrict ur,
 {
 	return	alx_ur_movel(ur, pose, usleep_after, log);
 }
+
 __attribute__((always_inline, nonnull(1), warn_unused_result))
 int	ur_Dout_set	(const struct Alx_UR *restrict ur,
 			 ptrdiff_t idx, bool state, int usleep_after,
@@ -179,6 +196,7 @@ int	ur_Dout_set	(const struct Alx_UR *restrict ur,
 {
 	return	alx_ur_Dout_set(ur, idx, state, usleep_after, log);
 }
+
 __attribute__((always_inline, nonnull(1), warn_unused_result))
 int	ur_halt		(const struct Alx_UR *restrict ur,
 			 int usleep_after,

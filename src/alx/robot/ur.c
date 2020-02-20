@@ -47,6 +47,11 @@ static
 int	ur_sprintf_pose		(ptrdiff_t nmemb,
 				 char str[static restrict nmemb],
 				 const struct Alx_UR_Pose *restrict pose);
+__attribute__((nonnull, warn_unused_result))
+static
+int	ur_sprintf_pose_rel	(ptrdiff_t nmemb,
+				 char str[static restrict nmemb],
+				 const char *restrict pose);
 __attribute__((nonnull(2, 3), warn_unused_result))
 static
 int	ur_sprintf_func		(ptrdiff_t nmemb,
@@ -171,13 +176,13 @@ int	alx_ur_puts	(const struct Alx_UR *restrict ur,
 			 FILE *restrict log)
 {
 	char	m[BUFSIZ];
-	char	buf[BUFSIZ];
+	char	cmd[BUFSIZ];
 
 	if (ur_sprintf_msg(ARRAY_SIZE(m), m, msg))
 		return	-1;
-	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "textmsg", m))
+	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "textmsg", m))
 		return	-1;
-	return	alx_ur_cmd(ur, buf, usleep_after, log);
+	return	alx_ur_cmd(ur, cmd, usleep_after, log);
 }
 
 int	alx_ur_movej	(const struct Alx_UR *restrict ur,
@@ -186,13 +191,30 @@ int	alx_ur_movej	(const struct Alx_UR *restrict ur,
 			 FILE *restrict log)
 {
 	char	pos[BUFSIZ];
-	char	buf[BUFSIZ];
+	char	cmd[BUFSIZ];
 
 	if (ur_sprintf_pose(ARRAY_SIZE(pos), pos, pose))
 		return	-1;
-	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "movej", pos))
+	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "movej", pos))
 		return	-1;
-	return	alx_ur_cmd(ur, buf, usleep_after, log);
+	return	alx_ur_cmd(ur, cmd, usleep_after, log);
+}
+
+int	alx_ur_movej_rel(const struct Alx_UR *restrict ur,
+			 const struct Alx_UR_Pose *restrict pose,
+			 int usleep_after,
+			 FILE *restrict log)
+{
+	char	buf1[BUFSIZ]; /* used as `pos` and later as `cmd` */
+	char	buf2[BUFSIZ]; /* used as `pos_rel` */
+
+	if (ur_sprintf_pose(ARRAY_SIZE(buf1), buf1, pose))
+		return	-1;
+	if (ur_sprintf_pose_rel(ARRAY_SIZE(buf2), buf2, buf1))
+		return	-1;
+	if (ur_sprintf_func(ARRAY_SIZE(buf1), buf1, "movej", buf2))
+		return	-1;
+	return	alx_ur_cmd(ur, buf1, usleep_after, log);
 }
 
 int	alx_ur_movel	(const struct Alx_UR *restrict ur,
@@ -201,35 +223,48 @@ int	alx_ur_movel	(const struct Alx_UR *restrict ur,
 			 FILE *restrict log)
 {
 	char	pos[BUFSIZ];
-	char	buf[BUFSIZ];
+	char	cmd[BUFSIZ];
 
 	if (ur_sprintf_pose(ARRAY_SIZE(pos), pos, pose))
 		return	-1;
-	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "movel", pos))
+	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "movel", pos))
 		return	-1;
-	return	alx_ur_cmd(ur, buf, usleep_after, log);
+	return	alx_ur_cmd(ur, cmd, usleep_after, log);
+}
+
+int	alx_ur_movel_rel(const struct Alx_UR *restrict ur,
+			 const struct Alx_UR_Pose *restrict pose,
+			 int usleep_after,
+			 FILE *restrict log)
+{
+	char	buf1[BUFSIZ]; /* used as `pos` and later as `cmd` */
+	char	buf2[BUFSIZ]; /* used as `pos_rel` */
+
+	if (ur_sprintf_pose(ARRAY_SIZE(buf1), buf1, pose))
+		return	-1;
+	if (ur_sprintf_pose_rel(ARRAY_SIZE(buf2), buf2, buf1))
+		return	-1;
+	if (ur_sprintf_func(ARRAY_SIZE(buf1), buf1, "movel", buf2))
+		return	-1;
+	return	alx_ur_cmd(ur, buf1, usleep_after, log);
 }
 
 int	alx_ur_Dout_set	(const struct Alx_UR *restrict ur,
 			 ptrdiff_t idx, bool state, int usleep_after,
 			 FILE *restrict log)
 {
-	char	buf[BUFSIZ];
+	char	cmd[BUFSIZ];
 
-	if (ur_sprintf_Dout_set(ARRAY_SIZE(buf), buf, idx, state))
+	if (ur_sprintf_Dout_set(ARRAY_SIZE(cmd), cmd, idx, state))
 		return	-1;
-	return	alx_ur_cmd(ur, buf, usleep_after, log);
+	return	alx_ur_cmd(ur, cmd, usleep_after, log);
 }
 
 int	alx_ur_halt	(const struct Alx_UR *restrict ur,
 			 int usleep_after,
 			 FILE *restrict log)
 {
-	char	buf[BUFSIZ];
-
-	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "halt", NULL))
-		return	-1;
-	return	alx_ur_cmd(ur, buf, usleep_after, log);
+	return	alx_ur_cmd(ur, "halt", usleep_after, log);
 }
 
 
@@ -256,6 +291,33 @@ int	ur_sprintf_pose		(ptrdiff_t nmemb,
 	default:
 		return	EINVAL;
 	}
+}
+
+static
+int	ur_sprintf_pose_rel	(ptrdiff_t nmemb,
+				 char str[static restrict nmemb],
+				 const char *restrict pose)
+{
+
+	if (alx_strlcpys(str, "pose_add(", nmemb, NULL))
+		return	-1;
+	switch (pose[0]) {
+	case 'p':	/* xyz */
+		if (alx_strscat(nmemb, str, "get_actual_tcp_pose(), ") < 0)
+			return	-1;
+		break;
+	case '[':	/* joints */
+		if (alx_strscat(nmemb, str, "get_actual_joint_positions(), ") < 0)
+			return	-1;
+		break;
+	default:
+		return	-1;
+	}
+	if (alx_strscat(nmemb, str, pose) < 0)
+		return	-1;
+	if (alx_strscat(nmemb, str, ")") < 0)
+		return	-1;
+	return	0;
 }
 
 static
