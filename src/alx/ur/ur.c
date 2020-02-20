@@ -50,6 +50,11 @@ static
 int	ur_sprintf_movej	(ptrdiff_t nmemb,
 				 char str[static restrict nmemb],
 				 const char *pose);
+__attribute__((nonnull, warn_unused_result))
+static
+int	ur_sprintf_movel	(ptrdiff_t nmemb,
+				 char str[static restrict nmemb],
+				 const char *pose);
 
 
 /******************************************************************************
@@ -167,6 +172,20 @@ int	alx_ur_movej	(const struct Alx_UR *restrict ur,
 	return	alx_ur_cmd(ur, buf, usleep_after, ostream);
 }
 
+int	alx_ur_movel	(const struct Alx_UR *restrict ur,
+			 const struct Alx_UR_Pose *pose, int usleep_after,
+			 FILE *restrict ostream)
+{
+	char		pos[BUFSIZ];
+	char		buf[BUFSIZ];
+
+	if (ur_sprintf_pose(ARRAY_SIZE(pos), pos, pose))
+		return	-1;
+	if (ur_sprintf_movel(ARRAY_SIZE(buf), buf, pos))
+		return	-1;
+	return	alx_ur_cmd(ur, buf, usleep_after, ostream);
+}
+
 
 /******************************************************************************
  ******* static function definitions ******************************************
@@ -200,6 +219,21 @@ int	ur_sprintf_movej	(ptrdiff_t nmemb,
 {
 
 	if (alx_strlcpys(str, "movej(", nmemb, NULL))
+		return	-1;
+	if (alx_strscat(nmemb, str, pose) < 0)
+		return	-1;
+	if (alx_strscat(nmemb, str, ")") < 0)
+		return	-1;
+	return	0;
+}
+
+static
+int	ur_sprintf_movel	(ptrdiff_t nmemb,
+				 char str[static restrict nmemb],
+				 const char *pose)
+{
+
+	if (alx_strlcpys(str, "movel(", nmemb, NULL))
 		return	-1;
 	if (alx_strscat(nmemb, str, pose) < 0)
 		return	-1;

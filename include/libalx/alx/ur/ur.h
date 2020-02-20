@@ -87,6 +87,10 @@ __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_ur_movej	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *pose, int usleep_after,
 			 FILE *restrict ostream);
+__attribute__((nonnull(1, 2), warn_unused_result))
+int	alx_ur_movel	(const struct Alx_UR *restrict ur,
+			 const struct Alx_UR_Pose *pose, int usleep_after,
+			 FILE *restrict ostream);
 
 
 /******************************************************************************
@@ -136,6 +140,13 @@ int	ur_movej	(const struct Alx_UR *restrict ur,
 			 FILE *restrict ostream)
 {
 	return	alx_ur_movej(ur, pose, usleep_after, ostream);
+}
+__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
+int	ur_movel	(const struct Alx_UR *restrict ur,
+			 const struct Alx_UR_Pose *pose, int usleep_after,
+			 FILE *restrict ostream)
+{
+	return	alx_ur_movel(ur, pose, usleep_after, ostream);
 }
 #endif	 /* defined(ALX_NO_PREFIX) */
 
