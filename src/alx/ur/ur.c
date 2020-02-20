@@ -44,17 +44,13 @@ __attribute__((nonnull, warn_unused_result))
 static
 int	ur_sprintf_pose		(ptrdiff_t nmemb,
 				 char str[static restrict nmemb],
-				 const struct Alx_UR_Pose *pose);
+				 const struct Alx_UR_Pose *restrict pose);
 __attribute__((nonnull, warn_unused_result))
 static
-int	ur_sprintf_movej	(ptrdiff_t nmemb,
+int	ur_sprintf_func		(ptrdiff_t nmemb,
 				 char str[static restrict nmemb],
-				 const char *pose);
-__attribute__((nonnull, warn_unused_result))
-static
-int	ur_sprintf_movel	(ptrdiff_t nmemb,
-				 char str[static restrict nmemb],
-				 const char *pose);
+				 const char *restrict func,
+				 const char *restrict arg);
 
 
 /******************************************************************************
@@ -158,30 +154,43 @@ struct Alx_UR_Pose alx_ur_pose_joints(float base, float shoulder, float elbow,
 	};
 }
 
-int	alx_ur_movej	(const struct Alx_UR *restrict ur,
-			 const struct Alx_UR_Pose *pose, int usleep_after,
+int	alx_ur_puts	(const struct Alx_UR *restrict ur,
+			 const char *restrict msg, int usleep_after,
 			 FILE *restrict ostream)
 {
-	char		pos[BUFSIZ];
-	char		buf[BUFSIZ];
+	char	buf[BUFSIZ];
+
+	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "textmsg", msg))
+		return	-1;
+	return	alx_ur_cmd(ur, buf, usleep_after, ostream);
+}
+
+int	alx_ur_movej	(const struct Alx_UR *restrict ur,
+			 const struct Alx_UR_Pose *restrict pose,
+			 int usleep_after,
+			 FILE *restrict ostream)
+{
+	char	pos[BUFSIZ];
+	char	buf[BUFSIZ];
 
 	if (ur_sprintf_pose(ARRAY_SIZE(pos), pos, pose))
 		return	-1;
-	if (ur_sprintf_movej(ARRAY_SIZE(buf), buf, pos))
+	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "movej", pos))
 		return	-1;
 	return	alx_ur_cmd(ur, buf, usleep_after, ostream);
 }
 
 int	alx_ur_movel	(const struct Alx_UR *restrict ur,
-			 const struct Alx_UR_Pose *pose, int usleep_after,
+			 const struct Alx_UR_Pose *restrict pose,
+			 int usleep_after,
 			 FILE *restrict ostream)
 {
-	char		pos[BUFSIZ];
-	char		buf[BUFSIZ];
+	char	pos[BUFSIZ];
+	char	buf[BUFSIZ];
 
 	if (ur_sprintf_pose(ARRAY_SIZE(pos), pos, pose))
 		return	-1;
-	if (ur_sprintf_movel(ARRAY_SIZE(buf), buf, pos))
+	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "movel", pos))
 		return	-1;
 	return	alx_ur_cmd(ur, buf, usleep_after, ostream);
 }
@@ -193,7 +202,7 @@ int	alx_ur_movel	(const struct Alx_UR *restrict ur,
 static
 int	ur_sprintf_pose		(ptrdiff_t nmemb,
 				 char str[static restrict nmemb],
-				 const struct Alx_UR_Pose *pose)
+				 const struct Alx_UR_Pose *restrict pose)
 {
 
 	switch (pose->type) {
@@ -213,29 +222,17 @@ int	ur_sprintf_pose		(ptrdiff_t nmemb,
 }
 
 static
-int	ur_sprintf_movej	(ptrdiff_t nmemb,
+int	ur_sprintf_func		(ptrdiff_t nmemb,
 				 char str[static restrict nmemb],
-				 const char *pose)
+				 const char *restrict func,
+				 const char *restrict arg)
 {
 
-	if (alx_strlcpys(str, "movej(", nmemb, NULL))
+	if (alx_strlcpys(str, func, nmemb, NULL))
 		return	-1;
-	if (alx_strscat(nmemb, str, pose) < 0)
+	if (alx_strscat(nmemb, str, "(") < 0)
 		return	-1;
-	if (alx_strscat(nmemb, str, ")") < 0)
-		return	-1;
-	return	0;
-}
-
-static
-int	ur_sprintf_movel	(ptrdiff_t nmemb,
-				 char str[static restrict nmemb],
-				 const char *pose)
-{
-
-	if (alx_strlcpys(str, "movel(", nmemb, NULL))
-		return	-1;
-	if (alx_strscat(nmemb, str, pose) < 0)
+	if (alx_strscat(nmemb, str, arg) < 0)
 		return	-1;
 	if (alx_strscat(nmemb, str, ")") < 0)
 		return	-1;

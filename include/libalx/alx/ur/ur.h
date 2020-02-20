@@ -85,11 +85,13 @@ struct Alx_UR_Pose alx_ur_pose_joints(float base, float shoulder, float elbow,
 
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_ur_movej	(const struct Alx_UR *restrict ur,
-			 const struct Alx_UR_Pose *pose, int usleep_after,
+			 const struct Alx_UR_Pose *restrict pose,
+			 int usleep_after,
 			 FILE *restrict ostream);
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_ur_movel	(const struct Alx_UR *restrict ur,
-			 const struct Alx_UR_Pose *pose, int usleep_after,
+			 const struct Alx_UR_Pose *restrict pose,
+			 int usleep_after,
 			 FILE *restrict ostream);
 
 
@@ -136,14 +138,16 @@ struct Alx_UR_Pose ur_pose_joints(float base, float shoulder, float elbow,
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 int	ur_movej	(const struct Alx_UR *restrict ur,
-			 const struct Alx_UR_Pose *pose, int usleep_after,
+			 const struct Alx_UR_Pose *restrict pose,
+			 int usleep_after,
 			 FILE *restrict ostream)
 {
 	return	alx_ur_movej(ur, pose, usleep_after, ostream);
 }
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 int	ur_movel	(const struct Alx_UR *restrict ur,
-			 const struct Alx_UR_Pose *pose, int usleep_after,
+			 const struct Alx_UR_Pose *restrict pose,
+			 int usleep_after,
 			 FILE *restrict ostream)
 {
 	return	alx_ur_movel(ur, pose, usleep_after, ostream);
