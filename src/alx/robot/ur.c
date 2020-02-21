@@ -57,7 +57,7 @@ static
 int	ur_sprintf_func		(ptrdiff_t nmemb,
 				 char str[static restrict nmemb],
 				 const char *restrict func,
-				 const char *restrict arg);
+				 const char *arg[]);
 __attribute__((nonnull, warn_unused_result))
 static
 int	ur_sprintf_msg		(ptrdiff_t nmemb,
@@ -177,10 +177,11 @@ int	alx_ur_puts	(const struct Alx_UR *restrict ur,
 {
 	char	m[BUFSIZ];
 	char	cmd[BUFSIZ];
+	const char *args[]	= {&m[0], NULL};
 
 	if (ur_sprintf_msg(ARRAY_SIZE(m), m, msg))
 		return	-1;
-	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "textmsg", m))
+	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "textmsg", args))
 		return	-1;
 	return	alx_ur_cmd(ur, cmd, usleep_after, log);
 }
@@ -191,10 +192,11 @@ int	alx_ur_movej	(const struct Alx_UR *restrict ur,
 {
 	char	pos[BUFSIZ];
 	char	cmd[BUFSIZ];
+	const char *args[]	= {&pos[0], NULL};
 
 	if (ur_sprintf_pose(ARRAY_SIZE(pos), pos, pose))
 		return	-1;
-	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "movej", pos))
+	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "movej", args))
 		return	-1;
 	return	alx_ur_cmd(ur, cmd, usleep_after, log);
 }
@@ -203,16 +205,17 @@ int	alx_ur_movej_rel(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
 			 int usleep_after, FILE *restrict log)
 {
-	char	buf1[BUFSIZ]; /* used as `pos` and later as `cmd` */
-	char	buf2[BUFSIZ]; /* used as `pos_rel` */
+	char	buf[BUFSIZ]; /* used as `pos` and later as `cmd` */
+	char	pos_rel[BUFSIZ]; /* used as `pos_rel` */
+	const char *args[]	= {&pos_rel[0], NULL};
 
-	if (ur_sprintf_pose(ARRAY_SIZE(buf1), buf1, pose))
+	if (ur_sprintf_pose(ARRAY_SIZE(buf), buf, pose))
 		return	-1;
-	if (ur_sprintf_pose_rel(ARRAY_SIZE(buf2), buf2, buf1))
+	if (ur_sprintf_pose_rel(ARRAY_SIZE(pos_rel), pos_rel, buf))
 		return	-1;
-	if (ur_sprintf_func(ARRAY_SIZE(buf1), buf1, "movej", buf2))
+	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "movej", args))
 		return	-1;
-	return	alx_ur_cmd(ur, buf1, usleep_after, log);
+	return	alx_ur_cmd(ur, buf, usleep_after, log);
 }
 
 int	alx_ur_movel	(const struct Alx_UR *restrict ur,
@@ -221,10 +224,11 @@ int	alx_ur_movel	(const struct Alx_UR *restrict ur,
 {
 	char	pos[BUFSIZ];
 	char	cmd[BUFSIZ];
+	const char *args[]	= {&pos[0], NULL};
 
 	if (ur_sprintf_pose(ARRAY_SIZE(pos), pos, pose))
 		return	-1;
-	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "movel", pos))
+	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "movel", args))
 		return	-1;
 	return	alx_ur_cmd(ur, cmd, usleep_after, log);
 }
@@ -233,16 +237,59 @@ int	alx_ur_movel_rel(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
 			 int usleep_after, FILE *restrict log)
 {
-	char	buf1[BUFSIZ]; /* used as `pos` and later as `cmd` */
-	char	buf2[BUFSIZ]; /* used as `pos_rel` */
+	char	buf[BUFSIZ]; /* used as `pos` and later as `cmd` */
+	char	pos_rel[BUFSIZ]; /* used as `pos_rel` */
+	const char *args[]	= {&pos_rel[0], NULL};
 
-	if (ur_sprintf_pose(ARRAY_SIZE(buf1), buf1, pose))
+	if (ur_sprintf_pose(ARRAY_SIZE(buf), buf, pose))
 		return	-1;
-	if (ur_sprintf_pose_rel(ARRAY_SIZE(buf2), buf2, buf1))
+	if (ur_sprintf_pose_rel(ARRAY_SIZE(pos_rel), pos_rel, buf))
 		return	-1;
-	if (ur_sprintf_func(ARRAY_SIZE(buf1), buf1, "movel", buf2))
+	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "movel", args))
 		return	-1;
-	return	alx_ur_cmd(ur, buf1, usleep_after, log);
+	return	alx_ur_cmd(ur, buf, usleep_after, log);
+}
+
+int	alx_ur_movec	(const struct Alx_UR *restrict ur,
+			 const struct Alx_UR_Pose *restrict via,
+			 const struct Alx_UR_Pose *restrict to,
+			 int usleep_after, FILE *restrict log)
+{
+	char	pos_via[BUFSIZ];
+	char	pos_to[BUFSIZ];
+	char	cmd[BUFSIZ];
+	const char *args[]	= {&pos_via[0], &pos_to[0], NULL};
+
+	if (ur_sprintf_pose(ARRAY_SIZE(pos_via), pos_via, via))
+		return	-1;
+	if (ur_sprintf_pose(ARRAY_SIZE(pos_to), pos_to, to))
+		return	-1;
+	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "movec", args))
+		return	-1;
+	return	alx_ur_cmd(ur, cmd, usleep_after, log);
+}
+
+int	alx_ur_movec_rel(const struct Alx_UR *restrict ur,
+			 const struct Alx_UR_Pose *restrict via,
+			 const struct Alx_UR_Pose *restrict to,
+			 int usleep_after, FILE *restrict log)
+{
+	char	buf[BUFSIZ]; /* used as `pos` and later as `cmd` */
+	char	pos_via[BUFSIZ];
+	char	pos_to[BUFSIZ];
+	const char *args[]	= {&pos_via[0], &pos_to[0], NULL};
+
+	if (ur_sprintf_pose(ARRAY_SIZE(buf), buf, via))
+		return	-1;
+	if (ur_sprintf_pose_rel(ARRAY_SIZE(pos_via), pos_via, buf))
+		return	-1;
+	if (ur_sprintf_pose(ARRAY_SIZE(buf), buf, to))
+		return	-1;
+	if (ur_sprintf_pose_rel(ARRAY_SIZE(pos_to), pos_to, buf))
+		return	-1;
+	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "movec", args))
+		return	-1;
+	return	alx_ur_cmd(ur, buf, usleep_after, log);
 }
 
 int	alx_ur_Dout_set	(const struct Alx_UR *restrict ur,
@@ -263,9 +310,9 @@ int	alx_ur_halt	(const struct Alx_UR *restrict ur,
 }
 
 int	alx_ur_shutdown	(const struct Alx_UR *restrict ur,
-			 FILE *restrict log)
+			 int usleep_after, FILE *restrict log)
 {
-	return	alx_ur_cmd(ur, "powerdown()", 0, log);
+	return	alx_ur_cmd(ur, "powerdown()", usleep_after, log);
 }
 
 
@@ -299,24 +346,26 @@ int	ur_sprintf_pose_rel	(ptrdiff_t nmemb,
 				 char str[static restrict nmemb],
 				 const char *restrict pose)
 {
+	char	arg1[BUFSIZ];
+	char	arg2[BUFSIZ];
+	const char *args[]	= {&arg1[0], &arg2[0], NULL};
 
-	if (alx_strlcpys(str, "pose_add(", nmemb, NULL))
-		return	-1;
 	switch (pose[0]) {
 	case 'p':	/* xyz */
-		if (alx_strscat(nmemb, str, "get_actual_tcp_pose(), ") < 0)
+		if (alx_strlcpys(arg1, "get_actual_tcp_pose(), ",
+							ARRAY_SIZE(arg1), NULL))
 			return	-1;
 		break;
 	case '[':	/* joints */
-		if (alx_strscat(nmemb, str, "get_actual_joint_positions(), ") < 0)
+		if (alx_strlcpys(arg1, "get_actual_joint_positions(), ",
+							ARRAY_SIZE(arg1), NULL))
 			return	-1;
 		break;
 	default:
 		return	-1;
 	}
-	if (alx_strscat(nmemb, str, pose) < 0)
-		return	-1;
-	if (alx_strscat(nmemb, str, ")") < 0)
+
+	if (ur_sprintf_func(nmemb, str, "pose_add", args))
 		return	-1;
 	return	0;
 }
@@ -325,15 +374,21 @@ static
 int	ur_sprintf_func		(ptrdiff_t nmemb,
 				 char str[static restrict nmemb],
 				 const char *restrict func,
-				 const char *restrict arg)
+				 const char *arg[])
 {
 
 	if (alx_strlcpys(str, func, nmemb, NULL))
 		return	-1;
 	if (alx_strscat(nmemb, str, "(") < 0)
 		return	-1;
-	if (alx_strscat(nmemb, str, arg) < 0)
-		return	-1;
+	for (ptrdiff_t i = 0; arg[i]; i++) {
+		if (i) {
+			if (alx_strscat(nmemb, str, ", ") < 0)
+				return	-1;
+		}
+		if (alx_strscat(nmemb, str, arg[i]) < 0)
+			return	-1;
+	}
 	if (alx_strscat(nmemb, str, ")") < 0)
 		return	-1;
 	return	0;
@@ -359,16 +414,22 @@ int	ur_sprintf_Dout_set	(ptrdiff_t nmemb,
 				 char str[static restrict nmemb],
 				 ptrdiff_t idx, bool state)
 {
+	char	arg1[BUFSIZ];
+	char	arg2[BUFSIZ];
+	const char *args[]	= {&arg1[0], &arg2[0], NULL};
 
-	if (alx_snprintfs(str, NULL, nmemb, "%ti, ", idx))
+	if (alx_snprintfs(arg1, NULL, ARRAY_SIZE(arg1), "%ti, ", idx))
 		return	-1;
 	if (state) {
-		if (alx_strscat(nmemb, str, "True") < 0)
+		if (alx_strlcpys(arg2, "True", ARRAY_SIZE(arg2), NULL))
 			return	-1;
 	} else {
-		if (alx_strscat(nmemb, str, "False") < 0)
+		if (alx_strlcpys(arg2, "False", ARRAY_SIZE(arg2), NULL))
 			return	-1;
 	}
+
+	if (ur_sprintf_func(nmemb, str, "set_digital_out", args))
+		return	-1;
 	return	0;
 }
 
