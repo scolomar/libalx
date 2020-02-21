@@ -112,8 +112,8 @@ int	alx_ur_deinit	(struct Alx_UR *restrict ur)
 }
 
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
-			 const char *restrict cmd, int usleep_after,
-			 FILE *restrict log)
+			 const char *restrict cmd,
+			 int usleep_after, FILE *restrict log)
 {
 	ssize_t	n;
 	ssize_t	len;
@@ -172,8 +172,8 @@ struct Alx_UR_Pose alx_ur_pose_joints(float base, float shoulder, float elbow,
 }
 
 int	alx_ur_puts	(const struct Alx_UR *restrict ur,
-			 const char *restrict msg, int usleep_after,
-			 FILE *restrict log)
+			 const char *restrict msg,
+			 int usleep_after, FILE *restrict log)
 {
 	char	m[BUFSIZ];
 	char	cmd[BUFSIZ];
@@ -187,8 +187,7 @@ int	alx_ur_puts	(const struct Alx_UR *restrict ur,
 
 int	alx_ur_movej	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after,
-			 FILE *restrict log)
+			 int usleep_after, FILE *restrict log)
 {
 	char	pos[BUFSIZ];
 	char	cmd[BUFSIZ];
@@ -202,8 +201,7 @@ int	alx_ur_movej	(const struct Alx_UR *restrict ur,
 
 int	alx_ur_movej_rel(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after,
-			 FILE *restrict log)
+			 int usleep_after, FILE *restrict log)
 {
 	char	buf1[BUFSIZ]; /* used as `pos` and later as `cmd` */
 	char	buf2[BUFSIZ]; /* used as `pos_rel` */
@@ -219,8 +217,7 @@ int	alx_ur_movej_rel(const struct Alx_UR *restrict ur,
 
 int	alx_ur_movel	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after,
-			 FILE *restrict log)
+			 int usleep_after, FILE *restrict log)
 {
 	char	pos[BUFSIZ];
 	char	cmd[BUFSIZ];
@@ -234,8 +231,7 @@ int	alx_ur_movel	(const struct Alx_UR *restrict ur,
 
 int	alx_ur_movel_rel(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after,
-			 FILE *restrict log)
+			 int usleep_after, FILE *restrict log)
 {
 	char	buf1[BUFSIZ]; /* used as `pos` and later as `cmd` */
 	char	buf2[BUFSIZ]; /* used as `pos_rel` */
@@ -250,8 +246,8 @@ int	alx_ur_movel_rel(const struct Alx_UR *restrict ur,
 }
 
 int	alx_ur_Dout_set	(const struct Alx_UR *restrict ur,
-			 ptrdiff_t idx, bool state, int usleep_after,
-			 FILE *restrict log)
+			 ptrdiff_t idx, bool state,
+			 int usleep_after, FILE *restrict log)
 {
 	char	cmd[BUFSIZ];
 
@@ -261,10 +257,15 @@ int	alx_ur_Dout_set	(const struct Alx_UR *restrict ur,
 }
 
 int	alx_ur_halt	(const struct Alx_UR *restrict ur,
-			 int usleep_after,
-			 FILE *restrict log)
+			 int usleep_after, FILE *restrict log)
 {
 	return	alx_ur_cmd(ur, "halt", usleep_after, log);
+}
+
+int	alx_ur_shutdown	(const struct Alx_UR *restrict ur,
+			 FILE *restrict log)
+{
+	return	alx_ur_cmd(ur, "powerdown()", 0, log);
 }
 
 
