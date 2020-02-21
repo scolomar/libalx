@@ -151,7 +151,7 @@ __attribute__((always_inline, warn_unused_result))
 struct Alx_UR_Pose ur_pose_joints(float base, float shoulder, float elbow,
 				  float wrist1, float wrist2, float wrist3)
 {
-	return	alx_ur_pose_xyz(base, shoulder, elbow, wrist1, wrist2, wrist3);
+	return alx_ur_pose_joints(base, shoulder, elbow, wrist1, wrist2,wrist3);
 }
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
