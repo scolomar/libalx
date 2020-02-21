@@ -123,7 +123,7 @@ __attribute__((nonnull(1), warn_unused_result))
 int	alx_ur_halt	(const struct Alx_UR *restrict ur,
 			 int usleep_after, FILE *restrict log);
 __attribute__((nonnull(1), warn_unused_result))
-int	alx_ur_shutdown	(const struct Alx_UR *restrict ur,
+int	alx_ur_poweroff	(const struct Alx_UR *restrict ur,
 			 int usleep_after, FILE *restrict log);
 
 
@@ -242,10 +242,10 @@ int	ur_halt		(const struct Alx_UR *restrict ur,
 }
 
 __attribute__((always_inline, nonnull(1), warn_unused_result))
-int	ur_shutdown	(const struct Alx_UR *restrict ur,
+int	ur_poweroff	(const struct Alx_UR *restrict ur,
 			 int usleep_after, FILE *restrict log)
 {
-	return	alx_ur_shutdown(ur, usleep_after, log);
+	return	alx_ur_poweroff(ur, usleep_after, log);
 }
 #endif	 /* defined(ALX_NO_PREFIX) */
 

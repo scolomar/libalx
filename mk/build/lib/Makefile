@@ -101,7 +101,8 @@ ALX_DS_OBJ	=							\
 ALX_NPC_OBJ	=							\
 		$(BUILD_TMP_DIR)/alx/npcomplete/solver_lut.o
 ALX_ROBOT_OBJ	=							\
-		$(BUILD_TMP_DIR)/alx/robot/ur.o
+		$(BUILD_TMP_DIR)/alx/robot/ur/ur.o
+#		$(BUILD_TMP_DIR)/alx/robot/kawasaki/kawasaki.o
 
 CURL_OBJ	=							\
 		$(BUILD_TMP_DIR)/extra/curl/fcurl/fclose.o		\

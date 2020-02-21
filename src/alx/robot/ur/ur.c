@@ -309,7 +309,7 @@ int	alx_ur_halt	(const struct Alx_UR *restrict ur,
 	return	alx_ur_cmd(ur, "halt", usleep_after, log);
 }
 
-int	alx_ur_shutdown	(const struct Alx_UR *restrict ur,
+int	alx_ur_poweroff	(const struct Alx_UR *restrict ur,
 			 int usleep_after, FILE *restrict log)
 {
 	return	alx_ur_cmd(ur, "powerdown()", usleep_after, log);
