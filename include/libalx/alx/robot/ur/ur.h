@@ -21,6 +21,35 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define alx_ur_pose_xyz(x_, y_, z_, rx_, ry_, rz_)			\
+(struct Alx_UR_Pose){							\
+	.type	= (ALX_UR_POSE_XYZ),					\
+	.x	= (x_),							\
+	.y	= (y_),							\
+	.z	= (z_),							\
+	.rx	= (rx_),						\
+	.ry	= (ry_),						\
+	.rz	= (rz_)							\
+}
+
+#define alx_ur_pose_joints(b_, s_, e_, w1_, w2_, w3_)			\
+(struct Alx_UR_Pose){							\
+	.type		= (ALX_UR_POSE_JOINTS),				\
+	.base		= (b_),						\
+	.shoulder	= (s_),						\
+	.elbow		= (e_),						\
+	.wrist1		= (w1_),					\
+	.wrist2		= (w2_),					\
+	.wrist3		= (w3_)						\
+}
+
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define ur_pose_xyz(x, y, z, rx, ry, rz)				\
+	alx_ur_pose_xyz(x, y, z, rx, ry, rz)
+#define ur_pose_joints(base, shoulder, elbow, wrist1, wrist2, wrist3)	\
+	alx_ur_pose_joints(base, shoulder, elbow, wrist1, wrist2, wrist3)
+#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -69,7 +98,8 @@ struct	Alx_UR_Pose {
 __attribute__((nonnull, warn_unused_result))
 int	alx_ur_init	(struct Alx_UR **restrict ur,
 			 const char *restrict ur_ip,
-			 const char *restrict ur_port);
+			 const char *restrict ur_port,
+			 int usleep_after);
 __attribute__((warn_unused_result))
 int	alx_ur_deinit	(struct Alx_UR *restrict ur);
 
@@ -77,13 +107,6 @@ __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
 			 const char *restrict cmd,
 			 int usleep_after, FILE *restrict log);
-
-__attribute__((warn_unused_result))
-struct Alx_UR_Pose alx_ur_pose_xyz(float x, float y, float z,
-				   float rx, float ry, float rz);
-__attribute__((warn_unused_result))
-struct Alx_UR_Pose alx_ur_pose_joints(float base, float shoulder, float elbow,
-				      float wrist1, float wrist2, float wrist3);
 
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_ur_puts	(const struct Alx_UR *restrict ur,
@@ -135,9 +158,10 @@ int	alx_ur_poweroff	(const struct Alx_UR *restrict ur,
 __attribute__((always_inline, nonnull, warn_unused_result))
 int	ur_init		(struct Alx_UR **restrict ur,
 			 const char *restrict ur_ip,
-			 const char *restrict ur_port)
+			 const char *restrict ur_port,
+			 int usleep_after)
 {
-	return	alx_ur_init(ur, ur_ip, ur_port);
+	return	alx_ur_init(ur, ur_ip, ur_port, usleep_after);
 }
 
 __attribute__((always_inline, warn_unused_result))
@@ -152,20 +176,6 @@ int	ur_cmd		(const struct Alx_UR *restrict ur,
 			 int usleep_after, FILE *restrict log)
 {
 	return	alx_ur_cmd(ur, cmd, usleep_after, log);
-}
-
-__attribute__((always_inline, warn_unused_result))
-struct Alx_UR_Pose ur_pose_xyz(float x, float y, float z,
-			       float rx, float ry, float rz)
-{
-	return	alx_ur_pose_xyz(x, y, z, rx, ry, rz);
-}
-
-__attribute__((always_inline, warn_unused_result))
-struct Alx_UR_Pose ur_pose_joints(float base, float shoulder, float elbow,
-				  float wrist1, float wrist2, float wrist3)
-{
-	return alx_ur_pose_joints(base, shoulder, elbow, wrist1, wrist2,wrist3);
 }
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))

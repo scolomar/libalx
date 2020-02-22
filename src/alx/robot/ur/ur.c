@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/alx/robot/ur.h"
+#include "libalx/alx/robot/ur/ur.h"
 
 #include <errno.h>
 #include <limits.h>
@@ -75,21 +75,24 @@ int	ur_sprintf_Dout_set	(ptrdiff_t nmemb,
  ******************************************************************************/
 int	alx_ur_init	(struct Alx_UR **restrict ur,
 			 const char *restrict ur_ip,
-			 const char *restrict ur_port)
+			 const char *restrict ur_port,
+			 int usleep_after)
 {
 	int	sfd;
 
 	sfd	= alx_tcp_client_open(ur_ip, ur_port);
 	if (sfd < 0)
 		return	sfd;
-
 	if (alx_callocs(ur, 1))
-		goto err;
-
+		goto err1;
 	(*ur)->sfd	= sfd;
 
+	if (usleep(usleep_after))
+		goto err2;
 	return	0;
-err:
+err2:
+	alx_frees(ur);
+err1:
 	close(sfd);
 	return	ENOMEM;
 }
@@ -139,36 +142,6 @@ err:
 	if (n < 0)
 		return	n;
 	return	(n % INT_MAX) + 1;
-}
-
-struct Alx_UR_Pose alx_ur_pose_xyz(float x, float y, float z,
-				   float rx, float ry, float rz)
-{
-
-	return	(struct Alx_UR_Pose){
-		.type	= ALX_UR_POSE_XYZ,
-		.x	= x,
-		.y	= y,
-		.z	= z,
-		.rx	= rx,
-		.ry	= ry,
-		.rz	= rz
-	};
-}
-
-struct Alx_UR_Pose alx_ur_pose_joints(float base, float shoulder, float elbow,
-				      float wrist1, float wrist2, float wrist3)
-{
-
-	return	(struct Alx_UR_Pose){
-		.type		= ALX_UR_POSE_JOINTS,
-		.base		= base,
-		.shoulder	= shoulder,
-		.elbow		= elbow,
-		.wrist1		= wrist1,
-		.wrist2		= wrist2,
-		.wrist3		= wrist3
-	};
 }
 
 int	alx_ur_puts	(const struct Alx_UR *restrict ur,
