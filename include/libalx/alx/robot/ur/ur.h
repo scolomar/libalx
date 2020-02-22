@@ -103,21 +103,16 @@ int	alx_ur_init	(struct Alx_UR **restrict ur,
 __attribute__((warn_unused_result))
 int	alx_ur_deinit	(struct Alx_UR *restrict ur);
 
-__attribute__((nonnull(1), warn_unused_result))
-int	alx_ur_halt	(const struct Alx_UR *restrict ur,
-			 int usleep_after, FILE *restrict log);
-__attribute__((nonnull(1), warn_unused_result))
-int	alx_ur_poweroff	(const struct Alx_UR *restrict ur,
-			 int usleep_after, FILE *restrict log);
-
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
 			 const char *restrict cmd,
 			 int usleep_after, FILE *restrict log);
 
-__attribute__((nonnull(1, 2), warn_unused_result))
-int	alx_ur_puts	(const struct Alx_UR *restrict ur,
-			 const char *restrict msg,
+__attribute__((nonnull(1), warn_unused_result))
+int	alx_ur_halt	(const struct Alx_UR *restrict ur,
+			 int usleep_after, FILE *restrict log);
+__attribute__((nonnull(1), warn_unused_result))
+int	alx_ur_poweroff	(const struct Alx_UR *restrict ur,
 			 int usleep_after, FILE *restrict log);
 
 __attribute__((nonnull(1, 2), warn_unused_result))
@@ -155,6 +150,11 @@ int	alx_ur_set_tcp	(const struct Alx_UR *restrict ur,
 __attribute__((nonnull(1), warn_unused_result))
 int	alx_ur_set_Dout	(const struct Alx_UR *restrict ur,
 			 ptrdiff_t idx, bool state,
+			 int usleep_after, FILE *restrict log);
+
+__attribute__((nonnull(1, 2), warn_unused_result))
+int	alx_ur_puts	(const struct Alx_UR *restrict ur,
+			 const char *restrict msg,
 			 int usleep_after, FILE *restrict log);
 
 
@@ -198,14 +198,6 @@ int	ur_poweroff	(const struct Alx_UR *restrict ur,
 			 int usleep_after, FILE *restrict log)
 {
 	return	alx_ur_poweroff(ur, usleep_after, log);
-}
-
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-int	ur_puts		(const struct Alx_UR *restrict ur,
-			 const char *restrict msg,
-			 int usleep_after, FILE *restrict log)
-{
-	return	alx_ur_puts(ur, msg, usleep_after, log);
 }
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
@@ -272,6 +264,14 @@ int	ur_set_Dout	(const struct Alx_UR *restrict ur,
 			 int usleep_after, FILE *restrict log)
 {
 	return	alx_ur_set_Dout(ur, idx, state, usleep_after, log);
+}
+
+__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
+int	ur_puts		(const struct Alx_UR *restrict ur,
+			 const char *restrict msg,
+			 int usleep_after, FILE *restrict log)
+{
+	return	alx_ur_puts(ur, msg, usleep_after, log);
 }
 #endif	 /* defined(ALX_NO_PREFIX) */
 

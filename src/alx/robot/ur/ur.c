@@ -113,18 +113,6 @@ int	alx_ur_deinit	(struct Alx_UR *restrict ur)
 	return	status1;
 }
 
-int	alx_ur_halt	(const struct Alx_UR *restrict ur,
-			 int usleep_after, FILE *restrict log)
-{
-	return	alx_ur_cmd(ur, "halt", usleep_after, log);
-}
-
-int	alx_ur_poweroff	(const struct Alx_UR *restrict ur,
-			 int usleep_after, FILE *restrict log)
-{
-	return	alx_ur_cmd(ur, "powerdown()", usleep_after, log);
-}
-
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
 			 const char *restrict cmd,
 			 int usleep_after, FILE *restrict log)
@@ -155,19 +143,16 @@ err:
 	return	(n % INT_MAX) + 1;
 }
 
-int	alx_ur_puts	(const struct Alx_UR *restrict ur,
-			 const char *restrict msg,
+int	alx_ur_halt	(const struct Alx_UR *restrict ur,
 			 int usleep_after, FILE *restrict log)
 {
-	char	m[BUFSIZ];
-	char	cmd[BUFSIZ];
-	const char *args[]	= {&m[0], NULL};
+	return	alx_ur_cmd(ur, "halt", usleep_after, log);
+}
 
-	if (ur_sprintf_msg(ARRAY_SIZE(m), m, msg))
-		return	-1;
-	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "textmsg", args))
-		return	-1;
-	return	alx_ur_cmd(ur, cmd, usleep_after, log);
+int	alx_ur_poweroff	(const struct Alx_UR *restrict ur,
+			 int usleep_after, FILE *restrict log)
+{
+	return	alx_ur_cmd(ur, "powerdown()", usleep_after, log);
 }
 
 int	alx_ur_movej	(const struct Alx_UR *restrict ur,
@@ -314,6 +299,21 @@ int	alx_ur_set_Dout	(const struct Alx_UR *restrict ur,
 	if (ur_sprintf_bool(ARRAY_SIZE(b), b, state))
 		return	-1;
 	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "set_digital_out", args))
+		return	-1;
+	return	alx_ur_cmd(ur, cmd, usleep_after, log);
+}
+
+int	alx_ur_puts	(const struct Alx_UR *restrict ur,
+			 const char *restrict msg,
+			 int usleep_after, FILE *restrict log)
+{
+	char	m[BUFSIZ];
+	char	cmd[BUFSIZ];
+	const char *args[]	= {&m[0], NULL};
+
+	if (ur_sprintf_msg(ARRAY_SIZE(m), m, msg))
+		return	-1;
+	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "textmsg", args))
 		return	-1;
 	return	alx_ur_cmd(ur, cmd, usleep_after, log);
 }
