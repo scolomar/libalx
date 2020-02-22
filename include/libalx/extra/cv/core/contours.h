@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2018	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,30 +7,20 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/videoio.h */
+#pragma once	/* libalx/extra/cv/core/contours.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <stddef.h>
+
 #include "libalx/extra/cv/core/types.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* typedef **************************************************************
- ******************************************************************************/
-/*
- * These are C++ classes which are accessed through a `void *`.
- * We just pass them around calls to C++  functions wrapped with `void *`,
- * so all the logic is in C++, and we just can't access them in C.
- * These types help visually differentiate between all the `void *`.
- */
-typedef	void	cam_s;
 
 
 /******************************************************************************
@@ -47,20 +37,23 @@ typedef	void	cam_s;
  ******* prototypes ***********************************************************
  ******************************************************************************/
 /* ----- alloc / free */
-__attribute__((nonnull, warn_unused_result))
-int	alx_cv_alloc_cam	(cam_s **cam);
 __attribute__((nonnull))
-void	alx_cv_free_cam		(cam_s *cam);
+int	alx_cv_alloc_conts	(conts_s **conts);
+__attribute__((nonnull))
+void	alx_cv_free_conts	(conts_s *conts);
 /* ----- init / deinit */
-__attribute__((nonnull(1)))
-void	alx_cv_init_cam		(cam_s *restrict cam,
-				 const char *restrict dev, int index, int api);
 __attribute__((nonnull))
-void	alx_cv_deinit_cam	(cam_s *cam);
-/* ----- read */
+void	alx_cv_init_conts	(conts_s *img);
 __attribute__((nonnull))
-int	alx_cv_cam_read	(img_s *restrict img,
-				 cam_s *restrict cam);
+void	alx_cv_deinit_conts	(conts_s *img);
+/* ----- Extract */
+__attribute__((nonnull(1, 3)))
+void	alx_cv_extract_conts	(const conts_s *restrict conts,
+				 const cont_s **restrict cont,
+				 ptrdiff_t *restrict size);
+__attribute__((nonnull))
+int	alx_cv_extract_conts_cont(const cont_s **restrict cont,
+				 const conts_s *restrict conts, ptrdiff_t i);
 
 
 /******************************************************************************

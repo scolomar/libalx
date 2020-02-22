@@ -12,52 +12,53 @@
 ################################################################################
 # dependencies
 OBJ		=							\
-		alx.o							\
-		features2d.o						\
-		highgui.o						\
-		imgproc.o						\
-		videoio.o						\
-		ximgproc.o
+		array.o							\
+		contours.o						\
+		img.o							\
+		pixel.o							\
+		rect.o							\
+		roi.o
 
-ALX_INC	=								\
+
+ARRAY_INC	=							\
 		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/base/compiler/size.hpp		\
-		$(INC_DIR)/libalx/extra/gsl/rstat/median.hpp		\
-		$(INC_DIR)/libalx/extra/gsl/statistics/mean.hpp		\
-		$(INC_DIR)/libalx/extra/cv/alx.hpp
-ALX_SRC	=								\
-		$(SRC_DIR)/extra/cv/alx.cpp
+		$(INC_DIR)/libalx/extra/cv/core/array.hpp
+ARRAY_SRC	=							\
+		$(SRC_DIR)/extra/cv/core/array.cpp
 
-FEATURES2D_INC	=							\
-		$(INC_DIR)/libalx/extra/cv/features2d.hpp
-FEATURES2D_SRC	=							\
-		$(SRC_DIR)/extra/cv/features2d.cpp
-
-HIGHGUI_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/base/errno/error.hpp			\
-		$(INC_DIR)/libalx/extra/cv/highgui.hpp
-HIGHGUI_SRC	=							\
-		$(SRC_DIR)/extra/cv/highgui.cpp
-
-IMGPROC_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/extra/cv/imgproc.hpp
-IMGPROC_SRC	=							\
-		$(SRC_DIR)/extra/cv/imgproc.cpp
-
-VIDEOIO_INC	=							\
+CONT_INC	=							\
 		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.hpp	\
-		$(INC_DIR)/libalx/extra/cv/videoio.hpp
-VIDEOIO_SRC	=							\
-		$(SRC_DIR)/extra/cv/videoio.cpp
+		$(INC_DIR)/libalx/extra/cv/core/contours.hpp
+CONT_SRC	=							\
+		$(SRC_DIR)/extra/cv/core/contours.cpp
 
-XIMGPROC_INC	=							\
+IMG_INC		=							\
 		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/extra/cv/ximgproc.hpp
-XIMGPROC_SRC	=							\
-		$(SRC_DIR)/extra/cv/ximgproc.cpp
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.hpp	\
+		$(INC_DIR)/libalx/extra/cv/core/img.hpp
+IMG_SRC		=							\
+		$(SRC_DIR)/extra/cv/core/img.cpp
+
+PIXEL_INC	=							\
+		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
+		$(INC_DIR)/libalx/extra/cv/core/pixel.hpp
+PIXEL_SRC	=							\
+		$(SRC_DIR)/extra/cv/core/pixel.cpp
+
+RECT_INC	=							\
+		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
+		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.hpp	\
+		$(INC_DIR)/libalx/base/stdlib/swap.hpp			\
+		$(INC_DIR)/libalx/extra/cv/core/rect.hpp
+RECT_SRC	=							\
+		$(SRC_DIR)/extra/cv/core/rect.cpp
+
+ROI_INC		=							\
+		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
+		$(INC_DIR)/libalx/extra/cv/core/roi.hpp
+ROI_SRC		=							\
+		$(SRC_DIR)/extra/cv/core/roi.cpp
 
 ################################################################################
 # cflags
@@ -73,33 +74,33 @@ all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
 %.a.s:
-	@echo	"	CXX	build/tmp/extra/cv/$@"
+	@echo	"	CXX	build/tmp/extra/cv/core/$@"
 	$(Q)$(CC) $(CXXFLAGS_A) -S $< -o $@
 %.so.s:
-	@echo	"	CXX	build/tmp/extra/cv/$@"
+	@echo	"	CXX	build/tmp/extra/cv/core/$@"
 	$(Q)$(CC) $(CXXFLAGS_SO) -S $< -o $@
 %.o: %.s
-	@echo	"	AS	build/tmp/extra/cv/$@"
+	@echo	"	AS	build/tmp/extra/cv/core/$@"
 	$(Q)$(AS) $< -o $@
 
 
-alx.a.s: $(ALX_SRC) $(ALX_INC)
-alx.so.s: $(ALX_SRC) $(ALX_INC)
+array.a.s: $(ARRAY_SRC) $(ARRAY_INC)
+array.so.s: $(ARRAY_SRC) $(ARRAY_INC)
 
-features2d.a.s: $(FEATURES2D_SRC) $(FEATURES2D_INC)
-features2d.so.s: $(FEATURES2D_SRC) $(FEATURES2D_INC)
+contours.a.s: $(CONT_SRC) $(CONT_INC)
+contours.so.s: $(CONT_SRC) $(CONT_INC)
 
-highgui.a.s: $(HIGHGUI_SRC) $(HIGHGUI_INC)
-highgui.so.s: $(HIGHGUI_SRC) $(HIGHGUI_INC)
+img.a.s: $(IMG_SRC) $(IMG_INC)
+img.so.s: $(IMG_SRC) $(IMG_INC)
 
-imgproc.a.s: $(IMGPROC_SRC) $(IMGPROC_INC)
-imgproc.so.s: $(IMGPROC_SRC) $(IMGPROC_INC)
+pixel.a.s: $(PIXEL_SRC) $(PIXEL_INC)
+pixel.so.s: $(PIXEL_SRC) $(PIXEL_INC)
 
-videoio.a.s: $(VIDEOIO_SRC) $(VIDEOIO_INC)
-videoio.so.s: $(VIDEOIO_SRC) $(VIDEOIO_INC)
+rect.a.s: $(RECT_SRC) $(RECT_INC)
+rect.so.s: $(RECT_SRC) $(RECT_INC)
 
-ximgproc.a.s: $(XIMGPROC_SRC) $(XIMGPROC_INC)
-ximgproc.so.s: $(XIMGPROC_SRC) $(XIMGPROC_INC)
+roi.a.s: $(ROI_SRC) $(ROI_INC)
+roi.so.s: $(ROI_SRC) $(ROI_INC)
 
 
 PHONY += clean

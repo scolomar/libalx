@@ -118,7 +118,12 @@ CURL_OBJ	=							\
 		$(BUILD_TMP_DIR)/extra/curl/fcurl/URL_FILE.o
 CV_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/cv/alx.o				\
-		$(BUILD_TMP_DIR)/extra/cv/core.o			\
+		$(BUILD_TMP_DIR)/extra/cv/core/array.o			\
+		$(BUILD_TMP_DIR)/extra/cv/core/contours.o		\
+		$(BUILD_TMP_DIR)/extra/cv/core/img.o			\
+		$(BUILD_TMP_DIR)/extra/cv/core/pixel.o			\
+		$(BUILD_TMP_DIR)/extra/cv/core/rect.o			\
+		$(BUILD_TMP_DIR)/extra/cv/core/roi.o			\
 		$(BUILD_TMP_DIR)/extra/cv/features2d.o			\
 		$(BUILD_TMP_DIR)/extra/cv/highgui.o			\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc.o			\

@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2018	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,13 +7,17 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/videoio.h */
+#pragma once	/* libalx/extra/cv/core/pixel.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/cv/core/types.h"
+#include <cstddef>
+
+#include <opencv2/core.hpp>
+
+#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
@@ -22,15 +26,28 @@
 
 
 /******************************************************************************
- ******* typedef **************************************************************
+ ******* extern "C" ***********************************************************
  ******************************************************************************/
-/*
- * These are C++ classes which are accessed through a `void *`.
- * We just pass them around calls to C++  functions wrapped with `void *`,
- * so all the logic is in C++, and we just can't access them in C.
- * These types help visually differentiate between all the `void *`.
- */
-typedef	void	cam_s;
+extern	"C"
+{
+[[gnu::nonnull]]
+int	alx_cv_pixel_get_u8	(const void *restrict img,
+				 unsigned char *restrict val,
+				 ptrdiff_t x, ptrdiff_t y);
+[[gnu::nonnull]]
+int	alx_cv_pixel_set_u8	(void *img,
+				 unsigned char val, ptrdiff_t x, ptrdiff_t y);
+[[gnu::nonnull]]
+int	alx_cv_pixel_get_flt	(const void *restrict img,
+				 float *restrict val, ptrdiff_t x, ptrdiff_t y);
+}
+
+
+/******************************************************************************
+ ******* namespace ************************************************************
+ ******************************************************************************/
+namespace alx {
+namespace CV {
 
 
 /******************************************************************************
@@ -46,26 +63,22 @@ typedef	void	cam_s;
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-/* ----- alloc / free */
-__attribute__((nonnull, warn_unused_result))
-int	alx_cv_alloc_cam	(cam_s **cam);
-__attribute__((nonnull))
-void	alx_cv_free_cam		(cam_s *cam);
-/* ----- init / deinit */
-__attribute__((nonnull(1)))
-void	alx_cv_init_cam		(cam_s *restrict cam,
-				 const char *restrict dev, int index, int api);
-__attribute__((nonnull))
-void	alx_cv_deinit_cam	(cam_s *cam);
-/* ----- read */
-__attribute__((nonnull))
-int	alx_cv_cam_read	(img_s *restrict img,
-				 cam_s *restrict cam);
+[[gnu::nonnull]]
+int	pixel_get_u8	(const class cv::Mat *restrict img,
+			 unsigned char *restrict val, ptrdiff_t x, ptrdiff_t y);
+[[gnu::nonnull]]
+int	pixel_set_u8	(class cv::Mat *img,
+			 unsigned char val, ptrdiff_t x, ptrdiff_t y);
+[[gnu::nonnull]]
+int	pixel_get_flt	(const class cv::Mat *restrict img,
+			 float *restrict val, ptrdiff_t x, ptrdiff_t y);
 
 
 /******************************************************************************
- ******* inline ***************************************************************
+ ******* namespace ************************************************************
  ******************************************************************************/
+}	/* namespace CV */
+}	/* namespace alx */
 
 
 /******************************************************************************
