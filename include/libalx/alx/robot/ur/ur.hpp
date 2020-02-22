@@ -23,7 +23,7 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define alx_ur_pose_xyz(x_, y_, z_, rx_, ry_, rz_)			\
+#define ALX_UR_POSE_XYZ(x_, y_, z_, rx_, ry_, rz_)			\
 (struct Alx_UR_Pose){							\
 	.type	= (ALX_UR_POSE_XYZ),					\
 	.x	= (x_),							\
@@ -34,7 +34,7 @@
 	.rz	= (rz_)							\
 }
 
-#define alx_ur_pose_joints(b_, s_, e_, w1_, w2_, w3_)			\
+#define ALX_UR_POSE_JOINTS(b_, s_, e_, w1_, w2_, w3_)			\
 (struct Alx_UR_Pose){							\
 	.type		= (ALX_UR_POSE_JOINTS),				\
 	.base		= (b_),						\
@@ -47,10 +47,10 @@
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define ur_pose_xyz(x, y, z, rx, ry, rz)				\
-	alx_ur_pose_xyz(x, y, z, rx, ry, rz)
-#define ur_pose_joints(base, shoulder, elbow, wrist1, wrist2, wrist3)	\
-	alx_ur_pose_joints(base, shoulder, elbow, wrist1, wrist2, wrist3)
+#define UR_POSE_XYZ(x, y, z, rx, ry, rz)				\
+	ALX_UR_POSE_XYZ(x, y, z, rx, ry, rz)
+#define UR_POSE_JOINTS(base, shoulder, elbow, wrist1, wrist2, wrist3)	\
+	ALX_UR_POSE_JOINTS(base, shoulder, elbow, wrist1, wrist2, wrist3)
 
 #define ur_init(ur, ur_ip, ur_port, usleep_after)			\
 	alx_ur_init(ur, ur_ip, ur_port, usleep_after)
