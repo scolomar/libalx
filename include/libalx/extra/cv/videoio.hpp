@@ -13,7 +13,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <opencv2/core.hpp>
+#include <opencv2/core/base.hpp>
 #include <opencv2/videoio.hpp>
 
 #include "libalx/base/compiler/restrict.hpp"
@@ -42,7 +42,7 @@ void	alx_cv_init_cam		(void *restrict cam,
 void	alx_cv_deinit_cam	(void *cam);
 /* ----- read */
 [[gnu::nonnull]]
-int	alx_cv_cam_read	(void *restrict img,
+int	alx_cv_cam_read		(void *restrict img,
 				 void *restrict cam);
 }
 

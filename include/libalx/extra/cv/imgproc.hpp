@@ -17,7 +17,7 @@
 
 #include <vector>
 
-#include <opencv2/core.hpp>
+#include <opencv2/core/base.hpp>
 
 #include "libalx/base/compiler/restrict.hpp"
 
