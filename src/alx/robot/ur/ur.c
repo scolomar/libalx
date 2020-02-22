@@ -65,9 +65,12 @@ int	ur_sprintf_msg		(ptrdiff_t nmemb,
 				 const char *restrict msg);
 __attribute__((nonnull, warn_unused_result))
 static
-int	ur_sprintf_set_Dout	(ptrdiff_t nmemb,
-				 char str[static restrict nmemb],
-				 ptrdiff_t idx, bool state);
+int	ur_sprintf_int		(ptrdiff_t nmemb,
+				 char str[static restrict nmemb], int i);
+__attribute__((nonnull, warn_unused_result))
+static
+int	ur_sprintf_bool		(ptrdiff_t nmemb,
+				 char str[static restrict nmemb], bool state);
 
 
 /******************************************************************************
@@ -112,6 +115,18 @@ int	alx_ur_deinit	(struct Alx_UR *restrict ur)
 		return	status2;
 	ur->sfd	= -1;
 	return	status1;
+}
+
+int	alx_ur_halt	(const struct Alx_UR *restrict ur,
+			 int usleep_after, FILE *restrict log)
+{
+	return	alx_ur_cmd(ur, "halt", usleep_after, log);
+}
+
+int	alx_ur_poweroff	(const struct Alx_UR *restrict ur,
+			 int usleep_after, FILE *restrict log)
+{
+	return	alx_ur_cmd(ur, "powerdown()", usleep_after, log);
 }
 
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
@@ -293,23 +308,18 @@ int	alx_ur_set_Dout	(const struct Alx_UR *restrict ur,
 			 ptrdiff_t idx, bool state,
 			 int usleep_after, FILE *restrict log)
 {
+	char	i[BUFSIZ];
+	char	b[BUFSIZ];
 	char	cmd[BUFSIZ];
+	const char *args[]	= {&i[0], &b[0], NULL};
 
-	if (ur_sprintf_set_Dout(ARRAY_SIZE(cmd), cmd, idx, state))
+	if (ur_sprintf_int(ARRAY_SIZE(i), i, idx))
+		return	-1;
+	if (ur_sprintf_bool(ARRAY_SIZE(b), b, state))
+		return	-1;
+	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "set_digital_out", args))
 		return	-1;
 	return	alx_ur_cmd(ur, cmd, usleep_after, log);
-}
-
-int	alx_ur_halt	(const struct Alx_UR *restrict ur,
-			 int usleep_after, FILE *restrict log)
-{
-	return	alx_ur_cmd(ur, "halt", usleep_after, log);
-}
-
-int	alx_ur_poweroff	(const struct Alx_UR *restrict ur,
-			 int usleep_after, FILE *restrict log)
-{
-	return	alx_ur_cmd(ur, "powerdown()", usleep_after, log);
 }
 
 
@@ -401,22 +411,27 @@ int	ur_sprintf_msg		(ptrdiff_t nmemb,
 }
 
 static
-int	ur_sprintf_set_Dout	(ptrdiff_t nmemb,
-				 char str[static restrict nmemb],
-				 ptrdiff_t idx, bool state)
+int	ur_sprintf_int		(ptrdiff_t nmemb,
+				 char str[static restrict nmemb], int i)
 {
-	char	arg1[BUFSIZ];
-	const char *args[]	= {&arg1[0], NULL, NULL};
 
-	if (alx_snprintfs(arg1, NULL, ARRAY_SIZE(arg1), "%ti", idx))
+	if (alx_snprintfs(str, NULL, nmemb, "%i", i))
 		return	-1;
-	if (state)
-		args[2]	= "True";
-	else
-		args[2]	= "False";
+	return	0;
+}
 
-	if (ur_sprintf_func(nmemb, str, "set_digital_out", args))
-		return	-1;
+static
+int	ur_sprintf_bool		(ptrdiff_t nmemb,
+				 char str[static restrict nmemb], bool state)
+{
+
+	if (state) {
+		if (alx_strlcpys(str, "True", nmemb, NULL))
+			return	-1;
+	} else {
+		if (alx_strlcpys(str, "False", nmemb, NULL))
+			return	-1;
+	}
 	return	0;
 }
 
