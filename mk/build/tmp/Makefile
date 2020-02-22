@@ -37,15 +37,16 @@ alx: data-structures npcomplete robot
 
 PHONY += data-structures
 data-structures:
-	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/alx/data-structures/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/alx/$@/
 
 PHONY += npcomplete
 npcomplete:
-#	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/alx/npcomplete/
+#	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/alx/$@/
 
 PHONY += robot
 robot:
-	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/alx/robot/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/alx/$@/ur/
+#	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/alx/$@/kawasaki/
 
 
 PHONY += extra
@@ -53,35 +54,35 @@ extra: curl cv gmp gsl ncurses ocr zbar
 
 PHONY += curl
 curl:
-	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/curl/fcurl/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/fcurl/
 
 PHONY += cv
 cv:
-	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/cv/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/
 
 PHONY += gmp
 gmp:
-	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/gmp/mpq/
-	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/gmp/mpz/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/mpq/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/mpz/
 
 PHONY += gsl
 gsl:
-	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/gsl/distributions/
-	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/gsl/rstat/
-	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/gsl/statistics/
-	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/gsl/units/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/distributions/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/rstat/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/statistics/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/units/
 
 PHONY += ncurses
 ncurses:
-	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/ncurses/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/
 
 PHONY += ocr
 ocr:
-	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/ocr/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/
 
 PHONY += zbar
 zbar:
-	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/zbar/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/
 
 
 PHONY += clean

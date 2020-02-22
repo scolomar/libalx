@@ -12,27 +12,16 @@
 ################################################################################
 # dependencies
 
-DIRS		=							\
-		kawasaki						\
-		ur
-
 OBJ		=							\
-		ur/ur.o
-#		kawasaki/kawasaki.o
+		ur.o
 
-KW_KW_INC	=							\
-		$(INC_DIR)/libalx/base/stdlib/alloc/callocs.h		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/frees.h		\
-		$(INC_DIR)/libalx/alx/robot/kawasaki/kawasaki.h
-KW_KW_SRC	=							\
-		$(SRC_DIR)/alx/robot/kawasaki/kawasaki.c
 
-UR_UR_INC	=							\
+UR_INC		=							\
 		$(INC_DIR)/libalx/base/socket/tcp/client.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/callocs.h		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/frees.h		\
 		$(INC_DIR)/libalx/alx/robot/ur/ur.h
-UR_UR_SRC	=							\
+UR_SRC		=							\
 		$(SRC_DIR)/alx/robot/ur/ur.c
 
 ################################################################################
@@ -40,33 +29,22 @@ UR_UR_SRC	=							\
 #	action
 
 PHONY := all
-all: $(DIRS) $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
-
-
-kawasaki:
-	@echo	"	MKDIR	build/tmp/alx/robot/$@"
-	$(Q)mkdir -p		$@/
-ur:
-	@echo	"	MKDIR	build/tmp/alx/robot/$@"
-	$(Q)mkdir -p		$@/
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
 %.a.s:
-	@echo	"	CC	build/tmp/alx/robot/$@"
+	@echo	"	CC	build/tmp/alx/robot/ur/$@"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
 %.so.s:
-	@echo	"	CC	build/tmp/alx/robot/$@"
+	@echo	"	CC	build/tmp/alx/robot/ur/$@"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
 %.o: %.s
-	@echo	"	AS	build/tmp/alx/robot/$@"
+	@echo	"	AS	build/tmp/alx/robot/ur/$@"
 	$(Q)$(AS) $< -o $@
 
 
-#kawasaki/kawasaki.a.s: $(KW_KW_SRC) $(KW_KW_INC)
-#kawasaki/kawasaki.so.s: $(KW_KW_SRC) $(KW_KW_INC)
-
-ur/ur.a.s: $(UR_UR_SRC) $(UR_UR_INC)
-ur/ur.so.s: $(UR_UR_SRC) $(UR_UR_INC)
+ur.a.s: $(UR_SRC) $(UR_INC)
+ur.so.s: $(UR_SRC) $(UR_INC)
 
 
 PHONY += clean
