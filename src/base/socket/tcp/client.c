@@ -58,11 +58,13 @@ int	alx_tcp_client_open	(const char *restrict server_addr,
 	for (struct addrinfo *ad = addrs; ad; ad = ad->ai_next) {
 		sd = socket(ad->ai_family, ad->ai_socktype, ad->ai_protocol);
 		if (sd < 0)
-			break;
-		if (!connect(sd, ad->ai_addr, ad->ai_addrlen))
-			break;
+			continue;
+		if (connect(sd, ad->ai_addr, ad->ai_addrlen))
+			goto try_next;
+		break;
+try_next:
 		close(sd);
-		sd	= -1;
+		sd = -1;
 	}
 	freeaddrinfo(addrs);
 
