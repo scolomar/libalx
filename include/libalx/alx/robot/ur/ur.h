@@ -103,6 +103,13 @@ int	alx_ur_init	(struct Alx_UR **restrict ur,
 __attribute__((warn_unused_result))
 int	alx_ur_deinit	(struct Alx_UR *restrict ur);
 
+__attribute__((nonnull(1), warn_unused_result))
+int	alx_ur_halt	(const struct Alx_UR *restrict ur,
+			 int usleep_after, FILE *restrict log);
+__attribute__((nonnull(1), warn_unused_result))
+int	alx_ur_poweroff	(const struct Alx_UR *restrict ur,
+			 int usleep_after, FILE *restrict log);
+
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
 			 const char *restrict cmd,
@@ -112,6 +119,7 @@ __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_ur_puts	(const struct Alx_UR *restrict ur,
 			 const char *restrict msg,
 			 int usleep_after, FILE *restrict log);
+
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_ur_movej	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
@@ -138,15 +146,15 @@ int	alx_ur_movec_rel(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict via,
 			 const struct Alx_UR_Pose *restrict to,
 			 int usleep_after, FILE *restrict log);
+
+__attribute__((nonnull(1, 2), warn_unused_result))
+int	alx_ur_set_tcp	(const struct Alx_UR *restrict ur,
+			 const struct Alx_UR_Pose *restrict tcp,
+			 int usleep_after, FILE *restrict log);
+
 __attribute__((nonnull(1), warn_unused_result))
-int	alx_ur_Dout_set	(const struct Alx_UR *restrict ur,
+int	alx_ur_set_Dout	(const struct Alx_UR *restrict ur,
 			 ptrdiff_t idx, bool state,
-			 int usleep_after, FILE *restrict log);
-__attribute__((nonnull(1), warn_unused_result))
-int	alx_ur_halt	(const struct Alx_UR *restrict ur,
-			 int usleep_after, FILE *restrict log);
-__attribute__((nonnull(1), warn_unused_result))
-int	alx_ur_poweroff	(const struct Alx_UR *restrict ur,
 			 int usleep_after, FILE *restrict log);
 
 
@@ -176,6 +184,20 @@ int	ur_cmd		(const struct Alx_UR *restrict ur,
 			 int usleep_after, FILE *restrict log)
 {
 	return	alx_ur_cmd(ur, cmd, usleep_after, log);
+}
+
+__attribute__((always_inline, nonnull(1), warn_unused_result))
+int	ur_halt		(const struct Alx_UR *restrict ur,
+			 int usleep_after, FILE *restrict log)
+{
+	return	alx_ur_halt(ur, usleep_after, log);
+}
+
+__attribute__((always_inline, nonnull(1), warn_unused_result))
+int	ur_poweroff	(const struct Alx_UR *restrict ur,
+			 int usleep_after, FILE *restrict log)
+{
+	return	alx_ur_poweroff(ur, usleep_after, log);
 }
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
@@ -236,26 +258,20 @@ int	ur_movec_rel	(const struct Alx_UR *restrict ur,
 	return	alx_ur_movec_rel(ur, via, to, usleep_after, log);
 }
 
+__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
+int	ur_set_tcp	(const struct Alx_UR *restrict ur,
+			 const struct Alx_UR_Pose *restrict tcp,
+			 int usleep_after, FILE *restrict log)
+{
+	return	alx_ur_set_tcp(ur, tcp, usleep_after, log);
+}
+
 __attribute__((always_inline, nonnull(1), warn_unused_result))
-int	ur_Dout_set	(const struct Alx_UR *restrict ur,
+int	ur_set_Dout	(const struct Alx_UR *restrict ur,
 			 ptrdiff_t idx, bool state,
 			 int usleep_after, FILE *restrict log)
 {
-	return	alx_ur_Dout_set(ur, idx, state, usleep_after, log);
-}
-
-__attribute__((always_inline, nonnull(1), warn_unused_result))
-int	ur_halt		(const struct Alx_UR *restrict ur,
-			 int usleep_after, FILE *restrict log)
-{
-	return	alx_ur_halt(ur, usleep_after, log);
-}
-
-__attribute__((always_inline, nonnull(1), warn_unused_result))
-int	ur_poweroff	(const struct Alx_UR *restrict ur,
-			 int usleep_after, FILE *restrict log)
-{
-	return	alx_ur_poweroff(ur, usleep_after, log);
+	return	alx_ur_set_Dout(ur, idx, state, usleep_after, log);
 }
 #endif	 /* defined(ALX_NO_PREFIX) */
 
