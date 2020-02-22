@@ -65,10 +65,6 @@ int	ur_sprintf_msg		(ptrdiff_t nmemb,
 				 const char *restrict msg);
 __attribute__((nonnull, warn_unused_result))
 static
-int	ur_sprintf_int		(ptrdiff_t nmemb,
-				 char str[static restrict nmemb], int i);
-__attribute__((nonnull, warn_unused_result))
-static
 int	ur_sprintf_bool		(ptrdiff_t nmemb,
 				 char str[static restrict nmemb], bool state);
 
@@ -313,7 +309,7 @@ int	alx_ur_set_Dout	(const struct Alx_UR *restrict ur,
 	char	cmd[BUFSIZ];
 	const char *args[]	= {&i[0], &b[0], NULL};
 
-	if (ur_sprintf_int(ARRAY_SIZE(i), i, idx))
+	if (alx_snprintfs(i, NULL, ARRAY_SIZE(i), "%ti", idx))
 		return	-1;
 	if (ur_sprintf_bool(ARRAY_SIZE(b), b, state))
 		return	-1;
@@ -406,16 +402,6 @@ int	ur_sprintf_msg		(ptrdiff_t nmemb,
 	if (alx_strscat(nmemb, str, msg) < 0)
 		return	-1;
 	if (alx_strscat(nmemb, str, "\"") < 0)
-		return	-1;
-	return	0;
-}
-
-static
-int	ur_sprintf_int		(ptrdiff_t nmemb,
-				 char str[static restrict nmemb], int i)
-{
-
-	if (alx_snprintfs(str, NULL, nmemb, "%i", i))
 		return	-1;
 	return	0;
 }
