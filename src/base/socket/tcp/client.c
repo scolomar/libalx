@@ -40,10 +40,10 @@ int	alx_tcp_client_open	(const char *restrict server_addr,
 				 const char *restrict server_port)
 {
 	struct protoent	*tcp;
-	int			sd;
+	int		sd;
 	struct addrinfo	hint = {0};
 	struct addrinfo	*addrs;
-	int			status;
+	int		status;
 
 	tcp	= getprotobyname("tcp");
 	if (!tcp)
