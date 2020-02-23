@@ -7,16 +7,18 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/cv/features2d.hpp"
+#include "libalx/extra/cv/features2d/orb.hpp"
 
 #include <cstddef>
 
 #include <vector>
 
 #include <opencv2/calib3d.hpp>
-#include <opencv2/core.hpp>
+#include <opencv2/core/mat.hpp>
 #include <opencv2/features2d.hpp>
 #include <opencv2/imgproc.hpp>
+
+#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************

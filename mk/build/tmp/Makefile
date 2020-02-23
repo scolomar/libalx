@@ -61,6 +61,7 @@ cv:
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/alx/
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/core/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/features2d/
 
 PHONY += gmp
 gmp:

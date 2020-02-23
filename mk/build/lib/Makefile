@@ -128,7 +128,7 @@ CV_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/cv/core/pixel.o			\
 		$(BUILD_TMP_DIR)/extra/cv/core/rect.o			\
 		$(BUILD_TMP_DIR)/extra/cv/core/roi.o			\
-		$(BUILD_TMP_DIR)/extra/cv/features2d.o			\
+		$(BUILD_TMP_DIR)/extra/cv/features2d/orb.o		\
 		$(BUILD_TMP_DIR)/extra/cv/highgui.o			\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc.o			\
 		$(BUILD_TMP_DIR)/extra/cv/videoio.o			\

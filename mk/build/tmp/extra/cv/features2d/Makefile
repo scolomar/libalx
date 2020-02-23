@@ -12,37 +12,14 @@
 ################################################################################
 # dependencies
 OBJ		=							\
-		highgui.o						\
-		imgproc.o						\
-		videoio.o						\
-		ximgproc.o
+		orb.o
 
 
-HIGHGUI_INC	=							\
+ORB_INC		=							\
 		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/base/errno/error.hpp			\
-		$(INC_DIR)/libalx/extra/cv/highgui.hpp
-HIGHGUI_SRC	=							\
-		$(SRC_DIR)/extra/cv/highgui.cpp
-
-IMGPROC_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/extra/cv/imgproc.hpp
-IMGPROC_SRC	=							\
-		$(SRC_DIR)/extra/cv/imgproc.cpp
-
-VIDEOIO_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.hpp	\
-		$(INC_DIR)/libalx/extra/cv/videoio.hpp
-VIDEOIO_SRC	=							\
-		$(SRC_DIR)/extra/cv/videoio.cpp
-
-XIMGPROC_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/extra/cv/ximgproc.hpp
-XIMGPROC_SRC	=							\
-		$(SRC_DIR)/extra/cv/ximgproc.cpp
+		$(INC_DIR)/libalx/extra/cv/features2d/orb.hpp
+ORB_SRC		=							\
+		$(SRC_DIR)/extra/cv/features2d/orb.cpp
 
 ################################################################################
 # cflags
@@ -58,27 +35,18 @@ all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
 %.a.s:
-	@echo	"	CXX	build/tmp/extra/cv/$@"
+	@echo	"	CXX	build/tmp/extra/cv/features2d/$@"
 	$(Q)$(CC) $(CXXFLAGS_A) -S $< -o $@
 %.so.s:
-	@echo	"	CXX	build/tmp/extra/cv/$@"
+	@echo	"	CXX	build/tmp/extra/cv/features2d/$@"
 	$(Q)$(CC) $(CXXFLAGS_SO) -S $< -o $@
 %.o: %.s
-	@echo	"	AS	build/tmp/extra/cv/$@"
+	@echo	"	AS	build/tmp/extra/cv/features2d/$@"
 	$(Q)$(AS) $< -o $@
 
 
-highgui.a.s: $(HIGHGUI_SRC) $(HIGHGUI_INC)
-highgui.so.s: $(HIGHGUI_SRC) $(HIGHGUI_INC)
-
-imgproc.a.s: $(IMGPROC_SRC) $(IMGPROC_INC)
-imgproc.so.s: $(IMGPROC_SRC) $(IMGPROC_INC)
-
-videoio.a.s: $(VIDEOIO_SRC) $(VIDEOIO_INC)
-videoio.so.s: $(VIDEOIO_SRC) $(VIDEOIO_INC)
-
-ximgproc.a.s: $(XIMGPROC_SRC) $(XIMGPROC_INC)
-ximgproc.so.s: $(XIMGPROC_SRC) $(XIMGPROC_INC)
+orb.a.s: $(ORB_SRC) $(ORB_INC)
+orb.so.s: $(ORB_SRC) $(ORB_INC)
 
 
 PHONY += clean
