@@ -13,7 +13,7 @@
 
 #include <memory>
 
-#include <opencv2/core.hpp>
+#include <opencv2/core/mat.hpp>
 
 #include "libalx/base/compiler/restrict.hpp"
 #include "libalx/base/stdlib/alloc/mallocarrays.hpp"

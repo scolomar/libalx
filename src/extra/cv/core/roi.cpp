@@ -9,7 +9,7 @@
  ******************************************************************************/
 #include "libalx/extra/cv/core/roi.hpp"
 
-#include <opencv2/core.hpp>
+#include <opencv2/core/mat.hpp>
 
 #include "libalx/base/compiler/restrict.hpp"
 

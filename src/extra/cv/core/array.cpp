@@ -11,6 +11,7 @@
 
 #include <cstddef>
 
+#include <opencv2/core/mat.hpp>
 #include <opencv2/core.hpp>
 
 #include "libalx/base/compiler/restrict.hpp"
