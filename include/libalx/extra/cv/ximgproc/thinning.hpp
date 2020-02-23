@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2018	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,13 +7,13 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/ximgproc.h */
+#pragma once	/* libalx/extra/cv/ximgproc/thinning.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/cv/core/types.h"
+#include <opencv2/core/base.hpp>
 
 
 /******************************************************************************
@@ -22,12 +22,25 @@
 
 
 /******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern	"C"
+{
+[[gnu::nonnull]]
+int	alx_cv_thinning	(void *img, int method);
+}
+
+
+/******************************************************************************
+ ******* namespace ************************************************************
+ ******************************************************************************/
+namespace alx {
+namespace CV {
+
+
+/******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
-enum	Alx_Cv_Thinning_Types{
-	ALX_CV_THINNING_ZHANGSUEN	= 0, // Thinning technique of Zhang-Suen
-	ALX_CV_THINNING_GUOHALL		= 1  // Thinning technique of Guo-Hall
-};
 
 
 /******************************************************************************
@@ -48,16 +61,18 @@ enum	Alx_Cv_Thinning_Types{
  * @param img	Source & Destination 8-bit single-channel image,
  * 		containing binary blobs, with blobs having 255 pixel values.
  * 		The function works in-place.
- * @param method	Value that defines which thinning algorithm should be
- * 		used. See Alx_Cv_Thinning_Types (cv::ximgproc::ThinningTypes).
+ * @param method	Value that defines which thinning algorithm should
+ * 		be used. See cv::ximgproc::ThinningTypes.
  */
-__attribute__((nonnull))
-int	alx_cv_thinning	(img_s *restrict img, int method);
+[[gnu::nonnull]]
+int	thinning	(class cv::Mat *img, int method);
 
 
 /******************************************************************************
- ******* inline ***************************************************************
+ ******* namespace ************************************************************
  ******************************************************************************/
+}	/* namespace CV */
+}	/* namespace alx */
 
 
 /******************************************************************************

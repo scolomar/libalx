@@ -12,22 +12,15 @@
 ################################################################################
 # dependencies
 OBJ		=							\
-		videoio.o						\
-		ximgproc.o
+		cam.o
 
 
-VIDEOIO_INC	=							\
+CAM_INC		=							\
 		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
 		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.hpp	\
-		$(INC_DIR)/libalx/extra/cv/videoio.hpp
-VIDEOIO_SRC	=							\
-		$(SRC_DIR)/extra/cv/videoio.cpp
-
-XIMGPROC_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/extra/cv/ximgproc.hpp
-XIMGPROC_SRC	=							\
-		$(SRC_DIR)/extra/cv/ximgproc.cpp
+		$(INC_DIR)/libalx/extra/cv/videoio/cam.hpp
+CAM_SRC		=							\
+		$(SRC_DIR)/extra/cv/videoio/cam.cpp
 
 ################################################################################
 # cflags
@@ -43,21 +36,18 @@ all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
 %.a.s:
-	@echo	"	CXX	build/tmp/extra/cv/$@"
+	@echo	"	CXX	build/tmp/extra/cv/videoio/$@"
 	$(Q)$(CC) $(CXXFLAGS_A) -S $< -o $@
 %.so.s:
-	@echo	"	CXX	build/tmp/extra/cv/$@"
+	@echo	"	CXX	build/tmp/extra/cv/videoio/$@"
 	$(Q)$(CC) $(CXXFLAGS_SO) -S $< -o $@
 %.o: %.s
-	@echo	"	AS	build/tmp/extra/cv/$@"
+	@echo	"	AS	build/tmp/extra/cv/videoio/$@"
 	$(Q)$(AS) $< -o $@
 
 
-videoio.a.s: $(VIDEOIO_SRC) $(VIDEOIO_INC)
-videoio.so.s: $(VIDEOIO_SRC) $(VIDEOIO_INC)
-
-ximgproc.a.s: $(XIMGPROC_SRC) $(XIMGPROC_INC)
-ximgproc.so.s: $(XIMGPROC_SRC) $(XIMGPROC_INC)
+cam.a.s: $(CAM_SRC) $(CAM_INC)
+cam.so.s: $(CAM_SRC) $(CAM_INC)
 
 
 PHONY += clean

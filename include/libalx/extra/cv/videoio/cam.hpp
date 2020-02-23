@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/videoio.hpp */
+#pragma once	/* libalx/extra/cv/videoio/cam.hpp */
 
 
 /******************************************************************************
@@ -42,8 +42,7 @@ void	alx_cv_init_cam		(void *restrict cam,
 void	alx_cv_deinit_cam	(void *cam);
 /* ----- read */
 [[gnu::nonnull]]
-int	alx_cv_cam_read		(void *restrict img,
-				 void *restrict cam);
+int	alx_cv_cam_read		(void *restrict img, void *restrict cam);
 }
 
 

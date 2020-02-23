@@ -136,8 +136,8 @@ CV_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/histogram.o		\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/miscellaneous.o	\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/shape.o		\
-		$(BUILD_TMP_DIR)/extra/cv/videoio.o			\
-		$(BUILD_TMP_DIR)/extra/cv/ximgproc.o
+		$(BUILD_TMP_DIR)/extra/cv/videoio/cam.o			\
+		$(BUILD_TMP_DIR)/extra/cv/ximgproc/thinning.o
 GMP_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/gmp/mpq/cmp.o			\
 		$(BUILD_TMP_DIR)/extra/gmp/mpz/arithmetic.o		\

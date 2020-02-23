@@ -7,15 +7,12 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/ximgproc.hpp */
+#pragma once	/* libalx/extra/cv/types.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <opencv2/core/base.hpp>
-
-#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
@@ -24,20 +21,20 @@
 
 
 /******************************************************************************
- ******* extern "C" ***********************************************************
+ ******* typedef **************************************************************
  ******************************************************************************/
-extern	"C"
-{
-[[gnu::nonnull]]
-int	alx_cv_thinning	(void *restrict img, int method);
-}
-
-
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-namespace alx {
-namespace CV {
+/*
+ * These are C++ classes which are accessed through a `void *`.
+ * We just pass them around calls to C++  functions wrapped with `void *`,
+ * so all the logic is in C++, and we just can't access them in C.
+ * These types help visually differentiate between all the `void *`.
+ */
+typedef	void	img_s;
+typedef	void	rect_s;
+typedef	void	rect_rot_s;
+typedef	void	conts_s;
+typedef	void	cont_s;
+typedef	void	cam_s;
 
 
 /******************************************************************************
@@ -53,28 +50,11 @@ namespace CV {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-/**
- * @brief Applies a binary blob thinning operation, to achieve a
- * skeletization of the input image.
- *
- * The function transforms a binary blob image into a skeletized form using
- * the technique of Zhang-Suen.
- *
- * @param img	Source & Destination 8-bit single-channel image,
- * 		containing binary blobs, with blobs having 255 pixel values.
- * 		The function works in-place.
- * @param method	Value that defines which thinning algorithm should
- * 		be used. See cv::ximgproc::ThinningTypes.
- */
-[[gnu::nonnull]]
-int	thinning	(class cv::Mat *restrict img, int method);
 
 
 /******************************************************************************
- ******* namespace ************************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-}	/* namespace CV */
-}	/* namespace alx */
 
 
 /******************************************************************************
