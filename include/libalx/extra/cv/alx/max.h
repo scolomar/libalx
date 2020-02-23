@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/alx.h */
+#pragma once	/* libalx/extra/cv/alx/max.h */
 
 
 /******************************************************************************
@@ -43,27 +43,7 @@ __attribute__((nonnull))
 int	alx_cv_maximum_u8	(const img_s *restrict img,
 				 uint8_t *restrict max);
 __attribute__((nonnull))
-int	alx_cv_local_max	(img_s *restrict img);
-#if 0
-__attribute__((nonnull))
-int	alx_cv_skeleton_B	(img_s *restrict img);
-__attribute__((nonnull))
-int	alx_cv_skeleton_A	(img_s *restrict img);
-#endif
-__attribute__((nonnull))
-int	alx_cv_skeleton_endpts	(img_s *restrict img);
-__attribute__((nonnull))
-int	alx_cv_lines_horizontal	(img_s *restrict img);
-__attribute__((nonnull))
-int	alx_cv_lines_vertical	(img_s *restrict img);
-__attribute__((nonnull))
-int	alx_cv_mean_horizontal	(img_s *restrict img);
-__attribute__((nonnull))
-int	alx_cv_mean_vertical	(img_s *restrict img);
-__attribute__((nonnull))
-int	alx_cv_median_horizontal(img_s *restrict img);
-__attribute__((nonnull))
-int	alx_cv_median_vertical	(img_s *restrict img);
+int	alx_cv_local_max	(img_s *img);
 
 
 /******************************************************************************

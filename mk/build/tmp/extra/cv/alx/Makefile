@@ -12,43 +12,42 @@
 ################################################################################
 # dependencies
 OBJ		=							\
-		features2d.o						\
-		highgui.o						\
-		imgproc.o						\
-		videoio.o						\
-		ximgproc.o
+		lines.o							\
+		max.o							\
+		mean.o							\
+		median.o						\
+		skeleton.o
 
 
-FEATURES2D_INC	=							\
-		$(INC_DIR)/libalx/extra/cv/features2d.hpp
-FEATURES2D_SRC	=							\
-		$(SRC_DIR)/extra/cv/features2d.cpp
+LINES_INC	=							\
+		$(INC_DIR)/libalx/extra/cv/alx/lines.hpp
+LINES_SRC	=							\
+		$(SRC_DIR)/extra/cv/alx/lines.cpp
 
-HIGHGUI_INC	=							\
+MAX_INC		=							\
 		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/base/errno/error.hpp			\
-		$(INC_DIR)/libalx/extra/cv/highgui.hpp
-HIGHGUI_SRC	=							\
-		$(SRC_DIR)/extra/cv/highgui.cpp
+		$(INC_DIR)/libalx/base/compiler/size.hpp		\
+		$(INC_DIR)/libalx/extra/cv/alx/max.hpp
+MAX_SRC		=							\
+		$(SRC_DIR)/extra/cv/alx/max.cpp
 
-IMGPROC_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/extra/cv/imgproc.hpp
-IMGPROC_SRC	=							\
-		$(SRC_DIR)/extra/cv/imgproc.cpp
+MEAN_INC	=							\
+		$(INC_DIR)/libalx/extra/gsl/statistics/mean.hpp		\
+		$(INC_DIR)/libalx/extra/cv/alx/mean.hpp
+MEAN_SRC	=							\
+		$(SRC_DIR)/extra/cv/alx/mean.cpp
 
-VIDEOIO_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.hpp	\
-		$(INC_DIR)/libalx/extra/cv/videoio.hpp
-VIDEOIO_SRC	=							\
-		$(SRC_DIR)/extra/cv/videoio.cpp
+MEDIAN_INC	=							\
+		$(INC_DIR)/libalx/extra/gsl/rstat/median.hpp		\
+		$(INC_DIR)/libalx/extra/cv/alx/median.hpp
+MEDIAN_SRC	=							\
+		$(SRC_DIR)/extra/cv/alx/median.cpp
 
-XIMGPROC_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/extra/cv/ximgproc.hpp
-XIMGPROC_SRC	=							\
-		$(SRC_DIR)/extra/cv/ximgproc.cpp
+SKELETON_INC	=							\
+		$(INC_DIR)/libalx/base/compiler/size.hpp		\
+		$(INC_DIR)/libalx/extra/cv/alx/skeleton.hpp
+SKELETON_SRC	=							\
+		$(SRC_DIR)/extra/cv/alx/skeleton.cpp
 
 ################################################################################
 # cflags
@@ -64,30 +63,30 @@ all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 
 %.a.s:
-	@echo	"	CXX	build/tmp/extra/cv/$@"
+	@echo	"	CXX	build/tmp/extra/cv/alx/$@"
 	$(Q)$(CC) $(CXXFLAGS_A) -S $< -o $@
 %.so.s:
-	@echo	"	CXX	build/tmp/extra/cv/$@"
+	@echo	"	CXX	build/tmp/extra/cv/alx/$@"
 	$(Q)$(CC) $(CXXFLAGS_SO) -S $< -o $@
 %.o: %.s
-	@echo	"	AS	build/tmp/extra/cv/$@"
+	@echo	"	AS	build/tmp/extra/cv/alx/$@"
 	$(Q)$(AS) $< -o $@
 
 
-features2d.a.s: $(FEATURES2D_SRC) $(FEATURES2D_INC)
-features2d.so.s: $(FEATURES2D_SRC) $(FEATURES2D_INC)
+lines.a.s: $(LINES_SRC) $(LINES_INC)
+lines.so.s: $(LINES_SRC) $(LINES_INC)
 
-highgui.a.s: $(HIGHGUI_SRC) $(HIGHGUI_INC)
-highgui.so.s: $(HIGHGUI_SRC) $(HIGHGUI_INC)
+max.a.s: $(MAX_SRC) $(MAX_INC)
+max.so.s: $(MAX_SRC) $(MAX_INC)
 
-imgproc.a.s: $(IMGPROC_SRC) $(IMGPROC_INC)
-imgproc.so.s: $(IMGPROC_SRC) $(IMGPROC_INC)
+mean.a.s: $(MEAN_SRC) $(MEAN_INC)
+mean.so.s: $(MEAN_SRC) $(MEAN_INC)
 
-videoio.a.s: $(VIDEOIO_SRC) $(VIDEOIO_INC)
-videoio.so.s: $(VIDEOIO_SRC) $(VIDEOIO_INC)
+median.a.s: $(MEDIAN_SRC) $(MEDIAN_INC)
+median.so.s: $(MEDIAN_SRC) $(MEDIAN_INC)
 
-ximgproc.a.s: $(XIMGPROC_SRC) $(XIMGPROC_INC)
-ximgproc.so.s: $(XIMGPROC_SRC) $(XIMGPROC_INC)
+skeleton.a.s: $(SKELETON_SRC) $(SKELETON_INC)
+skeleton.so.s: $(SKELETON_SRC) $(SKELETON_INC)
 
 
 PHONY += clean

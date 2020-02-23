@@ -59,6 +59,7 @@ curl:
 PHONY += cv
 cv:
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/alx/
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/core/
 
 PHONY += gmp

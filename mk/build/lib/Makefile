@@ -117,7 +117,11 @@ CURL_OBJ	=							\
 		$(BUILD_TMP_DIR)/extra/curl/fcurl/ungetc.o		\
 		$(BUILD_TMP_DIR)/extra/curl/fcurl/URL_FILE.o
 CV_OBJ		=							\
-		$(BUILD_TMP_DIR)/extra/cv/alx.o				\
+		$(BUILD_TMP_DIR)/extra/cv/alx/lines.o			\
+		$(BUILD_TMP_DIR)/extra/cv/alx/max.o			\
+		$(BUILD_TMP_DIR)/extra/cv/alx/mean.o			\
+		$(BUILD_TMP_DIR)/extra/cv/alx/median.o			\
+		$(BUILD_TMP_DIR)/extra/cv/alx/skeleton.o		\
 		$(BUILD_TMP_DIR)/extra/cv/core/array.o			\
 		$(BUILD_TMP_DIR)/extra/cv/core/contours.o		\
 		$(BUILD_TMP_DIR)/extra/cv/core/img.o			\
