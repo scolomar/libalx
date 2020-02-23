@@ -5,15 +5,15 @@
 
 
 /******************************************************************************
+ ******* include guard ********************************************************
+ ******************************************************************************/
+#pragma once	/* libalx/extra/cv/imgproc/geometric.h */
+
+
+/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/cv/highgui.hpp"
-
-#include <opencv2/core.hpp>
-#include <opencv2/highgui.hpp>
-
-#include "libalx/base/compiler/restrict.hpp"
-#include "libalx/base/errno/error.hpp"
+#include "libalx/extra/cv/core/types.h"
 
 
 /******************************************************************************
@@ -22,47 +22,31 @@
 
 
 /******************************************************************************
- ******* enum / struct / union ************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* static prototypes ****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* global functions *****************************************************
+ ******* prototypes ***********************************************************
  ******************************************************************************/
-int	alx::CV::imread	(class cv::Mat *restrict img,
-			 const char *restrict fname)
-{
-
-	*img	= cv::imread(fname, cv::IMREAD_UNCHANGED);
-	if (img->empty())
-		return	-1;
-	return	0;
-}
-
-int	alx_cv_imread	(void *restrict img, const char *restrict fname)
-{
-	return	alx::CV::imread((class cv::Mat *)img, fname);
-}
-
-void	alx::CV::imwrite(const class cv::Mat *restrict img,
-			 const char *restrict fname)
-{
-	cv::imwrite(fname, *img);
-}
-
-void	alx_cv_imwrite	(const void *restrict img, const char *restrict fname)
-{
-	alx::CV::imwrite((const class cv::Mat *)img, fname);
-}
+__attribute__((nonnull))
+int	alx_cv_mirror		(img_s *img, int axis);
+__attribute__((nonnull))
+int	alx_cv_rotate_orto	(img_s *img, int n);
+__attribute__((nonnull))
+int	alx_cv_rotate		(img_s *img, double x, double y, double angle);
+__attribute__((nonnull))
+int	alx_cv_rotate_2rect	(img_s *restrict img,
+				 const rect_rot_s *restrict rect_rot);
 
 
 /******************************************************************************
- ******* static function definitions ******************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
 
 

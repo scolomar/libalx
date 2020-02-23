@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/highgui.h */
+#pragma once	/* libalx/extra/cv/imgproc/shape.h */
 
 
 /******************************************************************************
@@ -34,10 +34,27 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-int	alx_cv_imread	(img_s *restrict img, const char *restrict fname)
-	__attribute__((nonnull));
-void	alx_cv_imwrite	(const img_s *restrict img, const char *restrict fname)
-	__attribute__((nonnull));
+__attribute__((nonnull))
+int	alx_cv_contours		(img_s *restrict img, conts_s *restrict contours);
+__attribute__((nonnull(1)))
+void	alx_cv_contour_dimensions(const cont_s *restrict cont,
+				 double *restrict area,
+				 double *restrict perimeter);
+__attribute__((nonnull))
+void	alx_cv_bounding_rect	(rect_s *restrict rect,
+				 const cont_s *restrict contour);
+__attribute__((nonnull))
+void	alx_cv_fit_ellipse	(rect_rot_s *restrict rect_rot,
+				 const cont_s *restrict contour);
+__attribute__((nonnull))
+void	alx_cv_min_area_rect	(rect_rot_s *restrict rect_rot,
+				 const cont_s *restrict contour);
+__attribute__((nonnull))
+void	alx_cv_draw_rect	(img_s *restrict img,
+				 const rect_s *restrict rect);
+__attribute__((nonnull))
+void	alx_cv_draw_rect_rot	(img_s *restrict img,
+				 const rect_rot_s *restrict rect_rot);
 
 
 /******************************************************************************

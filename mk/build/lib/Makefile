@@ -129,8 +129,13 @@ CV_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/cv/core/rect.o			\
 		$(BUILD_TMP_DIR)/extra/cv/core/roi.o			\
 		$(BUILD_TMP_DIR)/extra/cv/features2d/orb.o		\
-		$(BUILD_TMP_DIR)/extra/cv/highgui.o			\
-		$(BUILD_TMP_DIR)/extra/cv/imgproc.o			\
+		$(BUILD_TMP_DIR)/extra/cv/highgui/file.o		\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/features.o		\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/filter.o		\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/geometric.o		\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/histogram.o		\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/miscellaneous.o	\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/shape.o		\
 		$(BUILD_TMP_DIR)/extra/cv/videoio.o			\
 		$(BUILD_TMP_DIR)/extra/cv/ximgproc.o
 GMP_OBJ		=							\
