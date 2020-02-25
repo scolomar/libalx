@@ -194,17 +194,17 @@ PHONY += alx
 alx: data-structures npcomplete robot
 
 PHONY += data-structures
-data-structures: libalx base
+data-structures: libalx
 	$(Q)$(MAKE)	libalx/libalx-data-structures.a
 	$(Q)$(MAKE)	libalx/libalx-data-structures.so
 
 PHONY += npcomplete
-npcomplete: libalx base
+npcomplete: libalx
 #	$(Q)$(MAKE)	libalx/libalx-npcomplete.a
 #	$(Q)$(MAKE)	libalx/libalx-npcomplete.so
 
 PHONY += robot
-robot: libalx base
+robot: libalx
 	$(Q)$(MAKE)	libalx/libalx-robot.a
 	$(Q)$(MAKE)	libalx/libalx-robot.so
 
@@ -213,37 +213,37 @@ PHONY += extra
 extra: curl cv gmp gsl ncurses ocr zbar
 
 PHONY += curl
-curl: libalx base data-structures
+curl: libalx
 	$(Q)$(MAKE)	libalx/libalx-curl.a
 	$(Q)$(MAKE)	libalx/libalx-curl.so
 
 PHONY += cv
-cv: libalx base gsl
+cv: libalx
 	$(Q)$(MAKE)	libalx/libalx-cv.a
 	$(Q)$(MAKE)	libalx/libalx-cv.so
 
 PHONY += gmp
-gmp: libalx base
+gmp: libalx
 	$(Q)$(MAKE)	libalx/libalx-gmp.a
 	$(Q)$(MAKE)	libalx/libalx-gmp.so
 
 PHONY += gsl
-gsl: libalx base
+gsl: libalx
 	$(Q)$(MAKE)	libalx/libalx-gsl.a
 	$(Q)$(MAKE)	libalx/libalx-gsl.so
 
 PHONY += ncurses
-ncurses: libalx base
+ncurses: libalx
 	$(Q)$(MAKE)	libalx/libalx-ncurses.a
 	$(Q)$(MAKE)	libalx/libalx-ncurses.so
 
 PHONY += ocr
-ocr: libalx base
+ocr: libalx
 	$(Q)$(MAKE)	libalx/libalx-ocr.a
 	$(Q)$(MAKE)	libalx/libalx-ocr.so
 
 PHONY += zbar
-zbar: libalx base
+zbar: libalx
 	$(Q)$(MAKE)	libalx/libalx-zbar.a
 	$(Q)$(MAKE)	libalx/libalx-zbar.so
 

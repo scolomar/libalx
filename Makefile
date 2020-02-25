@@ -79,6 +79,8 @@ export	LIBALX_DIR
 export	INC_DIR
 export	SRC_DIR
 export	LIB_DIR
+export	ETC_DIR
+export	SHARE_DIR
 export	MK_DIR
 export	BUILD_DIR
 export	BUILD_TMP_DIR
@@ -214,8 +216,7 @@ export	LDFLAGS
 PHONY := all
 all: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_DIR)
 
 
 PHONY := build_dir
@@ -228,226 +229,137 @@ build_dir:
 PHONY += base
 base: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_DIR)
 
 
 PHONY += alx
 alx: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_DIR)
 
 PHONY += data-structures
 data-structures: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_DIR)
 
 PHONY += npcomplete
 npcomplete: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_DIR)
 
 PHONY += robot
 robot: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_DIR)
 
 
 PHONY += extra
 extra: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_DIR)
 
 PHONY += curl
 curl: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_DIR)
 
 PHONY += cv
 cv: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_DIR)
 
 PHONY += gmp
 gmp: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_DIR)
 
 PHONY += gsl
 gsl: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_DIR)
 
 PHONY += ncurses
 ncurses: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_DIR)
 
 PHONY += ocr
 ocr: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_DIR)
 
 PHONY += zbar
 zbar: build_dir
 	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
-
-
-PHONY += nix
-nix: build_dir
-	@echo	"	MAKE	$@"
-	$(Q)$(MAKE) $@	-C $(BUILD_TMP_DIR)
-	$(Q)$(MAKE) $@	-C $(BUILD_LIB_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_DIR)
 
 
 PHONY += tst
 tst: all
 	@echo	"	MAKE	tst"
-	$(Q)$(MAKE)	-C $(TST_DIR)
+	$(Q)$(MAKE) $@	-C $(BUILD_DIR)
 
 
 PHONY += install
-install:
+install: build_dir
 	@echo	"	Install:"
 	@echo
-	$(Q)$(MAKE)	install_base
-	$(Q)$(MAKE)	install_alx
-	$(Q)$(MAKE)	install_extra
-	$(Q)$(MAKE)	install_sh
-	$(Q)$(MAKE)	install_py
-	$(Q)$(MAKE)	conf_ld
+	$(Q)$(MAKE) $@		-C $(BUILD_DIR)
+	$(Q)$(MAKE) conf_ld	-C $(BUILD_DIR)
 	@echo	"	Done"
 	@echo
 
 PHONY += install_base
-install_base:
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/
-	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/*"
-	$(Q)cp -rf $(v)		$(INC_DIR)/libalx/base/*		\
-					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
-	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/*"
-	$(Q)cp -rf $(v)		$(SHARE_DIR)/libalx/*			\
-					$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
-	$(Q)$(MAKE)	libalx-base.a	libalx-base.so	libalx-base.pc
+install_base: build_dir
+	@echo	"	Install base:"
 	@echo
+	$(Q)$(MAKE) $@		-C $(BUILD_DIR)
+	$(Q)$(MAKE) conf_ld	-C $(BUILD_DIR)
+	@echo	"	Done"
 
 PHONY += install_alx
-install_alx:
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/
-	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/*"
-	$(Q)cp -r -f $(v)	$(INC_DIR)/libalx/alx/*			\
-					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/
-	$(Q)$(MAKE)	libalx-data-structures.a			\
-			libalx-data-structures.so			\
-			libalx-data-structures.pc
-#	$(Q)$(MAKE)	libalx-npcomplete.a				\
-#			libalx-npcomplete.so				\
-#			libalx-npcomplete.pc
-	$(Q)$(MAKE)	libalx-robot.a	libalx-robot.so	libalx-robot.pc
+install_alx: build_dir
+	@echo	"	Install alx:"
 	@echo
+	$(Q)$(MAKE) $@		-C $(BUILD_DIR)
+	$(Q)$(MAKE) conf_ld	-C $(BUILD_DIR)
+	@echo	"	Done"
 
 PHONY += install_extra
-install_extra:
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/
-	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/*"
-	$(Q)cp -r -f $(v)	$(ETC_DIR)/libalx/extra/*		\
-					$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/
-	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/*"
-	$(Q)cp -r -f $(v)	$(INC_DIR)/libalx/extra/*		\
-					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/
-	$(Q)$(MAKE)	libalx-curl.a	libalx-curl.so	libalx-curl.pc
-	$(Q)$(MAKE)	libalx-cv.a	libalx-cv.so	libalx-cv.pc
-	$(Q)$(MAKE)	libalx-gmp.a	libalx-gmp.so	libalx-gmp.pc
-	$(Q)$(MAKE)	libalx-gsl.a	libalx-gsl.so	libalx-gsl.pc
-	$(Q)$(MAKE)	libalx-ncurses.a libalx-ncurses.so libalx-ncurses.pc
-	$(Q)$(MAKE)	libalx-ocr.a	libalx-ocr.so	libalx-ocr.pc
-	$(Q)$(MAKE)	libalx-zbar.a	libalx-zbar.so	libalx-zbar.pc
+install_extra: build_dir
+	@echo	"	Install extra:"
 	@echo
+	$(Q)$(MAKE) $@		-C $(BUILD_DIR)
+	$(Q)$(MAKE) conf_ld	-C $(BUILD_DIR)
+	@echo	"	Done"
 
 PHONY += install_sh
-install_sh:
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/
-	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/*"
-	$(Q)cp -rf $(v)		$(LIB_DIR)/libalx/sh/*			\
-					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/
+install_sh: build_dir
+	@echo	"	Install sh:"
 	@echo
+	$(Q)$(MAKE) $@		-C $(BUILD_DIR)
+	@echo	"	Done"
 
 PHONY += install_py
-install_py:
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/py/
-	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/py/*"
-	$(Q)cp -rf $(v)		$(LIB_DIR)/libalx/py/*			\
-					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/py/
+install_py: build_dir
+	@echo	"	Install py:"
 	@echo
+	$(Q)$(MAKE) $@		-C $(BUILD_DIR)
+	@echo	"	Done"
 
 PHONY += conf_ld
 conf_ld:
-	@echo	"	CP -r	$(DESTDIR)/etc/ld.so.conf.d/*"
-	$(Q)cp -r -f $(v)	$(ETC_DIR)/ld.so.conf.d/*		\
-					$(DESTDIR)/etc/ld.so.conf.d/
-	@echo	"	LDCONFIG"
-	$(Q)ldconfig
+	@echo	"	Configure ld:"
 	@echo
-
-PHONY += libalx-%.a
-libalx-%.a:
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
-	@echo	"	CP	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/$@"
-	$(Q)cp -f $(v)		$(BUILD_LIB_DIR)/libalx/$@		\
-					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/$@
-
-PHONY += libalx-%.so
-libalx-%.so:
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
-	@echo	"	CP	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/$@"
-	$(Q)cp -f $(v)		$(BUILD_LIB_DIR)/libalx/$@		\
-					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/$@
-
-PHONY += libalx-%.pc
-libalx-%.pc:
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
-	@echo	"	CP	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/$@"
-	$(Q)cp -f $(v)		$(LIB_DIR)/pkgconfig/$@			\
-					$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
+	$(Q)$(MAKE) $@		-C $(BUILD_DIR)
+	@echo	"	Done"
 
 PHONY += uninstall
-uninstall:
-	@echo	"	Clean old installations:"
+uninstall: build_dir
+	@echo	"	Uninstall:"
 	@echo
-	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/"
-	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/
-	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/"
-	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/
-	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/"
-	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
-	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/"
-	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
-	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/libalx*.pc"
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
-	$(Q)find		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/	\
-				-type f -name 'libalx*.pc' -exec rm '{}' '+'
-	@echo	"	RM	$(DESTDIR)/etc/ld.so.conf.d/libalx*.conf"
-	$(Q)find		$(DESTDIR)/etc/ld.so.conf.d/		\
-				-type f -name 'libalx*.conf' -exec rm '{}' '+'
-	@echo	"	LDCONFIG"
-	$(Q)ldconfig
+	$(Q)$(MAKE) $@		-C $(BUILD_DIR)
 	@echo	"	Done"
-	@echo
 
 
 PHONY += clean
