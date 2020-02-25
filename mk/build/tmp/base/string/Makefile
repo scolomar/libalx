@@ -12,14 +12,6 @@
 ################################################################################
 # dependencies
 
-DIRS		=							\
-		memchr							\
-		strcat							\
-		strchr							\
-		strcpy							\
-		strlwr							\
-		strstr
-
 OBJ		=							\
 		memchr/memchrend.o					\
 		strcat/strscat.o					\
@@ -199,19 +191,6 @@ STRSTR_S_SRC	=							\
 PHONY := all
 all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o))) $(OBJ_TST)
 	@:
-
-
-$(DIRS):
-	@echo	"	MKDIR	build/tmp/base/string/$@"
-	$(Q)mkdir -p		$@/
-
-
-memchr/%.s: | memchr
-strcat/%.s: | strcat
-strchr/%.s: | strchr
-strcpy/%.s: | strcpy
-strlwr/%.s: | strlwr
-strstr/%.s: | strstr
 
 
 %.a.s:

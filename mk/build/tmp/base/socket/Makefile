@@ -12,9 +12,6 @@
 ################################################################################
 # dependencies
 
-DIRS		=							\
-		tcp
-
 OBJ		=							\
 		tcp/client.o						\
 		tcp/server.o
@@ -36,14 +33,6 @@ TCP_SERVER_SRC	=							\
 PHONY := all
 all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 	@:
-
-
-$(DIRS):
-	@echo	"	MKDIR	build/tmp/base/string/$@"
-	$(Q)mkdir -p		$@/
-
-
-tcp/%.a.s: | tcp
 
 
 %.a.s:

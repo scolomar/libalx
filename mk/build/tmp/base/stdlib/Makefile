@@ -12,10 +12,6 @@
 ################################################################################
 # dependencies
 
-DIRS		=							\
-		alloc							\
-		strto
-
 OBJ		=							\
 		alloc/callocs.o						\
 		alloc/frees.o						\
@@ -205,27 +201,20 @@ SWAP_SRC	=							\
 		$(SRC_DIR)/base/stdlib/swap.c
 
 ################################################################################
-# target: dependencies
-#	action
+# target: prerequisites
+#	recipe
 
 PHONY := all
 all: $(DIRS) $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 	@:
 
 
-$(DIRS):
-	@echo	"	MKDIR	build/tmp/base/string/$@"
-	$(Q)mkdir -p		$@/
-
-
-alloc/%.s: |alloc
-strto/%.s: |strto
-
-
 %.a.s:
+	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/tmp/base/stdlib/$@"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
 %.so.s:
+	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/tmp/base/stdlib/$@"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
 %.o: %.s
