@@ -101,6 +101,7 @@ TYPES_SRC	=							\
 
 PHONY := all
 all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+	@:
 
 
 %.a.s:

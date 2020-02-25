@@ -19,9 +19,9 @@ OBJ		=							\
 		tcp/client.o						\
 		tcp/server.o
 
-TCP_CLIENT_INC	=						\
+TCP_CLIENT_INC	=							\
 		$(INC_DIR)/libalx/base/socket/tcp/client.h
-TCP_CLIENT_SRC	=						\
+TCP_CLIENT_SRC	=							\
 		$(SRC_DIR)/base/socket/tcp/client.c
 
 TCP_SERVER_INC	=							\
@@ -34,18 +34,24 @@ TCP_SERVER_SRC	=							\
 #	action
 
 PHONY := all
-all: $(DIRS) $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+	@:
 
 
-tcp:
-	@echo	"	MKDIR	build/tmp/base/socket/$@"
+$(DIRS):
+	@echo	"	MKDIR	build/tmp/base/string/$@"
 	$(Q)mkdir -p		$@/
 
 
+tcp/%.a.s: | tcp
+
+
 %.a.s:
+	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/tmp/base/socket/$@"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
 %.so.s:
+	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/tmp/base/socket/$@"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
 %.o: %.s
@@ -65,7 +71,7 @@ clean:
 	$(Q)rm -rf *.o *.s
 
 ################################################################################
-# Declare the contents of the .PHONY variable as phony.
+# Declare the contents of the PHONY variable as phony.
 .PHONY: $(PHONY)
 
 

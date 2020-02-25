@@ -12,9 +12,6 @@
 ################################################################################
 # dependencies
 
-DIRS		=							\
-		printf
-
 OBJ		=							\
 		fgets.o							\
 		freads.o						\
@@ -79,18 +76,16 @@ SSCAN_SRC	=							\
 #	action
 
 PHONY := all
-all: $(DIRS) $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
-
-
-printf:
-	@echo	"	MKDIR	build/tmp/base/stdio/$@"
-	$(Q)mkdir -p		$@/
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+	@:
 
 
 %.a.s:
+	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/tmp/base/stdio/$@"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
 %.so.s:
+	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/tmp/base/stdio/$@"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
 %.o: %.s

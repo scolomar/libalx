@@ -210,14 +210,16 @@ SWAP_SRC	=							\
 
 PHONY := all
 all: $(DIRS) $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+	@:
 
 
-alloc:
-	@echo	"	MKDIR	build/tmp/base/stdlib/$@"
+$(DIRS):
+	@echo	"	MKDIR	build/tmp/base/string/$@"
 	$(Q)mkdir -p		$@/
-strto:
-	@echo	"	MKDIR	build/tmp/base/stdlib/$@"
-	$(Q)mkdir -p		$@/
+
+
+alloc/%.s: |alloc
+strto/%.s: |strto
 
 
 %.a.s:

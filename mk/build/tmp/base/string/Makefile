@@ -197,7 +197,8 @@ STRSTR_S_SRC	=							\
 #	action
 
 PHONY := all
-all: $(DIRS) $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o))) $(OBJ_TST)
+all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o))) $(OBJ_TST)
+	@:
 
 
 $(DIRS):
@@ -205,10 +206,20 @@ $(DIRS):
 	$(Q)mkdir -p		$@/
 
 
+memchr/%.s: | memchr
+strcat/%.s: | strcat
+strchr/%.s: | strchr
+strcpy/%.s: | strcpy
+strlwr/%.s: | strlwr
+strstr/%.s: | strstr
+
+
 %.a.s:
+	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/tmp/base/string/$@"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
 %.so.s:
+	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/tmp/base/string/$@"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
 %.o: %.s
