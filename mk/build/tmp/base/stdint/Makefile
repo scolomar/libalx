@@ -12,45 +12,45 @@
 ################################################################################
 # dependencies
 
-OBJ		=							\
-		constants.o						\
-		types.o
+OBJ	=								\
+	$(CURDIR)/constants.o						\
+	$(CURDIR)/types.o
 
-CONSTANTS_INC	=							\
-		$(INC_DIR)/libalx/base/stdint/constants.h
-CONSTANTS_SRC	=							\
-		$(SRC_DIR)/base/stdint/constants.c
+SRC	=								\
+	$(SRC_DIR)/base/stdint/constants.c				\
+	$(SRC_DIR)/base/stdint/types.c
 
-TYPES_INC	=							\
-		$(INC_DIR)/libalx/base/stdint/types.h
-TYPES_SRC	=							\
-		$(SRC_DIR)/base/stdint/types.c
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CC	build/tmp/base/stdint/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/base/stdint/%.c
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC -M	build/tmp/base/stdint/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/base/stdint/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/base/stdint/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CC	build/tmp/base/stdint/$@"
+$(CURDIR)/%.so.s: $(SRC_DIR)/base/stdint/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/base/stdint/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/base/stdint/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/base/stdint/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-constants.a.s: $(CONSTANTS_SRC) $(CONSTANTS_INC)
-constants.so.s: $(CONSTANTS_SRC) $(CONSTANTS_INC)
-
-types.a.s: $(TYPES_SRC) $(TYPES_INC)
-types.so.s: $(TYPES_SRC) $(TYPES_INC)
+include $(DEP)
 
 
 PHONY += clean

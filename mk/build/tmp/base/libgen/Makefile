@@ -12,49 +12,45 @@
 ################################################################################
 # dependencies
 
-OBJ		=							\
-		basename.o						\
-		dirname.o
+OBJ	=								\
+	$(CURDIR)/basename.o						\
+	$(CURDIR)/dirname.o
 
-BASENAME_INC	=							\
-		$(INC_DIR)/libalx/base/stdio/printf/sbprintf.h		\
-		$(INC_DIR)/libalx/base/stdio/printf/snprintfs.h		\
-		$(INC_DIR)/libalx/base/libgen/basename.h
-BASENAME_SRC	=							\
-		$(SRC_DIR)/base/libgen/basename.c
+SRC	=								\
+	$(SRC_DIR)/base/libgen/basename.c				\
+	$(SRC_DIR)/base/libgen/dirname.c
 
-DIRNAME_INC	=							\
-		$(INC_DIR)/libalx/base/stdio/printf/sbprintf.h		\
-		$(INC_DIR)/libalx/base/stdio/printf/snprintfs.h		\
-		$(INC_DIR)/libalx/base/libgen/dirname.h
-DIRNAME_SRC	=							\
-		$(SRC_DIR)/base/libgen/dirname.c
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CC	build/tmp/base/libgen/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/base/libgen/%.c
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC -M	build/tmp/base/libgen/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/base/libgen/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/base/libgen/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CC	build/tmp/base/libgen/$@"
+$(CURDIR)/%.so.s: $(SRC_DIR)/base/libgen/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/base/libgen/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/base/libgen/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/base/libgen/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-basename.a.s: $(BASENAME_SRC) $(BASENAME_INC)
-basename.so.s: $(BASENAME_SRC) $(BASENAME_INC)
-
-dirname.a.s: $(DIRNAME_SRC) $(DIRNAME_INC)
-dirname.so.s: $(DIRNAME_SRC) $(DIRNAME_INC)
+include $(DEP)
 
 
 PHONY += clean

@@ -12,54 +12,47 @@
 ################################################################################
 # dependencies
 
-OBJ		=							\
-		constant.o						\
-		printf.o						\
-		scanf.o
+OBJ	=								\
+	$(CURDIR)/constant.o						\
+	$(CURDIR)/printf.o						\
+	$(CURDIR)/scanf.o
 
-CONSTANT_INC	=							\
-		$(INC_DIR)/libalx/base/float/constant.h
-CONSTANT_SRC	=							\
-		$(SRC_DIR)/base/float/constant.c
+SRC	=								\
+	$(SRC_DIR)/base/float/constant.c				\
+	$(SRC_DIR)/base/float/printf.c					\
+	$(SRC_DIR)/base/float/scanf.c
 
-PRINTF_INC	=							\
-		$(INC_DIR)/libalx/base/float/printf.h
-PRINTF_SRC	=							\
-		$(SRC_DIR)/base/float/printf.c
-
-SCANF_INC	=							\
-		$(INC_DIR)/libalx/base/float/scanf.h
-SCANF_SRC	=							\
-		$(SRC_DIR)/base/float/scanf.c
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CC	build/tmp/base/float/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/base/float/%.c
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC -M	build/tmp/base/float/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/base/float/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/base/float/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CC	build/tmp/base/float/$@"
+$(CURDIR)/%.so.s: $(SRC_DIR)/base/float/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/base/float/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/base/float/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/base/float/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-constant.a.s: $(CONSTANT_SRC) $(CONSTANT_INC)
-constant.so.s: $(CONSTANT_SRC) $(CONSTANT_INC)
-
-printf.a.s: $(PRINTF_SRC) $(PRINTF_INC)
-printf.so.s: $(PRINTF_SRC) $(PRINTF_INC)
-
-scanf.a.s: $(SCANF_SRC) $(SCANF_INC)
-scanf.so.s: $(SCANF_SRC) $(SCANF_INC)
+include $(DEP)
 
 
 PHONY += clean

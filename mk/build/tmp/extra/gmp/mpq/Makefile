@@ -11,14 +11,14 @@
 
 ################################################################################
 # dependencies
-OBJ		=							\
-		cmp.o
+OBJ	=								\
+	$(CURDIR)/cmp.o
 
-CMP_INC		=							\
-		$(INC_DIR)/libalx/base/assert/assert.h			\
-		$(INC_DIR)/libalx/extra/gmp/mpq/cmp.h
-CMP_SRC		=							\
-		$(SRC_DIR)/extra/gmp/mpq/cmp.c
+SRC	=								\
+	$(SRC_DIR)/extra/gmp/mpq/cmp.c
+
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
@@ -30,23 +30,29 @@ CMP_SRC		=							\
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CC	build/tmp/extra/gmp/mpq/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/extra/gmp/mpq/%.c
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC -M	build/tmp/extra/gmp/mpq/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/extra/gmp/mpq/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/extra/gmp/mpq/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CC	build/tmp/extra/gmp/mpq/$@"
+$(CURDIR)/%.so.s: $(SRC_DIR)/extra/gmp/mpq/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/extra/gmp/mpq/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/extra/gmp/mpq/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/extra/gmp/mpq/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-cmp.a.s: $(CMP_SRC) $(CMP_INC)
-cmp.so.s: $(CMP_SRC) $(CMP_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -56,8 +62,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

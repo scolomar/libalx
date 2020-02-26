@@ -11,17 +11,14 @@
 
 ################################################################################
 # dependencies
-OBJ		=							\
-		solver_lut.o
+OBJ	=								\
+	$(CURDIR)/solver_lut.o
 
-SOLVERLUT_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/size.h			\
-		$(INC_DIR)/libalx/base/stdint/types.h			\
-		$(INC_DIR)/libalx/base/stdlib/compare.h			\
-		$(INC_DIR)/libalx/base/stdlib/popcnt.h			\
-		$(INC_DIR)/libalx/alx/npcomplete/solver_lut.h
-SOLVERLUT_SRC	=							\
-		$(SRC_DIR)/alx/npcomplete/solver_lut.c
+SRC	=								\
+	$(SRC_DIR)/alx/npcomplete/solver_lut.c
+
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
@@ -33,23 +30,29 @@ CFLAGS_SO	+= -fopenmp
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CC	build/tmp/alx/npcomplete/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/alx/npcomplete/%.c
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC -M	build/tmp/alx/npcomplete/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/alx/npcomplete/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/alx/npcomplete/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CC	build/tmp/alx/npcomplete/$@"
+$(CURDIR)/%.so.s: $(SRC_DIR)/alx/npcomplete/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/alx/npcomplete/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/alx/npcomplete/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/alx/npcomplete/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-solver_lut.a.s: $(SOLVERLUT_SRC) $(SOLVERLUT_INC)
-solver_lut.so.s: $(SOLVERLUT_SRC) $(SOLVERLUT_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -59,8 +62,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

@@ -11,47 +11,24 @@
 
 ################################################################################
 # dependencies
-OBJ		=							\
-		features.o						\
-		filter.o						\
-		geometric.o						\
-		histogram.o						\
-		miscellaneous.o						\
-		shape.o
+OBJ	=								\
+	$(CURDIR)/features.o						\
+	$(CURDIR)/filter.o						\
+	$(CURDIR)/geometric.o						\
+	$(CURDIR)/histogram.o						\
+	$(CURDIR)/miscellaneous.o					\
+	$(CURDIR)/shape.o
 
+SRC	=								\
+	$(SRC_DIR)/extra/cv/imgproc/features.cpp			\
+	$(SRC_DIR)/extra/cv/imgproc/filter.cpp				\
+	$(SRC_DIR)/extra/cv/imgproc/geometric.cpp			\
+	$(SRC_DIR)/extra/cv/imgproc/histogram.cpp			\
+	$(SRC_DIR)/extra/cv/imgproc/miscellaneous.cpp			\
+	$(SRC_DIR)/extra/cv/imgproc/shape.cpp
 
-FEATURES_INC	=							\
-		$(INC_DIR)/libalx/extra/cv/imgproc/features.hpp
-FEATURES_SRC	=							\
-		$(SRC_DIR)/extra/cv/imgproc/features.cpp
-
-FILTER_INC	=							\
-		$(INC_DIR)/libalx/extra/cv/imgproc/filter.hpp
-FILTER_SRC	=							\
-		$(SRC_DIR)/extra/cv/imgproc/filter.cpp
-
-GEOMETRIC_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/extra/cv/imgproc/geometric.hpp
-GEOMETRIC_SRC	=							\
-		$(SRC_DIR)/extra/cv/imgproc/geometric.cpp
-
-HISTOGRAM_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/extra/cv/imgproc/histogram.hpp
-HISTOGRAM_SRC	=							\
-		$(SRC_DIR)/extra/cv/imgproc/histogram.cpp
-
-MISC_INC	=							\
-		$(INC_DIR)/libalx/extra/cv/imgproc/miscellaneous.hpp
-MISC_SRC	=							\
-		$(SRC_DIR)/extra/cv/imgproc/miscellaneous.cpp
-
-SHAPE_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/extra/cv/imgproc/shape.hpp
-SHAPE_SRC	=							\
-		$(SRC_DIR)/extra/cv/imgproc/shape.cpp
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
@@ -63,38 +40,29 @@ CXXFLAGS_SO	+= `pkg-config --cflags opencv4`
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CXX	build/tmp/extra/cv/imgproc/$@"
-	$(Q)$(CC) $(CXXFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CXX	build/tmp/extra/cv/imgproc/$@"
-	$(Q)$(CC) $(CXXFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/extra/cv/imgproc/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/extra/cv/imgproc/%.cpp
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CXX -M	build/tmp/extra/cv/imgproc/$*.d"
+	$(Q)$(CXX) $(CXXFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/extra/cv/imgproc/%.cpp $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CXX	build/tmp/extra/cv/imgproc/$*.a.s"
+	$(Q)$(CXX) $(CXXFLAGS_A) -S $< -o $@
+$(CURDIR)/%.so.s: $(SRC_DIR)/extra/cv/imgproc/%.cpp $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CXX	build/tmp/extra/cv/imgproc/$*.so.s"
+	$(Q)$(CXX) $(CXXFLAGS_SO) -S $< -o $@
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/extra/cv/imgproc/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-features.a.s: $(FEATURES_SRC) $(FEATURES_INC)
-features.so.s: $(FEATURES_SRC) $(FEATURES_INC)
-
-filter.a.s: $(FILTER_SRC) $(FILTER_INC)
-filter.so.s: $(FILTER_SRC) $(FILTER_INC)
-
-geometric.a.s: $(GEOMETRIC_SRC) $(GEOMETRIC_INC)
-geometric.so.s: $(GEOMETRIC_SRC) $(GEOMETRIC_INC)
-
-histogram.a.s: $(HISTOGRAM_SRC) $(HISTOGRAM_INC)
-histogram.so.s: $(HISTOGRAM_SRC) $(HISTOGRAM_INC)
-
-miscellaneous.a.s: $(MISC_SRC) $(MISC_INC)
-miscellaneous.so.s: $(MISC_SRC) $(MISC_INC)
-
-shape.a.s: $(SHAPE_SRC) $(SHAPE_INC)
-shape.so.s: $(SHAPE_SRC) $(SHAPE_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -104,8 +72,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

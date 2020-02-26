@@ -11,54 +11,24 @@
 
 ################################################################################
 # dependencies
-OBJ		=							\
-		array.o							\
-		contours.o						\
-		img.o							\
-		pixel.o							\
-		rect.o							\
-		roi.o
+OBJ	=								\
+	$(CURDIR)/array.o						\
+	$(CURDIR)/contours.o						\
+	$(CURDIR)/img.o							\
+	$(CURDIR)/pixel.o						\
+	$(CURDIR)/rect.o						\
+	$(CURDIR)/roi.o
 
+SRC	=								\
+	$(SRC_DIR)/extra/cv/core/array.cpp				\
+	$(SRC_DIR)/extra/cv/core/contours.cpp				\
+	$(SRC_DIR)/extra/cv/core/img.cpp				\
+	$(SRC_DIR)/extra/cv/core/pixel.cpp				\
+	$(SRC_DIR)/extra/cv/core/rect.cpp				\
+	$(SRC_DIR)/extra/cv/core/roi.cpp
 
-ARRAY_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/extra/cv/core/array.hpp
-ARRAY_SRC	=							\
-		$(SRC_DIR)/extra/cv/core/array.cpp
-
-CONT_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.hpp	\
-		$(INC_DIR)/libalx/extra/cv/core/contours.hpp
-CONT_SRC	=							\
-		$(SRC_DIR)/extra/cv/core/contours.cpp
-
-IMG_INC		=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.hpp	\
-		$(INC_DIR)/libalx/extra/cv/core/img.hpp
-IMG_SRC		=							\
-		$(SRC_DIR)/extra/cv/core/img.cpp
-
-PIXEL_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/extra/cv/core/pixel.hpp
-PIXEL_SRC	=							\
-		$(SRC_DIR)/extra/cv/core/pixel.cpp
-
-RECT_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.hpp	\
-		$(INC_DIR)/libalx/base/stdlib/swap.hpp			\
-		$(INC_DIR)/libalx/extra/cv/core/rect.hpp
-RECT_SRC	=							\
-		$(SRC_DIR)/extra/cv/core/rect.cpp
-
-ROI_INC		=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/extra/cv/core/roi.hpp
-ROI_SRC		=							\
-		$(SRC_DIR)/extra/cv/core/roi.cpp
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
@@ -70,38 +40,29 @@ CXXFLAGS_SO	+= `pkg-config --cflags opencv4`
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CXX	build/tmp/extra/cv/core/$@"
-	$(Q)$(CC) $(CXXFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CXX	build/tmp/extra/cv/core/$@"
-	$(Q)$(CC) $(CXXFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/extra/cv/core/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/extra/cv/core/%.cpp
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CXX -M	build/tmp/extra/cv/core/$*.d"
+	$(Q)$(CXX) $(CXXFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/extra/cv/core/%.cpp $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CXX	build/tmp/extra/cv/core/$*.a.s"
+	$(Q)$(CXX) $(CXXFLAGS_A) -S $< -o $@
+$(CURDIR)/%.so.s: $(SRC_DIR)/extra/cv/core/%.cpp $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CXX	build/tmp/extra/cv/core/$*.so.s"
+	$(Q)$(CXX) $(CXXFLAGS_SO) -S $< -o $@
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/extra/cv/core/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-array.a.s: $(ARRAY_SRC) $(ARRAY_INC)
-array.so.s: $(ARRAY_SRC) $(ARRAY_INC)
-
-contours.a.s: $(CONT_SRC) $(CONT_INC)
-contours.so.s: $(CONT_SRC) $(CONT_INC)
-
-img.a.s: $(IMG_SRC) $(IMG_INC)
-img.so.s: $(IMG_SRC) $(IMG_INC)
-
-pixel.a.s: $(PIXEL_SRC) $(PIXEL_INC)
-pixel.so.s: $(PIXEL_SRC) $(PIXEL_INC)
-
-rect.a.s: $(RECT_SRC) $(RECT_INC)
-rect.so.s: $(RECT_SRC) $(RECT_INC)
-
-roi.a.s: $(ROI_SRC) $(ROI_INC)
-roi.so.s: $(ROI_SRC) $(ROI_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -111,8 +72,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

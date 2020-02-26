@@ -12,38 +12,43 @@
 ################################################################################
 # dependencies
 
-OBJ		=							\
-		assert.o
+OBJ	=								\
+	$(CURDIR)/assert.o
 
-ASSERT_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/type.h			\
-		$(INC_DIR)/libalx/base/errno/error.h			\
-		$(INC_DIR)/libalx/base/assert/assert.h
-ASSERT_SRC	=							\
-		$(SRC_DIR)/base/assert/assert.c
+SRC	=								\
+	$(SRC_DIR)/base/assert/assert.c
+
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CC	build/tmp/base/assert/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/base/assert/%.c
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC -M	build/tmp/base/assert/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/base/assert/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/base/assert/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CC	build/tmp/base/assert/$@"
+$(CURDIR)/%.so.s: $(SRC_DIR)/base/assert/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/base/assert/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/base/assert/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/base/assert/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-assert.a.s: $(ASSERT_SRC) $(ASSERT_INC)
-assert.so.s: $(ASSERT_SRC) $(ASSERT_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -53,8 +58,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

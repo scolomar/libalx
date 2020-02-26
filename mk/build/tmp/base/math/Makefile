@@ -12,137 +12,63 @@
 ################################################################################
 # dependencies
 
-OBJ		=							\
-		array_division.o					\
-		array_multiplication.o					\
-		array_sum.o						\
-		binomial_coefficient.o					\
-		matrix_addition.o					\
-		matrix_subtraction.o					\
-		pascal_triangle.o					\
-		prime.o							\
-		prime_defactorization.o					\
-		prime_factorization.o					\
-		scale_linear.o
+OBJ	=								\
+	$(CURDIR)/array_division.o					\
+	$(CURDIR)/array_multiplication.o				\
+	$(CURDIR)/array_sum.o						\
+	$(CURDIR)/binomial_coefficient.o				\
+	$(CURDIR)/matrix_addition.o					\
+	$(CURDIR)/matrix_subtraction.o					\
+	$(CURDIR)/pascal_triangle.o					\
+	$(CURDIR)/prime.o						\
+	$(CURDIR)/prime_defactorization.o				\
+	$(CURDIR)/prime_factorization.o					\
+	$(CURDIR)/scale_linear.o
 
-ARRAY_DIVISION_INC	=						\
-		$(INC_DIR)/libalx/base/math/array_division.h
-ARRAY_DIVISION_SRC	=						\
-		$(SRC_DIR)/base/math/array_division.c
+SRC	=								\
+	$(SRC_DIR)/base/math/array_division.c				\
+	$(SRC_DIR)/base/math/array_multiplication.c			\
+	$(SRC_DIR)/base/math/array_sum.c				\
+	$(SRC_DIR)/base/math/binomial_coefficient.c			\
+	$(SRC_DIR)/base/math/matrix_addition.c				\
+	$(SRC_DIR)/base/math/matrix_subtraction.c			\
+	$(SRC_DIR)/base/math/pascal_triangle.c				\
+	$(SRC_DIR)/base/math/prime.c					\
+	$(SRC_DIR)/base/math/prime_defactorization.c			\
+	$(SRC_DIR)/base/math/prime_factorization.c			\
+	$(SRC_DIR)/base/math/scale_linear.c
 
-ARRAY_MULTIPLICATION_INC	=					\
-		$(INC_DIR)/libalx/base/math/array_multiplication.h
-ARRAY_MULTIPLICATION_SRC	=					\
-		$(SRC_DIR)/base/math/array_multiplication.c
-
-ARRAY_SUM_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/size.h			\
-		$(INC_DIR)/libalx/base/stdlib/compare.h			\
-		$(INC_DIR)/libalx/base/math/array_sum.h
-ARRAY_SUM_SRC	=							\
-		$(SRC_DIR)/base/math/array_sum.c
-
-BINOMIAL_COEFFICIENT_INC	=					\
-		$(INC_DIR)/libalx/base/math/pascal_triangle.h		\
-		$(INC_DIR)/libalx/base/math/prime.h			\
-		$(INC_DIR)/libalx/base/math/binomial_coefficient.h
-BINOMIAL_COEFFICIENT_SRC	=					\
-		$(SRC_DIR)/base/math/binomial_coefficient.c
-
-MATRIX_ADDITION_INC	=						\
-		$(INC_DIR)/libalx/base/math/matrix_addition.h
-MATRIX_ADDITION_SRC	=						\
-		$(SRC_DIR)/base/math/matrix_addition.c
-
-MATRIX_SUBTRACTION_INC	=						\
-		$(INC_DIR)/libalx/base/math/matrix_subtraction.h
-MATRIX_SUBTRACTION_SRC	=						\
-		$(SRC_DIR)/base/math/matrix_subtraction.c
-
-PASCAL_TRIANGLE_INC	=						\
-		$(INC_DIR)/libalx/base/float/constant.h			\
-		$(INC_DIR)/libalx/base/math/prime.h			\
-		$(INC_DIR)/libalx/base/math/prime_factorization.h	\
-		$(INC_DIR)/libalx/base/math/pascal_triangle.h
-PASCAL_TRIANGLE_SRC	=						\
-		$(SRC_DIR)/base/math/pascal_triangle.c
-
-PRIME_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/size.h			\
-		$(INC_DIR)/libalx/base/stdlib/search.h			\
-		$(INC_DIR)/libalx/base/math/prime.h
-PRIME_SRC	=							\
-		$(SRC_DIR)/base/math/prime.c
-
-PRIME_DEFACTORIZATION_INC	=					\
-		$(INC_DIR)/libalx/base/math/prime.h			\
-		$(INC_DIR)/libalx/base/math/prime_defactorization.h
-PRIME_DEFACTORIZATION_SRC	=					\
-		$(SRC_DIR)/base/math/prime_defactorization.c
-
-PRIME_FACTORIZATION_INC	=						\
-		$(INC_DIR)/libalx/base/math/prime.h			\
-		$(INC_DIR)/libalx/base/math/prime_factorization.h
-PRIME_FACTORIZATION_SRC	=						\
-		$(SRC_DIR)/base/math/prime_factorization.c
-
-SCALE_LINEAR_INC	=						\
-		$(INC_DIR)/libalx/base/math/scale_linear.h
-SCALE_LINEAR_SRC	=						\
-		$(SRC_DIR)/base/math/scale_linear.c
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CC	build/tmp/base/math/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/base/math/%.c
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC -M	build/tmp/base/math/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/base/math/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/base/math/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CC	build/tmp/base/math/$@"
+$(CURDIR)/%.so.s: $(SRC_DIR)/base/math/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/base/math/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/base/math/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/base/math/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-array_division.a.s: $(ARRAY_DIVISION_SRC) $(ARRAY_DIVISION_INC)
-array_division.so.s: $(ARRAY_DIVISION_SRC) $(ARRAY_DIVISION_INC)
-
-array_multiplication.a.s: $(ARRAY_MULTIPLICATION_SRC) $(ARRAY_MULTIPLICATION_INC)
-array_multiplication.so.s: $(ARRAY_MULTIPLICATION_SRC) $(ARRAY_MULTIPLICATION_INC)
-
-array_sum.a.s: $(ARRAY_SUM_SRC) $(ARRAY_SUM_INC)
-array_sum.so.s: $(ARRAY_SUM_SRC) $(ARRAY_SUM_INC)
-
-binomial_coefficient.a.s: $(BINOMIAL_COEFFICIENT_SRC) $(BINOMIAL_COEFFICIENT_INC)
-binomial_coefficient.so.s: $(BINOMIAL_COEFFICIENT_SRC) $(BINOMIAL_COEFFICIENT_INC)
-
-matrix_addition.a.s: $(MATRIX_ADDITION_SRC) $(MATRIX_ADDITION_INC)
-matrix_addition.so.s: $(MATRIX_ADDITION_SRC) $(MATRIX_ADDITION_INC)
-
-matrix_subtraction.a.s: $(MATRIX_SUBTRACTION_SRC) $(MATRIX_SUBTRACTION_INC)
-matrix_subtraction.so.s: $(MATRIX_SUBTRACTION_SRC) $(MATRIX_SUBTRACTION_INC)
-
-pascal_triangle.a.s: $(PASCAL_TRIANGLE_SRC) $(PASCAL_TRIANGLE_INC)
-pascal_triangle.so.s: $(PASCAL_TRIANGLE_SRC) $(PASCAL_TRIANGLE_INC)
-
-prime.a.s: $(PRIME_SRC) $(PRIME_INC)
-prime.so.s: $(PRIME_SRC) $(PRIME_INC)
-
-prime_defactorization.a.s: $(PRIME_DEFACTORIZATION_SRC) $(PRIME_DEFACTORIZATION_INC)
-prime_defactorization.so.s: $(PRIME_DEFACTORIZATION_SRC) $(PRIME_DEFACTORIZATION_INC)
-
-prime_factorization.a.s: $(PRIME_FACTORIZATION_SRC) $(PRIME_FACTORIZATION_INC)
-prime_factorization.so.s: $(PRIME_FACTORIZATION_SRC) $(PRIME_FACTORIZATION_INC)
-
-scale_linear.a.s: $(SCALE_LINEAR_SRC) $(SCALE_LINEAR_INC)
-scale_linear.so.s: $(SCALE_LINEAR_SRC) $(SCALE_LINEAR_INC)
+include $(DEP)
 
 
 PHONY += clean

@@ -13,109 +13,56 @@
 # dependencies
 
 OBJ		=							\
-		fgets.o							\
-		freads.o						\
-		get.o							\
-		printf/b.o						\
-		printf/sbprintf.o					\
-		printf/snprintfs.o					\
-		seekc.o							\
-		sscan.o
+	$(CURDIR)/fgets.o						\
+	$(CURDIR)/freads.o						\
+	$(CURDIR)/get.o							\
+	$(CURDIR)/printf/b.o						\
+	$(CURDIR)/printf/sbprintf.o					\
+	$(CURDIR)/printf/snprintfs.o					\
+	$(CURDIR)/seekc.o						\
+	$(CURDIR)/sscan.o
 
-FGETS_INC	=							\
-		$(INC_DIR)/libalx/base/stdio/fgets.h
-FGETS_SRC	=							\
-		$(SRC_DIR)/base/stdio/fgets.c
+SRC	=								\
+	$(SRC_DIR)/base/stdio/fgets.c					\
+	$(SRC_DIR)/base/stdio/freads.c					\
+	$(SRC_DIR)/base/stdio/get.c					\
+	$(SRC_DIR)/base/stdio/printf/b.c				\
+	$(SRC_DIR)/base/stdio/printf/sbprintf.c				\
+	$(SRC_DIR)/base/stdio/printf/snprintfs.c			\
+	$(SRC_DIR)/base/stdio/seekc.c					\
+	$(SRC_DIR)/base/stdio/sscan.c
 
-FREADS_INC	=							\
-		$(INC_DIR)/libalx/base/assert/assert.h			\
-		$(INC_DIR)/libalx/base/stdio/freads.h
-FREADS_SRC	=							\
-		$(SRC_DIR)/base/stdio/freads.c
-
-GET_INC		=							\
-		$(INC_DIR)/libalx/base/compiler/size.h			\
-		$(INC_DIR)/libalx/base/errno/error.h			\
-		$(INC_DIR)/libalx/base/stdio/sscan.h			\
-		$(INC_DIR)/libalx/base/stdio/get.h
-GET_SRC		=							\
-		$(SRC_DIR)/base/stdio/get.c
-
-PRINTF_B_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/unused.h		\
-		$(INC_DIR)/libalx/base/stdio/printf/b.h
-PRINTF_B_SRC	=							\
-		$(SRC_DIR)/base/stdio/printf/b.c
-
-PRINTF_SBPRINTF_INC	=						\
-		$(INC_DIR)/libalx/base/compiler/size.h			\
-		$(INC_DIR)/libalx/base/stdio/printf/snprintfs.h		\
-		$(INC_DIR)/libalx/base/stdio/printf/sbprintf.h
-PRINTF_SBPRINTF_SRC	=						\
-		$(SRC_DIR)/base/stdio/printf/sbprintf.c
-
-PRINTF_SNPRINTFS_INC	=						\
-		$(INC_DIR)/libalx/base/stdio/printf/snprintfs.h
-PRINTF_SNPRINTFS_SRC	=						\
-		$(SRC_DIR)/base/stdio/printf/snprintfs.c
-
-SEEKC_INC	=							\
-		$(INC_DIR)/libalx/base/stdio/seekc.h
-SEEKC_SRC	=							\
-		$(SRC_DIR)/base/stdio/seekc.c
-
-SSCAN_INC	=							\
-		$(INC_DIR)/libalx/base/stdio/printf/sbprintf.h		\
-		$(INC_DIR)/libalx/base/string/strchr/strcasechr.h	\
-		$(INC_DIR)/libalx/base/stdio/sscan.h
-SSCAN_SRC	=							\
-		$(SRC_DIR)/base/stdio/sscan.c
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
+$(CURDIR)/%.d: $(SRC_DIR)/base/stdio/%.c
 	$(Q)mkdir -p		$(@D)/
-	@echo	"	CC	build/tmp/base/stdio/$@"
+	@echo	"	CC -M	build/tmp/base/stdio/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/base/stdio/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/base/stdio/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
+$(CURDIR)/%.so.s: $(SRC_DIR)/base/stdio/%.c $(CURDIR)/%.d
 	$(Q)mkdir -p		$(@D)/
-	@echo	"	CC	build/tmp/base/stdio/$@"
+	@echo	"	CC	build/tmp/base/stdio/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/base/stdio/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/base/stdio/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-fgets.a.s: $(FGETS_SRC) $(FGETS_INC)
-fgets.so.s: $(FGETS_SRC) $(FGETS_INC)
-
-freads.a.s: $(FREADS_SRC) $(FREADS_INC)
-freads.so.s: $(FREADS_SRC) $(FREADS_INC)
-
-get.a.s: $(GET_SRC) $(GET_INC)
-get.so.s: $(GET_SRC) $(GET_INC)
-
-printf/b.a.s: $(PRINTF_B_SRC) $(PRINTF_B_INC)
-printf/b.so.s: $(PRINTF_B_SRC) $(PRINTF_B_INC)
-
-printf/sbprintf.a.s: $(PRINTF_SBPRINTF_SRC) $(PRINTF_SBPRINTF_INC)
-printf/sbprintf.so.s: $(PRINTF_SBPRINTF_SRC) $(PRINTF_SBPRINTF_INC)
-
-printf/snprintfs.a.s: $(PRINTF_SNPRINTFS_SRC) $(PRINTF_SNPRINTFS_INC)
-printf/snprintfs.so.s: $(PRINTF_SNPRINTFS_SRC) $(PRINTF_SNPRINTFS_INC)
-
-seekc.a.s: $(SEEKC_SRC) $(SEEKC_INC)
-seekc.so.s: $(SEEKC_SRC) $(SEEKC_INC)
-
-sscan.a.s: $(SSCAN_SRC) $(SSCAN_INC)
-sscan.so.s: $(SSCAN_SRC) $(SSCAN_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -125,8 +72,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

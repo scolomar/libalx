@@ -12,54 +12,47 @@
 ################################################################################
 # dependencies
 
-OBJ		=							\
-		size.o							\
-		type.o							\
-		unused.o
+OBJ	=							\
+	$(CURDIR)/size.o					\
+	$(CURDIR)/type.o					\
+	$(CURDIR)/unused.o
 
-SIZE_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/size.h
-SIZE_SRC	=							\
-		$(SRC_DIR)/base/compiler/size.c
+SRC	=							\
+	$(SRC_DIR)/base/compiler/size.c				\
+	$(SRC_DIR)/base/compiler/type.c				\
+	$(SRC_DIR)/base/compiler/unused.c
 
-TYPE_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/type.h
-TYPE_SRC	=							\
-		$(SRC_DIR)/base/compiler/type.c
-
-UNUSED_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/unused.h
-UNUSED_SRC	=							\
-		$(SRC_DIR)/base/compiler/unused.c
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CC	build/tmp/base/compiler/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/base/compiler/%.c
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC -M	build/tmp/base/compiler/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/base/compiler/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/base/compiler/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CC	build/tmp/base/compiler/$@"
+$(CURDIR)/%.so.s: $(SRC_DIR)/base/compiler/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/base/compiler/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/base/compiler/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/base/compiler/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-size.a.s: $(SIZE_SRC) $(SIZE_INC)
-size.so.s: $(SIZE_SRC) $(SIZE_INC)
-
-type.a.s: $(TYPE_SRC) $(TYPE_INC)
-type.so.s: $(TYPE_SRC) $(TYPE_INC)
-
-unused.a.s: $(UNUSED_SRC) $(UNUSED_INC)
-unused.so.s: $(UNUSED_SRC) $(UNUSED_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -69,8 +62,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

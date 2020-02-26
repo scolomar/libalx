@@ -11,130 +11,55 @@
 
 ################################################################################
 # dependencies
-OBJ		=							\
-		bst.o							\
-		dataframe.o						\
-		dyn-array.o						\
-		dyn-buffer.o						\
-		llist.o							\
-		node.o							\
-		types.o
+OBJ	=								\
+	$(CURDIR)/bst.o							\
+	$(CURDIR)/dataframe.o						\
+	$(CURDIR)/dyn-array.o						\
+	$(CURDIR)/dyn-buffer.o						\
+	$(CURDIR)/llist.o						\
+	$(CURDIR)/node.o						\
+	$(CURDIR)/types.o
 
-BST_INC		=							\
-		$(INC_DIR)/libalx/alx/data-structures/llist.h		\
-		$(INC_DIR)/libalx/alx/data-structures/node.h		\
-		$(INC_DIR)/libalx/alx/data-structures/types.h		\
-		$(INC_DIR)/libalx/base/compiler/unused.h		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
-		$(INC_DIR)/libalx/alx/data-structures/bst.h
-BST_SRC		=							\
-		$(SRC_DIR)/alx/data-structures/bst.c
+SRC	=								\
+	$(SRC_DIR)/alx/data-structures/bst.c				\
+	$(SRC_DIR)/alx/data-structures/dataframe.c			\
+	$(SRC_DIR)/alx/data-structures/dyn-array.c			\
+	$(SRC_DIR)/alx/data-structures/dyn-buffer.c			\
+	$(SRC_DIR)/alx/data-structures/llist.c				\
+	$(SRC_DIR)/alx/data-structures/node.c				\
+	$(SRC_DIR)/alx/data-structures/types.c
 
-DF_INC		=							\
-		$(INC_DIR)/libalx/alx/data-structures/bst.h		\
-		$(INC_DIR)/libalx/alx/data-structures/dyn-array.h	\
-		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h	\
-		$(INC_DIR)/libalx/alx/data-structures/llist.h		\
-		$(INC_DIR)/libalx/alx/data-structures/node.h		\
-		$(INC_DIR)/libalx/alx/data-structures/types.h		\
-		$(INC_DIR)/libalx/base/compiler/unused.h		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/frees.h		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
-		$(INC_DIR)/libalx/base/stdlib/compare.h		\
-		$(INC_DIR)/libalx/alx/data-structures/dataframe.h
-DF_SRC		=							\
-		$(SRC_DIR)/alx/data-structures/dataframe.c
-
-DYNARR_INC	=							\
-		$(INC_DIR)/libalx/alx/data-structures/llist.h		\
-		$(INC_DIR)/libalx/alx/data-structures/types.h		\
-		$(INC_DIR)/libalx/base/assert/assert.h			\
-		$(INC_DIR)/libalx/base/stdlib/maximum.h			\
-		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
-		$(INC_DIR)/libalx/base/stdlib/alloc/frees.h		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/reallocarrays.h	\
-		$(INC_DIR)/libalx/alx/data-structures/dyn-array.h
-DYNARR_SRC	=							\
-		$(SRC_DIR)/alx/data-structures/dyn-array.c
-
-DYNBUF_INC	=							\
-		$(INC_DIR)/libalx/alx/data-structures/types.h		\
-		$(INC_DIR)/libalx/base/assert/assert.h			\
-		$(INC_DIR)/libalx/base/stdlib/maximum.h			\
-		$(INC_DIR)/libalx/base/stdlib/minimum.h			\
-		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
-		$(INC_DIR)/libalx/base/stdlib/alloc/mallocs.h		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/frees.h		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/reallocs.h		\
-		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h
-DYNBUF_SRC	=							\
-		$(SRC_DIR)/alx/data-structures/dyn-buffer.c
-
-LLIST_INC	=							\
-		$(INC_DIR)/libalx/alx/data-structures/bst.h		\
-		$(INC_DIR)/libalx/alx/data-structures/dyn-array.h	\
-		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h	\
-		$(INC_DIR)/libalx/alx/data-structures/node.h		\
-		$(INC_DIR)/libalx/alx/data-structures/types.h		\
-		$(INC_DIR)/libalx/base/compiler/unused.h		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
-		$(INC_DIR)/libalx/alx/data-structures/llist.h
-LLIST_SRC	=							\
-		$(SRC_DIR)/alx/data-structures/llist.c
-
-NODE_INC	=							\
-		$(INC_DIR)/libalx/alx/data-structures/dyn-buffer.h	\
-		$(INC_DIR)/libalx/alx/data-structures/types.h		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.h	\
-		$(INC_DIR)/libalx/alx/data-structures/node.h
-NODE_SRC	=							\
-		$(SRC_DIR)/alx/data-structures/node.c
-
-TYPES_INC	=							\
-		$(INC_DIR)/libalx/alx/data-structures/types.h
-TYPES_SRC	=							\
-		$(SRC_DIR)/alx/data-structures/types.c
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CC	build/tmp/alx/data-structures/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/alx/data-structures/%.c
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC -M	build/tmp/alx/data-structures/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/alx/data-structures/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/alx/data-structures/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CC	build/tmp/alx/data-structures/$@"
+$(CURDIR)/%.so.s: $(SRC_DIR)/alx/data-structures/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/alx/data-structures/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/alx/data-structures/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/alx/data-structures/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-bst.a.s: $(BST_SRC) $(BST_INC)
-bst.so.s: $(BST_SRC) $(BST_INC)
-
-dataframe.a.s: $(DF_SRC) $(DF_INC)
-dataframe.so.s: $(DF_SRC) $(DF_INC)
-
-dyn-array.a.s: $(DYNARR_SRC) $(DYNARR_INC)
-dyn-array.so.s: $(DYNARR_SRC) $(DYNARR_INC)
-
-dyn-buffer.a.s: $(DYNBUF_SRC) $(DYNBUF_INC)
-dyn-buffer.so.s: $(DYNBUF_SRC) $(DYNBUF_INC)
-
-llist.a.s: $(LLIST_SRC) $(LLIST_INC)
-llist.so.s: $(LLIST_SRC) $(LLIST_INC)
-
-node.a.s: $(NODE_SRC) $(NODE_INC)
-node.so.s: $(NODE_SRC) $(NODE_INC)
-
-types.a.s: $(TYPES_SRC) $(TYPES_INC)
-types.so.s: $(TYPES_SRC) $(TYPES_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -144,8 +69,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

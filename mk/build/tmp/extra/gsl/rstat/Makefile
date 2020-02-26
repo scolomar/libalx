@@ -11,16 +11,14 @@
 
 ################################################################################
 # dependencies
-OBJ		=							\
-		median.o
+OBJ	=								\
+	$(CURDIR)/median.o
 
-MEDIAN_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/size.h			\
-		$(INC_DIR)/libalx/base/stdlib/average.h			\
-		$(INC_DIR)/libalx/base/stdlib/compare.h			\
-		$(INC_DIR)/libalx/extra/gsl/rstat/median.h
-MEDIAN_SRC	=							\
-		$(SRC_DIR)/extra/gsl/rstat/median.c
+SRC	=								\
+	$(SRC_DIR)/extra/gsl/rstat/median.c
+
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
@@ -32,23 +30,29 @@ CFLAGS_SO	+= `pkg-config --cflags gsl`
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CC	build/tmp/extra/gsl/rstat/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/extra/gsl/rstat/%.c
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC -M	build/tmp/extra/gsl/rstat/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/extra/gsl/rstat/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/extra/gsl/rstat/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CC	build/tmp/extra/gsl/rstat/$@"
+$(CURDIR)/%.so.s: $(SRC_DIR)/extra/gsl/rstat/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/extra/gsl/rstat/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/extra/gsl/rstat/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/extra/gsl/rstat/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-median.a.s: $(MEDIAN_SRC) $(MEDIAN_INC)
-median.so.s: $(MEDIAN_SRC) $(MEDIAN_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -58,8 +62,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

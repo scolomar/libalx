@@ -11,14 +11,14 @@
 
 ################################################################################
 # dependencies
-OBJ		=							\
-		ocr.o
+OBJ	=								\
+	$(CURDIR)/ocr.o
 
-OCR_INC	=								\
-		$(INC_DIR)/libalx/base/stdio/printf/snprintfs.h		\
-		$(INC_DIR)/libalx/extra/ocr/ocr.h
-OCR_SRC	=								\
-		$(SRC_DIR)/extra/ocr/ocr.c
+SRC	=								\
+	$(SRC_DIR)/extra/ocr/ocr.c
+
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
@@ -30,23 +30,29 @@ CFLAGS_SO	+= `pkg-config --cflags tesseract`
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CC	build/tmp/extra/ocr/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/extra/ocr/%.c
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC -M	build/tmp/extra/ocr/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/extra/ocr/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/extra/ocr/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CC	build/tmp/extra/ocr/$@"
+$(CURDIR)/%.so.s: $(SRC_DIR)/extra/ocr/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/extra/ocr/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/extra/ocr/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/extra/ocr/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-ocr.a.s: $(OCR_SRC) $(OCR_INC)
-ocr.so.s: $(OCR_SRC) $(OCR_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -56,8 +62,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

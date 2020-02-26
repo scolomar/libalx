@@ -11,25 +11,18 @@
 
 ################################################################################
 # dependencies
-OBJ		=							\
-		len.o							\
-		temp.o							\
-		weight.o
+OBJ	=								\
+	$(CURDIR)/len.o							\
+	$(CURDIR)/temp.o						\
+	$(CURDIR)/weight.o
 
-LEN_INC		=							\
-		$(INC_DIR)/libalx/extra/gsl/units/len.h
-LEN_SRC		=							\
-		$(SRC_DIR)/extra/gsl/units/len.c
+SRC	=								\
+	$(SRC_DIR)/extra/gsl/units/len.c				\
+	$(SRC_DIR)/extra/gsl/units/temp.c				\
+	$(SRC_DIR)/extra/gsl/units/weight.c
 
-TEMP_INC	=							\
-		$(INC_DIR)/libalx/extra/gsl/units/temp.h
-TEMP_SRC	=							\
-		$(SRC_DIR)/extra/gsl/units/temp.c
-
-WEIGHT_INC	=							\
-		$(INC_DIR)/libalx/extra/gsl/units/weight.h
-WEIGHT_SRC	=							\
-		$(SRC_DIR)/extra/gsl/units/weight.c
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
@@ -41,29 +34,29 @@ CFLAGS_SO	+= `pkg-config --cflags gsl`
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CC	build/tmp/extra/gsl/units/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/extra/gsl/units/%.c
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC -M	build/tmp/extra/gsl/units/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/extra/gsl/units/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/extra/gsl/units/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CC	build/tmp/extra/gsl/units/$@"
+$(CURDIR)/%.so.s: $(SRC_DIR)/extra/gsl/units/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/extra/gsl/units/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/extra/gsl/units/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/extra/gsl/units/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-len.a.s: $(LEN_SRC) $(LEN_INC)
-len.so.s: $(LEN_SRC) $(LEN_INC)
-
-temp.a.s: $(TEMP_SRC) $(TEMP_INC)
-temp.so.s: $(TEMP_SRC) $(TEMP_INC)
-
-weight.a.s: $(WEIGHT_SRC) $(WEIGHT_INC)
-weight.so.s: $(WEIGHT_SRC) $(WEIGHT_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -73,8 +66,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

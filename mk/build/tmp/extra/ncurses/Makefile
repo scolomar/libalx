@@ -11,35 +11,20 @@
 
 ################################################################################
 # dependencies
-OBJ		=							\
-		common.o						\
-		get.o							\
-		menu.o							\
-		perror.o
+OBJ	=								\
+	$(CURDIR)/common.o						\
+	$(CURDIR)/get.o							\
+	$(CURDIR)/menu.o						\
+	$(CURDIR)/perror.o
 
-COMMON_INC	=							\
-		$(INC_DIR)/libalx/extra/ncurses/common.h
-COMMON_SRC	=							\
-		$(SRC_DIR)/extra/ncurses/common.c
+SRC	=								\
+	$(SRC_DIR)/extra/ncurses/common.c				\
+	$(SRC_DIR)/extra/ncurses/get.c					\
+	$(SRC_DIR)/extra/ncurses/menu.c					\
+	$(SRC_DIR)/extra/ncurses/perror.c
 
-GET_INC		=							\
-		$(INC_DIR)/libalx/base/stdio/sscan.h			\
-		$(INC_DIR)/libalx/extra/ncurses/common.h		\
-		$(INC_DIR)/libalx/extra/ncurses/perror.h		\
-		$(INC_DIR)/libalx/extra/ncurses/get.h	
-GET_SRC		=							\
-		$(SRC_DIR)/extra/ncurses/get.c
-
-MENU_INC	=							\
-		$(INC_DIR)/libalx/extra/ncurses/common.h		\
-		$(INC_DIR)/libalx/extra/ncurses/menu.h
-MENU_SRC	=							\
-		$(SRC_DIR)/extra/ncurses/menu.c
-
-PERROR_INC	=							\
-		$(INC_DIR)/libalx/extra/ncurses/perror.h
-PERROR_SRC	=							\
-		$(SRC_DIR)/extra/ncurses/perror.c
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
@@ -51,32 +36,29 @@ CFLAGS_SO	+= `pkg-config --cflags ncurses`
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CC	build/tmp/extra/ncurses/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/extra/ncurses/%.c
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC -M	build/tmp/extra/ncurses/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/extra/ncurses/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/extra/ncurses/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CC	build/tmp/extra/ncurses/$@"
+$(CURDIR)/%.so.s: $(SRC_DIR)/extra/ncurses/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/extra/ncurses/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/extra/ncurses/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/extra/ncurses/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-common.a.s: $(COMMON_SRC) $(COMMON_INC)
-common.so.s: $(COMMON_SRC) $(COMMON_INC)
-
-get.a.s: $(GET_SRC) $(GET_INC)
-get.so.s: $(GET_SRC) $(GET_INC)
-
-menu.a.s: $(MENU_SRC) $(MENU_INC)
-menu.so.s: $(MENU_SRC) $(MENU_INC)
-
-perror.a.s: $(PERROR_SRC) $(PERROR_INC)
-perror.so.s: $(PERROR_SRC) $(PERROR_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -86,8 +68,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

@@ -12,47 +12,45 @@
 ################################################################################
 # dependencies
 
-OBJ		=							\
-		tcp/client.o						\
-		tcp/server.o
+OBJ	=								\
+	$(CURDIR)/tcp/client.o						\
+	$(CURDIR)/tcp/server.o
 
-TCP_CLIENT_INC	=							\
-		$(INC_DIR)/libalx/base/socket/tcp/client.h
-TCP_CLIENT_SRC	=							\
-		$(SRC_DIR)/base/socket/tcp/client.c
+SRC	=								\
+	$(SRC_DIR)/base/socket/tcp/client.c				\
+	$(SRC_DIR)/base/socket/tcp/server.c
 
-TCP_SERVER_INC	=							\
-		$(INC_DIR)/libalx/base/socket/tcp/server.h
-TCP_SERVER_SRC	=							\
-		$(SRC_DIR)/base/socket/tcp/server.c
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
+$(CURDIR)/%.d: $(SRC_DIR)/base/socket/%.c
 	$(Q)mkdir -p		$(@D)/
-	@echo	"	CC	build/tmp/base/socket/$@"
+	@echo	"	CC -M	build/tmp/base/socket/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/base/socket/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/base/socket/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
+$(CURDIR)/%.so.s: $(SRC_DIR)/base/socket/%.c $(CURDIR)/%.d
 	$(Q)mkdir -p		$(@D)/
-	@echo	"	CC	build/tmp/base/socket/$@"
+	@echo	"	CC	build/tmp/base/socket/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/base/socket/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/base/socket/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-tcp/client.a.s: $(TCP_CLIENT_SRC) $(TCP_CLIENT_INC)
-tcp/client.so.s: $(TCP_CLIENT_SRC) $(TCP_CLIENT_INC)
-
-tcp/server.a.s: $(TCP_SERVER_SRC) $(TCP_SERVER_INC)
-tcp/server.so.s: $(TCP_SERVER_SRC) $(TCP_SERVER_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -62,8 +60,6 @@ clean:
 ################################################################################
 # Declare the contents of the PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

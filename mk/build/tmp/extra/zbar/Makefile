@@ -11,14 +11,14 @@
 
 ################################################################################
 # dependencies
-OBJ		=							\
-		zbar.o
+OBJ	=								\
+	$(CURDIR)/zbar.o
 
-ZBAR_INC	=							\
-		$(INC_DIR)/libalx/base/stdio/printf/snprintfs.h		\
-		$(INC_DIR)/libalx/extra/zbar/zbar.h
-ZBAR_SRC	=							\
-		$(SRC_DIR)/extra/zbar/zbar.c
+SRC	=								\
+	$(SRC_DIR)/extra/zbar/zbar.c
+
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
@@ -30,23 +30,29 @@ CFLAGS_SO	+= `pkg-config --cflags zbar`
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CC	build/tmp/extra/zbar/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/extra/zbar/%.c
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC -M	build/tmp/extra/zbar/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/extra/zbar/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/extra/zbar/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CC	build/tmp/extra/zbar/$@"
+$(CURDIR)/%.so.s: $(SRC_DIR)/extra/zbar/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/extra/zbar/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/extra/zbar/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/extra/zbar/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-zbar.a.s: $(ZBAR_SRC) $(ZBAR_INC)
-zbar.so.s: $(ZBAR_SRC) $(ZBAR_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -56,8 +62,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

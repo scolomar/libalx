@@ -11,14 +11,14 @@
 
 ################################################################################
 # dependencies
-OBJ		=							\
-		mean.o
+OBJ	=								\
+	$(CURDIR)/mean.o
 
-MEAN_INC	=							\
-		$(INC_DIR)/libalx/base/assert/assert.h			\
-		$(INC_DIR)/libalx/extra/gsl/statistics/mean.h
-MEAN_SRC	=							\
-		$(SRC_DIR)/extra/gsl/statistics/mean.c
+SRC	=								\
+	$(SRC_DIR)/extra/gsl/statistics/mean.c
+
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
@@ -30,23 +30,29 @@ CFLAGS_SO	+= `pkg-config --cflags gsl`
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CC	build/tmp/extra/gsl/statistics/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/extra/gsl/statistics/%.c
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC -M	build/tmp/extra/gsl/statistics/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/extra/gsl/statistics/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/extra/gsl/statistics/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CC	build/tmp/extra/gsl/statistics/$@"
+$(CURDIR)/%.so.s: $(SRC_DIR)/extra/gsl/statistics/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/extra/gsl/statistics/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/extra/gsl/statistics/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/extra/gsl/statistics/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-mean.a.s: $(MEAN_SRC) $(MEAN_INC)
-mean.so.s: $(MEAN_SRC) $(MEAN_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -56,8 +62,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

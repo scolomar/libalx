@@ -11,77 +11,32 @@
 
 ################################################################################
 # dependencies
-OBJ		=							\
-		arithmetic.o						\
-		cmp.o							\
-		division.o						\
-		exp.o							\
-		get.o							\
-		init_set.o						\
-		misc.o							\
-		root.o							\
-		set.o							\
-		theoretic.o
+OBJ	=								\
+	$(CURDIR)/arithmetic.o						\
+	$(CURDIR)/cmp.o							\
+	$(CURDIR)/division.o						\
+	$(CURDIR)/exp.o							\
+	$(CURDIR)/get.o							\
+	$(CURDIR)/init_set.o						\
+	$(CURDIR)/misc.o						\
+	$(CURDIR)/root.o						\
+	$(CURDIR)/set.o							\
+	$(CURDIR)/theoretic.o
 
-ARITHMETIC_INC	=							\
-		$(INC_DIR)/libalx/base/assert/assert.h			\
-		$(INC_DIR)/libalx/extra/gmp/mpz/arithmetic.h
-ARITHMETIC_SRC	=							\
-		$(SRC_DIR)/extra/gmp/mpz/arithmetic.c
+SRC	=								\
+	$(SRC_DIR)/extra/gmp/mpz/arithmetic.c				\
+	$(SRC_DIR)/extra/gmp/mpz/cmp.c					\
+	$(SRC_DIR)/extra/gmp/mpz/division.c				\
+	$(SRC_DIR)/extra/gmp/mpz/exp.c					\
+	$(SRC_DIR)/extra/gmp/mpz/get.c					\
+	$(SRC_DIR)/extra/gmp/mpz/init_set.c				\
+	$(SRC_DIR)/extra/gmp/mpz/misc.c					\
+	$(SRC_DIR)/extra/gmp/mpz/root.c					\
+	$(SRC_DIR)/extra/gmp/mpz/set.c					\
+	$(SRC_DIR)/extra/gmp/mpz/theoretic.c
 
-CMP_INC		=							\
-		$(INC_DIR)/libalx/base/assert/assert.h			\
-		$(INC_DIR)/libalx/extra/gmp/mpz/cmp.h
-CMP_SRC		=							\
-		$(SRC_DIR)/extra/gmp/mpz/cmp.c
-
-DIVISION_INC	=							\
-		$(INC_DIR)/libalx/base/assert/assert.h			\
-		$(INC_DIR)/libalx/extra/gmp/mpz/division.h
-DIVISION_SRC	=							\
-		$(SRC_DIR)/extra/gmp/mpz/division.c
-
-EXP_INC		=							\
-		$(INC_DIR)/libalx/base/assert/assert.h			\
-		$(INC_DIR)/libalx/extra/gmp/mpz/exp.h
-EXP_SRC		=							\
-		$(SRC_DIR)/extra/gmp/mpz/exp.c
-
-GET_INC		=							\
-		$(INC_DIR)/libalx/base/assert/assert.h			\
-		$(INC_DIR)/libalx/extra/gmp/mpz/get.h
-GET_SRC		=							\
-		$(SRC_DIR)/extra/gmp/mpz/get.c
-
-INITSET_INC	=							\
-		$(INC_DIR)/libalx/base/assert/assert.h			\
-		$(INC_DIR)/libalx/extra/gmp/mpz/init_set.h
-INITSET_SRC	=							\
-		$(SRC_DIR)/extra/gmp/mpz/init_set.c
-
-MISC_INC	=							\
-		$(INC_DIR)/libalx/base/assert/assert.h			\
-		$(INC_DIR)/libalx/extra/gmp/mpz/misc.h
-MISC_SRC	=							\
-		$(SRC_DIR)/extra/gmp/mpz/misc.c
-
-ROOT_INC	=							\
-		$(INC_DIR)/libalx/base/assert/assert.h			\
-		$(INC_DIR)/libalx/extra/gmp/mpz/root.h
-ROOT_SRC	=							\
-		$(SRC_DIR)/extra/gmp/mpz/root.c
-
-SET_INC		=							\
-		$(INC_DIR)/libalx/base/assert/assert.h			\
-		$(INC_DIR)/libalx/extra/gmp/mpz/set.h
-SET_SRC		=							\
-		$(SRC_DIR)/extra/gmp/mpz/set.c
-
-THEORETIC_INC	=							\
-		$(INC_DIR)/libalx/base/assert/assert.h			\
-		$(INC_DIR)/libalx/extra/gmp/mpz/theoretic.h
-THEORETIC_SRC	=							\
-		$(SRC_DIR)/extra/gmp/mpz/theoretic.c
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
@@ -93,50 +48,29 @@ THEORETIC_SRC	=							\
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CC	build/tmp/extra/gmp/mpz/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/extra/gmp/mpz/%.c
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC -M	build/tmp/extra/gmp/mpz/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/extra/gmp/mpz/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/extra/gmp/mpz/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CC	build/tmp/extra/gmp/mpz/$@"
+$(CURDIR)/%.so.s: $(SRC_DIR)/extra/gmp/mpz/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/extra/gmp/mpz/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/extra/gmp/mpz/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/extra/gmp/mpz/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-arithmetic.a.s: $(ARITHMETIC_SRC) $(ARITHMETIC_INC)
-arithmetic.so.s: $(ARITHMETIC_SRC) $(ARITHMETIC_INC)
-
-cmp.a.s: $(CMP_SRC) $(CMP_INC)
-cmp.so.s: $(CMP_SRC) $(CMP_INC)
-
-division.a.s: $(DIVISION_SRC) $(DIVISION_INC)
-division.so.s: $(DIVISION_SRC) $(DIVISION_INC)
-
-exp.a.s: $(EXP_SRC) $(EXP_INC)
-exp.so.s: $(EXP_SRC) $(EXP_INC)
-
-get.a.s: $(GET_SRC) $(GET_INC)
-get.so.s: $(GET_SRC) $(GET_INC)
-
-init_set.a.s: $(INITSET_SRC) $(INITSET_INC)
-init_set.so.s: $(INITSET_SRC) $(INITSET_INC)
-
-misc.a.s: $(MISC_SRC) $(MISC_INC)
-misc.so.s: $(MISC_SRC) $(MISC_INC)
-
-root.a.s: $(ROOT_SRC) $(ROOT_INC)
-root.so.s: $(ROOT_SRC) $(ROOT_INC)
-
-set.a.s: $(SET_SRC) $(SET_INC)
-set.so.s: $(SET_SRC) $(SET_INC)
-
-theoretic.a.s: $(THEORETIC_SRC) $(THEORETIC_INC)
-theoretic.so.s: $(THEORETIC_SRC) $(THEORETIC_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -146,8 +80,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

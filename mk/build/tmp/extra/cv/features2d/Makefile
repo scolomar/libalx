@@ -11,15 +11,14 @@
 
 ################################################################################
 # dependencies
-OBJ		=							\
-		orb.o
+OBJ	=								\
+	$(CURDIR)/orb.o
 
+SRC	=								\
+	$(SRC_DIR)/extra/cv/features2d/orb.cpp
 
-ORB_INC		=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/extra/cv/features2d/orb.hpp
-ORB_SRC		=							\
-		$(SRC_DIR)/extra/cv/features2d/orb.cpp
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
@@ -31,23 +30,29 @@ CXXFLAGS_SO	+= `pkg-config --cflags opencv4`
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CXX	build/tmp/extra/cv/features2d/$@"
-	$(Q)$(CC) $(CXXFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CXX	build/tmp/extra/cv/features2d/$@"
-	$(Q)$(CC) $(CXXFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/extra/cv/features2d/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/extra/cv/features2d/%.cpp
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CXX -M	build/tmp/extra/cv/features2d/$*.d"
+	$(Q)$(CXX) $(CXXFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/extra/cv/features2d/%.cpp $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CXX	build/tmp/extra/cv/features2d/$*.a.s"
+	$(Q)$(CXX) $(CXXFLAGS_A) -S $< -o $@
+$(CURDIR)/%.so.s: $(SRC_DIR)/extra/cv/features2d/%.cpp $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CXX	build/tmp/extra/cv/features2d/$*.so.s"
+	$(Q)$(CXX) $(CXXFLAGS_SO) -S $< -o $@
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/extra/cv/features2d/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-orb.a.s: $(ORB_SRC) $(ORB_INC)
-orb.so.s: $(ORB_SRC) $(ORB_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -57,8 +62,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

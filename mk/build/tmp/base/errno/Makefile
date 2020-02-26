@@ -12,36 +12,43 @@
 ################################################################################
 # dependencies
 
-OBJ		=							\
-		error.o
+OBJ	=								\
+	$(CURDIR)/error.o
 
-ERROR_INC	=							\
-		$(INC_DIR)/libalx/base/errno/error.h
-ERROR_SRC	=							\
-		$(SRC_DIR)/base/errno/error.c
+SRC	=								\
+	$(SRC_DIR)/base/errno/error.c
+
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # target: dependencies
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CC	build/tmp/base/errno/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/base/errno/%.c
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC -M	build/tmp/base/errno/$*.d"
+	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/base/errno/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/base/errno/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CC	build/tmp/base/errno/$@"
+$(CURDIR)/%.so.s: $(SRC_DIR)/base/errno/%.c $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CC	build/tmp/base/errno/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/base/errno/$@"
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/base/errno/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-error.a.s: $(ERROR_SRC) $(ERROR_INC)
-error.so.s: $(ERROR_SRC) $(ERROR_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -51,8 +58,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

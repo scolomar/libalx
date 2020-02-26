@@ -11,43 +11,22 @@
 
 ################################################################################
 # dependencies
-OBJ		=							\
-		lines.o							\
-		max.o							\
-		mean.o							\
-		median.o						\
-		skeleton.o
+OBJ	=								\
+	$(CURDIR)/lines.o						\
+	$(CURDIR)/max.o							\
+	$(CURDIR)/mean.o						\
+	$(CURDIR)/median.o						\
+	$(CURDIR)/skeleton.o
 
+SRC	=								\
+	$(SRC_DIR)/extra/cv/alx/lines.cpp				\
+	$(SRC_DIR)/extra/cv/alx/max.cpp					\
+	$(SRC_DIR)/extra/cv/alx/mean.cpp				\
+	$(SRC_DIR)/extra/cv/alx/median.cpp				\
+	$(SRC_DIR)/extra/cv/alx/skeleton.cpp
 
-LINES_INC	=							\
-		$(INC_DIR)/libalx/extra/cv/alx/lines.hpp
-LINES_SRC	=							\
-		$(SRC_DIR)/extra/cv/alx/lines.cpp
-
-MAX_INC		=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/base/compiler/size.hpp		\
-		$(INC_DIR)/libalx/extra/cv/alx/max.hpp
-MAX_SRC		=							\
-		$(SRC_DIR)/extra/cv/alx/max.cpp
-
-MEAN_INC	=							\
-		$(INC_DIR)/libalx/extra/gsl/statistics/mean.hpp		\
-		$(INC_DIR)/libalx/extra/cv/alx/mean.hpp
-MEAN_SRC	=							\
-		$(SRC_DIR)/extra/cv/alx/mean.cpp
-
-MEDIAN_INC	=							\
-		$(INC_DIR)/libalx/extra/gsl/rstat/median.hpp		\
-		$(INC_DIR)/libalx/extra/cv/alx/median.hpp
-MEDIAN_SRC	=							\
-		$(SRC_DIR)/extra/cv/alx/median.cpp
-
-SKELETON_INC	=							\
-		$(INC_DIR)/libalx/base/compiler/size.hpp		\
-		$(INC_DIR)/libalx/extra/cv/alx/skeleton.hpp
-SKELETON_SRC	=							\
-		$(SRC_DIR)/extra/cv/alx/skeleton.cpp
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
@@ -59,35 +38,29 @@ CXXFLAGS_SO	+= `pkg-config --cflags opencv4`
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CXX	build/tmp/extra/cv/alx/$@"
-	$(Q)$(CC) $(CXXFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CXX	build/tmp/extra/cv/alx/$@"
-	$(Q)$(CC) $(CXXFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/extra/cv/alx/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/extra/cv/alx/%.cpp
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CXX -M	build/tmp/extra/cv/alx/$*.d"
+	$(Q)$(CXX) $(CXXFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/extra/cv/alx/%.cpp $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CXX	build/tmp/extra/cv/alx/$*.a.s"
+	$(Q)$(CXX) $(CXXFLAGS_A) -S $< -o $@
+$(CURDIR)/%.so.s: $(SRC_DIR)/extra/cv/alx/%.cpp $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CXX	build/tmp/extra/cv/alx/$*.so.s"
+	$(Q)$(CXX) $(CXXFLAGS_SO) -S $< -o $@
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/extra/cv/alx/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-lines.a.s: $(LINES_SRC) $(LINES_INC)
-lines.so.s: $(LINES_SRC) $(LINES_INC)
-
-max.a.s: $(MAX_SRC) $(MAX_INC)
-max.so.s: $(MAX_SRC) $(MAX_INC)
-
-mean.a.s: $(MEAN_SRC) $(MEAN_INC)
-mean.so.s: $(MEAN_SRC) $(MEAN_INC)
-
-median.a.s: $(MEDIAN_SRC) $(MEDIAN_INC)
-median.so.s: $(MEDIAN_SRC) $(MEDIAN_INC)
-
-skeleton.a.s: $(SKELETON_SRC) $(SKELETON_INC)
-skeleton.so.s: $(SKELETON_SRC) $(SKELETON_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -97,8 +70,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

@@ -11,16 +11,14 @@
 
 ################################################################################
 # dependencies
-OBJ		=							\
-		cam.o
+OBJ	=								\
+	$(CURDIR)/cam.o
 
+SRC	=								\
+	$(SRC_DIR)/extra/cv/videoio/cam.cpp
 
-CAM_INC		=							\
-		$(INC_DIR)/libalx/base/compiler/restrict.hpp		\
-		$(INC_DIR)/libalx/base/stdlib/alloc/mallocarrays.hpp	\
-		$(INC_DIR)/libalx/extra/cv/videoio/cam.hpp
-CAM_SRC		=							\
-		$(SRC_DIR)/extra/cv/videoio/cam.cpp
+DEP		= $(OBJ:.o=.d)
+BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
@@ -32,23 +30,29 @@ CXXFLAGS_SO	+= `pkg-config --cflags opencv4`
 #	action
 
 PHONY := all
-all: $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+all: $(BOTH_OBJ)
 	@:
 
 
-%.a.s:
-	@echo	"	CXX	build/tmp/extra/cv/videoio/$@"
-	$(Q)$(CC) $(CXXFLAGS_A) -S $< -o $@
-%.so.s:
-	@echo	"	CXX	build/tmp/extra/cv/videoio/$@"
-	$(Q)$(CC) $(CXXFLAGS_SO) -S $< -o $@
-%.o: %.s
-	@echo	"	AS	build/tmp/extra/cv/videoio/$@"
+$(CURDIR)/%.d: $(SRC_DIR)/extra/cv/videoio/%.cpp
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CXX -M	build/tmp/extra/cv/videoio/$*.d"
+	$(Q)$(CXX) $(CXXFLAGS_A) -MG -MT"$@"				\
+			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
+			-M $< -MF $@
+$(CURDIR)/%.a.s: $(SRC_DIR)/extra/cv/videoio/%.cpp $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CXX	build/tmp/extra/cv/videoio/$*.a.s"
+	$(Q)$(CXX) $(CXXFLAGS_A) -S $< -o $@
+$(CURDIR)/%.so.s: $(SRC_DIR)/extra/cv/videoio/%.cpp $(CURDIR)/%.d
+	$(Q)mkdir -p		$(@D)/
+	@echo	"	CXX	build/tmp/extra/cv/videoio/$*.so.s"
+	$(Q)$(CXX) $(CXXFLAGS_SO) -S $< -o $@
+$(CURDIR)/%.o: $(CURDIR)/%.s
+	@echo	"	AS	build/tmp/extra/cv/videoio/$*.o"
 	$(Q)$(AS) $< -o $@
 
-
-cam.a.s: $(CAM_SRC) $(CAM_INC)
-cam.so.s: $(CAM_SRC) $(CAM_INC)
+include $(DEP)
 
 
 PHONY += clean
@@ -58,8 +62,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################
