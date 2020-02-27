@@ -95,9 +95,8 @@ int	alx_telnet_login	(FILE *restrict telnet,
 
 int	alx_telnet_send		(FILE *restrict telnet, char *restrict msg)
 {
-	const char	*eol	= "\r\n\r";
 
-	if (fprintf(telnet, "%s%s", msg, eol) <= 0)
+	if (fprintf(telnet, "%s\n", msg) <= 0)
 		return	-1;
 	if (fflush(telnet))
 		return	-1;
