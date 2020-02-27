@@ -30,6 +30,7 @@ base:
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/base/stdio/
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/base/stdlib/
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/base/string/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/base/sys/
 
 
 PHONY += alx

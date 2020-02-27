@@ -89,7 +89,8 @@ BASE_OBJ	=							\
 		$(BUILD_TMP_DIR)/base/string/strgrep.o			\
 		$(BUILD_TMP_DIR)/base/string/strstr/strncasestr.o	\
 		$(BUILD_TMP_DIR)/base/string/strstr/strscasestr.o	\
-		$(BUILD_TMP_DIR)/base/string/strstr/strsstr.o
+		$(BUILD_TMP_DIR)/base/string/strstr/strsstr.o		\
+		$(BUILD_TMP_DIR)/base/sys/types.o
 
 ALX_DS_OBJ	=							\
 		$(BUILD_TMP_DIR)/alx/data-structures/bst.o		\
