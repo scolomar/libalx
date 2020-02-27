@@ -40,7 +40,7 @@ robot: robot_tmp robot_lib
 
 
 PHONY	+= extra
-extra: curl cv gmp gsl ncurses ocr zbar
+extra: curl cv gmp gsl ncurses ocr telnet-tcp zbar
 
 PHONY	+= curl
 curl: curl_tmp curl_lib
@@ -59,6 +59,9 @@ ncurses: ncurses_tmp ncurses_lib
 
 PHONY	+= ocr
 ocr: ocr_tmp ocr_lib
+
+PHONY	+= telnet-tcp
+telnet-tcp: telnet-tcp_tmp telnet-tcp_lib
 
 PHONY	+= zbar
 zbar: zbar_tmp zbar_lib
@@ -142,6 +145,13 @@ PHONY	+= ocr
 ocr_lib: ocr_tmp base_lib
 	$(Q)$(MAKE) ocr			-C $(BUILD_LIB_DIR)
 
+PHONY	+= telnet-tcp
+telnet-tcp_tmp:
+	$(Q)$(MAKE) telnet-tcp		-C $(BUILD_TMP_DIR)
+PHONY	+= telnet-tcp
+telnet-tcp_lib: telnet-tcp_tmp base_lib
+	$(Q)$(MAKE) telnet-tcp		-C $(BUILD_LIB_DIR)
+
 PHONY	+= zbar
 zbar_tmp:
 	$(Q)$(MAKE) zbar		-C $(BUILD_TMP_DIR)
@@ -214,6 +224,7 @@ inst_extra: inst_alx inst_base
 	$(Q)$(MAKE)	inst_libalx-gsl
 	$(Q)$(MAKE)	inst_libalx-ncurses
 	$(Q)$(MAKE)	inst_libalx-ocr
+	$(Q)$(MAKE)	inst_libalx-telnet-tcp
 	$(Q)$(MAKE)	inst_libalx-zbar
 
 PHONY	+= inst_sh

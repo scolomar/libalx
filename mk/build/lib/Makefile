@@ -66,6 +66,7 @@ BASE_OBJ	=							\
 		$(BUILD_TMP_DIR)/base/string/memchr/memchrend.o		\
 		$(BUILD_TMP_DIR)/base/string/strcat/strscat.o		\
 		$(BUILD_TMP_DIR)/base/string/strcat/strscatf.o		\
+		$(BUILD_TMP_DIR)/base/string/strcat/strscatfs.o		\
 		$(BUILD_TMP_DIR)/base/string/strchr/strcasechr.o	\
 		$(BUILD_TMP_DIR)/base/string/strchr/strcasechrnul.o	\
 		$(BUILD_TMP_DIR)/base/string/strchr/strncasechr.o	\
@@ -171,6 +172,8 @@ NPCOMPLETE_OBJ	=							\
 		$(BUILD_TMP_DIR)/extra/npcomplete/solver_lut.o
 OCR_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/ocr/ocr.o
+TELNET_TCP_OBJ	=							\
+		$(BUILD_TMP_DIR)/extra/telnet-tcp/client/client.o
 ZBAR_OBJ	=							\
 		$(BUILD_TMP_DIR)/extra/zbar/zbar.o
 
@@ -210,7 +213,7 @@ robot: libalx
 
 
 PHONY += extra
-extra: curl cv gmp gsl ncurses ocr zbar
+extra: curl cv gmp gsl ncurses ocr telnet-tcp zbar
 
 PHONY += curl
 curl: libalx
@@ -241,6 +244,11 @@ PHONY += ocr
 ocr: libalx
 	$(Q)$(MAKE)	libalx/libalx-ocr.a
 	$(Q)$(MAKE)	libalx/libalx-ocr.so
+
+PHONY += telnet-tcp
+telnet-tcp: libalx
+	$(Q)$(MAKE)	libalx/libalx-telnet-tcp.a
+	$(Q)$(MAKE)	libalx/libalx-telnet-tcp.so
 
 PHONY += zbar
 zbar: libalx
@@ -315,6 +323,12 @@ libalx/libalx-ocr.a: $(patsubst %.o,%.a.o,$(OCR_OBJ))
 libalx/libalx-ocr.so: $(patsubst %.o,%.so.o,$(OCR_OBJ))
 	@echo	"	CC	build/lib/$@"
 	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs tesseract`	\
+						-l alx-base
+
+libalx/libalx-telnet-tcp.a: $(patsubst %.o,%.a.o,$(TELNET_TCP_OBJ))
+libalx/libalx-telnet-tcp.so: $(patsubst %.o,%.so.o,$(TELNET_TCP_OBJ))
+	@echo	"	CC	build/lib/$@"
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^					\
 						-l alx-base
 
 libalx/libalx-zbar.a: $(patsubst %.o,%.a.o,$(ZBAR_OBJ))

@@ -288,6 +288,11 @@ ocr: build_dir
 	@echo	"	MAKE	$@"
 	$(Q)$(MAKE) $@	-C $(BUILD_DIR)
 
+PHONY += telnet-tcp
+telnet-tcp: build_dir
+	@echo	"	MAKE	$@"
+	$(Q)$(MAKE) $@	-C $(BUILD_DIR)
+
 PHONY += zbar
 zbar: build_dir
 	@echo	"	MAKE	$@"

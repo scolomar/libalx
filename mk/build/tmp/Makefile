@@ -50,7 +50,7 @@ robot:
 
 
 PHONY += extra
-extra: curl cv gmp gsl ncurses ocr zbar
+extra: curl cv gmp gsl ncurses ocr telnet-tcp zbar
 
 PHONY += curl
 curl:
@@ -85,6 +85,10 @@ ncurses:
 PHONY += ocr
 ocr:
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/
+
+PHONY += telnet-tcp
+telnet-tcp:
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/client/
 
 PHONY += zbar
 zbar:
