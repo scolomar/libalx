@@ -63,7 +63,7 @@ ptrdiff_t alx_vstrscatf		(ptrdiff_t size,
 	if (dlen == size)
 		goto err;
 
-	if (alx_snprintfs(dest + dlen, &slen, size - dlen, format, ap))
+	if (alx_vsnprintfs(dest + dlen, &slen, size - dlen, format, ap))
 		goto err;
 
 	return	dlen + slen;
