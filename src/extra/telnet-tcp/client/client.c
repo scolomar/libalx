@@ -16,7 +16,7 @@
 
 #include "libalx/base/compiler/size.h"
 #include "libalx/base/stdio/printf/sbprintf.h"
-#include "libalx/base/string/strcat/strscatfs.h"
+#include "libalx/base/string/strcat/strbcatf.h"
 
 
 /******************************************************************************
@@ -64,13 +64,11 @@ int	alx_telnet_open_client	(FILE **restrict telnet,
 
 	if (log) {
 		if (fout) {
-			if (alx_strscatfs(cmd, NULL, ARRAY_SIZE(cmd), " 1%s %s",
-								redir, fout))
+			if (alx_strbcatf(cmd, NULL, " 1%s %s", redir, fout))
 				return	-1;
 		}
 		if (ferr) {
-			if (alx_strscatfs(cmd, NULL, ARRAY_SIZE(cmd), " 2%s %s",
-								redir, ferr))
+			if (alx_strbcatf(cmd, NULL, " 2%s %s", redir, ferr))
 				return	-1;
 		}
 	}

@@ -24,6 +24,7 @@
 #include "libalx/base/socket/tcp/client.h"
 #include "libalx/base/stdlib/alloc/callocs.h"
 #include "libalx/base/stdlib/alloc/frees.h"
+#include "libalx/base/stdio/printf/sbprintf.h"
 #include "libalx/base/stdio/printf/snprintfs.h"
 #include "libalx/base/string/strcpy/strlcpys.h"
 #include "libalx/base/string/strcat/strscat.h"
@@ -294,7 +295,7 @@ int	alx_ur_set_Dout	(const struct Alx_UR *restrict ur,
 	char	cmd[BUFSIZ];
 	const char *args[]	= {&i[0], &b[0], NULL};
 
-	if (alx_snprintfs(i, NULL, ARRAY_SIZE(i), "%ti", idx))
+	if (alx_sbprintf(i, NULL, "%ti", idx))
 		return	-1;
 	if (ur_sprintf_bool(ARRAY_SIZE(b), b, state))
 		return	-1;
@@ -410,15 +411,9 @@ static
 int	ur_sprintf_bool		(ptrdiff_t nmemb,
 				 char str[static restrict nmemb], bool state)
 {
+	static const char *const Bool_str[] = {"False", "True"};
 
-	if (state) {
-		if (alx_strlcpys(str, "True", nmemb, NULL))
-			return	-1;
-	} else {
-		if (alx_strlcpys(str, "False", nmemb, NULL))
-			return	-1;
-	}
-	return	0;
+	return	alx_strlcpys(str, Bool_str[!!state], nmemb, NULL);
 }
 
 
