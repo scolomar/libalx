@@ -14,6 +14,7 @@
 
 OBJ		=							\
 	$(CURDIR)/memchr/memchrend.o					\
+	$(CURDIR)/strcat/strbcatf.o					\
 	$(CURDIR)/strcat/strscat.o					\
 	$(CURDIR)/strcat/strscatf.o					\
 	$(CURDIR)/strcat/strscatfs.o					\
@@ -46,6 +47,7 @@ OBJ_TST		=							\
 
 SRC	=								\
 	$(SRC_DIR)/base/string/memchr/memchrend.c			\
+	$(SRC_DIR)/base/string/strcat/strbcatf.c			\
 	$(SRC_DIR)/base/string/strcat/strscat.c				\
 	$(SRC_DIR)/base/string/strcat/strscatf.c			\
 	$(SRC_DIR)/base/string/strcat/strscatfs.c			\

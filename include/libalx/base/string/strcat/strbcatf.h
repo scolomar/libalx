@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,48 +7,34 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/stdio/printf/sbprintf.hpp */
+#pragma once	/* libalx/base/string/strcat/strbcatf.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/base/compiler/size.hpp"
-#include "libalx/base/stdio/printf/snprintfs.hpp"
+#include "libalx/base/compiler/size.h"
+#include "libalx/base/string/strcat/strscatfs.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
 /*
- * [[gnu::nonnull(1, 3)]][[gnu::format(printf, 3, 4)]]
+ * [[gnu::nonnull(1, 3)]] [[gnu::format(printf, 3, 4)]]
  * [[gnu::warn_unused_result]]
- * int	alx_sbprintf	(char buff[restrict], ptrdiff_t *restrict written,
+ * int	alx_strbcatf	(char buff[restrict], ptrdiff_t *restrict written,
  *			 const char *restrict fmt, ...);
  */
-#define alx_sbprintf(buff, written, fmt, ...)				\
-	alx_snprintfs(buff, written, ARRAY_SIZE(buff), fmt, ##__VA_ARGS__)
+#define alx_strbcatf(buff, written, fmt, ...)				\
+	alx_strscatfs(buff, written, ARRAY_SIZE(buff), fmt, ##__VA_ARGS__)
 
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define sbprintf(buff, written, fmt, ...)				\
-	alx_sbprintf(buff, written, fmt, ##__VA_ARGS__)
+#define strbcatf(buff, written, fmt, ...)				\
+	alx_strbcatf(buff, written, fmt, ##__VA_ARGS__)
 #endif
-
-
-/******************************************************************************
- ******* extern "C" ***********************************************************
- ******************************************************************************/
-extern	"C"
-{
-}
-
-
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-namespace alx {
 
 
 /******************************************************************************
@@ -67,9 +53,8 @@ namespace alx {
 
 
 /******************************************************************************
- ******* namespace ************************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-}	/* namespace alx */
 
 
 /******************************************************************************

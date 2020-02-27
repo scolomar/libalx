@@ -64,6 +64,7 @@ BASE_OBJ	=							\
 		$(BUILD_TMP_DIR)/base/stdlib/strto/strtou_s.o		\
 		$(BUILD_TMP_DIR)/base/stdlib/swap.o			\
 		$(BUILD_TMP_DIR)/base/string/memchr/memchrend.o		\
+		$(BUILD_TMP_DIR)/base/string/strcat/strbcatf.o		\
 		$(BUILD_TMP_DIR)/base/string/strcat/strscat.o		\
 		$(BUILD_TMP_DIR)/base/string/strcat/strscatf.o		\
 		$(BUILD_TMP_DIR)/base/string/strcat/strscatfs.o		\
