@@ -7,13 +7,13 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/string/strcat/strscat.hpp */
+#pragma once	/* libalx/base/string/strcat/strscatf.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdarg.h>
+#include <cstdarg>
 #include <cstddef>
 
 #include "libalx/base/compiler/restrict.hpp"
@@ -36,11 +36,11 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
+[[gnu::nonnull]] [[gnu::format(printf, 3, 4)]] [[gnu::warn_unused_result]]
 ptrdiff_t alx_strscatf		(ptrdiff_t size,
 				 char *restrict dest/*[static restrict size]*/,
 				 const char *restrict format, ...);
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
+[[gnu::nonnull]] [[gnu::format(printf, 3, 0)]] [[gnu::warn_unused_result]]
 ptrdiff_t alx_vstrscatf		(ptrdiff_t size,
 				 char *restrict dest/*[static restrict size]*/,
 				 const char *restrict format, va_list ap);

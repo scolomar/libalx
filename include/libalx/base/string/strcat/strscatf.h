@@ -40,11 +40,11 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+__attribute__((nonnull, format(printf, 3, 4), warn_unused_result))
 ptrdiff_t alx_strscatf		(ptrdiff_t size,
 				 char dest[static restrict size],
 				 const char *restrict format, ...);
-__attribute__((nonnull, warn_unused_result))
+__attribute__((nonnull, format(printf, 3, 0), warn_unused_result))
 ptrdiff_t alx_vstrscatf		(ptrdiff_t size,
 				 char dest[static restrict size],
 				 const char *restrict format, va_list ap);
@@ -55,13 +55,14 @@ ptrdiff_t alx_vstrscatf		(ptrdiff_t size,
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, warn_unused_result))
+__attribute__((always_inline))
+__attribute__((nonnull, format(printf, 3, 0), warn_unused_result))
 inline
-ptrdiff_t alx_vstrscatf		(ptrdiff_t size,
+ptrdiff_t vstrscatf		(ptrdiff_t size,
 				 char dest[static restrict size],
 				 const char *restrict format, va_list ap)
 {
-	return	vstrscatf(size, dest, format, ap);
+	return	alx_vstrscatf(size, dest, format, ap);
 }
 #endif
 

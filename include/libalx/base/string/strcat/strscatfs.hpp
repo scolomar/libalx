@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/stdio/printf/snprintfs.hpp */
+#pragma once	/* libalx/base/string/strcat/strscatfs.hpp */
 
 
 /******************************************************************************
@@ -24,10 +24,10 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define snprintfs(str, written, nmemb, fmt, ...)			\
-	alx_snprintfs(str, written, nmemb, fmt, ##__VA_ARGS__)
-#define vsnprintfs(str, written, nmemb, fmt, ap)			\
-	alx_vsnprintfs(str, written, nmemb, fmt, ap)
+#define strscatfs(str, written, nmemb, fmt, ...)			\
+	alx_strscatfs(str, written, nmemb, fmt, ##__VA_ARGS__)
+#define vstrscatfs(str, written, nmemb, fmt, ap)			\
+	alx_vstrscatfs(str, written, nmemb, fmt, ap)
 #endif
 
 
@@ -36,12 +36,12 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull(1, 4)]] [[gnu::format(printf, 4, 5)]] [[gnu::warn_unused_result]]
-int	alx_snprintfs	(char *restrict str,
+[[gnu::nonnull]] [[gnu::format(printf, 3, 4)]] [[gnu::warn_unused_result]]
+int	alx_strscatfs	(char str[restrict /*nmemb*/],
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, ...);
-[[gnu::nonnull(1, 4)]] [[gnu::format(printf, 4, 0)]] [[gnu::warn_unused_result]]
-int	alx_vsnprintfs	(char *restrict str,
+[[gnu::nonnull]] [[gnu::format(printf, 3, 0)]] [[gnu::warn_unused_result]]
+int	alx_vstrscatfs	(char str[restrict /*nmemb*/],
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, va_list ap);
 }

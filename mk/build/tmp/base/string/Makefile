@@ -16,6 +16,7 @@ OBJ		=							\
 	$(CURDIR)/memchr/memchrend.o					\
 	$(CURDIR)/strcat/strscat.o					\
 	$(CURDIR)/strcat/strscatf.o					\
+	$(CURDIR)/strcat/strscatfs.o					\
 	$(CURDIR)/strchr/strcasechr.o					\
 	$(CURDIR)/strchr/strcasechrnul.o				\
 	$(CURDIR)/strchr/strncasechr.o					\
@@ -47,6 +48,7 @@ SRC	=								\
 	$(SRC_DIR)/base/string/memchr/memchrend.c			\
 	$(SRC_DIR)/base/string/strcat/strscat.c				\
 	$(SRC_DIR)/base/string/strcat/strscatf.c			\
+	$(SRC_DIR)/base/string/strcat/strscatfs.c			\
 	$(SRC_DIR)/base/string/strchr/strcasechr.c			\
 	$(SRC_DIR)/base/string/strchr/strcasechrnul.c			\
 	$(SRC_DIR)/base/string/strchr/strncasechr.c			\
