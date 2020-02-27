@@ -22,6 +22,8 @@ SRC	=								\
 
 DEP		= $(OBJ:.o=.d)
 BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+BOTH_ASM	= $(subst .a.s,.a.s ,$(join $(OBJ:.o=.a.s),$(OBJ:.o=.so.s)))
+NEEDDIR		= $(DEP) $(BOTH_ASM)
 
 ################################################################################
 # target: dependencies
@@ -31,19 +33,24 @@ PHONY := all
 all: $(BOTH_OBJ)
 	@:
 
+$(CURDIR)/tcp: $(CURDIR)/%:
+	@echo	"	MKDIR	build/tmp/base/socket/$*"
+	$(Q)mkdir -p		$(CURDIR)/$*
+
+$(NEEDDIR): $(CURDIR)/tcp/%: | $(CURDIR)/tcp
 
 $(CURDIR)/%.d: $(SRC_DIR)/base/socket/%.c
-	$(Q)mkdir -p		$(@D)/
+#	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC -M	build/tmp/base/socket/$*.d"
 	$(Q)$(CC) $(CFLAGS_A) -MG -MT"$@"				\
 			-MT"$(CURDIR)/$*.a.s" -MT"$(CURDIR)/$*.so.s"	\
 			-M $< -MF $@
 $(CURDIR)/%.a.s: $(SRC_DIR)/base/socket/%.c $(CURDIR)/%.d
-	$(Q)mkdir -p		$(@D)/
+#	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/tmp/base/socket/$*.a.s"
 	$(Q)$(CC) $(CFLAGS_A) -S $< -o $@
 $(CURDIR)/%.so.s: $(SRC_DIR)/base/socket/%.c $(CURDIR)/%.d
-	$(Q)mkdir -p		$(@D)/
+#	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/tmp/base/socket/$*.so.s"
 	$(Q)$(CC) $(CFLAGS_SO) -S $< -o $@
 $(CURDIR)/%.o: $(CURDIR)/%.s
