@@ -62,15 +62,17 @@ int	alx_telnet_open_client	(FILE **restrict telnet,
 	if (alx_sbprintf(cmd, NULL, "telnet %s %s", server_addr, server_port))
 		return	-1;
 
-	if (fout) {
-		if (alx_strscatfs(cmd, NULL, ARRAY_SIZE(cmd), " 1%s %s",
+	if (log) {
+		if (fout) {
+			if (alx_strscatfs(cmd, NULL, ARRAY_SIZE(cmd), " 1%s %s",
 								redir, fout))
-			return	-1;
-	}
-	if (ferr) {
-		if (alx_strscatfs(cmd, NULL, ARRAY_SIZE(cmd), " 2%s %s",
+				return	-1;
+		}
+		if (ferr) {
+			if (alx_strscatfs(cmd, NULL, ARRAY_SIZE(cmd), " 2%s %s",
 								redir, ferr))
-			return	-1;
+				return	-1;
+		}
 	}
 
 	*telnet	= popen(cmd, rw);
