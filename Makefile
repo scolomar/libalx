@@ -293,12 +293,10 @@ $(filter-out base_lib, $(COMPILE_ACTUAL_LIB_TARGETS)): base_lib
 cv_lib: gsl_lib
 
 PHONY	+= $(COMPILE_ACTUAL_TMP_TARGETS)
-$(COMPILE_ACTUAL_TMP_TARGETS): %_tmp:
-	@echo	"	MAKE	$* tmp"
+$(COMPILE_ACTUAL_TMP_TARGETS): %_tmp: | build_dir
 	$(Q)$(MAKE) $*		-C $(BUILD_TMP_DIR)
 PHONY	+= $(COMPILE_ACTUAL_LIB_TARGETS)
-$(COMPILE_ACTUAL_LIB_TARGETS): %_lib: %_tmp
-	@echo	"	MAKE	$*"
+$(COMPILE_ACTUAL_LIB_TARGETS): %_lib: %_tmp | build_dir
 	$(Q)$(MAKE) $*		-C $(BUILD_LIB_DIR)
 
 
@@ -326,9 +324,9 @@ INSTALL_TARGETS	=							\
 	install-telnet-tcp						\
 	install-zbar
 
-$(INSTALL_VIRTUAL): | build_dir
+$(INSTALL_VIRTUAL):
 	$(Q)$(MAKE) conf_ld	-C $(BUILD_DIR)
-$(INSTALL_TARGETS): | build_dir
+$(INSTALL_TARGETS):
 	$(Q)$(MAKE) conf_ld	-C $(BUILD_DIR)
 
 PHONY	+= install
