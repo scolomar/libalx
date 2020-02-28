@@ -314,43 +314,44 @@ install: build_dir
 	@echo	"	Done"
 	@echo
 
-PHONY += install_base
-install_base: build_dir
-	@echo	"	Install base:"
+INSTALL_VIRTUAL	=							\
+	install_alx							\
+	install_extra							\
+	install_sh							\
+	install_py
+
+INSTALL-TARGETS	=							\
+	install-doc							\
+	install-base							\
+	install-data-structures						\
+	install-npcomplete						\
+	install-robot							\
+	install-curl							\
+	install-cv							\
+	install-gmp							\
+	install-gsl							\
+	install-ncurses							\
+	install-ocr							\
+	install-telnet-tcp						\
+	install-zbar
+
+PHONY	+= $(INSTALL_VIRTUAL)
+$(INSTALL_VIRTUAL): install_%: build_dir
+	@echo	"	Install $*:"
 	@echo
 	$(Q)$(MAKE) $@		-C $(BUILD_DIR)
 	$(Q)$(MAKE) conf_ld	-C $(BUILD_DIR)
 	@echo	"	Done"
+	@echo
 
-PHONY += install_alx
-install_alx: build_dir
-	@echo	"	Install alx:"
+PHONY	+= $(INSTALL-TARGETS)
+$(INSTALL-TARGETS): install-%: build_dir
+	@echo	"	Install $*:"
 	@echo
 	$(Q)$(MAKE) $@		-C $(BUILD_DIR)
 	$(Q)$(MAKE) conf_ld	-C $(BUILD_DIR)
 	@echo	"	Done"
-
-PHONY += install_extra
-install_extra: build_dir
-	@echo	"	Install extra:"
 	@echo
-	$(Q)$(MAKE) $@		-C $(BUILD_DIR)
-	$(Q)$(MAKE) conf_ld	-C $(BUILD_DIR)
-	@echo	"	Done"
-
-PHONY += install_sh
-install_sh: build_dir
-	@echo	"	Install sh:"
-	@echo
-	$(Q)$(MAKE) $@		-C $(BUILD_DIR)
-	@echo	"	Done"
-
-PHONY += install_py
-install_py: build_dir
-	@echo	"	Install py:"
-	@echo
-	$(Q)$(MAKE) $@		-C $(BUILD_DIR)
-	@echo	"	Done"
 
 PHONY += conf_ld
 conf_ld:

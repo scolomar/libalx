@@ -168,101 +168,145 @@ tst: all
 
 ################################################################################
 PHONY	+= install
-install: install_base install_alx install_extra install_sh install_py
+install: | install-base
+install: | install_alx
+install: | install_extra
+install: | install_sh
+install: | install_py
+install: | install-doc
 
-PHONY	+= install_base
-install_base: inst_base
+PHONY	+= install-doc
+install-doc: inst-share
+
+PHONY	+= install-base
+install-base: inst-inc-base
+install-base: inst-libalx-base
+install-base: | install-doc
 
 PHONY	+= install_alx
-install_alx: inst_alx
+install_alx: install-data-structures
+install_alx: install-npcomplete
+install_alx: install-robot
+install_alx: | install-base
+
+PHONY	+= install-data-structures
+install-data-structures: inst-inc-a-data-structures inst-libalx-data-structures
+install-data-structures: | install-base
+PHONY	+= install-npcomplete
+install-npcomplete: inst-inc-a-npcomplete inst-libalx-npcomplete | install-base
+PHONY	+= install-robot
+install-robot: inst-inc-a-robot inst-libalx-robot
+install-robot: | install-base install-telnet-tcp
 
 PHONY	+= install_extra
-install_extra: inst_extra
+install_extra: | install-curl
+install_extra: | install-cv
+install_extra: | install-gmp
+install_extra: | install-gsl
+install_extra: | install-ncurses
+install_extra: | install-ocr
+install_extra: | install-telnet-tcp
+install_extra: | install-zbar
+install_extra: | install-base
 
-PHONY	+= install_sh
-install_sh: inst_sh
+PHONY	+= install-curl
+install-curl: inst-inc-x-curl inst-libalx-curl | install-base
+PHONY	+= install-cv
+install-cv: inst-inc-x-cv inst-libalx-cv | install-base install-gsl
+PHONY	+= install-gmp
+install-gmp: inst-inc-x-gmp inst-libalx-gmp | install-base
+PHONY	+= install-gsl
+install-gsl: inst-inc-x-gsl inst-libalx-gsl | install-base
+PHONY	+= install-ncurses
+install-ncurses: inst-inc-x-ncurses inst-libalx-ncurses | install-base
+PHONY	+= install-ocr
+install-ocr: inst-etc-x-ocr inst-inc-x-ocr inst-libalx-ocr | install-base
+PHONY	+= install-telnet-tcp
+install-telnet-tcp: inst-inc-x-telnet-tcp inst-libalx-telnet-tcp | install-base
+PHONY	+= install-zbar
+install-zbar: inst-inc-x-zbar inst-libalx-zbar | install-base
 
-PHONY	+= install_py
-install_py: inst_py
+PHONY	+= install-sh
+install_sh: inst-sh | install-doc
+
+PHONY	+= install-py
+install_py: inst-py | install-doc
 
 ################################################################################
-PHONY	+= inst_base
-inst_base:
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/
-	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/*"
-	$(Q)cp -rf $(v)		$(INC_DIR)/libalx/base/*		\
-					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
-	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/*"
-	$(Q)cp -rf $(v)		$(SHARE_DIR)/libalx/*			\
-					$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
-	$(Q)$(MAKE)	inst_libalx-base
+PHONY	+= inst-base
+inst-base:
 
-PHONY	+= inst_alx
-inst_alx: inst_base
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/
-	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/*"
-	$(Q)cp -r -f $(v)	$(INC_DIR)/libalx/alx/*			\
-					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/
-	$(Q)$(MAKE)	inst_libalx-data-structures
-#	$(Q)$(MAKE)	inst_libalx-npcomplete
-	$(Q)$(MAKE)	inst_libalx-robot
-
-PHONY	+= inst_extra
-inst_extra: inst_alx inst_base
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/
-	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/*"
-	$(Q)cp -r -f $(v)	$(ETC_DIR)/libalx/extra/*		\
-					$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/
-	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/*"
-	$(Q)cp -r -f $(v)	$(INC_DIR)/libalx/extra/*		\
-					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/
-	$(Q)$(MAKE)	inst_libalx-curl
-	$(Q)$(MAKE)	inst_libalx-cv
-	$(Q)$(MAKE)	inst_libalx-gmp
-	$(Q)$(MAKE)	inst_libalx-gsl
-	$(Q)$(MAKE)	inst_libalx-ncurses
-	$(Q)$(MAKE)	inst_libalx-ocr
-	$(Q)$(MAKE)	inst_libalx-telnet-tcp
-	$(Q)$(MAKE)	inst_libalx-zbar
-
-PHONY	+= inst_sh
-inst_sh:
+PHONY	+= inst-sh
+inst-sh:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/*"
 	$(Q)cp -rf $(v)		$(LIB_DIR)/libalx/sh/*			\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/
 	@echo
 
-PHONY	+= inst_py
-inst_py:
+PHONY	+= inst-py
+inst-py:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/py/
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/py/*"
 	$(Q)cp -rf $(v)		$(LIB_DIR)/libalx/py/*			\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/py/
 	@echo
 
-PHONY	+= inst_libalx-%
-inst_lib%: inst_lib%.a inst_lib%.so inst_lib%.pc
+PHONY += inst-share
+inst-share:
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
+	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/*"
+	$(Q)cp -r -f $(v)	$(SHARE_DIR)/libalx/*		\
+					$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
+
+PHONY += inst-etc-x-%
+inst-etc-x-%:
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/$*/
+	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/$*/*"
+	$(Q)cp -r -f $(v)	$(ETC_DIR)/libalx/extra/$*/*		\
+					$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/extra/$*/
+
+PHONY += inst-inc-base
+inst-inc-base:
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/
+	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/*"
+	$(Q)cp -r -f $(v)	$(INC_DIR)/libalx/base/*		\
+					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/base/
+
+PHONY += inst-inc-a-%
+inst-inc-a-%:
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/$*/
+	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/$*/*"
+	$(Q)cp -r -f $(v)	$(INC_DIR)/libalx/alx/$*/*		\
+					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/alx/$*/
+
+PHONY += inst-inc-x-%
+inst-inc-x-%:
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/$*/
+	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/$*/*"
+	$(Q)cp -r -f $(v)	$(INC_DIR)/libalx/extra/$*/*		\
+					$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/extra/$*/
+
+PHONY	+= inst-lib%
+inst-lib%: inst--lib%.a inst--lib%.so inst--lib%.pc
 	@:
 
-PHONY += inst_lib%.a
-inst_lib%.a:
+PHONY += inst--lib%.a
+inst--lib%.a:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 	@echo	"	CP	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/lib$*.a"
 	$(Q)cp -f $(v)		$(BUILD_LIB_DIR)/libalx/lib$*.a		\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 
-PHONY += inst_lib%.so
-inst_lib%.so:
+PHONY += inst--lib%.so
+inst--lib%.so:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 	@echo	"	CP	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/lib$*.so"
 	$(Q)cp -f $(v)		$(BUILD_LIB_DIR)/libalx/lib$*.so	\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 
-PHONY += inst_lib%.pc
-inst_lib%.pc:
+PHONY += inst--lib%.pc
+inst--lib%.pc:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
 	@echo	"	CP	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/lib$*.pc"
 	$(Q)cp -f $(v)		$(LIB_DIR)/pkgconfig/lib$*.pc		\
