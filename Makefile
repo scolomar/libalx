@@ -229,7 +229,6 @@ COMPILE_VIRTUAL	=							\
 COMPILE_TARGETS	=							\
 	base								\
 	data-structures							\
-	npcomplete							\
 	robot								\
 	curl								\
 	cv								\
@@ -248,7 +247,7 @@ base: | base_tmp base_lib
 
 PHONY	+= alx
 alx: | data-structures
-alx: | npcomplete
+#alx: | npcomplete
 alx: | robot
 PHONY	+= data-structures
 data-structures: | data-structures_tmp data-structures_lib
@@ -313,7 +312,6 @@ INSTALL_TARGETS	=							\
 	install-doc							\
 	install-base							\
 	install-data-structures						\
-	install-npcomplete						\
 	install-robot							\
 	install-curl							\
 	install-cv							\
@@ -325,9 +323,9 @@ INSTALL_TARGETS	=							\
 	install-zbar
 
 $(INSTALL_VIRTUAL):
-	$(Q)$(MAKE) conf_ld	-C $(BUILD_DIR)
+	$(Q)$(MAKE) conf_ld
 $(INSTALL_TARGETS):
-	$(Q)$(MAKE) conf_ld	-C $(BUILD_DIR)
+	$(Q)$(MAKE) conf_ld
 
 PHONY	+= install
 install: | install-base
@@ -347,7 +345,7 @@ install-base: | install-doc
 
 PHONY	+= install_alx
 install_alx: | install-data-structures
-install_alx: | install-npcomplete
+#install_alx: | install-npcomplete
 install_alx: | install-robot
 install_alx: | install-base
 
