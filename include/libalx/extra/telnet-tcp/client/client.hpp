@@ -23,12 +23,10 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define telnet_open_client(telnet, server_addr, server_port, rw,	\
-			   log, fout, ferr)				\
-	alx_telnet_open_client(telnet, server_addr, server_port,	\
-			       rw, log, fout, ferr)
-#define telnet_login(telnet, user, passwd)				\
-	alx_telnet_login(telnet, user, passwd)
+#define telnet_open_client(telnet, server_addr, server_port, rw)	\
+	alx_telnet_open_client(telnet, server_addr, server_port, rw)
+#define telnet_login(telnet, user, passwd, delay_us)			\
+	alx_telnet_login(telnet, user, passwd, delay_us)
 #define telnet_send(telnet, msg)					\
 	alx_telnet_send(telnet, msg)
 #endif
@@ -42,11 +40,11 @@ extern	"C"
 [[gnu::nonnull(1, 2, 4)]] [[gnu::warn_unused_result]]
 int	alx_telnet_open_client	(FILE **restrict telnet,
 				 char *restrict server_addr,
-				 char *restrict server_port, char *restrict rw,
-				 int log, char *fout, char *ferr);
+				 char *restrict server_port, char *restrict rw);
 [[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 int	alx_telnet_login	(FILE *restrict telnet,
-				 char *restrict user, char *restrict passwd);
+				 char *restrict user, char *restrict passwd,
+				 int delay_us);
 [[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
 int	alx_telnet_send		(FILE *restrict telnet, char *restrict msg);
 }
@@ -62,11 +60,6 @@ namespace telnet {
 /******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
-enum	TCP_Log {
-	TCP_LOG_NOT,
-	TCP_LOG_APPEND,
-	TCP_LOG_OVR
-};
 
 
 /******************************************************************************

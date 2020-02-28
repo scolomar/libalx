@@ -24,11 +24,6 @@
 /******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
-enum	Alx_Telnet_TCP_Log {
-	ALX_TELNET_TCP_LOG_NOT,
-	ALX_TELNET_TCP_LOG_APPEND,
-	ALX_TELNET_TCP_LOG_OVR
-};
 
 
 /******************************************************************************
@@ -42,11 +37,11 @@ enum	Alx_Telnet_TCP_Log {
 __attribute__((nonnull(1, 2, 4), warn_unused_result))
 int	alx_telnet_open_client	(FILE **restrict telnet,
 				 char *restrict server_addr,
-				 char *restrict server_port, char *restrict rw,
-				 int log, char *fout, char *ferr);
+				 char *restrict server_port, char *restrict rw);
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_telnet_login	(FILE *restrict telnet,
-				 char *restrict user, char *restrict passwd);
+				 char *restrict user, char *restrict passwd,
+				 int delay_us);
 __attribute__((nonnull(1), warn_unused_result))
 int	alx_telnet_send		(FILE *restrict telnet, char *restrict msg);
 
@@ -60,19 +55,18 @@ __attribute__((always_inline, nonnull(1, 2, 4), warn_unused_result))
 inline
 int	telnet_open_client	(FILE **restrict telnet,
 				 char *restrict server_addr,
-				 char *restrict server_port, char *restrict rw,
-				 int log, char *fout, char *ferr)
+				 char *restrict server_port, char *restrict rw)
 {
-	return	alx_telnet_open_client(telnet, server_addr, server_port, rw,
-							log, fout, ferr);
+	return	alx_telnet_open_client(telnet, server_addr, server_port, rw);
 }
 
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 inline
 int	telnet_login		(FILE *restrict telnet,
-				 char *restrict user, char *restrict passwd)
+				 char *restrict user, char *restrict passwd,
+				 int delay_us)
 {
-	return	alx_telnet_login(telnet, user, passwd);
+	return	alx_telnet_login(telnet, user, passwd, delay_us);
 }
 
 __attribute__((always_inline, nonnull(1), warn_unused_result))

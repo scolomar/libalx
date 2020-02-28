@@ -14,15 +14,12 @@
 
 #include <unistd.h>
 
-#include "libalx/base/compiler/size.h"
 #include "libalx/base/stdio/printf/sbprintf.h"
-#include "libalx/base/string/strcat/strbcatf.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define DELAY_US	(100 * 1000)
 
 
 /******************************************************************************
@@ -40,38 +37,12 @@
  ******************************************************************************/
 int	alx_telnet_open_client	(FILE **restrict telnet,
 				 char *restrict server_addr,
-				 char *restrict server_port, char *restrict rw,
-				 int log, char *fout, char *ferr)
+				 char *restrict server_port, char *restrict rw)
 {
-	char		cmd[_POSIX_ARG_MAX];
-	const char	*redir;
-
-	switch (log) {
-	case ALX_TELNET_TCP_LOG_NOT:
-		break;
-	case ALX_TELNET_TCP_LOG_APPEND:
-		redir	= ">>";
-		break;
-	case ALX_TELNET_TCP_LOG_OVR:
-		redir	= ">";
-		break;
-	default:
-		return	-1;
-	}
+	char	cmd[_POSIX_ARG_MAX];
 
 	if (alx_sbprintf(cmd, NULL, "telnet %s %s", server_addr, server_port))
 		return	-1;
-
-	if (log) {
-		if (fout) {
-			if (alx_strbcatf(cmd, NULL, " 1%s %s", redir, fout))
-				return	-1;
-		}
-		if (ferr) {
-			if (alx_strbcatf(cmd, NULL, " 2%s %s", redir, ferr))
-				return	-1;
-		}
-	}
 
 	*telnet	= popen(cmd, rw);
 
@@ -79,16 +50,17 @@ int	alx_telnet_open_client	(FILE **restrict telnet,
 }
 
 int	alx_telnet_login	(FILE *restrict telnet,
-				 char *restrict user, char *restrict passwd)
+				 char *restrict user, char *restrict passwd,
+				 int delay_us)
 {
 
-	usleep(DELAY_US);
+	usleep(delay_us);
 	if (alx_telnet_send(telnet, user))
 		return	-1;
-	usleep(DELAY_US);
+	usleep(delay_us);
 	if (alx_telnet_send(telnet, passwd))
 		return	-1;
-	usleep(DELAY_US);
+	usleep(delay_us);
 
 	return	0;
 }
