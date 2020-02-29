@@ -9,7 +9,6 @@
  ******************************************************************************/
 #include "libalx/base/string/strcpy/strscpy.h"
 
-#include <errno.h>
 #include <stddef.h>
 #include <string.h>
 
@@ -39,7 +38,7 @@ ptrdiff_t alx_strscpy		(char dest[restrict /*size*/],
 	ptrdiff_t	len;
 
 	if (size <= 0)
-		return	-E2BIG;
+		return	-1;
 
 	len	= strnlen(src, size - 1);
 	memcpy(dest, src, len);

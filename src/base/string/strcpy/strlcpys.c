@@ -9,7 +9,6 @@
  ******************************************************************************/
 #include "libalx/base/string/strcpy/strlcpys.h"
 
-#include <errno.h>
 #include <stddef.h>
 #include <string.h>
 
@@ -39,14 +38,14 @@ int	alx_strlcpys		(char dest[restrict /*size*/],
 	ptrdiff_t	l;
 
 	if (size <= 0)
-		return	-E2BIG;
+		return	-1;
 
 	l	= strlcpy(dest, src, size);
 	if (len)
 		*len	= l;
 
 	if (l >= size)
-		return	ENOBUFS;
+		return	1;
 
 	return	0;
 }
