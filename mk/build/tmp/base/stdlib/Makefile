@@ -29,6 +29,10 @@ OBJ	=								\
 	$(CURDIR)/clz.o							\
 	$(CURDIR)/compare.o						\
 	$(CURDIR)/ctz.o							\
+	$(CURDIR)/getenv/getenv_f.o					\
+	$(CURDIR)/getenv/getenv_i.o					\
+	$(CURDIR)/getenv/getenv_s.o					\
+	$(CURDIR)/getenv/getenv_u.o					\
 	$(CURDIR)/local_maxima.o					\
 	$(CURDIR)/maximum.o						\
 	$(CURDIR)/minimum.o						\
@@ -58,6 +62,10 @@ SRC	=								\
 	$(SRC_DIR)/base/stdlib/clz.c					\
 	$(SRC_DIR)/base/stdlib/compare.c				\
 	$(SRC_DIR)/base/stdlib/ctz.c					\
+	$(SRC_DIR)/base/stdlib/getenv/getenv_f.c			\
+	$(SRC_DIR)/base/stdlib/getenv/getenv_i.c			\
+	$(SRC_DIR)/base/stdlib/getenv/getenv_s.c			\
+	$(SRC_DIR)/base/stdlib/getenv/getenv_u.c			\
 	$(SRC_DIR)/base/stdlib/local_maxima.c				\
 	$(SRC_DIR)/base/stdlib/maximum.c				\
 	$(SRC_DIR)/base/stdlib/minimum.c				\

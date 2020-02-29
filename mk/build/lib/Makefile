@@ -52,6 +52,10 @@ BASE_OBJ	=							\
 		$(BUILD_TMP_DIR)/base/stdlib/clz.o			\
 		$(BUILD_TMP_DIR)/base/stdlib/compare.o			\
 		$(BUILD_TMP_DIR)/base/stdlib/ctz.o			\
+		$(BUILD_TMP_DIR)/base/stdlib/getenv/getenv_f.o		\
+		$(BUILD_TMP_DIR)/base/stdlib/getenv/getenv_i.o		\
+		$(BUILD_TMP_DIR)/base/stdlib/getenv/getenv_s.o		\
+		$(BUILD_TMP_DIR)/base/stdlib/getenv/getenv_u.o		\
 		$(BUILD_TMP_DIR)/base/stdlib/local_maxima.o		\
 		$(BUILD_TMP_DIR)/base/stdlib/maximum.o			\
 		$(BUILD_TMP_DIR)/base/stdlib/minimum.o			\
