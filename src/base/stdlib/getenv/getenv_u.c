@@ -50,6 +50,57 @@ int	alx_getenv_u64		(uint64_t *restrict num,
 	return	0;
 }
 
+int	alx_getenv_u32		(uint32_t *restrict num,
+				 const char *restrict name)
+{
+	const char	*env;
+	int		status;
+
+	env	= getenv(name);
+	if (!env)
+		return	-2;
+	status	= alx_strtou32_s(num, env, 0, NULL);
+	if (status < 0)
+		return	-1;
+	if (status)
+		return	1;
+	return	0;
+}
+
+int	alx_getenv_u16		(uint16_t *restrict num,
+				 const char *restrict name)
+{
+	const char	*env;
+	int		status;
+
+	env	= getenv(name);
+	if (!env)
+		return	-2;
+	status	= alx_strtou16_s(num, env, 0, NULL);
+	if (status < 0)
+		return	-1;
+	if (status)
+		return	1;
+	return	0;
+}
+
+int	alx_getenv_u8		(uint8_t *restrict num,
+				 const char *restrict name)
+{
+	const char	*env;
+	int		status;
+
+	env	= getenv(name);
+	if (!env)
+		return	-2;
+	status	= alx_strtou8_s(num, env, 0, NULL);
+	if (status < 0)
+		return	-1;
+	if (status)
+		return	1;
+	return	0;
+}
+
 int	alx_secure_getenv_u64	(uint64_t *restrict num,
 				 const char *restrict name)
 {
@@ -60,6 +111,57 @@ int	alx_secure_getenv_u64	(uint64_t *restrict num,
 	if (!env)
 		return	-2;
 	status	= alx_strtou64_s(num, env, 0, NULL);
+	if (status < 0)
+		return	-1;
+	if (status)
+		return	1;
+	return	0;
+}
+
+int	alx_secure_getenv_u32	(uint32_t *restrict num,
+				 const char *restrict name)
+{
+	const char	*env;
+	int		status;
+
+	env	= secure_getenv(name);
+	if (!env)
+		return	-2;
+	status	= alx_strtou32_s(num, env, 0, NULL);
+	if (status < 0)
+		return	-1;
+	if (status)
+		return	1;
+	return	0;
+}
+
+int	alx_secure_getenv_u16	(uint16_t *restrict num,
+				 const char *restrict name)
+{
+	const char	*env;
+	int		status;
+
+	env	= secure_getenv(name);
+	if (!env)
+		return	-2;
+	status	= alx_strtou16_s(num, env, 0, NULL);
+	if (status < 0)
+		return	-1;
+	if (status)
+		return	1;
+	return	0;
+}
+
+int	alx_secure_getenv_u8	(uint8_t *restrict num,
+				 const char *restrict name)
+{
+	const char	*env;
+	int		status;
+
+	env	= secure_getenv(name);
+	if (!env)
+		return	-2;
+	status	= alx_strtou8_s(num, env, 0, NULL);
 	if (status < 0)
 		return	-1;
 	if (status)
