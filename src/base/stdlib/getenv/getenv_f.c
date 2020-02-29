@@ -49,6 +49,40 @@ int	alx_getenv_d		(double *restrict num,
 	return	0;
 }
 
+int	alx_getenv_f		(float *restrict num,
+				 const char *restrict name)
+{
+	const char	*env;
+	int		status;
+
+	env	= getenv(name);
+	if (!env)
+		return	-2;
+	status	= alx_strtof_s(num, env, NULL);
+	if (status < 0)
+		return	-1;
+	if (status)
+		return	1;
+	return	0;
+}
+
+int	alx_getenv_ld		(long double *restrict num,
+				 const char *restrict name)
+{
+	const char	*env;
+	int		status;
+
+	env	= getenv(name);
+	if (!env)
+		return	-2;
+	status	= alx_strtold_s(num, env, NULL);
+	if (status < 0)
+		return	-1;
+	if (status)
+		return	1;
+	return	0;
+}
+
 int	alx_secure_getenv_d	(double *restrict num,
 				 const char *restrict name)
 {

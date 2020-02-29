@@ -22,7 +22,11 @@
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define getenv_d(num, name)		alx_getenv_d(num, name)
+#define getenv_f(num, name)		alx_getenv_f(num, name)
+#define getenv_ld(num, name)		alx_getenv_ld(num, name)
 #define secure_getenv_d(num, name)	alx_secure_getenv_d(num, name)
+#define secure_getenv_f(num, name)	alx_secure_getenv_f(num, name)
+#define secure_getenv_ld(num, name)	alx_secure_getenv_ld(num, name)
 #endif
 
 
@@ -35,7 +39,19 @@ extern	"C"
 int	getenv_d		(double *restrict num,
 				 const char *restrict name);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	getenv_f		(float *restrict num,
+				 const char *restrict name);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	getenv_ld		(long double *restrict num,
+				 const char *restrict name);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	secure_getenv_d		(double *restrict num,
+				 const char *restrict name);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	secure_getenv_f		(float *restrict num,
+				 const char *restrict name);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	secure_getenv_ld	(long double *restrict num,
 				 const char *restrict name);
 }
 
