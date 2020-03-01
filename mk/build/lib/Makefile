@@ -15,6 +15,7 @@ BASE_OBJ	=							\
 		$(BUILD_TMP_DIR)/base/float/scanf.o			\
 		$(BUILD_TMP_DIR)/base/libgen/basename.o			\
 		$(BUILD_TMP_DIR)/base/libgen/dirname.o			\
+		$(BUILD_TMP_DIR)/base/linux/membarrier.o		\
 		$(BUILD_TMP_DIR)/base/math/array_division.o		\
 		$(BUILD_TMP_DIR)/base/math/array_multiplication.o	\
 		$(BUILD_TMP_DIR)/base/math/array_sum.o			\

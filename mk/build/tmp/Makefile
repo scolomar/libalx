@@ -24,6 +24,7 @@ base:
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/base/errno/
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/base/float/
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/base/libgen/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/base/linux/
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/base/math/
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/base/socket/
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/base/stdint/
