@@ -32,6 +32,12 @@
 /******************************************************************************
  ******* static prototypes ****************************************************
  ******************************************************************************/
+static
+int	get_addrs	(const char *server_port, struct addrinfo **addrs);
+static
+int	set_server	(int sd, int *optval, struct addrinfo *ad, int backlog);
+static
+int	set_socket	(struct addrinfo *addrs, int backlog);
 
 
 /******************************************************************************
@@ -39,44 +45,17 @@
  ******************************************************************************/
 int	alx_tcp_server_open	(const char *server_port, int backlog)
 {
-	struct protoent	*tcp;
-	int			sd;
-	struct addrinfo	hint = {0};
+	int		sd;
 	struct addrinfo	*addrs;
-	int			val;
-	int			status;
 
-	tcp	= getprotobyname("tcp");
-	if (!tcp)
-		return	-EINVAL;
-	hint.ai_family		= AF_UNSPEC;
-	hint.ai_socktype	= SOCK_STREAM;
-	hint.ai_protocol	= tcp->p_proto;
-	hint.ai_flags		= AI_PASSIVE;
-	status	= getaddrinfo(NULL, server_port, &hint, &addrs);
-	if (status)
-		return	-labs(status);
-
-	for (struct addrinfo *ad = addrs; ad; ad = ad->ai_next) {
-		sd = socket(ad->ai_family, ad->ai_socktype, ad->ai_protocol);
-		if (sd < 0)
-			continue;
-		val = 1;
-		if (setsockopt(sd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val)))
-			goto try_next;
-		if (bind(sd, ad->ai_addr, ad->ai_addrlen))
-			goto try_next;
-		if (listen(sd, backlog))
-			goto try_next;
-		break;
-try_next:
-		close(sd);
-		sd = -1;
-	}
+	sd	= -1;
+	if (get_addrs(server_port, &addrs))
+		return	-1;
+	sd	= set_socket(addrs, backlog);
 	freeaddrinfo(addrs);
 
 	if (sd < 0)
-		return	-errno;
+		return	-2;
 	return	sd;
 }
 
@@ -84,6 +63,59 @@ try_next:
 /******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
+static
+int	get_addrs	(const char *server_port, struct addrinfo **addrs)
+{
+	struct protoent	*tcp;
+	struct addrinfo	hint = {0};
+
+	tcp	= getprotobyname("tcp");
+	if (!tcp)
+		return	-1;
+	hint.ai_family		= AF_UNSPEC;
+	hint.ai_socktype	= SOCK_STREAM;
+	hint.ai_protocol	= tcp->p_proto;
+	hint.ai_flags		= AI_PASSIVE;
+	if (getaddrinfo(NULL, server_port, &hint, addrs))
+		return	-1;
+	return	0;
+}
+
+static
+int	set_socket	(struct addrinfo *addrs, int backlog)
+{
+	int	val;
+	int	sock;
+
+	sock	= -1;
+	for (struct addrinfo *ad = addrs; ad; ad = ad->ai_next) {
+		sock = socket(ad->ai_family, ad->ai_socktype, ad->ai_protocol);
+		if (sock < 0)
+			continue;
+		if (set_server(sock, &val, ad, backlog))
+			goto retry;
+		break;
+	retry:
+		close(sock);
+		sock	= -1;
+	}
+
+	return	sock;
+}
+
+static
+int	set_server	(int sd, int *optval, struct addrinfo *ad, int backlog)
+{
+
+	*optval	= 1;
+	if (setsockopt(sd, SOL_SOCKET, SO_REUSEADDR, optval, sizeof(*optval)))
+		return	-1;
+	if (bind(sd, ad->ai_addr, ad->ai_addrlen))
+		return	-1;
+	if (listen(sd, backlog))
+		return	-1;
+	return	0;
+}
 
 
 /******************************************************************************
