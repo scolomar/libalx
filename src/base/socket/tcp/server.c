@@ -45,18 +45,15 @@ int	set_socket	(struct addrinfo *addrs, int backlog);
  ******************************************************************************/
 int	alx_tcp_server_open	(const char *server_port, int backlog)
 {
-	int		sd;
+	int		sock;
 	struct addrinfo	*addrs;
 
-	sd	= -1;
 	if (get_addrs(server_port, &addrs))
-		return	-1;
-	sd	= set_socket(addrs, backlog);
+		return	-2;
+	sock	= set_socket(addrs, backlog);
 	freeaddrinfo(addrs);
 
-	if (sd < 0)
-		return	-2;
-	return	sd;
+	return	sock;
 }
 
 

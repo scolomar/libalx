@@ -31,6 +31,13 @@
 /******************************************************************************
  ******* static prototypes ****************************************************
  ******************************************************************************/
+static
+int	get_addrs	(const char *server_addr, const char *server_port,
+			 struct addrinfo **addrs);
+static
+int	set_socket	(struct addrinfo *addrs);
+static
+int	connect_socket	(int sock, struct addrinfo *addr);
 
 
 /******************************************************************************
@@ -39,44 +46,65 @@
 int	alx_tcp_client_open	(const char *restrict server_addr,
 				 const char *restrict server_port)
 {
-	struct protoent	*tcp;
-	int		sd;
-	struct addrinfo	hint = {0};
+	int		sock;
 	struct addrinfo	*addrs;
-	int		status;
 
-	tcp	= getprotobyname("tcp");
-	if (!tcp)
-		return	-EINVAL;
-	hint.ai_family		= AF_UNSPEC;
-	hint.ai_socktype	= SOCK_STREAM;
-	hint.ai_protocol	= tcp->p_proto;
-	status	= getaddrinfo(server_addr, server_port, &hint, &addrs);
-	if (status)
-		return	-labs(status);
-
-	for (struct addrinfo *ad = addrs; ad; ad = ad->ai_next) {
-		sd = socket(ad->ai_family, ad->ai_socktype, ad->ai_protocol);
-		if (sd < 0)
-			continue;
-		if (connect(sd, ad->ai_addr, ad->ai_addrlen))
-			goto try_next;
-		break;
-try_next:
-		close(sd);
-		sd = -1;
-	}
+	if (get_addrs(server_addr, server_port, &addrs))
+		return	-2;
+	sock	= set_socket(addrs);
 	freeaddrinfo(addrs);
 
-	if (sd < 0)
-		return	-errno;
-	return	sd;
+	return	sock;
 }
 
 
 /******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
+static
+int	get_addrs	(const char *server_addr, const char *server_port,
+			 struct addrinfo **addrs)
+{
+	struct protoent	*tcp;
+	struct addrinfo	hint = {0};
+
+	tcp	= getprotobyname("tcp");
+	if (!tcp)
+		return	-1;
+	hint.ai_family		= AF_UNSPEC;
+	hint.ai_socktype	= SOCK_STREAM;
+	hint.ai_protocol	= tcp->p_proto;
+	if (getaddrinfo(server_addr, server_port, &hint, addrs))
+		return	-1;
+	return	0;
+}
+
+static
+int	set_socket	(struct addrinfo *addrs)
+{
+	int	sock;
+
+	sock	= -1;
+	for (struct addrinfo *ad = addrs; ad; ad = ad->ai_next) {
+		sock = socket(ad->ai_family, ad->ai_socktype, ad->ai_protocol);
+		if (sock < 0)
+			continue;
+		if (connect_socket(sock, ad))
+			goto try_next;
+		break;
+	try_next:
+		close(sock);
+		sock	= -1;
+	}
+
+	return	sock;
+}
+
+static
+int	connect_socket	(int sock, struct addrinfo *addr)
+{
+	return	connect(sock, addr->ai_addr, addr->ai_addrlen);
+}
 
 
 /******************************************************************************
