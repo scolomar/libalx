@@ -13,9 +13,11 @@
 # dependencies
 
 OBJ	=								\
+	$(CURDIR)/sigpipe.o						\
 	$(CURDIR)/sigterm.o
 
 SRC	=								\
+	$(SRC_DIR)/base/signal/sigpipe.c				\
 	$(SRC_DIR)/base/signal/sigterm.c
 
 DEP		= $(OBJ:.o=.d)

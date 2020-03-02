@@ -27,6 +27,7 @@ BASE_OBJ	=							\
 		$(BUILD_TMP_DIR)/base/math/prime_defactorization.o	\
 		$(BUILD_TMP_DIR)/base/math/prime_factorization.o	\
 		$(BUILD_TMP_DIR)/base/math/scale_linear.o		\
+		$(BUILD_TMP_DIR)/base/signal/sigpipe.o			\
 		$(BUILD_TMP_DIR)/base/signal/sigterm.o			\
 		$(BUILD_TMP_DIR)/base/socket/tcp/client.o		\
 		$(BUILD_TMP_DIR)/base/socket/tcp/server.o		\
