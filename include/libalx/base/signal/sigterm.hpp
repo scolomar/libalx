@@ -21,7 +21,7 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define sigterm_handler()		alx_sigterm_init()
+#define sigterm_init()		alx_sigterm_init()
 #endif
 
 
