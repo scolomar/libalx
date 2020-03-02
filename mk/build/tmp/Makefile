@@ -26,6 +26,7 @@ base:
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/base/libgen/
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/base/linux/
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/base/math/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/base/signal/
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/base/socket/
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/base/stdint/
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/base/stdio/
