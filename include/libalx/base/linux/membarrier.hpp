@@ -23,6 +23,7 @@
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define membarrier(cmd, flags)		alx_membarrier(cmd, flags)
+#define mb()				alx_mb()
 #endif
 
 
@@ -32,6 +33,7 @@
 extern	"C"
 {
 int	alx_membarrier	(int cmd, int flags);
+void	alx_mb		(void);
 }
 
 
