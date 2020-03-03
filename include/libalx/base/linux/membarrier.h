@@ -25,6 +25,12 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define alx_mb()	asm volatile ("" : : : "memory")
+
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define mb()		alx_mb()
+#endif
 
 
 /******************************************************************************
@@ -42,8 +48,6 @@
  ******************************************************************************/
 inline
 int	alx_membarrier	(int cmd, int flags);
-inline
-void	alx_mb		(void);
 
 
 /******************************************************************************
@@ -57,13 +61,6 @@ int	membarrier	(int cmd, int flags)
 {
 	return	alx_membarrier(cmd, flags);
 }
-
-__attribute__((always_inline))
-inline
-void	mb		(void)
-{
-	return	alx_mb();
-}
 #endif
 
 
@@ -74,12 +71,6 @@ inline
 int	alx_membarrier	(int cmd, int flags)
 {
 	return	syscall(__NR_membarrier, cmd, flags);
-}
-
-inline
-void	alx_mb		(void)
-{
-	asm volatile ("" : : : "memory");
 }
 
 

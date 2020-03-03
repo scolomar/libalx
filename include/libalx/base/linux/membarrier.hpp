@@ -20,6 +20,8 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define alx_mb()			asm volatile ("" : : : "memory")
+
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define membarrier(cmd, flags)		alx_membarrier(cmd, flags)
@@ -33,7 +35,6 @@
 extern	"C"
 {
 int	alx_membarrier	(int cmd, int flags);
-void	alx_mb		(void);
 }
 
 
