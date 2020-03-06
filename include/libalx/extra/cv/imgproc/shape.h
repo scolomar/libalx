@@ -35,11 +35,14 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull))
-int	alx_cv_contours		(img_s *restrict img, conts_s *restrict contours);
+int	alx_cv_contours		(img_s *restrict img,
+				 conts_s *restrict contours);
 __attribute__((nonnull(1)))
 void	alx_cv_contour_dimensions(const cont_s *restrict cont,
 				 double *restrict area,
 				 double *restrict perimeter);
+__attribute__((nonnull))
+ptrdiff_t alx_cv_conts_largest	(const conts_s *conts);
 __attribute__((nonnull))
 void	alx_cv_bounding_rect	(rect_s *restrict rect,
 				 const cont_s *restrict contour);

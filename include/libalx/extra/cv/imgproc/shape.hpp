@@ -37,6 +37,8 @@ void	alx_cv_contour_dimensions(const void *restrict contour,
 				 double *restrict area,
 				 double *restrict perimeter);
 [[gnu::nonnull]]
+ptrdiff_t alx_cv_conts_largest	(const void *conts);
+[[gnu::nonnull]]
 void	alx_cv_bounding_rect	(void *restrict rect,
 				 const void *restrict contour);
 [[gnu::nonnull]]
@@ -86,6 +88,10 @@ void	contour_dimensions(const class std::vector<
 				int>>  *restrict contour,
 			 double *restrict area,
 			 double *restrict perimeter);
+[[gnu::nonnull]]
+ptrdiff_t conts_largest	(const class std::vector<
+				class std::vector<
+				class cv::Point_<int>>> *conts);
 [[gnu::nonnull]]
 void	bounding_rect	(class cv::Rect_ <int> *restrict rect,
 			 const class std::vector <
