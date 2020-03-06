@@ -149,6 +149,56 @@ int	alx_cv_threshold		(void *img, int thr_typ, int thr_val)
 	return	alx::CV::threshold((class cv::Mat *)img, thr_typ, thr_val);
 }
 
+void	alx::CV::bkgd_mask		(class cv::Mat *img)
+{
+	cv::floodFill(*img, cv::Point(0, 0), UINT8_MAX);
+}
+
+void	alx_cv_bkgd_mask		(void *img)
+{
+	alx::CV::bkgd_mask((class cv::Mat *)img);
+}
+
+void	alx::CV::bkgd_fill		(class cv::Mat *img)
+{
+	class cv::Mat	tmp;
+
+	img->copyTo(tmp);
+	alx::CV::bkgd_mask(&tmp);
+	cv::bitwise_or(*img, tmp, *img);
+
+	tmp.release();
+}
+
+void	alx_cv_bkgd_fill		(void *img)
+{
+	alx::CV::bkgd_fill((class cv::Mat *)img);
+}
+
+void	alx::CV::holes_mask		(class cv::Mat *img)
+{
+
+	alx::CV::bkgd_fill(img);
+	cv::bitwise_not(*img, *img);
+}
+
+void	alx_cv_holes_mask		(void *img)
+{
+	alx::CV::holes_mask((class cv::Mat *)img);
+}
+
+void	alx::CV::holes_fill		(class cv::Mat *img)
+{
+
+	alx::CV::bkgd_mask(img);
+	cv::bitwise_not(*img, *img);
+}
+
+void	alx_cv_holes_fill		(void *img)
+{
+	alx::CV::holes_fill((class cv::Mat *)img);
+}
+
 
 /******************************************************************************
  ******* static function definitions ******************************************

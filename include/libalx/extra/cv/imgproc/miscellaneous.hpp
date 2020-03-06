@@ -40,6 +40,14 @@ int	alx_cv_distance_transform	(void *img);
 int	alx_cv_distance_transform_8b	(void *img);
 [[gnu::nonnull]]
 int	alx_cv_threshold		(void *img, int thr_typ, int thr_val);
+[[gnu::nonnull]]
+void	alx_cv_bkgd_mask		(void *img);
+[[gnu::nonnull]]
+void	alx_cv_bkgd_fill		(void *img);
+[[gnu::nonnull]]
+void	alx_cv_holes_mask		(void *img);
+[[gnu::nonnull]]
+void	alx_cv_holes_fill		(void *img);
 }
 
 
@@ -76,6 +84,14 @@ int	distance_transform	(class cv::Mat *img);
 int	distance_transform_8b	(class cv::Mat *img);
 [[gnu::nonnull]]
 int	threshold		(class cv::Mat *img, int thr_typ, int thr_val);
+[[gnu::nonnull]]
+void	bkgd_mask		(class cv::Mat *img);
+[[gnu::nonnull]]
+void	bkgd_fill		(class cv::Mat *img);
+[[gnu::nonnull]]
+void	holes_mask		(class cv::Mat *img);
+[[gnu::nonnull]]
+void	holes_fill		(class cv::Mat *img);
 
 
 /******************************************************************************
