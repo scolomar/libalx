@@ -35,12 +35,6 @@ enum	Alx_Cv_Cmp {
 	ALX_CV_CMP_V	= ALX_CV_CMP_RED
 };
 
-enum	Alx_Cv_Cmp {
-	ALX_CV_CMP_BLUE,
-	ALX_CV_CMP_GREEN,
-	ALX_CV_CMP_RED
-};
-
 
 /******************************************************************************
  ******* struct / union *******************************************************
