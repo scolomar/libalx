@@ -106,7 +106,7 @@ ptrdiff_t alx::CV::conts_largest(const class std::vector<
 		return	-1;
 
 	for (ptrdiff_t i = 0; i < n; i++) {
-		a	= cv::contourArea(conts[i]);
+		a	= cv::contourArea((*conts)[i]);
 		if (a > area) {
 			area	= a;
 			largest	= i;
