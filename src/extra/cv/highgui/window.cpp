@@ -54,15 +54,17 @@ void	alx_cv_destroy_all_windows	(void)
 }
 
 void	alx::CV::imshow			(const class cv::Mat *restrict img,
-					 const char *restrict win)
+					 const char *restrict win, int delay)
 {
+
 	cv::imshow(win, *img);
+	cv::waitKey(delay);
 }
 
 void	alx_cv_imshow			(const void *restrict img,
-					 const char *restrict win)
+					 const char *restrict win, int delay)
 {
-	alx::CV::imshow((const class cv::Mat *)img, win);
+	alx::CV::imshow((const class cv::Mat *)img, win, delay);
 }
 
 

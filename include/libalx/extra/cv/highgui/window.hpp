@@ -33,7 +33,7 @@ void	alx_cv_named_window		(const char *restrict win, int flags);
 void	alx_cv_destroy_all_windows	(void);
 [[gnu::nonnull]]
 void	alx_cv_imshow			(const void *restrict img,
-					 const char *restrict win);
+					 const char *restrict win, int delay);
 }
 
 
@@ -62,7 +62,7 @@ void	named_window		(const char *restrict win, int flags);
 void	destroy_all_windows	(void);
 [[gnu::nonnull]]
 void	imshow			(const class cv::Mat *restrict img,
-				 const char *restrict win);
+				 const char *restrict win, int delay);
 
 
 /******************************************************************************
