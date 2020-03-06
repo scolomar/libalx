@@ -50,8 +50,6 @@ int	alx_cv_alloc_img	(void **img)
 
 void	alx::CV::free_img	(class cv::Mat *img)
 {
-
-	img->release();	/* XXX */
 	free(img);
 }
 
