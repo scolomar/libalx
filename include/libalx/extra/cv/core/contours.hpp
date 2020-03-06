@@ -47,7 +47,7 @@ void	alx_cv_deinit_conts	(void *conts);
 void	alx_cv_extract_conts	(const void *restrict conts,
 				 const void **restrict cont,
 				 ptrdiff_t *restrict size);
-[[gnu::nonnull]]
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_cv_extract_conts_cont(const void **restrict cont,
 				 const void *restrict conts, ptrdiff_t i);
 }

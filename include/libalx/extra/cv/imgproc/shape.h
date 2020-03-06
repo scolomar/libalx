@@ -41,7 +41,7 @@ __attribute__((nonnull(1)))
 void	alx_cv_contour_dimensions(const cont_s *restrict cont,
 				 double *restrict area,
 				 double *restrict perimeter);
-__attribute__((nonnull))
+__attribute__((nonnull, warn_unused_result))
 ptrdiff_t alx_cv_conts_largest	(const conts_s *conts);
 __attribute__((nonnull))
 void	alx_cv_bounding_rect	(rect_s *restrict rect,
