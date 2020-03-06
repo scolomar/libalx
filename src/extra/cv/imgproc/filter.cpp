@@ -18,7 +18,6 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define ALX_CV_MAX_KSIZE	(50)
 #define ALX_CV_MAX_DERIVATIVE	(20)
 
 
@@ -101,7 +100,7 @@ int	alx::CV::smooth		(class cv::Mat *img,
 				 int method, ptrdiff_t ksize)
 {
 
-	if (!(ksize % 2)  ||  ksize < 3  ||  ksize > ALX_CV_MAX_KSIZE)
+	if (!(ksize % 2)  ||  ksize < 3)
 		return	1;
 
 	switch (method) {
@@ -136,7 +135,7 @@ int	alx::CV::sobel		(class cv::Mat *img,
 		return	1;
 	if (dx > ALX_CV_MAX_DERIVATIVE || dy > ALX_CV_MAX_DERIVATIVE)
 		return	1;
-	if (!(ksize % 2)  ||  ksize < -1  ||  ksize > ALX_CV_MAX_KSIZE)
+	if (!(ksize % 2)  ||  ksize < -1)
 		return	1;
 	cv::Sobel(*img, *img, -1, dx, dy, ksize, 1, 0, cv::BORDER_DEFAULT);
 
