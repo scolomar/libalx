@@ -12,10 +12,12 @@
 ################################################################################
 # dependencies
 OBJ	=								\
-	$(CURDIR)/file.o
+	$(CURDIR)/file.o						\
+	$(CURDIR)/window.o
 
 SRC	=								\
-	$(SRC_DIR)/extra/cv/highgui/file.cpp
+	$(SRC_DIR)/extra/cv/highgui/file.cpp				\
+	$(SRC_DIR)/extra/cv/highgui/window.cpp
 
 DEP		= $(OBJ:.o=.d)
 BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))

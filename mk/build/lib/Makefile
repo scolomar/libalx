@@ -140,6 +140,7 @@ CV_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/cv/core/roi.o			\
 		$(BUILD_TMP_DIR)/extra/cv/features2d/orb.o		\
 		$(BUILD_TMP_DIR)/extra/cv/highgui/file.o		\
+		$(BUILD_TMP_DIR)/extra/cv/highgui/window.o		\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/features.o		\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/filter.o		\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/geometric.o		\
