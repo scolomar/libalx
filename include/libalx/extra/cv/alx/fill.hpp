@@ -27,13 +27,13 @@
 extern	"C"
 {
 [[gnu::nonnull]]
-void	alx_cv_bkgd_mask	(void *img);
+int	alx_cv_bkgd_mask	(void *img);
 [[gnu::nonnull]]
-void	alx_cv_bkgd_fill	(void *img);
+int	alx_cv_bkgd_fill	(void *img);
 [[gnu::nonnull]]
-void	alx_cv_holes_mask	(void *img);
+int	alx_cv_holes_mask	(void *img);
 [[gnu::nonnull]]
-void	alx_cv_holes_fill	(void *img);
+int	alx_cv_holes_fill	(void *img);
 }
 
 
@@ -58,13 +58,13 @@ namespace CV {
  ******* prototypes ***********************************************************
  ******************************************************************************/
 [[gnu::nonnull]]
-void	bkgd_mask	(class cv::Mat *img);
+int	bkgd_mask	(class cv::Mat *img);
 [[gnu::nonnull]]
-void	bkgd_fill	(class cv::Mat *img);
+int	bkgd_fill	(class cv::Mat *img);
 [[gnu::nonnull]]
-void	holes_mask	(class cv::Mat *img);
+int	holes_mask	(class cv::Mat *img);
 [[gnu::nonnull]]
-void	holes_fill	(class cv::Mat *img);
+int	holes_fill	(class cv::Mat *img);
 
 
 /******************************************************************************
