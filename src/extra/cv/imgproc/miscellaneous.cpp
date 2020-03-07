@@ -61,8 +61,6 @@ int	alx_cv_adaptive_thr		(void *img,
 int	alx::CV::cvt_color		(class cv::Mat *img, int method)
 {
 
-	if (img->channels() != 3)
-		return	1;
 	if (method < 0 || method > cv::COLOR_COLORCVT_MAX)
 		return	1;
 	cv::cvtColor(*img, *img, method, 0);
