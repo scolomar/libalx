@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2018	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,21 +7,18 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/imgproc/miscellaneous.hpp */
+#pragma once	/* libalx/extra/cv/alx/fill.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstdint>
-
 #include <opencv2/core/base.hpp>
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define ALX_CV_THR_OTSU	(-1)
 
 
 /******************************************************************************
@@ -30,18 +27,13 @@
 extern	"C"
 {
 [[gnu::nonnull]]
-int	alx_cv_adaptive_thr		(void *img,
-					 int method, int thr_typ, int ksize);
+void	alx_cv_bkgd_mask	(void *img);
 [[gnu::nonnull]]
-int	alx_cv_cvt_color		(void *img, int method);
+void	alx_cv_bkgd_fill	(void *img);
 [[gnu::nonnull]]
-void	alx_cv_cvt_res_8b		(void *img);
+void	alx_cv_holes_mask	(void *img);
 [[gnu::nonnull]]
-int	alx_cv_distance_transform	(void *img);
-[[gnu::nonnull]]
-int	alx_cv_distance_transform_8b	(void *img);
-[[gnu::nonnull]]
-int	alx_cv_threshold		(void *img, int thr_typ, int thr_val);
+void	alx_cv_holes_fill	(void *img);
 }
 
 
@@ -66,18 +58,13 @@ namespace CV {
  ******* prototypes ***********************************************************
  ******************************************************************************/
 [[gnu::nonnull]]
-int	adaptive_thr		(class cv::Mat *img,
-				 int method, int thr_typ, int ksize);
+void	bkgd_mask	(class cv::Mat *img);
 [[gnu::nonnull]]
-int	cvt_color		(class cv::Mat *img, int method);
+void	bkgd_fill	(class cv::Mat *img);
 [[gnu::nonnull]]
-void	cvt_res_8b		(class cv::Mat *img);
+void	holes_mask	(class cv::Mat *img);
 [[gnu::nonnull]]
-int	distance_transform	(class cv::Mat *img);
-[[gnu::nonnull]]
-int	distance_transform_8b	(class cv::Mat *img);
-[[gnu::nonnull]]
-int	threshold		(class cv::Mat *img, int thr_typ, int thr_val);
+void	holes_fill	(class cv::Mat *img);
 
 
 /******************************************************************************

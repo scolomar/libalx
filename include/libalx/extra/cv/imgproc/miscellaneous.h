@@ -318,20 +318,6 @@ __attribute__((nonnull))
 int	alx_cv_distance_transform_8b	(img_s *img);
 __attribute__((nonnull))
 int	alx_cv_threshold		(img_s *img, int thr_typ, int thr_val);
-__attribute__((nonnull))
-void	alx_cv_bkgd_mask		(img_s *img);
-__attribute__((nonnull))
-void	alx_cv_bkgd_mask		(img_s *img);
-__attribute__((nonnull))
-void	alx_cv_holes_mask		(img_s *img);
-__attribute__((nonnull))
-void	alx_cv_holes_fill		(img_s *img);
-__attribute__((nonnull))
-int	alx_cv_color_white_mask		(img_s *img, uint8_t tolerance);
-__attribute__((nonnull))
-int	alx_cv_color_black_mask		(img_s *img, uint8_t tolerance);
-__attribute__((nonnull))
-int	alx_cv_color_gray_mask		(img_s *img, uint8_t tolerance);
 
 
 /******************************************************************************

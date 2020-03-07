@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2018	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/imgproc/miscellaneous.hpp */
+#pragma once	/* libalx/extra/cv/alx/gray.hpp */
 
 
 /******************************************************************************
@@ -21,7 +21,6 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define ALX_CV_THR_OTSU	(-1)
 
 
 /******************************************************************************
@@ -30,18 +29,11 @@
 extern	"C"
 {
 [[gnu::nonnull]]
-int	alx_cv_adaptive_thr		(void *img,
-					 int method, int thr_typ, int ksize);
+int	alx_cv_white_mask	(void *img, uint8_t tolerance);
 [[gnu::nonnull]]
-int	alx_cv_cvt_color		(void *img, int method);
+int	alx_cv_black_mask	(void *img, uint8_t tolerance);
 [[gnu::nonnull]]
-void	alx_cv_cvt_res_8b		(void *img);
-[[gnu::nonnull]]
-int	alx_cv_distance_transform	(void *img);
-[[gnu::nonnull]]
-int	alx_cv_distance_transform_8b	(void *img);
-[[gnu::nonnull]]
-int	alx_cv_threshold		(void *img, int thr_typ, int thr_val);
+int	alx_cv_gray_mask	(void *img, uint8_t tolerance);
 }
 
 
@@ -66,18 +58,11 @@ namespace CV {
  ******* prototypes ***********************************************************
  ******************************************************************************/
 [[gnu::nonnull]]
-int	adaptive_thr		(class cv::Mat *img,
-				 int method, int thr_typ, int ksize);
+int	white_mask	(class cv::Mat *img, uint8_t tolerance);
 [[gnu::nonnull]]
-int	cvt_color		(class cv::Mat *img, int method);
+int	black_mask	(class cv::Mat *img, uint8_t tolerance);
 [[gnu::nonnull]]
-void	cvt_res_8b		(class cv::Mat *img);
-[[gnu::nonnull]]
-int	distance_transform	(class cv::Mat *img);
-[[gnu::nonnull]]
-int	distance_transform_8b	(class cv::Mat *img);
-[[gnu::nonnull]]
-int	threshold		(class cv::Mat *img, int thr_typ, int thr_val);
+int	gray_mask	(class cv::Mat *img, uint8_t tolerance);
 
 
 /******************************************************************************

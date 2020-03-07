@@ -12,6 +12,8 @@
 ################################################################################
 # dependencies
 OBJ	=								\
+	$(CURDIR)/fill.o						\
+	$(CURDIR)/gray.o						\
 	$(CURDIR)/lines.o						\
 	$(CURDIR)/max.o							\
 	$(CURDIR)/mean.o						\
@@ -19,6 +21,8 @@ OBJ	=								\
 	$(CURDIR)/skeleton.o
 
 SRC	=								\
+	$(SRC_DIR)/extra/cv/alx/fill.cpp				\
+	$(SRC_DIR)/extra/cv/alx/gray.cpp				\
 	$(SRC_DIR)/extra/cv/alx/lines.cpp				\
 	$(SRC_DIR)/extra/cv/alx/max.cpp					\
 	$(SRC_DIR)/extra/cv/alx/mean.cpp				\

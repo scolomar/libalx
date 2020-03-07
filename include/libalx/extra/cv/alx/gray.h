@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2018	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,49 +7,20 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/imgproc/miscellaneous.hpp */
+#pragma once	/* libalx/extra/cv/alx/gray.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstdint>
+#include <sttdint.h>
 
-#include <opencv2/core/base.hpp>
+#include "libalx/extra/cv/types.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define ALX_CV_THR_OTSU	(-1)
-
-
-/******************************************************************************
- ******* extern "C" ***********************************************************
- ******************************************************************************/
-extern	"C"
-{
-[[gnu::nonnull]]
-int	alx_cv_adaptive_thr		(void *img,
-					 int method, int thr_typ, int ksize);
-[[gnu::nonnull]]
-int	alx_cv_cvt_color		(void *img, int method);
-[[gnu::nonnull]]
-void	alx_cv_cvt_res_8b		(void *img);
-[[gnu::nonnull]]
-int	alx_cv_distance_transform	(void *img);
-[[gnu::nonnull]]
-int	alx_cv_distance_transform_8b	(void *img);
-[[gnu::nonnull]]
-int	alx_cv_threshold		(void *img, int thr_typ, int thr_val);
-}
-
-
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-namespace alx {
-namespace CV {
 
 
 /******************************************************************************
@@ -65,26 +36,17 @@ namespace CV {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-[[gnu::nonnull]]
-int	adaptive_thr		(class cv::Mat *img,
-				 int method, int thr_typ, int ksize);
-[[gnu::nonnull]]
-int	cvt_color		(class cv::Mat *img, int method);
-[[gnu::nonnull]]
-void	cvt_res_8b		(class cv::Mat *img);
-[[gnu::nonnull]]
-int	distance_transform	(class cv::Mat *img);
-[[gnu::nonnull]]
-int	distance_transform_8b	(class cv::Mat *img);
-[[gnu::nonnull]]
-int	threshold		(class cv::Mat *img, int thr_typ, int thr_val);
+__attribute__((nonnull))
+int	alx_cv_white_mask	(img_s *img, uint8_t tolerance);
+__attribute__((nonnull))
+int	alx_cv_black_mask	(img_s *img, uint8_t tolerance);
+__attribute__((nonnull))
+int	alx_cv_gray_mask	(img_s *img, uint8_t tolerance);
 
 
 /******************************************************************************
- ******* namespace ************************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-}	/* namespace CV */
-}	/* namespace alx */
 
 
 /******************************************************************************

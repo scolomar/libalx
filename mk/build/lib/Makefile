@@ -127,6 +127,8 @@ CURL_OBJ	=							\
 		$(BUILD_TMP_DIR)/extra/curl/fcurl/ungetc.o		\
 		$(BUILD_TMP_DIR)/extra/curl/fcurl/URL_FILE.o
 CV_OBJ		=							\
+		$(BUILD_TMP_DIR)/extra/cv/alx/fill.o			\
+		$(BUILD_TMP_DIR)/extra/cv/alx/gray.o			\
 		$(BUILD_TMP_DIR)/extra/cv/alx/lines.o			\
 		$(BUILD_TMP_DIR)/extra/cv/alx/max.o			\
 		$(BUILD_TMP_DIR)/extra/cv/alx/mean.o			\
