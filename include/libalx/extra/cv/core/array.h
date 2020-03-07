@@ -27,12 +27,17 @@
  ******* enum *****************************************************************
  ******************************************************************************/
 enum	Alx_Cv_Cmp {
-	ALX_CV_CMP_BLUE,
-	ALX_CV_CMP_H	= ALX_CV_CMP_BLUE,
-	ALX_CV_CMP_GREEN,
-	ALX_CV_CMP_S	= ALX_CV_CMP_GREEN,
-	ALX_CV_CMP_RED,
-	ALX_CV_CMP_V	= ALX_CV_CMP_RED
+	ALX_CV_CMP_BGR_B = 0,
+	ALX_CV_CMP_BGR_G,
+	ALX_CV_CMP_BGR_R,
+
+	ALX_CV_CMP_HSV_H = 0,
+	ALX_CV_CMP_HSV_S,
+	ALX_CV_CMP_HSV_V,
+
+	ALX_CV_CMP_HLS_H = 0,
+	ALX_CV_CMP_HLS_L,
+	ALX_CV_CMP_HLS_S
 };
 
 
