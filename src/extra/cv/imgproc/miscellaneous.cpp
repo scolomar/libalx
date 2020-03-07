@@ -204,13 +204,16 @@ void	alx_cv_holes_fill		(void *img)
 int	alx::CV::color_white_mask	(class cv::Mat *img, uint8_t tolerance)
 {
 	class cv::Mat	cmp_img[3];
+	class cv::Mat	lw;
 
 	if (img->channels() != 3)
 		return	1;
 	cv::cvtColor(*img, *img, cv::COLOR_BGR2HLS, 0);
 	cv::split(*img, cmp_img);
+	img->release();
 	/* light white */
-	cv::threshold(*img, cmp_img[alx::CV::CMP_HLS_L],
+	cmp_img[alx::CV::CMP_HLS_L].copyTo(cmp_img[0]);
+	cv::threshold(cmp_img[0], cmp_img[0],
 			UINT8_MAX - tolerance -1, UINT8_MAX, cv::THRESH_BINARY);
 	/* grayish white */
 	cv::threshold(cmp_img[alx::CV::CMP_HLS_L], cmp_img[alx::CV::CMP_HLS_L],
@@ -218,10 +221,11 @@ int	alx::CV::color_white_mask	(class cv::Mat *img, uint8_t tolerance)
 	cv::threshold(cmp_img[alx::CV::CMP_HLS_S], cmp_img[alx::CV::CMP_HLS_S],
 			tolerance, UINT8_MAX, cv::THRESH_BINARY_INV);
 	cv::bitwise_and(cmp_img[alx::CV::CMP_HLS_S],
-			cmp_img[alx::CV::CMP_HLS_S],
-			cmp_img[alx::CV::CMP_HLS_L]);
+			cmp_img[alx::CV::CMP_HLS_L],
+			cmp_img[alx::CV::CMP_HLS_S]);
 	/* merge */
-	cv::bitwise_or(*img, *img, cmp_img[alx::CV::CMP_HLS_S]);
+	cmp_img[0].copyTo(*img);
+	cv::bitwise_or(*img, cmp_img[alx::CV::CMP_HLS_S], *img);
 
 	for (ptrdiff_t i = 0; i < 3; i++)
 		cmp_img[i].release();
@@ -241,8 +245,10 @@ int	alx::CV::color_black_mask	(class cv::Mat *img, uint8_t tolerance)
 		return	1;
 	cv::cvtColor(*img, *img, cv::COLOR_BGR2HLS, 0);
 	cv::split(*img, cmp_img);
+	img->release();
 	/* dark black */
-	cv::threshold(*img, cmp_img[alx::CV::CMP_HLS_L],
+	cmp_img[alx::CV::CMP_HLS_L].copyTo(cmp_img[0]);
+	cv::threshold(cmp_img[0], cmp_img[0],
 			tolerance, UINT8_MAX, cv::THRESH_BINARY_INV);
 	/* grayish black */
 	cv::threshold(cmp_img[alx::CV::CMP_HLS_L], cmp_img[alx::CV::CMP_HLS_L],
@@ -250,10 +256,11 @@ int	alx::CV::color_black_mask	(class cv::Mat *img, uint8_t tolerance)
 	cv::threshold(cmp_img[alx::CV::CMP_HLS_S], cmp_img[alx::CV::CMP_HLS_S],
 			tolerance, UINT8_MAX, cv::THRESH_BINARY_INV);
 	cv::bitwise_and(cmp_img[alx::CV::CMP_HLS_S],
-			cmp_img[alx::CV::CMP_HLS_S],
-			cmp_img[alx::CV::CMP_HLS_L]);
+			cmp_img[alx::CV::CMP_HLS_L],
+			cmp_img[alx::CV::CMP_HLS_S]);
 	/* merge */
-	cv::bitwise_or(*img, *img, cmp_img[alx::CV::CMP_HLS_S]);
+	cmp_img[0].copyTo(*img);
+	cv::bitwise_or(*img, cmp_img[alx::CV::CMP_HLS_S], *img);
 
 	for (ptrdiff_t i = 0; i < 3; i++)
 		cmp_img[i].release();
@@ -273,17 +280,21 @@ int	alx::CV::color_gray_mask	(class cv::Mat *img, uint8_t tolerance)
 		return	1;
 	cv::cvtColor(*img, *img, cv::COLOR_BGR2HLS, 0);
 	cv::split(*img, cmp_img);
+	img->release();
 	/* dark black */
-	cv::threshold(*img, cmp_img[alx::CV::CMP_HLS_L],
+	cmp_img[alx::CV::CMP_HLS_L].copyTo(cmp_img[0]);
+	cv::threshold(cmp_img[0], cmp_img[0],
 			tolerance, UINT8_MAX, cv::THRESH_BINARY_INV);
 	/* light white */
 	cv::threshold(cmp_img[alx::CV::CMP_HLS_L], cmp_img[alx::CV::CMP_HLS_L],
 			UINT8_MAX - tolerance -1, UINT8_MAX, cv::THRESH_BINARY);
-	cv::bitwise_or(*img, *img, cmp_img[alx::CV::CMP_HLS_L]);
 	/* gray */
 	cv::threshold(cmp_img[alx::CV::CMP_HLS_S], cmp_img[alx::CV::CMP_HLS_S],
 			tolerance, UINT8_MAX, cv::THRESH_BINARY_INV);
-	cv::bitwise_or(*img, *img, cmp_img[alx::CV::CMP_HLS_S]);
+	/* merge */
+	cmp_img[0].copyTo(*img);
+	cv::bitwise_or(*img, cmp_img[alx::CV::CMP_HLS_L], *img);
+	cv::bitwise_or(*img, cmp_img[alx::CV::CMP_HLS_S], *img);
 
 	for (ptrdiff_t i = 0; i < 3; i++)
 		cmp_img[i].release();

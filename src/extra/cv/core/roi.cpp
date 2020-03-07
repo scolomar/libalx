@@ -36,7 +36,7 @@ void	alx::CV::roi_set	(class cv::Mat *restrict img,
 				 const class cv::Rect_<int> *restrict rect)
 {
 	class cv::Mat	tmp;
-
+/* FIXME: check roi is possible */
 	(*img)(*rect).copyTo(tmp);
 	img->release();
 	tmp.copyTo(*img);
