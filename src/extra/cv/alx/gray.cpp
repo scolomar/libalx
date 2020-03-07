@@ -48,9 +48,9 @@ int	alx::CV::white_mask	(class cv::Mat *img,
 	cv::split(*img, cmp_img);
 	img->release();
 	/* light white */
-	cmp_img[alx::CV::CMP_HLS_L].copyTo(cmp_img[0]);
-	cv::threshold(cmp_img[0], cmp_img[0], UINT8_MAX - l_tolerance -1,
-			UINT8_MAX, cv::THRESH_BINARY);
+	cv::threshold(cmp_img[alx::CV::CMP_HLS_L], cmp_img[0],
+				UINT8_MAX - l_tolerance -1,
+				UINT8_MAX, cv::THRESH_BINARY);
 	/* grayish white */
 	cv::threshold(cmp_img[alx::CV::CMP_HLS_L], cmp_img[alx::CV::CMP_HLS_L],
 				UINT8_MAX / 2, UINT8_MAX, cv::THRESH_BINARY);
@@ -86,9 +86,8 @@ int	alx::CV::black_mask	(class cv::Mat *img,
 	cv::split(*img, cmp_img);
 	img->release();
 	/* dark black */
-	cmp_img[alx::CV::CMP_HLS_L].copyTo(cmp_img[0]);
-	cv::threshold(cmp_img[0], cmp_img[0], UINT8_MAX - l_tolerance -1,
-				UINT8_MAX, cv::THRESH_BINARY_INV);
+	cv::threshold(cmp_img[alx::CV::CMP_HLS_L], cmp_img[0],
+				l_tolerance, UINT8_MAX, cv::THRESH_BINARY_INV);
 	/* grayish black */
 	cv::threshold(cmp_img[alx::CV::CMP_HLS_L], cmp_img[alx::CV::CMP_HLS_L],
 				UINT8_MAX / 2, UINT8_MAX, cv::THRESH_BINARY_INV);
@@ -124,9 +123,8 @@ int	alx::CV::gray_mask	(class cv::Mat *img,
 	cv::split(*img, cmp_img);
 	img->release();
 	/* dark black */
-	cmp_img[alx::CV::CMP_HLS_L].copyTo(cmp_img[0]);
-	cv::threshold(cmp_img[0], cmp_img[0], UINT8_MAX - l_tolerance -1,
-				UINT8_MAX, cv::THRESH_BINARY_INV);
+	cv::threshold(cmp_img[alx::CV::CMP_HLS_L], cmp_img[0],
+				l_tolerance, UINT8_MAX, cv::THRESH_BINARY_INV);
 	/* light white */
 	cv::threshold(cmp_img[alx::CV::CMP_HLS_L], cmp_img[alx::CV::CMP_HLS_L],
 				UINT8_MAX - l_tolerance - 1,
