@@ -13,6 +13,8 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <cstdint>
+
 #include <opencv2/core/base.hpp>
 
 
@@ -48,6 +50,12 @@ void	alx_cv_bkgd_fill		(void *img);
 void	alx_cv_holes_mask		(void *img);
 [[gnu::nonnull]]
 void	alx_cv_holes_fill		(void *img);
+[[gnu::nonnull]]
+int	alx_cv_color_white_mask		(void *img, uint8_t tolerance);
+[[gnu::nonnull]]
+int	alx_cv_color_black_mask		(void *img, uint8_t tolerance);
+[[gnu::nonnull]]
+int	alx_cv_color_gray_mask		(void *img, uint8_t tolerance);
 }
 
 
@@ -92,6 +100,12 @@ void	bkgd_fill		(class cv::Mat *img);
 void	holes_mask		(class cv::Mat *img);
 [[gnu::nonnull]]
 void	holes_fill		(class cv::Mat *img);
+[[gnu::nonnull]]
+int	color_white_mask	(class cv::Mat *img, uint8_t tolerance);
+[[gnu::nonnull]]
+int	color_black_mask	(class cv::Mat *img, uint8_t tolerance);
+[[gnu::nonnull]]
+int	color_gray_mask		(class cv::Mat *img, uint8_t tolerance);
 
 
 /******************************************************************************
