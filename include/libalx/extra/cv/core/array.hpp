@@ -53,9 +53,17 @@ namespace CV {
  ******* enum *****************************************************************
  ******************************************************************************/
 enum	Cmp {
-	CMP_BLUE,
-	CMP_GREEN,
-	CMP_RED
+	CMP_BGR_B = 0,
+	CMP_BGR_G,
+	CMP_BGR_R,
+
+	CMP_HSV_H = 0,
+	CMP_HSV_S,
+	CMP_HSV_V,
+
+	CMP_HLS_H = 0,
+	CMP_HLS_L,
+	CMP_HLS_S
 };
 
 
