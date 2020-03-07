@@ -37,11 +37,14 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull))
-int	alx_cv_white_mask	(img_s *img, uint8_t tolerance);
+int	alx_cv_white_mask	(img_s *img,
+				 uint8_t s_tolerance, uint8_t l_tolerance);
 __attribute__((nonnull))
-int	alx_cv_black_mask	(img_s *img, uint8_t tolerance);
+int	alx_cv_black_mask	(img_s *img,
+				 uint8_t s_tolerance, uint8_t l_tolerance);
 __attribute__((nonnull))
-int	alx_cv_gray_mask	(img_s *img, uint8_t tolerance);
+int	alx_cv_gray_mask	(img_s *img,
+				 uint8_t s_tolerance, uint8_t l_tolerance);
 
 
 /******************************************************************************
