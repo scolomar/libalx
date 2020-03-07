@@ -14,6 +14,7 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <stddef.h>
+#include <stdint.h>
 
 #include "libalx/extra/cv/types.h"
 
@@ -54,7 +55,7 @@ int	alx_cv_smooth		(img_s *img, int method, int ksize);
 __attribute__((nonnull))
 int	alx_cv_sobel		(img_s *img, int dx, int dy, ptrdiff_t ksize);
 __attribute__((nonnull))
-int	alx_cv_border		(img_s *img, ptrdiff_t size);
+int	alx_cv_border		(img_s *img, ptrdiff_t size, uint8_t val);
 
 
 /******************************************************************************

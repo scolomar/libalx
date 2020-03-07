@@ -14,6 +14,7 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <cstddef>
+#include <cstdint>
 
 #include <opencv2/core/base.hpp>
 
@@ -41,7 +42,7 @@ int	alx_cv_smooth		(void *img, int method, int ksize);
 [[gnu::nonnull]]
 int	alx_cv_sobel		(void *img, int dx, int dy, ptrdiff_t ksize);
 [[gnu::nonnull]]
-int	alx_cv_border		(void *img, ptrdiff_t size);
+int	alx_cv_border		(void *img, ptrdiff_t size, uint8_t val);
 }
 
 
@@ -83,7 +84,7 @@ int	smooth		(class cv::Mat *img, int method, ptrdiff_t ksize);
 [[gnu::nonnull]]
 int	sobel		(class cv::Mat *img, int dx, int dy, ptrdiff_t ksize);
 [[gnu::nonnull]]
-int	border		(class cv::Mat *img, ptrdiff_t size);
+int	border		(class cv::Mat *img, ptrdiff_t size, uint8_t val);
 
 
 /******************************************************************************

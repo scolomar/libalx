@@ -147,7 +147,8 @@ int	alx_cv_sobel		(void *img, int dx, int dy, ptrdiff_t ksize)
 	return	alx::CV::sobel((class cv::Mat *)img, dx, dy, ksize);
 }
 
-int	alx::CV::border		(class cv::Mat *img, ptrdiff_t size)
+int	alx::CV::border		(class cv::Mat *img,
+				 ptrdiff_t size, uint8_t val)
 {
 	class cv::Mat	tmp;
 
@@ -156,15 +157,15 @@ int	alx::CV::border		(class cv::Mat *img, ptrdiff_t size)
 
 	tmp	= cv::Mat(cv::Size(img->cols + size, img->rows + size), CV_8U);
 	cv::copyMakeBorder(*img, tmp, size, size, size, size,
-					cv::BORDER_CONSTANT, cv::Scalar(0));
+					cv::BORDER_CONSTANT, cv::Scalar(val));
 	tmp.copyTo(*img);
 	tmp.release();
 	return	0;
 }
 
-int	alx_cv_border		(void *img, ptrdiff_t size)
+int	alx_cv_border		(void *img, ptrdiff_t size, uint8_t val)
 {
-	return	alx::CV::border((class cv::Mat *)img, size);
+	return	alx::CV::border((class cv::Mat *)img, size, val);
 }
 
 
