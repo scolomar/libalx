@@ -34,7 +34,7 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx::CV::bkgd_mask	(class cv::Mat *img)
+int	alx::CV::bkgd_fill	(class cv::Mat *img)
 {
 
 	if (img->channels() != 1)
@@ -43,28 +43,28 @@ int	alx::CV::bkgd_mask	(class cv::Mat *img)
 	return	0;
 }
 
-int	alx_cv_bkgd_mask	(void *img)
+int	alx_cv_bkgd_fill	(void *img)
 {
-	return	alx::CV::bkgd_mask((class cv::Mat *)img);
+	return	alx::CV::bkgd_fill((class cv::Mat *)img);
 }
 
-int	alx::CV::bkgd_fill	(class cv::Mat *img)
+int	alx::CV::bkgd_mask	(class cv::Mat *img)
 {
 	class cv::Mat	tmp;
 
 	if (img->channels() != 1)
 		return	1;
 	img->copyTo(tmp);
-	alx::CV::bkgd_mask(&tmp);
-	cv::bitwise_or(*img, tmp, *img);
+	cv::floodFill(tmp, cv::Point(0, 0), UINT8_MAX);
+	cv::bitwise_xor(*img, tmp, *img);
 
 	tmp.release();
 	return	0;
 }
 
-int	alx_cv_bkgd_fill	(void *img)
+int	alx_cv_bkgd_mask	(void *img)
 {
-	return	alx::CV::bkgd_fill((class cv::Mat *)img);
+	return	alx::CV::bkgd_mask((class cv::Mat *)img);
 }
 
 int	alx::CV::holes_mask	(class cv::Mat *img)
@@ -72,7 +72,7 @@ int	alx::CV::holes_mask	(class cv::Mat *img)
 
 	if (img->channels() != 1)
 		return	1;
-	alx::CV::bkgd_fill(img);
+	cv::floodFill(*img, cv::Point(0, 0), UINT8_MAX);
 	cv::bitwise_not(*img, *img);
 	return	0;
 }
