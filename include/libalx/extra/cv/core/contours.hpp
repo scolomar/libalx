@@ -43,8 +43,8 @@ void	alx_cv_init_conts	(void *conts);
 [[gnu::nonnull]]
 void	alx_cv_deinit_conts	(void *conts);
 /* ----- Extract */
-[[gnu::nonnull(1, 3)]]
-void	alx_cv_extract_conts	(const void *restrict conts,
+[[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
+int	alx_cv_extract_conts	(const void *restrict conts,
 				 const void **restrict cont,
 				 ptrdiff_t *restrict size);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
@@ -96,8 +96,8 @@ void	deinit_conts	(class std::vector<
 					class cv::Point_<
 					int>>> *conts);
 /* ----- Extract */
-[[gnu::nonnull(1, 3)]]
-void	extract_conts	(const class std::vector<
+[[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
+int	extract_conts	(const class std::vector<
 					class std::vector<
 					class cv::Point_<int>>> *restrict conts,
 			 const class std::vector<

@@ -99,24 +99,30 @@ void	alx_cv_deinit_conts	(void *conts)
 }
 
 /* ----- Extract */
-void	alx::CV::extract_conts	(const class std::vector<
+int	alx::CV::extract_conts	(const class std::vector<
 					class std::vector<
 					class cv::Point_<int>>> *restrict conts,
 				 const class std::vector<
 					class cv::Point_<int>> **restrict cont,
 				 ptrdiff_t *restrict size)
 {
+	ptrdiff_t	sz;
 
+	sz	= conts->size();
+	if (sz <= 0)
+		return	-1;
 	if (cont)
 		*cont	= &(*conts)[0];
-	*size	= conts->size();
+	if (size)
+		*size	= sz;
+	return	0;
 }
 
-void	alx_cv_extract_conts	(const void *restrict conts,
+int	alx_cv_extract_conts	(const void *restrict conts,
 				 const void **restrict cont,
 				 ptrdiff_t *restrict size)
 {
-	alx::CV::extract_conts((const class std::vector<
+	return	alx::CV::extract_conts((const class std::vector<
 						class std::vector<
 						class cv::Point_<int>>> *)conts,
 					(const class std::vector<
