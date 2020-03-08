@@ -29,14 +29,14 @@
 extern	"C"
 {
 [[gnu::nonnull]]
-int	alx_cv_white_mask	(void *img,
-				 uint8_t s_tolerance, uint8_t l_tolerance);
+int	alx_cv_white_mask	(void *img, int16_t SL_tolerance,
+				 int16_t S_tolerance, int16_t L_tolerance);
 [[gnu::nonnull]]
-int	alx_cv_black_mask	(void *img,
-				 uint8_t s_tolerance, uint8_t l_tolerance);
+int	alx_cv_black_mask	(void *img, int16_t SL_tolerance,
+				 int16_t S_tolerance, int16_t L_tolerance);
 [[gnu::nonnull]]
-int	alx_cv_gray_mask	(void *img,
-				 uint8_t s_tolerance, uint8_t l_tolerance);
+int	alx_cv_gray_mask	(void *img, int16_t SL_tolerance,
+				 int16_t S_tolerance, int16_t L_tolerance);
 }
 
 
@@ -61,14 +61,14 @@ namespace CV {
  ******* prototypes ***********************************************************
  ******************************************************************************/
 [[gnu::nonnull]]
-int	white_mask	(class cv::Mat *img,
-			 uint8_t s_tolerance, uint8_t l_tolerance);
+int	white_mask	(class cv::Mat *img, int16_t SL_tolerance,
+			 int16_t S_tolerance, int16_t L_tolerance);
 [[gnu::nonnull]]
-int	black_mask	(class cv::Mat *img,
-			 uint8_t s_tolerance, uint8_t l_tolerance);
+int	black_mask	(class cv::Mat *img, int16_t SL_tolerance,
+			 int16_t S_tolerance, int16_t L_tolerance);
 [[gnu::nonnull]]
-int	gray_mask	(class cv::Mat *img,
-			 uint8_t s_tolerance, uint8_t l_tolerance);
+int	gray_mask	(class cv::Mat *img, int16_t SL_tolerance,
+			 int16_t S_tolerance, int16_t L_tolerance);
 
 
 /******************************************************************************
