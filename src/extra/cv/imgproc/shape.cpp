@@ -49,11 +49,8 @@ int	alx::CV::contours	(class cv::Mat *restrict img,
 		return	-1;
 	cv::findContours(*img, *contours, hierarchy, cv::RETR_EXTERNAL,
 							cv::CHAIN_APPROX_SIMPLE);
-	/* Set image to black */
 	img->setTo(cv::Scalar(0));
-	/* Draw contours in color */
-	cv::drawContours(*img, *contours, -1, cv::Scalar(UINT8_MAX), 1, 8,
-						hierarchy, 1, cv::Point(0, 0));
+	cv::drawContours(*img, *contours, -1, cv::Scalar(UINT8_MAX), 1);
 
 	hierarchy.release();
 	return	0;
@@ -92,6 +89,7 @@ void	alx_cv_contour_dimensions(const void *restrict contour,
 
 int	alx::CV::conts_largest(const class std::vector<
 					class cv::Point_<int>> **restrict cont,
+				 ptrdiff_t *restrict i,
 				 const class std::vector<
 					class std::vector<
 					class cv::Point_<int>>> *restrict conts)
@@ -104,11 +102,14 @@ int	alx::CV::conts_largest(const class std::vector<
 	if (!n)
 		return	-1;
 
-	for (ptrdiff_t i = 0; i < n; i++) {
-		a	= cv::contourArea((*conts)[i]);
+	for (ptrdiff_t j = 0; j < n; j++) {
+		a	= cv::contourArea((*conts)[j]);
 		if (a > area) {
 			area	= a;
-			*cont	= &(*conts)[i];
+			if (cont)
+				*cont	= &(*conts)[j];
+			if (i)
+				*i	= j;
 		}
 	}
 
@@ -116,14 +117,40 @@ int	alx::CV::conts_largest(const class std::vector<
 }
 
 int	alx_cv_conts_largest	(const void **restrict cont,
-				 const void *restrict conts)
+				 const void *restrict conts,
+				 ptrdiff_t *restrict i)
 {
 	return	alx::CV::conts_largest((const class std::vector<
 						class cv::Point_<int>> **)cont,
-					 (const class std::vector<
+					i,
+					(const class std::vector<
 						class std::vector<
 						class cv::Point_<
 						int>>> *)conts);
+}
+
+int	alx::CV::contour_mask	(class cv::Mat *restrict img,
+				 const class std::vector<
+					class std::vector<
+					class cv::Point_<int>>> *restrict conts,
+				 ptrdiff_t i)
+{
+
+	if (img->channels() != 1)
+		return	-1;
+	cv::drawContours(*img, *conts, i, cv::Scalar(UINT8_MAX), -1);
+	return	0;
+}
+
+int	alx_cv_contour_mask	(const void **restrict img,
+				 const void *restrict conts, ptrdiff_t i)
+{
+	return	alx::CV::contour_mask((class cv::Mat *)img,
+				  	(const class std::vector<
+						class std::vector<
+						class cv::Point_<
+						int>>> *)conts,
+					i);
 }
 
 void	alx::CV::bounding_rect	(class cv::Rect_ <int> *restrict rect,

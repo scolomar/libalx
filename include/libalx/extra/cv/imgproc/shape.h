@@ -41,9 +41,13 @@ __attribute__((nonnull(1)))
 void	alx_cv_contour_dimensions(const cont_s *restrict cont,
 				 double *restrict area,
 				 double *restrict perimeter);
-__attribute__((nonnull, warn_unused_result))
-int	alx_cv_conts_largest	(const conts_s **restrict cont,
+__attribute__((nonnull(3), warn_unused_result))
+int	alx_cv_conts_largest	(const cont_s **restrict cont,
+				 ptrdiff_t *restrict i,
 				 const conts_s *restrict conts);
+__attribute__((nonnull, warn_unused_result))
+int	alx_cv_contour_mask	(const img_s **restrict img,
+				 const conts_s *restrict conts, ptrdiff_t i)
 __attribute__((nonnull))
 void	alx_cv_bounding_rect	(rect_s *restrict rect,
 				 const cont_s *restrict contour);
