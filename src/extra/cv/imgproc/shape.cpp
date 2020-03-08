@@ -117,8 +117,8 @@ int	alx::CV::conts_largest(const class std::vector<
 }
 
 int	alx_cv_conts_largest	(const void **restrict cont,
-				 const void *restrict conts,
-				 ptrdiff_t *restrict i)
+				 ptrdiff_t *restrict i,
+				 const void *restrict conts)
 {
 	return	alx::CV::conts_largest((const class std::vector<
 						class cv::Point_<int>> **)cont,
