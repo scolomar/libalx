@@ -152,10 +152,8 @@ int	alx::CV::border		(class cv::Mat *img,
 {
 	class cv::Mat	tmp;
 
-	if (img->channels() != 1)
-		return	1;
-
-	tmp	= cv::Mat(cv::Size(img->cols + size, img->rows + size), CV_8U);
+	tmp	= cv::Mat(cv::Size(img->cols + size * 2, img->rows + size * 2),
+								img->depth());
 	cv::copyMakeBorder(*img, tmp, size, size, size, size,
 					cv::BORDER_CONSTANT, cv::Scalar(val));
 	tmp.copyTo(*img);
