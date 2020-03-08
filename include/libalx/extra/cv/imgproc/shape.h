@@ -47,7 +47,7 @@ int	alx_cv_conts_largest	(const cont_s **restrict cont,
 				 const conts_s *restrict conts);
 __attribute__((nonnull, warn_unused_result))
 int	alx_cv_contour_mask	(const img_s **restrict img,
-				 const conts_s *restrict conts, ptrdiff_t i)
+				 const conts_s *restrict conts, ptrdiff_t i);
 __attribute__((nonnull))
 void	alx_cv_bounding_rect	(rect_s *restrict rect,
 				 const cont_s *restrict contour);
