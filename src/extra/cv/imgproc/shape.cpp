@@ -90,17 +90,16 @@ void	alx_cv_contour_dimensions(const void *restrict contour,
 					area, perimeter);
 }
 
-ptrdiff_t alx::CV::conts_largest(const class std::vector<
+int	alx::CV::conts_largest(const class std::vector<
+					class cv::Point_<int>> **restrict cont,
+				 const class std::vector<
 					class std::vector<
-					class cv::Point_<int>>> *conts)
+					class cv::Point_<int>>> *restrict conts)
 {
-	double		area;
-	double		a;
-	ptrdiff_t	largest;
+	double		area, a;
 	ptrdiff_t	n;
 
-	area	= 0;
-	largest	= 0;
+	area	= -1;
 	n	= conts->size();
 	if (!n)
 		return	-1;
@@ -109,16 +108,19 @@ ptrdiff_t alx::CV::conts_largest(const class std::vector<
 		a	= cv::contourArea((*conts)[i]);
 		if (a > area) {
 			area	= a;
-			largest	= i;
+			*cont	= &(*conts)[i];
 		}
 	}
 
-	return	largest;
+	return	0;
 }
 
-ptrdiff_t alx_cv_conts_largest	(const void *conts)
+int	alx_cv_conts_largest	(const void **restrict cont,
+				 const void *restrict conts)
 {
 	return	alx::CV::conts_largest((const class std::vector<
+						class cv::Point_<int>> **)cont,
+					 (const class std::vector<
 						class std::vector<
 						class cv::Point_<
 						int>>> *)conts);
