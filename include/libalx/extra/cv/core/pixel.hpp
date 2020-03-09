@@ -32,11 +32,11 @@ extern	"C"
 {
 [[gnu::nonnull]]
 int	alx_cv_pixel_get_u8	(const void *restrict img,
-				 unsigned char *restrict val,
+				 uint8_t *restrict val,
 				 ptrdiff_t x, ptrdiff_t y);
 [[gnu::nonnull]]
 int	alx_cv_pixel_set_u8	(void *img,
-				 unsigned char val, ptrdiff_t x, ptrdiff_t y);
+				 uint8_t val, ptrdiff_t x, ptrdiff_t y);
 [[gnu::nonnull]]
 int	alx_cv_pixel_get_flt	(const void *restrict img,
 				 float *restrict val, ptrdiff_t x, ptrdiff_t y);
@@ -65,10 +65,10 @@ namespace CV {
  ******************************************************************************/
 [[gnu::nonnull]]
 int	pixel_get_u8	(const class cv::Mat *restrict img,
-			 unsigned char *restrict val, ptrdiff_t x, ptrdiff_t y);
+			 uint8_t *restrict val, ptrdiff_t x, ptrdiff_t y);
 [[gnu::nonnull]]
 int	pixel_set_u8	(class cv::Mat *img,
-			 unsigned char val, ptrdiff_t x, ptrdiff_t y);
+			 uint8_t val, ptrdiff_t x, ptrdiff_t y);
 [[gnu::nonnull]]
 int	pixel_get_flt	(const class cv::Mat *restrict img,
 			 float *restrict val, ptrdiff_t x, ptrdiff_t y);
