@@ -7,18 +7,44 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/imgproc/shape.h */
+#pragma once	/* libalx/extra/cv/imgproc/geometric/geom.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/cv/types.h"
+#include <opencv2/core/base.hpp>
+
+#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern	"C"
+{
+[[gnu::nonnull]]
+int	alx_cv_mirror		(void *img, int axis);
+[[gnu::nonnull]]
+int	alx_cv_rotate_orto	(void *img, int n);
+[[gnu::nonnull]]
+int	alx_cv_rotate		(void *img, double x, double y, double angle);
+[[gnu::nonnull]]
+int	alx_cv_rotate_2rect	(void *restrict img,
+				 const void *restrict rect_rot);
+}
+
+
+/******************************************************************************
+ ******* namespace ************************************************************
+ ******************************************************************************/
+namespace alx {
+namespace CV {
 
 
 /******************************************************************************
@@ -34,40 +60,22 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
-int	alx_cv_contours		(img_s *restrict img,
-				 conts_s *restrict contours);
-__attribute__((nonnull(1)))
-void	alx_cv_contour_dimensions(const cont_s *restrict cont,
-				 double *restrict area,
-				 double *restrict perimeter);
-__attribute__((nonnull(3), warn_unused_result))
-int	alx_cv_conts_largest	(const cont_s **restrict cont,
-				 ptrdiff_t *restrict i,
-				 const conts_s *restrict conts);
-__attribute__((nonnull))
-int	alx_cv_contour_mask	(const img_s **restrict img,
-				 const conts_s *restrict conts, ptrdiff_t i);
-__attribute__((nonnull))
-void	alx_cv_bounding_rect	(rect_s *restrict rect,
-				 const cont_s *restrict contour);
-__attribute__((nonnull))
-void	alx_cv_fit_ellipse	(rect_rot_s *restrict rect_rot,
-				 const cont_s *restrict contour);
-__attribute__((nonnull))
-void	alx_cv_min_area_rect	(rect_rot_s *restrict rect_rot,
-				 const cont_s *restrict contour);
-__attribute__((nonnull))
-void	alx_cv_draw_rect	(img_s *restrict img,
-				 const rect_s *restrict rect);
-__attribute__((nonnull))
-void	alx_cv_draw_rect_rot	(img_s *restrict img,
-				 const rect_rot_s *restrict rect_rot);
+[[gnu::nonnull]]
+int	mirror		(class cv::Mat *img, int axis);
+[[gnu::nonnull]]
+int	rotate_orto	(class cv::Mat *img, int n);
+[[gnu::nonnull]]
+int	rotate		(class cv::Mat *img, double x, double y, double angle);
+[[gnu::nonnull]]
+int	rotate_2rect	(class cv::Mat *restrict img,
+			 const class cv::RotatedRect *restrict rect_rot);
 
 
 /******************************************************************************
- ******* inline ***************************************************************
+ ******* namespace ************************************************************
  ******************************************************************************/
+}	/* namespace CV */
+}	/* namespace alx */
 
 
 /******************************************************************************

@@ -7,39 +7,18 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/imgproc/histogram.hpp */
+#pragma once	/* libalx/extra/cv/imgproc/shape/rect.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <opencv2/core/base.hpp>
-
-#include "libalx/base/compiler/restrict.hpp"
+#include "libalx/extra/cv/types.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* extern "C" ***********************************************************
- ******************************************************************************/
-extern	"C"
-{
-[[gnu::nonnull]]
-int	alx_cv_histogram1D	(void *restrict hist, const void *restrict img);
-[[gnu::nonnull]]
-int	alx_cv_histogram3D	(void *restrict hist, const void *restrict img);
-}
-
-
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-namespace alx {
-namespace CV {
 
 
 /******************************************************************************
@@ -55,19 +34,26 @@ namespace CV {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-[[gnu::nonnull]]
-int	histogram1D	(class cv::Mat *restrict hist,
-			 const class cv::Mat *restrict img);
-[[gnu::nonnull]]
-int	histogram3D	(class cv::Mat *restrict hist,
-			 const class cv::Mat *restrict img);
+__attribute__((nonnull))
+void	alx_cv_bounding_rect	(rect_s *restrict rect,
+				 const cont_s *restrict contour);
+__attribute__((nonnull))
+void	alx_cv_fit_ellipse	(rect_rot_s *restrict rect_rot,
+				 const cont_s *restrict contour);
+__attribute__((nonnull))
+void	alx_cv_min_area_rect	(rect_rot_s *restrict rect_rot,
+				 const cont_s *restrict contour);
+__attribute__((nonnull))
+void	alx_cv_draw_rect	(img_s *restrict img,
+				 const rect_s *restrict rect);
+__attribute__((nonnull))
+void	alx_cv_draw_rect_rot	(img_s *restrict img,
+				 const rect_rot_s *restrict rect_rot);
 
 
 /******************************************************************************
- ******* namespace ************************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-}	/* namespace CV */
-}	/* namespace alx */
 
 
 /******************************************************************************

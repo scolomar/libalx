@@ -12,20 +12,22 @@
 ################################################################################
 # dependencies
 OBJ	=								\
-	$(CURDIR)/features.o						\
-	$(CURDIR)/filter.o						\
-	$(CURDIR)/geometric.o						\
-	$(CURDIR)/histogram.o						\
-	$(CURDIR)/miscellaneous.o					\
-	$(CURDIR)/shape.o
+	$(CURDIR)/features/features.o					\
+	$(CURDIR)/filter/filter.o					\
+	$(CURDIR)/geometric/geom.o					\
+	$(CURDIR)/histogram/hist.o					\
+	$(CURDIR)/miscellaneous/misc.o					\
+	$(CURDIR)/shape/contours.o					\
+	$(CURDIR)/shape/rect.o
 
 SRC	=								\
-	$(SRC_DIR)/extra/cv/imgproc/features.cpp			\
-	$(SRC_DIR)/extra/cv/imgproc/filter.cpp				\
-	$(SRC_DIR)/extra/cv/imgproc/geometric.cpp			\
-	$(SRC_DIR)/extra/cv/imgproc/histogram.cpp			\
-	$(SRC_DIR)/extra/cv/imgproc/miscellaneous.cpp			\
-	$(SRC_DIR)/extra/cv/imgproc/shape.cpp
+	$(SRC_DIR)/extra/cv/imgproc/features/features.cpp		\
+	$(SRC_DIR)/extra/cv/imgproc/filter/filter.cpp			\
+	$(SRC_DIR)/extra/cv/imgproc/geometric/geom.cpp			\
+	$(SRC_DIR)/extra/cv/imgproc/histogram/hist.cpp			\
+	$(SRC_DIR)/extra/cv/imgproc/miscellaneous/misc.cpp		\
+	$(SRC_DIR)/extra/cv/imgproc/shape/contours.cpp			\
+	$(SRC_DIR)/extra/cv/imgproc/shape/rect.cpp
 
 DEP		= $(OBJ:.o=.d)
 BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))

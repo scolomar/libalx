@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/cv/imgproc/histogram.hpp"
+#include "libalx/extra/cv/imgproc/histogram/hist.hpp"
 
 #include <cstddef>
 #include <cstdint>

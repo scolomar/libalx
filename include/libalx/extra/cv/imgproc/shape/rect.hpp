@@ -7,12 +7,14 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/imgproc/geometric.hpp */
+#pragma once	/* libalx/extra/cv/imgproc/shape/rect.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <vector>
+
 #include <opencv2/core/base.hpp>
 
 #include "libalx/base/compiler/restrict.hpp"
@@ -29,13 +31,19 @@
 extern	"C"
 {
 [[gnu::nonnull]]
-int	alx_cv_mirror		(void *img, int axis);
+void	alx_cv_bounding_rect	(void *restrict rect,
+				 const void *restrict contour);
 [[gnu::nonnull]]
-int	alx_cv_rotate_orto	(void *img, int n);
+void	alx_cv_fit_ellipse	(void *restrict rect_rot,
+				 const void *restrict contour);
 [[gnu::nonnull]]
-int	alx_cv_rotate		(void *img, double x, double y, double angle);
+void	alx_cv_min_area_rect	(void *restrict rect_rot,
+				 const void *restrict contour);
 [[gnu::nonnull]]
-int	alx_cv_rotate_2rect	(void *restrict img,
+void	alx_cv_draw_rect	(void *restrict img,
+				 const void *restrict rect);
+[[gnu::nonnull]]
+void	alx_cv_draw_rect_rot	(void *restrict img,
 				 const void *restrict rect_rot);
 }
 
@@ -61,14 +69,26 @@ namespace CV {
  ******* prototypes ***********************************************************
  ******************************************************************************/
 [[gnu::nonnull]]
-int	mirror		(class cv::Mat *img, int axis);
+void	bounding_rect	(class cv::Rect_ <int> *restrict rect,
+			 const class std::vector <
+				class cv::Point_ <
+				int>>  *restrict contour);
 [[gnu::nonnull]]
-int	rotate_orto	(class cv::Mat *img, int n);
+void	fit_ellipse	(class cv::RotatedRect *restrict rect_rot,
+			 const class std::vector <
+				class cv::Point_ <
+				int>>  *restrict contour);
 [[gnu::nonnull]]
-int	rotate		(class cv::Mat *img, double x, double y, double angle);
+void	min_area_rect	(class cv::RotatedRect *restrict rect_rot,
+			 const class std::vector <
+				class cv::Point_ <
+				int>>  *restrict contour);
 [[gnu::nonnull]]
-int	rotate_2rect	(class cv::Mat *restrict img,
-			 const class cv::RotatedRect *restrict rect_rot);
+void	draw_rect	(class cv::Mat *restrict img,
+			 const class cv::Rect_ <int> *restrict rect);
+[[gnu::nonnull]]
+void	draw_rect_rot	(class cv::Mat *restrict img,
+			 class cv::RotatedRect *restrict rect_rot);
 
 
 /******************************************************************************

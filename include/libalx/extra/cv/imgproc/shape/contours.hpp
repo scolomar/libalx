@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/imgproc/shape.hpp */
+#pragma once	/* libalx/extra/cv/imgproc/shape/contours.hpp */
 
 
 /******************************************************************************
@@ -35,7 +35,9 @@ int	alx_cv_contours		(void *restrict img, void *restrict contours);
 [[gnu::nonnull(1)]]
 void	alx_cv_contour_dimensions(const void *restrict contour,
 				 double *restrict area,
-				 double *restrict perimeter);
+				 double *restrict perimeter,
+				 ptrdiff_t *restrict ctr_x,
+				 ptrdiff_t *restrict ctr_y);
 [[gnu::nonnull(3)]] [[gnu::warn_unused_result]]
 int	alx_cv_conts_largest	(const void **restrict cont,
 				 ptrdiff_t *restrict i,
@@ -43,21 +45,6 @@ int	alx_cv_conts_largest	(const void **restrict cont,
 [[gnu::nonnull]]
 int	alx_cv_contour_mask	(const void **restrict img,
 				 const void *restrict conts, ptrdiff_t i);
-[[gnu::nonnull]]
-void	alx_cv_bounding_rect	(void *restrict rect,
-				 const void *restrict contour);
-[[gnu::nonnull]]
-void	alx_cv_fit_ellipse	(void *restrict rect_rot,
-				 const void *restrict contour);
-[[gnu::nonnull]]
-void	alx_cv_min_area_rect	(void *restrict rect_rot,
-				 const void *restrict contour);
-[[gnu::nonnull]]
-void	alx_cv_draw_rect	(void *restrict img,
-				 const void *restrict rect);
-[[gnu::nonnull]]
-void	alx_cv_draw_rect_rot	(void *restrict img,
-				 const void *restrict rect_rot);
 }
 
 
@@ -92,7 +79,9 @@ void	contour_dimensions(const class std::vector<
 				class cv::Point_<
 				int>>  *restrict contour,
 			 double *restrict area,
-			 double *restrict perimeter);
+			 double *restrict perimeter,
+			 ptrdiff_t *restrict ctr_x,
+			 ptrdiff_t *restrict ctr_y);
 [[gnu::nonnull(3)]] [[gnu::warn_unused_result]]
 int	conts_largest	(const class std::vector<
 				class cv::Point_<int>> **restrict cont,
@@ -106,27 +95,6 @@ int	contour_mask	(class cv::Mat *restrict img,
 				class std::vector<
 				class cv::Point_<int>>> *restrict conts,
 			 ptrdiff_t i);
-[[gnu::nonnull]]
-void	bounding_rect	(class cv::Rect_ <int> *restrict rect,
-			 const class std::vector <
-				class cv::Point_ <
-				int>>  *restrict contour);
-[[gnu::nonnull]]
-void	fit_ellipse	(class cv::RotatedRect *restrict rect_rot,
-			 const class std::vector <
-				class cv::Point_ <
-				int>>  *restrict contour);
-[[gnu::nonnull]]
-void	min_area_rect	(class cv::RotatedRect *restrict rect_rot,
-			 const class std::vector <
-				class cv::Point_ <
-				int>>  *restrict contour);
-[[gnu::nonnull]]
-void	draw_rect	(class cv::Mat *restrict img,
-			 const class cv::Rect_ <int> *restrict rect);
-[[gnu::nonnull]]
-void	draw_rect_rot	(class cv::Mat *restrict img,
-			 class cv::RotatedRect *restrict rect_rot);
 
 
 /******************************************************************************

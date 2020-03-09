@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/cv/imgproc/geometric.hpp"
+#include "libalx/extra/cv/imgproc/geometric/geom.hpp"
 
 #include <opencv2/core/mat.hpp>
 #include <opencv2/imgproc.hpp>

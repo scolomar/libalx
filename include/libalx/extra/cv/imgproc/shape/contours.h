@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/imgproc/geometric.h */
+#pragma once	/* libalx/extra/cv/imgproc/shape/contours.h */
 
 
 /******************************************************************************
@@ -35,14 +35,21 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull))
-int	alx_cv_mirror		(img_s *img, int axis);
+int	alx_cv_contours		(img_s *restrict img,
+				 conts_s *restrict contours);
+__attribute__((nonnull(1)))
+void	alx_cv_contour_dimensions(const cont_s *restrict cont,
+				 double *restrict area,
+				 double *restrict perimeter,
+				 ptrdiff_t *restrict ctr_x,
+				 ptrdiff_t *restrict ctr_y);
+__attribute__((nonnull(3), warn_unused_result))
+int	alx_cv_conts_largest	(const cont_s **restrict cont,
+				 ptrdiff_t *restrict i,
+				 const conts_s *restrict conts);
 __attribute__((nonnull))
-int	alx_cv_rotate_orto	(img_s *img, int n);
-__attribute__((nonnull))
-int	alx_cv_rotate		(img_s *img, double x, double y, double angle);
-__attribute__((nonnull))
-int	alx_cv_rotate_2rect	(img_s *restrict img,
-				 const rect_rot_s *restrict rect_rot);
+int	alx_cv_contour_mask	(const img_s **restrict img,
+				 const conts_s *restrict conts, ptrdiff_t i);
 
 
 /******************************************************************************

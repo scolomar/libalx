@@ -143,12 +143,13 @@ CV_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/cv/features2d/orb.o		\
 		$(BUILD_TMP_DIR)/extra/cv/highgui/file.o		\
 		$(BUILD_TMP_DIR)/extra/cv/highgui/window.o		\
-		$(BUILD_TMP_DIR)/extra/cv/imgproc/features.o		\
-		$(BUILD_TMP_DIR)/extra/cv/imgproc/filter.o		\
-		$(BUILD_TMP_DIR)/extra/cv/imgproc/geometric.o		\
-		$(BUILD_TMP_DIR)/extra/cv/imgproc/histogram.o		\
-		$(BUILD_TMP_DIR)/extra/cv/imgproc/miscellaneous.o	\
-		$(BUILD_TMP_DIR)/extra/cv/imgproc/shape.o		\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/features/features.o	\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/filter/filter.o	\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/geometric/geom.o	\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/histogram/hist.o	\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/miscellaneous/misc.o	\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/shape/contours.o	\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/shape/rect.o		\
 		$(BUILD_TMP_DIR)/extra/cv/videoio/cam.o			\
 		$(BUILD_TMP_DIR)/extra/cv/ximgproc/thinning.o
 GMP_OBJ		=							\
@@ -311,7 +312,7 @@ libalx/libalx-cv.a: $(patsubst %.o,%.a.o,$(CV_OBJ))
 libalx/libalx-cv.so: $(patsubst %.o,%.so.o,$(CV_OBJ))
 	@echo	"	CXX	build/lib/$@"
 	$(Q)$(CXX) $(LDFLAGS) -o $@ $^ `pkg-config --libs opencv4`	\
-						-l alx-gsl -l alx-base
+						-l alx-gsl -l alx-base -l m
 
 libalx/libalx-gmp.a: $(patsubst %.o,%.a.o,$(GMP_OBJ))
 libalx/libalx-gmp.so: $(patsubst %.o,%.so.o,$(GMP_OBJ))
