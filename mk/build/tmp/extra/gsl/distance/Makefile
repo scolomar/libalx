@@ -12,10 +12,12 @@
 ################################################################################
 # dependencies
 OBJ	=								\
+	$(CURDIR)/chebyshev.o						\
 	$(CURDIR)/euclidean.o						\
 	$(CURDIR)/manhattan.o
 
 SRC	=								\
+	$(SRC_DIR)/extra/gsl/distance/chebyshev.c			\
 	$(SRC_DIR)/extra/gsl/distance/euclidean.c			\
 	$(SRC_DIR)/extra/gsl/distance/manhattan.c
 
