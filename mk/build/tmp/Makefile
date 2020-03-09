@@ -76,6 +76,7 @@ gmp:
 
 PHONY += gsl
 gsl:
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/distance/
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/distributions/
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/rstat/
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/statistics/
