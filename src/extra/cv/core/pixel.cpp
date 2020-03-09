@@ -35,7 +35,7 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 int	alx::CV::pixel_get_u8	(const class cv::Mat *restrict img,
-				 unsigned char *restrict val,
+				 uint8_t *restrict val,
 				 ptrdiff_t x, ptrdiff_t y)
 {
 
@@ -44,20 +44,20 @@ int	alx::CV::pixel_get_u8	(const class cv::Mat *restrict img,
 		return	-1;
 	if (x < 0 || y < 0)
 		return	-1;
-	*val	= img->at<unsigned char>(y, x);
+	*val	= img->at<uint8_t>(y, x);
 
 	return	0;
 }
 
 int	alx_cv_pixel_get_u8	(const void *restrict img,
-				 unsigned char *restrict val,
+				 uint8_t *restrict val,
 				 ptrdiff_t x, ptrdiff_t y)
 {
 	return	alx::CV::pixel_get_u8((const class cv::Mat *)img, val, x, y);
 }
 
 int	alx::CV::pixel_set_u8	(class cv::Mat *img,
-				 unsigned char val, ptrdiff_t x, ptrdiff_t y)
+				 uint8_t val, ptrdiff_t x, ptrdiff_t y)
 {
 
 	/* TODO: multichannel images */
@@ -65,13 +65,13 @@ int	alx::CV::pixel_set_u8	(class cv::Mat *img,
 		return	1;
 	if (x < 0 || y < 0)
 		return	1;
-	img->at<unsigned char>(y, x)	= val;
+	img->at<uint8_t>(y, x)	= val;
 
 	return	0;
 }
 
 int	alx_cv_pixel_set_u8	(void *img,
-				 unsigned char val, ptrdiff_t x, ptrdiff_t y)
+				 uint8_t val, ptrdiff_t x, ptrdiff_t y)
 {
 	return	alx::CV::pixel_set_u8((class cv::Mat *)img, val, x, y);
 }
