@@ -150,10 +150,10 @@ int	alx::CV::conts_closest	(const class std::vector<
 					class std::vector<
 					class cv::Point_<int>>> *restrict conts,
 				 ptrdiff_t x, ptrdiff_t y,
-				 double (*fdist)(uint32_t dx, uint32_t dy))
+				 double (*fdist)(int32_t dx, int32_t dy))
 {
 	ptrdiff_t	ctr_x, ctr_y;
-	uint32_t	dx, dy;
+	int32_t		dx, dy;
 	double		dist, d;
 	ptrdiff_t	n;
 	const class std::vector<class cv::Point_<int>>	*c;
@@ -187,7 +187,7 @@ int	alx_cv_conts_closest	(const void **restrict cont,
 				 ptrdiff_t *restrict i,
 				 const void *restrict conts,
 				 ptrdiff_t x, ptrdiff_t y,
-				 double (*fdist)(uint32_t dx, uint32_t dy))
+				 double (*fdist)(int32_t dx, int32_t dy))
 {
 	return	alx::CV::conts_closest((const class std::vector<
 						class cv::Point_<int>> **)cont,

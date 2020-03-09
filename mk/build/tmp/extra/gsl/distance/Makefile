@@ -12,10 +12,12 @@
 ################################################################################
 # dependencies
 OBJ	=								\
-	$(CURDIR)/euclidean.o
+	$(CURDIR)/euclidean.o						\
+	$(CURDIR)/manhattan.o
 
 SRC	=								\
-	$(SRC_DIR)/extra/gsl/distance/euclidean.c
+	$(SRC_DIR)/extra/gsl/distance/euclidean.c			\
+	$(SRC_DIR)/extra/gsl/distance/manhattan.c
 
 DEP		= $(OBJ:.o=.d)
 BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))

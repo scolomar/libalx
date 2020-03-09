@@ -50,13 +50,13 @@ double	alx_gsl_distance2D_euclidean		(double dx, double dy);
 [[gnu::const]]
 float	alx_gsl_distance2D_euclidean_flt	(float dx, float dy);
 [[gnu::const]]
-float	alx_gsl_distance2D_euclidean_8b		(uint8_t dx, uint8_t dy);
+float	alx_gsl_distance2D_euclidean_8b		(int8_t dx, int8_t dy);
 [[gnu::const]]
-float	alx_gsl_distance2D_euclidean_16b	(uint16_t dx, uint16_t dy);
+float	alx_gsl_distance2D_euclidean_16b	(int16_t dx, int16_t dy);
 [[gnu::const]]
-double	alx_gsl_distance2D_euclidean_32b	(uint32_t dx, uint32_t dy);
+double	alx_gsl_distance2D_euclidean_32b	(int32_t dx, int32_t dy);
 [[gnu::const]]
-long double alx_gsl_distance2D_euclidean_64b	(uint64_t dx, uint64_t dy);
+long double alx_gsl_distance2D_euclidean_64b	(int64_t dx, int64_t dy);
 }
 
 

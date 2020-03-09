@@ -166,6 +166,7 @@ GMP_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/gmp/mpz/theoretic.o
 GSL_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/gsl/distance/euclidean.o		\
+		$(BUILD_TMP_DIR)/extra/gsl/distance/manhattan.o		\
 		$(BUILD_TMP_DIR)/extra/gsl/distributions/binomial.o	\
 		$(BUILD_TMP_DIR)/extra/gsl/distributions/exponential.o	\
 		$(BUILD_TMP_DIR)/extra/gsl/distributions/geometric.o	\

@@ -52,7 +52,7 @@ int	alx_cv_conts_closest	(const void **restrict cont,
 				 ptrdiff_t *restrict i,
 				 const void *restrict conts,
 				 ptrdiff_t x, ptrdiff_t y,
-				 double (*fdist)(uint32_t dx, uint32_t dy));
+				 double (*fdist)(int32_t dx, int32_t dy));
 __attribute__((nonnull))
 int	alx_cv_contour_mask	(const img_s **restrict img,
 				 const conts_s *restrict conts, ptrdiff_t i);
