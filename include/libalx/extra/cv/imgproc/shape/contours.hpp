@@ -42,6 +42,12 @@ void	alx_cv_contour_dimensions(const void *restrict contour,
 int	alx_cv_conts_largest	(const void **restrict cont,
 				 ptrdiff_t *restrict i,
 				 const void *restrict conts);
+[[gnu::nonnull(3)]] [[gnu::warn_unused_result]]
+int	alx_cv_conts_closest	(const void **restrict cont,
+				 ptrdiff_t *restrict i,
+				 const void *restrict conts,
+				 ptrdiff_t x, ptrdiff_t y,
+				 double (*fdist)(uint32_t dx, uint32_t dy));
 [[gnu::nonnull]]
 int	alx_cv_contour_mask	(const void **restrict img,
 				 const void *restrict conts, ptrdiff_t i);
@@ -89,6 +95,15 @@ int	conts_largest	(const class std::vector<
 			 const class std::vector<
 				class std::vector<
 				class cv::Point_<int>>> *restrict conts);
+[[gnu::nonnull(3)]] [[gnu::warn_unused_result]]
+int	conts_closest	(const class std::vector<
+				class cv::Point_<int>> **restrict cont,
+			 ptrdiff_t *restrict i,
+			 const class std::vector<
+				class std::vector<
+				class cv::Point_<int>>> *restrict conts,
+			 ptrdiff_t x, ptrdiff_t y,
+			 double (*fdist)(uint32_t dx, uint32_t dy));
 [[gnu::nonnull]]
 int	contour_mask	(class cv::Mat *restrict img,
 			 const class std::vector<

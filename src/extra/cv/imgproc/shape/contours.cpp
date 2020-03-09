@@ -18,6 +18,7 @@
 #include <opencv2/imgproc.hpp>
 
 #include "libalx/base/compiler/restrict.hpp"
+#include "libalx/extra/gsl/distance/euclidean.hpp"
 
 
 /******************************************************************************
@@ -100,7 +101,7 @@ void	alx_cv_contour_dimensions(const void *restrict contour,
 					area, perimeter, ctr_x, ctr_y);
 }
 
-int	alx::CV::conts_largest(const class std::vector<
+int	alx::CV::conts_largest	(const class std::vector<
 					class cv::Point_<int>> **restrict cont,
 				 ptrdiff_t *restrict i,
 				 const class std::vector<
@@ -140,6 +141,62 @@ int	alx_cv_conts_largest	(const void **restrict cont,
 						class std::vector<
 						class cv::Point_<
 						int>>> *)conts);
+}
+
+int	alx::CV::conts_closest	(const class std::vector<
+					class cv::Point_<int>> **restrict cont,
+				 ptrdiff_t *restrict i,
+				 const class std::vector<
+					class std::vector<
+					class cv::Point_<int>>> *restrict conts,
+				 ptrdiff_t x, ptrdiff_t y,
+				 double (*fdist)(uint32_t dx, uint32_t dy))
+{
+	ptrdiff_t	ctr_x, ctr_y;
+	uint32_t	dx, dy;
+	double		dist, d;
+	ptrdiff_t	n;
+	const class std::vector<class cv::Point_<int>>	*c;
+
+	dist	= INFINITY;
+	n	= conts->size();
+	if (!n)
+		return	-1;
+	if (!fdist)
+		fdist	= &alx_gsl_distance2D_euclidean_32b;
+
+	for (ptrdiff_t j = 0; j < n; j++) {
+		c	= &(*conts)[j];
+		alx::CV::contour_dimensions(c, NULL, NULL, &ctr_x, &ctr_y);
+		dx	= abs(ctr_x - x);
+		dy	= abs(ctr_y - y);
+		d	= fdist(dx, dy);
+		if (d < dist) {
+			dist	= d;
+			if (cont)
+				*cont	= c;
+			if (i)
+				*i	= j;
+		}
+	}
+
+	return	0;
+}
+
+int	alx_cv_conts_closest	(const void **restrict cont,
+				 ptrdiff_t *restrict i,
+				 const void *restrict conts,
+				 ptrdiff_t x, ptrdiff_t y,
+				 double (*fdist)(uint32_t dx, uint32_t dy))
+{
+	return	alx::CV::conts_closest((const class std::vector<
+						class cv::Point_<int>> **)cont,
+					i,
+					(const class std::vector<
+						class std::vector<
+						class cv::Point_<
+						int>>> *)conts,
+					x, y, fdist);
 }
 
 int	alx::CV::contour_mask	(class cv::Mat *restrict img,

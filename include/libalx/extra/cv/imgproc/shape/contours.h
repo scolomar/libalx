@@ -47,6 +47,12 @@ __attribute__((nonnull(3), warn_unused_result))
 int	alx_cv_conts_largest	(const cont_s **restrict cont,
 				 ptrdiff_t *restrict i,
 				 const conts_s *restrict conts);
+__attribute__((nonnull(3), warn_unused_result))
+int	alx_cv_conts_closest	(const void **restrict cont,
+				 ptrdiff_t *restrict i,
+				 const void *restrict conts,
+				 ptrdiff_t x, ptrdiff_t y,
+				 double (*fdist)(uint32_t dx, uint32_t dy));
 __attribute__((nonnull))
 int	alx_cv_contour_mask	(const img_s **restrict img,
 				 const conts_s *restrict conts, ptrdiff_t i);
