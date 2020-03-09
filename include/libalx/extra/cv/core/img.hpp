@@ -44,10 +44,8 @@ void	alx_cv_deinit_img	(void *img);
 [[gnu::nonnull(1)]]
 void	alx_cv_extract_imgdata	(const void *restrict img,
 				 void **restrict data,
-				 ptrdiff_t *restrict rows,
-				 ptrdiff_t *restrict cols,
-				 ptrdiff_t *restrict width,
-				 ptrdiff_t *restrict height,
+				 ptrdiff_t *restrict w,
+				 ptrdiff_t *restrict h,
 				 ptrdiff_t *restrict B_per_pix,
 				 ptrdiff_t *restrict B_per_line,
 				 int *restrict type);
@@ -92,10 +90,8 @@ void	deinit_img	(class cv::Mat *img);
 [[gnu::nonnull(1)]]
 void	extract_imgdata	(const class cv::Mat *restrict img,
 			 void **restrict data,
-			 ptrdiff_t *restrict rows,
-			 ptrdiff_t *restrict cols,
-			 ptrdiff_t *restrict width,
-			 ptrdiff_t *restrict height,
+			 ptrdiff_t *restrict w,
+			 ptrdiff_t *restrict h,
 			 ptrdiff_t *restrict B_per_pix,
 			 ptrdiff_t *restrict B_per_line,
 			 int *restrict type);

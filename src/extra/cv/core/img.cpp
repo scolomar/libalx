@@ -87,10 +87,8 @@ void	alx_cv_deinit_img	(void *img)
 /* ----- Extract */
 void	alx::CV::extract_imgdata(const class cv::Mat *restrict img,
 				 void **restrict data,
-				 ptrdiff_t *restrict rows,
-				 ptrdiff_t *restrict cols,
-				 ptrdiff_t *restrict width,
-				 ptrdiff_t *restrict height,
+				 ptrdiff_t *restrict w,
+				 ptrdiff_t *restrict h,
 				 ptrdiff_t *restrict B_per_pix,
 				 ptrdiff_t *restrict B_per_line,
 				 int *restrict type)
@@ -98,14 +96,10 @@ void	alx::CV::extract_imgdata(const class cv::Mat *restrict img,
 
 	if (data)
 		*data		= img->data;
-	if (rows)
-		*rows		= img->rows;
-	if (cols)
-		*cols		= img->cols;
-	if (width)
-		*width		= img->size().width;
-	if (height)
-		*height		= img->size().height;
+	if (w)
+		*w		= img->cols;
+	if (h)
+		*h		= img->rows;
 	if (B_per_pix)
 		*B_per_pix	= img->channels();
 	if (B_per_line)
@@ -116,16 +110,13 @@ void	alx::CV::extract_imgdata(const class cv::Mat *restrict img,
 
 void	alx_cv_extract_imgdata	(const void *restrict img,
 				 void **restrict data,
-				 ptrdiff_t *restrict rows,
-				 ptrdiff_t *restrict cols,
-				 ptrdiff_t *restrict width,
-				 ptrdiff_t *restrict height,
+				 ptrdiff_t *restrict w,
+				 ptrdiff_t *restrict h,
 				 ptrdiff_t *restrict B_per_pix,
 				 ptrdiff_t *restrict B_per_line,
 				 int *restrict type)
 {
-	alx::CV::extract_imgdata((const class cv::Mat *)img, data,
-						rows, cols, width, height,
+	alx::CV::extract_imgdata((const class cv::Mat *)img, data, w, h,
 						B_per_pix, B_per_line, type);
 }
 

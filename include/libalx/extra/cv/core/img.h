@@ -50,10 +50,8 @@ void	alx_cv_deinit_img	(img_s *img);
 __attribute__((nonnull(1)))
 void	alx_cv_extract_imgdata	(const img_s *restrict img,
 				 void **restrict data,
-				 ptrdiff_t *restrict rows,
-				 ptrdiff_t *restrict cols,
-				 ptrdiff_t *restrict width,
-				 ptrdiff_t *restrict height,
+				 ptrdiff_t *restrict w,
+				 ptrdiff_t *restrict h,
 				 ptrdiff_t *restrict B_per_pix,
 				 ptrdiff_t *restrict B_per_line,
 				 int *restrict type);
