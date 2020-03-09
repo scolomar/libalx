@@ -138,6 +138,8 @@ int	alx::CV::contour_mask	(class cv::Mat *restrict img,
 
 	if (img->channels() != 1)
 		return	-1;
+	if (i >= (ptrdiff_t)conts->size())
+		return	-2;
 	cv::drawContours(*img, *conts, i, cv::Scalar(UINT8_MAX), -1);
 	return	0;
 }
