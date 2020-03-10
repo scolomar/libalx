@@ -25,6 +25,12 @@
 /******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
+/** Adaptive threshold methods */
+enum	Alx_Cv_Adaptive_Thr_Method {
+	ALX_CV_ADAPTIVE_THRESH_MEAN	= 0,
+	ALX_CV_ADAPTIVE_THRESH_GAUSSIAN	= 1
+};
+
 enum	Alx_Cv_ColorConversionCodes {
 	ALX_CV_COLOR_BGR2BGRA     = 0, // add alpha channel to RGB or BGR image
 	ALX_CV_COLOR_RGB2RGBA     = ALX_CV_COLOR_BGR2BGRA,
@@ -289,7 +295,7 @@ enum	Alx_Cv_Thresh {
 	ALX_CV_THRESH_TOZERO      = 3,  /**< value = value > threshold ? value : 0           */
 	ALX_CV_THRESH_TOZERO_INV  = 4,  /**< value = value > threshold ? 0 : value           */
 	ALX_CV_THRESH_MASK        = 7,
-	ALX_CV_THRESH_OTSU        = 8, /**< use Otsu algorithm to choose the optimal threshold value;
+	ALX_CV_THRESH_OTSU        = 8,  /**< use Otsu algorithm to choose the optimal threshold value;
 					combine the flag with one of the above CV_THRESH_* values */
 	ALX_CV_THRESH_TRIANGLE    = 16  /**< use Triangle algorithm to choose the optimal threshold value;
 					combine the flag with one of the above CV_THRESH_* values, but not
