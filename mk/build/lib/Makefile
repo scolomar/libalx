@@ -144,7 +144,10 @@ CV_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/cv/highgui/file.o		\
 		$(BUILD_TMP_DIR)/extra/cv/highgui/window.o		\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/features/features.o	\
-		$(BUILD_TMP_DIR)/extra/cv/imgproc/filter/filter.o	\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/filter/border.o	\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/filter/dilate_erode.o	\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/filter/edges.o	\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/filter/smooth.o	\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/geometric/geom.o	\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/histogram/hist.o	\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/miscellaneous/color.o	\

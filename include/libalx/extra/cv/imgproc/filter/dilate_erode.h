@@ -7,16 +7,15 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/imgproc/filter.hpp */
+#pragma once	/* libalx/extra/cv/imgproc/filter/dilate_erode.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstddef>
-#include <cstdint>
+#include <stddef.h>
 
-#include <opencv2/core/base.hpp>
+#include "libalx/extra/cv/types.h"
 
 
 /******************************************************************************
@@ -25,42 +24,8 @@
 
 
 /******************************************************************************
- ******* extern "C" ***********************************************************
- ******************************************************************************/
-extern	"C"
-{
-[[gnu::nonnull]]
-int	alx_cv_dilate		(void *img, ptrdiff_t i);
-[[gnu::nonnull]]
-int	alx_cv_erode		(void *img, ptrdiff_t i);
-[[gnu::nonnull]]
-int	alx_cv_dilate_erode	(void *img, ptrdiff_t i);
-[[gnu::nonnull]]
-int	alx_cv_erode_dilate	(void *img, ptrdiff_t i);
-[[gnu::nonnull]]
-int	alx_cv_smooth		(void *img, int method, int ksize);
-[[gnu::nonnull]]
-int	alx_cv_sobel		(void *img, int dx, int dy, ptrdiff_t ksize);
-[[gnu::nonnull]]
-int	alx_cv_border		(void *img, ptrdiff_t size);
-}
-
-
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-namespace alx {
-namespace CV {
-
-
-/******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
-enum	Smooth {
-	SMOOTH_MEAN = 1,
-	SMOOTH_GAUSS,
-	SMOOTH_MEDIAN
-};
 
 
 /******************************************************************************
@@ -71,27 +36,19 @@ enum	Smooth {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-[[gnu::nonnull]]
-int	dilate		(class cv::Mat *img, ptrdiff_t i);
-[[gnu::nonnull]]
-int	erode		(class cv::Mat *img, ptrdiff_t i);
-[[gnu::nonnull]]
-int	dilate_erode	(class cv::Mat *img, ptrdiff_t i);
-[[gnu::nonnull]]
-int	erode_dilate	(class cv::Mat *img, ptrdiff_t i);
-[[gnu::nonnull]]
-int	smooth		(class cv::Mat *img, int method, ptrdiff_t ksize);
-[[gnu::nonnull]]
-int	sobel		(class cv::Mat *img, int dx, int dy, ptrdiff_t ksize);
-[[gnu::nonnull]]
-int	border		(class cv::Mat *img, ptrdiff_t size);
+__attribute__((nonnull))
+int	alx_cv_dilate		(img_s *img, ptrdiff_t i);
+__attribute__((nonnull))
+int	alx_cv_erode		(img_s *img, ptrdiff_t i);
+__attribute__((nonnull))
+int	alx_cv_dilate_erode	(img_s *img, ptrdiff_t i);
+__attribute__((nonnull))
+int	alx_cv_erode_dilate	(img_s *img, ptrdiff_t i);
 
 
 /******************************************************************************
- ******* namespace ************************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-}	/* namespace CV */
-}	/* namespace alx */
 
 
 /******************************************************************************
