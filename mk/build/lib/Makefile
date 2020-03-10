@@ -127,7 +127,6 @@ CURL_OBJ	=							\
 		$(BUILD_TMP_DIR)/extra/curl/fcurl/ungetc.o		\
 		$(BUILD_TMP_DIR)/extra/curl/fcurl/URL_FILE.o
 CV_OBJ		=							\
-		$(BUILD_TMP_DIR)/extra/cv/alx/fill.o			\
 		$(BUILD_TMP_DIR)/extra/cv/alx/gray.o			\
 		$(BUILD_TMP_DIR)/extra/cv/alx/lines.o			\
 		$(BUILD_TMP_DIR)/extra/cv/alx/max.o			\
@@ -153,6 +152,7 @@ CV_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/histogram/hist.o	\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/miscellaneous/color.o	\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/miscellaneous/distance.o	\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/miscellaneous/fill.o	\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/miscellaneous/resolution.o	\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/miscellaneous/threshold.o	\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/shape/contours.o	\

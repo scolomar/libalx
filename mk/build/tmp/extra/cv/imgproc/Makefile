@@ -22,6 +22,7 @@ OBJ	=								\
 	$(CURDIR)/histogram/hist.o					\
 	$(CURDIR)/miscellaneous/color.o					\
 	$(CURDIR)/miscellaneous/distance.o				\
+	$(CURDIR)/miscellaneous/fill.o					\
 	$(CURDIR)/miscellaneous/resolution.o				\
 	$(CURDIR)/miscellaneous/threshold.o				\
 	$(CURDIR)/shape/contours.o					\
@@ -38,6 +39,7 @@ SRC	=								\
 	$(SRC_DIR)/extra/cv/imgproc/histogram/hist.cpp			\
 	$(SRC_DIR)/extra/cv/imgproc/miscellaneous/color.cpp		\
 	$(SRC_DIR)/extra/cv/imgproc/miscellaneous/distance.cpp		\
+	$(SRC_DIR)/extra/cv/imgproc/miscellaneous/fill.cpp		\
 	$(SRC_DIR)/extra/cv/imgproc/miscellaneous/resolution.cpp	\
 	$(SRC_DIR)/extra/cv/imgproc/miscellaneous/threshold.cpp		\
 	$(SRC_DIR)/extra/cv/imgproc/shape/contours.cpp			\
