@@ -12,6 +12,7 @@
 ################################################################################
 # dependencies
 OBJ	=								\
+	$(CURDIR)/features/edges.o					\
 	$(CURDIR)/features/features.o					\
 	$(CURDIR)/filter/border.o					\
 	$(CURDIR)/filter/dilate_erode.o					\
@@ -29,6 +30,7 @@ OBJ	=								\
 	$(CURDIR)/shape/rect.o
 
 SRC	=								\
+	$(SRC_DIR)/extra/cv/imgproc/features/edges.cpp			\
 	$(SRC_DIR)/extra/cv/imgproc/features/features.cpp		\
 	$(SRC_DIR)/extra/cv/imgproc/filter/border.cpp			\
 	$(SRC_DIR)/extra/cv/imgproc/filter/dilate_erode.cpp		\

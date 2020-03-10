@@ -7,20 +7,47 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/core/img.h */
+#pragma once	/* libalx/extra/cv/core/pixel/pixel.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stddef.h>
+#include <cstddef>
 
-#include "libalx/extra/cv/types.h"
+#include <opencv2/core/base.hpp>
+
+#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern	"C"
+{
+[[gnu::nonnull]]
+int	alx_cv_pixel_get_u8	(const void *restrict img,
+				 uint8_t *restrict val,
+				 ptrdiff_t x, ptrdiff_t y);
+[[gnu::nonnull]]
+int	alx_cv_pixel_set_u8	(void *img,
+				 uint8_t val, ptrdiff_t x, ptrdiff_t y);
+[[gnu::nonnull]]
+int	alx_cv_pixel_get_flt	(const void *restrict img,
+				 float *restrict val, ptrdiff_t x, ptrdiff_t y);
+}
+
+
+/******************************************************************************
+ ******* namespace ************************************************************
+ ******************************************************************************/
+namespace alx {
+namespace CV {
 
 
 /******************************************************************************
@@ -36,34 +63,22 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-/* ----- alloc / free */
-__attribute__((nonnull))
-int	alx_cv_alloc_img	(img_s **img);
-__attribute__((nonnull))
-void	alx_cv_free_img		(img_s *img);
-/* ----- init / deinit */
-__attribute__((nonnull))
-int	alx_cv_init_img		(img_s *img, ptrdiff_t w, ptrdiff_t h);
-__attribute__((nonnull))
-void	alx_cv_deinit_img	(img_s *img);
-/* ----- Extract */
-__attribute__((nonnull(1)))
-void	alx_cv_extract_imgdata	(const img_s *restrict img,
-				 void **restrict data,
-				 ptrdiff_t *restrict w,
-				 ptrdiff_t *restrict h,
-				 ptrdiff_t *restrict B_per_pix,
-				 ptrdiff_t *restrict B_per_line,
-				 int *restrict type);
-/* ----- Copy */
-__attribute__((nonnull))
-void	alx_cv_clone		(img_s *restrict clone,
-				 const img_s *restrict img);
+[[gnu::nonnull]]
+int	pixel_get_u8	(const class cv::Mat *restrict img,
+			 uint8_t *restrict val, ptrdiff_t x, ptrdiff_t y);
+[[gnu::nonnull]]
+int	pixel_set_u8	(class cv::Mat *img,
+			 uint8_t val, ptrdiff_t x, ptrdiff_t y);
+[[gnu::nonnull]]
+int	pixel_get_flt	(const class cv::Mat *restrict img,
+			 float *restrict val, ptrdiff_t x, ptrdiff_t y);
 
 
 /******************************************************************************
- ******* inline ***************************************************************
+ ******* namespace ************************************************************
  ******************************************************************************/
+}	/* namespace CV */
+}	/* namespace alx */
 
 
 /******************************************************************************

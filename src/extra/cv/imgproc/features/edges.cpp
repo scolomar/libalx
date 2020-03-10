@@ -1,21 +1,23 @@
 /******************************************************************************
- *	Copyright (C) 2018	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* include guard ********************************************************
- ******************************************************************************/
-#pragma once	/* libalx/extra/cv/core/contours.h */
-
-
-/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stddef.h>
+#include "libalx/extra/cv/imgproc/features/edges.hpp"
 
-#include "libalx/extra/cv/types.h"
+#include <cstdbool>
+#include <cstddef>
+#include <cstdint>
+
+#include <opencv2/core/mat.hpp>
+#include <opencv2/imgproc.hpp>
+
+#include <libalx/base/stdlib/maximum.hpp>
+#include <libalx/base/stdlib/minimum.hpp>
 
 
 /******************************************************************************
@@ -24,40 +26,42 @@
 
 
 /******************************************************************************
- ******* enum *****************************************************************
+ ******* enum / struct / union ************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* struct / union *******************************************************
+ ******* static prototypes ****************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* prototypes ***********************************************************
+ ******* global functions *****************************************************
  ******************************************************************************/
-/* ----- alloc / free */
-__attribute__((nonnull))
-int	alx_cv_alloc_conts	(conts_s **conts);
-__attribute__((nonnull))
-void	alx_cv_free_conts	(conts_s *conts);
-/* ----- init / deinit */
-__attribute__((nonnull))
-void	alx_cv_init_conts	(conts_s *conts);
-__attribute__((nonnull))
-void	alx_cv_deinit_conts	(conts_s *conts);
-/* ----- Extract */
-__attribute__((nonnull(1), warn_unused_result))
-int	alx_cv_extract_conts	(const conts_s *restrict conts,
-				 const cont_s **restrict cont,
-				 ptrdiff_t *restrict size);
-__attribute__((nonnull, warn_unused_result))
-int	alx_cv_extract_conts_cont(const cont_s **restrict cont,
-				 const conts_s *restrict conts, ptrdiff_t i);
+int	alx::CV::canny	(class cv::Mat *img,
+			 uint8_t val, ptrdiff_t ksize, bool l2grad)
+{
+	uint16_t	lo;
+	uint16_t	hi;
+
+	hi	= ALX_MIN(val * 1.5, UINT8_MAX);
+	lo	= ALX_MAX(val / 1.5, 1);
+
+	if (!(ksize % 2)  ||  ksize < -1)
+		return	1;
+	cv::Canny(*img, *img, lo, hi, ksize, l2grad);
+
+	return	0;
+}
+
+int	alx_cv_canny	(void *img, uint8_t val, ptrdiff_t ksize, bool l2grad)
+{
+	return	alx::CV::canny((class cv::Mat *)img, val, ksize, l2grad);
+}
 
 
 /******************************************************************************
- ******* inline ***************************************************************
+ ******* static function definitions ******************************************
  ******************************************************************************/
 
 

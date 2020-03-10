@@ -7,13 +7,15 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/core/img.hpp */
+#pragma once	/* libalx/extra/cv/core/contours/contours.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
 #include <cstddef>
+
+#include <vector>
 
 #include <opencv2/core/base.hpp>
 
@@ -32,27 +34,22 @@ extern	"C"
 {
 /* ----- Alloc */
 [[gnu::nonnull]]
-int	alx_cv_alloc_img	(void **img);
+int	alx_cv_alloc_conts	(void **contours);
 [[gnu::nonnull]]
-void	alx_cv_free_img		(void *img);
+void	alx_cv_free_conts	(void *contours);
 /* ----- Init */
 [[gnu::nonnull]]
-int	alx_cv_init_img		(void *img, ptrdiff_t w, ptrdiff_t h);
+void	alx_cv_init_conts	(void *conts);
 [[gnu::nonnull]]
-void	alx_cv_deinit_img	(void *img);
+void	alx_cv_deinit_conts	(void *conts);
 /* ----- Extract */
-[[gnu::nonnull(1)]]
-void	alx_cv_extract_imgdata	(const void *restrict img,
-				 void **restrict data,
-				 ptrdiff_t *restrict w,
-				 ptrdiff_t *restrict h,
-				 ptrdiff_t *restrict B_per_pix,
-				 ptrdiff_t *restrict B_per_line,
-				 int *restrict type);
-/* ----- Copy */
-[[gnu::nonnull]]
-void	alx_cv_clone		(void *restrict clone,
-				 const void *restrict img);
+[[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
+int	alx_cv_extract_conts	(const void *restrict conts,
+				 const void **restrict cont,
+				 ptrdiff_t *restrict size);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_cv_extract_conts_cont(const void **restrict cont,
+				 const void *restrict conts, ptrdiff_t i);
 }
 
 
@@ -78,27 +75,41 @@ namespace CV {
  ******************************************************************************/
 /* ----- Alloc */
 [[gnu::nonnull]]
-int	alloc_img	(class cv::Mat **img);
+int	alloc_conts	(class std::vector<
+					class std::vector<
+					class cv::Point_<
+					int>>> **contours);
 [[gnu::nonnull]]
-void	free_img	(class cv::Mat *img);
+void	free_conts	(class std::vector<
+					class std::vector<
+					class cv::Point_<
+					int>>> *contours);
 /* ----- Init */
 [[gnu::nonnull]]
-int	init_img	(class cv::Mat *img, ptrdiff_t w, ptrdiff_t h);
+void	init_conts	(class std::vector<
+					class std::vector<
+					class cv::Point_<
+					int>>> *conts);
 [[gnu::nonnull]]
-void	deinit_img	(class cv::Mat *img);
+void	deinit_conts	(class std::vector<
+					class std::vector<
+					class cv::Point_<
+					int>>> *conts);
 /* ----- Extract */
-[[gnu::nonnull(1)]]
-void	extract_imgdata	(const class cv::Mat *restrict img,
-			 void **restrict data,
-			 ptrdiff_t *restrict w,
-			 ptrdiff_t *restrict h,
-			 ptrdiff_t *restrict B_per_pix,
-			 ptrdiff_t *restrict B_per_line,
-			 int *restrict type);
-/* ----- Copy */
+[[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
+int	extract_conts	(const class std::vector<
+					class std::vector<
+					class cv::Point_<int>>> *restrict conts,
+			 const class std::vector<
+					class cv::Point_<int>> **restrict cont,
+			 ptrdiff_t *restrict size);
 [[gnu::nonnull]]
-void	clone		(class cv::Mat *restrict clone,
-			 const class cv::Mat *restrict img);
+int	extract_conts_cont(const class std::vector<
+					class cv::Point_<int>> **restrict cont,
+			 const class std::vector<
+					class std::vector<
+					class cv::Point_<int>>> *restrict conts,
+			 ptrdiff_t i);
 
 
 /******************************************************************************

@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/core/core/rect.hpp */
+#pragma once	/* libalx/extra/cv/core/img/img.hpp */
 
 
 /******************************************************************************
@@ -32,29 +32,27 @@ extern	"C"
 {
 /* ----- Alloc */
 [[gnu::nonnull]]
-int	alx_cv_alloc_rect	(void **rect);
+int	alx_cv_alloc_img	(void **img);
 [[gnu::nonnull]]
-void	alx_cv_free_rect	(void *rect);
-[[gnu::nonnull]]
-int	alx_cv_alloc_rect_rot	(void **rect_rot);
-[[gnu::nonnull]]
-void	alx_cv_free_rect_rot	(void *rect_rot);
+void	alx_cv_free_img		(void *img);
 /* ----- Init */
 [[gnu::nonnull]]
-int	alx_cv_init_rect	(void *rect,
-				 ptrdiff_t x, ptrdiff_t y,
-				 ptrdiff_t w, ptrdiff_t h);
+int	alx_cv_init_img		(void *img, ptrdiff_t w, ptrdiff_t h);
+[[gnu::nonnull]]
+void	alx_cv_deinit_img	(void *img);
 /* ----- Extract */
 [[gnu::nonnull(1)]]
-void	alx_cv_extract_rect	(const void *restrict rect,
-				 ptrdiff_t *restrict x, ptrdiff_t *restrict y,
-				 ptrdiff_t *restrict w, ptrdiff_t *restrict h);
-[[gnu::nonnull(1)]]
-void	alx_cv_extract_rect_rot	(const void *restrict rect_rot,
-				 ptrdiff_t *restrict ctr_x,
-				 ptrdiff_t *restrict ctr_y,
-				 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
-				 double *restrict angle);
+void	alx_cv_extract_imgdata	(const void *restrict img,
+				 void **restrict data,
+				 ptrdiff_t *restrict w,
+				 ptrdiff_t *restrict h,
+				 ptrdiff_t *restrict B_per_pix,
+				 ptrdiff_t *restrict B_per_line,
+				 int *restrict type);
+/* ----- Copy */
+[[gnu::nonnull]]
+void	alx_cv_clone		(void *restrict clone,
+				 const void *restrict img);
 }
 
 
@@ -80,27 +78,27 @@ namespace CV {
  ******************************************************************************/
 /* ----- Alloc */
 [[gnu::nonnull]]
-int	alloc_rect	(class cv::Rect_<int> **rect);
+int	alloc_img	(class cv::Mat **img);
 [[gnu::nonnull]]
-void	free_rect	(class cv::Rect_<int> *rect);
-[[gnu::nonnull]]
-int	alloc_rect_rot	(class cv::RotatedRect **rect_rot);
-[[gnu::nonnull]]
-void	free_rect_rot	(class cv::RotatedRect *rect_rot);
+void	free_img	(class cv::Mat *img);
 /* ----- Init */
 [[gnu::nonnull]]
-int	init_rect	(class cv::Rect_<int> *rect,
-			 ptrdiff_t x, ptrdiff_t y, ptrdiff_t w, ptrdiff_t h);
+int	init_img	(class cv::Mat *img, ptrdiff_t w, ptrdiff_t h);
+[[gnu::nonnull]]
+void	deinit_img	(class cv::Mat *img);
 /* ----- Extract */
 [[gnu::nonnull(1)]]
-void	extract_rect	(const class cv::Rect_<int> *restrict rect,
-			 ptrdiff_t *restrict x, ptrdiff_t *restrict y,
-			 ptrdiff_t *restrict w, ptrdiff_t *restrict h);
-[[gnu::nonnull(1)]]
-void	extract_rect_rot(const class cv::RotatedRect *restrict rect_rot,
-			 ptrdiff_t *restrict ctr_x, ptrdiff_t *restrict ctr_y,
-			 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
-			 double *restrict angle);
+void	extract_imgdata	(const class cv::Mat *restrict img,
+			 void **restrict data,
+			 ptrdiff_t *restrict w,
+			 ptrdiff_t *restrict h,
+			 ptrdiff_t *restrict B_per_pix,
+			 ptrdiff_t *restrict B_per_line,
+			 int *restrict type);
+/* ----- Copy */
+[[gnu::nonnull]]
+void	clone		(class cv::Mat *restrict clone,
+			 const class cv::Mat *restrict img);
 
 
 /******************************************************************************

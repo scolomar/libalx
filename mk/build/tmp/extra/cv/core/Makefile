@@ -12,20 +12,22 @@
 ################################################################################
 # dependencies
 OBJ	=								\
-	$(CURDIR)/array.o						\
-	$(CURDIR)/contours.o						\
-	$(CURDIR)/img.o							\
-	$(CURDIR)/pixel.o						\
-	$(CURDIR)/rect.o						\
-	$(CURDIR)/roi.o
+	$(CURDIR)/array/array.o						\
+	$(CURDIR)/array/bitwise.o					\
+	$(CURDIR)/contours/contours.o					\
+	$(CURDIR)/img/img.o						\
+	$(CURDIR)/pixel/pixel.o						\
+	$(CURDIR)/rect/rect.o						\
+	$(CURDIR)/roi/roi.o
 
 SRC	=								\
-	$(SRC_DIR)/extra/cv/core/array.cpp				\
-	$(SRC_DIR)/extra/cv/core/contours.cpp				\
-	$(SRC_DIR)/extra/cv/core/img.cpp				\
-	$(SRC_DIR)/extra/cv/core/pixel.cpp				\
-	$(SRC_DIR)/extra/cv/core/rect.cpp				\
-	$(SRC_DIR)/extra/cv/core/roi.cpp
+	$(SRC_DIR)/extra/cv/core/array/array.cpp			\
+	$(SRC_DIR)/extra/cv/core/array/bitwise.cpp			\
+	$(SRC_DIR)/extra/cv/core/contours/contours.cpp			\
+	$(SRC_DIR)/extra/cv/core/img/img.cpp				\
+	$(SRC_DIR)/extra/cv/core/pixel/pixel.cpp			\
+	$(SRC_DIR)/extra/cv/core/rect/rect.cpp				\
+	$(SRC_DIR)/extra/cv/core/roi/roi.cpp
 
 DEP		= $(OBJ:.o=.d)
 BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))

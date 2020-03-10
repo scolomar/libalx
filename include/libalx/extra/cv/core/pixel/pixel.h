@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/core/array.h */
+#pragma once	/* libalx/extra/cv/core/pixel/pixel.h */
 
 
 /******************************************************************************
@@ -26,19 +26,6 @@
 /******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
-enum	Alx_Cv_Cmp {
-	ALX_CV_CMP_BGR_B = 0,
-	ALX_CV_CMP_BGR_G,
-	ALX_CV_CMP_BGR_R,
-
-	ALX_CV_CMP_HSV_H = 0,
-	ALX_CV_CMP_HSV_S,
-	ALX_CV_CMP_HSV_V,
-
-	ALX_CV_CMP_HLS_H = 0,
-	ALX_CV_CMP_HLS_L,
-	ALX_CV_CMP_HLS_S
-};
 
 
 /******************************************************************************
@@ -49,17 +36,16 @@ enum	Alx_Cv_Cmp {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-/* ----- Operations on arrays */
 __attribute__((nonnull))
-int	alx_cv_and_2ref		(img_s *restrict img,
-				 const img_s *restrict ref);
+int	alx_cv_pixel_get_u8	(const img_s *restrict img,
+				 uint8_t *restrict val,
+				 ptrdiff_t x, ptrdiff_t y);
 __attribute__((nonnull))
-void	alx_cv_invert		(img_s *img);
+int	alx_cv_pixel_set_u8	(img_s *img,
+				 uint8_t val, ptrdiff_t x, ptrdiff_t y);
 __attribute__((nonnull))
-int	alx_cv_or_2ref		(img_s *restrict img,
-				 const img_s *restrict ref);
-__attribute__((nonnull))
-int	alx_cv_component	(img_s *img, ptrdiff_t cmp);
+int	alx_cv_pixel_get_flt	(const img_s *restrict img,
+				 float *restrict val, ptrdiff_t x, ptrdiff_t y);
 
 
 /******************************************************************************

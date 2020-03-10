@@ -7,17 +7,15 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/core/array.hpp */
+#pragma once	/* libalx/extra/cv/core/rect/rect.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstddef>
+#include <stddef.h>
 
-#include <opencv2/core/base.hpp>
-
-#include "libalx/base/compiler/restrict.hpp"
+#include "libalx/extra/cv/types.h"
 
 
 /******************************************************************************
@@ -26,45 +24,8 @@
 
 
 /******************************************************************************
- ******* extern "C" ***********************************************************
- ******************************************************************************/
-extern	"C"
-{
-/* ----- Operations on arrays */
-[[gnu::nonnull]]
-int	alx_cv_and_2ref		(void *restrict img, const void *restrict ref);
-[[gnu::nonnull]]
-void	alx_cv_invert		(void *img);
-[[gnu::nonnull]]
-int	alx_cv_or_2ref		(void *restrict img, const void *restrict ref);
-[[gnu::nonnull]]
-int	alx_cv_component	(void *img, ptrdiff_t cmp);
-}
-
-
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-namespace alx {
-namespace CV {
-
-
-/******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
-enum	Cmp {
-	CMP_BGR_B = 0,
-	CMP_BGR_G,
-	CMP_BGR_R,
-
-	CMP_HSV_H = 0,
-	CMP_HSV_S,
-	CMP_HSV_V,
-
-	CMP_HLS_H = 0,
-	CMP_HLS_L,
-	CMP_HLS_S
-};
 
 
 /******************************************************************************
@@ -75,24 +36,36 @@ enum	Cmp {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-/* ----- Operations on arrays */
-[[gnu::nonnull]]
-int	and_2ref	(class cv::Mat *restrict img,
-			 const class cv::Mat *restrict ref);
-[[gnu::nonnull]]
-void	invert		(class cv::Mat *img);
-[[gnu::nonnull]]
-int	or_2ref		(class cv::Mat *restrict img,
-			 const class cv::Mat *restrict ref);
-[[gnu::nonnull]]
-int	component	(class cv::Mat *img, ptrdiff_t cmp);
+/* ----- alloc / free */
+__attribute__((nonnull))
+int	alx_cv_alloc_rect	(rect_s **rect);
+__attribute__((nonnull))
+void	alx_cv_free_rect	(rect_s *rect);
+__attribute__((nonnull))
+int	alx_cv_alloc_rect_rot	(rect_rot_s **rect_rot);
+__attribute__((nonnull))
+void	alx_cv_free_rect_rot	(rect_rot_s *rect_rot);
+/* ----- init / deinit */
+__attribute__((nonnull))
+int	alx_cv_init_rect	(rect_s *rect,
+				 ptrdiff_t x, ptrdiff_t y,
+				 ptrdiff_t w, ptrdiff_t h);
+/* ----- Extract */
+__attribute__((nonnull(1)))
+void	alx_cv_extract_rect	(const rect_s *restrict rect,
+				 ptrdiff_t *restrict x, ptrdiff_t *restrict y,
+				 ptrdiff_t *restrict w, ptrdiff_t *restrict h);
+__attribute__((nonnull(1)))
+void	alx_cv_extract_rect_rot	(const rect_rot_s *restrict rect_rot,
+				 ptrdiff_t *restrict ctr_x,
+				 ptrdiff_t *restrict ctr_y,
+				 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
+				 double *restrict angle);
 
 
 /******************************************************************************
- ******* namespace ************************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-}	/* namespace CV */
-}	/* namespace alx */
 
 
 /******************************************************************************

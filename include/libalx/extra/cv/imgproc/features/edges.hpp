@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2018	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,19 +7,17 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/core/contours.hpp */
+#pragma once	/* libalx/extra/cv/imgproc/features/edges.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <cstdbool>
 #include <cstddef>
-
-#include <vector>
+#include <cstdint>
 
 #include <opencv2/core/base.hpp>
-
-#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
@@ -32,24 +30,8 @@
  ******************************************************************************/
 extern	"C"
 {
-/* ----- Alloc */
 [[gnu::nonnull]]
-int	alx_cv_alloc_conts	(void **contours);
-[[gnu::nonnull]]
-void	alx_cv_free_conts	(void *contours);
-/* ----- Init */
-[[gnu::nonnull]]
-void	alx_cv_init_conts	(void *conts);
-[[gnu::nonnull]]
-void	alx_cv_deinit_conts	(void *conts);
-/* ----- Extract */
-[[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
-int	alx_cv_extract_conts	(const void *restrict conts,
-				 const void **restrict cont,
-				 ptrdiff_t *restrict size);
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_cv_extract_conts_cont(const void **restrict cont,
-				 const void *restrict conts, ptrdiff_t i);
+int	alx_cv_canny	(void *img, uint8_t val, ptrdiff_t ksize, bool l2grad);
 }
 
 
@@ -73,43 +55,8 @@ namespace CV {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-/* ----- Alloc */
 [[gnu::nonnull]]
-int	alloc_conts	(class std::vector<
-					class std::vector<
-					class cv::Point_<
-					int>>> **contours);
-[[gnu::nonnull]]
-void	free_conts	(class std::vector<
-					class std::vector<
-					class cv::Point_<
-					int>>> *contours);
-/* ----- Init */
-[[gnu::nonnull]]
-void	init_conts	(class std::vector<
-					class std::vector<
-					class cv::Point_<
-					int>>> *conts);
-[[gnu::nonnull]]
-void	deinit_conts	(class std::vector<
-					class std::vector<
-					class cv::Point_<
-					int>>> *conts);
-/* ----- Extract */
-[[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
-int	extract_conts	(const class std::vector<
-					class std::vector<
-					class cv::Point_<int>>> *restrict conts,
-			 const class std::vector<
-					class cv::Point_<int>> **restrict cont,
-			 ptrdiff_t *restrict size);
-[[gnu::nonnull]]
-int	extract_conts_cont(const class std::vector<
-					class cv::Point_<int>> **restrict cont,
-			 const class std::vector<
-					class std::vector<
-					class cv::Point_<int>>> *restrict conts,
-			 ptrdiff_t i);
+int	canny	(class cv::Mat *img, uint8_t val, ptrdiff_t ksize, bool l2grad);
 
 
 /******************************************************************************

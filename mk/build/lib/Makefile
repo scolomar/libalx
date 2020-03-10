@@ -133,15 +133,16 @@ CV_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/cv/alx/mean.o			\
 		$(BUILD_TMP_DIR)/extra/cv/alx/median.o			\
 		$(BUILD_TMP_DIR)/extra/cv/alx/skeleton.o		\
-		$(BUILD_TMP_DIR)/extra/cv/core/array.o			\
-		$(BUILD_TMP_DIR)/extra/cv/core/contours.o		\
-		$(BUILD_TMP_DIR)/extra/cv/core/img.o			\
-		$(BUILD_TMP_DIR)/extra/cv/core/pixel.o			\
-		$(BUILD_TMP_DIR)/extra/cv/core/rect.o			\
-		$(BUILD_TMP_DIR)/extra/cv/core/roi.o			\
+		$(BUILD_TMP_DIR)/extra/cv/core/array/array.o		\
+		$(BUILD_TMP_DIR)/extra/cv/core/contours/contours.o	\
+		$(BUILD_TMP_DIR)/extra/cv/core/img/img.o		\
+		$(BUILD_TMP_DIR)/extra/cv/core/pixel/pixel.o		\
+		$(BUILD_TMP_DIR)/extra/cv/core/rect/rect.o		\
+		$(BUILD_TMP_DIR)/extra/cv/core/roi/roi.o		\
 		$(BUILD_TMP_DIR)/extra/cv/features2d/orb.o		\
 		$(BUILD_TMP_DIR)/extra/cv/highgui/file.o		\
 		$(BUILD_TMP_DIR)/extra/cv/highgui/window.o		\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/features/edges.o	\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/features/features.o	\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/filter/border.o	\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/filter/dilate_erode.o	\

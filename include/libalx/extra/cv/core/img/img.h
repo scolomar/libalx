@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/core/rect.h */
+#pragma once	/* libalx/extra/cv/core/img/img.h */
 
 
 /******************************************************************************
@@ -38,29 +38,27 @@
  ******************************************************************************/
 /* ----- alloc / free */
 __attribute__((nonnull))
-int	alx_cv_alloc_rect	(rect_s **rect);
+int	alx_cv_alloc_img	(img_s **img);
 __attribute__((nonnull))
-void	alx_cv_free_rect	(rect_s *rect);
-__attribute__((nonnull))
-int	alx_cv_alloc_rect_rot	(rect_rot_s **rect_rot);
-__attribute__((nonnull))
-void	alx_cv_free_rect_rot	(rect_rot_s *rect_rot);
+void	alx_cv_free_img		(img_s *img);
 /* ----- init / deinit */
 __attribute__((nonnull))
-int	alx_cv_init_rect	(rect_s *rect,
-				 ptrdiff_t x, ptrdiff_t y,
-				 ptrdiff_t w, ptrdiff_t h);
+int	alx_cv_init_img		(img_s *img, ptrdiff_t w, ptrdiff_t h);
+__attribute__((nonnull))
+void	alx_cv_deinit_img	(img_s *img);
 /* ----- Extract */
 __attribute__((nonnull(1)))
-void	alx_cv_extract_rect	(const rect_s *restrict rect,
-				 ptrdiff_t *restrict x, ptrdiff_t *restrict y,
-				 ptrdiff_t *restrict w, ptrdiff_t *restrict h);
-__attribute__((nonnull(1)))
-void	alx_cv_extract_rect_rot	(const rect_rot_s *restrict rect_rot,
-				 ptrdiff_t *restrict ctr_x,
-				 ptrdiff_t *restrict ctr_y,
-				 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
-				 double *restrict angle);
+void	alx_cv_extract_imgdata	(const img_s *restrict img,
+				 void **restrict data,
+				 ptrdiff_t *restrict w,
+				 ptrdiff_t *restrict h,
+				 ptrdiff_t *restrict B_per_pix,
+				 ptrdiff_t *restrict B_per_line,
+				 int *restrict type);
+/* ----- Copy */
+__attribute__((nonnull))
+void	alx_cv_clone		(img_s *restrict clone,
+				 const img_s *restrict img);
 
 
 /******************************************************************************

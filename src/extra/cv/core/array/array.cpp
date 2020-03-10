@@ -5,17 +5,16 @@
 
 
 /******************************************************************************
- ******* include guard ********************************************************
- ******************************************************************************/
-#pragma once	/* libalx/extra/cv/core/pixel.h */
-
-
-/******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stddef.h>
+#include "libalx/extra/cv/core/array/array.hpp"
 
-#include "libalx/extra/cv/types.h"
+#include <cstddef>
+
+#include <opencv2/core/mat.hpp>
+#include <opencv2/core.hpp>
+
+#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
@@ -24,32 +23,45 @@
 
 
 /******************************************************************************
- ******* enum *****************************************************************
+ ******* enum / struct / union ************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* struct / union *******************************************************
+ ******* static prototypes ****************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* prototypes ***********************************************************
+ ******* global functions *****************************************************
  ******************************************************************************/
-__attribute__((nonnull))
-int	alx_cv_pixel_get_u8	(const img_s *restrict img,
-				 uint8_t *restrict val,
-				 ptrdiff_t x, ptrdiff_t y);
-__attribute__((nonnull))
-int	alx_cv_pixel_set_u8	(img_s *img,
-				 uint8_t val, ptrdiff_t x, ptrdiff_t y);
-__attribute__((nonnull))
-int	alx_cv_pixel_get_flt	(const img_s *restrict img,
-				 float *restrict val, ptrdiff_t x, ptrdiff_t y);
+int	alx::CV::component	(class cv::Mat *restrict img, ptrdiff_t cmp)
+{
+	const ptrdiff_t	chans	= img->channels();
+	class cv::Mat	cmp_img[chans];
+
+	if (chans < 2)
+		return	1;
+	if (cmp < 0 || cmp >= chans)
+		return	1;
+
+	cv::split(*img, cmp_img);
+	img->release();
+	cmp_img[cmp].copyTo(*img);
+
+	for (ptrdiff_t i = 0; i < chans; i++)
+		cmp_img[i].release();
+	return	0;
+}
+
+int	alx_cv_component	(void *restrict img, ptrdiff_t cmp)
+{
+	return	alx::CV::component((class cv::Mat *)img, cmp);
+}
 
 
 /******************************************************************************
- ******* inline ***************************************************************
+ ******* static function definitions ******************************************
  ******************************************************************************/
 
 

@@ -15,7 +15,7 @@
 #include <opencv2/core/mat.hpp>
 #include <opencv2/imgproc.hpp>
 
-#include "libalx/extra/cv/core/array.hpp"
+#include "libalx/extra/cv/core/array/array.hpp"
 
 
 /******************************************************************************
