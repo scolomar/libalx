@@ -12,8 +12,9 @@
 ################################################################################
 # dependencies
 OBJ	=								\
-	$(CURDIR)/array/array.o						\
 	$(CURDIR)/array/bitwise.o					\
+	$(CURDIR)/array/component.o					\
+	$(CURDIR)/array/normalize.o					\
 	$(CURDIR)/contours/contours.o					\
 	$(CURDIR)/img/img.o						\
 	$(CURDIR)/pixel/pixel.o						\
@@ -21,8 +22,9 @@ OBJ	=								\
 	$(CURDIR)/roi/roi.o
 
 SRC	=								\
-	$(SRC_DIR)/extra/cv/core/array/array.cpp			\
 	$(SRC_DIR)/extra/cv/core/array/bitwise.cpp			\
+	$(SRC_DIR)/extra/cv/core/array/component.cpp			\
+	$(SRC_DIR)/extra/cv/core/array/normalize.cpp			\
 	$(SRC_DIR)/extra/cv/core/contours/contours.cpp			\
 	$(SRC_DIR)/extra/cv/core/img/img.cpp				\
 	$(SRC_DIR)/extra/cv/core/pixel/pixel.cpp			\

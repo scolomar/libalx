@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2018	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,14 +7,12 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/cv/core/array/array.hpp"
+#include "libalx/extra/cv/core/array/normalize.hpp"
 
-#include <cstddef>
+#include <cstdint>
 
 #include <opencv2/core/mat.hpp>
 #include <opencv2/core.hpp>
-
-#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
@@ -35,28 +33,14 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx::CV::component	(class cv::Mat *restrict img, ptrdiff_t cmp)
+void	alx::CV::normalize	(class cv::Mat *img)
 {
-	const ptrdiff_t	chans	= img->channels();
-	class cv::Mat	cmp_img[chans];
-
-	if (chans < 2)
-		return	1;
-	if (cmp < 0 || cmp >= chans)
-		return	1;
-
-	cv::split(*img, cmp_img);
-	img->release();
-	cmp_img[cmp].copyTo(*img);
-
-	for (ptrdiff_t i = 0; i < chans; i++)
-		cmp_img[i].release();
-	return	0;
+	cv::normalize(*img, *img, 0, UINT8_MAX, cv::NORM_MINMAX);
 }
 
-int	alx_cv_component	(void *restrict img, ptrdiff_t cmp)
+void	alx_cv_normalize	(void *img)
 {
-	return	alx::CV::component((class cv::Mat *)img, cmp);
+	return	alx::CV::normalize((class cv::Mat *)img);
 }
 
 

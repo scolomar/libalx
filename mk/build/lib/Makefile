@@ -133,7 +133,9 @@ CV_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/cv/alx/mean.o			\
 		$(BUILD_TMP_DIR)/extra/cv/alx/median.o			\
 		$(BUILD_TMP_DIR)/extra/cv/alx/skeleton.o		\
-		$(BUILD_TMP_DIR)/extra/cv/core/array/array.o		\
+		$(BUILD_TMP_DIR)/extra/cv/core/array/bitwise.o		\
+		$(BUILD_TMP_DIR)/extra/cv/core/array/component.o	\
+		$(BUILD_TMP_DIR)/extra/cv/core/array/normalize.o	\
 		$(BUILD_TMP_DIR)/extra/cv/core/contours/contours.o	\
 		$(BUILD_TMP_DIR)/extra/cv/core/img/img.o		\
 		$(BUILD_TMP_DIR)/extra/cv/core/pixel/pixel.o		\
