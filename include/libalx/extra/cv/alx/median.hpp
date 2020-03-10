@@ -30,6 +30,8 @@ extern	"C"
 int	alx_cv_median_horizontal(void *img);
 [[gnu::nonnull]]
 int	alx_cv_median_vertical	(void *img);
+[[gnu::nonnull]]
+int	alx_cv_median		(void *img);
 }
 
 
@@ -57,6 +59,8 @@ namespace CV {
 int	median_horizontal	(class cv::Mat *img);
 [[gnu::nonnull]]
 int	median_vertical		(class cv::Mat *img);
+[[gnu::nonnull]]
+int	median			(class cv::Mat *img);
 
 
 /******************************************************************************

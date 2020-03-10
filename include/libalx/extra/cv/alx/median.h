@@ -38,6 +38,8 @@ __attribute__((nonnull))
 int	alx_cv_median_horizontal(img_s *img);
 __attribute__((nonnull))
 int	alx_cv_median_vertical	(img_s *img);
+__attribute__((nonnull))
+int	alx_cv_median		(img_s *img);
 
 
 /******************************************************************************

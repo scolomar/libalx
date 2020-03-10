@@ -46,7 +46,7 @@ int	alx::CV::median_horizontal	(class cv::Mat *img)
 	uint8_t		*pix;
 
 	if (img->channels() != 1)
-		return	1;
+		return	-1;
 
 #pragma GCC ivdep
 	for (ptrdiff_t i = 0; i < rows; i++) {
@@ -79,7 +79,7 @@ int	alx::CV::median_vertical	(class cv::Mat *img)
 	uint8_t		*pix;
 
 	if (img->channels() != 1)
-		return	1;
+		return	-1;
 
 #pragma GCC ivdep
 	for (ptrdiff_t i = 0; i < cols; i++) {
@@ -99,6 +99,35 @@ int	alx::CV::median_vertical	(class cv::Mat *img)
 int	alx_cv_median_vertical		(void *img)
 {
 	return	alx::CV::median_vertical((class cv::Mat *)img);
+}
+
+int	alx::CV::median			(class cv::Mat *img)
+{
+	const ptrdiff_t	rows	= img->rows;
+	const ptrdiff_t	cols	= img->cols;
+	const ptrdiff_t	step	= img->step;
+	const ptrdiff_t	sz	= step * rows;
+	uint8_t		*data	= img->data;
+	uint8_t		median;
+	uint8_t		*pix;
+
+	if (img->channels() != 1)
+		return	-1;
+
+	median	= alx_gsl_rstat_median_u8(sz, data);
+#pragma GCC ivdep
+	for (ptrdiff_t i = 0; i < cols; i++) {
+		for (ptrdiff_t j = 0; j < rows; j++) {
+			pix	= data + j * step + i;
+			*pix	= median;
+		}
+	}
+	return	median;
+}
+
+int	alx_cv_median			(void *img)
+{
+	return	alx::CV::median((class cv::Mat *)img);
 }
 
 
