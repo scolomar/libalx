@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/cv/imgproc/miscellaneous/misc.hpp"
+#include "libalx/extra/cv/imgproc/miscellaneous/distance.hpp"
 
 #include <opencv2/core/mat.hpp>
 #include <opencv2/imgproc.hpp>
@@ -31,36 +31,6 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx::CV::cvt_color		(class cv::Mat *img, int method)
-{
-
-	if (method < 0 || method > cv::COLOR_COLORCVT_MAX)
-		return	1;
-	cv::cvtColor(*img, *img, method, 0);
-
-	return	0;
-}
-
-int	alx_cv_cvt_color		(void *img, int method)
-{
-	return	alx::CV::cvt_color((class cv::Mat *)img, method);
-}
-
-void	alx::CV::cvt_res_8b		(class cv::Mat *img)
-{
-	class cv::Mat	tmp;
-
-	img->convertTo(tmp, CV_8U);
-	tmp.copyTo(*img);
-
-	tmp.release();
-}
-
-void	alx_cv_cvt_res_8b		(void *img)
-{
-	alx::CV::cvt_res_8b((class cv::Mat *)img);
-}
-
 int	alx::CV::distance_transform	(class cv::Mat *img)
 {
 	class cv::Mat	tmp;
