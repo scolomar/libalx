@@ -148,6 +148,7 @@ CV_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/geometric/geom.o	\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/histogram/hist.o	\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/miscellaneous/misc.o	\
+		$(BUILD_TMP_DIR)/extra/cv/imgproc/miscellaneous/threshold.o\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/shape/contours.o	\
 		$(BUILD_TMP_DIR)/extra/cv/imgproc/shape/rect.o		\
 		$(BUILD_TMP_DIR)/extra/cv/videoio/cam.o			\

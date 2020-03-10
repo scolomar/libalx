@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/imgproc/miscellaneous/misc.hpp */
+#pragma once	/* libalx/extra/cv/imgproc/miscellaneous/threshold.hpp */
 
 
 /******************************************************************************
@@ -28,13 +28,10 @@
 extern	"C"
 {
 [[gnu::nonnull]]
-int	alx_cv_cvt_color		(void *img, int method);
+int	alx_cv_adaptive_thr		(void *img,
+					 int method, int thr_typ, int ksize);
 [[gnu::nonnull]]
-void	alx_cv_cvt_res_8b		(void *img);
-[[gnu::nonnull]]
-int	alx_cv_distance_transform	(void *img);
-[[gnu::nonnull]]
-int	alx_cv_distance_transform_8b	(void *img);
+int	alx_cv_threshold		(void *img, int thr_typ, int thr_val);
 }
 
 
@@ -59,13 +56,10 @@ namespace CV {
  ******* prototypes ***********************************************************
  ******************************************************************************/
 [[gnu::nonnull]]
-int	cvt_color		(class cv::Mat *img, int method);
+int	adaptive_thr		(class cv::Mat *img,
+				 int method, int thr_typ, int ksize);
 [[gnu::nonnull]]
-void	cvt_res_8b		(class cv::Mat *img);
-[[gnu::nonnull]]
-int	distance_transform	(class cv::Mat *img);
-[[gnu::nonnull]]
-int	distance_transform_8b	(class cv::Mat *img);
+int	threshold		(class cv::Mat *img, int thr_typ, int thr_val);
 
 
 /******************************************************************************

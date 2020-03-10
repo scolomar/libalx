@@ -7,13 +7,13 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/imgproc/miscellaneous/misc.hpp */
+#pragma once	/* libalx/extra/cv/imgproc/miscellaneous/threshold.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <opencv2/core/base.hpp>
+#include "libalx/extra/cv/types.h"
 
 
 /******************************************************************************
@@ -23,31 +23,27 @@
 
 
 /******************************************************************************
- ******* extern "C" ***********************************************************
- ******************************************************************************/
-extern	"C"
-{
-[[gnu::nonnull]]
-int	alx_cv_cvt_color		(void *img, int method);
-[[gnu::nonnull]]
-void	alx_cv_cvt_res_8b		(void *img);
-[[gnu::nonnull]]
-int	alx_cv_distance_transform	(void *img);
-[[gnu::nonnull]]
-int	alx_cv_distance_transform_8b	(void *img);
-}
-
-
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-namespace alx {
-namespace CV {
-
-
-/******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
+/** Adaptive threshold methods */
+enum	Alx_Cv_Adaptive_Thr_Method {
+	ALX_CV_ADAPTIVE_THRESH_MEAN	= 0,
+	ALX_CV_ADAPTIVE_THRESH_GAUSSIAN	= 1
+};
+
+enum	Alx_Cv_Thresh {
+	ALX_CV_THRESH_BINARY      = 0,  /**< value = value > threshold ? max_value : 0       */
+	ALX_CV_THRESH_BINARY_INV  = 1,  /**< value = value > threshold ? 0 : max_value       */
+	ALX_CV_THRESH_TRUNC       = 2,  /**< value = value > threshold ? threshold : value   */
+	ALX_CV_THRESH_TOZERO      = 3,  /**< value = value > threshold ? value : 0           */
+	ALX_CV_THRESH_TOZERO_INV  = 4,  /**< value = value > threshold ? 0 : value           */
+	ALX_CV_THRESH_MASK        = 7,
+	ALX_CV_THRESH_OTSU        = 8,  /**< use Otsu algorithm to choose the optimal threshold value;
+					combine the flag with one of the above CV_THRESH_* values */
+	ALX_CV_THRESH_TRIANGLE    = 16  /**< use Triangle algorithm to choose the optimal threshold value;
+					combine the flag with one of the above CV_THRESH_* values, but not
+					with CV_THRESH_OTSU */
+};
 
 
 /******************************************************************************
@@ -58,21 +54,16 @@ namespace CV {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-[[gnu::nonnull]]
-int	cvt_color		(class cv::Mat *img, int method);
-[[gnu::nonnull]]
-void	cvt_res_8b		(class cv::Mat *img);
-[[gnu::nonnull]]
-int	distance_transform	(class cv::Mat *img);
-[[gnu::nonnull]]
-int	distance_transform_8b	(class cv::Mat *img);
+__attribute__((nonnull))
+int	alx_cv_adaptive_thr		(img_s *img,
+					 int method, int thr_typ, int ksize);
+__attribute__((nonnull))
+int	alx_cv_threshold		(img_s *img, int thr_typ, int thr_val);
 
 
 /******************************************************************************
- ******* namespace ************************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-}	/* namespace CV */
-}	/* namespace alx */
 
 
 /******************************************************************************
