@@ -18,7 +18,6 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define ALX_CV_MAX_KSIZE	(50)
 
 
 /******************************************************************************
@@ -44,7 +43,7 @@ int	alx::CV::adaptive_thr		(class cv::Mat *img,
 		return	1;
 	if (thr_typ < 0 || thr_typ > 1)
 		return	1;
-	if (!(ksize % 2) || ksize < 3 || ksize > ALX_CV_MAX_KSIZE)
+	if (!(ksize % 2) || ksize < 3)
 		return	1;
 	cv::adaptiveThreshold(*img, *img, UINT8_MAX, method, thr_typ, ksize, 0);
 
