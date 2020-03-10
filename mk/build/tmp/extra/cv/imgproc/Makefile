@@ -17,7 +17,8 @@ OBJ	=								\
 	$(CURDIR)/filter/dilate_erode.o					\
 	$(CURDIR)/filter/edges.o					\
 	$(CURDIR)/filter/smooth.o					\
-	$(CURDIR)/geometric/geom.o					\
+	$(CURDIR)/geometric/mirror.o					\
+	$(CURDIR)/geometric/rotate.o					\
 	$(CURDIR)/histogram/hist.o					\
 	$(CURDIR)/miscellaneous/color.o					\
 	$(CURDIR)/miscellaneous/distance.o				\
@@ -32,7 +33,8 @@ SRC	=								\
 	$(SRC_DIR)/extra/cv/imgproc/filter/dilate_erode.cpp		\
 	$(SRC_DIR)/extra/cv/imgproc/filter/edges.cpp			\
 	$(SRC_DIR)/extra/cv/imgproc/filter/smooth.cpp			\
-	$(SRC_DIR)/extra/cv/imgproc/geometric/geom.cpp			\
+	$(SRC_DIR)/extra/cv/imgproc/geometric/mirror.cpp		\
+	$(SRC_DIR)/extra/cv/imgproc/geometric/rotate.cpp		\
 	$(SRC_DIR)/extra/cv/imgproc/histogram/hist.cpp			\
 	$(SRC_DIR)/extra/cv/imgproc/miscellaneous/color.cpp		\
 	$(SRC_DIR)/extra/cv/imgproc/miscellaneous/distance.cpp		\

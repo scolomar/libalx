@@ -7,44 +7,18 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/imgproc/geometric/geom.hpp */
+#pragma once	/* libalx/extra/cv/imgproc/geometric/rotate.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <opencv2/core/base.hpp>
-
-#include "libalx/base/compiler/restrict.hpp"
+#include "libalx/extra/cv/types.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* extern "C" ***********************************************************
- ******************************************************************************/
-extern	"C"
-{
-[[gnu::nonnull]]
-int	alx_cv_mirror		(void *img, int axis);
-[[gnu::nonnull]]
-int	alx_cv_rotate_orto	(void *img, int n);
-[[gnu::nonnull]]
-int	alx_cv_rotate		(void *img, double x, double y, double angle);
-[[gnu::nonnull]]
-int	alx_cv_rotate_2rect	(void *restrict img,
-				 const void *restrict rect_rot);
-}
-
-
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-namespace alx {
-namespace CV {
 
 
 /******************************************************************************
@@ -60,22 +34,18 @@ namespace CV {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-[[gnu::nonnull]]
-int	mirror		(class cv::Mat *img, int axis);
-[[gnu::nonnull]]
-int	rotate_orto	(class cv::Mat *img, int n);
-[[gnu::nonnull]]
-int	rotate		(class cv::Mat *img, double x, double y, double angle);
-[[gnu::nonnull]]
-int	rotate_2rect	(class cv::Mat *restrict img,
-			 const class cv::RotatedRect *restrict rect_rot);
+__attribute__((nonnull))
+int	alx_cv_rotate_orto	(img_s *img, int n);
+__attribute__((nonnull))
+int	alx_cv_rotate		(img_s *img, double x, double y, double angle);
+__attribute__((nonnull))
+int	alx_cv_rotate_2rect	(img_s *restrict img,
+				 const rect_rot_s *restrict rect_rot);
 
 
 /******************************************************************************
- ******* namespace ************************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-}	/* namespace CV */
-}	/* namespace alx */
 
 
 /******************************************************************************
