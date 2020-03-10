@@ -38,25 +38,22 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx::CV::canny	(class cv::Mat *img,
-			 uint8_t val, ptrdiff_t ksize, bool l2grad)
+int	alx::CV::canny	(class cv::Mat *img, uint8_t thr_lo, uint8_t thr_hi,
+			 ptrdiff_t ksize, bool l2grad)
 {
-	uint16_t	lo;
-	uint16_t	hi;
-
-	hi	= ALX_MIN(val * 1.5, UINT8_MAX);
-	lo	= ALX_MAX(val / 1.5, 1);
 
 	if (!(ksize % 2)  ||  ksize < -1)
 		return	1;
-	cv::Canny(*img, *img, lo, hi, ksize, l2grad);
+	cv::Canny(*img, *img, thr_lo, thr_hi, ksize, l2grad);
 
 	return	0;
 }
 
-int	alx_cv_canny	(void *img, uint8_t val, ptrdiff_t ksize, bool l2grad)
+int	alx_cv_canny	(void *img, uint8_t thr_lo, uint8_t thr_hi,
+			 ptrdiff_t ksize, bool l2grad)
 {
-	return	alx::CV::canny((class cv::Mat *)img, val, ksize, l2grad);
+	return	alx::CV::canny((class cv::Mat *)img, thr_lo, thr_hi,
+								ksize, l2grad);
 }
 
 

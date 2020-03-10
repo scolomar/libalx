@@ -39,7 +39,8 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull))
-int	alx_cv_canny	(void *img, uint8_t val, ptrdiff_t ksize, bool l2grad);
+int	alx_cv_canny	(void *img, uint8_t thr_lo, uint8_t thr_hi,
+			 ptrdiff_t ksize, bool l2grad);
 
 
 /******************************************************************************
