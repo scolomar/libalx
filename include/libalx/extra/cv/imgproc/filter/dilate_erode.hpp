@@ -32,7 +32,15 @@ extern	"C"
 [[gnu::nonnull]]
 int	alx_cv_dilate		(void *img, ptrdiff_t i);
 [[gnu::nonnull]]
+int	alx_cv_dilate_h		(void *img, ptrdiff_t i);
+[[gnu::nonnull]]
+int	alx_cv_dilate_v		(void *img, ptrdiff_t i);
+[[gnu::nonnull]]
 int	alx_cv_erode		(void *img, ptrdiff_t i);
+[[gnu::nonnull]]
+int	alx_cv_erode_h		(void *img, ptrdiff_t i);
+[[gnu::nonnull]]
+int	alx_cv_erode_v		(void *img, ptrdiff_t i);
 [[gnu::nonnull]]
 int	alx_cv_dilate_erode	(void *img, ptrdiff_t i);
 [[gnu::nonnull]]
@@ -63,7 +71,15 @@ namespace CV {
 [[gnu::nonnull]]
 int	dilate		(class cv::Mat *img, ptrdiff_t i);
 [[gnu::nonnull]]
+int	dilate_h	(class cv::Mat *img, ptrdiff_t i);
+[[gnu::nonnull]]
+int	dilate_v	(class cv::Mat *img, ptrdiff_t i);
+[[gnu::nonnull]]
 int	erode		(class cv::Mat *img, ptrdiff_t i);
+[[gnu::nonnull]]
+int	erode_h		(class cv::Mat *img, ptrdiff_t i);
+[[gnu::nonnull]]
+int	erode_v		(class cv::Mat *img, ptrdiff_t i);
 [[gnu::nonnull]]
 int	dilate_erode	(class cv::Mat *img, ptrdiff_t i);
 [[gnu::nonnull]]

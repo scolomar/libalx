@@ -39,7 +39,15 @@
 __attribute__((nonnull))
 int	alx_cv_dilate		(img_s *img, ptrdiff_t i);
 __attribute__((nonnull))
+int	alx_cv_dilate_h		(img_s *img, ptrdiff_t i);
+__attribute__((nonnull))
+int	alx_cv_dilate_v		(img_s *img, ptrdiff_t i);
+__attribute__((nonnull))
 int	alx_cv_erode		(img_s *img, ptrdiff_t i);
+__attribute__((nonnull))
+int	alx_cv_erode_h		(img_s *img, ptrdiff_t i);
+__attribute__((nonnull))
+int	alx_cv_erode_v		(img_s *img, ptrdiff_t i);
 __attribute__((nonnull))
 int	alx_cv_dilate_erode	(img_s *img, ptrdiff_t i);
 __attribute__((nonnull))
