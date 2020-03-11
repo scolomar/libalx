@@ -32,9 +32,10 @@ extern	"C"
 int	alx_cv_rotate_orto	(void *img, int n);
 [[gnu::nonnull]]
 int	alx_cv_rotate		(void *img, double x, double y, double angle);
-[[gnu::nonnull]]
+[[gnu::nonnull(1, 2)]]
 int	alx_cv_rotate_2rect	(void *restrict img,
-				 const void *restrict rect_rot);
+				 const void *restrict rect_rot,
+				 void *restrict rect);
 }
 
 
@@ -62,9 +63,10 @@ namespace CV {
 int	rotate_orto	(class cv::Mat *img, int n);
 [[gnu::nonnull]]
 int	rotate		(class cv::Mat *img, double x, double y, double angle);
-[[gnu::nonnull]]
+[[gnu::nonnull(1, 2)]]
 int	rotate_2rect	(class cv::Mat *restrict img,
-			 const class cv::RotatedRect *restrict rect_rot);
+			 const class cv::RotatedRect *restrict rect_rot,
+			 class cv::Rect_<int> *rect);
 
 
 /******************************************************************************

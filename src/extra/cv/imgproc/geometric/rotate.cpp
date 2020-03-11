@@ -90,10 +90,10 @@ int	alx_cv_rotate		(void *img, double x, double y, double angle)
 }
 
 int	alx::CV::rotate_2rect	(class cv::Mat *restrict img,
-				 const class cv::RotatedRect *restrict rect_rot)
+				 const class cv::RotatedRect *restrict rect_rot,
+				 class cv::Rect_<int> *rect)
 {
-	ptrdiff_t	x;
-	ptrdiff_t	y;
+	ptrdiff_t	x, y;
 	double		angle;
 
 	x	= rect_rot->center.x;
@@ -103,14 +103,23 @@ int	alx::CV::rotate_2rect	(class cv::Mat *restrict img,
 	if (angle < -45.0)
 		angle += 90.0;
 
+	if (rect) {
+		rect->x		= x - rect_rot->size.width / 2;
+		rect->y		= y - rect_rot->size.height / 2;
+		rect->width	= rect_rot->size.width;
+		rect->height	= rect_rot->size.height;
+	}
+
 	return	alx::CV::rotate(img, x, y, angle);
 }
 
 int	alx_cv_rotate_2rect	(void *restrict img,
-				 const void *restrict rect_rot)
+				 const void *restrict rect_rot,
+				 void *restrict rect)
 {
 	return	alx::CV::rotate_2rect((class cv::Mat *)img,
-				(const class cv::RotatedRect *)rect_rot);
+				(const class cv::RotatedRect *)rect_rot,
+				(class cv::Rect_<int> *)rect);
 }
 
 
