@@ -102,14 +102,15 @@ int	alx::CV::rotate_2rect	(class cv::Mat *restrict img,
 	y	= rect_rot->center.y;
 	angle	= rect_rot->angle;
 	/* If angle is < -45º, it is taking into acount the incorrect side */
-printf("ang%lf\n", angle);
 	if (angle < -45.0)
 		angle += 90.0;
+	if (angle > 45.0)
+		angle -= 90.0;
 
 	if (rect) {
 		w	= rect_rot->size.width;
 		h	= rect_rot->size.height;
-		if (rect_rot->angle < -45.5)
+		if ((rect_rot->angle < -45.0)  ||  (rect_rot->angle > 45.0))
 			ALX_SWAP(&w, &h);
 		rect->x		= x - w / 2;
 		rect->y		= y - h / 2;
