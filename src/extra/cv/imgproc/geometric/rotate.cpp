@@ -13,6 +13,7 @@
 #include <opencv2/imgproc.hpp>
 
 #include "libalx/base/compiler/restrict.hpp"
+#include "libalx/base/stdlib/swap.hpp"
 
 
 /******************************************************************************
@@ -94,20 +95,26 @@ int	alx::CV::rotate_2rect	(class cv::Mat *restrict img,
 				 class cv::Rect_<int> *rect)
 {
 	ptrdiff_t	x, y;
+	ptrdiff_t	w, h;
 	double		angle;
 
 	x	= rect_rot->center.x;
 	y	= rect_rot->center.y;
 	angle	= rect_rot->angle;
 	/* If angle is < -45º, it is taking into acount the incorrect side */
+printf("ang%lf\n", angle);
 	if (angle < -45.0)
 		angle += 90.0;
 
 	if (rect) {
-		rect->x		= x - rect_rot->size.width / 2;
-		rect->y		= y - rect_rot->size.height / 2;
-		rect->width	= rect_rot->size.width;
-		rect->height	= rect_rot->size.height;
+		w	= rect_rot->size.width;
+		h	= rect_rot->size.height;
+		if (rect_rot->angle < -45.5)
+			ALX_SWAP(&w, &h);
+		rect->x		= x - w / 2;
+		rect->y		= y - h / 2;
+		rect->width	= w;
+		rect->height	= h;
 	}
 
 	return	alx::CV::rotate(img, x, y, angle);
