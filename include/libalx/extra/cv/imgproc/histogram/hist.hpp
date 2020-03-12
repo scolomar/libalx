@@ -13,6 +13,8 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <cstddef>
+
 #include <opencv2/core/base.hpp>
 
 #include "libalx/base/compiler/restrict.hpp"
@@ -29,9 +31,12 @@
 extern	"C"
 {
 [[gnu::nonnull]]
-int	alx_cv_histogram1D	(void *restrict hist, const void *restrict img);
+int	alx_cv_histogram1D	(ptrdiff_t *restrict hist/*[static 256]*/,
+				 const void *restrict img);
 [[gnu::nonnull]]
-int	alx_cv_histogram3D	(void *restrict hist, const void *restrict img);
+int	alx_cv_draw_hist1D	(void *restrict hist, const void *restrict img);
+[[gnu::nonnull]]
+int	alx_cv_draw_hist3D	(void *restrict hist, const void *restrict img);
 }
 
 
@@ -56,10 +61,13 @@ namespace CV {
  ******* prototypes ***********************************************************
  ******************************************************************************/
 [[gnu::nonnull]]
-int	histogram1D	(class cv::Mat *restrict hist,
+int	histogram1D	(ptrdiff_t *restrict hist/*[static 256]*/,
 			 const class cv::Mat *restrict img);
 [[gnu::nonnull]]
-int	histogram3D	(class cv::Mat *restrict hist,
+int	draw_hist1D	(class cv::Mat *restrict hist,
+			 const class cv::Mat *restrict img);
+[[gnu::nonnull]]
+int	draw_hist3D	(class cv::Mat *restrict hist,
 			 const class cv::Mat *restrict img);
 
 
@@ -73,3 +81,4 @@ int	histogram3D	(class cv::Mat *restrict hist,
 /******************************************************************************
  ******* end of file **********************************************************
  ******************************************************************************/
+

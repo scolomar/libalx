@@ -9,6 +9,7 @@
  ******************************************************************************/
 #include "libalx/extra/cv/imgproc/histogram/hist.hpp"
 
+#include <cmath>
 #include <cstddef>
 #include <cstdint>
 
@@ -36,8 +37,32 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-/* ----- Histograms */
-int	alx::CV::histogram1D	(class cv::Mat *restrict hist,
+int	alx::CV::histogram1D	(ptrdiff_t *restrict hist/*[static 256]*/,
+				 const class cv::Mat *restrict img)
+{
+	const	int	h_size		= 256;
+	const	float	h_range_arr[]	= {0.0, 256.0};
+	const	float	*h_range	= {h_range_arr};
+	class cv::Mat	h;
+
+	if (img->channels() != 1)
+		return	-1;
+	cv::calcHist(img, 1, 0, cv::Mat(), h, 1, &h_size, &h_range);
+#pragma GCC ivdep
+	for (ptrdiff_t i = 0; i < h_size; i++)
+		hist[i]	= roundf(h.at<float>(i));
+
+	h.release();
+	return	0;
+}
+
+int	alx_cv_histogram1D	(ptrdiff_t *restrict hist,
+				 const void *restrict img)
+{
+	return	alx::CV::histogram1D(hist, (const class cv::Mat *)img);
+}
+
+int	alx::CV::draw_hist1D	(class cv::Mat *restrict hist,
 				 const class cv::Mat *restrict img)
 {
 	const	int	h_size		= 256;
@@ -50,8 +75,7 @@ int	alx::CV::histogram1D	(class cv::Mat *restrict hist,
 		return	-1;
 	*hist	= cv::Mat::zeros(cv::Size(h_size, h_height), CV_8UC3);
 
-	cv::calcHist(img, 1, 0, cv::Mat(), tmp, 1, &h_size, &h_range,
-								true, false);
+	cv::calcHist(img, 1, 0, cv::Mat(), tmp, 1, &h_size, &h_range);
 	/* Normalize the result to [0, rows - 1] */
 	cv::normalize(tmp, tmp, 0, hist->rows - 1, cv::NORM_MINMAX, -1,
 								 cv::Mat());
@@ -67,13 +91,13 @@ int	alx::CV::histogram1D	(class cv::Mat *restrict hist,
 	return	0;
 }
 
-int	alx_cv_histogram1D	(void *restrict hist, const void *restrict img)
+int	alx_cv_draw_hist1D	(void *restrict hist, const void *restrict img)
 {
-	return	alx::CV::histogram1D((class cv::Mat *)hist,
+	return	alx::CV::draw_hist1D((class cv::Mat *)hist,
 						(const class cv::Mat *)img);
 }
 
-int	alx::CV::histogram3D	(class cv::Mat *restrict hist,
+int	alx::CV::draw_hist3D	(class cv::Mat *restrict hist,
 				 const class cv::Mat *restrict img)
 {
 	const	int	h_size		= 256;
@@ -137,9 +161,9 @@ int	alx::CV::histogram3D	(class cv::Mat *restrict hist,
 	return	0;
 }
 
-int	alx_cv_histogram3D	(void *restrict hist, const void *restrict img)
+int	alx_cv_draw_hist3D	(void *restrict hist, const void *restrict img)
 {
-	return	alx::CV::histogram3D((class cv::Mat *)hist,
+	return	alx::CV::draw_hist3D((class cv::Mat *)hist,
 						(const class cv::Mat *)img);
 }
 
