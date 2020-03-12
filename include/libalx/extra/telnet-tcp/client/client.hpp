@@ -29,6 +29,8 @@
 	alx_telnet_login(telnet, user, passwd, delay_us)
 #define telnet_send(telnet, msg)					\
 	alx_telnet_send(telnet, msg)
+#define telnet_sendf(telnet, fmt, ...)					\
+	alx_telnet_sendf(telnet, fmt, ##__VA_ARGS__)
 #endif
 
 
@@ -39,14 +41,20 @@ extern	"C"
 {
 [[gnu::nonnull(1, 2, 4)]] [[gnu::warn_unused_result]]
 int	alx_telnet_open_client	(FILE **restrict telnet,
-				 char *restrict server_addr,
-				 char *restrict server_port, char *restrict rw);
+				 const char *restrict server_addr,
+				 const char *restrict server_port,
+				 const char *restrict rw);
 [[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 int	alx_telnet_login	(FILE *restrict telnet,
-				 char *restrict user, char *restrict passwd,
+				 const char *restrict user,
+				 const char *restrict passwd,
 				 int delay_us);
-[[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
-int	alx_telnet_send		(FILE *restrict telnet, char *restrict msg);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_telnet_send		(FILE *restrict telnet,
+				 const char *restrict msg);
+[[gnu::nonnull]] [[gnu::format(printf, 2, 3)]] [[gnu::warn_unused_result]]
+int	alx_telnet_sendf	(FILE *restrict telnet,
+				 const char *restrict fmt, ...);
 }
 
 

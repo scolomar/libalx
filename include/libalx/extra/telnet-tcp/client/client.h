@@ -19,6 +19,11 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define telnet_sendf(telnet, fmt, ...)					\
+	alx_telnet_sendf(telnet, fmt, ##__VA_ARGS__)
+#endif
 
 
 /******************************************************************************
@@ -36,14 +41,20 @@
  ******************************************************************************/
 __attribute__((nonnull(1, 2, 4), warn_unused_result))
 int	alx_telnet_open_client	(FILE **restrict telnet,
-				 char *restrict server_addr,
-				 char *restrict server_port, char *restrict rw);
+				 const char *restrict server_addr,
+				 const char *restrict server_port,
+				 const char *restrict rw);
 __attribute__((nonnull(1, 2), warn_unused_result))
 int	alx_telnet_login	(FILE *restrict telnet,
-				 char *restrict user, char *restrict passwd,
+				 const char *restrict user,
+				 const char *restrict passwd,
 				 int delay_us);
-__attribute__((nonnull(1), warn_unused_result))
-int	alx_telnet_send		(FILE *restrict telnet, char *restrict msg);
+__attribute__((nonnull, warn_unused_result))
+int	alx_telnet_send		(FILE *restrict telnet,
+				 const char *restrict msg);
+__attribute__((nonnull, format(printf, 2, 3), warn_unused_result))
+int	alx_telnet_sendf	(FILE *restrict telnet,
+				 const char *restrict fmt, ...);
 
 
 /******************************************************************************
@@ -54,8 +65,9 @@ int	alx_telnet_send		(FILE *restrict telnet, char *restrict msg);
 __attribute__((always_inline, nonnull(1, 2, 4), warn_unused_result))
 inline
 int	telnet_open_client	(FILE **restrict telnet,
-				 char *restrict server_addr,
-				 char *restrict server_port, char *restrict rw)
+				 const char *restrict server_addr,
+				 const char *restrict server_port,
+				 const char *restrict rw)
 {
 	return	alx_telnet_open_client(telnet, server_addr, server_port, rw);
 }
@@ -63,15 +75,17 @@ int	telnet_open_client	(FILE **restrict telnet,
 __attribute__((always_inline, nonnull(1, 2), warn_unused_result))
 inline
 int	telnet_login		(FILE *restrict telnet,
-				 char *restrict user, char *restrict passwd,
+				 const char *restrict user,
+				 const char *restrict passwd,
 				 int delay_us)
 {
 	return	alx_telnet_login(telnet, user, passwd, delay_us);
 }
 
-__attribute__((always_inline, nonnull(1), warn_unused_result))
+__attribute__((always_inline, nonnull, warn_unused_result))
 inline
-int	telnet_send		(FILE *restrict telnet, char *restrict msg)
+int	telnet_send		(FILE *restrict telnet,
+				 const char *restrict msg)
 {
 	return	alx_telnet_send(telnet, msg);
 }

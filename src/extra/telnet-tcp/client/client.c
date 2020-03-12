@@ -36,8 +36,9 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 int	alx_telnet_open_client	(FILE **restrict telnet,
-				 char *restrict server_addr,
-				 char *restrict server_port, char *restrict rw)
+				 const char *restrict server_addr,
+				 const char *restrict server_port,
+				 const char *restrict rw)
 {
 	char	cmd[_POSIX_ARG_MAX];
 
@@ -50,7 +51,8 @@ int	alx_telnet_open_client	(FILE **restrict telnet,
 }
 
 int	alx_telnet_login	(FILE *restrict telnet,
-				 char *restrict user, char *restrict passwd,
+				 const char *restrict user,
+				 const char *restrict passwd,
 				 int delay_us)
 {
 
@@ -65,10 +67,31 @@ int	alx_telnet_login	(FILE *restrict telnet,
 	return	0;
 }
 
-int	alx_telnet_send		(FILE *restrict telnet, char *restrict msg)
+int	alx_telnet_send		(FILE *restrict telnet,
+				 const char *restrict msg)
 {
 
 	if (fprintf(telnet, "%s\n", msg) <= 0)
+		return	-1;
+	if (fflush(telnet))
+		return	-1;
+
+	return	0;
+}
+
+int	alx_telnet_sendf	(FILE *restrict telnet,
+				 const char *restrict fmt, ...)
+{
+	va_list	ap;
+	int	status;
+
+	va_start(ap, fmt);
+	status	= vfprintf(telnet, fmt, ap);
+	va_end(ap);
+
+	if (status <= 0)
+		return	-1;
+	if (fputc('\n', telnet) < 0)
 		return	-1;
 	if (fflush(telnet))
 		return	-1;
