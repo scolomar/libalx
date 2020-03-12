@@ -20,27 +20,19 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 /*
- * void	alx_perrorx(const char *restrict str);
+ * [[noreturn]] [[gnu::format(printf, 2, 3)]]
+ * void	alx_errorx(int status, const char *restrict fmt, ...);
  */
-#define alx_perrorx(str)		do				\
+#define alx_errorx(status, fmt, ...)	do				\
 {									\
-	alx__perrorx__(__FILE__, __LINE__, __func__, str);		\
-} while (0)
-
-/*
- * [[noreturn]]
- * void	alx_errorx(int status, const char *restrict str);
- */
-#define alx_errorx(status, str)	do					\
-{									\
-	alx__errorx__(status, __FILE__, __LINE__, __func__, str);	\
+	alx__errorx__(status, __FILE__, __LINE__, __func__, errno,	\
+						fmt, ##__VA_ARGS__);	\
 } while (0)
 
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define perrorx(str)		alx_perrorx(str)
-#define errorx(status, str)	alx_errorx(status, str)
+#define errorx(status, fmt, ...)	alx_errorx(status, fmt, ##__VA_ARGS__)
 #endif
 
 
@@ -49,12 +41,10 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull(1, 3)]]
-void	alx__perrorx__	(const char *restrict file, int line,
-			 const char *restrict func, const char *restrict str);
-[[noreturn]][[gnu::nonnull(2, 4)]]
+[[noreturn]] [[gnu::nonnull(2, 4)]] [[gnu::format(printf, 6, 7)]]
 void	alx__errorx__	(int status, const char *restrict file, int line,
-			 const char *restrict func, const char *restrict str);
+			 const char *restrict func, int errno_val,
+			 const char *restrict format, ...);
 }
 
 

@@ -47,7 +47,7 @@
 {									\
 									\
 	if (!(expr))							\
-		alx_perror(msg);					\
+		alx_perrorx("%s", msg);					\
 } while (0)
 #endif
 
