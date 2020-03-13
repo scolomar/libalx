@@ -13,6 +13,9 @@ base:
 data-structures:
  + base
 
+robot:
+ + base
+
 curl:
  + base
  + data-structures
@@ -39,6 +42,14 @@ ncurses:
 ocr:
  + base
  - libtesseract-dev
+
+plot:
+ + base
+ - gnuplot
+
+telnet-tcp:
+ + base
+ - telnet
 
 zbar:
  + base

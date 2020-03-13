@@ -13,7 +13,6 @@ RUN	apt-get update							&& \
 			libgsl-dev \
 			libncurses-dev \
 			libopencv-dev \
-			libtelnet-dev \
 			libtesseract-dev \
 			libzbar-dev \
 			deborphan \

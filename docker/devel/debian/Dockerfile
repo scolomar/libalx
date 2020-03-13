@@ -13,9 +13,10 @@ RUN	apt-get update							&& \
 			libgsl-dev \
 			libncurses-dev \
 			libopencv-dev \
-			libtelnet-dev \
 			libtesseract-dev \
 			libzbar-dev \
+			telnet \
+			gnuplot \
 			deborphan \
 			--yes						&& \
 	apt-get autoremove --purge --yes				&& \
@@ -24,7 +25,7 @@ RUN	apt-get update							&& \
 	apt-get clean
 
 
-### Use this container to build libalx.
+### Use this container to build and test libalx.
 ### To run the machine (coding and compiling libalx can be done here):
 ### This needs to be called from the parent directory where the programs are.
 ## $ docker container run --user $(id -u):$(id -g) --tty --interactive --volume $PWD:$PWD --workdir $PWD --name libalx-devel alejandrocolomar/libalx:devel bash
