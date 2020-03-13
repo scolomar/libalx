@@ -60,8 +60,11 @@
 int	alx_gnuplot_init	(struct Alx_Gnuplot **gnuplot)
 {
 
-	if (alx_mallocarrays(gnuplot, 1))
+	if (!getenv("DISPLAY"))
 		return	-1;
+
+	if (alx_mallocarrays(gnuplot, 1))
+		return	-2;
 
 	(*gnuplot)->nplots	= 0;
 	(*gnuplot)->multi	= false;
@@ -73,7 +76,7 @@ int	alx_gnuplot_init	(struct Alx_Gnuplot **gnuplot)
 	return	0;
 err:
 	alx_frees(gnuplot);
-	return	-2;
+	return	-3;
 }
 
 int	alx_gnuplot_deinit	(struct Alx_Gnuplot *gnuplot)
