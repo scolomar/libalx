@@ -16,11 +16,11 @@
  * enables sending display requests to gnuplot through simple C calls.	      *
  ******************************************************************************
  * Modified by:		pingplug					      *
- * Site:		< https://github.com/pingplug/gnuplot_i) >	      *
+ * Site:		< https://github.com/pingplug/gnuplot_i >	      *
  ******************************************************************************
  * Modified by:		Alejandro Colomar Andrés			      *
  * Date:		2020						      *
- * Site:		< https://github.com/alejandro-colomar/libalx) >      *
+ * Site:		< https://github.com/alejandro-colomar/libalx >	      *
  ******************************************************************************/
 
 

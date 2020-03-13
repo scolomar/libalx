@@ -16,11 +16,11 @@
  * enables sending display requests to gnuplot through simple C calls.	      *
  ******************************************************************************
  * Modified by:		pingplug					      *
- * Site:		< https://github.com/pingplug/gnuplot_i) >	      *
+ * Site:		< https://github.com/pingplug/gnuplot_i >	      *
  ******************************************************************************
  * Modified by:		Alejandro Colomar Andrés			      *
  * Date:		2020						      *
- * Site:		< https://github.com/alejandro-colomar/libalx) >      *
+ * Site:		< https://github.com/alejandro-colomar/libalx >	      *
  ******************************************************************************/
 
 
@@ -53,9 +53,7 @@ enum	Alx_Gnuplot_Styles {
 	ALX_GNUPLOT_STYLE_LINES,
 	ALX_GNUPLOT_STYLE_LINESPOINTS,
 	ALX_GNUPLOT_STYLE_POINTS,
-	ALX_GNUPLOT_STYLE_STEPS/*,
-
-	ALX_GNUPLOT_STYLES*/
+	ALX_GNUPLOT_STYLE_STEPS
 };
 
 
