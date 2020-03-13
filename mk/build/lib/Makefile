@@ -316,7 +316,7 @@ libalx:
 libalx/libalx-base.a: $(patsubst %.o,%.a.o,$(BASE_OBJ))
 libalx/libalx-base.so: $(patsubst %.o,%.so.o,$(BASE_OBJ))
 	@echo	"	CC	build/lib/$@"
-	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs libbsd-overlay`
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs libbsd-overlay` -l m
 
 
 libalx/libalx-data-structures.a: $(patsubst %.o,%.a.o,$(ALX_DS_OBJ))
