@@ -12,6 +12,7 @@
 #include <errno.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <string.h>
 
 
 /******************************************************************************
@@ -56,7 +57,7 @@ void	alx__vperrorx__	(const char *restrict file, int line,
 		vfprintf(stderr, format, ap);
 		fputc('\n', stderr);
 	}
-	fprintf(stderr, "	E%i -	%s\n", errno_val, strerror(errno_cpy));
+	fprintf(stderr, "	E%i -	%s\n", errno_val, strerror(errno_val));
 }
 
 

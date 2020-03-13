@@ -13,10 +13,12 @@
 # dependencies
 
 OBJ	=								\
-	$(CURDIR)/error.o
+	$(CURDIR)/error.o						\
+	$(CURDIR)/perror.o
 
 SRC	=								\
-	$(SRC_DIR)/base/errno/error.c
+	$(SRC_DIR)/base/errno/error.c					\
+	$(SRC_DIR)/base/errno/perror.c
 
 DEP		= $(OBJ:.o=.d)
 BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))

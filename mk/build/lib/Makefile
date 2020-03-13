@@ -10,6 +10,7 @@ BASE_OBJ	=							\
 		$(BUILD_TMP_DIR)/base/compiler/type.o			\
 		$(BUILD_TMP_DIR)/base/compiler/unused.o			\
 		$(BUILD_TMP_DIR)/base/errno/error.o			\
+		$(BUILD_TMP_DIR)/base/errno/perror.o			\
 		$(BUILD_TMP_DIR)/base/float/constant.o			\
 		$(BUILD_TMP_DIR)/base/float/printf.o			\
 		$(BUILD_TMP_DIR)/base/float/scanf.o			\
