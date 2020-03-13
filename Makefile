@@ -388,7 +388,7 @@ install-ncurses: | inst-inc-x-ncurses inst-libalx-ncurses install-base
 PHONY	+= install-ocr
 install-ocr: | inst-etc-x-ocr inst-inc-x-ocr inst-libalx-ocr install-base
 PHONY	+= install-plot
-install-plot: | inst-etc-x-plot inst-inc-x-plot inst-libalx-plot install-base
+install-plot: | inst-inc-x-plot inst-libalx-plot install-base
 PHONY	+= install-telnet-tcp
 install-telnet-tcp: | inst-inc-x-telnet-tcp inst-libalx-telnet-tcp install-base
 PHONY	+= install-zbar
