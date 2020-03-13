@@ -1,19 +1,41 @@
 /******************************************************************************
- *	Copyright (C) 2018	Alejandro Colomar Andrés		      *
- *	SPDX-License-Identifier:	LGPL-2.0-only			      *
+ *	The code given here is all public domain			      *
+ ******************************************************************************/
+
+
+/******************************************************************************
+ * Original file:	gnuplot_i.h					      *
+ * Original author:	N. Devillard					      *
+ * Date:		Sep 1998					      *
+ * Site:		< http://ndevilla.free.fr/gnuplot/ >		      *
+ * Brief:		C interface to gnuplot				      *
+ *									      *
+ * gnuplot  is a freely available, command-driven graphical display tool      *
+ * for Unix.  It compiles and works quite well on a number of Unix	      *
+ * flavours as well as other operating systems.  The following module	      *
+ * enables sending display requests to gnuplot through simple C calls.	      *
+ ******************************************************************************
+ * Modified by:		pingplug					      *
+ * Site:		< https://github.com/pingplug/gnuplot_i >	      *
+ ******************************************************************************
+ * Modified by:		Alejandro Colomar Andrés			      *
+ * Date:		2020						      *
+ * Site:		< https://github.com/alejandro-colomar/libalx >	      *
  ******************************************************************************/
 
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/zbar/zbar.hpp */
+#pragma once	/* libalx/extra/plot/core.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstddef>
+#include <cstdarg>
+#include <cstdbool>
+#include <cstdio>
 
 #include "libalx/base/compiler/restrict.hpp"
 
@@ -26,14 +48,30 @@
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
+struct	Alx_Gnuplot {
+	FILE		*pipe;
+	char		buf[BUFSIZ];
+
+	int		nplots;
+	const char	*style;
+
+	bool		multi;
+};
+
 extern	"C"
 {
-[[gnu::nonnull(2, 4)]]
-int	alx_zbar_read	(ptrdiff_t bufsiz,
-			 char *restrict bcode_data, char *restrict bcode_type,
-			 const void *restrict imgdata,
-			 ptrdiff_t rows, ptrdiff_t cols,
-			 int type);
+[[gnu::nonnull]]
+int	alx_gnuplot_init	(struct Alx_Gnuplot **gnuplot);
+int	alx_gnuplot_deinit	(struct Alx_Gnuplot *gnuplot);
+[[gnu::nonnull]] [[gnu::format(printf, 2, 3)]]
+int	alx_gnuplot_cmd		(const struct Alx_Gnuplot *restrict gnuplot,
+				 const char *restrict fmt, ...);
+[[gnu::nonnull]] [[gnu::format(printf, 2, 3)]]
+int	alx_gnuplot_printf	(const struct Alx_Gnuplot *restrict gnuplot,
+				 const char *restrict fmt, ...);
+[[gnu::nonnull]] [[gnu::format(printf, 2, 0)]]
+int	alx_gnuplot_vprintf	(const struct Alx_Gnuplot *restrict gnuplot,
+				 const char *restrict fmt, va_list ap);
 }
 
 
@@ -41,7 +79,7 @@ int	alx_zbar_read	(ptrdiff_t bufsiz,
  ******* namespace ************************************************************
  ******************************************************************************/
 namespace alx {
-namespace zbar {
+namespace plot {
 
 
 /******************************************************************************
@@ -62,7 +100,7 @@ namespace zbar {
 /******************************************************************************
  ******* namespace ************************************************************
  ******************************************************************************/
-}	/* namespace zbar */
+}	/* namespace plot */
 }	/* namespace alx */
 
 
