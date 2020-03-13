@@ -198,6 +198,11 @@ NPCOMPLETE_OBJ	=							\
 		$(BUILD_TMP_DIR)/extra/npcomplete/solver_lut.o
 OCR_OBJ		=							\
 		$(BUILD_TMP_DIR)/extra/ocr/ocr.o
+PLOT_OBJ	=							\
+		$(BUILD_TMP_DIR)/extra/plot/core.o			\
+		$(BUILD_TMP_DIR)/extra/plot/multi.o			\
+		$(BUILD_TMP_DIR)/extra/plot/plot.o			\
+		$(BUILD_TMP_DIR)/extra/plot/setup.o
 TELNET_TCP_OBJ	=							\
 		$(BUILD_TMP_DIR)/extra/telnet-tcp/client/client.o
 ZBAR_OBJ	=							\
@@ -220,7 +225,9 @@ base: libalx
 
 
 PHONY += alx
-alx: data-structures npcomplete robot
+alx: data-structures
+#alx: npcomplete
+alx: robot
 
 PHONY += data-structures
 data-structures: libalx
@@ -229,8 +236,8 @@ data-structures: libalx
 
 PHONY += npcomplete
 npcomplete: libalx
-#	$(Q)$(MAKE)	libalx/libalx-npcomplete.a
-#	$(Q)$(MAKE)	libalx/libalx-npcomplete.so
+	$(Q)$(MAKE)	libalx/libalx-npcomplete.a
+	$(Q)$(MAKE)	libalx/libalx-npcomplete.so
 
 PHONY += robot
 robot: libalx
@@ -239,7 +246,15 @@ robot: libalx
 
 
 PHONY += extra
-extra: curl cv gmp gsl ncurses ocr telnet-tcp zbar
+extra: curl
+extra: cv
+extra: gmp
+extra: gsl
+extra: ncurses
+extra: ocr
+extra: plot
+extra: telnet-tcp
+extra: zbar
 
 PHONY += curl
 curl: libalx
@@ -270,6 +285,11 @@ PHONY += ocr
 ocr: libalx
 	$(Q)$(MAKE)	libalx/libalx-ocr.a
 	$(Q)$(MAKE)	libalx/libalx-ocr.so
+
+PHONY += plot
+plot: libalx
+	$(Q)$(MAKE)	libalx/libalx-plot.a
+	$(Q)$(MAKE)	libalx/libalx-plot.so
 
 PHONY += telnet-tcp
 telnet-tcp: libalx
@@ -349,6 +369,12 @@ libalx/libalx-ocr.a: $(patsubst %.o,%.a.o,$(OCR_OBJ))
 libalx/libalx-ocr.so: $(patsubst %.o,%.so.o,$(OCR_OBJ))
 	@echo	"	CC	build/lib/$@"
 	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs tesseract`	\
+						-l alx-base
+
+libalx/libalx-plot.a: $(patsubst %.o,%.a.o,$(PLOT_OBJ))
+libalx/libalx-plot.so: $(patsubst %.o,%.so.o,$(PLOT_OBJ))
+	@echo	"	CC	build/lib/$@"
+	$(Q)$(CC) $(LDFLAGS) -o $@ $^ 					\
 						-l alx-base
 
 libalx/libalx-telnet-tcp.a: $(patsubst %.o,%.a.o,$(TELNET_TCP_OBJ))

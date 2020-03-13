@@ -36,7 +36,9 @@ base:
 
 
 PHONY += alx
-alx: data-structures npcomplete robot
+alx: data-structures
+#alx: npcomplete
+alx: robot
 
 PHONY += data-structures
 data-structures:
@@ -44,7 +46,7 @@ data-structures:
 
 PHONY += npcomplete
 npcomplete:
-#	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/alx/$@/
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/alx/$@/
 
 PHONY += robot
 robot:
@@ -53,7 +55,15 @@ robot:
 
 
 PHONY += extra
-extra: curl cv gmp gsl ncurses ocr telnet-tcp zbar
+extra: curl
+extra: cv
+extra: gmp
+extra: gsl
+extra: ncurses
+extra: ocr
+extra: plot
+extra: telnet-tcp
+extra: zbar
 
 PHONY += curl
 curl:
@@ -90,6 +100,10 @@ PHONY += ocr
 ocr:
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/
 
+PHONY += plot
+plot:
+	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/
+
 PHONY += telnet-tcp
 telnet-tcp:
 	$(Q)$(MAKE)	-C $(BUILD_TMP_DIR)/extra/$@/client/
@@ -107,8 +121,6 @@ clean:
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
 .PHONY: $(PHONY)
-
-
 
 
 ################################################################################

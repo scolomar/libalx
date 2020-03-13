@@ -236,6 +236,7 @@ COMPILE_TARGETS	=							\
 	gsl								\
 	ncurses								\
 	ocr								\
+	plot								\
 	telnet-tcp							\
 	zbar
 
@@ -263,6 +264,7 @@ extra: | gmp
 extra: | gsl
 extra: | ncurses
 extra: | ocr
+extra: | plot
 extra: | telnet-tcp
 extra: | zbar
 PHONY	+= curl
@@ -277,6 +279,8 @@ PHONY	+= ncurses
 ncurses: | ncurses_tmp ncurses_lib
 PHONY	+= ocr
 ocr: | ocr_tmp ocr_lib
+PHONY	+= plot
+plot: | plot_tmp plot_lib
 PHONY	+= telnet-tcp
 telnet-tcp: | telnet-tcp_tmp telnet-tcp_lib
 PHONY	+= zbar
@@ -319,6 +323,7 @@ INSTALL_TARGETS	=							\
 	install-gsl							\
 	install-ncurses							\
 	install-ocr							\
+	install-plot							\
 	install-telnet-tcp						\
 	install-zbar
 
@@ -365,6 +370,7 @@ install_extra: | install-gmp
 install_extra: | install-gsl
 install_extra: | install-ncurses
 install_extra: | install-ocr
+install_extra: | install-plot
 install_extra: | install-telnet-tcp
 install_extra: | install-zbar
 install_extra: | install-base
@@ -381,6 +387,8 @@ PHONY	+= install-ncurses
 install-ncurses: | inst-inc-x-ncurses inst-libalx-ncurses install-base
 PHONY	+= install-ocr
 install-ocr: | inst-etc-x-ocr inst-inc-x-ocr inst-libalx-ocr install-base
+PHONY	+= install-plot
+install-plot: | inst-etc-x-plot inst-inc-x-plot inst-libalx-plot install-base
 PHONY	+= install-telnet-tcp
 install-telnet-tcp: | inst-inc-x-telnet-tcp inst-libalx-telnet-tcp install-base
 PHONY	+= install-zbar
