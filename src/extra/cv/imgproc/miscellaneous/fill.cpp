@@ -15,6 +15,8 @@
 #include <opencv2/core/mat.hpp>
 #include <opencv2/imgproc.hpp>
 
+#include "libalx/extra/cv/imgproc/filter/border.hpp"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
@@ -39,7 +41,9 @@ int	alx::CV::bkgd_fill	(class cv::Mat *img)
 
 	if (img->channels() != 1)
 		return	1;
+	alx::CV::border_black(img, 1);
 	cv::floodFill(*img, cv::Point(0, 0), UINT8_MAX);
+	alx::CV::rm_border(img, 1);
 	return	0;
 }
 
@@ -52,10 +56,9 @@ int	alx::CV::bkgd_mask	(class cv::Mat *img)
 {
 	class cv::Mat	tmp;
 
-	if (img->channels() != 1)
-		return	1;
 	img->copyTo(tmp);
-	cv::floodFill(tmp, cv::Point(0, 0), UINT8_MAX);
+	if (alx::CV::bkgd_fill(&tmp))
+		return	1;
 	cv::bitwise_xor(*img, tmp, *img);
 
 	tmp.release();
@@ -70,9 +73,8 @@ int	alx_cv_bkgd_mask	(void *img)
 int	alx::CV::holes_mask	(class cv::Mat *img)
 {
 
-	if (img->channels() != 1)
+	if (alx::CV::bkgd_fill(img))
 		return	1;
-	cv::floodFill(*img, cv::Point(0, 0), UINT8_MAX);
 	cv::bitwise_not(*img, *img);
 	return	0;
 }
@@ -85,9 +87,8 @@ int	alx_cv_holes_mask	(void *img)
 int	alx::CV::holes_fill	(class cv::Mat *img)
 {
 
-	if (img->channels() != 1)
+	if (alx::CV::bkgd_mask(img))
 		return	1;
-	alx::CV::bkgd_mask(img);
 	cv::bitwise_not(*img, *img);
 	return	0;
 }
