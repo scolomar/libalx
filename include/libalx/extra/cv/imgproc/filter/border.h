@@ -38,7 +38,11 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull))
-int	alx_cv_border		(img_s *img, ptrdiff_t size);
+void	alx_cv_border_black	(img_s *img, ptrdiff_t size);
+__attribute__((nonnull))
+int	alx_cv_border1D_median	(img_s *img, ptrdiff_t size);
+__attribute__((nonnull))
+int	alx_cv_border1D		(img_s *img, ptrdiff_t size, uint8_t value);
 
 
 /******************************************************************************

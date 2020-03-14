@@ -14,6 +14,7 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <cstddef>
+#include <cstdint>
 
 #include <opencv2/core/base.hpp>
 
@@ -29,7 +30,11 @@
 extern	"C"
 {
 [[gnu::nonnull]]
-int	alx_cv_border		(void *img, ptrdiff_t size);
+void	alx_cv_border_black	(void *img, ptrdiff_t size);
+[[gnu::nonnull]]
+int	alx_cv_border1D_median	(void *img, ptrdiff_t size);
+[[gnu::nonnull]]
+int	alx_cv_border1D		(void *img, ptrdiff_t size, uint8_t value);
 }
 
 
@@ -54,7 +59,11 @@ namespace CV {
  ******* prototypes ***********************************************************
  ******************************************************************************/
 [[gnu::nonnull]]
-int	border		(class cv::Mat *img, ptrdiff_t size);
+void	border_black	(class cv::Mat *img, ptrdiff_t size);
+[[gnu::nonnull]]
+int	border1D_median	(class cv::Mat *img, ptrdiff_t size);
+[[gnu::nonnull]]
+int	border1D	(class cv::Mat *img, ptrdiff_t size, uint8_t value);
 
 
 /******************************************************************************
