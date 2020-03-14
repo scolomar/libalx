@@ -38,7 +38,7 @@
  ******************************************************************************/
 __attribute__((nonnull))
 void	alx_cv_roi_set		(img_s *restrict img,
-				 const rect_s *restrict rect);
+				 rect_s *restrict rect);
 
 
 /******************************************************************************

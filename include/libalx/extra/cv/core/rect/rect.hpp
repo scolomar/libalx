@@ -55,6 +55,9 @@ void	alx_cv_extract_rect_rot	(const void *restrict rect_rot,
 				 ptrdiff_t *restrict ctr_y,
 				 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
 				 double *restrict angle);
+
+[[gnu::nonnull]]
+void	alx_cv_rect_within_img	(const void *restrict img, void *restrict rect);
 }
 
 
@@ -101,6 +104,10 @@ void	extract_rect_rot(const class cv::RotatedRect *restrict rect_rot,
 			 ptrdiff_t *restrict ctr_x, ptrdiff_t *restrict ctr_y,
 			 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
 			 double *restrict angle);
+
+[[gnu::nonnull]]
+void	rect_within_img	(const class cv::Mat *restrict img,
+			 class cv::Rect_<int> *restrict rect);
 
 
 /******************************************************************************

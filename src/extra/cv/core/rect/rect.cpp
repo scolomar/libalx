@@ -11,6 +11,7 @@
 
 #include <cstddef>
 
+#include <opencv2/core/mat.hpp>
 #include <opencv2/core/types.hpp>
 
 #include "libalx/base/compiler/restrict.hpp"
@@ -156,6 +157,44 @@ void	alx_cv_extract_rect_rot	(const void *restrict rect_rot,
 {
 	alx::CV::extract_rect_rot((const class cv::RotatedRect *)rect_rot,
 						ctr_x, ctr_y, w, h, angle);
+}
+
+void	alx::CV::rect_within_img(const class cv::Mat *restrict img,
+				 class cv::Rect_<int> *restrict rect)
+{
+	ptrdiff_t	rx, ry, rw, rh;
+	ptrdiff_t	iw, ih;
+
+	rx	= rect->x;
+	ry	= rect->y;
+	rw	= rect->width;
+	rh	= rect->height;
+	iw	= img->cols;
+	ih	= img->rows;
+
+	if (rx + rw > iw)
+		rw	= iw - rx;
+	if (ry + rh > ih)
+		rh	= ih - ry;
+	if (rx < 0) {
+		rw	+= rx;
+		rx	= 0;
+	}
+	if (ry < 0) {
+		rh	+= ry;
+		ry	= 0;
+	}
+
+	rect->x		= rx;
+	rect->y		= ry;
+	rect->width	= rw;
+	rect->height	= rh;
+}
+
+void	alx_cv_rect_within_img	(const void *restrict img, void *restrict rect)
+{
+	alx::CV::rect_within_img((const class cv::Mat *)img,
+					(class cv::Rect_<int> *)rect);
 }
 
 

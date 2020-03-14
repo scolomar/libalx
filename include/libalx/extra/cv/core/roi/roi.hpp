@@ -29,7 +29,7 @@
 extern	"C"
 {
 [[gnu::nonnull]]
-void	alx_cv_roi_set		(void *restrict img, const void *restrict rect);
+void	alx_cv_roi_set		(void *restrict img, void *restrict rect);
 }
 
 
@@ -56,7 +56,7 @@ namespace CV {
 /* ----- ROI */
 [[gnu::nonnull]]
 void	roi_set		(class cv::Mat *restrict img,
-			 const class cv::Rect_<int> *restrict rect);
+			 class cv::Rect_<int> *restrict rect);
 
 
 /******************************************************************************

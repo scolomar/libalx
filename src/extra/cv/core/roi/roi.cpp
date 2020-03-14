@@ -12,6 +12,7 @@
 #include <opencv2/core/mat.hpp>
 
 #include "libalx/base/compiler/restrict.hpp"
+#include "libalx/extra/cv/core/rect/rect.hpp"
 
 
 /******************************************************************************
@@ -33,10 +34,12 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 void	alx::CV::roi_set	(class cv::Mat *restrict img,
-				 const class cv::Rect_<int> *restrict rect)
+				 class cv::Rect_<int> *restrict rect)
 {
 	class cv::Mat	tmp;
-/* FIXME: check roi is possible */
+
+	alx::CV::rect_within_img(img, rect);
+
 	(*img)(*rect).copyTo(tmp);
 	img->release();
 	tmp.copyTo(*img);
@@ -44,10 +47,10 @@ void	alx::CV::roi_set	(class cv::Mat *restrict img,
 	tmp.release();
 }
 
-void	alx_cv_roi_set		(void *restrict img, const void *restrict rect)
+void	alx_cv_roi_set		(void *restrict img, void *restrict rect)
 {
 	alx::CV::roi_set((class cv::Mat *)img,
-					(const class cv::Rect_<int> *)rect);
+					(class cv::Rect_<int> *)rect);
 }
 
 
