@@ -199,7 +199,7 @@ int	multi__begin__		(const struct Alx_Gnuplot *restrict gnuplot,
 	if (n <= 0)
 		return	-1;
 
-	cmd	= multi__cmd__(gnuplot);
+	cmd	= multi__cmd__(gnuplot);	/* XXX: May be a bug; test */
 	t	= multi__title__(title, 0);
 	if (alx_gnuplot_printf(gnuplot, "%s '-' title \"%s\" with %s",
 							cmd, t, gnuplot->style))
