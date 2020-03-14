@@ -20,7 +20,8 @@ OBJ		=							\
 	$(CURDIR)/printf/sbprintf.o					\
 	$(CURDIR)/printf/snprintfs.o					\
 	$(CURDIR)/seekc.o						\
-	$(CURDIR)/sscan.o
+	$(CURDIR)/sscan.o						\
+	$(CURDIR)/tmpfname.o
 
 SRC	=								\
 	$(SRC_DIR)/base/stdio/fgets.c					\
@@ -30,7 +31,8 @@ SRC	=								\
 	$(SRC_DIR)/base/stdio/printf/sbprintf.c				\
 	$(SRC_DIR)/base/stdio/printf/snprintfs.c			\
 	$(SRC_DIR)/base/stdio/seekc.c					\
-	$(SRC_DIR)/base/stdio/sscan.c
+	$(SRC_DIR)/base/stdio/sscan.c					\
+	$(SRC_DIR)/base/stdio/tmpfname.c
 
 DEP		= $(OBJ:.o=.d)
 BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))

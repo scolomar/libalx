@@ -41,6 +41,7 @@ BASE_OBJ	=							\
 		$(BUILD_TMP_DIR)/base/stdio/printf/snprintfs.o		\
 		$(BUILD_TMP_DIR)/base/stdio/seekc.o			\
 		$(BUILD_TMP_DIR)/base/stdio/sscan.o			\
+		$(BUILD_TMP_DIR)/base/stdio/tmpfname.o			\
 		$(BUILD_TMP_DIR)/base/stdlib/alloc/callocs.o		\
 		$(BUILD_TMP_DIR)/base/stdlib/alloc/frees.o		\
 		$(BUILD_TMP_DIR)/base/stdlib/alloc/mallocarray.o	\
