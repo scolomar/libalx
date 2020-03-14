@@ -31,6 +31,7 @@
 
 #include <stddef.h>
 
+#include "libalx/base/stdio/tmpfname.h"
 #include "libalx/extra/plot/core.h"
 
 
@@ -52,8 +53,13 @@ const char *plot__cmd__		(const struct Alx_Gnuplot *gnuplot);
 static
 const char *plot__title__	(const char *title);
 static
-int	plot__begin__		(const struct Alx_Gnuplot *restrict gnuplot,
-				 const char *restrict title);
+int	plot__begin__		(char fname[static restrict FILENAME_MAX],
+				 FILE **restrict fp);
+static
+int	plot__end__		(const struct Alx_Gnuplot *restrict gnuplot,
+				 const char *restrict title,
+				 const char *restrict fname,
+				 FILE *restrict fp);
 
 
 /******************************************************************************
@@ -69,15 +75,18 @@ int	alx_gnuplot_plot_y		(struct Alx_Gnuplot *restrict gnuplot,
 					 const double y[static restrict size],
 					 const char *title)
 {
+	char	fname[FILENAME_MAX];
+	FILE	*fp;
 
-	if (plot__begin__(gnuplot, title))
+	if (plot__begin__(fname, &fp))
 		return	-1;
 
 	for (ptrdiff_t x = 0; x < size; x++) {
-		if (alx_gnuplot_printf(gnuplot, "%11le\n", y[x]))
+		if (fprintf(fp, "%11le\n", y[x]) < 0)
 			return	-1;
 	}
-	if (alx_gnuplot_cmd(gnuplot, "e"))
+
+	if (plot__end__(gnuplot, title, fname, fp))
 		return	-1;
 
 	gnuplot->nplots++;
@@ -90,15 +99,18 @@ int	alx_gnuplot_plot_xy		(struct Alx_Gnuplot *restrict gnuplot,
 					 const double y[static restrict size],
 					 const char *title)
 {
+	char	fname[FILENAME_MAX];
+	FILE	*fp;
 
-	if (plot__begin__(gnuplot, title))
+	if (plot__begin__(fname, &fp))
 		return	-1;
 
 	for (ptrdiff_t i = 0; i < size; i++) {
-		if (alx_gnuplot_printf(gnuplot, "%11le %11le\n", x[i], y[i]))
+		if (fprintf(fp, "%11le %11le\n", x[i], y[i]))
 			return	-1;
 	}
-	if (alx_gnuplot_cmd(gnuplot, "e"))
+
+	if (plot__end__(gnuplot, title, fname, fp))
 		return	-1;
 
 	gnuplot->nplots++;
@@ -165,16 +177,34 @@ const char *plot__title__	(const char *title)
 }
 
 static
-int	plot__begin__		(const struct Alx_Gnuplot *restrict gnuplot,
-				 const char *restrict title)
+int	plot__begin__		(char fname[static restrict FILENAME_MAX],
+				 FILE **restrict fp)
 {
 
-	if (gnuplot->nplots)
+	if (alx_tmpfname(FILENAME_MAX, fname))
 		return	-1;
+	*fp	= fopen(fname, "w");
+	if (!*fp)
+		return	-1;
+
+	return	0;
+}
+
+static
+int	plot__end__		(const struct Alx_Gnuplot *restrict gnuplot,
+				 const char *restrict title,
+				 const char *restrict fname,
+				 FILE *restrict fp)
+{
+	const char *cmd;
+
+	cmd	= plot__cmd__(gnuplot);
 	title	= plot__title__(title);
 
-	if (alx_gnuplot_printf(gnuplot, "plot '-' title \"%s\" with %s\n",
-						title, gnuplot->style))
+	if (fclose(fp))
+		return	-1;
+	if (alx_gnuplot_cmd(gnuplot, "%s \"%s\" title \"%s\" with %s",
+					cmd, fname, title, gnuplot->style))
 		return	-1;
 
 	return	0;
