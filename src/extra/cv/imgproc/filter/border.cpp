@@ -99,6 +99,28 @@ int	alx_cv_border1D			(void *img,
 	return	alx::CV::border1D((class cv::Mat *)img, size, value);
 }
 
+void	alx::CV::rm_border		(class cv::Mat *img, ptrdiff_t size)
+{
+	class cv::Rect_<int>	rect;
+	class cv::Mat		roi;
+
+	rect.x		= size;
+	rect.y		= size;
+	rect.width	= img->cols - 2 * size;
+	rect.height	= img->rows - 2 * size;
+
+	(*img)(rect).copyTo(roi);
+	img->release();
+	roi.copyTo(*img);
+
+	roi.release();
+}
+
+void	alx_cv_rm_border		(void *img, ptrdiff_t size)
+{
+	alx::CV::rm_border((class cv::Mat *)img, size);
+}
+
 
 /******************************************************************************
  ******* static function definitions ******************************************

@@ -35,6 +35,8 @@ void	alx_cv_border_black	(void *img, ptrdiff_t size);
 int	alx_cv_border1D_median	(void *img, ptrdiff_t size);
 [[gnu::nonnull]]
 int	alx_cv_border1D		(void *img, ptrdiff_t size, uint8_t value);
+[[gnu::nonnull]]
+void	alx_cv_rm_border	(void *img, ptrdiff_t size);
 }
 
 
@@ -64,6 +66,8 @@ void	border_black	(class cv::Mat *img, ptrdiff_t size);
 int	border1D_median	(class cv::Mat *img, ptrdiff_t size);
 [[gnu::nonnull]]
 int	border1D	(class cv::Mat *img, ptrdiff_t size, uint8_t value);
+[[gnu::nonnull]]
+void	rm_border	(class cv::Mat *img, ptrdiff_t size);
 
 
 /******************************************************************************
