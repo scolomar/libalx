@@ -77,7 +77,7 @@ int	alx_gnuplot_set_multiplot	(struct Alx_Gnuplot *restrict gnuplot,
 		if (alx_gnuplot_printf(gnuplot, " %s", opt))
 			return	-1;
 	}
-	return	fflush(gnuplot->pipe);
+	return	alx_gnuplot_cmd(gnuplot, " ");
 }
 
 int	alx_gnuplot_unset_multiplot	(struct Alx_Gnuplot *gnuplot)
@@ -211,10 +211,7 @@ int	multi__begin__		(const struct Alx_Gnuplot *restrict gnuplot,
 							t, gnuplot->style))
 			return	-1;
 	}
-	if (alx_gnuplot_cmd(gnuplot, " "))
-		return	-1;
-
-	return	0;
+	return	alx_gnuplot_cmd(gnuplot, " ");
 }
 
 

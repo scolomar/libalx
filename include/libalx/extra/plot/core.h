@@ -52,13 +52,10 @@
  ******* struct / union *******************************************************
  ******************************************************************************/
 struct	Alx_Gnuplot {
-	FILE		*pipe;
-	char		buf[BUFSIZ];
-
-	int		nplots;
-	const char	*style;
-
-	bool		multi;
+	FILE	*pipe;
+	int	nplots;
+	char	style[BUFSIZ];
+	bool	multi;
 };
 
 

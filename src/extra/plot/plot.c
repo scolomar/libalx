@@ -109,13 +109,13 @@ int	alx_gnuplot_plot_slope		(struct Alx_Gnuplot *restrict gnuplot,
 					 double a, double b,
 					 const char *title)
 {
+	const char *cmd;
 
-	if (plot__begin__(gnuplot, title))
-		return	-1;
+	cmd	= plot__cmd__(gnuplot);
+	title	= plot__title__(title);
 
-	if (alx_gnuplot_printf(gnuplot, "%11le * x + %11le\n", a, b))
-		return	-1;
-	if (alx_gnuplot_cmd(gnuplot, "e"))
+	if (alx_gnuplot_cmd(gnuplot, "%s %11le * x + %11le title \"%s\" with %s",
+					cmd, a, b, title, gnuplot->style))
 		return	-1;
 
 	gnuplot->nplots++;
@@ -126,13 +126,13 @@ int	alx_gnuplot_plot_equation	(struct Alx_Gnuplot *restrict gnuplot,
 					 const char *equation,
 					 const char *title)
 {
+	const char *cmd;
 
-	if (plot__begin__(gnuplot, title))
-		return	-1;
+	cmd	= plot__cmd__(gnuplot);
+	title	= plot__title__(title);
 
-	if (alx_gnuplot_printf(gnuplot, "%s\n", equation))
-		return	-1;
-	if (alx_gnuplot_cmd(gnuplot, "e"))
+	if (alx_gnuplot_cmd(gnuplot, "%s %s title \"%s\" with %s",
+					cmd, equation, title, gnuplot->style))
 		return	-1;
 
 	gnuplot->nplots++;
@@ -168,13 +168,13 @@ static
 int	plot__begin__		(const struct Alx_Gnuplot *restrict gnuplot,
 				 const char *restrict title)
 {
-	const char *cmd;
 
-	cmd	= plot__cmd__(gnuplot);
+	if (gnuplot->nplots)
+		return	-1;
 	title	= plot__title__(title);
 
-	if (alx_gnuplot_printf(gnuplot, "%s '-' title \"%s\" with %s\n",
-						cmd, title, gnuplot->style))
+	if (alx_gnuplot_printf(gnuplot, "plot '-' title \"%s\" with %s\n",
+						title, gnuplot->style))
 		return	-1;
 
 	return	0;

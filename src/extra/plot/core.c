@@ -68,7 +68,7 @@ int	alx_gnuplot_init	(struct Alx_Gnuplot **gnuplot)
 
 	(*gnuplot)->nplots	= 0;
 	(*gnuplot)->multi	= false;
-	alx_gnuplot_set_style(*gnuplot, ALX_GNUPLOT_STYLE_POINTS);
+	alx_gnuplot_set_style(*gnuplot, ALX_GNUPLOT_STYLE_POINTS, NULL);
 	(*gnuplot)->pipe	= popen("gnuplot", "w");
 	if (!(*gnuplot)->pipe)
 		goto err;

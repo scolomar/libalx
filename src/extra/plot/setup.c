@@ -30,6 +30,8 @@
 #include "libalx/extra/plot/setup.h"
 
 #include "libalx/base/compiler/size.h"
+#include "libalx/base/string/strcpy/strlcpys.h"
+#include "libalx/base/string/strcat/strbcatf.h"
 #include "libalx/extra/plot/core.h"
 
 
@@ -67,13 +69,20 @@ static const char *const styles[/*ALX_GNUPLOT_STYLES*/]	= {
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_gnuplot_set_style		(struct Alx_Gnuplot *gnuplot, int style)
+int	alx_gnuplot_set_style		(struct Alx_Gnuplot *restrict gnuplot,
+					 int style, const char *restrict opt)
 {
 
 	if (style < 0  ||  style >= ARRAY_SSIZE(styles))
 		return	-1;
-	gnuplot->style	= styles[style];
+
+	if (alx_strlcpys(gnuplot->style, styles[style],
+					ARRAY_SIZE(gnuplot->style), NULL))
+		return	-1;
+	if (opt)
+		return	alx_strbcatf(gnuplot->style, NULL, " %s", opt);
 	return	0;
+
 }
 
 int	alx_gnuplot_set_xlabel		(struct Alx_Gnuplot *restrict gnuplot,
