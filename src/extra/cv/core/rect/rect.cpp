@@ -84,13 +84,13 @@ int	alx::CV::init_rect	(class cv::Rect_<int> *rect,
 				 ptrdiff_t w, ptrdiff_t h)
 {
 
-	if (x < 0 || y < 0 || w < 1 || h < 1)
-		return	1;
 	rect->x		= x;
 	rect->y		= y;
 	rect->width	= w;
 	rect->height	= h;
 
+	if (x < 0 || y < 0 || w < 1 || h < 1)
+		return	1;
 	return	0;
 }
 
