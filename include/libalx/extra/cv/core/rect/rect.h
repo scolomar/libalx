@@ -38,13 +38,13 @@
  ******************************************************************************/
 /* ----- alloc / free */
 __attribute__((nonnull))
-int	alx_cv_alloc_rect	(rect_s **rect);
+int	alx_cv_init_rect	(rect_s **rect);
 __attribute__((nonnull))
-void	alx_cv_free_rect	(rect_s *rect);
+void	alx_cv_deinit_rect	(rect_s *rect);
 __attribute__((nonnull))
-int	alx_cv_alloc_rect_rot	(rect_rot_s **rect_rot);
+int	alx_cv_init_rect_rot	(rect_rot_s **rect_rot);
 __attribute__((nonnull))
-void	alx_cv_free_rect_rot	(rect_rot_s *rect_rot);
+void	alx_cv_deinit_rect_rot	(rect_rot_s *rect_rot);
 /* ----- init / deinit */
 __attribute__((nonnull))
 int	alx_cv_set_rect		(rect_s *rect,

@@ -38,44 +38,44 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 /* ----- alloc / free */
-int	alx::CV::alloc_rect	(class cv::Rect_<int> **rect)
+int	alx::CV::init_rect	(class cv::Rect_<int> **rect)
 {
 	return	alx_mallocarrays(rect, 1);
 }
 
-int	alx_cv_alloc_rect	(void **rect)
+int	alx_cv_init_rect	(void **rect)
 {
-	return	alx::CV::alloc_rect((class cv::Rect_<int> **)rect);
+	return	alx::CV::init_rect((class cv::Rect_<int> **)rect);
 }
 
-void	alx::CV::free_rect	(class cv::Rect_<int> *rect)
+void	alx::CV::deinit_rect	(class cv::Rect_<int> *rect)
 {
 	free(rect);
 }
 
-void	alx_cv_free_rect	(void *rect)
+void	alx_cv_deinit_rect	(void *rect)
 {
-	alx::CV::free_rect((class cv::Rect_<int> *)rect);
+	alx::CV::deinit_rect((class cv::Rect_<int> *)rect);
 }
 
-int	alx::CV::alloc_rect_rot	(class cv::RotatedRect **rect_rot)
+int	alx::CV::init_rect_rot	(class cv::RotatedRect **rect_rot)
 {
 	return	alx_mallocarrays(rect_rot, 1);
 }
 
-int	alx_cv_alloc_rect_rot	(void **rect_rot)
+int	alx_cv_init_rect_rot	(void **rect_rot)
 {
-	return	alx::CV::alloc_rect_rot((class cv::RotatedRect **)rect_rot);
+	return	alx::CV::init_rect_rot((class cv::RotatedRect **)rect_rot);
 }
 
-void	alx::CV::free_rect_rot	(class cv::RotatedRect *rect_rot)
+void	alx::CV::deinit_rect_rot(class cv::RotatedRect *rect_rot)
 {
 	free(rect_rot);
 }
 
-void	alx_cv_free_rect_rot	(void *restrict rect_rot)
+void	alx_cv_deinit_rect_rot	(void *restrict rect_rot)
 {
-	alx::CV::free_rect_rot((class cv::RotatedRect *)rect_rot);
+	alx::CV::deinit_rect_rot((class cv::RotatedRect *)rect_rot);
 }
 
 /* ----- init / deinit */
@@ -94,7 +94,7 @@ int	alx::CV::set_rect	(class cv::Rect_<int> *rect,
 	return	0;
 }
 
-int	alx_cv_set_rect	(void *rect,
+int	alx_cv_set_rect		(void *rect,
 				 ptrdiff_t x, ptrdiff_t y,
 				 ptrdiff_t w, ptrdiff_t h)
 {

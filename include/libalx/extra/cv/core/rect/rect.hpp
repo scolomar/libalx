@@ -32,13 +32,11 @@ extern	"C"
 {
 /* ----- Alloc */
 [[gnu::nonnull]]
-int	alx_cv_alloc_rect	(void **rect);
+int	alx_cv_init_rect	(void **rect);
+void	alx_cv_deinit_rect	(void *rect);
 [[gnu::nonnull]]
-void	alx_cv_free_rect	(void *rect);
-[[gnu::nonnull]]
-int	alx_cv_alloc_rect_rot	(void **rect_rot);
-[[gnu::nonnull]]
-void	alx_cv_free_rect_rot	(void *rect_rot);
+int	alx_cv_init_rect_rot	(void **rect_rot);
+void	alx_cv_deinit_rect_rot	(void *rect_rot);
 /* ----- Init */
 [[gnu::nonnull]]
 int	alx_cv_set_rect		(void *rect,
@@ -83,13 +81,11 @@ namespace CV {
  ******************************************************************************/
 /* ----- Alloc */
 [[gnu::nonnull]]
-int	alloc_rect	(class cv::Rect_<int> **rect);
+int	init_rect	(class cv::Rect_<int> **rect);
+void	deinit_rect	(class cv::Rect_<int> *rect);
 [[gnu::nonnull]]
-void	free_rect	(class cv::Rect_<int> *rect);
-[[gnu::nonnull]]
-int	alloc_rect_rot	(class cv::RotatedRect **rect_rot);
-[[gnu::nonnull]]
-void	free_rect_rot	(class cv::RotatedRect *rect_rot);
+int	init_rect_rot	(class cv::RotatedRect **rect_rot);
+void	deinit_rect_rot	(class cv::RotatedRect *rect_rot);
 /* ----- Init */
 [[gnu::nonnull]]
 int	set_rect	(class cv::Rect_<int> *rect,
