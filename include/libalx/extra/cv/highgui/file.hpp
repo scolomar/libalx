@@ -29,9 +29,14 @@
 extern	"C"
 {
 [[gnu::nonnull]]
-int	alx_cv_imread	(void *restrict img, const char *restrict fname);
+int	alx_cv_imread		(void *restrict img,
+				 const char *restrict fname);
 [[gnu::nonnull]]
-void	alx_cv_imwrite	(const void *restrict img, const char *restrict fname);
+int	alx_cv_imread_gray	(void *restrict img,
+				 const char *restrict fname);
+[[gnu::nonnull]]
+void	alx_cv_imwrite		(const void *restrict img,
+				 const char *restrict fname);
 }
 
 
@@ -57,6 +62,9 @@ namespace CV {
  ******************************************************************************/
 [[gnu::nonnull]]
 int	imread		(class cv::Mat *restrict img,
+			 const char *restrict fname);
+[[gnu::nonnull]]
+int	imread_gray	(class cv::Mat *restrict img,
 			 const char *restrict fname);
 [[gnu::nonnull]]
 void	imwrite		(const class cv::Mat *restrict img,
