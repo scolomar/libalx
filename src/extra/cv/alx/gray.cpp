@@ -15,7 +15,6 @@
 #include <opencv2/core/mat.hpp>
 #include <opencv2/imgproc.hpp>
 
-#include "libalx/extra/cv/core/array/bitwise.hpp"
 #include "libalx/extra/cv/core/array/component.hpp"
 
 
