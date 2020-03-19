@@ -41,7 +41,7 @@ int	alx_cv_alloc_rect_rot	(void **rect_rot);
 void	alx_cv_free_rect_rot	(void *rect_rot);
 /* ----- Init */
 [[gnu::nonnull]]
-int	alx_cv_init_rect	(void *rect,
+int	alx_cv_set_rect		(void *rect,
 				 ptrdiff_t x, ptrdiff_t y,
 				 ptrdiff_t w, ptrdiff_t h);
 /* ----- Extract */
@@ -92,7 +92,7 @@ int	alloc_rect_rot	(class cv::RotatedRect **rect_rot);
 void	free_rect_rot	(class cv::RotatedRect *rect_rot);
 /* ----- Init */
 [[gnu::nonnull]]
-int	init_rect	(class cv::Rect_<int> *rect,
+int	set_rect	(class cv::Rect_<int> *rect,
 			 ptrdiff_t x, ptrdiff_t y, ptrdiff_t w, ptrdiff_t h);
 /* ----- Extract */
 [[gnu::nonnull(1)]]

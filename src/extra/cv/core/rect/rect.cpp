@@ -79,7 +79,7 @@ void	alx_cv_free_rect_rot	(void *restrict rect_rot)
 }
 
 /* ----- init / deinit */
-int	alx::CV::init_rect	(class cv::Rect_<int> *rect,
+int	alx::CV::set_rect	(class cv::Rect_<int> *rect,
 				 ptrdiff_t x, ptrdiff_t y,
 				 ptrdiff_t w, ptrdiff_t h)
 {
@@ -94,11 +94,11 @@ int	alx::CV::init_rect	(class cv::Rect_<int> *rect,
 	return	0;
 }
 
-int	alx_cv_init_rect	(void *rect,
+int	alx_cv_set_rect	(void *rect,
 				 ptrdiff_t x, ptrdiff_t y,
 				 ptrdiff_t w, ptrdiff_t h)
 {
-	return	alx::CV::init_rect((class cv::Rect_<int> *)rect, x, y, w, h);
+	return	alx::CV::set_rect((class cv::Rect_<int> *)rect, x, y, w, h);
 }
 
 /* ----- Extract */

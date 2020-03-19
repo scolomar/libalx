@@ -47,7 +47,7 @@ __attribute__((nonnull))
 void	alx_cv_free_rect_rot	(rect_rot_s *rect_rot);
 /* ----- init / deinit */
 __attribute__((nonnull))
-int	alx_cv_init_rect	(rect_s *rect,
+int	alx_cv_set_rect		(rect_s *rect,
 				 ptrdiff_t x, ptrdiff_t y,
 				 ptrdiff_t w, ptrdiff_t h);
 /* ----- Extract */
