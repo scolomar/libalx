@@ -36,15 +36,9 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-/* ----- alloc / free */
-__attribute__((nonnull))
-int	alx_cv_alloc_img	(img_s **img);
-__attribute__((nonnull))
-void	alx_cv_free_img		(img_s *img);
 /* ----- init / deinit */
 __attribute__((nonnull))
-int	alx_cv_init_img		(img_s *img, ptrdiff_t w, ptrdiff_t h);
-__attribute__((nonnull))
+int	alx_cv_init_img		(img_s **img);
 void	alx_cv_deinit_img	(img_s *img);
 /* ----- Extract */
 __attribute__((nonnull(1)))

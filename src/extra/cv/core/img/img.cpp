@@ -37,46 +37,29 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-/* ----- alloc / free */
-int	alx::CV::alloc_img	(class cv::Mat **img)
-{
-	return	alx_mallocarrays(img, 1);
-}
-
-int	alx_cv_alloc_img	(void **img)
-{
-	return	alx::CV::alloc_img((class cv::Mat **)img);
-}
-
-void	alx::CV::free_img	(class cv::Mat *img)
-{
-	free(img);
-}
-
-void	alx_cv_free_img		(void *img)
-{
-	alx::CV::free_img((class cv::Mat *)img);
-}
-
 /* ----- init / deinit */
-int	alx::CV::init_img	(class cv::Mat *img, ptrdiff_t w, ptrdiff_t h)
+int	alx::CV::init_img	(class cv::Mat **img)
 {
 
-	if (w < 1 || h < 1)
-		return	1;
-	new (img)	cv::Mat(cv::Size(w, h), CV_8UC3, 0.0);
+	if (alx_mallocarrays(img, 1))
+		return	-1;
+	new (*img)	cv::Mat(cv::Size(1, 1), CV_8UC3, 0.0);
 
 	return	0;
 }
 
-int	alx_cv_init_img		(void *img, ptrdiff_t w, ptrdiff_t h)
+int	alx_cv_init_img		(void **img)
 {
-	return	alx::CV::init_img((class cv::Mat *)img, w, h);
+	return	alx::CV::init_img((class cv::Mat **)img);
 }
 
 void	alx::CV::deinit_img	(class cv::Mat *img)
 {
+
+	if (!img)
+		return;
 	std::destroy_at(img);
+	free(img);
 }
 
 void	alx_cv_deinit_img	(void *img)

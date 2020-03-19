@@ -30,15 +30,9 @@
  ******************************************************************************/
 extern	"C"
 {
-/* ----- Alloc */
-[[gnu::nonnull]]
-int	alx_cv_alloc_img	(void **img);
-[[gnu::nonnull]]
-void	alx_cv_free_img		(void *img);
 /* ----- Init */
 [[gnu::nonnull]]
-int	alx_cv_init_img		(void *img, ptrdiff_t w, ptrdiff_t h);
-[[gnu::nonnull]]
+int	alx_cv_init_img		(void **img);
 void	alx_cv_deinit_img	(void *img);
 /* ----- Extract */
 [[gnu::nonnull(1)]]
@@ -76,15 +70,9 @@ namespace CV {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-/* ----- Alloc */
-[[gnu::nonnull]]
-int	alloc_img	(class cv::Mat **img);
-[[gnu::nonnull]]
-void	free_img	(class cv::Mat *img);
 /* ----- Init */
 [[gnu::nonnull]]
-int	init_img	(class cv::Mat *img, ptrdiff_t w, ptrdiff_t h);
-[[gnu::nonnull]]
+int	init_img	(class cv::Mat **img);
 void	deinit_img	(class cv::Mat *img);
 /* ----- Extract */
 [[gnu::nonnull(1)]]
