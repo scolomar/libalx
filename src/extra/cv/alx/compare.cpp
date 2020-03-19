@@ -74,7 +74,7 @@ double	alx::CV::compare_bitwise	(const class cv::Mat *restrict img_a,
 	cv::bitwise_and(_xor, _and, a);
 	pix_dif	= cv::countNonZero(a);
 
-	match	= (pix_and - pix_dif) / pix_and;
+	match	= (pix_and - pix_dif) / (double)pix_and;
 
 	a.release();
 	b.release();
