@@ -31,7 +31,8 @@
 extern	"C"
 {
 [[gnu::nonnull]]
-int	alx_cv_contours		(void *restrict img, void *restrict contours);
+int	alx_cv_contours		(const void *restrict img,
+				 void *restrict conts);
 [[gnu::nonnull(1)]]
 void	alx_cv_contour_dimensions(const void *restrict contour,
 				 double *restrict area,
@@ -50,6 +51,9 @@ int	alx_cv_conts_closest	(const void **restrict cont,
 				 double (*fdist)(int32_t dx, int32_t dy));
 [[gnu::nonnull]]
 int	alx_cv_contour_mask	(const void **restrict img,
+				 const void *restrict conts, ptrdiff_t i);
+[[gnu::nonnull]]
+void	alx_cv_draw_conts	(void *restrict img,
 				 const void *restrict conts, ptrdiff_t i);
 }
 
@@ -75,11 +79,10 @@ namespace CV {
  ******* prototypes ***********************************************************
  ******************************************************************************/
 [[gnu::nonnull]]
-int	contours	(class cv::Mat *restrict img,
+int	contours	(const class cv::Mat *restrict img,
 			 class std::vector<
 				class std::vector<
-				class cv::Point_<
-				int>>>  *restrict contours);
+				class cv::Point_<int>>>  *restrict conts);
 [[gnu::nonnull(1)]]
 void	contour_dimensions(const class std::vector<
 				class cv::Point_<
@@ -109,6 +112,12 @@ int	contour_mask	(class cv::Mat *restrict img,
 			 const class std::vector<
 				class std::vector<
 				class cv::Point_<int>>> *restrict conts,
+			 ptrdiff_t i);
+[[gnu::nonnull]]
+void	draw_conts	(class cv::Mat *restrict img,
+			 const class std::vector<
+				class std::vector<
+				class cv::Point_<int>>>  *restrict conts,
 			 ptrdiff_t i);
 
 

@@ -39,31 +39,32 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx::CV::contours	(class cv::Mat *restrict img,
+int	alx::CV::contours	(const class cv::Mat *restrict img,
 				 class std::vector<
 					class std::vector<
 					class cv::Point_<
-					int>>>  *restrict contours)
+					int>>>  *restrict conts)
 {
+	class cv::Mat	tmp;
 	class cv::Mat	hierarchy;
 
 	if (img->channels() != 1)
 		return	-1;
-	cv::findContours(*img, *contours, hierarchy, cv::RETR_EXTERNAL,
-							cv::CHAIN_APPROX_SIMPLE);
-	img->setTo(cv::Scalar(0));
-	cv::drawContours(*img, *contours, -1, cv::Scalar(UINT8_MAX), 1);
+	img->copyTo(tmp);
+	cv::findContours(tmp, *conts, hierarchy, cv::RETR_EXTERNAL,
+						cv::CHAIN_APPROX_SIMPLE);
 
 	hierarchy.release();
+	tmp.release();
 	return	0;
 }
 
-int	alx_cv_contours		(void *restrict img, void *restrict contours)
+int	alx_cv_contours		(const void *restrict img, void *restrict conts)
 {
-	return	alx::CV::contours((class cv::Mat *)img,
+	return	alx::CV::contours((const class cv::Mat *)img,
 				  (class std::vector<
 					class std::vector<
-					class cv::Point_<int>>>  *)contours);
+					class cv::Point_<int>>>  *)conts);
 }
 
 void	alx::CV::contour_dimensions(const class std::vector <
@@ -224,6 +225,26 @@ int	alx_cv_contour_mask	(const void **restrict img,
 						class cv::Point_<
 						int>>> *)conts,
 					i);
+}
+
+void	alx::CV::draw_conts	(class cv::Mat *restrict img,
+				 const class std::vector<
+					class std::vector<
+					class cv::Point_<
+					int>>>  *restrict conts,
+				 ptrdiff_t i)
+{
+
+	cv::drawContours(*img, *conts, i, cv::Scalar(UINT8_MAX), 1);
+}
+
+void	alx_cv_draw_conts	(void *restrict img, const void *restrict conts,
+				 ptrdiff_t i)
+{
+	return	alx::CV::draw_conts((class cv::Mat *)img,
+				  (const class std::vector<
+					class std::vector<
+					class cv::Point_<int>>>  *)conts, i);
 }
 
 

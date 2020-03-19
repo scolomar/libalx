@@ -35,8 +35,8 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull))
-int	alx_cv_contours		(img_s *restrict img,
-				 conts_s *restrict contours);
+int	alx_cv_contours		(const img_s *restrict img,
+				 conts_s *restrict conts);
 __attribute__((nonnull(1)))
 void	alx_cv_contour_dimensions(const cont_s *restrict cont,
 				 double *restrict area,
@@ -55,6 +55,9 @@ int	alx_cv_conts_closest	(const void **restrict cont,
 				 double (*fdist)(int32_t dx, int32_t dy));
 __attribute__((nonnull))
 int	alx_cv_contour_mask	(const img_s **restrict img,
+				 const conts_s *restrict conts, ptrdiff_t i);
+__attribute__((nonnull))
+void	alx_cv_draw_conts	(img_s *restrict img,
 				 const conts_s *restrict conts, ptrdiff_t i);
 
 
