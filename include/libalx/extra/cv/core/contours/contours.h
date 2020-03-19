@@ -36,15 +36,9 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-/* ----- alloc / free */
-__attribute__((nonnull))
-int	alx_cv_alloc_conts	(conts_s **conts);
-__attribute__((nonnull))
-void	alx_cv_free_conts	(conts_s *conts);
 /* ----- init / deinit */
 __attribute__((nonnull))
-void	alx_cv_init_conts	(conts_s *conts);
-__attribute__((nonnull))
+int	alx_cv_init_conts	(conts_s **conts);
 void	alx_cv_deinit_conts	(conts_s *conts);
 /* ----- Extract */
 __attribute__((nonnull(1), warn_unused_result))

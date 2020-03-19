@@ -38,57 +38,34 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-/* ----- alloc / free */
-int	alx::CV::alloc_conts	(class std::vector<
-					class std::vector<
-					class cv::Point_<
-					int>>> **contours)
-{
-	return	alx_mallocarrays(contours, 1);
-}
-
-int	alx_cv_alloc_conts	(void **contours)
-{
-	return	alx::CV::alloc_conts((class std::vector<
-					class std::vector<
-					class cv::Point_<int>>> **)contours);
-}
-
-void	alx::CV::free_conts	(class std::vector<
-					class std::vector<
-					class cv::Point_<
-					int>>> *contours)
-{
-	free(contours);
-}
-
-void	alx_cv_free_conts	(void *contours)
-{
-	alx::CV::free_conts((class std::vector<
-					class std::vector<
-					class cv::Point_<int>>> *)contours);
-}
-
 /* ----- init / deinit */
-void	alx::CV::init_conts	(class std::vector<
+int	alx::CV::init_conts	(class std::vector<
 					class std::vector<
-					class cv::Point_<int>>> *conts)
+					class cv::Point_<int>>> **conts)
 {
-	new (conts)	std::vector<std::vector<cv::Point_<int>>>();
+
+	if (alx_mallocarrays(conts, 1))
+		return	-1;
+	new (*conts)	std::vector<std::vector<cv::Point_<int>>>();
+	return	0;
 }
 
-void	alx_cv_init_conts	(void *conts)
+int	alx_cv_init_conts	(void **conts)
 {
 	return	alx::CV::init_conts((class std::vector<
 					class std::vector<
-					class cv::Point_<int>>> *)conts);
+					class cv::Point_<int>>> **)conts);
 }
 
 void	alx::CV::deinit_conts	(class std::vector<
 					class std::vector<
 					class cv::Point_<int>>> *conts)
 {
+
+	if (!conts)
+		return;
 	std::destroy_at(conts);
+	free(conts);
 }
 
 void	alx_cv_deinit_conts	(void *conts)

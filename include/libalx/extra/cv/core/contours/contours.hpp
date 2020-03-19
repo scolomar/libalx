@@ -32,15 +32,9 @@
  ******************************************************************************/
 extern	"C"
 {
-/* ----- Alloc */
-[[gnu::nonnull]]
-int	alx_cv_alloc_conts	(void **contours);
-[[gnu::nonnull]]
-void	alx_cv_free_conts	(void *contours);
 /* ----- Init */
 [[gnu::nonnull]]
-void	alx_cv_init_conts	(void *conts);
-[[gnu::nonnull]]
+int	alx_cv_init_conts	(void **conts);
 void	alx_cv_deinit_conts	(void *conts);
 /* ----- Extract */
 [[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
@@ -73,24 +67,12 @@ namespace CV {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-/* ----- Alloc */
-[[gnu::nonnull]]
-int	alloc_conts	(class std::vector<
-					class std::vector<
-					class cv::Point_<
-					int>>> **contours);
-[[gnu::nonnull]]
-void	free_conts	(class std::vector<
-					class std::vector<
-					class cv::Point_<
-					int>>> *contours);
 /* ----- Init */
 [[gnu::nonnull]]
-void	init_conts	(class std::vector<
+int	init_conts	(class std::vector<
 					class std::vector<
 					class cv::Point_<
-					int>>> *conts);
-[[gnu::nonnull]]
+					int>>> **conts);
 void	deinit_conts	(class std::vector<
 					class std::vector<
 					class cv::Point_<
