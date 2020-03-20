@@ -63,16 +63,17 @@ MAKEFLAGS += --no-print-directory
 
 LIBALX_DIR	= $(CURDIR)
 
-INC_DIR		= $(LIBALX_DIR)/include/
-SRC_DIR		= $(LIBALX_DIR)/src/
-LIB_DIR		= $(LIBALX_DIR)/lib/
-ETC_DIR		= $(LIBALX_DIR)/etc/
-SHARE_DIR	= $(LIBALX_DIR)/share/
-MK_DIR		= $(LIBALX_DIR)/mk/
-BUILD_DIR	= $(LIBALX_DIR)/build/
-BUILD_TMP_DIR	= $(BUILD_DIR)/tmp/
-BUILD_LIB_DIR	= $(BUILD_DIR)/lib/
-TST_DIR		= $(LIBALX_DIR)/test/
+INC_DIR		= $(LIBALX_DIR)/include
+SRC_DIR		= $(LIBALX_DIR)/src
+LIB_DIR		= $(LIBALX_DIR)/lib
+ETC_DIR		= $(LIBALX_DIR)/etc
+SHARE_DIR	= $(LIBALX_DIR)/share
+MK_DIR		= $(LIBALX_DIR)/mk
+MK_TMP_DIR	= $(MK_DIR)/tmp
+MK_LIB_DIR	= $(MK_DIR)/lib
+BUILD_DIR	= $(LIBALX_DIR)/build
+BUILD_TMP_DIR	= $(BUILD_DIR)/tmp
+BUILD_LIB_DIR	= $(BUILD_DIR)/lib
 
 export	LIBALX_DIR
 
@@ -82,24 +83,25 @@ export	LIB_DIR
 export	ETC_DIR
 export	SHARE_DIR
 export	MK_DIR
+export	MK_TMP_DIR
+export	MK_LIB_DIR
 export	BUILD_DIR
 export	BUILD_TMP_DIR
 export	BUILD_LIB_DIR
-export	TST_DIR
 
 # XXX: make ... LOCAL=local to build in /usr/local/
 ifndef LOCAL
   LOCAL			=
 endif
 ifeq ("$(LOCAL)","local")
-  INSTALL_ETC_DIR	= /usr/local/etc/
+  INSTALL_ETC_DIR	= /usr/local/etc
 else
-  INSTALL_ETC_DIR	= /etc/
+  INSTALL_ETC_DIR	= /etc
 endif
-INSTALL_INC_DIR		= /usr/$(LOCAL)/include/
-INSTALL_LIB_DIR		= /usr/$(LOCAL)/lib/
-INSTALL_SHARE_DIR	= /usr/$(LOCAL)/share/
-INSTALL_PKGCONFIG_DIR	= $(INSTALL_LIB_DIR)/pkgconfig/
+INSTALL_INC_DIR		= /usr/$(LOCAL)/include
+INSTALL_LIB_DIR		= /usr/$(LOCAL)/lib
+INSTALL_SHARE_DIR	= /usr/$(LOCAL)/share
+INSTALL_PKGCONFIG_DIR	= $(INSTALL_LIB_DIR)/pkgconfig
 
 export	INSTALL_ETC_DIR
 export	INSTALL_INC_DIR
@@ -213,13 +215,7 @@ export	LDFLAGS
 # compile
 
 PHONY := all
-all: base alx extra | build_dir
-
-PHONY := build_dir
-build_dir:
-	@echo	"	CP	build/*"
-	$(Q)mkdir -p	$(BUILD_DIR)/
-	$(Q)cp -rf	$(MK_DIR)/build/*	$(BUILD_DIR)/
+all: base alx extra
 
 
 COMPILE_VIRTUAL	=							\
@@ -240,8 +236,8 @@ COMPILE_TARGETS	=							\
 	telnet-tcp							\
 	zbar
 
-$(COMPILE_VIRTUAL): | build_dir
-$(COMPILE_TARGETS): | build_dir
+$(COMPILE_VIRTUAL):
+$(COMPILE_TARGETS):
 
 PHONY	+= base_tmp
 base: | base_tmp base_lib
@@ -296,11 +292,11 @@ $(filter-out base_lib, $(COMPILE_ACTUAL_LIB_TARGETS)): base_lib
 cv_lib: gsl_lib
 
 PHONY	+= $(COMPILE_ACTUAL_TMP_TARGETS)
-$(COMPILE_ACTUAL_TMP_TARGETS): %_tmp: | build_dir
-	$(Q)$(MAKE) $*		-C $(BUILD_TMP_DIR)
+$(COMPILE_ACTUAL_TMP_TARGETS): %_tmp:
+	$(Q)$(MAKE) $*		-C $(MK_TMP_DIR)
 PHONY	+= $(COMPILE_ACTUAL_LIB_TARGETS)
-$(COMPILE_ACTUAL_LIB_TARGETS): %_lib: %_tmp | build_dir
-	$(Q)$(MAKE) $*		-C $(BUILD_LIB_DIR)
+$(COMPILE_ACTUAL_LIB_TARGETS): %_lib: %_tmp
+	$(Q)$(MAKE) $*		-C $(MK_LIB_DIR)
 
 
 ################################################################################
@@ -485,7 +481,7 @@ inst--lib%.pc:
 # uninstall
 
 PHONY += uninstall
-uninstall: build_dir
+uninstall:
 	@echo	"	Uninstall:"
 	@echo
 	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/"
@@ -522,20 +518,10 @@ conf_ld:
 ################################################################################
 # test
 
-PHONY += tst
-tst: all
-	@echo	"	MAKE	tst"
-	$(Q)$(MAKE)	-C $(TST_DIR)
-
-################################################################################
-# test
-
 PHONY += clean
 clean:
 	@echo	"	RM	$(BUILD_DIR)"
 	$(Q)rm -rf	$(BUILD_DIR)
-	@echo	"	RM	*-test"
-	$(Q)find $(TST_DIR) -type f -name '*-test' -exec rm '{}' '+'
 
 ################################################################################
 # Declare the contents of the .PHONY variable as phony.
@@ -545,3 +531,4 @@ clean:
 ################################################################################
 ######## End of file ###########################################################
 ################################################################################
+
