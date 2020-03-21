@@ -405,7 +405,6 @@ inst-sh:
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/*"
 	$(Q)cp -rf $(v)		$(LIB_DIR)/libalx/sh/*			\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/
-	@echo
 
 PHONY	+= inst-py
 inst-py:
@@ -413,7 +412,6 @@ inst-py:
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/py/*"
 	$(Q)cp -rf $(v)		$(LIB_DIR)/libalx/py/*			\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/py/
-	@echo
 
 PHONY += inst-share
 inst-share:
@@ -483,7 +481,6 @@ inst--lib%.pc:
 PHONY += uninstall
 uninstall:
 	@echo	"	Uninstall:"
-	@echo
 	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/"
 	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/
 	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/"
@@ -502,7 +499,6 @@ uninstall:
 	@echo	"	LDCONFIG"
 	$(Q)ldconfig
 	@echo	"	Done"
-	@echo
 
 ################################################################################
 # ldconfig
@@ -512,8 +508,7 @@ conf_ld:
 	@echo	"	LDCONFIG"
 	$(Q)cp -r -f $(v)	$(ETC_DIR)/ld.so.conf.d/*		\
 					$(DESTDIR)/etc/ld.so.conf.d/
-	$(Q)ldconfig
-	@echo
+	$(Q)flock /tmp	-c ldconfig
 
 ################################################################################
 # test
