@@ -36,7 +36,7 @@ RUN	apt-get update							&& \
 
 ### To install libalx:
 ## $ docker container start libalx-devel
-## $ docker container exec --user root --workdir $PWD libalx-devel make install --directory libalx
+## $ docker container exec --user root --workdir $PWD libalx-devel make install -j 8 --directory libalx
 
 ### To run a root terminal (other uses):
 ## $ docker container start libalx-devel
