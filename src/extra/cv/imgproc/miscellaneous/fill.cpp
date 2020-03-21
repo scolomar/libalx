@@ -98,6 +98,20 @@ int	alx_cv_holes_fill	(void *img)
 	return	alx::CV::holes_fill((class cv::Mat *)img);
 }
 
+int	alx::CV::holes_mask_fill(class cv::Mat *img)
+{
+
+	if (alx::CV::holes_mask(img))
+		return	1;
+	alx::CV::holes_fill(img);
+	return	0;
+}
+
+int	alx_cv_holes_mask_fill	(void *img)
+{
+	return	alx::CV::holes_mask_fill((class cv::Mat *)img);
+}
+
 
 /******************************************************************************
  ******* static function definitions ******************************************
