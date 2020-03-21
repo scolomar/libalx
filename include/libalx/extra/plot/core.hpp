@@ -43,6 +43,15 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define Gnuplot			      Alx_Gnuplot
+#define gnuplot_init(gnuplot)	      alx_gnuplot_init(gnuplot)
+#define gnuplot_deinit(gnuplot)	      alx_gnuplot_deinit(gnuplot)
+#define gnuplot_cmd(gp, fmt, ...)     alx_gnuplot_cmd(gp, fmt, ##__VA_ARGS__)
+#define gnuplot_printf(gp, fmt, ...)  alx_gnuplot_printf(gp, fmt, ##__VA_ARGS__)
+#define gnuplot_vprintf(gp, fmt, ap)  alx_gnuplot_vprintf(gp, fmt, ap)
+#endif
 
 
 /******************************************************************************

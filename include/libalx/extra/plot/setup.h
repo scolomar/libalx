@@ -39,6 +39,15 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define gnuplot_set_style(gnuplot, style, opt)				\
+			alx_gnuplot_set_style(gnuplot, style, opt)
+#define gnuplot_set_xlabel(gnuplot, label)				\
+			alx_gnuplot_set_xlabel(gnuplot, label)
+#define gnuplot_set_ylabel(gnuplot, label)				\
+			alx_gnuplot_set_ylabel(gnuplot, label)
+#endif
 
 
 /******************************************************************************

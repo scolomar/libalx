@@ -42,6 +42,19 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define gnuplot_reset_plot(gnuplot)					\
+			alx_gnuplot_reset_plot(gnuplot)
+#define gnuplot_plot_y(gnuplot, size, y, title)				\
+			alx_gnuplot_plot_y(gnuplot, size, y, title)
+#define gnuplot_plot_xy(gnuplot, size, x, y, title)			\
+			alx_gnuplot_plot_xy(gnuplot, size, x, y, title)
+#define gnuplot_plot_slope(gnuplot, a, b, title)			\
+			alx_gnuplot_plot_slope(gnuplot, a, b, title)
+#define gnuplot_plot_equation(gnuplot, equation, title)			\
+			alx_gnuplot_plot_equation(gnuplot, equation, title)
+#endif
 
 
 /******************************************************************************

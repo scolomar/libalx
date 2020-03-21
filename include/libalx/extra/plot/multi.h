@@ -41,6 +41,19 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define gnuplot_set_multiplot(gnuplot, opt)				\
+			alx_gnuplot_set_multiplot(gnuplot, opt)
+#define gnuplot_unset_multiplot(gnuplot)				\
+			alx_gnuplot_unset_multiplot(gnuplot)
+#define gnuplot_plot_multi_y(gp, n, size, y, title)			\
+			alx_gnuplot_plot_multi_y(gp, n, size, y, title)
+#define gnuplot_plot_x_multi_y(gp, n, size, x, y, title)		\
+			alx_gnuplot_plot_x_multi_y(gp, n, size, x, y, title)
+#define gnuplot_plot_multi_xy(gp, n, size, x, y, title)			\
+			alx_gnuplot_plot_multi_xy(gp, n, size, x, y, title)
+#endif
 
 
 /******************************************************************************
