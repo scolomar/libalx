@@ -30,6 +30,7 @@
 #include "libalx/extra/plot/plot.h"
 
 #include <stddef.h>
+#include <stdio.h>
 
 #include "libalx/base/stdio/tmpfname.h"
 #include "libalx/extra/plot/core.h"
