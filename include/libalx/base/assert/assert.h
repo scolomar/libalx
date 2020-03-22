@@ -196,6 +196,16 @@
 	alx_assert_msg(((t)-1) < 0,					\
 			"BUG:   Not a signed type!")
 
+#define alx_Static_assert_compatible(a, b)				\
+	_Static_assert(__builtin_types_compatible_p(			\
+			typeof(a), typeof(b)),				\
+			"Incompatible types!")
+
+#define alx_assert_compatible(a, b)					\
+	alx_assert_msg(__builtin_types_compatible_p(			\
+				typeof(a), typeof(b)),			\
+			"BUG:   Incompatible types!")
+
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
@@ -226,10 +236,12 @@
 #define assert_s64_long()		alx_assert_s64_long()
 #define Static_assert_size_ptrdiff()	alx_Static_assert_size_ptrdiff()
 #define assert_size_ptrdiff()		alx_assert_size_ptrdiff()
-#define Static_assert_unsigned_type()	alx_Static_assert_unsigned_type()
-#define Static_assert_signed_type()	alx_Static_assert_signed_type()
-#define assert_unsigned_type()		alx_assert_unsigned_type()
-#define assert_signed_type()		alx_assert_signed_type()
+#define Static_assert_unsigned_type(t)	alx_Static_assert_unsigned_type(t)
+#define Static_assert_signed_type(t)	alx_Static_assert_signed_type(t)
+#define assert_unsigned_type(t)		alx_assert_unsigned_type(t)
+#define assert_signed_type(t)		alx_assert_signed_type(t)
+#define Static_assert_compatible(a, b)	alx_Static_assert_compatible(a, b)
+#define assert_compatible(a, b)		alx_assert_compatible(a, b)
 #endif
 
 

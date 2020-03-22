@@ -52,18 +52,18 @@
 #endif
 
 #define alx_Static_assert_array(a)					\
-	_Static_assert(std::is_array <typeof(a)>::value, "Not a `[]`!")
+	static_assert(std::is_array <typeof(a)>::value, "Not a `[]`!")
 
 #define alx_static_assert_char_array(a)					\
 	alx_Static_assert_array(a);					\
-	_Static_assert(std::is_same <char, typeof((a)[0])>::value,	\
+	static_assert(std::is_same <char, typeof((a)[0])>::value,	\
 						"Not a `char[]` !")
 
 #define alx_Static_assert_char_signed()					\
-	_Static_assert(CHAR_MIN < 0, "char != signed char")
+	static_assert(CHAR_MIN < 0, "char != signed char")
 
 #define alx_Static_assert_char_unsigned()				\
-	_Static_assert(CHAR_MIN == 0, "char != unsigned char")
+	static_assert(CHAR_MIN == 0, "char != unsigned char")
 
 #define alx_assert_char_signed()					\
 	alx_assert_msg(CHAR_MIN < 0, "BUG:   char != signed char")
@@ -82,35 +82,35 @@
 	alx_Static_assert_s64_long()
 
 #define alx_Static_assert_u8_uchar()					\
-	_Static_assert(std::is_same <uint8_t, unsigned char>::value,	\
+	static_assert(std::is_same <uint8_t, unsigned char>::value,	\
 				    "uint8_t != unsigned char")
 
 #define alx_Static_assert_s8_schar()					\
-	_Static_assert(std::is_same < int8_t, signed char>::value,	\
+	static_assert(std::is_same < int8_t, signed char>::value,	\
 				     "int8_t != signed char")
 
 #define alx_Static_assert_u16_ushort()					\
-	_Static_assert(std::is_same <uint16_t, unsigned short>::value,	\
+	static_assert(std::is_same <uint16_t, unsigned short>::value,	\
 				    "uint16_t != unsigned short")
 
 #define alx_Static_assert_s16_short()					\
-	_Static_assert(std::is_same < int16_t, short>::value,		\
+	static_assert(std::is_same < int16_t, short>::value,		\
 				     "int16_t != short")
 
 #define alx_Static_assert_u32_unsigned()				\
-	_Static_assert(std::is_same <uint32_t, unsigned>::value,	\
+	static_assert(std::is_same <uint32_t, unsigned>::value,	\
 				    "uint32_t != unsigned")
 
 #define alx_Static_assert_s32_int()					\
-	_Static_assert(std::is_same < int32_t, int>::value,		\
+	static_assert(std::is_same < int32_t, int>::value,		\
 				     "int32_t != int")
 
 #define alx_Static_assert_u64_ulong()					\
-	_Static_assert(std::is_same <uint64_t, unsigned long>::value,	\
+	static_assert(std::is_same <uint64_t, unsigned long>::value,	\
 				    "uint64_t != unsigned long")
 
 #define alx_Static_assert_s64_long()					\
-	_Static_assert(std::is_same < int64_t, long>::value,		\
+	static_assert(std::is_same < int64_t, long>::value,		\
 				     "int64_t != long")
 
 #define alx_assert_stdint_types()					\
@@ -156,7 +156,7 @@
 			 "BUG:   int64_t != long")
 
 #define alx_Static_assert_size_ptrdiff()				\
-	_Static_assert(sizeof(size_t) == sizeof(ptrdiff_t),		\
+	static_assert(sizeof(size_t) == sizeof(ptrdiff_t),		\
 			"sizeof(size_t) != sizeof(ptrdiff_t)")
 
 #define alx_assert_size_ptrdiff()					\
@@ -164,11 +164,11 @@
 			"BUG:   sizeof(size_t) != sizeof(ptrdiff_t)")
 
 #define alx_Static_assert_unsigned_type(t)				\
-	_Static_assert(((t)-1) > 0,					\
+	static_assert(((t)-1) > 0,					\
 			"Not an unsigned type!")
 
 #define alx_Static_assert_signed_type(t)				\
-	_Static_assert(((t)-1) < 0,					\
+	static_assert(((t)-1) < 0,					\
 			"Not a signed type!")
 
 #define alx_assert_unsigned_type(t)					\
@@ -178,6 +178,14 @@
 #define alx_assert_signed_type(t)					\
 	alx_assert_msg(((t)-1) < 0,					\
 			"BUG:   Not a signed type!")
+
+#define alx_Static_assert_compatible(a, b)				\
+	static_assert(std::is_same <typeof(a), typeof(b)>::value,	\
+			"Incompatible types!")
+
+#define alx_assert_compatible(a, b)					\
+	alx_assert_msg(std::is_same <typeof(a), typeof(b)>::value,	\
+			"BUG:   Incompatible types!")
 
 
 /* Rename without alx_ prefix */
@@ -209,10 +217,12 @@
 #define assert_s64_long()		alx_assert_s64_long()
 #define Static_assert_size_ptrdiff()	alx_Static_assert_size_ptrdiff()
 #define assert_size_ptrdiff()		alx_assert_size_ptrdiff()
-#define Static_assert_unsigned_type()	alx_Static_assert_unsigned_type()
-#define Static_assert_signed_type()	alx_Static_assert_signed_type()
-#define assert_unsigned_type()		alx_assert_unsigned_type()
-#define assert_signed_type()		alx_assert_signed_type()
+#define Static_assert_unsigned_type(t)	alx_Static_assert_unsigned_type(t)
+#define Static_assert_signed_type(t)	alx_Static_assert_signed_type(t)
+#define assert_unsigned_type(t)		alx_assert_unsigned_type(t)
+#define assert_signed_type(t)		alx_assert_signed_type(t)
+#define Static_assert_compatible(a, b)	alx_Static_assert_compatible(a, b)
+#define assert_compatible(a, b)		alx_assert_compatible(a, b)
 #endif
 
 
