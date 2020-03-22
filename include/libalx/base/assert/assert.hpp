@@ -163,6 +163,22 @@
 	alx_assert_msg(sizeof(size_t) == sizeof(ptrdiff_t),		\
 			"BUG:   sizeof(size_t) != sizeof(ptrdiff_t)")
 
+#define alx_Static_assert_unsigned_type(t)				\
+	_Static_assert(((t)-1) > 0,					\
+			"Not an unsigned type!")
+
+#define alx_Static_assert_signed_type(t)				\
+	_Static_assert(((t)-1) < 0,					\
+			"Not a signed type!")
+
+#define alx_assert_unsigned_type(t)					\
+	alx_assert_msg(((t)-1) > 0,					\
+			"BUG:   Not an unsigned type!")
+
+#define alx_assert_signed_type(t)					\
+	alx_assert_msg(((t)-1) < 0,					\
+			"BUG:   Not a signed type!")
+
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
@@ -193,6 +209,10 @@
 #define assert_s64_long()		alx_assert_s64_long()
 #define Static_assert_size_ptrdiff()	alx_Static_assert_size_ptrdiff()
 #define assert_size_ptrdiff()		alx_assert_size_ptrdiff()
+#define Static_assert_unsigned_type()	alx_Static_assert_unsigned_type()
+#define Static_assert_signed_type()	alx_Static_assert_signed_type()
+#define assert_unsigned_type()		alx_assert_unsigned_type()
+#define assert_signed_type()		alx_assert_signed_type()
 #endif
 
 
