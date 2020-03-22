@@ -44,6 +44,14 @@
 	alx_assert_msg(alx_same_type(a, b),				\
 			"BUG:   Incompatible types!")
 
+#define alx_Static_assert_bit_fits_type(b, t)				\
+	_Static_assert(!alx_bit_overflows_type(b, t),			\
+			"Bit overflows type!")
+
+#define alx_assert_bit_fits_type(b, t)					\
+	alx_assert_msg(!alx_bit_overflows_type(b, t),			\
+			"BUG:   Bit overflows type!")
+
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
@@ -53,6 +61,8 @@
 #define assert_signed(x)		alx_assert_signed(x)
 #define Static_assert_same_type(a, b)	alx_Static_assert_same_type(a, b)
 #define assert_same_type(a, b)		alx_assert_same_type(a, b)
+#define Static_assert_bit_fits_type(b, t)  alx_Static_assert_bit_fits_type(b, t)
+#define assert_bit_fits_type(b, t)	alx_assert_bit_fits_type(b, t)
 #endif
 
 
