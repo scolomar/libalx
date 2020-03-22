@@ -71,8 +71,8 @@
 	alx_Static_assert_unsigned(x_);					\
 	alx_Static_assert_bit_fits_type(p_ + l_ - 1, x_);		\
 									\
-	x_	&= BITMASK_GEN(p_, l_);					\
 	x_	>>= p_;							\
+	x_	&= BITMASK_GEN(0, l_);					\
 	x_;								\
 }									\
 )
