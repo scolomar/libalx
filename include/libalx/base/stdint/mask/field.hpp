@@ -27,7 +27,7 @@
 	auto	l_	= (len);					\
 									\
 	alx_Static_assert_unsigned(*x_);				\
-	alx_Static_assert_bit_fits_type(p_ + l_ - 1, *x_);		\
+	alx_assert_bit_fits_type(p_ + l_ - 1, *x_);			\
 									\
 	*x_	|= BITMASK_GEN(p_, l_);					\
 	*x_;								\
@@ -41,7 +41,7 @@
 	auto	l_	= (len);					\
 									\
 	alx_Static_assert_unsigned(*x_);				\
-	alx_Static_assert_bit_fits_type(p_ + l_ - 1, *x_);		\
+	alx_assert_bit_fits_type(p_ + l_ - 1, *x_);			\
 									\
 	*x_	&= ~BITMASK_GEN(p_, l_);				\
 	*x_;								\
@@ -55,7 +55,7 @@
 	auto	l_	= (len);					\
 									\
 	alx_Static_assert_unsigned(*x_);				\
-	alx_Static_assert_bit_fits_type(p_ + l_ - 1, *x_);		\
+	alx_assert_bit_fits_type(p_ + l_ - 1, *x_);			\
 									\
 	*x_	^= BITMASK_GEN(p_, l_);					\
 	*x_;								\
@@ -69,7 +69,7 @@
 	auto	l_	= (len);					\
 									\
 	alx_Static_assert_unsigned(x_);					\
-	alx_Static_assert_bit_fits_type(p_ + l_ - 1, x_);		\
+	alx_assert_bit_fits_type(p_ + l_ - 1, x_);			\
 									\
 	x_	>>= p_;							\
 	x_	&= BITMASK_GEN(0, l_);					\
@@ -79,17 +79,19 @@
 
 #define BITFIELD_WRITE(x, pos, len, field)	(			\
 {									\
-	auto	x_	= (x);						\
-	auto	p_	= (pos);					\
-	auto	l_	= (len);					\
-	auto	f_	= (field);					\
+	auto		x_	= (x);					\
+	auto		p_	= (pos);				\
+	auto		l_	= (len);				\
+	typeof(*x_)	f_	= (field);				\
+	typeof(*x_)	m_;						\
 									\
 	alx_Static_assert_unsigned(*x_);				\
-	alx_Static_assert_unsigned(f_);					\
-	alx_Static_assert_bit_fits_type(p_ + l_ - 1, *x_);		\
+	alx_assert_bit_fits_type(p_ + l_ - 1, *x_);			\
 									\
-	f_	&= BITMASK_GEN(0, l_);					\
+	m_	= BITMASK_GEN(p_, l_);					\
 	f_	<<= p_;							\
+	f_	&= m_;							\
+	*x_	&= ~m_;							\
 	*x_	|= f_;							\
 	*x_;								\
 }									\

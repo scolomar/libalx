@@ -33,7 +33,7 @@
 	__auto_type	b_	= (bit);				\
 									\
 	alx_Static_assert_unsigned(*x_);				\
-	alx_Static_assert_bit_fits_type(b_, *x_);			\
+	alx_assert_bit_fits_type(b_, *x_);				\
 									\
 	*x_	|= 1ull << b_;						\
 	*x_;								\
@@ -46,7 +46,7 @@
 	__auto_type	b_	= (bit);				\
 									\
 	alx_Static_assert_unsigned(*x_);				\
-	alx_Static_assert_bit_fits_type(b_, *x_);			\
+	alx_assert_bit_fits_type(b_, *x_);				\
 									\
 	*x_	&= ~(1ull << b_);					\
 	*x_;								\
@@ -59,7 +59,7 @@
 	__auto_type	b_	= (bit);				\
 									\
 	alx_Static_assert_unsigned(*x_);				\
-	alx_Static_assert_bit_fits_type(b_, *x_);			\
+	alx_assert_bit_fits_type(b_, *x_);				\
 									\
 	*x_	^= 1ull << b_;						\
 	*x_;								\
@@ -73,7 +73,7 @@
 	bool		r_;						\
 									\
 	alx_Static_assert_unsigned(x_);					\
-	alx_Static_assert_bit_fits_type(b_, x_);			\
+	alx_assert_bit_fits_type(b_, x_);				\
 									\
 	r_	= x_ & (1ull << b_);					\
 	r_;								\

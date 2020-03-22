@@ -32,7 +32,7 @@
 	__auto_type	l_	= (len);				\
 									\
 	alx_Static_assert_unsigned(*x_);				\
-	alx_Static_assert_bit_fits_type(p_ + l_ - 1, *x_);		\
+	alx_assert_bit_fits_type(p_ + l_ - 1, *x_);			\
 									\
 	*x_	|= BITMASK_GEN(p_, l_);					\
 	*x_;								\
@@ -46,7 +46,7 @@
 	__auto_type	l_	= (len);				\
 									\
 	alx_Static_assert_unsigned(*x_);				\
-	alx_Static_assert_bit_fits_type(p_ + l_ - 1, *x_);		\
+	alx_assert_bit_fits_type(p_ + l_ - 1, *x_);			\
 									\
 	*x_	&= ~BITMASK_GEN(p_, l_);				\
 	*x_;								\
@@ -60,7 +60,7 @@
 	__auto_type	l_	= (len);				\
 									\
 	alx_Static_assert_unsigned(*x_);				\
-	alx_Static_assert_bit_fits_type(p_ + l_ - 1, *x_);		\
+	alx_assert_bit_fits_type(p_ + l_ - 1, *x_);			\
 									\
 	*x_	^= BITMASK_GEN(p_, l_);					\
 	*x_;								\
@@ -74,7 +74,7 @@
 	__auto_type	l_	= (len);				\
 									\
 	alx_Static_assert_unsigned(x_);					\
-	alx_Static_assert_bit_fits_type(p_ + l_ - 1, x_);		\
+	alx_assert_bit_fits_type(p_ + l_ - 1, x_);			\
 									\
 	x_	>>= p_;							\
 	x_	&= BITMASK_GEN(0, l_);					\
@@ -87,14 +87,16 @@
 	__auto_type	x_	= (x);					\
 	__auto_type	p_	= (pos);				\
 	__auto_type	l_	= (len);				\
-	__auto_type	f_	= (field);				\
+	typeof(*x_)	f_	= (field);				\
+	typeof(*x_)	m_;						\
 									\
 	alx_Static_assert_unsigned(*x_);				\
-	alx_Static_assert_unsigned(f_);					\
-	alx_Static_assert_bit_fits_type(p_ + l_ - 1, *x_);		\
+	alx_assert_bit_fits_type(p_ + l_ - 1, *x_);			\
 									\
-	f_	&= BITMASK_GEN(0, l_);					\
+	m_	= BITMASK_GEN(p_, l_);					\
 	f_	<<= p_;							\
+	f_	&= m_;							\
+	*x_	&= ~m_;							\
 	*x_	|= f_;							\
 	*x_;								\
 }									\
