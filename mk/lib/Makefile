@@ -11,7 +11,12 @@ MK_DEPS	=								\
 BUILD_PATH	= $(BUILD_LIB_DIR)/libalx
 
 BASE_MODULES	=							\
+		base/assert/array					\
 		base/assert/assert					\
+		base/assert/char					\
+		base/assert/stddef					\
+		base/assert/stdint					\
+		base/assert/type					\
 		base/compiler/size					\
 		base/compiler/type					\
 		base/compiler/unused					\

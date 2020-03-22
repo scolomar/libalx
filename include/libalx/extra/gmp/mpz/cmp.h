@@ -17,7 +17,7 @@
 
 #include <gmp.h>
 
-#include "libalx/base/assert/assert.h"
+#include "libalx/base/assert/stdint.h"
 
 
 /******************************************************************************

@@ -7,32 +7,46 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/gmp/mpz/init_set.h */
+#pragma once	/* libalx/base/assert/stddef.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdint.h>
+#include <stddef.h>
 
-#include <gmp.h>
+#include <sys/types.h>
 
-#include "libalx/base/assert/stdint.h"
-
-
-/******************************************************************************
- ******* _Static_assert *******************************************************
- ******************************************************************************/
-alx_Static_assert_stdint_types();
+#include "libalx/base/assert/assert.h"
+#include "libalx/base/compiler/type.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define alx_Static_assert_size_ptrdiff()				\
+	_Static_assert(sizeof(size_t) == sizeof(ptrdiff_t),		\
+			"sizeof(size_t) != sizeof(ptrdiff_t)")
+
+#define alx_assert_size_ptrdiff()					\
+	alx_assert_msg(sizeof(size_t) == sizeof(ptrdiff_t),		\
+			"BUG:   sizeof(size_t) != sizeof(ptrdiff_t)")
+
+#define alx_Static_assert_ssize_ptrdiff()				\
+	static_assert(alx_same_type(ssize_t, ptrdiff_t),		\
+			"ssize_t != ptrdiff_t")
+
+#define alx_assert_ssize_ptrdiff()					\
+	alx_assert_msg(alx_same_type(ssize_t, ptrdiff_t),		\
+			"BUG:   ssize_t != ptrdiff_t")
+
+
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define mpz_init_set_u64(rop, op)	alx_mpz_init_set_u64(rop, op)
-#define mpz_init_set_s64(rop, op)	alx_mpz_init_set_s64(rop, op)
+#define Static_assert_size_ptrdiff()	alx_Static_assert_size_ptrdiff()
+#define assert_size_ptrdiff()		alx_assert_size_ptrdiff()
+#define Static_assert_ssize_ptrdiff()	alx_Static_assert_ssize_ptrdiff()
+#define assert_ssize_ptrdiff()		alx_assert_ssize_ptrdiff()
 #endif
 
 
@@ -49,26 +63,11 @@ alx_Static_assert_stdint_types();
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-inline
-void	alx_mpz_init_set_u64	(mpz_t rop, uint64_t op);
-inline
-void	alx_mpz_init_set_s64	(mpz_t rop, int64_t op);
 
 
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
-inline
-void	alx_mpz_init_set_u64	(mpz_t rop, uint64_t op)
-{
-	mpz_init_set_ui(rop, op);
-}
-
-inline
-void	alx_mpz_init_set_s64	(mpz_t rop, int64_t op)
-{
-	mpz_init_set_si(rop, op);
-}
 
 
 /******************************************************************************

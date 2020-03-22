@@ -14,14 +14,10 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <cassert>
-#include <climits>
 #include <cstdbool>
-#include <cstdint>
 #include <cstdio>
 
-#include <type_traits>
-
-#include "libalx/base/errno/error.hpp"
+#include "libalx/base/errno/perror.hpp"
 
 
 /******************************************************************************
@@ -51,178 +47,10 @@
 } while (0)
 #endif
 
-#define alx_Static_assert_array(a)					\
-	static_assert(std::is_array <typeof(a)>::value, "Not a `[]`!")
-
-#define alx_static_assert_char_array(a)					\
-	alx_Static_assert_array(a);					\
-	static_assert(std::is_same <char, typeof((a)[0])>::value,	\
-						"Not a `char[]` !")
-
-#define alx_Static_assert_char_signed()					\
-	static_assert(CHAR_MIN < 0, "char != signed char")
-
-#define alx_Static_assert_char_unsigned()				\
-	static_assert(CHAR_MIN == 0, "char != unsigned char")
-
-#define alx_assert_char_signed()					\
-	alx_assert_msg(CHAR_MIN < 0, "BUG:   char != signed char")
-
-#define alx_assert_char_unsigned()					\
-	alx_assert_msg(CHAR_MIN == 0, "BUG:   char != unsigned char")
-
-#define alx_Static_assert_stdint_types()				\
-	alx_Static_assert_u8_uchar();					\
-	alx_Static_assert_s8_schar();					\
-	alx_Static_assert_u16_ushort();					\
-	alx_Static_assert_s16_short();					\
-	alx_Static_assert_u32_unsigned();				\
-	alx_Static_assert_s32_int();					\
-	alx_Static_assert_u64_ulong();					\
-	alx_Static_assert_s64_long()
-
-#define alx_Static_assert_u8_uchar()					\
-	static_assert(std::is_same <uint8_t, unsigned char>::value,	\
-				    "uint8_t != unsigned char")
-
-#define alx_Static_assert_s8_schar()					\
-	static_assert(std::is_same < int8_t, signed char>::value,	\
-				     "int8_t != signed char")
-
-#define alx_Static_assert_u16_ushort()					\
-	static_assert(std::is_same <uint16_t, unsigned short>::value,	\
-				    "uint16_t != unsigned short")
-
-#define alx_Static_assert_s16_short()					\
-	static_assert(std::is_same < int16_t, short>::value,		\
-				     "int16_t != short")
-
-#define alx_Static_assert_u32_unsigned()				\
-	static_assert(std::is_same <uint32_t, unsigned>::value,	\
-				    "uint32_t != unsigned")
-
-#define alx_Static_assert_s32_int()					\
-	static_assert(std::is_same < int32_t, int>::value,		\
-				     "int32_t != int")
-
-#define alx_Static_assert_u64_ulong()					\
-	static_assert(std::is_same <uint64_t, unsigned long>::value,	\
-				    "uint64_t != unsigned long")
-
-#define alx_Static_assert_s64_long()					\
-	static_assert(std::is_same < int64_t, long>::value,		\
-				     "int64_t != long")
-
-#define alx_assert_stdint_types()					\
-	alx_assert_u8_uchar();						\
-	alx_assert_s8_schar();						\
-	alx_assert_u16_ushort();					\
-	alx_assert_s16_short();						\
-	alx_assert_u32_unsigned();					\
-	alx_assert_s32_int();						\
-	alx_assert_u64_ulong();						\
-	alx_assert_s64_long()
-
-#define alx_assert_u8_uchar()						\
-	alx_assert_msg(std::is_same <uint8_t, unsigned char>::value,	\
-			 "BUG:   uint8_t != unsigned char")
-
-#define alx_assert_s8_schar()						\
-	alx_assert_msg(std::is_same <int8_t, signed char>::value,	\
-			 "BUG:   int8_t != signed char")
-
-#define alx_assert_u16_ushort()						\
-	alx_assert_msg(std::is_same <uint16_t, unsigned short>::value,	\
-			 "BUG:   uint16_t != unsigned short")
-
-#define alx_assert_s16_short()						\
-	alx_assert_msg(std::is_same <int16_t, short>::value,		\
-			 "BUG:   int16_t != short")
-
-#define alx_assert_u32_unsigned()					\
-	alx_assert_msg(std::is_same <uint32_t, unsigned>::value,	\
-			 "BUG:   uint32_t != unsigned")
-
-#define alx_assert_s32_int()						\
-	alx_assert_msg(std::is_same <int32_t, int>::value,		\
-			 "BUG:   int32_t != int")
-
-#define alx_assert_u64_ulong()						\
-	alx_assert_msg(std::is_same <uint64_t, unsigned long>::value,	\
-			 "BUG:   uint64_t != unsigned long")
-
-#define alx_assert_s64_long()						\
-	alx_assert_msg(std::is_same <int64_t, long>::value,		\
-			 "BUG:   int64_t != long")
-
-#define alx_Static_assert_size_ptrdiff()				\
-	static_assert(sizeof(size_t) == sizeof(ptrdiff_t),		\
-			"sizeof(size_t) != sizeof(ptrdiff_t)")
-
-#define alx_assert_size_ptrdiff()					\
-	alx_assert_msg(sizeof(size_t) == sizeof(ptrdiff_t),		\
-			"BUG:   sizeof(size_t) != sizeof(ptrdiff_t)")
-
-#define alx_Static_assert_unsigned(t)					\
-	static_assert(((typeof(t))-1) > 0,				\
-			"Not an unsigned type!")
-
-#define alx_Static_assert_signed(t)					\
-	static_assert(((typeof(t))-1) < 0,				\
-			"Not a signed type!")
-
-#define alx_assert_unsigned(t)						\
-	alx_assert_msg(((typeof(t))-1) > 0,				\
-			"BUG:   Not an unsigned type!")
-
-#define alx_assert_signed(t)						\
-	alx_assert_msg(((typeof(t))-1) < 0,				\
-			"BUG:   Not a signed type!")
-
-#define alx_Static_assert_compatible(a, b)				\
-	static_assert(std::is_same <typeof(a), typeof(b)>::value,	\
-			"Incompatible types!")
-
-#define alx_assert_compatible(a, b)					\
-	alx_assert_msg(std::is_same <typeof(a), typeof(b)>::value,	\
-			"BUG:   Incompatible types!")
-
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define assert_msg(expr, msg)		alx_assert_msg(expr, msg)
-#define Static_assert_array(a)		alx_Static_assert_array(a)
-#define Static_assert_char_array(a)	alx_Static_assert_char_array(a)
-#define Static_assert_char_signed()	alx_Static_assert_char_signed()
-#define Static_assert_char_unsigned()	alx_Static_assert_char_unsigned()
-#define assert_char_signed()		alx_assert_char_signed()
-#define assert_char_unsigned()		alx_assert_char_unsigned()
-#define Static_assert_stdint_types()	alx_Static_assert_stdint_types()
-#define Static_assert_u8_uchar()	alx_Static_assert_u8_uchar()
-#define Static_assert_s8_schar()	alx_Static_assert_s8_schar()
-#define Static_assert_u16_ushort()	alx_Static_assert_u16_ushort()
-#define Static_assert_s16_short()	alx_Static_assert_s16_short()
-#define Static_assert_u32_unsigned()	alx_Static_assert_u32_unsigned()
-#define Static_assert_s32_int()		alx_Static_assert_s32_int()
-#define Static_assert_u64_ulong()	alx_Static_assert_u64_ulong()
-#define Static_assert_s64_long()	alx_Static_assert_s64_long()
-#define assert_stdint_types()		alx_assert_stdint_types()
-#define assert_u8_uchar()		alx_assert_u8_uchar()
-#define assert_s8_schar()		alx_assert_s8_schar()
-#define assert_u16_ushort()		alx_assert_u16_ushort()
-#define assert_s16_short()		alx_assert_s16_short()
-#define assert_u32_unsigned()		alx_assert_u32_unsigned()
-#define assert_s32_int()		alx_assert_s32_int()
-#define assert_u64_ulong()		alx_assert_u64_ulong()
-#define assert_s64_long()		alx_assert_s64_long()
-#define Static_assert_size_ptrdiff()	alx_Static_assert_size_ptrdiff()
-#define assert_size_ptrdiff()		alx_assert_size_ptrdiff()
-#define Static_assert_unsigned(t)	alx_Static_assert_unsigned(t)
-#define Static_assert_signed(t)		alx_Static_assert_signed(t)
-#define assert_unsigned(t)		alx_assert_unsigned(t)
-#define assert_signed(t)		alx_assert_signed(t)
-#define Static_assert_compatible(a, b)	alx_Static_assert_compatible(a, b)
-#define assert_compatible(a, b)		alx_assert_compatible(a, b)
 #endif
 
 

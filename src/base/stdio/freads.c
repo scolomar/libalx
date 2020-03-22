@@ -13,7 +13,7 @@
 #include <stddef.h>
 #include <stdio.h>
 
-#include "libalx/base/assert/assert.h"
+#include "libalx/base/assert/stddef.h"
 
 
 /******************************************************************************

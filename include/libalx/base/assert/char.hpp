@@ -7,33 +7,55 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/gmp/mpz/init_set.h */
+#pragma once	/* libalx/base/assert/char.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdint.h>
+#include <cassert>
 
-#include <gmp.h>
-
-#include "libalx/base/assert/stdint.h"
-
-
-/******************************************************************************
- ******* _Static_assert *******************************************************
- ******************************************************************************/
-alx_Static_assert_stdint_types();
+#include "libalx/base/assert/assert.h"
+#include "libalx/base/compiler/type.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define alx_Static_assert_char_signed()					\
+	static_assert(alx_signed_type(char), "char != signed char")
+
+#define alx_Static_assert_char_unsigned()				\
+	static_assert(alx_unsigned_type(char), "char != unsigned char")
+
+#define alx_assert_char_signed()					\
+	alx_assert_msg(alx_signed_type(char), "BUG:   char != signed char")
+
+#define alx_assert_char_unsigned()					\
+	alx_assert_msg(alx_unsigned_type(char), "BUG:   char != unsigned char")
+
+
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define mpz_init_set_u64(rop, op)	alx_mpz_init_set_u64(rop, op)
-#define mpz_init_set_s64(rop, op)	alx_mpz_init_set_s64(rop, op)
+#define Static_assert_char_signed()	alx_Static_assert_char_signed()
+#define Static_assert_char_unsigned()	alx_Static_assert_char_unsigned()
+#define assert_char_signed()		alx_assert_char_signed()
+#define assert_char_unsigned()		alx_assert_char_unsigned()
 #endif
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern	"C"
+{
+}
+
+
+/******************************************************************************
+ ******* namespace ************************************************************
+ ******************************************************************************/
+namespace alx {
 
 
 /******************************************************************************
@@ -49,26 +71,12 @@ alx_Static_assert_stdint_types();
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-inline
-void	alx_mpz_init_set_u64	(mpz_t rop, uint64_t op);
-inline
-void	alx_mpz_init_set_s64	(mpz_t rop, int64_t op);
 
 
 /******************************************************************************
- ******* inline ***************************************************************
+ ******* namespace ************************************************************
  ******************************************************************************/
-inline
-void	alx_mpz_init_set_u64	(mpz_t rop, uint64_t op)
-{
-	mpz_init_set_ui(rop, op);
-}
-
-inline
-void	alx_mpz_init_set_s64	(mpz_t rop, int64_t op)
-{
-	mpz_init_set_si(rop, op);
-}
+}	/* namespace alx */
 
 
 /******************************************************************************

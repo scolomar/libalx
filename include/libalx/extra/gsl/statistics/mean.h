@@ -23,7 +23,8 @@
 #include <gsl/gsl_statistics_uint.h>
 #include <gsl/gsl_statistics_int.h>
 
-#include "libalx/base/assert/assert.h"
+#include "libalx/base/assert/char.h"
+#include "libalx/base/assert/stdint.h"
 
 
 /******************************************************************************

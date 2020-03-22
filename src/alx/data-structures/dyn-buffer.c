@@ -17,7 +17,7 @@
 #include <sys/types.h>
 
 #include "libalx/alx/data-structures/types.h"
-#include "libalx/base/assert/assert.h"
+#include "libalx/base/assert/stddef.h"
 #include "libalx/base/stdlib/maximum.h"
 #include "libalx/base/stdlib/minimum.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"

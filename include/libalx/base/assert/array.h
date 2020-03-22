@@ -7,32 +7,30 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/gmp/mpz/init_set.h */
+#pragma once	/* libalx/base/assert/array.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdint.h>
-
-#include <gmp.h>
-
-#include "libalx/base/assert/stdint.h"
-
-
-/******************************************************************************
- ******* _Static_assert *******************************************************
- ******************************************************************************/
-alx_Static_assert_stdint_types();
+#include "libalx/base/compiler/type.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define alx_Static_assert_array(a)					\
+	_Static_assert(!alx_same_type((a), &(a)[0]), "Not a `[]` !")
+
+#define alx_Static_assert_char_array(a)					\
+	alx_Static_assert_array(a);					\
+	_Static_assert(alx_same_type(char, (a)[0]), "Not a `char[]` !")
+
+
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define mpz_init_set_u64(rop, op)	alx_mpz_init_set_u64(rop, op)
-#define mpz_init_set_s64(rop, op)	alx_mpz_init_set_s64(rop, op)
+#define Static_assert_array(a)		alx_Static_assert_array(a)
+#define Static_assert_char_array(a)	alx_Static_assert_char_array(a)
 #endif
 
 
@@ -49,26 +47,11 @@ alx_Static_assert_stdint_types();
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-inline
-void	alx_mpz_init_set_u64	(mpz_t rop, uint64_t op);
-inline
-void	alx_mpz_init_set_s64	(mpz_t rop, int64_t op);
 
 
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
-inline
-void	alx_mpz_init_set_u64	(mpz_t rop, uint64_t op)
-{
-	mpz_init_set_ui(rop, op);
-}
-
-inline
-void	alx_mpz_init_set_s64	(mpz_t rop, int64_t op)
-{
-	mpz_init_set_si(rop, op);
-}
 
 
 /******************************************************************************

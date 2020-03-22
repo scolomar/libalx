@@ -14,7 +14,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#include "libalx/base/assert/assert.h"
+#include "libalx/base/assert/stddef.h"
 
 
 /******************************************************************************

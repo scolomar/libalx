@@ -18,7 +18,12 @@ MK_DEPS	=								\
 	$(LIBALX_DIR)/Makefile
 
 MODULES	=								\
+	base/assert/array						\
 	base/assert/assert						\
+	base/assert/char						\
+	base/assert/stddef						\
+	base/assert/stdint						\
+	base/assert/type						\
 	base/compiler/size						\
 	base/compiler/type						\
 	base/compiler/unused						\
