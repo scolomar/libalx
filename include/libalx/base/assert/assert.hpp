@@ -163,20 +163,20 @@
 	alx_assert_msg(sizeof(size_t) == sizeof(ptrdiff_t),		\
 			"BUG:   sizeof(size_t) != sizeof(ptrdiff_t)")
 
-#define alx_Static_assert_unsigned_type(t)				\
-	static_assert(((t)-1) > 0,					\
+#define alx_Static_assert_unsigned(t)					\
+	static_assert(((typeof(t))-1) > 0,				\
 			"Not an unsigned type!")
 
-#define alx_Static_assert_signed_type(t)				\
-	static_assert(((t)-1) < 0,					\
+#define alx_Static_assert_signed(t)					\
+	static_assert(((typeof(t))-1) < 0,				\
 			"Not a signed type!")
 
-#define alx_assert_unsigned_type(t)					\
-	alx_assert_msg(((t)-1) > 0,					\
+#define alx_assert_unsigned(t)						\
+	alx_assert_msg(((typeof(t))-1) > 0,				\
 			"BUG:   Not an unsigned type!")
 
-#define alx_assert_signed_type(t)					\
-	alx_assert_msg(((t)-1) < 0,					\
+#define alx_assert_signed(t)						\
+	alx_assert_msg(((typeof(t))-1) < 0,				\
 			"BUG:   Not a signed type!")
 
 #define alx_Static_assert_compatible(a, b)				\
@@ -217,10 +217,10 @@
 #define assert_s64_long()		alx_assert_s64_long()
 #define Static_assert_size_ptrdiff()	alx_Static_assert_size_ptrdiff()
 #define assert_size_ptrdiff()		alx_assert_size_ptrdiff()
-#define Static_assert_unsigned_type(t)	alx_Static_assert_unsigned_type(t)
-#define Static_assert_signed_type(t)	alx_Static_assert_signed_type(t)
-#define assert_unsigned_type(t)		alx_assert_unsigned_type(t)
-#define assert_signed_type(t)		alx_assert_signed_type(t)
+#define Static_assert_unsigned(t)	alx_Static_assert_unsigned(t)
+#define Static_assert_signed(t)		alx_Static_assert_signed(t)
+#define assert_unsigned(t)		alx_assert_unsigned(t)
+#define assert_signed(t)		alx_assert_signed(t)
 #define Static_assert_compatible(a, b)	alx_Static_assert_compatible(a, b)
 #define assert_compatible(a, b)		alx_assert_compatible(a, b)
 #endif
