@@ -25,11 +25,17 @@
  ******************************************************************************/
 /* Are two types/vars the same type (ignoring qualifiers)? */
 #define alx_same_type(a, b) __builtin_types_compatible_p(typeof(a), typeof(b))
+/* Is x of unsigned type? */
+#define alx_unsigned_type(x)	(((typeof(x))-1) > 0)
+/* Is x of signed type? */
+#define alx_signed_type(x)	(((typeof(x))-1) < 0)
 
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define same_type(a, b)		alx_same_type(a, b)
+#define unsigned_type(x)	alx_unsigned_type(x)
+#define signed_type(x)		alx_signed_type(x)
 #endif
 
 
