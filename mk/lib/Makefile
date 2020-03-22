@@ -44,6 +44,9 @@ BASE_MODULES	=							\
 		base/socket/tcp/client					\
 		base/socket/tcp/server					\
 		base/stdint/constants					\
+		base/stdint/mask/bit					\
+		base/stdint/mask/field					\
+		base/stdint/mask/mask					\
 		base/stdint/types					\
 		base/stdio/fgets					\
 		base/stdio/get						\

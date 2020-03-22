@@ -52,6 +52,9 @@ MODULES	=								\
 	base/socket/tcp/server						\
 	base/socket/foo							\
 	base/stdint/constants						\
+	base/stdint/mask/bit						\
+	base/stdint/mask/field						\
+	base/stdint/mask/mask						\
 	base/stdint/types						\
 	base/stdio/fgets						\
 	base/stdio/freads						\
