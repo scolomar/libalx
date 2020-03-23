@@ -41,7 +41,7 @@ __attribute__((nonnull))
 int	alx_cv_init_conts	(conts_s **conts);
 void	alx_cv_deinit_conts	(conts_s *conts);
 /* ----- Extract */
-__attribute__((nonnull(1), warn_unused_result))
+__attribute__((nonnull(1)))
 int	alx_cv_extract_conts	(const conts_s *restrict conts,
 				 const cont_s **restrict cont,
 				 ptrdiff_t *restrict size);

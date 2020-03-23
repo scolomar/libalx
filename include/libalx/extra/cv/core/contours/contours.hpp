@@ -37,7 +37,7 @@ extern	"C"
 int	alx_cv_init_conts	(void **conts);
 void	alx_cv_deinit_conts	(void *conts);
 /* ----- Extract */
-[[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
+[[gnu::nonnull(1)]]
 int	alx_cv_extract_conts	(const void *restrict conts,
 				 const void **restrict cont,
 				 ptrdiff_t *restrict size);
@@ -78,7 +78,7 @@ void	deinit_conts	(class std::vector<
 					class cv::Point_<
 					int>>> *conts);
 /* ----- Extract */
-[[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
+[[gnu::nonnull(1)]]
 int	extract_conts	(const class std::vector<
 					class std::vector<
 					class cv::Point_<int>>> *restrict conts,
