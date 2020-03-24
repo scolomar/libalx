@@ -33,8 +33,8 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx::CV::adaptive_thr		(class cv::Mat *img,
-					 int method, int thr_typ, int ksize)
+int	alx::CV::adaptive_threshold	(class cv::Mat *img, int method,
+					 int thr_typ, int ksize, int c)
 {
 
 	if (img->channels() != 1)
@@ -45,16 +45,16 @@ int	alx::CV::adaptive_thr		(class cv::Mat *img,
 		return	-1;
 	if (!(ksize % 2) || ksize < 3)
 		return	-1;
-	cv::adaptiveThreshold(*img, *img, UINT8_MAX, method, thr_typ, ksize, 0);
+	cv::adaptiveThreshold(*img, *img, UINT8_MAX, method, thr_typ, ksize, c);
 
 	return	0;
 }
 
-int	alx_cv_adaptive_thr		(void *img,
-					 int method, int thr_typ, int ksize)
+int	alx_cv_adaptive_threshold	(void *img, int method,
+					 int thr_typ, int ksize, int c)
 {
-	return	alx::CV::adaptive_thr((class cv::Mat *)img,
-						method, thr_typ, ksize);
+	return	alx::CV::adaptive_threshold((class cv::Mat *)img,
+						method, thr_typ, ksize, c);
 }
 
 int	alx::CV::threshold		(class cv::Mat *img,

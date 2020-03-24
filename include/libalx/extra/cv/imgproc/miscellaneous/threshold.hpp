@@ -29,8 +29,8 @@
 extern	"C"
 {
 [[gnu::nonnull]]
-int	alx_cv_adaptive_thr		(void *img,
-					 int method, int thr_typ, int ksize);
+int	alx_cv_adaptive_threshold	(void *img, int method,
+					 int thr_typ, int ksize, int c);
 [[gnu::nonnull]]
 int	alx_cv_threshold		(void *img, int thr_typ, int thr_val);
 }
@@ -57,8 +57,8 @@ namespace CV {
  ******* prototypes ***********************************************************
  ******************************************************************************/
 [[gnu::nonnull]]
-int	adaptive_thr		(class cv::Mat *img,
-				 int method, int thr_typ, int ksize);
+int	adaptive_threshold	(class cv::Mat *img, int method,
+				 int thr_typ, int ksize, int c);
 [[gnu::nonnull]]
 int	threshold		(class cv::Mat *img, int thr_typ, int thr_val);
 
