@@ -33,7 +33,7 @@ extern	"C"
 [[gnu::nonnull]]
 double	alx_cv_compare_bitwise	(const void *restrict img_a,
 				 const void *restrict img_b,
-				 ptrdiff_t tolerance);
+				 double power);
 }
 
 
@@ -60,7 +60,7 @@ namespace CV {
 [[gnu::nonnull]]
 double	compare_bitwise	(const class cv::Mat *restrict img_a,
 			 const class cv::Mat *restrict img_b,
-			 ptrdiff_t tolerance);
+			 double power);
 
 
 /******************************************************************************

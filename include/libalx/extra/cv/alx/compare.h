@@ -39,7 +39,7 @@
 __attribute__((nonnull))
 double	alx_cv_compare_bitwise	(const img_s *restrict img_a,
 				 const img_s *restrict img_b,
-				 ptrdiff_t tolerance);
+				 double power);
 
 
 /******************************************************************************

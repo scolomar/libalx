@@ -10,20 +10,20 @@
 #include "libalx/extra/cv/alx/compare.hpp"
 
 #include <cstddef>
+#include <cstdint>
 
 #include <opencv2/core.hpp>
 #include <opencv2/core/mat.hpp>
 #include <opencv2/imgproc.hpp>
 
 #include "libalx/base/compiler/restrict.hpp"
-#include "libalx/extra/cv/imgproc/filter/border.hpp"
 #include "libalx/extra/cv/imgproc/geometric/resize.hpp"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-
+#include <opencv2/highgui.hpp>
 
 /******************************************************************************
  ******* enum / struct / union ************************************************
@@ -40,14 +40,18 @@
  ******************************************************************************/
 double	alx::CV::compare_bitwise	(const class cv::Mat *restrict img_a,
 					 const class cv::Mat *restrict img_b,
-					 ptrdiff_t tolerance)
+					 double power)
 {
 	class cv::Mat	a;
 	class cv::Mat	b;
-	class cv::Mat	_xor;
+	class cv::Mat	dt_a;
+	class cv::Mat	dt_b;
+	class cv::Mat	dt;
+	class cv::Mat	_or;
 	class cv::Mat	_and;
-	ptrdiff_t	pix_and;
-	ptrdiff_t	pix_dif;
+	double		sum;
+	double		n;
+	double		mean;
 	double		match;
 
 	if (img_a->channels() != 1)
@@ -59,37 +63,43 @@ double	alx::CV::compare_bitwise	(const class cv::Mat *restrict img_a,
 
 	alx::CV::resize_2largest(&a, &b);
 
-	cv::bitwise_xor(a, b, _xor);
+	cv::bitwise_or(a, b, _or);
+cv::imwrite("_or.png", _or);
 
-	cv::dilate(a, a, cv::Mat(), cv::Point(-1,-1), tolerance);
-	cv::dilate(b, b, cv::Mat(), cv::Point(-1,-1), tolerance);
-	cv::bitwise_and(a, b, _and);
-	pix_and	= cv::countNonZero(_and);
-	cv::bitwise_not(_and, _and);
+	cv::bitwise_not(a, a);
+	cv::bitwise_not(b, b);
+	cv::distanceTransform(a, dt_a, cv::DIST_L2, cv::DIST_MASK_PRECISE);
+	cv::distanceTransform(b, dt_b, cv::DIST_L2, cv::DIST_MASK_PRECISE);
+	cv::max(dt_a, dt_b, dt);
+	cv::pow(dt, power, dt);
+cv::imwrite("_dt.png", dt);
 
-	alx::CV::border_black(&_xor, tolerance);
-	alx::CV::border_black(&_and, tolerance);
+	cv::bitwise_and(dt, dt, _and, _or);
+cv::imwrite("_or_and_dt.png", _and);
+	sum	= cv::sum(_and)[0];
+	n	= cv::countNonZero(_and);
+	mean	= sum / n;
+printf("mean = %lf\n", mean);
+	match	= (UINT8_MAX - mean) / UINT8_MAX;
 
-	cv::bitwise_and(_xor, _and, a);
-	pix_dif	= cv::countNonZero(a);
-
-	match	= (pix_and - pix_dif) / (double)pix_and;
-
-	a.release();
-	b.release();
-	_xor.release();
 	_and.release();
+	_or.release();
+	dt.release();
+	dt_b.release();
+	dt_a.release();
+	b.release();
+	a.release();
 
 	return	match;
 }
 
 double	alx_cv_compare_bitwise		(const void *restrict img_a,
 					 const void *restrict img_b,
-					 ptrdiff_t tolerance)
+					 double power)
 {
 	return	alx::CV::compare_bitwise((const class cv::Mat *)img_a,
 						(const class cv::Mat *)img_b,
-						tolerance);
+						power);
 }
 
 
