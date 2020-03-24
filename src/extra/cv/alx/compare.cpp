@@ -60,16 +60,15 @@ double	alx::CV::compare_bitwise	(const class cv::Mat *restrict img_a,
 	alx::CV::resize_2largest(&a, &b);
 
 	cv::bitwise_xor(a, b, _xor);
+
+	cv::dilate(a, a, cv::Mat(), cv::Point(-1,-1), tolerance);
+	cv::dilate(b, b, cv::Mat(), cv::Point(-1,-1), tolerance);
 	cv::bitwise_and(a, b, _and);
 	pix_and	= cv::countNonZero(_and);
 	cv::bitwise_not(_and, _and);
 
 	alx::CV::border_black(&_xor, tolerance);
 	alx::CV::border_black(&_and, tolerance);
-	cv::dilate(_xor, _xor, cv::Mat(), cv::Point(-1,-1), tolerance,
-					cv::BORDER_CONSTANT, cv::Scalar(0));
-	cv::erode(_and, _and, cv::Mat(), cv::Point(-1,-1), tolerance,
-					cv::BORDER_CONSTANT, cv::Scalar(0));
 
 	cv::bitwise_and(_xor, _and, a);
 	pix_dif	= cv::countNonZero(a);
