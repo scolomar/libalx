@@ -7,18 +7,46 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/imgproc/shape/contours.h */
+#pragma once	/* libalx/extra/cv/core/contours/extract.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/cv/types.h"
+#include <cstddef>
+
+#include <vector>
+
+#include <opencv2/core/base.hpp>
+
+#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern	"C"
+{
+[[gnu::nonnull(1)]]
+int	alx_cv_extract_conts	(const void *restrict conts,
+				 const void **restrict cont,
+				 ptrdiff_t *restrict size);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_cv_extract_conts_cont(const void **restrict cont,
+				 const void *restrict conts, ptrdiff_t i);
+}
+
+
+/******************************************************************************
+ ******* namespace ************************************************************
+ ******************************************************************************/
+namespace alx {
+namespace CV {
 
 
 /******************************************************************************
@@ -34,36 +62,27 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
-int	alx_cv_contours		(const img_s *restrict img,
-				 conts_s *restrict conts);
-__attribute__((nonnull(1)))
-void	alx_cv_contour_dimensions(const cont_s *restrict cont,
-				 double *restrict area,
-				 double *restrict perimeter,
-				 ptrdiff_t *restrict ctr_x,
-				 ptrdiff_t *restrict ctr_y);
-__attribute__((nonnull(3), warn_unused_result))
-int	alx_cv_conts_largest	(const cont_s **restrict cont,
-				 ptrdiff_t *restrict i,
-				 const conts_s *restrict conts);
-__attribute__((nonnull(3), warn_unused_result))
-int	alx_cv_conts_closest	(const void **restrict cont,
-				 ptrdiff_t *restrict i,
-				 const void *restrict conts,
-				 ptrdiff_t x, ptrdiff_t y,
-				 double (*fdist)(int32_t dx, int32_t dy));
-__attribute__((nonnull))
-int	alx_cv_contour_mask	(const img_s **restrict img,
-				 const conts_s *restrict conts, ptrdiff_t i);
-__attribute__((nonnull))
-void	alx_cv_draw_conts	(img_s *restrict img,
-				 const conts_s *restrict conts, ptrdiff_t i);
+[[gnu::nonnull(1)]]
+int	extract_conts	(const class std::vector<
+					class std::vector<
+					class cv::Point_<int>>> *restrict conts,
+			 const class std::vector<
+					class cv::Point_<int>> **restrict cont,
+			 ptrdiff_t *restrict size);
+[[gnu::nonnull]]
+int	extract_conts_cont(const class std::vector<
+					class cv::Point_<int>> **restrict cont,
+			 const class std::vector<
+					class std::vector<
+					class cv::Point_<int>>> *restrict conts,
+			 ptrdiff_t i);
 
 
 /******************************************************************************
- ******* inline ***************************************************************
+ ******* namespace ************************************************************
  ******************************************************************************/
+}	/* namespace CV */
+}	/* namespace alx */
 
 
 /******************************************************************************

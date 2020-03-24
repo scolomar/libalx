@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/cv/imgproc/shape/contours.hpp"
+#include "libalx/extra/cv/imgproc/shape/contour/contours.hpp"
 
 #include <cmath>
 #include <cstdint>
@@ -225,26 +225,6 @@ int	alx_cv_contour_mask	(const void **restrict img,
 						class cv::Point_<
 						int>>> *)conts,
 					i);
-}
-
-void	alx::CV::draw_conts	(class cv::Mat *restrict img,
-				 const class std::vector<
-					class std::vector<
-					class cv::Point_<
-					int>>>  *restrict conts,
-				 ptrdiff_t i)
-{
-
-	cv::drawContours(*img, *conts, i, cv::Scalar(UINT8_MAX), 1);
-}
-
-void	alx_cv_draw_conts	(void *restrict img, const void *restrict conts,
-				 ptrdiff_t i)
-{
-	return	alx::CV::draw_conts((class cv::Mat *)img,
-				  (const class std::vector<
-					class std::vector<
-					class cv::Point_<int>>>  *)conts, i);
 }
 
 

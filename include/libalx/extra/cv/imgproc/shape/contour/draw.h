@@ -7,51 +7,18 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/cv/core/contours/contours.hpp */
+#pragma once	/* libalx/extra/cv/imgproc/shape/contour/draw.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstddef>
-
-#include <vector>
-
-#include <opencv2/core/base.hpp>
-
-#include "libalx/base/compiler/restrict.hpp"
+#include "libalx/extra/cv/types.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* extern "C" ***********************************************************
- ******************************************************************************/
-extern	"C"
-{
-/* ----- Init */
-[[gnu::nonnull]]
-int	alx_cv_init_conts	(void **conts);
-void	alx_cv_deinit_conts	(void *conts);
-/* ----- Extract */
-[[gnu::nonnull(1)]]
-int	alx_cv_extract_conts	(const void *restrict conts,
-				 const void **restrict cont,
-				 ptrdiff_t *restrict size);
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_cv_extract_conts_cont(const void **restrict cont,
-				 const void *restrict conts, ptrdiff_t i);
-}
-
-
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-namespace alx {
-namespace CV {
 
 
 /******************************************************************************
@@ -67,38 +34,14 @@ namespace CV {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-/* ----- Init */
-[[gnu::nonnull]]
-int	init_conts	(class std::vector<
-					class std::vector<
-					class cv::Point_<
-					int>>> **conts);
-void	deinit_conts	(class std::vector<
-					class std::vector<
-					class cv::Point_<
-					int>>> *conts);
-/* ----- Extract */
-[[gnu::nonnull(1)]]
-int	extract_conts	(const class std::vector<
-					class std::vector<
-					class cv::Point_<int>>> *restrict conts,
-			 const class std::vector<
-					class cv::Point_<int>> **restrict cont,
-			 ptrdiff_t *restrict size);
-[[gnu::nonnull]]
-int	extract_conts_cont(const class std::vector<
-					class cv::Point_<int>> **restrict cont,
-			 const class std::vector<
-					class std::vector<
-					class cv::Point_<int>>> *restrict conts,
-			 ptrdiff_t i);
+__attribute__((nonnull))
+void	alx_cv_draw_conts	(img_s *restrict img,
+				 const conts_s *restrict conts, ptrdiff_t i);
 
 
 /******************************************************************************
- ******* namespace ************************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-}	/* namespace CV */
-}	/* namespace alx */
 
 
 /******************************************************************************

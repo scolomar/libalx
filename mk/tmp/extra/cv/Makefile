@@ -29,7 +29,8 @@ MODULES	=								\
 	extra/cv/core/array/component					\
 	extra/cv/core/array/minmax					\
 	extra/cv/core/array/normalize					\
-	extra/cv/core/contours/contours					\
+	extra/cv/core/contours/extract					\
+	extra/cv/core/contours/init					\
 	extra/cv/core/img/img						\
 	extra/cv/core/pixel/pixel					\
 	extra/cv/core/rect/rect						\
@@ -52,7 +53,9 @@ MODULES	=								\
 	extra/cv/imgproc/miscellaneous/fill				\
 	extra/cv/imgproc/miscellaneous/resolution			\
 	extra/cv/imgproc/miscellaneous/threshold			\
-	extra/cv/imgproc/shape/contours					\
+	extra/cv/imgproc/shape/contour/contours				\
+	extra/cv/imgproc/shape/contour/draw				\
+	extra/cv/imgproc/shape/contour/sort				\
 	extra/cv/imgproc/shape/rect					\
 	extra/cv/videoio/cam						\
 	extra/cv/ximgproc/thinning
