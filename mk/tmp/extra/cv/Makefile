@@ -27,6 +27,7 @@ MODULES	=								\
 	extra/cv/alx/skeleton						\
 	extra/cv/core/array/bitwise					\
 	extra/cv/core/array/component					\
+	extra/cv/core/array/minmax					\
 	extra/cv/core/array/normalize					\
 	extra/cv/core/contours/contours					\
 	extra/cv/core/img/img						\
