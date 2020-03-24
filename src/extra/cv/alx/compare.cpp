@@ -64,7 +64,6 @@ double	alx::CV::compare_bitwise	(const class cv::Mat *restrict img_a,
 	alx::CV::resize_2largest(&a, &b);
 
 	cv::bitwise_or(a, b, _or);
-cv::imwrite("_or.png", _or);
 
 	cv::bitwise_not(a, a);
 	cv::bitwise_not(b, b);
@@ -72,14 +71,11 @@ cv::imwrite("_or.png", _or);
 	cv::distanceTransform(b, dt_b, cv::DIST_L2, cv::DIST_MASK_PRECISE);
 	cv::max(dt_a, dt_b, dt);
 	cv::pow(dt, power, dt);
-cv::imwrite("_dt.png", dt);
 
 	cv::bitwise_and(dt, dt, _and, _or);
-cv::imwrite("_or_and_dt.png", _and);
 	sum	= cv::sum(_and)[0];
 	n	= cv::countNonZero(_and);
 	mean	= sum / n;
-printf("mean = %lf\n", mean);
 	match	= (UINT8_MAX - mean) / UINT8_MAX;
 
 	_and.release();
