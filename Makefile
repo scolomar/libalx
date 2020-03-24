@@ -511,7 +511,7 @@ conf_ld:
 	$(Q)flock /tmp	-c ldconfig
 
 ################################################################################
-# test
+# clean
 
 PHONY += clean
 clean:
