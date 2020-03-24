@@ -38,8 +38,7 @@ int	alx::CV::dilate		(class cv::Mat *img, ptrdiff_t i)
 
 	if (i < 1)
 		return	1;
-	cv::dilate(*img, *img, cv::Mat(), cv::Point(-1,-1), i,
-					cv::BORDER_CONSTANT, cv::Scalar(0));
+	cv::dilate(*img, *img, cv::Mat(), cv::Point(-1,-1), i);
 	return	0;
 }
 
@@ -55,8 +54,7 @@ int	alx::CV::dilate_h	(class cv::Mat *img, ptrdiff_t i)
 	if (i < 1)
 		return	1;
 	k	= cv::getStructuringElement(cv::MORPH_RECT, cv::Size(3, 1));
-	cv::dilate(*img, *img, k, cv::Point(-1,-1), i,
-					cv::BORDER_CONSTANT, cv::Scalar(0));
+	cv::dilate(*img, *img, k, cv::Point(-1,-1), i);
 	k.release();
 	return	0;
 }
@@ -73,8 +71,7 @@ int	alx::CV::dilate_v	(class cv::Mat *img, ptrdiff_t i)
 	if (i < 1)
 		return	1;
 	k	= cv::getStructuringElement(cv::MORPH_RECT, cv::Size(1, 3));
-	cv::dilate(*img, *img, k, cv::Point(-1,-1), i,
-					cv::BORDER_CONSTANT, cv::Scalar(0));
+	cv::dilate(*img, *img, k, cv::Point(-1,-1), i);
 	k.release();
 	return	0;
 }
@@ -89,8 +86,7 @@ int	alx::CV::erode		(class cv::Mat *img, ptrdiff_t i)
 
 	if (i < 1)
 		return	1;
-	cv::erode(*img, *img, cv::Mat(), cv::Point(-1,-1), i,
-					cv::BORDER_CONSTANT, cv::Scalar(0));
+	cv::erode(*img, *img, cv::Mat(), cv::Point(-1,-1), i);
 	return	0;
 }
 
@@ -106,8 +102,7 @@ int	alx::CV::erode_h	(class cv::Mat *img, ptrdiff_t i)
 	if (i < 1)
 		return	1;
 	k	= cv::getStructuringElement(cv::MORPH_RECT, cv::Size(3, 1));
-	cv::erode(*img, *img, k, cv::Point(-1,-1), i,
-					cv::BORDER_CONSTANT, cv::Scalar(0));
+	cv::erode(*img, *img, k, cv::Point(-1,-1), i);
 	k.release();
 	return	0;
 }
@@ -124,8 +119,7 @@ int	alx::CV::erode_v	(class cv::Mat *img, ptrdiff_t i)
 	if (i < 1)
 		return	1;
 	k	= cv::getStructuringElement(cv::MORPH_RECT, cv::Size(1, 3));
-	cv::erode(*img, *img, k, cv::Point(-1,-1), i,
-					cv::BORDER_CONSTANT, cv::Scalar(0));
+	cv::erode(*img, *img, k, cv::Point(-1,-1), i);
 	k.release();
 	return	0;
 }
