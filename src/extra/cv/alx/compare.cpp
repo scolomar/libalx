@@ -9,6 +9,7 @@
  ******************************************************************************/
 #include "libalx/extra/cv/alx/compare.hpp"
 
+#include <cmath>
 #include <cstddef>
 #include <cstdint>
 
@@ -76,7 +77,7 @@ double	alx::CV::compare_bitwise	(const class cv::Mat *restrict img_a,
 	sum	= cv::sum(_and)[0];
 	n	= cv::countNonZero(_and);
 	mean	= sum / n;
-	match	= (UINT8_MAX - mean) / UINT8_MAX;
+	match	= 1.0 - mean / pow(UINT8_MAX, power);
 
 	_and.release();
 	_or.release();
