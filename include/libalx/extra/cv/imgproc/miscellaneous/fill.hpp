@@ -36,6 +36,10 @@ int	alx_cv_holes_mask	(void *img);
 int	alx_cv_holes_fill	(void *img);
 [[gnu::nonnull]]
 int	alx_cv_holes_mask_fill	(void *img);
+[[gnu::nonnull]]
+int	alx_cv_holes_remove	(void *img);
+[[gnu::nonnull]]
+int	alx_cv_holes_extract	(void *img);
 }
 
 
@@ -69,6 +73,10 @@ int	holes_mask	(class cv::Mat *img);
 int	holes_fill	(class cv::Mat *img);
 [[gnu::nonnull]]
 int	holes_mask_fill	(class cv::Mat *img);
+[[gnu::nonnull]]
+int	holes_remove	(class cv::Mat *img);
+[[gnu::nonnull]]
+int	holes_extract	(class cv::Mat *img);
 
 
 /******************************************************************************

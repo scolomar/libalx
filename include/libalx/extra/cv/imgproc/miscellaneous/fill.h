@@ -44,6 +44,10 @@ __attribute__((nonnull))
 int	alx_cv_holes_fill	(img_s *img);
 __attribute__((nonnull))
 int	alx_cv_holes_mask_fill	(img_s *img);
+__attribute__((nonnull))
+int	alx_cv_holes_remove	(img_s *img);
+__attribute__((nonnull))
+int	alx_cv_holes_extract	(img_s *img);
 
 
 /******************************************************************************

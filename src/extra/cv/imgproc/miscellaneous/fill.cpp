@@ -112,6 +112,39 @@ int	alx_cv_holes_mask_fill	(void *img)
 	return	alx::CV::holes_mask_fill((class cv::Mat *)img);
 }
 
+int	alx::CV::holes_remove(class cv::Mat *img)
+{
+	class cv::Mat	mask;
+
+	img->copyTo(mask);
+	if (alx::CV::holes_mask_fill(&mask))
+		return	1;
+	cv::bitwise_not(mask, mask);
+	cv::bitwise_and(*img, mask, *img);
+	return	0;
+}
+
+int	alx_cv_holes_remove	(void *img)
+{
+	return	alx::CV::holes_remove((class cv::Mat *)img);
+}
+
+int	alx::CV::holes_extract(class cv::Mat *img)
+{
+	class cv::Mat	mask;
+
+	img->copyTo(mask);
+	if (alx::CV::holes_mask_fill(&mask))
+		return	1;
+	cv::bitwise_and(*img, mask, *img);
+	return	0;
+}
+
+int	alx_cv_holes_extract	(void *img)
+{
+	return	alx::CV::holes_extract((class cv::Mat *)img);
+}
+
 
 /******************************************************************************
  ******* static function definitions ******************************************
