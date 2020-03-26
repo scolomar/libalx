@@ -36,18 +36,26 @@
 int	alx::CV::adaptive_thr	(class cv::Mat *img, int method,
 				 int thr_typ, int ksize, int c)
 {
+	int	status;
 
+	status	= 0;
 	if (img->channels() != 1)
 		return	-1;
 	if (method < 0 || method > 1)
 		return	-1;
 	if (thr_typ < 0 || thr_typ > 1)
 		return	-1;
-	if (!(ksize % 2) || ksize < 3)
-		return	-1;
+	if (!(ksize % 2)) {
+		ksize++;
+		status	= ksize;
+	}
+	if (ksize < 3) {
+		ksize	= 3;
+		status	= ksize;
+	}
 	cv::adaptiveThreshold(*img, *img, UINT8_MAX, method, thr_typ, ksize, c);
 
-	return	0;
+	return	status;
 }
 
 int	alx_cv_adaptive_thr	(void *img, int method,
