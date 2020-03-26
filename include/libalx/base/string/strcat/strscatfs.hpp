@@ -36,12 +36,12 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull]] [[gnu::format(printf, 3, 4)]] [[gnu::warn_unused_result]]
-int	alx_strscatfs	(char str[restrict /*nmemb*/],
+[[gnu::nonnull(1, 4)]] [[gnu::format(printf, 4, 5)]] [[gnu::warn_unused_result]]
+int	alx_strscatfs	(char *restrict str/*[nmemb]*/,
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, ...);
-[[gnu::nonnull]] [[gnu::format(printf, 3, 0)]] [[gnu::warn_unused_result]]
-int	alx_vstrscatfs	(char str[restrict /*nmemb*/],
+[[gnu::nonnull(1, 4)]] [[gnu::format(printf, 4, 0)]] [[gnu::warn_unused_result]]
+int	alx_vstrscatfs	(char *restrict str/*[nmemb]*/,
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, va_list ap);
 }
