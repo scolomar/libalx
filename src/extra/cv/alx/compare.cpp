@@ -76,8 +76,13 @@ double	alx::CV::compare_bitwise	(const class cv::Mat *restrict img_a,
 	cv::bitwise_and(dt, dt, _and, _or);
 	sum	= cv::sum(_and)[0];
 	n	= cv::countNonZero(_and);
-	mean	= sum / n;
-	match	= 1.0 - mean / pow(UINT8_MAX, power);
+	if (!n) {
+		match	= 1.0;
+	} else {
+		mean	= sum / n;
+		mean	= pow(mean, 1.0 / power);
+		match	= 1.0 - mean / UINT8_MAX;
+	}
 
 	_and.release();
 	_or.release();
