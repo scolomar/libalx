@@ -44,7 +44,11 @@ void	alx_cv_contour_dimensions(const cont_s *restrict cont,
 				 ptrdiff_t *restrict ctr_x,
 				 ptrdiff_t *restrict ctr_y);
 __attribute__((nonnull(3), warn_unused_result))
-int	alx_cv_conts_largest	(const cont_s **restrict cont,
+int	alx_cv_conts_largest_a	(const cont_s **restrict cont,
+				 ptrdiff_t *restrict i,
+				 const conts_s *restrict conts);
+__attribute__((nonnull(3), warn_unused_result))
+int	alx_cv_conts_largest_p	(const cont_s **restrict cont,
 				 ptrdiff_t *restrict i,
 				 const conts_s *restrict conts);
 __attribute__((nonnull(3), warn_unused_result))

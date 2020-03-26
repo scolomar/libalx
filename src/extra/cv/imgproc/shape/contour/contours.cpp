@@ -102,7 +102,7 @@ void	alx_cv_contour_dimensions(const void *restrict contour,
 					area, perimeter, ctr_x, ctr_y);
 }
 
-int	alx::CV::conts_largest	(const class std::vector<
+int	alx::CV::conts_largest_a(const class std::vector<
 					class cv::Point_<int>> **restrict cont,
 				 ptrdiff_t *restrict i,
 				 const class std::vector<
@@ -131,11 +131,53 @@ int	alx::CV::conts_largest	(const class std::vector<
 	return	0;
 }
 
-int	alx_cv_conts_largest	(const void **restrict cont,
+int	alx_cv_conts_largest_a	(const void **restrict cont,
 				 ptrdiff_t *restrict i,
 				 const void *restrict conts)
 {
-	return	alx::CV::conts_largest((const class std::vector<
+	return	alx::CV::conts_largest_a((const class std::vector<
+						class cv::Point_<int>> **)cont,
+					i,
+					(const class std::vector<
+						class std::vector<
+						class cv::Point_<
+						int>>> *)conts);
+}
+
+int	alx::CV::conts_largest_p(const class std::vector<
+					class cv::Point_<int>> **restrict cont,
+				 ptrdiff_t *restrict i,
+				 const class std::vector<
+					class std::vector<
+					class cv::Point_<int>>> *restrict conts)
+{
+	double		perimeter, p;
+	ptrdiff_t	n;
+
+	perimeter	= -1;
+	n		= conts->size();
+	if (!n)
+		return	-1;
+
+	for (ptrdiff_t j = 0; j < n; j++) {
+		p	= cv::arcLength((*conts)[j], true);
+		if (p > perimeter) {
+			perimeter	= p;
+			if (cont)
+				*cont	= &(*conts)[j];
+			if (i)
+				*i	= j;
+		}
+	}
+
+	return	0;
+}
+
+int	alx_cv_conts_largest_p	(const void **restrict cont,
+				 ptrdiff_t *restrict i,
+				 const void *restrict conts)
+{
+	return	alx::CV::conts_largest_p((const class std::vector<
 						class cv::Point_<int>> **)cont,
 					i,
 					(const class std::vector<
