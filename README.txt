@@ -29,7 +29,7 @@ cv:
 
 gmp:
  + base
- - libgmp-dev  ||  libgmp3-dev
+ - libgmp-dev
 
 gsl:
  + base
