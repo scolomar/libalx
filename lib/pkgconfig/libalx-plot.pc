@@ -1,7 +1,7 @@
 Name: libalx-plot
 Description: The libalx C/C++ library (gnuplot extension)
 URL: https://github.com/alejandro-colomar/libalx
-Version: 1~b17
+Version: 1~b18
 Requires:
 Requires.private: libalx-base
 
