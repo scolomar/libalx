@@ -24,8 +24,8 @@ RUN	apt-get update							&& \
 
 WORKDIR	/tmp
 RUN	git clone https://github.com/alejandro-colomar/libalx.git	&& \
-	make		-C libalx	-j 8				&& \
-	make install	-C libalx	-j 8				&& \
+	make		-C libalx					&& \
+	make install	-C libalx					&& \
 	rm -rf libalx
 
 
