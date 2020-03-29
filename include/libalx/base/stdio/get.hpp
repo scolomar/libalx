@@ -17,7 +17,7 @@
 #include <cstddef>
 #include <cstdint>
 
-#include "libalx/base/stddef/restrict.hpp"
+#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
@@ -94,7 +94,7 @@ char		alx_get_ch	(const char *restrict valid,
 				uint8_t attempts);
 [[gnu::nonnull(1, 2)]]
 int		alx_get_fname	(const char *restrict path,
-				char fname[static restrict FILENAME_MAX],
+				char fname[FILENAME_MAX],
 				bool exist,
 				const char *restrict title,
 				const char *restrict help,

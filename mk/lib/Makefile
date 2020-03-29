@@ -41,8 +41,6 @@ BASE_MODULES	=							\
 		base/math/scale_linear					\
 		base/signal/sigpipe					\
 		base/signal/sigterm					\
-		base/socket/tcp/client					\
-		base/socket/tcp/server					\
 		base/stdint/constants					\
 		base/stdint/mask/bit					\
 		base/stdint/mask/field					\
@@ -115,6 +113,8 @@ BASE_MODULES	=							\
 		base/string/strstr/strncasestr				\
 		base/string/strstr/strscasestr				\
 		base/string/strstr/strsstr				\
+		base/sys/socket/tcp/client				\
+		base/sys/socket/tcp/server				\
 		base/sys/types
 BASE_A_OBJ	= $(BASE_MODULES:%=$(BUILD_TMP_DIR)/%.a.o)
 BASE_SO_OBJ	= $(BASE_MODULES:%=$(BUILD_TMP_DIR)/%.so.o)

@@ -48,9 +48,6 @@ MODULES	=								\
 	base/math/scale_linear						\
 	base/signal/sigpipe						\
 	base/signal/sigterm						\
-	base/socket/tcp/client						\
-	base/socket/tcp/server						\
-	base/socket/foo							\
 	base/stdint/constants						\
 	base/stdint/mask/bit						\
 	base/stdint/mask/field						\
@@ -125,6 +122,8 @@ MODULES	=								\
 	base/string/strstr/strncasestr					\
 	base/string/strstr/strscasestr					\
 	base/string/strstr/strsstr					\
+	base/sys/socket/tcp/client					\
+	base/sys/socket/tcp/server					\
 	base/sys/types
 
 SRC	= $(MODULES:%=$(SRC_DIR)/%.c)

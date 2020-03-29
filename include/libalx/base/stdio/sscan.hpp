@@ -18,7 +18,7 @@
 #include <cstdint>
 #include <cstdio>
 
-#include "libalx/base/stddef/restrict.hpp"
+#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
@@ -93,8 +93,8 @@ int	alx_sscan_ch	(char *restrict dest,
 			bool skip_space, bool ignore_case,
 			const char *restrict str);
 [[gnu::nonnull]]
-int	alx_sscan_fname	(const char *path,
-			char fname[restrict FILENAME_MAX],
+int	alx_sscan_fname	(const char *restrict path,
+			char fname[FILENAME_MAX],
 			bool exist,
 			const char *restrict str);
 }

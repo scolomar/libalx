@@ -9,7 +9,6 @@
  ******************************************************************************/
 #include "libalx/base/libgen/dirname.h"
 
-#include <errno.h>
 #include <libgen.h>
 #include <stdio.h>
 
@@ -41,9 +40,9 @@ int	alx_dirname_s	(char dest[static restrict FILENAME_MAX],
 	char	tmp[FILENAME_MAX];
 
 	if (alx_strlcpys(tmp, path, ARRAY_SIZE(tmp), NULL))
-		return	ENAMETOOLONG;
+		return	-1;
 	if (alx_strlcpys(dest, dirname(tmp), FILENAME_MAX, NULL))
-		return	ENAMETOOLONG;
+		return	-1;
 
 	return	0;
 }
