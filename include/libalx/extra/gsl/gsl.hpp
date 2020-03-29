@@ -1,0 +1,34 @@
+/******************************************************************************
+ *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
+ *	SPDX-License-Identifier:	LGPL-2.0-only			      *
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* include guard ********************************************************
+ ******************************************************************************/
+#pragma once	/* libalx/extra/gsl/gsl.hpp */
+
+
+/******************************************************************************
+ ******* headers **************************************************************
+ ******************************************************************************/
+#include <libalx/extra/gsl/distance/chebyshev.hpp>
+#include <libalx/extra/gsl/distance/euclidean.hpp>
+#include <libalx/extra/gsl/distance/manhattan.hpp>
+#include <libalx/extra/gsl/distributions/binomial.hpp>
+#include <libalx/extra/gsl/distributions/exponential.hpp>
+#include <libalx/extra/gsl/distributions/geometric.hpp>
+#include <libalx/extra/gsl/distributions/normal.hpp>
+#include <libalx/extra/gsl/distributions/poisson.hpp>
+#include <libalx/extra/gsl/distributions/uniform.hpp>
+#include <libalx/extra/gsl/rstat/median.hpp>
+#include <libalx/extra/gsl/statistics/mean.hpp>
+#include <libalx/extra/gsl/units/len.hpp>
+#include <libalx/extra/gsl/units/temp.hpp>
+#include <libalx/extra/gsl/units/weight.hpp>
+
+
+/******************************************************************************
+ ******* end of file **********************************************************
+ ******************************************************************************/
