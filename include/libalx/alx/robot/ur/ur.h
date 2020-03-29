@@ -108,59 +108,59 @@ int	alx_ur_init	(struct Alx_UR **restrict ur,
 __attribute__((warn_unused_result))
 int	alx_ur_deinit	(struct Alx_UR *restrict ur);
 
-__attribute__((nonnull(1, 2), warn_unused_result))
+__attribute__((nonnull, warn_unused_result))
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
 			 const char *restrict cmd,
-			 int usleep_after, FILE *restrict log);
+			 int usleep_after);
 
-__attribute__((nonnull(1), warn_unused_result))
+__attribute__((nonnull, warn_unused_result))
 int	alx_ur_halt	(const struct Alx_UR *restrict ur,
-			 int usleep_after, FILE *restrict log);
-__attribute__((nonnull(1), warn_unused_result))
+			 int usleep_after);
+__attribute__((nonnull, warn_unused_result))
 int	alx_ur_poweroff	(const struct Alx_UR *restrict ur,
-			 int usleep_after, FILE *restrict log);
+			 int usleep_after);
 
-__attribute__((nonnull(1, 2), warn_unused_result))
+__attribute__((nonnull, warn_unused_result))
 int	alx_ur_movej	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after, FILE *restrict log);
-__attribute__((nonnull(1, 2), warn_unused_result))
+			 int usleep_after);
+__attribute__((nonnull, warn_unused_result))
 int	alx_ur_movej_rel(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after, FILE *restrict log);
-__attribute__((nonnull(1, 2), warn_unused_result))
+			 int usleep_after);
+__attribute__((nonnull, warn_unused_result))
 int	alx_ur_movel	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after, FILE *restrict log);
-__attribute__((nonnull(1, 2), warn_unused_result))
+			 int usleep_after);
+__attribute__((nonnull, warn_unused_result))
 int	alx_ur_movel_rel(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after, FILE *restrict log);
-__attribute__((nonnull(1, 2, 3), warn_unused_result))
+			 int usleep_after);
+__attribute__((nonnull, warn_unused_result))
 int	alx_ur_movec	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict via,
 			 const struct Alx_UR_Pose *restrict to,
-			 int usleep_after, FILE *restrict log);
-__attribute__((nonnull(1, 2, 3), warn_unused_result))
+			 int usleep_after);
+__attribute__((nonnull, warn_unused_result))
 int	alx_ur_movec_rel(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict via,
 			 const struct Alx_UR_Pose *restrict to,
-			 int usleep_after, FILE *restrict log);
+			 int usleep_after);
 
-__attribute__((nonnull(1, 2), warn_unused_result))
+__attribute__((nonnull, warn_unused_result))
 int	alx_ur_set_tcp	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict tcp,
-			 int usleep_after, FILE *restrict log);
+			 int usleep_after);
 
-__attribute__((nonnull(1), warn_unused_result))
+__attribute__((nonnull, warn_unused_result))
 int	alx_ur_set_Dout	(const struct Alx_UR *restrict ur,
 			 ptrdiff_t idx, bool state,
-			 int usleep_after, FILE *restrict log);
+			 int usleep_after);
 
-__attribute__((nonnull(1, 2), warn_unused_result))
+__attribute__((nonnull, warn_unused_result))
 int	alx_ur_puts	(const struct Alx_UR *restrict ur,
 			 const char *restrict msg,
-			 int usleep_after, FILE *restrict log);
+			 int usleep_after);
 
 
 /******************************************************************************
@@ -183,100 +183,100 @@ int	ur_deinit	(struct Alx_UR *restrict ur)
 	return	alx_ur_deinit(ur);
 }
 
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
+__attribute__((always_inline, nonnull, warn_unused_result))
 int	ur_cmd		(const struct Alx_UR *restrict ur,
 			 const char *restrict cmd,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
-	return	alx_ur_cmd(ur, cmd, usleep_after, log);
+	return	alx_ur_cmd(ur, cmd, usleep_after);
 }
 
-__attribute__((always_inline, nonnull(1), warn_unused_result))
+__attribute__((always_inline, nonnull, warn_unused_result))
 int	ur_halt		(const struct Alx_UR *restrict ur,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
-	return	alx_ur_halt(ur, usleep_after, log);
+	return	alx_ur_halt(ur, usleep_after);
 }
 
-__attribute__((always_inline, nonnull(1), warn_unused_result))
+__attribute__((always_inline, nonnull, warn_unused_result))
 int	ur_poweroff	(const struct Alx_UR *restrict ur,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
-	return	alx_ur_poweroff(ur, usleep_after, log);
+	return	alx_ur_poweroff(ur, usleep_after);
 }
 
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
+__attribute__((always_inline, nonnull, warn_unused_result))
 int	ur_movej	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
-	return	alx_ur_movej(ur, pose, usleep_after, log);
+	return	alx_ur_movej(ur, pose, usleep_after);
 }
 
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
+__attribute__((always_inline, nonnull, warn_unused_result))
 int	ur_movej_rel	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
-	return	alx_ur_movej_rel(ur, pose, usleep_after, log);
+	return	alx_ur_movej_rel(ur, pose, usleep_after);
 }
 
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
+__attribute__((always_inline, nonnull, warn_unused_result))
 int	ur_movel	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
-	return	alx_ur_movel(ur, pose, usleep_after, log);
+	return	alx_ur_movel(ur, pose, usleep_after);
 }
 
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
+__attribute__((always_inline, nonnull, warn_unused_result))
 int	ur_movel_rel	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
-	return	alx_ur_movel_rel(ur, pose, usleep_after, log);
+	return	alx_ur_movel_rel(ur, pose, usleep_after);
 }
 
-__attribute__((always_inline, nonnull(1, 2, 3), warn_unused_result))
+__attribute__((always_inline, nonnull, warn_unused_result))
 int	ur_movec	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict via,
 			 const struct Alx_UR_Pose *restrict to,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_afterg)
 {
-	return	alx_ur_movec(ur, via, to, usleep_after, log);
+	return	alx_ur_movec(ur, via, to, usleep_after);
 }
 
-__attribute__((always_inline, nonnull(1, 2, 3), warn_unused_result))
+__attribute__((always_inline, nonnull, warn_unused_result))
 int	ur_movec_rel	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict via,
 			 const struct Alx_UR_Pose *restrict to,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
-	return	alx_ur_movec_rel(ur, via, to, usleep_after, log);
+	return	alx_ur_movec_rel(ur, via, to, usleep_after);
 }
 
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
+__attribute__((always_inline, nonnull, warn_unused_result))
 int	ur_set_tcp	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict tcp,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
-	return	alx_ur_set_tcp(ur, tcp, usleep_after, log);
+	return	alx_ur_set_tcp(ur, tcp, usleep_after);
 }
 
-__attribute__((always_inline, nonnull(1), warn_unused_result))
+__attribute__((always_inline, nonnull, warn_unused_result))
 int	ur_set_Dout	(const struct Alx_UR *restrict ur,
 			 ptrdiff_t idx, bool state,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
-	return	alx_ur_set_Dout(ur, idx, state, usleep_after, log);
+	return	alx_ur_set_Dout(ur, idx, state, usleep_after);
 }
 
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
+__attribute__((always_inline, nonnull, warn_unused_result))
 int	ur_puts		(const struct Alx_UR *restrict ur,
 			 const char *restrict msg,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
-	return	alx_ur_puts(ur, msg, usleep_after, log);
+	return	alx_ur_puts(ur, msg, usleep_after);
 }
 #endif	 /* defined(ALX_NO_PREFIX) */
 

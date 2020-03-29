@@ -105,7 +105,7 @@ int	alx_ur_deinit	(struct Alx_UR *restrict ur)
 	if (!ur)
 		return	ENOANO;
 
-	status1	= alx_ur_cmd(ur, "halt()", 0, NULL);
+	status1	= alx_ur_halt(ur, 0);
 	status2	= close(ur->sfd);
 
 	if (status2)
@@ -116,7 +116,7 @@ int	alx_ur_deinit	(struct Alx_UR *restrict ur)
 
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
 			 const char *restrict cmd,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
 	ssize_t	n;
 	ssize_t	len;
@@ -131,34 +131,30 @@ int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
 	if (n != len)
 		goto err;
 
-	if (log)
-		fprintf(log, "%s\n", cmd);
+	printf("%s\n", cmd);
 	return	usleep(usleep_after);
 err:
-	if (log) {
-		fprintf(log, "%s\n", cmd);
-		fprintf(stderr, "%s\n", cmd);
-	}
+	fprintf(stderr, "%s\n", cmd);
 	if (n < 0)
 		return	n;
 	return	(n % INT_MAX) + 1;
 }
 
 int	alx_ur_halt	(const struct Alx_UR *restrict ur,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
-	return	alx_ur_cmd(ur, "halt", usleep_after, log);
+	return	alx_ur_cmd(ur, "halt", usleep_after);
 }
 
 int	alx_ur_poweroff	(const struct Alx_UR *restrict ur,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
-	return	alx_ur_cmd(ur, "powerdown()", usleep_after, log);
+	return	alx_ur_cmd(ur, "powerdown()", usleep_after);
 }
 
 int	alx_ur_movej	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
 	char	pos[BUFSIZ];
 	char	cmd[BUFSIZ];
@@ -168,12 +164,12 @@ int	alx_ur_movej	(const struct Alx_UR *restrict ur,
 		return	-1;
 	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "movej", args))
 		return	-1;
-	return	alx_ur_cmd(ur, cmd, usleep_after, log);
+	return	alx_ur_cmd(ur, cmd, usleep_after);
 }
 
 int	alx_ur_movej_rel(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
 	char	buf[BUFSIZ]; /* used as `pos` and later as `cmd` */
 	char	pos_rel[BUFSIZ]; /* used as `pos_rel` */
@@ -185,12 +181,12 @@ int	alx_ur_movej_rel(const struct Alx_UR *restrict ur,
 		return	-1;
 	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "movej", args))
 		return	-1;
-	return	alx_ur_cmd(ur, buf, usleep_after, log);
+	return	alx_ur_cmd(ur, buf, usleep_after);
 }
 
 int	alx_ur_movel	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
 	char	pos[BUFSIZ];
 	char	cmd[BUFSIZ];
@@ -200,12 +196,12 @@ int	alx_ur_movel	(const struct Alx_UR *restrict ur,
 		return	-1;
 	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "movel", args))
 		return	-1;
-	return	alx_ur_cmd(ur, cmd, usleep_after, log);
+	return	alx_ur_cmd(ur, cmd, usleep_after);
 }
 
 int	alx_ur_movel_rel(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
 	char	buf[BUFSIZ]; /* used as `pos` and later as `cmd` */
 	char	pos_rel[BUFSIZ]; /* used as `pos_rel` */
@@ -217,13 +213,13 @@ int	alx_ur_movel_rel(const struct Alx_UR *restrict ur,
 		return	-1;
 	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "movel", args))
 		return	-1;
-	return	alx_ur_cmd(ur, buf, usleep_after, log);
+	return	alx_ur_cmd(ur, buf, usleep_after);
 }
 
 int	alx_ur_movec	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict via,
 			 const struct Alx_UR_Pose *restrict to,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
 	char	pos_via[BUFSIZ];
 	char	pos_to[BUFSIZ];
@@ -239,13 +235,13 @@ int	alx_ur_movec	(const struct Alx_UR *restrict ur,
 		return	-1;
 	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "movec", args))
 		return	-1;
-	return	alx_ur_cmd(ur, cmd, usleep_after, log);
+	return	alx_ur_cmd(ur, cmd, usleep_after);
 }
 
 int	alx_ur_movec_rel(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict via,
 			 const struct Alx_UR_Pose *restrict to,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
 	char	buf[BUFSIZ]; /* used as `pos` and later as `cmd` */
 	char	pos_via[BUFSIZ];
@@ -265,12 +261,12 @@ int	alx_ur_movec_rel(const struct Alx_UR *restrict ur,
 		return	-1;
 	if (ur_sprintf_func(ARRAY_SIZE(buf), buf, "movec", args))
 		return	-1;
-	return	alx_ur_cmd(ur, buf, usleep_after, log);
+	return	alx_ur_cmd(ur, buf, usleep_after);
 }
 
 int	alx_ur_set_tcp	(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict tcp,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
 	char	pos_tcp[BUFSIZ];
 	char	cmd[BUFSIZ];
@@ -283,12 +279,12 @@ int	alx_ur_set_tcp	(const struct Alx_UR *restrict ur,
 		return	-1;
 	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "set_tcp", args))
 		return	-1;
-	return	alx_ur_cmd(ur, cmd, usleep_after, log);
+	return	alx_ur_cmd(ur, cmd, usleep_after);
 }
 
 int	alx_ur_set_Dout	(const struct Alx_UR *restrict ur,
 			 ptrdiff_t idx, bool state,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
 	char	i[BUFSIZ];
 	char	b[BUFSIZ];
@@ -301,12 +297,12 @@ int	alx_ur_set_Dout	(const struct Alx_UR *restrict ur,
 		return	-1;
 	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "set_digital_out", args))
 		return	-1;
-	return	alx_ur_cmd(ur, cmd, usleep_after, log);
+	return	alx_ur_cmd(ur, cmd, usleep_after);
 }
 
 int	alx_ur_puts	(const struct Alx_UR *restrict ur,
 			 const char *restrict msg,
-			 int usleep_after, FILE *restrict log)
+			 int usleep_after)
 {
 	char	m[BUFSIZ];
 	char	cmd[BUFSIZ];
@@ -316,7 +312,7 @@ int	alx_ur_puts	(const struct Alx_UR *restrict ur,
 		return	-1;
 	if (ur_sprintf_func(ARRAY_SIZE(cmd), cmd, "textmsg", args))
 		return	-1;
-	return	alx_ur_cmd(ur, cmd, usleep_after, log);
+	return	alx_ur_cmd(ur, cmd, usleep_after);
 }
 
 
