@@ -29,11 +29,22 @@
 #define alx_sbprintf(buff, written, fmt, ...)				\
 	alx_snprintfs(buff, written, ARRAY_SIZE(buff), fmt, ##__VA_ARGS__)
 
+/*
+ * [[gnu::nonnull(1, 3)]][[gnu::format(printf, 3, 0)]]
+ * [[gnu::warn_unused_result]]
+ * int	alx_vsbprintf	(char buff[restrict], ptrdiff_t *restrict written,
+ *			 const char *restrict fmt, va_list ap);
+ */
+#define alx_vsbprintf(buff, written, fmt, ap)				\
+	alx_vsnprintfs(buff, written, ARRAY_SIZE(buff), fmt, ap)
+
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define sbprintf(buff, written, fmt, ...)				\
 	alx_sbprintf(buff, written, fmt, ##__VA_ARGS__)
+#define vsbprintf(buff, written, fmt, ap)				\
+	alx_vsbprintf(buff, written, fmt, ap)
 #endif
 
 
