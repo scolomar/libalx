@@ -97,6 +97,7 @@ MODULES	=								\
 	base/stdlib/strto/strtou_s					\
 	base/stdlib/swap						\
 	base/string/memchr/memchrend					\
+	base/string/strbool/strbool					\
 	base/string/strcat/strbcatf					\
 	base/string/strcat/strscat					\
 	base/string/strcat/strscatf					\

@@ -87,6 +87,7 @@ BASE_MODULES	=							\
 		base/stdlib/strto/strtou_s				\
 		base/stdlib/swap					\
 		base/string/memchr/memchrend				\
+		base/string/strbool/strbool				\
 		base/string/strcat/strbcatf				\
 		base/string/strcat/strscat				\
 		base/string/strcat/strscatf				\
@@ -133,7 +134,12 @@ ALX_NPC_MODULES	=							\
 ALX_NPC_A_OBJ	= $(ALX_NPC_MODULES:%=$(BUILD_TMP_DIR)/%.a.o)
 ALX_NPC_SO_OBJ	= $(ALX_NPC_MODULES:%=$(BUILD_TMP_DIR)/%.so.o)
 ALX_ROBOT_MODULES	=						\
-		alx/robot/ur/ur
+		alx/robot/ur/core					\
+		alx/robot/ur/io						\
+		alx/robot/ur/miscellaneous				\
+		alx/robot/ur/move					\
+		alx/robot/ur/pose					\
+		alx/robot/ur/setup
 #		alx/robot/kawasaki/kawasaki
 ALX_ROBOT_A_OBJ	= $(ALX_ROBOT_MODULES:%=$(BUILD_TMP_DIR)/%.a.o)
 ALX_ROBOT_SO_OBJ= $(ALX_ROBOT_MODULES:%=$(BUILD_TMP_DIR)/%.so.o)
