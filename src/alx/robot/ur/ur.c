@@ -9,7 +9,6 @@
  ******************************************************************************/
 #include "libalx/alx/robot/ur/ur.h"
 
-#include <errno.h>
 #include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -82,36 +81,30 @@ int	alx_ur_init	(struct Alx_UR **restrict ur,
 
 	sfd	= alx_tcp_client_open(ur_ip, ur_port);
 	if (sfd < 0)
-		return	sfd;
+		return	-1;
 	if (alx_callocs(ur, 1))
 		goto err1;
 	(*ur)->sfd	= sfd;
 
-	if (usleep(usleep_after))
-		goto err2;
+	usleep(usleep_after);
 	return	0;
-err2:
-	alx_frees(ur);
-err1:
-	close(sfd);
-	return	ENOMEM;
+
+err1:	close(sfd);
+	return	-1;
 }
 
 int	alx_ur_deinit	(struct Alx_UR *restrict ur)
 {
-	int	status1;
-	int	status2;
+	int	status;
 
 	if (!ur)
-		return	ENOANO;
+		return	-1;
 
-	status1	= alx_ur_halt(ur, 0);
-	status2	= close(ur->sfd);
-
-	if (status2)
-		return	status2;
+	status	= alx_ur_halt(ur, 0);
+	if (close(ur->sfd))
+		return	-1;
 	ur->sfd	= -1;
-	return	status1;
+	return	status;
 }
 
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
@@ -132,12 +125,11 @@ int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
 		goto err;
 
 	printf("%s\n", cmd);
-	return	usleep(usleep_after);
+	usleep(usleep_after);
+	return	0;
 err:
 	fprintf(stderr, "%s\n", cmd);
-	if (n < 0)
-		return	n;
-	return	(n % INT_MAX) + 1;
+	return	-1;
 }
 
 int	alx_ur_halt	(const struct Alx_UR *restrict ur,
@@ -337,7 +329,7 @@ int	ur_sprintf_pose		(ptrdiff_t nmemb,
 					pose->x, pose->y, pose->z,
 					pose->rx, pose->ry, pose->rz);
 	default:
-		return	EINVAL;
+		return	-1;
 	}
 }
 
