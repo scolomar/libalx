@@ -1,59 +1,63 @@
-C/C++ library
 
-This library provides extensions to glibc and other libraries (libbsd,
-libcurl, OpenCV, GMP, GSL, ncurses, tesseract-ocr, zbar).
+======
+libalx
+======
 
-Dependencies:
+C/C++ library.
+This library provides extensions to glibc and other libraries.
+
+Modules and dependencies:
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 base:
- - gcc (>= 8)
- - libbsd-dev
- - pkg-config
+	- gcc (>= 8)
+	- libbsd-dev
+	- pkg-config
 
 data-structures:
- + base
+	+ base
 
 robot:
- + base
+	+ base
 
 curl:
- + base
- + data-structures
- - libcurl-*-dev
+	+ base
+	+ data-structures
+	- libcurl-*-dev
 
 cv:
- + base
- + gsl
- - g++ (>= 8)
- - libopencv-dev (>= 4)
+	+ base
+	+ gsl
+	- g++ (>= 8)
+	- libopencv-dev (>= 4)
 
 gmp:
- + base
- - libgmp-dev
+	+ base
+	- libgmp-dev
 
 gsl:
- + base
- - libgsl-dev
+	+ base
+	- libgsl-dev
 
 ncurses:
- + base
- - libncurses-dev
+	+ base
+	- libncurses-dev
 
 ocr:
- + base
- - libtesseract-dev
+	+ base
+	- libtesseract-dev
 
 plot:
- + base
- - gnuplot
+	+ base
+	- gnuplot
 
 telnet-tcp:
- + base
- - telnet
+	+ base
+	- telnet
 
 zbar:
- + base
- - libzbar-dev
+	+ base
+	- libzbar-dev
 
 The majority of the library is licensed with LGPL-2.0-only, which basically
 means that you can use it for whatever you want (open-source or closed-source),
