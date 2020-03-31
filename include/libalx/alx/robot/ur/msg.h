@@ -3,6 +3,14 @@
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
+/*
+ * Suported versions of UR client interface:
+ *	major	minor
+ *	1	6 ... 8
+ *	3	0 ... 12
+ *	5	0 ... 6
+ */
+
 
 /******************************************************************************
  ******* include guard ********************************************************
@@ -24,51 +32,18 @@
 /******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
-enum	Alx_UR_Msg_Type {
-	MSG_TYPE_ROBOT_STATE	= 16,
-	MSG_TYPE_ROBOT_MSG	= 20
-};
 
 
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
-struct	Alx_UR_Msg_Hdr {
-	int32_t	sz;
-	uint8_t	type;
-};
-
-struct	Alx_UR_Robot_State_Pkg_Hdr {
-	int32_t	sz;
-	uint8_t	type;
-};
-
-struct	Alx_UR_Robot_Msg_Hdr {
-	uint64_t	timestamp;
-	char		source;
-	int8_t		type;
-};
 
 
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull, warn_unused_result))
-int	alx_ur_init	(struct Alx_UR **restrict ur,
-			 const char *restrict ur_ip,
-			 const char *restrict ur_port,
-			 int usleep_after);
-__attribute__((warn_unused_result))
-int	alx_ur_deinit	(struct Alx_UR *restrict ur);
-
-__attribute__((nonnull, warn_unused_result))
-int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
-			 int usleep_after,
-			 const char *restrict fmt, ...);
-
-__attribute__((nonnull, warn_unused_result))
-int	alx_ur_poweroff	(const struct Alx_UR *restrict ur,
-			 int usleep_after);
+int	alx_ur_recv	(struct Alx_UR *ur);
 
 
 /******************************************************************************
