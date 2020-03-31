@@ -138,6 +138,7 @@ ALX_ROBOT_MODULES	=						\
 		alx/robot/ur/io						\
 		alx/robot/ur/miscellaneous				\
 		alx/robot/ur/move					\
+		alx/robot/ur/msg					\
 		alx/robot/ur/pose					\
 		alx/robot/ur/setup
 #		alx/robot/kawasaki/kawasaki

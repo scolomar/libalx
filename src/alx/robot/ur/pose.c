@@ -43,13 +43,13 @@ int	alx_ur_sprintf_pose	(ptrdiff_t nmemb,
 	case ALX_UR_POSE_XYZ:
 		return	alx_snprintfs(str, NULL, nmemb,
 				"p[%.4f, %.4f, %.4f, %.4f, %.4f, %.4f]",
-					pose->x, pose->y, pose->z,
-					pose->rx, pose->ry, pose->rz);
+				pose->xyz.x, pose->xyz.y, pose->xyz.z,
+				pose->xyz.rx, pose->xyz.ry, pose->xyz.rz);
 	case ALX_UR_POSE_JOINTS:
 		return	alx_snprintfs(str, NULL, nmemb,
 				"[%.4f, %.4f, %.4f, %.4f, %.4f, %.4f]",
-					pose->x, pose->y, pose->z,
-					pose->rx, pose->ry, pose->rz);
+				pose->j.j[0], pose->j.j[1], pose->j.j[2],
+				pose->j.j[3], pose->j.j[4], pose->j.j[5]);
 	default:
 		return	-1;
 	}

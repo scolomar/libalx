@@ -15,11 +15,13 @@
  ******************************************************************************/
 #include <stddef.h>
 
+#include "libalx/alx/robot/ur/core.h"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define ALX_UR_POSE_XYZ(x_, y_, z_, rx_, ry_, rz_)			\
+#define ALX_UR_POSE_INIT_XYZ(x_, y_, z_, rx_, ry_, rz_)			\
 (struct Alx_UR_Pose){							\
 	.type	= (ALX_UR_POSE_XYZ),					\
 	.x	= (x_),							\
@@ -30,7 +32,7 @@
 	.rz	= (rz_)							\
 }
 
-#define ALX_UR_POSE_JOINTS(b_, s_, e_, w1_, w2_, w3_)			\
+#define ALX_UR_POSE_INIT_JOINTS(b_, s_, e_, w1_, w2_, w3_)		\
 (struct Alx_UR_Pose){							\
 	.type		= (ALX_UR_POSE_JOINTS),				\
 	.base		= (b_),						\
@@ -44,10 +46,10 @@
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define UR_POSE_XYZ(x, y, z, rx, ry, rz)				\
-	ALX_UR_POSE_XYZ(x, y, z, rx, ry, rz)
-#define UR_POSE_JOINTS(base, shoulder, elbow, wrist1, wrist2, wrist3)	\
-	ALX_UR_POSE_JOINTS(base, shoulder, elbow, wrist1, wrist2, wrist3)
+#define UR_POSE_INIT_XYZ(x, y, z, rx, ry, rz)				\
+	ALX_UR_POSE_INIT_XYZ(x, y, z, rx, ry, rz)
+#define UR_POSE_INIT_JOINTS(b, s, e, w1, w2, w3)			\
+	ALX_UR_POSE_INIT_JOINTS(b, s, e, w1, w2, w3)
 
 #define ur_sprintf_pose(nmemb, str, pose)				\
 	alx_ur_sprintf_pose(nmemb, str, pose)
@@ -72,22 +74,8 @@ enum	Alx_UR_Pose_Types {
 struct	Alx_UR_Pose {
 	int	type;
 	union {
-		struct {
-			float	x;
-			float	y;
-			float	z;
-			float	rx;
-			float	ry;
-			float	rz;
-		};
-		struct {
-			float	base;
-			float	shoulder;
-			float	elbow;
-			float	wrist1;
-			float	wrist2;
-			float	wrist3;
-		};
+		struct Alx_UR_Coord	xyz;
+		union Alx_UR_Joints	j;
 	};
 };
 

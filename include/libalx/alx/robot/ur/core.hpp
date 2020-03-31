@@ -40,6 +40,27 @@ struct	Alx_UR {
 	int	sfd;
 };
 
+struct	Alx_UR_Coord {
+	double	x;
+	double	y;
+	double	z;
+	double	rx;
+	double	ry;
+	double	rz;
+};
+
+union	Alx_UR_Joints {
+	struct {
+		double	base;
+		double	shoulder;
+		double	elbow;
+		double	wrist1;
+		double	wrist2;
+		double	wrist3;
+	};
+	double	j[6];
+};
+
 extern	"C"
 {
 [[gnu::nonnull]] [[gnu::warn_unused_result]]

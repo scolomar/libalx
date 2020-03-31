@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/alx/robot/ur/core.h"
+#include "libalx/alx/robot/ur/state.h"
 
 #include <stdarg.h>
 #include <stdio.h>
@@ -20,10 +20,10 @@
 #include <unistd.h>
 
 #include "libalx/alx/robot/ur/move.h"
+#include "libalx/base/socket/tcp/client.h"
 #include "libalx/base/stdlib/alloc/callocs.h"
 #include "libalx/base/stdio/printf/sbprintf.h"
 #include "libalx/base/string/strcat/strbcatf.h"
-#include "libalx/base/sys/socket/tcp/client.h"
 
 
 /******************************************************************************
