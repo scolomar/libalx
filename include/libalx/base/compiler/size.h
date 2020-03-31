@@ -31,6 +31,10 @@
 #define ARRAY_BITS(arr)		(ARRAY_BYTES(arr) * CHAR_BIT)
 
 #define FIELD_SIZEOF(t, f)	(sizeof(((t *)NULL)->f))
+#define FIELD_ARRAY_SIZE(t, f)	(sizeof(((t *)NULL)->f) /		\
+				 sizeof(((t *)NULL)->f[0]))
+#define FIELD_ARRAY_BYTES(t, f)	(sizeof(((t *)NULL)->f[0]) *		\
+				 FIELD_ARRAY_SIZE(t, f))
 
 
 /******************************************************************************
