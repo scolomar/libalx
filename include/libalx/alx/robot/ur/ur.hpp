@@ -17,6 +17,7 @@
 #include <libalx/alx/robot/ur/io.hpp>
 #include <libalx/alx/robot/ur/miscellaneous.hpp>
 #include <libalx/alx/robot/ur/move.hpp>
+#include <libalx/alx/robot/ur/msg.hpp>
 #include <libalx/alx/robot/ur/pose.hpp>
 #include <libalx/alx/robot/ur/setup.hpp>
 
