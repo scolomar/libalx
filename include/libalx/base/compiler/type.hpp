@@ -14,6 +14,7 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <climits>
+#include <cstddef>
 
 #include <type_traits>
 
@@ -28,7 +29,7 @@
 /* Is x of signed type? */
 #define alx_signed_type(x)		(((typeof(x))-1) < 0)
 /* Bit b overflows type t? */
-#define alx_bit_overflows_type(b, t)	(b >= sizeof(t) * CHAR_BIT)
+#define alx_bit_overflows_type(b, t)	((size_t)b >= sizeof(t) * CHAR_BIT)
 
 
 /* Rename without alx_ prefix */

@@ -14,6 +14,7 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <limits.h>
+#include <stddef.h>
 
 
 /******************************************************************************
@@ -25,13 +26,13 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 /* Are two types/vars the same type (ignoring qualifiers)? */
-#define alx_same_type(a, b) __builtin_types_compatible_p(typeof(a), typeof(b))
+#define alx_same_type(a, b)  __builtin_types_compatible_p(typeof(a), typeof(b))
 /* Is x of unsigned type? */
 #define alx_unsigned_type(x)		(((typeof(x))-1) > 0)
 /* Is x of signed type? */
 #define alx_signed_type(x)		(((typeof(x))-1) < 0)
 /* Bit b overflows type t? */
-#define alx_bit_overflows_type(b, t)	(b >= sizeof(t) * CHAR_BIT)
+#define alx_bit_overflows_type(b, t)	((size_t)b >= sizeof(t) * CHAR_BIT)
 
 
 /* Rename without alx_ prefix */
