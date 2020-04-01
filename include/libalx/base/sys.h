@@ -15,6 +15,7 @@
  ******************************************************************************/
 #include <libalx/base/sys/socket/tcp/client.h>
 #include <libalx/base/sys/socket/tcp/server.h>
+#include <libalx/base/sys/socket/timestamp.h>
 #include <libalx/base/sys/types.h>
 
 

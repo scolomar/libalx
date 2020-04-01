@@ -124,6 +124,7 @@ MODULES	=								\
 	base/string/strstr/strsstr					\
 	base/sys/socket/tcp/client					\
 	base/sys/socket/tcp/server					\
+	base/sys/socket/timestamp					\
 	base/sys/types							\
 	base/time/gettime						\
 	base/time/timespec
