@@ -45,37 +45,38 @@ void	alx_clock_gettime_diff		(clockid_t clk_id,
 int64_t	alx_clock_gettime_diff_s	(clockid_t clk_id,
 					 const struct timespec *rt_base)
 {
-	struct timespec	now;
+	struct timespec	tm;
 
-	alx_clock_gettime_diff(clk_id, &now, rt_base);
-	return	now.tv_sec;
+	clock_gettime(clk_id, &tm);
+	alx_timespec_diff(&tm, rt_base, &tm);
+	return	tm.tv_sec;
 }
 
 int64_t	alx_clock_gettime_diff_ms	(clockid_t clk_id,
 					 const struct timespec *rt_base)
 {
-	struct timespec	now;
+	struct timespec	tm;
 
-	alx_clock_gettime_diff(clk_id, &now, rt_base);
-	return	alx_timespec_ms(&now);
+	clock_gettime(clk_id, &tm);
+	return	alx_timespec_diff_ms(rt_base, &tm);
 }
 
 int64_t	alx_clock_gettime_diff_us	(clockid_t clk_id,
 					 const struct timespec *rt_base)
 {
-	struct timespec	now;
+	struct timespec	tm;
 
-	alx_clock_gettime_diff(clk_id, &now, rt_base);
-	return	alx_timespec_us(&now);
+	clock_gettime(clk_id, &tm);
+	return	alx_timespec_diff_us(rt_base, &tm);
 }
 
 int64_t	alx_clock_gettime_diff_ns	(clockid_t clk_id,
 					 const struct timespec *rt_base)
 {
-	struct timespec	now;
+	struct timespec	tm;
 
-	alx_clock_gettime_diff(clk_id, &now, rt_base);
-	return	alx_timespec_ns(&now);
+	clock_gettime(clk_id, &tm);
+	return	alx_timespec_diff_ns(rt_base, &tm);
 }
 
 

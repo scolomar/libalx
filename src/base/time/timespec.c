@@ -31,6 +31,21 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
+int64_t	alx_timespec_ms			(const struct timespec *tm)
+{
+	return	tm->tv_sec * INT64_C(1000)  +  tm->tv_nsec / INT64_C(1000000);
+}
+
+int64_t	alx_timespec_us			(const struct timespec *tm)
+{
+	return	tm->tv_sec * INT64_C(1000000)  +  tm->tv_nsec / INT64_C(1000);
+}
+
+int64_t	alx_timespec_ns			(const struct timespec *tm)
+{
+	return	tm->tv_sec * INT64_C(1000000000)  +  tm->tv_nsec;
+}
+
 void	alx_timespec_diff		(struct timespec *diff,
 					 const struct timespec *start,
 					 const struct timespec *stop)
@@ -45,19 +60,31 @@ void	alx_timespec_diff		(struct timespec *diff,
 	}
 }
 
-int64_t	alx_timespec_ms			(const struct timespec *tm)
+int64_t	alx_timespec_diff_ms		(const struct timespec *start,
+					 const struct timespec *stop)
 {
-	return	tm->tv_sec * INT64_C(1000)  +  tm->tv_nsec / INT64_C(1000000);
+	struct timespec	diff;
+
+	alx_timespec_diff(&diff, start, stop);
+	return	alx_timespec_ms(&diff);
 }
 
-int64_t	alx_timespec_us			(const struct timespec *tm)
+int64_t	alx_timespec_diff_us		(const struct timespec *start,
+					 const struct timespec *stop)
 {
-	return	tm->tv_sec * INT64_C(1000000)  +  tm->tv_nsec / INT64_C(1000);
+	struct timespec	diff;
+
+	alx_timespec_diff(&diff, start, stop);
+	return	alx_timespec_us(&diff);
 }
 
-int64_t	alx_timespec_ns			(const struct timespec *tm)
+int64_t	alx_timespec_diff_ns		(const struct timespec *start,
+					 const struct timespec *stop)
 {
-	return	tm->tv_sec * INT64_C(1000000000)  +  tm->tv_nsec;
+	struct timespec	diff;
+
+	alx_timespec_diff(&diff, start, stop);
+	return	alx_timespec_ns(&diff);
 }
 
 
