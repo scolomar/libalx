@@ -11,9 +11,13 @@
 
 #include <stdbool.h>
 #include <stddef.h>
+#include <time.h>
 
 #include "libalx/alx/robot/ur/core.h"
+#include "libalx/alx/robot/ur/msg.h"
+#include "libalx/base/stdint/mask/bit.h"
 #include "libalx/base/string/strbool/strbool.h"
+#include "libalx/base/time/gettime.h"
 
 
 /******************************************************************************
@@ -34,12 +38,29 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_ur_set_Dout	(const struct Alx_UR *restrict ur,
-			 ptrdiff_t idx, bool state,
-			 int usleep_after)
+int	alx_ur_set_Dout	(struct Alx_UR *ur, ptrdiff_t idx, bool state,
+			 double timeout)
 {
-	return	alx_ur_cmd(ur, usleep_after,"set_digital_out(%ti, %s)",
-						idx, alx_strBool[!!state]);
+	bool		actual_state;
+	double		time;
+	struct timespec	tm;
+
+	clock_gettime(CLOCK_REALTIME, &tm);
+
+	if (alx_ur_cmd(ur, 0, "set_digital_out(%ti, %s)",
+						idx, alx_strBool[!!state]))
+		return	-1;
+
+	do {
+		if (alx_ur_recv(ur))
+			return	-1;
+		actual_state	= BIT_READ(ur->state.mb.DO_bits, idx);
+		time	= alx_clock_gettime_diff_ms(CLOCK_REALTIME, &tm);
+		if (time >= timeout * 1000.0)
+			return	-1;
+	} while (actual_state != state);
+
+	return	0;
 }
 
 

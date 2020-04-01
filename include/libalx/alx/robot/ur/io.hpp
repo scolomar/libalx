@@ -25,8 +25,8 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define ur_set_Dout(ur, idx, state, usleep_after)			\
-	alx_ur_set_Dout(ur, idx, state, usleep_after)
+#define ur_set_Dout(ur, idx, state, timeout)				\
+	alx_ur_set_Dout(ur, idx, state, timeout)
 }
 #endif	/* defined(ALX_NO_PREFIX) */
 
@@ -37,9 +37,9 @@
 extern	"C"
 {
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_Dout_set	(const struct Alx_UR *restrict ur,
+int	alx_ur_Dout_set	(struct Alx_UR *restrict ur,
 			 ptrdiff_t idx, bool state,
-			 int usleep_after);
+			 double timeout);
 }
 
 

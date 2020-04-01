@@ -24,8 +24,8 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define ur_set_Dout(ur, idx, state, usleep_after)			\
-	alx_ur_set_Dout(ur, idx, state, usleep_after)
+#define ur_set_Dout(ur, idx, state, timeout)				\
+	alx_ur_set_Dout(ur, idx, state, timeout)
 #endif	/* defined(ALX_NO_PREFIX) */
 
 
@@ -43,9 +43,8 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull, warn_unused_result))
-int	alx_ur_set_Dout	(const struct Alx_UR *restrict ur,
-			 ptrdiff_t idx, bool state,
-			 int usleep_after);
+int	alx_ur_set_Dout	(struct Alx_UR *ur, ptrdiff_t idx, bool state,
+			 double timeout);
 
 
 /******************************************************************************

@@ -20,7 +20,9 @@
 #include <unistd.h>
 
 #include "libalx/alx/robot/ur/move.h"
+#include "libalx/alx/robot/ur/msg.h"
 #include "libalx/base/stdlib/alloc/callocs.h"
+#include "libalx/base/stdlib/alloc/frees.h"
 #include "libalx/base/stdio/printf/sbprintf.h"
 #include "libalx/base/string/strcat/strbcatf.h"
 #include "libalx/base/sys/socket/tcp/client.h"
@@ -50,17 +52,29 @@ int	alx_ur_init	(struct Alx_UR **restrict ur,
 			 int usleep_after)
 {
 	int	sfd;
+	int	enable = 1;
 
 	sfd	= alx_tcp_client_open(ur_ip, ur_port);
 	if (sfd < 0)
 		return	-1;
+	if (setsockopt(sfd, SOL_SOCKET, SO_TIMESTAMP, &enable, sizeof(enable)))
+		goto err1;
+
 	if (alx_callocs(ur, 1))
 		goto err1;
 	(*ur)->sfd	= sfd;
 
+	/* First received message is 'version' (in newer UR client versions) */
+	if (alx_ur_recv(*ur))
+		goto err2;
+	/* Seccond received message is 'state' */
+	if (alx_ur_recv(*ur))
+		goto err2;
+
 	usleep(usleep_after);
 	return	0;
 
+err2:	alx_frees(ur);
 err1:	close(sfd);
 	return	-1;
 }
