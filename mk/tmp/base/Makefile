@@ -124,7 +124,9 @@ MODULES	=								\
 	base/string/strstr/strsstr					\
 	base/sys/socket/tcp/client					\
 	base/sys/socket/tcp/server					\
-	base/sys/types
+	base/sys/types							\
+	base/time/gettime						\
+	base/time/timespec
 
 SRC	= $(MODULES:%=$(SRC_DIR)/%.c)
 OBJ	= $(MODULES:%=$(BUILD_TMP_DIR)/%.o)

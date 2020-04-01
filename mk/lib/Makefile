@@ -115,7 +115,9 @@ BASE_MODULES	=							\
 		base/string/strstr/strsstr				\
 		base/sys/socket/tcp/client				\
 		base/sys/socket/tcp/server				\
-		base/sys/types
+		base/sys/types						\
+		base/time/gettime					\
+		base/time/timespec
 BASE_A_OBJ	= $(BASE_MODULES:%=$(BUILD_TMP_DIR)/%.a.o)
 BASE_SO_OBJ	= $(BASE_MODULES:%=$(BUILD_TMP_DIR)/%.so.o)
 
