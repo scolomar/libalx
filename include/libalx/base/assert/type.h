@@ -21,19 +21,19 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 #define alx_Static_assert_unsigned(x)					\
-	_Static_assert(alx_unsigned_type(x),				\
+	_Static_assert(alx_is_unsigned_type(x),				\
 			"Not an unsigned type!")
 
 #define alx_Static_assert_signed(x)					\
-	_Static_assert(alx_signed_type(x),				\
+	_Static_assert(alx_is_signed_type(x),				\
 			"Not a signed type!")
 
 #define alx_assert_unsigned(x)						\
-	alx_assert_msg(alx_unsigned_type(x),				\
+	alx_assert_msg(alx_is_unsigned_type(x),				\
 			"BUG:   Not an unsigned type!")
 
 #define alx_assert_signed(x)						\
-	alx_assert_msg(alx_signed_type(x),				\
+	alx_assert_msg(alx_is_signed_type(x),				\
 			"BUG:   Not a signed type!")
 
 #define alx_Static_assert_same_type(a, b)				\

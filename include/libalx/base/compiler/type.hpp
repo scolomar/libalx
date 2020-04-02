@@ -23,20 +23,26 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 /* Are two types/vars the same type (ignoring qualifiers)? */
-#define alx_same_type(a, b) (std::is_same <typeof(a), typeof(b)>::value)
+#define alx_is_same_type(a, b) (std::is_same <typeof(a), typeof(b)>::value)
+/* Is a an array? */
+#define alx_is_array(a)			(std::is_array <typeof(a)>::value)
+/* Is a a char array */
+#define alx_is_char_array(a)		(alx_is_array(a)  &&		\
+					 alx_is_same_type(char, (a)[0]))
 /* Is x of unsigned type? */
-#define alx_unsigned_type(x)		(((typeof(x))-1) > 0)
+#define alx_is_unsigned_type(x)		(((typeof(x))-1) > 0)
 /* Is x of signed type? */
-#define alx_signed_type(x)		(((typeof(x))-1) < 0)
+#define alx_is_signed_type(x)		(((typeof(x))-1) < 0)
 /* Bit b overflows type t? */
 #define alx_bit_overflows_type(b, t)	((size_t)b >= sizeof(t) * CHAR_BIT)
 
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define same_type(a, b)			alx_same_type(a, b)
-#define unsigned_type(x)		alx_unsigned_type(x)
-#define signed_type(x)			alx_signed_type(x)
+#define is_same_type(a, b)		alx_is_same_type(a, b)
+#define is_array(a)			alx_is_array(a)
+#define is_unsigned_type(x)		alx_is_unsigned_type(x)
+#define is_signed_type(x)		alx_is_signed_type(x)
 #define bit_overflows_type(b, t)	alx_bit_overflows_type(b, t)
 #endif
 

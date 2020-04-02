@@ -20,11 +20,10 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 #define alx_Static_assert_array(a)					\
-	_Static_assert(!alx_same_type((a), &(a)[0]), "Not a `[]` !")
+	_Static_assert(alx_is_array(a), "Not a `[]` !")
 
 #define alx_Static_assert_char_array(a)					\
-	alx_Static_assert_array(a);					\
-	_Static_assert(alx_same_type(char, (a)[0]), "Not a `char[]` !")
+	_Static_assert(alx_is_char_array(a), "Not a `char[]` !")
 
 
 /* Rename without alx_ prefix */

@@ -24,11 +24,10 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 #define alx_Static_assert_array(a)					\
-	static_assert(std::is_array <typeof(a)>::value, "Not a `[]`!")
+	static_assert(alx_is_array(a), "Not a `[]`!")
 
 #define alx_static_assert_char_array(a)					\
-	alx_Static_assert_array(a);					\
-	static_assert(alx_same_type(char, (a)[0]), "Not a `char[]` !")
+	static_assert(alx_is_char_array(a), "Not a `char[]` !")
 
 
 /* Rename without alx_ prefix */
