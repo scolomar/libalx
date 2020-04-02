@@ -25,7 +25,7 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define msg_get_timestamp(tm, msg)	alx_msg_get_timestamp(tm, msg)
+#define msg_get_timestampns(tm, msg)	alx_msg_get_timestampns(tm, msg)
 #endif	 /* defined(ALX_NO_PREFIX) */
 
 
@@ -35,7 +35,7 @@
 extern	"C"
 {
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_msg_get_timestamp	(struct timespec *restrict tm,
+int	alx_msg_get_timestampns	(struct timespec *restrict tm,
 				 struct msghdr *restrict msg);
 }
 

@@ -33,7 +33,7 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_msg_get_timestamp	(struct timespec *restrict tm,
+int	alx_msg_get_timestampns	(struct timespec *restrict tm,
 				 struct msghdr *restrict msg)
 {
 	struct cmsghdr	*cmsg;
