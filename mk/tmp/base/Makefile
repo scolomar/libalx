@@ -21,6 +21,7 @@ MODULES	=								\
 	base/assert/array						\
 	base/assert/assert						\
 	base/assert/char						\
+	base/assert/pointer						\
 	base/assert/stddef						\
 	base/assert/stdint						\
 	base/assert/type						\
@@ -124,6 +125,7 @@ MODULES	=								\
 	base/string/strstr/strsstr					\
 	base/sys/socket/tcp/client					\
 	base/sys/socket/tcp/server					\
+	base/sys/socket/msghdr						\
 	base/sys/socket/timestamp					\
 	base/sys/types							\
 	base/time/gettime						\
