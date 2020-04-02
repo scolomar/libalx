@@ -57,7 +57,7 @@ int	alx_ur_init	(struct Alx_UR **restrict ur,
 	sfd	= alx_tcp_client_open(ur_ip, ur_port);
 	if (sfd < 0)
 		return	-1;
-	if (setsockopt(sfd, SOL_SOCKET, SO_TIMESTAMP, &enable, sizeof(enable)))
+	if (setsockopt(sfd, SOL_SOCKET, SO_TIMESTAMPNS, &enable,sizeof(enable)))
 		goto err1;
 
 	if (alx_callocs(ur, 1))
