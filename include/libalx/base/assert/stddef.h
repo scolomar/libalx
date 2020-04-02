@@ -33,11 +33,11 @@
 			"BUG:   sizeof(size_t) != sizeof(ptrdiff_t)")
 
 #define alx_Static_assert_ssize_ptrdiff()				\
-	static_assert(alx_same_type(ssize_t, ptrdiff_t),		\
+	static_assert(alx_is_same_type(ssize_t, ptrdiff_t),		\
 			"ssize_t != ptrdiff_t")
 
 #define alx_assert_ssize_ptrdiff()					\
-	alx_assert_msg(alx_same_type(ssize_t, ptrdiff_t),		\
+	alx_assert_msg(alx_is_same_type(ssize_t, ptrdiff_t),		\
 			"BUG:   ssize_t != ptrdiff_t")
 
 

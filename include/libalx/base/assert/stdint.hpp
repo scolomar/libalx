@@ -34,35 +34,35 @@
 	alx_Static_assert_s64_long()
 
 #define alx_Static_assert_u8_uchar()					\
-	static_assert(alx_same_type(uint8_t, unsigned char),		\
+	static_assert(alx_is_same_type(uint8_t, unsigned char),		\
 				   "uint8_t != unsigned char")
 
 #define alx_Static_assert_s8_schar()					\
-	static_assert(alx_same_type( int8_t, signed char),		\
+	static_assert(alx_is_same_type( int8_t, signed char),		\
 				    "int8_t != signed char")
 
 #define alx_Static_assert_u16_ushort()					\
-	static_assert(alx_same_type(uint16_t, unsigned short),		\
+	static_assert(alx_is_same_type(uint16_t, unsigned short),	\
 				   "uint16_t != unsigned short")
 
 #define alx_Static_assert_s16_short()					\
-	static_assert(alx_same_type( int16_t, short),			\
+	static_assert(alx_is_same_type( int16_t, short),		\
 				    "int16_t != short")
 
 #define alx_Static_assert_u32_unsigned()				\
-	static_assert(alx_same_type(uint32_t, unsigned),		\
+	static_assert(alx_is_same_type(uint32_t, unsigned),		\
 				   "uint32_t != unsigned")
 
 #define alx_Static_assert_s32_int()					\
-	static_assert(alx_same_type( int32_t, int),			\
+	static_assert(alx_is_same_type( int32_t, int),			\
 				    "int32_t != int")
 
 #define alx_Static_assert_u64_ulong()					\
-	static_assert(alx_same_type(uint64_t, unsigned long),		\
+	static_assert(alx_is_same_type(uint64_t, unsigned long),	\
 				   "uint64_t != unsigned long")
 
 #define alx_Static_assert_s64_long()					\
-	static_assert(alx_same_type( int64_t, long),			\
+	static_assert(alx_is_same_type( int64_t, long),			\
 				    "int64_t != long")
 
 #define alx_assert_stdint_types()					\
@@ -76,35 +76,35 @@
 	alx_assert_s64_long()
 
 #define alx_assert_u8_uchar()						\
-	alx_assert_msg(alx_same_type(uint8_t, unsigned char),		\
+	alx_assert_msg(alx_is_same_type(uint8_t, unsigned char),	\
 			 "BUG:   uint8_t != unsigned char")
 
 #define alx_assert_s8_schar()						\
-	alx_assert_msg(alx_same_type(int8_t, signed char),		\
+	alx_assert_msg(alx_is_same_type(int8_t, signed char),		\
 			 "BUG:   int8_t != signed char")
 
 #define alx_assert_u16_ushort()						\
-	alx_assert_msg(alx_same_type(uint16_t, unsigned short),		\
+	alx_assert_msg(alx_is_same_type(uint16_t, unsigned short),	\
 			 "BUG:   uint16_t != unsigned short")
 
 #define alx_assert_s16_short()						\
-	alx_assert_msg(alx_same_type(int16_t, short),			\
+	alx_assert_msg(alx_is_same_type(int16_t, short),		\
 			 "BUG:   int16_t != short")
 
 #define alx_assert_u32_unsigned()					\
-	alx_assert_msg(alx_same_type(uint32_t, unsigned),		\
+	alx_assert_msg(alx_is_same_type(uint32_t, unsigned),		\
 			 "BUG:   uint32_t != unsigned")
 
 #define alx_assert_s32_int()						\
-	alx_assert_msg(alx_same_type(int32_t, int),			\
+	alx_assert_msg(alx_is_same_type(int32_t, int),			\
 			 "BUG:   int32_t != int")
 
 #define alx_assert_u64_ulong()						\
-	alx_assert_msg(alx_same_type(uint64_t, unsigned long),		\
+	alx_assert_msg(alx_is_same_type(uint64_t, unsigned long),	\
 			 "BUG:   uint64_t != unsigned long")
 
 #define alx_assert_s64_long()						\
-	alx_assert_msg(alx_same_type(int64_t, long),			\
+	alx_assert_msg(alx_is_same_type(int64_t, long),			\
 			 "BUG:   int64_t != long")
 
 

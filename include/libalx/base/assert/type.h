@@ -37,11 +37,11 @@
 			"BUG:   Not a signed type!")
 
 #define alx_Static_assert_same_type(a, b)				\
-	_Static_assert(alx_same_type(a, b),				\
+	_Static_assert(alx_is_same_type(a, b),				\
 			"Incompatible types!")
 
 #define alx_assert_same_type(a, b)					\
-	alx_assert_msg(alx_same_type(a, b),				\
+	alx_assert_msg(alx_is_same_type(a, b),				\
 			"BUG:   Incompatible types!")
 
 #define alx_Static_assert_bit_fits_type(b, t)				\

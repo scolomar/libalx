@@ -21,16 +21,16 @@
  ******* macros ***************************************************************
  ******************************************************************************/
 #define alx_Static_assert_char_signed()					\
-	_Static_assert(alx_signed_type(char), "char != signed char")
+	_Static_assert(alx_is_signed_type(char), "char != signed char")
 
 #define alx_Static_assert_char_unsigned()				\
-	_Static_assert(alx_unsigned_type(char), "char != unsigned char")
+	_Static_assert(alx_is_unsigned_type(char), "char != unsigned char")
 
 #define alx_assert_char_signed()					\
-	alx_assert_msg(alx_signed_type(char), "BUG:   char != signed char")
+	alx_assert_msg(alx_is_signed_type(char), "BUG:   char != signed char")
 
 #define alx_assert_char_unsigned()					\
-	alx_assert_msg(alx_unsigned_type(char), "BUG:   char != unsigned char")
+	alx_assert_msg(alx_is_unsigned_type(char),"BUG:   char != unsigned char")
 
 
 /* Rename without alx_ prefix */
