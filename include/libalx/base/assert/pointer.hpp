@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -21,17 +21,13 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define alx_Static_assert_array(a)					\
-	static_assert(alx_is_array(a), "Not a `[]`!")
-
-#define alx_static_assert_char_array(a)					\
-	static_assert(alx_is_char_array(a), "Not a `char[]` !")
+#define alx_Static_assert_pointer(a)					\
+	static_assert(alx_is_pointer(p), "Not a pointer !")
 
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define Static_assert_array(a)		alx_Static_assert_array(a)
-#define Static_assert_char_array(a)	alx_Static_assert_char_array(a)
+#define Static_assert_pointer(p)	alx_Static_assert_pointer(p)
 #endif
 
 

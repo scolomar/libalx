@@ -16,6 +16,7 @@
 #include <libalx/base/assert/array.h>
 #include <libalx/base/assert/assert.h>
 #include <libalx/base/assert/char.h>
+#include <libalx/base/assert/pointer.h>
 #include <libalx/base/assert/stddef.h>
 #include <libalx/base/assert/stdint.h>
 #include <libalx/base/assert/type.h>
