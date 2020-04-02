@@ -89,7 +89,7 @@ int	alx_ur_pose_diff	(struct Alx_UR_Pose *restrict diff,
 				 const struct Alx_UR_Pose *restrict a,
 				 const struct Alx_UR_Pose *restrict b);
 __attribute__((nonnull, warn_unused_result))
-bool	alx_ur_is_at_pose	(struct Alx_UR *restrict ur,
+bool	alx_ur_is_at_pose	(const struct Alx_UR *restrict ur,
 				 const struct Alx_UR_Pose *restrict pose);
 __attribute__((nonnull))
 int	alx_ur_sprintf_pose	(ptrdiff_t nmemb,

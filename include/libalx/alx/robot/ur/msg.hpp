@@ -27,7 +27,9 @@
 extern	"C"
 {
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_recv	(struct Alx_UR *ur);
+int	alx_ur_recv			(struct Alx_UR *ur);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_ur_robot_state_update	(struct Alx_UR *ur);
 }
 
 

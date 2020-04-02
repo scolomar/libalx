@@ -61,7 +61,7 @@ int	alx_ur_pose_diff	(struct Alx_UR_Pose *restrict diff,
 	return	0;
 }
 
-bool	alx_ur_is_at_pose	(struct Alx_UR *restrict ur,
+bool	alx_ur_is_at_pose	(const struct Alx_UR *restrict ur,
 				 const struct Alx_UR_Pose *restrict pose)
 {
 	struct Alx_UR_Pose	here;

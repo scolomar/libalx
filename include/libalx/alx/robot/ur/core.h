@@ -24,6 +24,7 @@
  ******************************************************************************/
 #define NJOINTS			(6)
 #define ROBOT_FREQUENCY		(10)
+#define ROBOT_UPDATE_PERIOD_MS	(100)
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)

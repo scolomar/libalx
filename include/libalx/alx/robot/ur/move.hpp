@@ -47,35 +47,42 @@
 extern	"C"
 {
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_halt	(struct Alx_UR *restrict ur,
-			 int usleep_after);
+int	alx_ur_halt		(struct Alx_UR *restrict ur,
+				 int usleep_after);
 
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_movej	(struct Alx_UR *restrict ur,
-			 const struct Alx_UR_Pose *restrict pose,
-			 double timeout);
+int	alx_ur_wait_while_moving(struct Alx_UR *restrict ur,
+				 double timeout,
+				 const struct timespec *restrict tm_start);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_movej_rel(const struct Alx_UR *restrict ur,
-			 const struct Alx_UR_Pose *restrict pose_rel,
-			 int usleep_after);
+bool	alx_ur_is_moving	(const struct Alx_UR *ur);
+
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_movel	(const struct Alx_UR *restrict ur,
-			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after);
+int	alx_ur_movej		(struct Alx_UR *restrict ur,
+				 const struct Alx_UR_Pose *restrict pose,
+				 double timeout);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_movel_rel(const struct Alx_UR *restrict ur,
-			 const struct Alx_UR_Pose *restrict pose_rel,
-			 int usleep_after);
+int	alx_ur_movej_rel	(const struct Alx_UR *restrict ur,
+				 const struct Alx_UR_Pose *restrict pose_rel,
+				 int usleep_after);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_movec	(const struct Alx_UR *restrict ur,
-			 const struct Alx_UR_Pose *restrict via,
-			 const struct Alx_UR_Pose *restrict to,
-			 int usleep_after);
+int	alx_ur_movel		(const struct Alx_UR *restrict ur,
+				 const struct Alx_UR_Pose *restrict pose,
+				 int usleep_after);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_movec_rel(const struct Alx_UR *restrict ur,
-			 const struct Alx_UR_Pose *restrict via,
-			 const struct Alx_UR_Pose *restrict to,
-			 int usleep_after);
+int	alx_ur_movel_rel	(const struct Alx_UR *restrict ur,
+				 const struct Alx_UR_Pose *restrict pose_rel,
+				 int usleep_after);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_ur_movec		(const struct Alx_UR *restrict ur,
+				 const struct Alx_UR_Pose *restrict via,
+				 const struct Alx_UR_Pose *restrict to,
+				 int usleep_after);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_ur_movec_rel	(const struct Alx_UR *restrict ur,
+				 const struct Alx_UR_Pose *restrict via,
+				 const struct Alx_UR_Pose *restrict to,
+				 int usleep_after);
 }
 
 

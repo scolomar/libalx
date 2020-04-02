@@ -23,6 +23,7 @@
 #include "libalx/base/compiler/unused.h"
 #include "libalx/base/sys/socket/msghdr.h"
 #include "libalx/base/sys/socket/timestamp.h"
+#include "libalx/base/time/timespec.h"
 
 
 /******************************************************************************
@@ -141,7 +142,7 @@ void	parse_rspkg_tool_mode_info	(struct Alx_UR *restrict ur,
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_ur_recv	(struct Alx_UR *ur)
+int	alx_ur_recv			(struct Alx_UR *ur)
 {
 	struct Alx_UR_Msg_Hdr	hdr;
 	struct msghdr		msg;
@@ -173,6 +174,21 @@ int	alx_ur_recv	(struct Alx_UR *ur)
 	default:
 		return	-1;	/* Unrecignized msg */
 	}
+}
+
+int	alx_ur_robot_state_update	(struct Alx_UR *ur)
+{
+	int64_t		time_ms;
+	struct timespec	start;
+
+	clock_gettime(CLOCK_REALTIME, &start);
+
+	do {
+		if (alx_ur_recv(ur))
+			return	-1;
+		time_ms	= alx_timespec_diff_ms(&start, &ur->state.timestamp);
+	} while (time_ms < ROBOT_UPDATE_PERIOD_MS);
+	return	0;
 }
 
 
