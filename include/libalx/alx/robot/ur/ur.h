@@ -13,13 +13,13 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <libalx/alx/robot/ur/core.h>
-#include <libalx/alx/robot/ur/io.h>
-#include <libalx/alx/robot/ur/miscellaneous.h>
-#include <libalx/alx/robot/ur/move.h>
-#include <libalx/alx/robot/ur/msg.h>
-#include <libalx/alx/robot/ur/pose.h>
-#include <libalx/alx/robot/ur/setup.h>
+#include <libalx/alx/robot/ur/core/core.h>
+#include <libalx/alx/robot/ur/core/msg.h>
+#include <libalx/alx/robot/ur/io/io.h>
+#include <libalx/alx/robot/ur/miscellaneous/miscellaneous.h>
+#include <libalx/alx/robot/ur/move/move.h>
+#include <libalx/alx/robot/ur/pose/pose.h>
+#include <libalx/alx/robot/ur/setup/setup.h>
 
 
 /******************************************************************************

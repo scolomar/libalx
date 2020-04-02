@@ -139,13 +139,13 @@ ALX_NPC_MODULES	=							\
 ALX_NPC_A_OBJ	= $(ALX_NPC_MODULES:%=$(BUILD_TMP_DIR)/%.a.o)
 ALX_NPC_SO_OBJ	= $(ALX_NPC_MODULES:%=$(BUILD_TMP_DIR)/%.so.o)
 ALX_ROBOT_MODULES	=						\
-		alx/robot/ur/core					\
-		alx/robot/ur/io						\
-		alx/robot/ur/miscellaneous				\
-		alx/robot/ur/move					\
-		alx/robot/ur/msg					\
-		alx/robot/ur/pose					\
-		alx/robot/ur/setup
+		alx/robot/ur/core/core					\
+		alx/robot/ur/core/msg					\
+		alx/robot/ur/io/io					\
+		alx/robot/ur/miscellaneous/miscellaneous		\
+		alx/robot/ur/move/move					\
+		alx/robot/ur/pose/pose					\
+		alx/robot/ur/setup/setup
 #		alx/robot/kawasaki/kawasaki
 ALX_ROBOT_A_OBJ	= $(ALX_ROBOT_MODULES:%=$(BUILD_TMP_DIR)/%.a.o)
 ALX_ROBOT_SO_OBJ= $(ALX_ROBOT_MODULES:%=$(BUILD_TMP_DIR)/%.so.o)

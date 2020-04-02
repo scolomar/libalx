@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/alx/robot/ur/msg.h"
+#include "libalx/alx/robot/ur/core/msg.h"
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -18,7 +18,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 
-#include "libalx/alx/robot/ur/core.h"
+#include "libalx/alx/robot/ur/core/core.h"
 #include "libalx/base/compiler/size.h"
 #include "libalx/base/compiler/unused.h"
 #include "libalx/base/sys/socket/msghdr.h"

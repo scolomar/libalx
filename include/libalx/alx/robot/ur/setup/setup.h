@@ -3,30 +3,27 @@
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
-/*
- * Suported versions of UR client interface:
- *	major	minor
- *	1	6 ... 8
- *	3	0 ... 12
- *	5	0 ... 6
- */
-
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/alx/robot/ur/msg.h */
+#pragma once	/* libalx/alx/robot/ur/setup/setup.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/alx/robot/ur/core.h"
+#include "libalx/alx/robot/ur/core/core.h"
+#include "libalx/alx/robot/ur/pose/pose.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define ur_set_tcp(ur, tcp, usleep_after)  alx_ur_set_tcp(ur, tcp, usleep_after)
+#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -43,9 +40,9 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull, warn_unused_result))
-int	alx_ur_recv			(struct Alx_UR *ur);
-__attribute__((nonnull, warn_unused_result))
-int	alx_ur_robot_state_update	(struct Alx_UR *ur);
+int	alx_ur_set_tcp	(const struct Alx_UR *restrict ur,
+			 const struct Alx_UR_Pose *restrict tcp,
+			 int usleep_after);
 
 
 /******************************************************************************

@@ -7,17 +7,16 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/alx/robot/ur/core.hpp */
+#pragma once	/* libalx/alx/robot/ur/core/core.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <cstdbool>
-#include <cstdint>
-#include <cstdio>
-
-#include "libalx/base/compiler/restrict.hpp"
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <time.h>
 
 
 /******************************************************************************
@@ -37,12 +36,98 @@
 	alx_ur_cmd(ur, usleep_after, fmt, ##__VA_ARGS__)
 #define ur_poweroff(ur, usleep_after)					\
 	alx_ur_poweroff(ur, usleep_after)
-}
 #endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
- ******* extern "C" ***********************************************************
+ ******* enum *****************************************************************
+ ******************************************************************************/
+enum	Alx_UR_Robot_State_Pkg_Type {
+	ROBOT_STATE_PKG_TYPE_ROBOT_MODE_DATA,
+	ROBOT_STATE_PKG_TYPE_JOINT_DATA,
+	ROBOT_STATE_PKG_TYPE_TOOL_DATA,
+	ROBOT_STATE_PKG_TYPE_MB_DATA,
+	ROBOT_STATE_PKG_TYPE_CARTESIAN_INFO,
+	ROBOT_STATE_PKG_TYPE_KINEMATICS_INFO,
+	ROBOT_STATE_PKG_TYPE_CONFIG_DATA,
+	ROBOT_STATE_PKG_TYPE_FORCE_MODE_DATA,
+	ROBOT_STATE_PKG_TYPE_ADDITIONAL_INFO,
+	ROBOT_STATE_PKG_TYPE_CALIB_DATA,
+	ROBOT_STATE_PKG_TYPE_SAFETY_DATA,
+	ROBOT_STATE_PKG_TYPE_TOOL_COMM_INFO,
+	ROBOT_STATE_PKG_TYPE_TOOL_MODE_INFO
+};
+
+enum	Alx_UR_Ctrl_Mode {
+	CTRL_MODE_POSITION,
+	CTRL_MODE_TEACH,
+	CTRL_MODE_FORCE,
+	CTRL_MODE_TORQUE
+};
+
+enum	Alx_UR_Joint_Mode {
+	JOINT_MODE_RESET			= 235,
+	JOINT_MODE_SHUTTING_DOWN		= 236,
+	JOINT_PART_D_CALIBRATION_MODE_		= 237,
+	JOINT_MODE_BACKDRIVE			= 238,
+	JOINT_MODE_POWER_OFF			= 239,
+	JOINT_MODE_READY_FOR_POWER_OFF		= 240,
+
+	JOINT_MODE_NOT_RESPONDING		= 245,
+	JOINT_MODE_MOTOR_INITIALISATION		= 246,
+	JOINT_MODE_BOOTING			= 247,
+	JOINT_PART_D_CALIBRATION_ERROR_MODE_	= 248,
+	JOINT_MODE_BOOTLOADER			= 249,
+	JOINT_CALIBRATION_MODE_			= 250,
+	JOINT_MODE_VIOLATION			= 251,
+	JOINT_MODE_FAULT			= 252,
+	JOINT_MODE_RUNNING			= 253,
+
+	JOINT_MODE_IDLE				= 255
+};
+
+enum	Alx_UR_Robot_Mode {
+	ROBOT_MODE_NO_CONTROLLER	= -1,
+	ROBOT_MODE_DISCONNECTED,
+	ROBOT_MODE_CONFIRM_SAFETY,
+	ROBOT_MODE_BOOTING,
+	ROBOT_MODE_POWER_OFF,
+	ROBOT_MODE_POWER_ON,
+	ROBOT_MODE_IDLE,
+	ROBOT_MODE_BACKDRIVE,
+	ROBOT_MODE_RUNNING,
+	ROBOT_MODE_UPDATING_FIRMWARE
+};
+
+enum	Alx_UR_Tool_Mode {
+	TOOL_MODE_RESET			= JOINT_MODE_RESET,
+	TOOL_MODE_SHUTTING_DOWN		= JOINT_MODE_SHUTTING_DOWN,
+	TOOL_MODE_POWER_OFF		= JOINT_MODE_POWER_OFF,
+	TOOL_MODE_NOT_RESPONDING	= JOINT_MODE_NOT_RESPONDING,
+	TOOL_MODE_BOOTING		= JOINT_MODE_BOOTING,
+	TOOL_MODE_BOOTLOADER		= JOINT_MODE_BOOTLOADER,
+	TOOL_MODE_FAULT			= JOINT_MODE_FAULT,
+	TOOL_MODE_RUNNING		= JOINT_MODE_RUNNING,
+	TOOL_MODE_IDLE			= JOINT_MODE_IDLE
+};
+
+enum	Alx_UR_Safety_Mode {
+	SAFETY_MODE_NORMAL	= 1,
+	SAFETY_MODE_REDUCED,
+	SAFETY_MODE_PROTECTIVE_STOP,
+	SAFETY_MODE_RECOVERY,
+	SAFETY_MODE_SAFEGUARD_STOP,
+	SAFETY_MODE_SYSTEM_EMERGENCY_STOP,
+	SAFETY_MODE_ROBOT_EMERGENCY_STOP,
+	SAFETY_MODE_VIOLATION,
+	SAFETY_MODE_FAULT,
+	SAFETY_MODE_VALIDATE_JOINT_ID,
+	SAFETY_MODE_UNDEFINED_SAFETY_MODE
+};
+
+
+/******************************************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 struct	Alx_UR_Coord {
 	double	x;
@@ -212,6 +297,7 @@ struct	Alx_UR_Tool_Mode_Info {
 };
 
 struct	Alx_UR_Robot_State {
+	struct timespec			timestamp;
 	struct Alx_UR_Robot_Mode_Data	robot_mode;
 	struct Alx_UR_Joint_Data	joint;
 	struct Alx_UR_Tool_Data		tool_data;
@@ -245,136 +331,31 @@ struct	Alx_UR {
 	struct Alx_UR_Version		version;
 };
 
-extern	"C"
-{
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_init	(struct Alx_UR **restrict ur,
-			 const char *restrict ur_ip,
-			 const char *restrict ur_port,
-			 int usleep_after);
-[[gnu::warn_unused_result]]
-int	alx_ur_deinit	(struct Alx_UR *restrict ur);
-
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
-			 int usleep_after,
-			 const char *restrict fmt, ...);
-
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_poweroff	(const struct Alx_UR *restrict ur,
-			 int usleep_after);
-}
-
-
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-namespace alx {
-namespace UR {
-
-
-/******************************************************************************
- ******* enum *****************************************************************
- ******************************************************************************/
-enum	Robot_State_Pkg_Type {
-	ROBOT_STATE_PKG_TYPE_ROBOT_MODE_DATA,
-	ROBOT_STATE_PKG_TYPE_JOINT_DATA,
-	ROBOT_STATE_PKG_TYPE_TOOL_DATA,
-	ROBOT_STATE_PKG_TYPE_MB_DATA,
-	ROBOT_STATE_PKG_TYPE_CARTESIAN_INFO,
-	ROBOT_STATE_PKG_TYPE_KINEMATICS_INFO,
-	ROBOT_STATE_PKG_TYPE_CONFIG_DATA,
-	ROBOT_STATE_PKG_TYPE_FORCE_MODE_DATA,
-	ROBOT_STATE_PKG_TYPE_ADDITIONAL_INFO,
-	ROBOT_STATE_PKG_TYPE_CALIB_DATA,
-	ROBOT_STATE_PKG_TYPE_SAFETY_DATA,
-	ROBOT_STATE_PKG_TYPE_TOOL_COMM_INFO,
-	ROBOT_STATE_PKG_TYPE_TOOL_MODE_INFO
-};
-
-enum	Ctrl_Mode {
-	CTRL_MODE_POSITION,
-	CTRL_MODE_TEACH,
-	CTRL_MODE_FORCE,
-	CTRL_MODE_TORQUE
-};
-
-enum	Joint_Mode {
-	JOINT_MODE_RESET			= 235,
-	JOINT_MODE_SHUTTING_DOWN		= 236,
-	JOINT_PART_D_CALIBRATION_MODE_		= 237,
-	JOINT_MODE_BACKDRIVE			= 238,
-	JOINT_MODE_POWER_OFF			= 239,
-	JOINT_MODE_READY_FOR_POWER_OFF		= 240,
-
-	JOINT_MODE_NOT_RESPONDING		= 245,
-	JOINT_MODE_MOTOR_INITIALISATION		= 246,
-	JOINT_MODE_BOOTING			= 247,
-	JOINT_PART_D_CALIBRATION_ERROR_MODE_	= 248,
-	JOINT_MODE_BOOTLOADER			= 249,
-	JOINT_CALIBRATION_MODE_			= 250,
-	JOINT_MODE_VIOLATION			= 251,
-	JOINT_MODE_FAULT			= 252,
-	JOINT_MODE_RUNNING			= 253,
-
-	JOINT_MODE_IDLE				= 255
-};
-
-enum	Robot_Mode {
-	ROBOT_MODE_NO_CONTROLLER	= -1,
-	ROBOT_MODE_DISCONNECTED,
-	ROBOT_MODE_CONFIRM_SAFETY,
-	ROBOT_MODE_BOOTING,
-	ROBOT_MODE_POWER_OFF,
-	ROBOT_MODE_POWER_ON,
-	ROBOT_MODE_IDLE,
-	ROBOT_MODE_BACKDRIVE,
-	ROBOT_MODE_RUNNING,
-	ROBOT_MODE_UPDATING_FIRMWARE
-};
-
-enum	Tool_Mode {
-	TOOL_MODE_RESET			= JOINT_MODE_RESET,
-	TOOL_MODE_SHUTTING_DOWN		= JOINT_MODE_SHUTTING_DOWN,
-	TOOL_MODE_POWER_OFF		= JOINT_MODE_POWER_OFF,
-	TOOL_MODE_NOT_RESPONDING	= JOINT_MODE_NOT_RESPONDING,
-	TOOL_MODE_BOOTING		= JOINT_MODE_BOOTING,
-	TOOL_MODE_BOOTLOADER		= JOINT_MODE_BOOTLOADER,
-	TOOL_MODE_FAULT			= JOINT_MODE_FAULT,
-	TOOL_MODE_RUNNING		= JOINT_MODE_RUNNING,
-	TOOL_MODE_IDLE			= JOINT_MODE_IDLE
-};
-
-enum	Safety_Mode {
-	SAFETY_MODE_NORMAL	= 1,
-	SAFETY_MODE_REDUCED,
-	SAFETY_MODE_PROTECTIVE_STOP,
-	SAFETY_MODE_RECOVERY,
-	SAFETY_MODE_SAFEGUARD_STOP,
-	SAFETY_MODE_SYSTEM_EMERGENCY_STOP,
-	SAFETY_MODE_ROBOT_EMERGENCY_STOP,
-	SAFETY_MODE_VIOLATION,
-	SAFETY_MODE_FAULT,
-	SAFETY_MODE_VALIDATE_JOINT_ID,
-	SAFETY_MODE_UNDEFINED_SAFETY_MODE
-};
-
-
-/******************************************************************************
- ******* struct / union *******************************************************
- ******************************************************************************/
-
 
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+__attribute__((nonnull, warn_unused_result))
+int	alx_ur_init	(struct Alx_UR **restrict ur,
+			 const char *restrict ur_ip,
+			 const char *restrict ur_port,
+			 int usleep_after);
+__attribute__((warn_unused_result))
+int	alx_ur_deinit	(struct Alx_UR *restrict ur);
+
+__attribute__((nonnull, warn_unused_result))
+int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
+			 int usleep_after,
+			 const char *restrict fmt, ...);
+
+__attribute__((nonnull, warn_unused_result))
+int	alx_ur_poweroff	(const struct Alx_UR *restrict ur,
+			 int usleep_after);
 
 
 /******************************************************************************
- ******* namespace ************************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-}	/* namespace UR */
-}	/* namespace alx */
 
 
 /******************************************************************************

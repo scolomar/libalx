@@ -7,98 +7,88 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/alx/robot/ur/pose.h */
+#pragma once	/* libalx/alx/robot/ur/move/move.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <stdbool.h>
-#include <stddef.h>
-
-#include "libalx/alx/robot/ur/core.h"
+#include "libalx/alx/robot/ur/core/core.h"
+#include "libalx/alx/robot/ur/pose/pose.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define ALX_UR_POSE_INIT_XYZ(x_, y_, z_, rx_, ry_, rz_)			\
-(struct Alx_UR_Pose){							\
-	.type	= (ALX_UR_POSE_XYZ),					\
-	.x	= (x_),							\
-	.y	= (y_),							\
-	.z	= (z_),							\
-	.rx	= (rx_),						\
-	.ry	= (ry_),						\
-	.rz	= (rz_)							\
-}
-
-#define ALX_UR_POSE_INIT_JOINTS(b_, s_, e_, w1_, w2_, w3_)		\
-(struct Alx_UR_Pose){							\
-	.type		= (ALX_UR_POSE_JOINTS),				\
-	.base		= (b_),						\
-	.shoulder	= (s_),						\
-	.elbow		= (e_),						\
-	.wrist1		= (w1_),					\
-	.wrist2		= (w2_),					\
-	.wrist3		= (w3_)						\
-}
-
-
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define UR_POSE_INIT_XYZ(x, y, z, rx, ry, rz)				\
-	ALX_UR_POSE_INIT_XYZ(x, y, z, rx, ry, rz)
-#define UR_POSE_INIT_JOINTS(b, s, e, w1, w2, w3)			\
-	ALX_UR_POSE_INIT_JOINTS(b, s, e, w1, w2, w3)
-
-#define ur_sprintf_pose(nmemb, str, pose)				\
-	alx_ur_sprintf_pose(nmemb, str, pose)
-#define ur_sprintf_pose_rel(nmemb, str, pose_rel)			\
-	alx_ur_sprintf_pose_rel(nmemb, str, pose_rel)
+#define ur_halt(ur, usleep_after)					\
+	alx_ur_halt(ur, usleep_after)
+#define ur_movej(ur, pose, usleep_after)				\
+	alx_ur_movej(ur, pose, usleep_after)
+#define ur_movej_rel(ur, pose, usleep_after)				\
+	alx_ur_movej_rel(ur, pose, usleep_after)
+#define ur_movel(ur, pose, usleep_after)				\
+	alx_ur_movel(ur, pose, usleep_after)
+#define ur_movel_rel(ur, pose, usleep_after)				\
+	alx_ur_movel_rel(ur, pose, usleep_after)
+#define ur_movec(ur, via, to, usleep_afterg)				\
+	alx_ur_movec(ur, via, to, usleep_after)
+#define ur_movec_rel(ur, via, to, usleep_after)				\
+	alx_ur_movec_rel(ur, via, to, usleep_after)
 #endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
-enum	Alx_UR_Pose_Types {
-	ALX_UR_POSE_NONE,
-	ALX_UR_POSE_XYZ,
-	ALX_UR_POSE_JOINTS
-};
 
 
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
-struct	Alx_UR_Pose {
-	int	type;
-	union {
-		struct Alx_UR_Coord	xyz;
-		union Alx_UR_Joints	j;
-	};
-};
 
 
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
-int	alx_ur_pose_diff	(struct Alx_UR_Pose *restrict diff,
-				 const struct Alx_UR_Pose *restrict a,
-				 const struct Alx_UR_Pose *restrict b);
 __attribute__((nonnull, warn_unused_result))
-bool	alx_ur_is_at_pose	(const struct Alx_UR *restrict ur,
-				 const struct Alx_UR_Pose *restrict pose);
-__attribute__((nonnull))
-int	alx_ur_sprintf_pose	(ptrdiff_t nmemb,
-				 char str[static restrict nmemb],
-				 const struct Alx_UR_Pose *restrict pose);
-__attribute__((nonnull))
-int	alx_ur_sprintf_pose_rel	(ptrdiff_t nmemb,
-				 char str[static restrict nmemb],
-				 const struct Alx_UR_Pose *restrict pose_rel);
+int	alx_ur_halt		(struct Alx_UR *ur,
+				 int usleep_after);
+
+__attribute__((nonnull, warn_unused_result))
+int	alx_ur_wait_while_moving(struct Alx_UR *restrict ur,
+				 double timeout,
+				 const struct timespec *restrict tm_start);
+__attribute__((nonnull, warn_unused_result))
+bool	alx_ur_is_moving	(const struct Alx_UR *ur);
+
+__attribute__((nonnull, warn_unused_result))
+int	alx_ur_movej		(struct Alx_UR *restrict ur,
+				 const struct Alx_UR_Pose *restrict pose,
+				 double timeout);
+__attribute__((nonnull, warn_unused_result))
+int	alx_ur_movej_rel	(const struct Alx_UR *restrict ur,
+				 const struct Alx_UR_Pose *restrict pose_rel,
+				 int usleep_after);
+__attribute__((nonnull, warn_unused_result))
+int	alx_ur_movel		(const struct Alx_UR *restrict ur,
+				 const struct Alx_UR_Pose *restrict pose,
+				 int usleep_after);
+__attribute__((nonnull, warn_unused_result))
+int	alx_ur_movel_rel	(const struct Alx_UR *restrict ur,
+				 const struct Alx_UR_Pose *restrict pose_rel,
+				 int usleep_after);
+__attribute__((nonnull, warn_unused_result))
+int	alx_ur_movec		(const struct Alx_UR *restrict ur,
+				 const struct Alx_UR_Pose *restrict via,
+				 const struct Alx_UR_Pose *restrict to,
+				 int usleep_after);
+__attribute__((nonnull, warn_unused_result))
+int	alx_ur_movec_rel	(const struct Alx_UR *restrict ur,
+				 const struct Alx_UR_Pose *restrict via,
+				 const struct Alx_UR_Pose *restrict to,
+				 int usleep_after);
 
 
 /******************************************************************************

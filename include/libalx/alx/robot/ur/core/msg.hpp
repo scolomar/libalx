@@ -7,23 +7,18 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/alx/robot/ur/miscellaneous.hpp */
+#pragma once	/* libalx/alx/robot/ur/core/msg.hpp */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/alx/robot/ur/core.hpp"
-#include "libalx/base/compiler/restrict.hpp"
+#include "libalx/alx/robot/ur/core/core.hpp"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define ur_puts(ur, msg)	alx_ur_puts(ur, msg)
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -32,7 +27,9 @@
 extern	"C"
 {
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_puts	(struct Alx_UR *restrict ur, const char *restrict msg);
+int	alx_ur_recv			(struct Alx_UR *ur);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_ur_robot_state_update	(struct Alx_UR *ur);
 }
 
 

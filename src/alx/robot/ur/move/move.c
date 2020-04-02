@@ -7,13 +7,13 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/alx/robot/ur/move.h"
+#include "libalx/alx/robot/ur/move/move.h"
 
 #include <stdio.h>
 
-#include "libalx/alx/robot/ur/core.h"
-#include "libalx/alx/robot/ur/msg.h"
-#include "libalx/alx/robot/ur/pose.h"
+#include "libalx/alx/robot/ur/core/core.h"
+#include "libalx/alx/robot/ur/core/msg.h"
+#include "libalx/alx/robot/ur/pose/pose.h"
 #include "libalx/base/compiler/size.h"
 #include "libalx/base/time/gettime.h"
 

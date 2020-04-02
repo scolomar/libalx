@@ -7,12 +7,13 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/alx/robot/ur/pose.h"
+#include "libalx/alx/robot/ur/pose/pose.h"
 
 #include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 
+#include "libalx/alx/robot/ur/core/core.h"
 #include "libalx/base/compiler/size.h"
 #include "libalx/base/stdio/printf/snprintfs.h"
 
