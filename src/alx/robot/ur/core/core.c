@@ -31,6 +31,7 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define UR_SECONDARY_PORT	"30002"
 
 
 /******************************************************************************
@@ -47,14 +48,12 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 int	alx_ur_init	(struct Alx_UR **restrict ur,
-			 const char *restrict ur_ip,
-			 const char *restrict ur_port,
-			 int usleep_after)
+			 const char *restrict ur_ip)
 {
 	int	sfd;
 	int	enable = 1;
 
-	sfd	= alx_tcp_client_open(ur_ip, ur_port);
+	sfd	= alx_tcp_client_open(ur_ip, UR_SECONDARY_PORT);
 	if (sfd < 0)
 		return	-1;
 	if (setsockopt(sfd, SOL_SOCKET, SO_TIMESTAMPNS, &enable,sizeof(enable)))
@@ -67,11 +66,10 @@ int	alx_ur_init	(struct Alx_UR **restrict ur,
 	/* First received message is 'version' (in newer UR client versions) */
 	if (alx_ur_recv(*ur))
 		goto err2;
-	/* Seccond received message is 'state' */
+	/* Second received message is 'state' */
 	if (alx_ur_recv(*ur))
 		goto err2;
 
-	usleep(usleep_after);
 	return	0;
 
 err2:	alx_frees(ur);
@@ -95,7 +93,6 @@ int	alx_ur_deinit	(struct Alx_UR *restrict ur)
 }
 
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
-			 int usleep_after,
 			 const char *restrict fmt, ...)
 {
 	va_list	ap;
@@ -118,17 +115,15 @@ int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
 		goto err;
 
 	printf("%s", buf);
-	usleep(usleep_after);
 	return	0;
 err:
 	fprintf(stderr, "%s", buf);
 	return	-1;
 }
 
-int	alx_ur_poweroff	(const struct Alx_UR *restrict ur,
-			 int usleep_after)
+int	alx_ur_poweroff	(const struct Alx_UR *restrict ur)
 {
-	return	alx_ur_cmd(ur, usleep_after, "powerdown();");
+	return	alx_ur_cmd(ur, "powerdown();");
 }
 
 

@@ -17,7 +17,6 @@
 #include <cstddef>
 
 #include "libalx/alx/robot/ur/core/core.hpp"
-#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
@@ -25,8 +24,8 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define ur_set_Dout(ur, idx, state, timeout)				\
-	alx_ur_set_Dout(ur, idx, state, timeout)
+#define ur_set_Dout(ur, i, state, timeout)				\
+	alx_ur_set_Dout(ur, i, state, timeout)
 }
 #endif	/* defined(ALX_NO_PREFIX) */
 
@@ -37,8 +36,7 @@
 extern	"C"
 {
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_Dout_set	(struct Alx_UR *restrict ur,
-			 ptrdiff_t idx, bool state,
+int	alx_ur_Dout_set	(struct Alx_UR *ur, ptrdiff_t i, bool state,
 			 double timeout);
 }
 

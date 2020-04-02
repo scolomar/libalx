@@ -11,7 +11,6 @@
 
 #include <stddef.h>
 #include <stdio.h>
-#include <string.h>
 
 #include "libalx/alx/robot/ur/core/core.h"
 #include "libalx/base/compiler/size.h"
@@ -71,7 +70,7 @@ bool	alx_ur_is_at_pose	(const struct Alx_UR *restrict ur,
 	here.type	= pose->type;
 
 	if (pose->type == ALX_UR_POSE_XYZ) {
-		memcpy(&here.xyz, &ur->state.cartesian.pos, sizeof(here.xyz));
+		here.xyz	= ur->state.cartesian.pos;
 		alx_ur_pose_diff(&diff, pose, &here);
 		return	(here.xyz.x < THRESHOLD  &&
 				here.xyz.y < THRESHOLD  &&
@@ -80,7 +79,7 @@ bool	alx_ur_is_at_pose	(const struct Alx_UR *restrict ur,
 				here.xyz.ry < THRESHOLD  &&
 				here.xyz.rz < THRESHOLD);
 	} else { /* ALX_UR_POSE_JOINTS */
-		memcpy(&here.j, &ur->state.joint.q_actual, sizeof(here.j));
+		here.j	= ur->state.joint.q_actual;
 		alx_ur_pose_diff(&diff, pose, &here);
 		for (ptrdiff_t i= 0; i < ARRAY_SSIZE(here.j.j); i++) {
 			if (here.j.j[i] > THRESHOLD)
@@ -88,6 +87,25 @@ bool	alx_ur_is_at_pose	(const struct Alx_UR *restrict ur,
 		}
 		return	true;
 	}
+}
+
+bool	alx_ur_is_at_target	(const struct Alx_UR *ur)
+{
+	struct Alx_UR_Pose	target;
+	struct Alx_UR_Pose	actual;
+	struct Alx_UR_Pose	diff;
+
+	target.type	= ALX_UR_POSE_JOINTS;
+	target.j	= ur->state.joint.q_target;
+	actual.type	= ALX_UR_POSE_JOINTS;
+	actual.j	= ur->state.joint.q_actual;
+
+	alx_ur_pose_diff(&diff, &target, &actual);
+	for (ptrdiff_t i= 0; i < ARRAY_SSIZE(diff.j.j); i++) {
+		if (diff.j.j[i] > THRESHOLD)
+			return	false;
+	}
+	return	true;
 }
 
 int	alx_ur_sprintf_pose	(ptrdiff_t nmemb,

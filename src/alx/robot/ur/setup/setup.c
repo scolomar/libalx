@@ -12,6 +12,7 @@
 #include <stdio.h>
 
 #include "libalx/alx/robot/ur/core/core.h"
+#include "libalx/alx/robot/ur/core/msg.h"
 #include "libalx/alx/robot/ur/pose/pose.h"
 #include "libalx/base/compiler/size.h"
 
@@ -34,9 +35,8 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_ur_set_tcp	(const struct Alx_UR *restrict ur,
-			 const struct Alx_UR_Pose *restrict tcp,
-			 int usleep_after)
+int	alx_ur_set_tcp	(struct Alx_UR *restrict ur,
+			 const struct Alx_UR_Pose *restrict tcp)
 {
 	char	pos_tcp[BUFSIZ];
 
@@ -45,7 +45,11 @@ int	alx_ur_set_tcp	(const struct Alx_UR *restrict ur,
 
 	if (alx_ur_sprintf_pose(ARRAY_SIZE(pos_tcp), pos_tcp, tcp))
 		return	-1;
-	return	alx_ur_cmd(ur, usleep_after, "set_tcp(%s);", pos_tcp);
+	if (alx_ur_cmd(ur, "set_tcp(%s);", pos_tcp))
+		return	-1;
+	if (alx_ur_recv(ur))
+		return	-1;
+	return	0;
 }
 
 

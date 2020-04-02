@@ -29,15 +29,10 @@
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define ur_init(ur, ur_ip, ur_port, usleep_after)			\
-	alx_ur_init(ur, ur_ip, ur_port, usleep_after)
-#define ur_deinit(ur)							\
-	alx_ur_deinit(ur)
-#define ur_cmd(ur, usleep_after, fmt, ...)				\
-	alx_ur_cmd(ur, usleep_after, fmt, ##__VA_ARGS__)
-#define ur_poweroff(ur, usleep_after)					\
-	alx_ur_poweroff(ur, usleep_after)
-}
+#define ur_init(ur, ur_ip)	alx_ur_init(ur, ur_ip)
+#define ur_deinit(ur)		alx_ur_deinit(ur)
+#define ur_cmd(ur, fmt, ...)	alx_ur_cmd(ur, fmt, ##__VA_ARGS__)
+#define ur_poweroff(ur)		alx_ur_poweroff(ur)
 #endif	/* defined(ALX_NO_PREFIX) */
 
 
@@ -249,20 +244,16 @@ extern	"C"
 {
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_init	(struct Alx_UR **restrict ur,
-			 const char *restrict ur_ip,
-			 const char *restrict ur_port,
-			 int usleep_after);
+			 const char *restrict ur_ip);
 [[gnu::warn_unused_result]]
-int	alx_ur_deinit	(struct Alx_UR *restrict ur);
+int	alx_ur_deinit	(struct Alx_UR *ur);
 
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
-			 int usleep_after,
 			 const char *restrict fmt, ...);
 
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_poweroff	(const struct Alx_UR *restrict ur,
-			 int usleep_after);
+int	alx_ur_poweroff	(const struct Alx_UR *ur);
 }
 
 

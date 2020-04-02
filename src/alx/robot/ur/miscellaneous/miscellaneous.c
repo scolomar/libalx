@@ -35,7 +35,7 @@ int	alx_ur_puts	(struct Alx_UR *restrict ur,
 			 const char *restrict msg)
 {
 
-	if (alx_ur_cmd(ur, 0, "textmsg(\"%s\");", msg))
+	if (alx_ur_cmd(ur, "textmsg(\"%s\");", msg))
 		return	-1;
 	if (alx_ur_recv(ur))
 		return	-1;

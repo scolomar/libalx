@@ -23,7 +23,7 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define ur_set_tcp(ur, tcp, usleep_after)  alx_ur_set_tcp(ur, tcp, usleep_after)
+#define ur_set_tcp(ur, tcp)	alx_ur_set_tcp(ur, tcp)
 #endif	/* defined(ALX_NO_PREFIX) */
 
 
@@ -33,9 +33,8 @@
 extern	"C"
 {
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_set_tcp	(const struct Alx_UR *restrict ur,
-			 const struct Alx_UR_Pose *restrict tcp,
-			 int usleep_after);
+int	alx_ur_set_tcp	(struct Alx_UR *restrict ur,
+			 const struct Alx_UR_Pose *restrict tcp);
 }
 
 

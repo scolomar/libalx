@@ -38,7 +38,7 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_ur_set_Dout	(struct Alx_UR *ur, ptrdiff_t idx, bool state,
+int	alx_ur_set_Dout	(struct Alx_UR *ur, ptrdiff_t i, bool state,
 			 double timeout)
 {
 	bool		actual_state;
@@ -47,14 +47,13 @@ int	alx_ur_set_Dout	(struct Alx_UR *ur, ptrdiff_t idx, bool state,
 
 	clock_gettime(CLOCK_REALTIME, &tm);
 
-	if (alx_ur_cmd(ur, 0, "set_digital_out(%ti, %s)",
-						idx, alx_strBool[!!state]))
+	if (alx_ur_cmd(ur, "set_digital_out(%ti, %s)", i, alx_strBool[!!state]))
 		return	-1;
 
 	do {
 		if (alx_ur_recv(ur))
 			return	-1;
-		actual_state	= BIT_READ(ur->state.mb.DO_bits, idx);
+		actual_state	= BIT_READ(ur->state.mb.DO_bits, i);
 		time	= alx_clock_gettime_diff_ms(CLOCK_REALTIME, &tm);
 		if (time >= timeout * 1000.0)
 			return	-1;

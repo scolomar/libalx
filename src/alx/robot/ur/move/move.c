@@ -38,9 +38,30 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 int	alx_ur_halt		(struct Alx_UR *ur,
-				 int usleep_after)
+				 double timeout)
 {
-	return	alx_ur_cmd(ur, usleep_after, "halt");
+	struct timespec	start;
+
+	if (alx_ur_cmd(ur, "halt"))
+		return	-1;
+
+	clock_gettime(CLOCK_REALTIME, &start);
+	if (alx_ur_wait_while_moving(ur, timeout, &start))
+		return	-1;
+	return	0;
+}
+
+int	alx_ur_check_movement	(struct Alx_UR *restrict ur,
+				 double timeout)
+{
+	struct timespec	start;
+
+	clock_gettime(CLOCK_REALTIME, &start);
+	if (alx_ur_wait_while_moving(ur, timeout, &start))
+		return	-1;
+	if (!alx_ur_is_at_target(ur))
+		return	-1;
+	return	0;
 }
 
 int	alx_ur_wait_while_moving(struct Alx_UR *restrict ur,
@@ -76,60 +97,66 @@ int	alx_ur_movej		(struct Alx_UR *restrict ur,
 				 const struct Alx_UR_Pose *restrict pose,
 				 double timeout)
 {
-	char		pos[BUFSIZ];
-	struct timespec	start;
-
-	clock_gettime(CLOCK_REALTIME, &start);
+	char	pos[BUFSIZ];
 
 	if (alx_ur_sprintf_pose(ARRAY_SIZE(pos), pos, pose))
 		return	-1;
-	if (alx_ur_cmd(ur, 0, "movej(%s);", pos))
+	if (alx_ur_cmd(ur, "movej(%s);", pos))
 		return	-1;
-
-	if (alx_ur_wait_while_moving(ur, timeout, &start))
-		return	-1;
-	if (!alx_ur_is_at_pose(ur, pose))
+	if (alx_ur_check_movement(ur, timeout))
 		return	-1;
 	return	0;
 }
 
-int	alx_ur_movej_rel	(const struct Alx_UR *restrict ur,
+int	alx_ur_movej_rel	(struct Alx_UR *restrict ur,
 				 const struct Alx_UR_Pose *restrict pose_rel,
-				 int usleep_after)
+				 double timeout)
 {
 	char	pos_rel[BUFSIZ];
 
 	if (alx_ur_sprintf_pose_rel(ARRAY_SIZE(pos_rel), pos_rel, pose_rel))
 		return	-1;
-	return	alx_ur_cmd(ur, usleep_after, "movej(%s);", pos_rel);
+	if (alx_ur_cmd(ur, "movej(%s);", pos_rel))
+		return	-1;
+	if (alx_ur_check_movement(ur, timeout))
+		return	-1;
+	return	0;
 }
 
-int	alx_ur_movel		(const struct Alx_UR *restrict ur,
+int	alx_ur_movel		(struct Alx_UR *restrict ur,
 				 const struct Alx_UR_Pose *restrict pose,
-				 int usleep_after)
+				 double timeout)
 {
 	char	pos[BUFSIZ];
 
 	if (alx_ur_sprintf_pose(ARRAY_SIZE(pos), pos, pose))
 		return	-1;
-	return	alx_ur_cmd(ur, usleep_after, "movel(%s);", pos);
+	if (alx_ur_cmd(ur, "movel(%s);", pos))
+		return	-1;
+	if (alx_ur_check_movement(ur, timeout))
+		return	-1;
+	return	0;
 }
 
-int	alx_ur_movel_rel	(const struct Alx_UR *restrict ur,
+int	alx_ur_movel_rel	(struct Alx_UR *restrict ur,
 				 const struct Alx_UR_Pose *restrict pose_rel,
-				 int usleep_after)
+				 double timeout)
 {
 	char	pos_rel[BUFSIZ];
 
 	if (alx_ur_sprintf_pose_rel(ARRAY_SIZE(pos_rel), pos_rel, pose_rel))
 		return	-1;
-	return	alx_ur_cmd(ur, usleep_after, "movel(%s);", pos_rel);
+	if (alx_ur_cmd(ur, "movel(%s);", pos_rel))
+		return	-1;
+	if (alx_ur_check_movement(ur, timeout))
+		return	-1;
+	return	0;
 }
 
-int	alx_ur_movec		(const struct Alx_UR *restrict ur,
+int	alx_ur_movec		(struct Alx_UR *restrict ur,
 				 const struct Alx_UR_Pose *restrict via,
 				 const struct Alx_UR_Pose *restrict to,
-				 int usleep_after)
+				 double timeout)
 {
 	char	pos_via[BUFSIZ];
 	char	pos_to[BUFSIZ];
@@ -141,13 +168,17 @@ int	alx_ur_movec		(const struct Alx_UR *restrict ur,
 		return	-1;
 	if (alx_ur_sprintf_pose(ARRAY_SIZE(pos_to), pos_to, to))
 		return	-1;
-	return	alx_ur_cmd(ur, usleep_after, "movec(%s, %s);", pos_via, pos_to);
+	if (alx_ur_cmd(ur, "movec(%s, %s);", pos_via, pos_to))
+		return	-1;
+	if (alx_ur_check_movement(ur, timeout))
+		return	-1;
+	return	0;
 }
 
-int	alx_ur_movec_rel	(const struct Alx_UR *restrict ur,
+int	alx_ur_movec_rel	(struct Alx_UR *restrict ur,
 				 const struct Alx_UR_Pose *restrict via,
 				 const struct Alx_UR_Pose *restrict to,
-				 int usleep_after)
+				 double timeout)
 {
 	char	pos_via[BUFSIZ];
 	char	pos_to[BUFSIZ];
@@ -159,7 +190,11 @@ int	alx_ur_movec_rel	(const struct Alx_UR *restrict ur,
 		return	-1;
 	if (alx_ur_sprintf_pose_rel(ARRAY_SIZE(pos_to), pos_to, to))
 		return	-1;
-	return	alx_ur_cmd(ur, usleep_after, "movec(%s, %s);", pos_via, pos_to);
+	if (alx_ur_cmd(ur, "movec(%s, %s);", pos_via, pos_to))
+		return	-1;
+	if (alx_ur_check_movement(ur, timeout))
+		return	-1;
+	return	0;
 }
 
 
