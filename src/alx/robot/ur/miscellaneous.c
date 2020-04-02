@@ -10,6 +10,7 @@
 #include "libalx/alx/robot/ur/miscellaneous.h"
 
 #include "libalx/alx/robot/ur/core.h"
+#include "libalx/alx/robot/ur/msg.h"
 
 
 /******************************************************************************
@@ -30,11 +31,15 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_ur_puts	(const struct Alx_UR *restrict ur,
-			 const char *restrict msg,
-			 int usleep_after)
+int	alx_ur_puts	(struct Alx_UR *restrict ur,
+			 const char *restrict msg)
 {
-	return	alx_ur_cmd(ur, usleep_after, "textmsg(\"%s\");", msg);
+
+	if (alx_ur_cmd(ur, 0, "textmsg(\"%s\");", msg))
+		return	-1;
+	if (alx_ur_recv(ur))
+		return	-1;
+	return	0;
 }
 
 

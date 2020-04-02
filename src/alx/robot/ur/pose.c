@@ -11,6 +11,7 @@
 
 #include <stddef.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "libalx/base/compiler/size.h"
 #include "libalx/base/stdio/printf/snprintfs.h"
@@ -19,6 +20,7 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define THRESHOLD	(0.001)
 
 
 /******************************************************************************
@@ -34,6 +36,59 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
+int	alx_ur_pose_diff	(struct Alx_UR_Pose *restrict diff,
+				 const struct Alx_UR_Pose *restrict a,
+				 const struct Alx_UR_Pose *restrict b)
+{
+
+	if (a->type != b->type)
+		return	-1;
+
+	diff->type	= a->type;
+
+	if (diff->type == ALX_UR_POSE_XYZ) {
+		diff->xyz.x	= b->xyz.x - a->xyz.x;
+		diff->xyz.y	= b->xyz.y - a->xyz.y;
+		diff->xyz.z	= b->xyz.z - a->xyz.z;
+		diff->xyz.rx	= b->xyz.rx - a->xyz.rx;
+		diff->xyz.ry	= b->xyz.ry - a->xyz.ry;
+		diff->xyz.rz	= b->xyz.rz - a->xyz.rz;
+	} else { /* ALX_UR_POSE_JOINTS */
+		for (ptrdiff_t i= 0; i < ARRAY_SSIZE(diff->j.j); i++)
+			diff->j.j[i]	= b->j.j[i] - a->j.j[i];
+	}
+
+	return	0;
+}
+
+bool	alx_ur_is_at_pose	(struct Alx_UR *restrict ur,
+				 const struct Alx_UR_Pose *restrict pose)
+{
+	struct Alx_UR_Pose	here;
+	struct Alx_UR_Pose	diff;
+
+	here.type	= pose->type;
+
+	if (pose->type == ALX_UR_POSE_XYZ) {
+		memcpy(&here.xyz, &ur->state.cartesian.pos, sizeof(here.xyz));
+		alx_ur_pose_diff(&diff, pose, &here);
+		return	(here.xyz.x < THRESHOLD  &&
+				here.xyz.y < THRESHOLD  &&
+				here.xyz.z < THRESHOLD  &&
+				here.xyz.rx < THRESHOLD  &&
+				here.xyz.ry < THRESHOLD  &&
+				here.xyz.rz < THRESHOLD);
+	} else { /* ALX_UR_POSE_JOINTS */
+		memcpy(&here.j, &ur->state.joint.q_actual, sizeof(here.j));
+		alx_ur_pose_diff(&diff, pose, &here);
+		for (ptrdiff_t i= 0; i < ARRAY_SSIZE(here.j.j); i++) {
+			if (here.j.j[i] > THRESHOLD)
+				return	false;
+		}
+		return	true;
+	}
+}
+
 int	alx_ur_sprintf_pose	(ptrdiff_t nmemb,
 				 char str[static restrict nmemb],
 				 const struct Alx_UR_Pose *restrict pose)

@@ -13,6 +13,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <string.h>
+#include <time.h>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -20,6 +21,8 @@
 #include "libalx/alx/robot/ur/core.h"
 #include "libalx/base/compiler/size.h"
 #include "libalx/base/compiler/unused.h"
+#include "libalx/base/sys/socket/msghdr.h"
+#include "libalx/base/sys/socket/timestamp.h"
 
 
 /******************************************************************************
@@ -78,7 +81,8 @@ struct	Alx_UR_Robot_Msg_Hdr {
 static
 void	parse_msg_robot_state		(struct Alx_UR *restrict ur,
 					 ssize_t sz,
-					 const unsigned char msg[static restrict sz]);
+					 const unsigned char msg[static restrict sz],
+					 const struct timespec *restrict ts);
 static
 void	parse_rspkg_robot_mode_data	(struct Alx_UR *restrict ur,
 					 ssize_t sz,
@@ -140,10 +144,17 @@ void	parse_rspkg_tool_mode_info	(struct Alx_UR *restrict ur,
 int	alx_ur_recv	(struct Alx_UR *ur)
 {
 	struct Alx_UR_Msg_Hdr	hdr;
-	ssize_t	n;
+	struct msghdr		msg;
+	struct iovec		iov;
+	struct timespec		ts;
+	char			cbuf[BUFSIZ];
+	ssize_t			n;
 
-	n	= recv(ur->sfd, &hdr, sizeof(hdr), MSG_WAITALL);
+	alx_wrap_msghdr(&msg, &iov, sizeof(hdr), &hdr, ARRAY_BYTES(cbuf), cbuf);
+	n	= recvmsg(ur->sfd, &msg, MSG_WAITALL);
 	if (n != sizeof(hdr))
+		return	-1;
+	if (alx_msg_get_timestampns(&ts, &msg))
 		return	-1;
 
 	unsigned char	buf[hdr.sz];
@@ -154,7 +165,7 @@ int	alx_ur_recv	(struct Alx_UR *ur)
 
 	switch (hdr.type) {
 	case MSG_TYPE_ROBOT_STATE:
-		parse_msg_robot_state(ur, ARRAY_SIZE(buf), buf);
+		parse_msg_robot_state(ur, ARRAY_SIZE(buf), buf, &ts);
 		return	0;
 	case MSG_TYPE_ROBOT_MSG:
 // TODO		parse_msg_robot_msg(ur, ARRAY_SIZE(buf), buf);
@@ -171,9 +182,12 @@ int	alx_ur_recv	(struct Alx_UR *ur)
 static
 void	parse_msg_robot_state		(struct Alx_UR *restrict ur,
 					 ssize_t sz,
-					 const unsigned char msg[static restrict sz])
+					 const unsigned char msg[static restrict sz],
+					 const struct timespec *restrict ts)
 {
 	struct Alx_UR_Robot_State_Pkg_Hdr	hdr;
+
+	ur->state.timestamp	= *ts;
 
 	while (sz > 0) {
 		memcpy(&hdr, msg, sizeof(hdr));

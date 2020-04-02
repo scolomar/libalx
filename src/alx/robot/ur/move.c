@@ -12,8 +12,10 @@
 #include <stdio.h>
 
 #include "libalx/alx/robot/ur/core.h"
+#include "libalx/alx/robot/ur/msg.h"
 #include "libalx/alx/robot/ur/pose.h"
 #include "libalx/base/compiler/size.h"
+#include "libalx/base/time/gettime.h"
 
 
 /******************************************************************************
@@ -34,21 +36,36 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_ur_halt	(const struct Alx_UR *restrict ur,
+int	alx_ur_halt	(struct Alx_UR *restrict ur,
 			 int usleep_after)
 {
 	return	alx_ur_cmd(ur, usleep_after, "halt");
 }
 
-int	alx_ur_movej	(const struct Alx_UR *restrict ur,
+int	alx_ur_movej	(struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after)
+			 double timeout)
 {
-	char	pos[BUFSIZ];
+	char			pos[BUFSIZ];
+	double			time;
+	struct timespec		tm;
+
+	clock_gettime(CLOCK_REALTIME, &tm);
 
 	if (alx_ur_sprintf_pose(ARRAY_SIZE(pos), pos, pose))
 		return	-1;
-	return	alx_ur_cmd(ur, usleep_after, "movej(%s);", pos);
+	if (alx_ur_cmd(ur, 0, "movej(%s);", pos))
+		return	-1;
+
+	do {
+		if (alx_ur_recv(ur))
+			return	-1;
+		if (alx_ur_is_at_pose(ur, pose))
+			return	0;
+		time	= alx_clock_gettime_diff_ms(CLOCK_REALTIME, &tm);
+	} while (time < timeout * 1000.0);
+
+	return	0;
 }
 
 int	alx_ur_movej_rel(const struct Alx_UR *restrict ur,

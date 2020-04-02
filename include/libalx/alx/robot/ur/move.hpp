@@ -47,13 +47,13 @@
 extern	"C"
 {
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_halt	(const struct Alx_UR *restrict ur,
+int	alx_ur_halt	(struct Alx_UR *restrict ur,
 			 int usleep_after);
 
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_movej	(const struct Alx_UR *restrict ur,
+int	alx_ur_movej	(struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose,
-			 int usleep_after);
+			 double timeout);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_movej_rel(const struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict pose_rel,

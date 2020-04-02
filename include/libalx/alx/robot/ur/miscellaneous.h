@@ -21,7 +21,7 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define ur_puts(ur, msg, usleep_after)	alx_ur_puts(ur, msg, usleep_after)
+#define ur_puts(ur, msg)	alx_ur_puts(ur, msg)
 #endif	/* defined(ALX_NO_PREFIX) */
 
 
@@ -39,9 +39,7 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull, warn_unused_result))
-int	alx_ur_puts	(const struct Alx_UR *restrict ur,
-			 const char *restrict msg,
-			 int usleep_after);
+int	alx_ur_puts	(struct Alx_UR *restrict ur, const char *restrict msg);
 
 
 /******************************************************************************

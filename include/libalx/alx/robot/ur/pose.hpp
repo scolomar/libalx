@@ -13,6 +13,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <cstdbool>
 #include <cstddef>
 
 #include "libalx/alx/robot/ur/core.hpp"
@@ -73,11 +74,18 @@ struct	Alx_UR_Pose {
 
 extern	"C"
 {
+[[gnu::nonnull]]
+int	alx_ur_pose_diff	(struct Alx_UR_Pose *restrict diff,
+				 const struct Alx_UR_Pose *restrict a,
+				 const struct Alx_UR_Pose *restrict b);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
+bool	alx_ur_is_at_pose	(struct Alx_UR *restrict ur,
+				 const struct Alx_UR_Pose *restrict pose);
+[[gnu::nonnull]]
 int	alx_ur_sprintf_pose	(ptrdiff_t nmemb,
 				 char *restrict str/*[nmemb]*/,
 				 const struct Alx_UR_Pose *restrict pose);
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
+[[gnu::nonnull]]
 int	alx_ur_sprintf_pose_rel	(ptrdiff_t nmemb,
 				 char *restrict str/*[nmemb]*/,
 				 const struct Alx_UR_Pose *restrict pose_rel);

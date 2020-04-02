@@ -16,6 +16,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <time.h>
 
 
 /******************************************************************************
@@ -295,6 +296,7 @@ struct	Alx_UR_Tool_Mode_Info {
 };
 
 struct	Alx_UR_Robot_State {
+	struct timespec			timestamp;
 	struct Alx_UR_Robot_Mode_Data	robot_mode;
 	struct Alx_UR_Joint_Data	joint;
 	struct Alx_UR_Tool_Data		tool_data;
