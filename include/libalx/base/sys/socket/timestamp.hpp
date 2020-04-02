@@ -15,6 +15,7 @@
  ******************************************************************************/
 #include <ctime>
 
+#include <sys/types.h>
 #include <sys/socket.h>
 
 #include "libalx/base/compiler/restrict.hpp"

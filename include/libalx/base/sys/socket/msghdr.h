@@ -7,13 +7,13 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/sys/socket/timestamp.h */
+#pragma once	/* libalx/base/sys/socket/msghdr.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include <time.h>
+#include <stddef.h>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -24,7 +24,8 @@
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define msg_get_timestampns(tm, msg)	alx_msg_get_timestampns(tm, msg)
+#define wrap_msghdr(msg, iov, bsz, buf, cbsz, cbuf)			\
+	alx_wrap_msghdr(msg, iov, bsz, buf, cbsz, cbuf)
 #endif	 /* defined(ALX_NO_PREFIX) */
 
 
@@ -41,9 +42,11 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
-int	alx_msg_get_timestampns	(struct timespec *restrict tm,
-				 struct msghdr *restrict msg);
+__attribute__((nonnull))
+void	alx_wrap_msghdr	(struct msghdr *restrict msg,
+			 struct iovec *restrict iov,
+			 size_t bufsiz, void *restrict buf,
+			 size_t cbufsiz, void *restrict cbuf);
 
 
 /******************************************************************************
