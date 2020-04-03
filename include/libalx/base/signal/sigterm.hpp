@@ -22,7 +22,7 @@
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define sigterm_init()		alx_sigterm_init()
-#endif
+#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************

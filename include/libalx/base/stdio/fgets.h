@@ -20,6 +20,11 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define fgets_nonl(buf, bufsiz, stream, len)				\
+	alx_fgets_nonl(buf, bufsiz, stream, len)
+#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -38,21 +43,6 @@
 __attribute__((nonnull(1, 3)))
 int	alx_fgets_nonl	(char buf[restrict /*bufsiz*/], int bufsiz,
 			 FILE *restrict stream, ptrdiff_t *restrict len);
-
-
-/******************************************************************************
- ******* static inline ********************************************************
- ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull(1, 3)))
-inline
-int	fgets_nonl	(char buf[restrict /*bufsiz*/], int bufsiz,
-			 FILE *restrict stream, ptrdiff_t *restrict len)
-{
-	return	alx_fgets_nonl(buf, bufsiz, stream, len);
-}
-#endif
 
 
 /******************************************************************************

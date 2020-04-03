@@ -22,7 +22,7 @@
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define sigpipe_init()		alx_sigpipe_init()
-#endif
+#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************

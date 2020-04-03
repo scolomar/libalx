@@ -19,6 +19,10 @@
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define dirname_s(dest, path)		alx_dirname_s(dest, path)
+#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -37,21 +41,6 @@
 __attribute__((nonnull, warn_unused_result))
 int	alx_dirname_s	(char dest[static restrict FILENAME_MAX],
 			 const char *restrict path);
-
-
-/******************************************************************************
- ******* always_inline ********************************************************
- ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-int	dirname_s	(char dest[static restrict FILENAME_MAX],
-			 const char *restrict path)
-{
-	return	alx_dirname_s(dest, path);
-}
-#endif
 
 
 /******************************************************************************

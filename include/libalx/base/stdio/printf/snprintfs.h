@@ -11,20 +11,22 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stdarg.h>
 #include <stddef.h>
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define snprintfs(str, written, nmemb, fmt, ...)			\
 	alx_snprintfs(str, written, nmemb, fmt, ##__VA_ARGS__)
-#endif
+#define vsnprintfs(str, written, nmemb, fmt, ap)			\
+	alx_vsnprintfs(str, written, nmemb, fmt, ap)
+#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -48,23 +50,6 @@ __attribute__((nonnull(1, 4), format(printf, 4, 0), warn_unused_result))
 int	alx_vsnprintfs	(char str[restrict /*nmemb*/],
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, va_list ap);
-
-
-/******************************************************************************
- ******* always_inline ********************************************************
- ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-__attribute__((always_inline))
-__attribute__((nonnull(1, 4), format(printf, 4, 0), warn_unused_result))
-inline
-int	vsnprintfs	(char str[restrict /*nmemb*/],
-			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
-			 const char *restrict format, va_list ap)
-{
-	return	alx_vsnprintfs(str, written, nmemb, format, ap);
-}
-#endif
 
 
 /******************************************************************************

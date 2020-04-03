@@ -29,8 +29,9 @@
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define mb()		alx_mb()
-#endif
+#define mb()			alx_mb()
+#define membarrier(cmd, flags)	alx_membarrier(cmd, flags)
+#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -48,20 +49,6 @@
  ******************************************************************************/
 inline
 int	alx_membarrier	(int cmd, int flags);
-
-
-/******************************************************************************
- ******* always_inline ********************************************************
- ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-__attribute__((always_inline))
-inline
-int	membarrier	(int cmd, int flags)
-{
-	return	alx_membarrier(cmd, flags);
-}
-#endif
 
 
 /******************************************************************************

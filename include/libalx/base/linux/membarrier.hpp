@@ -24,8 +24,8 @@
 
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define membarrier(cmd, flags)		alx_membarrier(cmd, flags)
 #define mb()				alx_mb()
+#define membarrier(cmd, flags)		alx_membarrier(cmd, flags)
 #endif
 
 

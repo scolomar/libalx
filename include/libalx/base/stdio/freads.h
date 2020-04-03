@@ -11,15 +11,20 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 #include <stdio.h>
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define freads(bufsiz, buf, stream, len)				\
+	alx_freads(bufsiz, buf, stream, len)
+#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -38,21 +43,6 @@
 __attribute__((nonnull(2, 3)))
 int	alx_freads	(ptrdiff_t bufsiz, char buf[static restrict bufsiz],
 			 FILE *restrict stream, ptrdiff_t *restrict len);
-
-
-/******************************************************************************
- ******* static inline ********************************************************
- ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull(2, 3)))
-inline
-int	freads		(ptrdiff_t bufsiz, char buf[static restrict bufsiz],
-			 FILE *restrict stream, ptrdiff_t *restrict len)
-{
-	return	alx_freads(bufsiz, buf, stream, len);
-}
-#endif
 
 
 /******************************************************************************
