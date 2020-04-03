@@ -13,11 +13,12 @@
 #include <stddef.h>
 #include <time.h>
 
-#include "libalx/alx/robot/ur/core/core.h"
-#include "libalx/alx/robot/ur/core/msg.h"
 #include "libalx/base/stdint/mask/bit.h"
 #include "libalx/base/string/strbool/strbool.h"
 #include "libalx/base/time/gettime.h"
+
+#include "libalx/alx/robot/ur/core/core.h"
+#include "libalx/alx/robot/ur/core/msg/robot_state.h"
 
 
 /******************************************************************************
@@ -51,7 +52,7 @@ int	alx_ur_set_Dout	(struct Alx_UR *ur, ptrdiff_t i, bool state,
 		return	-1;
 
 	do {
-		if (alx_ur_recv(ur))
+		if (alx_ur_robot_state_update(ur))
 			return	-1;
 		actual_state	= BIT_READ(ur->state.mb.DO_bits, i);
 		time	= alx_clock_gettime_diff_ms(CLOCK_REALTIME, &tm);

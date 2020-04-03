@@ -7,15 +7,25 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/alx/robot/ur/setup/setup.h"
+#include "libalx/alx/robot/ur/core/msg/msg.h"
 
-#include <stdio.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <string.h>
+#include <time.h>
+
+#include <sys/types.h>
+#include <sys/socket.h>
 
 #include "libalx/base/compiler/size.h"
+#include "libalx/base/compiler/unused.h"
+#include "libalx/base/sys/socket/msghdr.h"
+#include "libalx/base/sys/socket/timestamp.h"
+#include "libalx/base/time/timespec.h"
 
 #include "libalx/alx/robot/ur/core/core.h"
 #include "libalx/alx/robot/ur/core/msg/robot_state.h"
-#include "libalx/alx/robot/ur/pose/pose.h"
 
 
 /******************************************************************************
@@ -28,6 +38,7 @@
  ******************************************************************************/
 
 
+
 /******************************************************************************
  ******* static prototypes ****************************************************
  ******************************************************************************/
@@ -36,20 +47,52 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_ur_set_tcp	(struct Alx_UR *restrict ur,
-			 const struct Alx_UR_Pose *restrict tcp)
+int	alx_ur_recvmsg			(struct Alx_UR *ur)
 {
-	char	pos_tcp[BUFSIZ];
+	struct Alx_UR_Msg_Hdr	hdr;
+	struct msghdr		msg;
+	struct iovec		iov;
+	struct timespec		ts;
+	char			cbuf[BUFSIZ];
+	ssize_t			n;
 
-	if (tcp->type != ALX_UR_POSE_XYZ)
+	alx_wrap_msghdr(&msg, &iov, sizeof(hdr), &hdr, ARRAY_BYTES(cbuf), cbuf);
+	n	= recvmsg(ur->sfd, &msg, MSG_WAITALL);
+	if (n != sizeof(hdr))
+		return	-1;
+	if (alx_msg_get_timestampns(&ts, &msg))
 		return	-1;
 
-	if (alx_ur_sprintf_pose(ARRAY_SIZE(pos_tcp), pos_tcp, tcp))
+	unsigned char	buf[hdr.sz];
+
+	n	= recv(ur->sfd, buf, ARRAY_SIZE(buf), MSG_WAITALL);
+	if (n != ARRAY_SSIZE(buf))
 		return	-1;
-	if (alx_ur_cmd(ur, "set_tcp(%s);", pos_tcp))
-		return	-1;
-	if (alx_ur_robot_state_update(ur))
-		return	-1;
+
+	switch (hdr.type) {
+	case MSG_TYPE_ROBOT_STATE:
+		alx_ur_parse_msg_robot_state(ur, ARRAY_SIZE(buf), buf, &ts);
+		return	0;
+	case MSG_TYPE_ROBOT_MSG:
+// TODO		alx_ur_parse_msg_robot_msg(ur, ARRAY_SIZE(buf), buf);
+		return	0;
+	default:
+		return	-1;	/* Unrecignized msg */
+	}
+}
+
+int	alx_ur_buffer_read		(struct Alx_UR *ur)
+{
+	int64_t		time_ms;
+	struct timespec	start;
+
+	clock_gettime(CLOCK_REALTIME, &start);
+
+	do {
+		if (alx_ur_recvmsg(ur))
+			return	-1;
+		time_ms	= alx_timespec_diff_ms(&start, &ur->state.timestamp);
+	} while (time_ms < -ROBOT_UPDATE_PERIOD_MS);
 	return	0;
 }
 

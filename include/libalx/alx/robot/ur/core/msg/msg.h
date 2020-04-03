@@ -3,95 +3,86 @@
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
+/*
+ * Suported versions of UR secondary client interface:
+ *	major	minor
+ *	1	6 ... 8
+ *	3	0 ... 12
+ *	5	0 ... 6
+ */
+
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/alx/robot/ur/move/move.h */
+#pragma once	/* libalx/alx/robot/ur/core/msg/msg.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <stdint.h>
+
 #include "libalx/alx/robot/ur/core/core.h"
-#include "libalx/alx/robot/ur/pose/pose.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+#define parse_pkg_elem(type, msg)	(				\
+{									\
+	type				t_;				\
+	const unsigned char *restrict	*p2_	= msg;			\
+	const unsigned char		*p_	= *p2_;			\
+									\
+	_Generic(t_,							\
+	bool: ({	/* bool is sent as char by the UR */		\
+		t_	= *p_;						\
+		*p2_	+= sizeof(char);				\
+	}),								\
+	default: ({							\
+		memcpy(&t_, p_, sizeof(t_));				\
+		*p2_	+= sizeof(t_);					\
+	})								\
+	);								\
+									\
+	t_;								\
+}									\
+)
+
+
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-#define ur_halt(ur, timeout)		alx_ur_halt(ur, timeout)
-
-#define ur_check_movement(ur, timeout)	alx_ur_check_movement(ur, timeout)
-#define ur_wait_while_moving(ur, timeout, tm_start)			\
-	alx_ur_wait_while_moving(ur, timeout, tm_start)
-#define ur_is_moving(ur)		alx_ur_is_moving(ur)
-
-#define ur_movej(ur, pose, timeout)	alx_ur_movej(ur, pose, timeout)
-#define ur_movej_rel(ur, pose, timeout)	alx_ur_movej_rel(ur, pose, timeout)
-#define ur_movel(ur, pose, timeout)	alx_ur_movel(ur, pose, timeout)
-#define ur_movel_rel(ur, pose, timeout)	alx_ur_movel_rel(ur, pose, timeout)
-#define ur_movec(ur, via, to, timeout)	alx_ur_movec(ur, via, to, timeout)
-#define ur_movec_rel(ur, via, to, timeout)				\
-	alx_ur_movec_rel(ur, via, to, timeout)
+#define ur_recvmsg(ur)		alx_ur_recvmsg(ur)
+#define ur_buffer_read(ur)	alx_ur_buffer_read(ur)
 #endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
+enum	Alx_UR_Msg_Type {
+	MSG_TYPE_ROBOT_STATE	= 16,
+	MSG_TYPE_ROBOT_MSG	= 20
+};
 
 
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
+struct	Alx_UR_Msg_Hdr {
+	int32_t	sz;
+	uint8_t	type;
+};
 
 
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull, warn_unused_result))
-int	alx_ur_halt		(struct Alx_UR *ur,
-				 double timeout);
-
+int	alx_ur_recvmsg		(struct Alx_UR *ur);
 __attribute__((nonnull, warn_unused_result))
-int	alx_ur_check_movement	(struct Alx_UR *restrict ur,
-				 double timeout);
-__attribute__((nonnull, warn_unused_result))
-int	alx_ur_wait_while_moving(struct Alx_UR *restrict ur,
-				 double timeout,
-				 const struct timespec *restrict tm_start);
-__attribute__((nonnull, warn_unused_result))
-bool	alx_ur_is_moving	(const struct Alx_UR *ur);
-
-__attribute__((nonnull, warn_unused_result))
-int	alx_ur_movej		(struct Alx_UR *restrict ur,
-				 const struct Alx_UR_Pose *restrict pose,
-				 double timeout);
-__attribute__((nonnull, warn_unused_result))
-int	alx_ur_movej_rel	(struct Alx_UR *restrict ur,
-				 const struct Alx_UR_Pose *restrict pose_rel,
-				 double timeout);
-__attribute__((nonnull, warn_unused_result))
-int	alx_ur_movel		(struct Alx_UR *restrict ur,
-				 const struct Alx_UR_Pose *restrict pose,
-				 double timeout);
-__attribute__((nonnull, warn_unused_result))
-int	alx_ur_movel_rel	(struct Alx_UR *restrict ur,
-				 const struct Alx_UR_Pose *restrict pose_rel,
-				 double timeout);
-__attribute__((nonnull, warn_unused_result))
-int	alx_ur_movec		(struct Alx_UR *restrict ur,
-				 const struct Alx_UR_Pose *restrict via,
-				 const struct Alx_UR_Pose *restrict to,
-				 double timeout);
-__attribute__((nonnull, warn_unused_result))
-int	alx_ur_movec_rel	(struct Alx_UR *restrict ur,
-				 const struct Alx_UR_Pose *restrict via,
-				 const struct Alx_UR_Pose *restrict to,
-				 double timeout);
+int	alx_ur_buffer_read	(struct Alx_UR *ur);
 
 
 /******************************************************************************

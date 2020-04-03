@@ -14,7 +14,8 @@
  ******* headers **************************************************************
  ******************************************************************************/
 #include <libalx/alx/robot/ur/core/core.hpp>
-#include <libalx/alx/robot/ur/core/msg.hpp>
+#include <libalx/alx/robot/ur/core/msg/msg.hpp>
+#include <libalx/alx/robot/ur/core/msg/robot_state.hpp>
 #include <libalx/alx/robot/ur/io/io.hpp>
 #include <libalx/alx/robot/ur/miscellaneous/miscellaneous.hpp>
 #include <libalx/alx/robot/ur/move/move.hpp>

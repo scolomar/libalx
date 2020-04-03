@@ -10,7 +10,7 @@
 #include "libalx/alx/robot/ur/miscellaneous/miscellaneous.h"
 
 #include "libalx/alx/robot/ur/core/core.h"
-#include "libalx/alx/robot/ur/core/msg.h"
+#include "libalx/alx/robot/ur/core/msg/robot_state.h"
 
 
 /******************************************************************************
@@ -37,7 +37,7 @@ int	alx_ur_puts	(struct Alx_UR *restrict ur,
 
 	if (alx_ur_cmd(ur, "textmsg(\"%s\");", msg))
 		return	-1;
-	if (alx_ur_recv(ur))
+	if (alx_ur_robot_state_update(ur))
 		return	-1;
 	return	0;
 }

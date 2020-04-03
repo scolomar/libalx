@@ -3,30 +3,32 @@
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
-/*
- * Suported versions of UR client interface:
- *	major	minor
- *	1	6 ... 8
- *	3	0 ... 12
- *	5	0 ... 6
- */
-
 
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/alx/robot/ur/core/msg.h */
+#pragma once	/* libalx/alx/robot/ur/core/msg/robot_state.h */
 
 
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <stdint.h>
+
+#include <sys/types.h>
+
 #include "libalx/alx/robot/ur/core/core.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define ur_robot_state_update(ur)	alx_ur_robot_state_update(ur)
+#define ur_parse_msg_robot_state(ur, sz, msg, ts)			\
+	alx_ur_parse_msg_robot_state(ur, sz, msg, ts)
+#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -37,15 +39,28 @@
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
+struct	Alx_UR_Robot_Msg_Hdr {
+	uint64_t	timestamp;
+	char		source;
+	int8_t		type;
+};
+
+struct	Alx_UR_Robot_State_Pkg_Hdr {
+	int32_t	sz;
+	uint8_t	type;
+};
 
 
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull, warn_unused_result))
-int	alx_ur_recv			(struct Alx_UR *ur);
-__attribute__((nonnull, warn_unused_result))
 int	alx_ur_robot_state_update	(struct Alx_UR *ur);
+__attribute__((nonnull))
+void	alx_ur_parse_msg_robot_state	(struct Alx_UR *restrict ur,
+					 ssize_t sz,
+					 const unsigned char msg[static restrict sz],
+					 const struct timespec *restrict ts);
 
 
 /******************************************************************************

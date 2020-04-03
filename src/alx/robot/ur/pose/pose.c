@@ -12,9 +12,10 @@
 #include <stddef.h>
 #include <stdio.h>
 
-#include "libalx/alx/robot/ur/core/core.h"
 #include "libalx/base/compiler/size.h"
 #include "libalx/base/stdio/printf/snprintfs.h"
+
+#include "libalx/alx/robot/ur/core/core.h"
 
 
 /******************************************************************************

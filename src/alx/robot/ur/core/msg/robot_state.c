@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/alx/robot/ur/core/msg.h"
+#include "libalx/alx/robot/ur/core/msg/robot_state.h"
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -18,72 +18,29 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 
-#include "libalx/alx/robot/ur/core/core.h"
 #include "libalx/base/compiler/size.h"
 #include "libalx/base/compiler/unused.h"
 #include "libalx/base/sys/socket/msghdr.h"
 #include "libalx/base/sys/socket/timestamp.h"
 #include "libalx/base/time/timespec.h"
 
+#include "libalx/alx/robot/ur/core/core.h"
+#include "libalx/alx/robot/ur/core/msg/msg.h"
+
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define parse_pkg_elem(type, msg)	(				\
-{									\
-	type				t_;				\
-	const unsigned char *restrict	*p2_	= msg;			\
-	const unsigned char		*p_	= *p2_;			\
-									\
-	_Generic(t_,							\
-	bool: ({	/* bool is sent as char by the UR */		\
-		t_	= *p_;						\
-		*p2_	+= sizeof(char);				\
-	}),								\
-	default: ({							\
-		memcpy(&t_, p_, sizeof(t_));				\
-		*p2_	+= sizeof(t_);					\
-	})								\
-	);								\
-									\
-	t_;								\
-}									\
-)
 
 
 /******************************************************************************
  ******* enum / struct / union ************************************************
  ******************************************************************************/
-enum	Alx_UR_Msg_Type {
-	MSG_TYPE_ROBOT_STATE	= 16,
-	MSG_TYPE_ROBOT_MSG	= 20
-};
-
-struct	Alx_UR_Msg_Hdr {
-	int32_t	sz;
-	uint8_t	type;
-};
-
-struct	Alx_UR_Robot_State_Pkg_Hdr {
-	int32_t	sz;
-	uint8_t	type;
-};
-
-struct	Alx_UR_Robot_Msg_Hdr {
-	uint64_t	timestamp;
-	char		source;
-	int8_t		type;
-};
 
 
 /******************************************************************************
  ******* static prototypes ****************************************************
  ******************************************************************************/
-static
-void	parse_msg_robot_state		(struct Alx_UR *restrict ur,
-					 ssize_t sz,
-					 const unsigned char msg[static restrict sz],
-					 const struct timespec *restrict ts);
 static
 void	parse_rspkg_robot_mode_data	(struct Alx_UR *restrict ur,
 					 ssize_t sz,
@@ -142,40 +99,6 @@ void	parse_rspkg_tool_mode_info	(struct Alx_UR *restrict ur,
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_ur_recv			(struct Alx_UR *ur)
-{
-	struct Alx_UR_Msg_Hdr	hdr;
-	struct msghdr		msg;
-	struct iovec		iov;
-	struct timespec		ts;
-	char			cbuf[BUFSIZ];
-	ssize_t			n;
-
-	alx_wrap_msghdr(&msg, &iov, sizeof(hdr), &hdr, ARRAY_BYTES(cbuf), cbuf);
-	n	= recvmsg(ur->sfd, &msg, MSG_WAITALL);
-	if (n != sizeof(hdr))
-		return	-1;
-	if (alx_msg_get_timestampns(&ts, &msg))
-		return	-1;
-
-	unsigned char	buf[hdr.sz];
-
-	n	= recv(ur->sfd, buf, ARRAY_SIZE(buf), MSG_WAITALL);
-	if (n != ARRAY_SSIZE(buf))
-		return	-1;
-
-	switch (hdr.type) {
-	case MSG_TYPE_ROBOT_STATE:
-		parse_msg_robot_state(ur, ARRAY_SIZE(buf), buf, &ts);
-		return	0;
-	case MSG_TYPE_ROBOT_MSG:
-// TODO		parse_msg_robot_msg(ur, ARRAY_SIZE(buf), buf);
-		return	0;
-	default:
-		return	-1;	/* Unrecignized msg */
-	}
-}
-
 int	alx_ur_robot_state_update	(struct Alx_UR *ur)
 {
 	int64_t		time_ms;
@@ -184,18 +107,13 @@ int	alx_ur_robot_state_update	(struct Alx_UR *ur)
 	clock_gettime(CLOCK_REALTIME, &start);
 
 	do {
-		if (alx_ur_recv(ur))
+		if (alx_ur_recvmsg(ur))
 			return	-1;
 		time_ms	= alx_timespec_diff_ms(&start, &ur->state.timestamp);
 	} while (time_ms < ROBOT_UPDATE_PERIOD_MS);
 	return	0;
 }
 
-
-/******************************************************************************
- ******* static function definitions ******************************************
- ******************************************************************************/
-static
 void	parse_msg_robot_state		(struct Alx_UR *restrict ur,
 					 ssize_t sz,
 					 const unsigned char msg[static restrict sz],
@@ -259,6 +177,10 @@ void	parse_msg_robot_state		(struct Alx_UR *restrict ur,
 	}
 }
 
+
+/******************************************************************************
+ ******* static function definitions ******************************************
+ ******************************************************************************/
 static
 void	parse_rspkg_robot_mode_data	(struct Alx_UR *restrict ur,
 					 ssize_t sz,

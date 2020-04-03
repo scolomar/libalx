@@ -26,7 +26,6 @@
 #if defined(ALX_NO_PREFIX)
 #define ur_set_Dout(ur, i, state, timeout)				\
 	alx_ur_set_Dout(ur, i, state, timeout)
-}
 #endif	/* defined(ALX_NO_PREFIX) */
 
 

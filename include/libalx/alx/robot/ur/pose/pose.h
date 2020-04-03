@@ -52,6 +52,10 @@
 #define UR_POSE_INIT_JOINTS(b, s, e, w1, w2, w3)			\
 	ALX_UR_POSE_INIT_JOINTS(b, s, e, w1, w2, w3)
 
+#define ur_pose_diff(diff, a, b)	alx_ur_pose_diff(diff, a, b)
+#define ur_is_at_pose(ur, pose)		alx_ur_is_at_pose(ur, pose)
+#define ur_is_at_target(ur)		alx_ur_is_at_target(ur)
+
 #define ur_sprintf_pose(nmemb, str, pose)				\
 	alx_ur_sprintf_pose(nmemb, str, pose)
 #define ur_sprintf_pose_rel(nmemb, str, pose_rel)			\

@@ -18,12 +18,13 @@ MK_DEPS	=								\
 	$(LIBALX_DIR)/Makefile
 
 MODULES	=								\
-	alx/robot/ur/core/core					\
-	alx/robot/ur/core/msg					\
-	alx/robot/ur/io/io					\
-	alx/robot/ur/miscellaneous/miscellaneous		\
-	alx/robot/ur/move/move					\
-	alx/robot/ur/pose/pose					\
+	alx/robot/ur/core/core						\
+	alx/robot/ur/core/msg/msg					\
+	alx/robot/ur/core/msg/robot_state				\
+	alx/robot/ur/io/io						\
+	alx/robot/ur/miscellaneous/miscellaneous			\
+	alx/robot/ur/move/move						\
+	alx/robot/ur/pose/pose						\
 	alx/robot/ur/setup/setup
 
 SRC	= $(MODULES:%=$(SRC_DIR)/%.c)

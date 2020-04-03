@@ -11,17 +11,18 @@
 
 #include <stdio.h>
 
-#include "libalx/alx/robot/ur/core/core.h"
-#include "libalx/alx/robot/ur/core/msg.h"
-#include "libalx/alx/robot/ur/pose/pose.h"
 #include "libalx/base/compiler/size.h"
 #include "libalx/base/time/gettime.h"
+
+#include "libalx/alx/robot/ur/core/core.h"
+#include "libalx/alx/robot/ur/core/msg/robot_state.h"
+#include "libalx/alx/robot/ur/pose/pose.h"
 
 
 /******************************************************************************
  ******* macros ***************************************************************
  ******************************************************************************/
-#define THRESHOLD	(0.001)
+#define QD_THRESHOLD	(0.001)
 
 
 /******************************************************************************
@@ -70,10 +71,8 @@ int	alx_ur_wait_while_moving(struct Alx_UR *restrict ur,
 {
 	double	time;
 
-	if (alx_ur_robot_state_update(ur))
-		return	-1;
 	do {
-		if (alx_ur_recv(ur))
+		if (alx_ur_robot_state_update(ur))
 			return	-1;
 		if (!alx_ur_is_moving(ur))
 			return	0;
@@ -87,7 +86,7 @@ bool	alx_ur_is_moving	(const struct Alx_UR *ur)
 {
 
 	for (ptrdiff_t i = 0; i < NJOINTS; i++) {
-		if (ur->state.joint.qd_actual.j[i] > THRESHOLD)
+		if (ur->state.joint.qd_actual.j[i] > QD_THRESHOLD)
 			return	true;
 	}
 	return	false;

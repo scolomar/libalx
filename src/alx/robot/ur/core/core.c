@@ -19,13 +19,14 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
-#include "libalx/alx/robot/ur/move/move.h"
-#include "libalx/alx/robot/ur/core/msg.h"
 #include "libalx/base/stdlib/alloc/callocs.h"
 #include "libalx/base/stdlib/alloc/frees.h"
 #include "libalx/base/stdio/printf/sbprintf.h"
 #include "libalx/base/string/strcat/strbcatf.h"
 #include "libalx/base/sys/socket/tcp/client.h"
+
+#include "libalx/alx/robot/ur/move/move.h"
+#include "libalx/alx/robot/ur/core/msg/robot_state.h"
 
 
 /******************************************************************************
@@ -63,11 +64,11 @@ int	alx_ur_init	(struct Alx_UR **restrict ur,
 		goto err1;
 	(*ur)->sfd	= sfd;
 
-	/* First received message is 'version' (in newer UR client versions) */
-	if (alx_ur_recv(*ur))
-		goto err2;
-	/* Second received message is 'state' */
-	if (alx_ur_recv(*ur))
+	/*
+	 * First received message is 'version' (in newer UR client versions).
+	 * When robot state is updated, version will have been received.
+	 */
+	if (alx_ur_robot_state_update(*ur))
 		goto err2;
 
 	return	0;

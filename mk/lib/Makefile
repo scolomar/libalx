@@ -140,7 +140,8 @@ ALX_NPC_A_OBJ	= $(ALX_NPC_MODULES:%=$(BUILD_TMP_DIR)/%.a.o)
 ALX_NPC_SO_OBJ	= $(ALX_NPC_MODULES:%=$(BUILD_TMP_DIR)/%.so.o)
 ALX_ROBOT_MODULES	=						\
 		alx/robot/ur/core/core					\
-		alx/robot/ur/core/msg					\
+		alx/robot/ur/core/msg/msg				\
+		alx/robot/ur/core/msg/robot_state			\
 		alx/robot/ur/io/io					\
 		alx/robot/ur/miscellaneous/miscellaneous		\
 		alx/robot/ur/move/move					\
