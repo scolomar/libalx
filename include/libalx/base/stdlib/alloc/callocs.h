@@ -79,7 +79,7 @@
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define callocs(ptr, nmemb)	alx_callocs(ptr, nmemb)
-#endif
+#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************

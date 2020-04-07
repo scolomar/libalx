@@ -44,7 +44,7 @@
 /* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define frees(ptr)	alx_frees(ptr)
-#endif
+#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************

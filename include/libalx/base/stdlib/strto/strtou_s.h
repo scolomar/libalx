@@ -11,7 +11,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 #include <stdint.h>
@@ -20,8 +20,15 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define strtou8_s(num, str, base, nread)   alx_strtou8_s(num, str, base, nread)
+#define strtou16_s(num, str, base, nread)  alx_strtou16_s(num, str, base, nread)
+#define strtou32_s(num, str, base, nread)  alx_strtou32_s(num, str, base, nread)
+#define strtou64_s(num, str, base, nread)  alx_strtou64_s(num, str, base, nread)
+#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -59,49 +66,6 @@ inline
 int	alx_strtoul_status	(const char *restrict str,
 				 const char *restrict endptr,
 				 int errno_after, int errno_before);
-
-
-/******************************************************************************
- ******* always_inline ********************************************************
- ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-inline
-int	strtou8_s		(uint8_t *restrict num,
-				 const char *restrict str,
-				 int base, ptrdiff_t *restrict nread)
-{
-	return	alx_strtou8_s(num, str, base, nread);
-}
-
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-inline
-int	strtou16_s		(uint16_t *restrict num,
-				 const char *restrict str,
-				 int base, ptrdiff_t *restrict nread)
-{
-	return	alx_strtou16_s(num, str, base, nread);
-}
-
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-inline
-int	strtou32_s		(uint32_t *restrict num,
-				 const char *restrict str,
-				 int base, ptrdiff_t *restrict nread)
-{
-	return	alx_strtou32_s(num, str, base, nread);
-}
-
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-inline
-int	strtou64_s		(uint64_t *restrict num,
-				 const char *restrict str,
-				 int base, ptrdiff_t *restrict nread)
-{
-	return	alx_strtou64_s(num, str, base, nread);
-}
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************

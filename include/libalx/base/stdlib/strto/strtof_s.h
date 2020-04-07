@@ -11,7 +11,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 
@@ -19,8 +19,14 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define strtod_s(num, str, nread)	alx_strtod_s(num, str, nread)
+#define strtof_s(num, str, nread)	alx_strtof_s(num, str, nread)
+#define strtold_s(num, str, nread)	alx_strtold_s(num, str, nread)
+#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -55,37 +61,6 @@ inline
 int	alx_strtof_status	(const char *restrict str,
 				 const char *restrict endptr,
 				 int errno_after, int errno_before);
-
-
-/******************************************************************************
- ******* always_inline ********************************************************
- ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-inline
-int	strtod_s	(double *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict nread)
-{
-	return	alx_strtod_s(num, str, nread);
-}
-
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-inline
-int	strtof_s	(float *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict nread)
-{
-	return	alx_strtof_s(num, str, nread);
-}
-
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-inline
-int	strtold_s	(long double *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict nread)
-{
-	return	alx_strtold_s(num, str, nread);
-}
-#endif	 /* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************

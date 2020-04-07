@@ -11,15 +11,20 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 #include <stdint.h>
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define getenv_s(dest, size, name)	   alx_getenv_s(dest, size, name)
+#define secure_getenv_s(dest, size, name)  alx_secure_getenv_s(dest, size, name)
+#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -41,29 +46,6 @@ int	alx_getenv_s		(char dest[/*size*/], ptrdiff_t size,
 __attribute__((nonnull, warn_unused_result))
 int	alx_secure_getenv_s	(char dest[/*size*/], ptrdiff_t size,
 				 const char *name);
-
-
-/******************************************************************************
- ******* always_inline ********************************************************
- ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-int	getenv_s		(char dest[/*size*/], ptrdiff_t size,
-				 const char *name)
-{
-	return	alx_getenv_s(dest, size, name);
-}
-
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-int	secure_getenv_s		(char dest[/*size*/], ptrdiff_t size,
-				 const char *name)
-{
-	return	alx_secure_getenv_s(dest, size, name);
-}
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************

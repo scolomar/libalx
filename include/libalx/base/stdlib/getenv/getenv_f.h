@@ -11,14 +11,23 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stdint.h>
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define getenv_d(num, name)		alx_getenv_d(num, name)
+#define getenv_f(num, name)		alx_getenv_f(num, name)
+#define getenv_ld(num, name)		alx_getenv_ld(num, name)
+#define secure_getenv_d(num, name)	alx_secure_getenv_d(num, name)
+#define secure_getenv_f(num, name)	alx_secure_getenv_f(num, name)
+#define secure_getenv_ld(num, name)	alx_secure_getenv_ld(num, name)
+#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -52,61 +61,6 @@ int	alx_secure_getenv_f	(float *restrict num,
 __attribute__((nonnull, warn_unused_result))
 int	alx_secure_getenv_ld	(long double *restrict num,
 				 const char *restrict name);
-
-
-/******************************************************************************
- ******* always_inline ********************************************************
- ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-int	getenv_d		(double *restrict num,
-				 const char *restrict name)
-{
-	return	alx_getenv_d(num, name);
-}
-
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-int	getenv_f		(float *restrict num,
-				 const char *restrict name)
-{
-	return	alx_getenv_f(num, name);
-}
-
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-int	getenv_ld		(long double *restrict num,
-				 const char *restrict name)
-{
-	return	alx_getenv_ld(num, name);
-}
-
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-int	secure_getenv_d		(double *restrict num,
-				 const char *restrict name)
-{
-	return	alx_secure_getenv_d(num, name);
-}
-
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-int	secure_getenv_f		(float *restrict num,
-				 const char *restrict name)
-{
-	return	alx_secure_getenv_f(num, name);
-}
-
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-int	secure_getenv_ld	(long double *restrict num,
-				 const char *restrict name)
-{
-	return	alx_secure_getenv_ld(num, name);
-}
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
