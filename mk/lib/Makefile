@@ -377,90 +377,103 @@ $(BUILD_PATH)/libalx-base.a: $(BASE_A_OBJ)
 $(BUILD_PATH)/libalx-base.so: $(BASE_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/lib/libalx/$(@F)"
-	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs libbsd-overlay` -l m
+	$(Q)$(CC) $(LDFLAGS) -Wl,-soname,$(@F).$(VERSION)		\
+			-o $@ $^ `pkg-config --libs libbsd-overlay` -l m
 
 
 $(BUILD_PATH)/libalx-data-structures.a: $(ALX_DS_A_OBJ)
 $(BUILD_PATH)/libalx-data-structures.so: $(ALX_DS_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/lib/libalx/$(@F)"
-	$(Q)$(CC) $(LDFLAGS) -o $@ $^ -l alx-base
+	$(Q)$(CC) $(LDFLAGS) -Wl,-soname,$(@F).$(VERSION)		\
+			-o $@ $^ -l alx-base
 
 
 $(BUILD_PATH)/libalx-npcomplete.a: $(ALX_NPC_A_OBJ)
 $(BUILD_PATH)/libalx-npcomplete.so: $(ALX_NPC_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/lib/libalx/$(@F)"
-	$(Q)$(CC) $(LDFLAGS) -o $@ $^ -fopenmp -l alx-base
+	$(Q)$(CC) $(LDFLAGS) -Wl,-soname,$(@F).$(VERSION)		\
+			-o $@ $^ -fopenmp -l alx-base
 
 
 $(BUILD_PATH)/libalx-robot.a: $(ALX_ROBOT_A_OBJ)
 $(BUILD_PATH)/libalx-robot.so: $(ALX_ROBOT_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/lib/libalx/$(@F)"
-	$(Q)$(CC) $(LDFLAGS) -o $@ $^ -l alx-base
+	$(Q)$(CC) $(LDFLAGS) -Wl,-soname,$(@F).$(VERSION)		\
+			-o $@ $^ -l alx-base
 
 $(BUILD_PATH)/libalx-curl.a: $(CURL_A_OBJ)
 $(BUILD_PATH)/libalx-curl.so: $(CURL_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/lib/libalx/$(@F)"
-	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs libcurl`	\
+	$(Q)$(CC) $(LDFLAGS) -Wl,-soname,$(@F).$(VERSION)		\
+			-o $@ $^ `pkg-config --libs libcurl`	\
 					-l alx-data-structures -l alx-base
 
 $(BUILD_PATH)/libalx-cv.a: $(CV_A_OBJ)
 $(BUILD_PATH)/libalx-cv.so: $(CV_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
 	@echo	"	CXX	build/lib/libalx/$(@F)"
-	$(Q)$(CXX) $(LDFLAGS) -o $@ $^ `pkg-config --libs opencv4`	\
+	$(Q)$(CXX) $(LDFLAGS) -Wl,-soname,$(@F).$(VERSION)		\
+			-o $@ $^ `pkg-config --libs opencv4`	\
 						-l alx-gsl -l alx-base -l m
 
 $(BUILD_PATH)/libalx-gmp.a: $(GMP_A_OBJ)
 $(BUILD_PATH)/libalx-gmp.so: $(GMP_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/lib/libalx/$(@F)"
-	$(Q)$(CC) $(LDFLAGS) -o $@ $^ -l gmp				\
+	$(Q)$(CC) $(LDFLAGS) -Wl,-soname,$(@F).$(VERSION)		\
+			-o $@ $^ -l gmp				\
 						-l alx-base
 
 $(BUILD_PATH)/libalx-gsl.a: $(GSL_A_OBJ)
 $(BUILD_PATH)/libalx-gsl.so: $(GSL_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/lib/libalx/$(@F)"
-	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs gsl`		\
+	$(Q)$(CC) $(LDFLAGS) -Wl,-soname,$(@F).$(VERSION)		\
+			-o $@ $^ `pkg-config --libs gsl`		\
 						-l alx-base
 
 $(BUILD_PATH)/libalx-ncurses.a: $(NCURSES_A_OBJ)
 $(BUILD_PATH)/libalx-ncurses.so: $(NCURSES_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/lib/libalx/$(@F)"
-	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs ncurses`	\
+	$(Q)$(CC) $(LDFLAGS) -Wl,-soname,$(@F).$(VERSION)		\
+			-o $@ $^ `pkg-config --libs ncurses`	\
 						-l alx-base
 
 $(BUILD_PATH)/libalx-ocr.a: $(OCR_A_OBJ)
 $(BUILD_PATH)/libalx-ocr.so: $(OCR_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/lib/libalx/$(@F)"
-	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs tesseract`	\
+	$(Q)$(CC) $(LDFLAGS) -Wl,-soname,$(@F).$(VERSION)		\
+			-o $@ $^ `pkg-config --libs tesseract`	\
 						-l alx-base
 
 $(BUILD_PATH)/libalx-plot.a: $(PLOT_A_OBJ)
 $(BUILD_PATH)/libalx-plot.so: $(PLOT_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/lib/libalx/$(@F)"
-	$(Q)$(CC) $(LDFLAGS) -o $@ $^ 					\
+	$(Q)$(CC) $(LDFLAGS) -Wl,-soname,$(@F).$(VERSION)		\
+			-o $@ $^ 					\
 						-l alx-base
 
 $(BUILD_PATH)/libalx-telnet-tcp.a: $(TELNET_TCP_A_OBJ)
 $(BUILD_PATH)/libalx-telnet-tcp.so: $(TELNET_TCP_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/lib/libalx/$(@F)"
-	$(Q)$(CC) $(LDFLAGS) -o $@ $^					\
+	$(Q)$(CC) $(LDFLAGS) -Wl,-soname,$(@F).$(VERSION)		\
+			-o $@ $^					\
 						-l alx-base
 
 $(BUILD_PATH)/libalx-zbar.a: $(ZBAR_A_OBJ)
 $(BUILD_PATH)/libalx-zbar.so: $(ZBAR_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
 	@echo	"	CC	build/lib/libalx/$(@F)"
-	$(Q)$(CC) $(LDFLAGS) -o $@ $^ `pkg-config --libs zbar`		\
+	$(Q)$(CC) $(LDFLAGS) -Wl,-soname,$(@F).$(VERSION)		\
+			-o $@ $^ `pkg-config --libs zbar`		\
 						-l alx-base
 
 

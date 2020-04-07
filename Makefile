@@ -1,6 +1,20 @@
 #! /usr/bin/make -f
 
 ################################################################################
+VERSION		= 1
+PATCHLEVEL	= 0
+SUBLEVEL	=
+EXTRAVERSION	= ~b18
+NAME		=
+
+export	VERSION
+export	PATCHLEVEL
+export	SUBLEVEL
+
+LIBVERSION	= $(VERSION)$(if $(PATCHLEVEL),.$(PATCHLEVEL)$(if $(SUBLEVEL),.$(SUBLEVEL)))$(EXTRAVERSION)
+export	LIBVERSION
+
+################################################################################
 # Copyright (C) 2019	Alejandro Colomar Andrés
 # SPDX-License-Identifier:	LGPL-2.0-only
 ################################################################################
