@@ -478,7 +478,7 @@ PHONY += inst--lib%.so
 inst--lib%.so:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 	@echo	"	CP	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/lib$*.so"
-	$(Q)cp -f $(v)		$(BUILD_LIB_DIR)/libalx/lib$*.so	\
+	$(Q)cp -f $(v)		$(BUILD_LIB_DIR)/libalx/lib$*.so.$(LIBVERSION)	\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 
 PHONY += inst--lib%.pc
@@ -507,6 +507,8 @@ uninstall:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
 	$(Q)find		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/	\
 				-type f -name 'libalx*.pc' -exec rm '{}' '+'
+	@echo	"	LDCONFIG"
+	$(Q)ldconfig
 	@echo	"	RM	$(DESTDIR)/etc/ld.so.conf.d/libalx*.conf"
 	$(Q)find		$(DESTDIR)/etc/ld.so.conf.d/		\
 				-type f -name 'libalx*.conf' -exec rm '{}' '+'

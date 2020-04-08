@@ -1,9 +1,9 @@
 Name: libalx-curl
 Description: The libalx C/C++ library (libcurl extension)
 URL: https://github.com/alejandro-colomar/libalx
-Version: 1~b18
-Requires:
-Requires.private: libcurl libalx-base libalx-data-structures
+Version: 1.0~b18
+Requires: libalx-base libalx-data-structures
+Requires.private: libcurl
 
 prefix=/usr/
 libdir=${prefix}/lib/
