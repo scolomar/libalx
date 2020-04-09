@@ -181,7 +181,8 @@ export	CFLAGS_SO
 CXXFLAGS_STD	= -std=gnu++17
 
 CXXFLAGS_OPT	= -O3
-CXXFLAGS_OPT   += -march=native
+## XXX: optimize for native if portability is not needed
+#CXXFLAGS_OPT   += -march=native
 CXXFLAGS_OPT   += -flto
 
 CXXFLAGS_W	= -Wall
@@ -214,7 +215,6 @@ export	CXXFLAGS_SO
 ################################################################################
 # libs
 LDFLAGS_OPT	= -O3
-LDFLAGS_OPT    += -march=native
 LDFLAGS_OPT    += -flto
 LDFLAGS_OPT    += -fuse-linker-plugin
 
