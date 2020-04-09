@@ -430,7 +430,7 @@ $(BUILD_PATH)/libalx-cv.so.$(LIBVERSION): $(CV_SO_OBJ)
 			-Wl,-soname,libalx-cv.so.$(VERSION)		\
 			-o $@ $^					\
 			`pkg-config --libs opencv4`			\
-			-l alx-gsl -l alx-base -l m
+			-l alx-gsl -l gsl -l alx-base -l m
 
 $(BUILD_PATH)/libalx-gmp.a: $(GMP_A_OBJ)
 $(BUILD_PATH)/libalx-gmp.so.$(LIBVERSION): $(GMP_SO_OBJ)

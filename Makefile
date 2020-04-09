@@ -103,9 +103,9 @@ export	BUILD_DIR
 export	BUILD_TMP_DIR
 export	BUILD_LIB_DIR
 
-# XXX: make ... LOCAL=local to build in /usr/local/
+# XXX: make ... LOCAL= to build in /usr/
 ifndef LOCAL
-  LOCAL			=
+  LOCAL			= local
 endif
 ifeq ("$(LOCAL)","local")
   INSTALL_ETC_DIR	= /usr/local/etc
