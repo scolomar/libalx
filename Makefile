@@ -103,7 +103,7 @@ export	BUILD_DIR
 export	BUILD_TMP_DIR
 export	BUILD_LIB_DIR
 
-# XXX: make ... LOCAL= to build in /usr/
+## XXX: make ... LOCAL= to build in /usr/
 ifndef LOCAL
   LOCAL			= local
 endif
@@ -144,7 +144,8 @@ export	SZ
 CFLAGS_STD	= -std=gnu17
 
 CFLAGS_OPT	= -O3
-CFLAGS_OPT     += -march=native
+## XXX: optimize for native if portability is not needed
+#CFLAGS_OPT     += -march=native
 CFLAGS_OPT     += -flto
 
 CFLAGS_W	= -Wall

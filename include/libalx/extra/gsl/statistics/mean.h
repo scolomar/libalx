@@ -70,27 +70,27 @@ long double alx_gsl_stats_mean_ldbl(ptrdiff_t nmemb,
 __attribute__((nonnull, pure))
 float	alx_gsl_stats_mean_flt	(ptrdiff_t nmemb,
 				 const float arr[static restrict nmemb]);
-__attribute__((always_inline, nonnull, pure))
+__attribute__((nonnull, pure))
 inline
 double	alx_gsl_stats_mean_u8	(ptrdiff_t nmemb,
 				 const uint8_t arr[static restrict nmemb]);
-__attribute__((always_inline, nonnull, pure))
+__attribute__((nonnull, pure))
 inline
 double	alx_gsl_stats_mean_s8	(ptrdiff_t nmemb,
 				 const int8_t arr[static restrict nmemb]);
-__attribute__((always_inline, nonnull, pure))
+__attribute__((nonnull, pure))
 inline
 double	alx_gsl_stats_mean_u16	(ptrdiff_t nmemb,
 				 const uint16_t arr[static restrict nmemb]);
-__attribute__((always_inline, nonnull, pure))
+__attribute__((nonnull, pure))
 inline
 double	alx_gsl_stats_mean_s16	(ptrdiff_t nmemb,
 				 const int16_t arr[static restrict nmemb]);
-__attribute__((always_inline, nonnull, pure))
+__attribute__((nonnull, pure))
 inline
 double	alx_gsl_stats_mean_u32	(ptrdiff_t nmemb,
 				 const uint32_t arr[static restrict nmemb]);
-__attribute__((always_inline, nonnull, pure))
+__attribute__((nonnull, pure))
 inline
 double	alx_gsl_stats_mean_s32	(ptrdiff_t nmemb,
 				 const int32_t arr[static restrict nmemb]);
