@@ -8,7 +8,8 @@ MK_DEPS	=								\
 	$(MK_LIB_DIR)/Makefile						\
 	$(LIBALX_DIR)/Makefile
 
-BUILD_PATH	= $(BUILD_LIB_DIR)/libalx
+BUILD_A_PATH	= $(BUILD_A_DIR)/libalx
+BUILD_SO_PATH	= $(BUILD_SO_DIR)/libalx
 
 BASE_MODULES	=							\
 		base/assert/array					\
@@ -283,8 +284,8 @@ all: $(ALL)
 
 PHONY += base
 base:
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.so.$(LIBVERSION)
+	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
+	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
 
 
 PHONY += alx
@@ -294,18 +295,18 @@ alx: robot
 
 PHONY += data-structures
 data-structures:
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.so.$(LIBVERSION)
+	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
+	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
 
 PHONY += npcomplete
 npcomplete:
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.so.$(LIBVERSION)
+	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
+	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
 
 PHONY += robot
 robot:
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.so.$(LIBVERSION)
+	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
+	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
 
 
 PHONY += extra
@@ -321,184 +322,241 @@ extra: zbar
 
 PHONY += curl
 curl:
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.so.$(LIBVERSION)
+	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
+	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
 
 PHONY += cv
 cv:
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.so.$(LIBVERSION)
+	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
+	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
 
 PHONY += gmp
 gmp:
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.so.$(LIBVERSION)
+	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
+	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
 
 PHONY += gsl
 gsl:
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.so.$(LIBVERSION)
+	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
+	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
 
 PHONY += ncurses
 ncurses:
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.so.$(LIBVERSION)
+	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
+	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
 
 PHONY += ocr
 ocr:
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.so.$(LIBVERSION)
+	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
+	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
 
 PHONY += plot
 plot:
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.so.$(LIBVERSION)
+	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
+	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
 
 PHONY += telnet-tcp
 telnet-tcp:
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.so.$(LIBVERSION)
+	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
+	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
 
 PHONY += zbar
 zbar:
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_PATH)/libalx-$@.so.$(LIBVERSION)
+	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
+	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
 
 
 %.so.$(LIBVERSION):
 %.a:
 	$(Q)mkdir -p		$(@D)/
-	@echo	"	AR	build/lib/libalx/$(@F)"
+	@echo	"	AR	build/lib/static/libalx/$(@F)"
 	$(Q)$(AR) -r -c -s -o $@ $^
 
 
 
-$(BUILD_PATH)/libalx-base.a: $(BASE_A_OBJ)
-$(BUILD_PATH)/libalx-base.so.$(LIBVERSION): $(BASE_SO_OBJ)
+$(BUILD_A_PATH)/libalx-base.a: $(BASE_A_OBJ)
+$(BUILD_SO_PATH)/libalx-base.so.$(LIBVERSION): $(BASE_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
-	@echo	"	CC	build/lib/libalx/$(@F)"
+	@echo	"	CC	build/lib/shared/libalx/$(@F)"
 	$(Q)$(CC) $(LDFLAGS)						\
 			-Wl,-soname,libalx-base.so.$(VERSION)		\
 			-o $@ $^					\
-			`pkg-config --libs libbsd-overlay` -l m
+			`pkg-config --libs libbsd-overlay`		\
+			-l m
+	$(Q)ln -s -T	libalx-base.so.$(LIBVERSION)			\
+			$(BUILD_SO_PATH)/libalx-base.so.$(VERSION)
+	$(Q)ln -s -T	libalx-base.so.$(VERSION)			\
+			$(BUILD_SO_PATH)/libalx-base.so
 
 
-$(BUILD_PATH)/libalx-data-structures.a: $(ALX_DS_A_OBJ)
-$(BUILD_PATH)/libalx-data-structures.so.$(LIBVERSION): $(ALX_DS_SO_OBJ)
+$(BUILD_A_PATH)/libalx-data-structures.a: $(ALX_DS_A_OBJ)
+$(BUILD_SO_PATH)/libalx-data-structures.so.$(LIBVERSION): $(ALX_DS_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
-	@echo	"	CC	build/lib/libalx/$(@F)"
+	@echo	"	CC	build/lib/shared/libalx/$(@F)"
 	$(Q)$(CC) $(LDFLAGS)						\
 			-Wl,-soname,libalx-data-structures.so.$(VERSION)\
 			-o $@ $^					\
-			-l alx-base
+			-L$(BUILD_SO_PATH) -l alx-base
+	$(Q)ln -s -T	libalx-data-structures.so.$(LIBVERSION)		\
+			$(BUILD_SO_PATH)/libalx-data-structures.so.$(VERSION)
+	$(Q)ln -s -T	libalx-data-structures.so.$(VERSION)		\
+			$(BUILD_SO_PATH)/libalx-data-structures.so
 
-$(BUILD_PATH)/libalx-npcomplete.a: $(ALX_NPC_A_OBJ)
-$(BUILD_PATH)/libalx-npcomplete.so.$(LIBVERSION): $(ALX_NPC_SO_OBJ)
+$(BUILD_A_PATH)/libalx-npcomplete.a: $(ALX_NPC_A_OBJ)
+$(BUILD_SO_PATH)/libalx-npcomplete.so.$(LIBVERSION): $(ALX_NPC_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
-	@echo	"	CC	build/lib/libalx/$(@F)"
+	@echo	"	CC	build/lib/shared/libalx/$(@F)"
 	$(Q)$(CC) $(LDFLAGS)						\
 			-Wl,-soname,libalx-npcomplete.so.$(VERSION)	\
 			-o $@ $^					\
 			-fopenmp					\
-			-l alx-base
+			-L$(BUILD_SO_PATH) -l alx-base
+	$(Q)ln -s -T	libalx-npcomplete.so.$(LIBVERSION)		\
+			$(BUILD_SO_PATH)/libalx-npcomplete.so.$(VERSION)
+	$(Q)ln -s -T	libalx-npcomplete.so.$(VERSION)			\
+			$(BUILD_SO_PATH)/libalx-npcomplete.so
 
-$(BUILD_PATH)/libalx-robot.a: $(ALX_ROBOT_A_OBJ)
-$(BUILD_PATH)/libalx-robot.so.$(LIBVERSION): $(ALX_ROBOT_SO_OBJ)
+$(BUILD_A_PATH)/libalx-robot.a: $(ALX_ROBOT_A_OBJ)
+$(BUILD_SO_PATH)/libalx-robot.so.$(LIBVERSION): $(ALX_ROBOT_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
-	@echo	"	CC	build/lib/libalx/$(@F)"
+	@echo	"	CC	build/lib/shared/libalx/$(@F)"
 	$(Q)$(CC) $(LDFLAGS)						\
 			-Wl,-soname,libalx-robot.so.$(VERSION)		\
 			-o $@ $^					\
-			-l alx-base
+			-L$(BUILD_SO_PATH) -l alx-base
+	$(Q)ln -s -T	libalx-robot.so.$(LIBVERSION)			\
+			$(BUILD_SO_PATH)/libalx-robot.so.$(VERSION)
+	$(Q)ln -s -T	libalx-robot.so.$(VERSION)			\
+			$(BUILD_SO_PATH)/libalx-robot.so
 
 
-$(BUILD_PATH)/libalx-curl.a: $(CURL_A_OBJ)
-$(BUILD_PATH)/libalx-curl.so.$(LIBVERSION): $(CURL_SO_OBJ)
+$(BUILD_A_PATH)/libalx-curl.a: $(CURL_A_OBJ)
+$(BUILD_SO_PATH)/libalx-curl.so.$(LIBVERSION): $(CURL_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
-	@echo	"	CC	build/lib/libalx/$(@F)"
+	@echo	"	CC	build/lib/shared/libalx/$(@F)"
 	$(Q)$(CC) $(LDFLAGS)						\
 			-Wl,-soname,libalx-curl.so.$(VERSION)		\
 			-o $@ $^					\
 			`pkg-config --libs libcurl`			\
-			-l alx-data-structures -l alx-base
+			-L$(BUILD_SO_PATH) -l alx-data-structures	\
+			-L$(BUILD_SO_PATH) -l alx-base
+	$(Q)ln -s -T	libalx-curl.so.$(LIBVERSION)			\
+			$(BUILD_SO_PATH)/libalx-curl.so.$(VERSION)
+	$(Q)ln -s -T	libalx-curl.so.$(VERSION)			\
+			$(BUILD_SO_PATH)/libalx-curl.so
 
-$(BUILD_PATH)/libalx-cv.a: $(CV_A_OBJ)
-$(BUILD_PATH)/libalx-cv.so.$(LIBVERSION): $(CV_SO_OBJ)
+$(BUILD_A_PATH)/libalx-cv.a: $(CV_A_OBJ)
+$(BUILD_SO_PATH)/libalx-cv.so.$(LIBVERSION): $(CV_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
-	@echo	"	CXX	build/lib/libalx/$(@F)"
+	@echo	"	CXX	build/lib/shared/libalx/$(@F)"
 	$(Q)$(CXX) $(LDFLAGS)						\
 			-Wl,-soname,libalx-cv.so.$(VERSION)		\
 			-o $@ $^					\
 			`pkg-config --libs opencv4`			\
-			-l alx-gsl -l gsl -l alx-base -l m
+			-L$(BUILD_SO_PATH) -l alx-gsl			\
+			-l gsl						\
+			-L$(BUILD_SO_PATH) -l alx-base			\
+			-l m
+	$(Q)ln -s -T	libalx-cv.so.$(LIBVERSION)			\
+			$(BUILD_SO_PATH)/libalx-cv.so.$(VERSION)
+	$(Q)ln -s -T	libalx-cv.so.$(VERSION)				\
+			$(BUILD_SO_PATH)/libalx-cv.so
 
-$(BUILD_PATH)/libalx-gmp.a: $(GMP_A_OBJ)
-$(BUILD_PATH)/libalx-gmp.so.$(LIBVERSION): $(GMP_SO_OBJ)
+$(BUILD_A_PATH)/libalx-gmp.a: $(GMP_A_OBJ)
+$(BUILD_SO_PATH)/libalx-gmp.so.$(LIBVERSION): $(GMP_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
-	@echo	"	CC	build/lib/libalx/$(@F)"
+	@echo	"	CC	build/lib/shared/libalx/$(@F)"
 	$(Q)$(CC) $(LDFLAGS)						\
 			-Wl,-soname,libalx-gmp.so.$(VERSION)		\
 			-o $@ $^					\
 			-l gmp						\
-			-l alx-base
+			-L$(BUILD_SO_PATH) -l alx-base
+	$(Q)ln -s -T	libalx-gmp.so.$(LIBVERSION)			\
+			$(BUILD_SO_PATH)/libalx-gmp.so.$(VERSION)
+	$(Q)ln -s -T	libalx-gmp.so.$(VERSION)			\
+			$(BUILD_SO_PATH)/libalx-gmp.so
 
-$(BUILD_PATH)/libalx-gsl.a: $(GSL_A_OBJ)
-$(BUILD_PATH)/libalx-gsl.so.$(LIBVERSION): $(GSL_SO_OBJ)
+$(BUILD_A_PATH)/libalx-gsl.a: $(GSL_A_OBJ)
+$(BUILD_SO_PATH)/libalx-gsl.so.$(LIBVERSION): $(GSL_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
-	@echo	"	CC	build/lib/libalx/$(@F)"
+	@echo	"	CC	build/lib/shared/libalx/$(@F)"
 	$(Q)$(CC) $(LDFLAGS)						\
 			-Wl,-soname,libalx-gsl.so.$(VERSION)		\
 			-o $@ $^					\
 			`pkg-config --libs gsl`				\
-			-l alx-base
+			-L$(BUILD_SO_PATH) -l alx-base
+	$(Q)ln -s -T	libalx-gsl.so.$(LIBVERSION)			\
+			$(BUILD_SO_PATH)/libalx-gsl.so.$(VERSION)
+	$(Q)ln -s -T	libalx-gsl.so.$(VERSION)			\
+			$(BUILD_SO_PATH)/libalx-gsl.so
 
-$(BUILD_PATH)/libalx-ncurses.a: $(NCURSES_A_OBJ)
-$(BUILD_PATH)/libalx-ncurses.so.$(LIBVERSION): $(NCURSES_SO_OBJ)
+$(BUILD_A_PATH)/libalx-ncurses.a: $(NCURSES_A_OBJ)
+$(BUILD_SO_PATH)/libalx-ncurses.so.$(LIBVERSION): $(NCURSES_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
-	@echo	"	CC	build/lib/libalx/$(@F)"
+	@echo	"	CC	build/lib/shared/libalx/$(@F)"
 	$(Q)$(CC) $(LDFLAGS)						\
 			-Wl,-soname,libalx-ncurses.so.$(VERSION)	\
 			-o $@ $^					\
 			`pkg-config --libs ncurses`			\
-			-l alx-base
+			-L$(BUILD_SO_PATH) -l alx-base
+	$(Q)ln -s -T	libalx-ncurses.so.$(LIBVERSION)			\
+			$(BUILD_SO_PATH)/libalx-ncurses.so.$(VERSION)
+	$(Q)ln -s -T	libalx-ncurses.so.$(VERSION)			\
+			$(BUILD_SO_PATH)/libalx-ncurses.so
 
-$(BUILD_PATH)/libalx-ocr.a: $(OCR_A_OBJ)
-$(BUILD_PATH)/libalx-ocr.so.$(LIBVERSION): $(OCR_SO_OBJ)
+$(BUILD_A_PATH)/libalx-ocr.a: $(OCR_A_OBJ)
+$(BUILD_SO_PATH)/libalx-ocr.so.$(LIBVERSION): $(OCR_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
-	@echo	"	CC	build/lib/libalx/$(@F)"
+	@echo	"	CC	build/lib/shared/libalx/$(@F)"
 	$(Q)$(CC) $(LDFLAGS)						\
 			-Wl,-soname,libalx-ocr.so.$(VERSION)		\
 			-o $@ $^					\
 			`pkg-config --libs tesseract`			\
-			-l alx-base
+			-L$(BUILD_SO_PATH) -l alx-base
+	$(Q)ln -s -T	libalx-ocr.so.$(LIBVERSION)			\
+			$(BUILD_SO_PATH)/libalx-ocr.so.$(VERSION)
+	$(Q)ln -s -T	libalx-ocr.so.$(VERSION)			\
+			$(BUILD_SO_PATH)/libalx-ocr.so
 
-$(BUILD_PATH)/libalx-plot.a: $(PLOT_A_OBJ)
-$(BUILD_PATH)/libalx-plot.so.$(LIBVERSION): $(PLOT_SO_OBJ)
+$(BUILD_A_PATH)/libalx-plot.a: $(PLOT_A_OBJ)
+$(BUILD_SO_PATH)/libalx-plot.so.$(LIBVERSION): $(PLOT_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
-	@echo	"	CC	build/lib/libalx/$(@F)"
+	@echo	"	CC	build/lib/shared/libalx/$(@F)"
 	$(Q)$(CC) $(LDFLAGS)						\
 			-Wl,-soname,libalx-plot.so.$(VERSION)		\
 			-o $@ $^ 					\
-			-l alx-base
+			-L$(BUILD_SO_PATH) -l alx-base
+	$(Q)ln -s -T	libalx-plot.so.$(LIBVERSION)			\
+			$(BUILD_SO_PATH)/libalx-plot.so.$(VERSION)
+	$(Q)ln -s -T	libalx-plot.so.$(VERSION)			\
+			$(BUILD_SO_PATH)/libalx-plot.so
 
-$(BUILD_PATH)/libalx-telnet-tcp.a: $(TELNET_TCP_A_OBJ)
-$(BUILD_PATH)/libalx-telnet-tcp.so.$(LIBVERSION): $(TELNET_TCP_SO_OBJ)
+$(BUILD_A_PATH)/libalx-telnet-tcp.a: $(TELNET_TCP_A_OBJ)
+$(BUILD_SO_PATH)/libalx-telnet-tcp.so.$(LIBVERSION): $(TELNET_TCP_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
-	@echo	"	CC	build/lib/libalx/$(@F)"
+	@echo	"	CC	build/lib/shared/libalx/$(@F)"
 	$(Q)$(CC) $(LDFLAGS)						\
 			-Wl,-soname,libalx-telnet-tcp.so.$(VERSION)	\
 			-o $@ $^					\
-			-l alx-base
+			-L$(BUILD_SO_PATH) -l alx-base
+	$(Q)ln -s -T	libalx-telnet-tcp.so.$(LIBVERSION)		\
+			$(BUILD_SO_PATH)/libalx-telnet-tcp.so.$(VERSION)
+	$(Q)ln -s -T	libalx-telnet-tcp.so.$(VERSION)			\
+			$(BUILD_SO_PATH)/libalx-telnet-tcp.so
 
-$(BUILD_PATH)/libalx-zbar.a: $(ZBAR_A_OBJ)
-$(BUILD_PATH)/libalx-zbar.so.$(LIBVERSION): $(ZBAR_SO_OBJ)
+$(BUILD_A_PATH)/libalx-zbar.a: $(ZBAR_A_OBJ)
+$(BUILD_SO_PATH)/libalx-zbar.so.$(LIBVERSION): $(ZBAR_SO_OBJ)
 	$(Q)mkdir -p		$(@D)/
-	@echo	"	CC	build/lib/libalx/$(@F)"
+	@echo	"	CC	build/lib/shared/libalx/$(@F)"
 	$(Q)$(CC) $(LDFLAGS)						\
 			-Wl,-soname,libalx-zbar.so.$(VERSION)		\
 			-o $@ $^					\
 			`pkg-config --libs zbar`			\
-			-l alx-base
+			-L$(BUILD_SO_PATH) -l alx-base
+	$(Q)ln -s -T	libalx-zbar.so.$(LIBVERSION)			\
+			$(BUILD_SO_PATH)/libalx-zbar.so.$(VERSION)
+	$(Q)ln -s -T	libalx-zbar.so.$(VERSION)			\
+			$(BUILD_SO_PATH)/libalx-zbar.so
 
 
 PHONY += clean

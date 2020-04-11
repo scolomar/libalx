@@ -88,6 +88,8 @@ MK_LIB_DIR	= $(MK_DIR)/lib
 BUILD_DIR	= $(LIBALX_DIR)/build
 BUILD_TMP_DIR	= $(BUILD_DIR)/tmp
 BUILD_LIB_DIR	= $(BUILD_DIR)/lib
+BUILD_A_DIR	= $(BUILD_LIB_DIR)/static
+BUILD_SO_DIR	= $(BUILD_LIB_DIR)/shared
 
 export	LIBALX_DIR
 
@@ -102,6 +104,8 @@ export	MK_LIB_DIR
 export	BUILD_DIR
 export	BUILD_TMP_DIR
 export	BUILD_LIB_DIR
+export	BUILD_A_DIR
+export	BUILD_SO_DIR
 
 ## XXX: make ... LOCAL= to build in /usr/
 ifndef LOCAL
@@ -146,7 +150,7 @@ CFLAGS_STD	= -std=gnu17
 CFLAGS_OPT	= -O3
 ## XXX: optimize for native if portability is not needed
 #CFLAGS_OPT     += -march=native
-CFLAGS_OPT     += -flto
+#CFLAGS_OPT     += -flto
 
 CFLAGS_W	= -Wall
 CFLAGS_W       += -Wextra
@@ -170,7 +174,7 @@ CFLAGS         += $(CFLAGS_I)
 
 export	CFLAGS
 
-CFLAGS_A	= $(CFLAGS)
+CFLAGS_A	= $(CFLAGS) -flto
 CFLAGS_SO	= $(CFLAGS) -fpic
 
 export	CFLAGS_A
@@ -183,7 +187,7 @@ CXXFLAGS_STD	= -std=gnu++17
 CXXFLAGS_OPT	= -O3
 ## XXX: optimize for native if portability is not needed
 #CXXFLAGS_OPT   += -march=native
-CXXFLAGS_OPT   += -flto
+#CXXFLAGS_OPT   += -flto
 
 CXXFLAGS_W	= -Wall
 CXXFLAGS_W     += -Wextra
@@ -206,7 +210,7 @@ CXXFLAGS       += $(CXXFLAGS_I)
 
 export	CXXFLAGS
 
-CXXFLAGS_A	= $(CXXFLAGS)
+CXXFLAGS_A	= $(CXXFLAGS) -flto
 CXXFLAGS_SO	= $(CXXFLAGS) -fpic
 
 export	CXXFLAGS_A
@@ -215,8 +219,8 @@ export	CXXFLAGS_SO
 ################################################################################
 # libs
 LDFLAGS_OPT	= -O3
-LDFLAGS_OPT    += -flto
-LDFLAGS_OPT    += -fuse-linker-plugin
+#LDFLAGS_OPT    += -flto
+#LDFLAGS_OPT    += -fuse-linker-plugin
 
 LDFLAGS_L	= -L $(BUILD_LIB_DIR)/libalx/
 
@@ -472,14 +476,18 @@ PHONY += inst--lib%.a
 inst--lib%.a:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 	@echo	"	CP	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/lib$*.a"
-	$(Q)cp -f $(v)		$(BUILD_LIB_DIR)/libalx/lib$*.a		\
+	$(Q)cp -f $(v)		$(BUILD_A_DIR)/libalx/lib$*.a		\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 
 PHONY += inst--lib%.so
 inst--lib%.so:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 	@echo	"	CP	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/lib$*.so"
-	$(Q)cp -f $(v)		$(BUILD_LIB_DIR)/libalx/lib$*.so.$(LIBVERSION)	\
+	$(Q)cp -f $(v)		$(BUILD_SO_DIR)/libalx/lib$*.so.$(LIBVERSION)	\
+					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
+	$(Q)cp -f $(v)		$(BUILD_SO_DIR)/libalx/lib$*.so.$(VERSION)	\
+					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
+	$(Q)cp -f $(v)		$(BUILD_SO_DIR)/libalx/lib$*.so		\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 
 PHONY += inst--lib%.pc

@@ -5,10 +5,10 @@ Version: 1.0~b18
 Requires: libbsd-overlay
 Requires.private:
 
-prefix=/usr/local/
-includedir=${prefix}/include/
-libdir=${prefix}/lib/
+prefix=/usr/local
+includedir=${prefix}/include
+libdir=${prefix}/lib
 
 Cflags: -I${includedir} -D_GNU_SOURCE -D_POSIX_C_SOURCE=200809L
-Libs: -L${libdir}/libalx/ -lalx-base -lm
-Libs.private:
+Libs: -L${libdir}/libalx -lalx-base
+Libs.private: -lm
