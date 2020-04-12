@@ -482,10 +482,11 @@ inst--lib%.a:
 PHONY += inst--lib%.so
 inst--lib%.so:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
-	@echo	"	CP	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/lib$*.so"
+	@echo	"	CP	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/lib$*.so.$(LIBVERSION)"
 	$(Q)cp -f $(v)		$(BUILD_SO_DIR)/libalx/lib$*.so.$(LIBVERSION)	\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
-	$(Q)ln -s -T		lib$*.so.$(VERSION)			\
+	@echo	"	LN -s	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/lib$*.so"
+	$(Q)ln -sf -T		lib$*.so.$(VERSION)			\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/lib$*.so
 
 PHONY += inst--lib%.pc
