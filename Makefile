@@ -155,6 +155,7 @@ CFLAGS_OPT	= -O3
 CFLAGS_W	= -Wall
 CFLAGS_W       += -Wextra
 CFLAGS_W       += -Wstrict-prototypes
+CFLAGS_W       += -fno-common
 CFLAGS_W       += -Werror
 
 CFLAGS_D	= -D _GNU_SOURCE
@@ -191,6 +192,7 @@ CXXFLAGS_OPT	= -O3
 
 CXXFLAGS_W	= -Wall
 CXXFLAGS_W     += -Wextra
+CXXFLAGS_W     += -fno-common
 CXXFLAGS_W     += -Werror
 
 CXXFLAGS_D	= -D _GNU_SOURCE
@@ -221,6 +223,8 @@ export	CXXFLAGS_SO
 LDFLAGS_OPT	= -O3
 #LDFLAGS_OPT    += -flto
 #LDFLAGS_OPT    += -fuse-linker-plugin
+
+LDFLAGS_W	= -fno-common
 
 LDFLAGS_L	= -L $(BUILD_LIB_DIR)/libalx/
 
