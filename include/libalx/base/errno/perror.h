@@ -50,11 +50,11 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull(1, 3), format(printf, 5, 6)))
+__attribute__((nonnull(1, 3), format(printf, 5, 6), cold))
 void	alx__perrorx__	(const char *restrict file, int line,
 			 const char *restrict func, int errno_val,
 			 const char *restrict format, ...);
-__attribute__((nonnull(1, 3), format(printf, 5, 0)))
+__attribute__((nonnull(1, 3), format(printf, 5, 0), cold))
 void	alx__vperrorx__	(const char *restrict file, int line,
 			 const char *restrict func, int errno_val,
 			 const char *restrict format, va_list ap);

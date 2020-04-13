@@ -51,7 +51,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull(2, 4), format(printf, 6, 7)))
+__attribute__((nonnull(2, 4), format(printf, 6, 7), cold))
 noreturn
 void	alx__errorx__	(int status, const char *restrict file, int line,
 			 const char *restrict func, int errno_val,

@@ -44,7 +44,7 @@
  ******************************************************************************/
 extern	"C"
 {
-[[gnu::nonnull(1, 3)]] [[gnu::format(printf, 5, 6)]]
+[[gnu::nonnull(1, 3)]] [[gnu::format(printf, 5, 6)]] [[gnu::cold]]
 void	alx__perrorx__	(const char *restrict file, int line,
 			 const char *restrict func, int errno_val,
 			 const char *restrict format, ...);
