@@ -39,15 +39,6 @@
 	alx_vsnprintfs(buff, written, ARRAY_SIZE(buff), fmt, ap)
 
 
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define sbprintf(buff, written, fmt, ...)				\
-	alx_sbprintf(buff, written, fmt, ##__VA_ARGS__)
-#define vsbprintf(buff, written, fmt, ap)				\
-	alx_vsbprintf(buff, written, fmt, ap)
-#endif	/* defined(ALX_NO_PREFIX) */
-
-
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
@@ -75,6 +66,17 @@ namespace alx {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+#define sbprintf(buff, written, fmt, ...)				\
+	alx_sbprintf(buff, written, fmt, ##__VA_ARGS__)
+#define vsbprintf(buff, written, fmt, ap)				\
+	alx_vsbprintf(buff, written, fmt, ap)
+#endif
 
 
 /******************************************************************************

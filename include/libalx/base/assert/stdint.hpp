@@ -11,7 +11,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <cassert>
 #include <cstdint>
@@ -21,7 +21,7 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 #define alx_Static_assert_stdint_types()				\
 	alx_Static_assert_u8_uchar();					\
@@ -108,29 +108,6 @@
 			 "BUG:   int64_t != long")
 
 
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define Static_assert_stdint_types()	alx_Static_assert_stdint_types()
-#define Static_assert_u8_uchar()	alx_Static_assert_u8_uchar()
-#define Static_assert_s8_schar()	alx_Static_assert_s8_schar()
-#define Static_assert_u16_ushort()	alx_Static_assert_u16_ushort()
-#define Static_assert_s16_short()	alx_Static_assert_s16_short()
-#define Static_assert_u32_unsigned()	alx_Static_assert_u32_unsigned()
-#define Static_assert_s32_int()		alx_Static_assert_s32_int()
-#define Static_assert_u64_ulong()	alx_Static_assert_u64_ulong()
-#define Static_assert_s64_long()	alx_Static_assert_s64_long()
-#define assert_stdint_types()		alx_assert_stdint_types()
-#define assert_u8_uchar()		alx_assert_u8_uchar()
-#define assert_s8_schar()		alx_assert_s8_schar()
-#define assert_u16_ushort()		alx_assert_u16_ushort()
-#define assert_s16_short()		alx_assert_s16_short()
-#define assert_u32_unsigned()		alx_assert_u32_unsigned()
-#define assert_s32_int()		alx_assert_s32_int()
-#define assert_u64_ulong()		alx_assert_u64_ulong()
-#define assert_s64_long()		alx_assert_s64_long()
-#endif
-
-
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
@@ -158,6 +135,32 @@ namespace alx {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+/* Rename without alx_ prefix */
+#if defined(ALX_NO_PREFIX)
+#define Static_assert_stdint_types()	alx_Static_assert_stdint_types()
+#define Static_assert_u8_uchar()	alx_Static_assert_u8_uchar()
+#define Static_assert_s8_schar()	alx_Static_assert_s8_schar()
+#define Static_assert_u16_ushort()	alx_Static_assert_u16_ushort()
+#define Static_assert_s16_short()	alx_Static_assert_s16_short()
+#define Static_assert_u32_unsigned()	alx_Static_assert_u32_unsigned()
+#define Static_assert_s32_int()		alx_Static_assert_s32_int()
+#define Static_assert_u64_ulong()	alx_Static_assert_u64_ulong()
+#define Static_assert_s64_long()	alx_Static_assert_s64_long()
+#define assert_stdint_types()		alx_assert_stdint_types()
+#define assert_u8_uchar()		alx_assert_u8_uchar()
+#define assert_s8_schar()		alx_assert_s8_schar()
+#define assert_u16_ushort()		alx_assert_u16_ushort()
+#define assert_s16_short()		alx_assert_s16_short()
+#define assert_u32_unsigned()		alx_assert_u32_unsigned()
+#define assert_s32_int()		alx_assert_s32_int()
+#define assert_u64_ulong()		alx_assert_u64_ulong()
+#define assert_s64_long()		alx_assert_s64_long()
+#endif
 
 
 /******************************************************************************

@@ -16,17 +16,12 @@
 #include <stdarg.h>
 #include <stddef.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define snprintfs(str, written, nmemb, fmt, ...)			\
-	alx_snprintfs(str, written, nmemb, fmt, ##__VA_ARGS__)
-#define vsnprintfs(str, written, nmemb, fmt, ap)			\
-	alx_vsnprintfs(str, written, nmemb, fmt, ap)
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -50,6 +45,15 @@ __attribute__((nonnull(1, 4), format(printf, 4, 0), warn_unused_result))
 int	alx_vsnprintfs	(char str[restrict /*nmemb*/],
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, va_list ap);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS(snprintfs,	alx_snprintfs);
+ALX_ALIAS(vsnprintfs,	alx_vsnprintfs);
+#endif
 
 
 /******************************************************************************
