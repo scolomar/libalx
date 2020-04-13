@@ -13,6 +13,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <libalx/base/compiler/attribute.h>
 #include <libalx/base/compiler/size.h>
 #include <libalx/base/compiler/type.h>
 #include <libalx/base/compiler/unused.h>

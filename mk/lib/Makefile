@@ -19,6 +19,7 @@ BASE_MODULES	=							\
 		base/assert/stddef					\
 		base/assert/stdint					\
 		base/assert/type					\
+		base/compiler/attribute					\
 		base/compiler/size					\
 		base/compiler/type					\
 		base/compiler/unused					\

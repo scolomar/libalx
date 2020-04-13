@@ -13,6 +13,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <libalx/base/compiler/attribute.hpp>
 #include <libalx/base/compiler/restrict.hpp>
 #include <libalx/base/compiler/size.hpp>
 #include <libalx/base/compiler/type.hpp>
