@@ -18,9 +18,15 @@
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-#define ALX_ALIAS(aka, original)					\
+#define ALX_ALIAS_DECLARATION(aka, original)				\
+__attribute__((copy(original)))						\
+extern									\
+typeof(original)	aka;
+
+#define ALX_ALIAS_DEFINITION(aka, original)				\
 __attribute__((alias(#original)))					\
 __attribute__((copy(original)))						\
+extern									\
 typeof(original)	aka;
 
 
@@ -43,7 +49,8 @@ typeof(original)	aka;
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define ALIAS(aka, original)	ALX_ALIAS(aka, original)
+#define ALIAS_DECLARATION(aka, original)  ALX_ALIAS_DECLARATION(aka, original)
+#define ALIAS_DEFINITION(aka, original)	  ALX_ALIAS_DEFINITION(aka, original)
 #endif
 
 

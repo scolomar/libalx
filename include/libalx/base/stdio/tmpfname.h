@@ -44,7 +44,9 @@ int	alx_tmpfname	(ptrdiff_t size, char fname[static size]);
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-ALX_ALIAS(tmpfname, alx_tmpfname);
+# if !defined(ALX_SRC__)
+ALX_ALIAS_DECLARATION(tmpfname, alx_tmpfname);
+# endif
 #endif
 
 

@@ -55,7 +55,9 @@ namespace alx {
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-ALX_ALIAS(printf_b_init, alx_printf_b_init);
+# if !defined(ALX_SRC__)
+ALX_ALIAS_DECLARATION(printf_b_init, alx_printf_b_init);
+# endif
 #endif
 
 

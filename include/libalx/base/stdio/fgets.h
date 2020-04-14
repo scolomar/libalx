@@ -46,7 +46,9 @@ int	alx_fgets_nonl	(char buf[restrict /*bufsiz*/], int bufsiz,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-ALX_ALIAS(fgets_nonl, alx_fgets_nonl);
+# if !defined(ALX_SRC__)
+ALX_ALIAS_DECLARATION(fgets_nonl, alx_fgets_nonl);
+# endif
 #endif
 
 

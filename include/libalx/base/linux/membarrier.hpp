@@ -60,7 +60,10 @@ namespace alx {
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
 #define mb()	alx_mb()
-ALX_ALIAS(membarrier, alx_membarrier);
+
+# if !defined(ALX_SRC__)
+ALX_ALIAS_DECLARATION(membarrier, alx_membarrier);
+# endif
 #endif
 
 

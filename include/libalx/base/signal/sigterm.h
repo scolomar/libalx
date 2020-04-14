@@ -49,8 +49,10 @@ int	alx_sigterm_init(void);
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-ALX_ALIAS(sigterm,	alx_sigterm);
-ALX_ALIAS(sigterm_init,	alx_sigterm_init);
+# if !defined(ALX_SRC__)
+ALX_ALIAS_DECLARATION(sigterm,		alx_sigterm);
+ALX_ALIAS_DECLARATION(sigterm_init,	alx_sigterm_init);
+# endif
 #endif
 
 

@@ -61,7 +61,9 @@ namespace alx {
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-ALX_ALIAS(freads, alx_freads);
+# if !defined(ALX_SRC__)
+ALX_ALIAS_DECLARATION(freads, alx_freads);
+# endif
 #endif
 
 

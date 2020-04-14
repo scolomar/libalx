@@ -49,8 +49,10 @@ int	alx_sigpipe_init(void);
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-ALX_ALIAS(sigpipe,	alx_sigpipe);
-ALX_ALIAS(sigpipe_init,	alx_sigpipe_init);
+# if !defined(ALX_SRC__)
+ALX_ALIAS_DECLARATION(sigpipe,		alx_sigpipe);
+ALX_ALIAS_DECLARATION(sigpipe_init,	alx_sigpipe_init);
+# endif
 #endif
 
 
