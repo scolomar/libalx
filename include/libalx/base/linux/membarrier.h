@@ -47,10 +47,7 @@ int	alx_membarrier	(int cmd, int flags);
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
 #define mb()	alx_mb()
-
-# if !defined(ALX_SRC__)
 ALX_ALIAS_DECLARATION(membarrier, alx_membarrier);
-# endif
 #endif
 
 

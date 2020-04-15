@@ -66,10 +66,8 @@ namespace alx {
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-# if !defined(ALX_SRC__)
 ALX_ALIAS_DECLARATION(snprintfs,	alx_snprintfs);
 ALX_ALIAS_DECLARATION(vsnprintfs,	alx_vsnprintfs);
-# endif
 #endif
 
 

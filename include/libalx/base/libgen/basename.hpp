@@ -59,11 +59,8 @@ namespace alx {
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-# if !defined(ALX_SRC__)
 ALX_ALIAS_DECLARATION(basename_s, alx_basename_s);
-# endif
 #endif
 
 

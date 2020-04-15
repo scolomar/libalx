@@ -46,9 +46,7 @@ int	alx_freads	(ptrdiff_t bufsiz, char buf[static restrict bufsiz],
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-# if !defined(ALX_SRC__)
 ALX_ALIAS_DECLARATION(freads, alx_freads);
-# endif
 #endif
 
 

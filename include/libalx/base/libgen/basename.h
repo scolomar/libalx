@@ -45,9 +45,7 @@ int	alx_basename_s	(char dest[static restrict FILENAME_MAX],
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-# if !defined(ALX_SRC__)
 ALX_ALIAS_DECLARATION(basename_s, alx_basename_s);
-# endif
 #endif
 
 

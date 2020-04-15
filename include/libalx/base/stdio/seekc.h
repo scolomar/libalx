@@ -49,11 +49,9 @@ int	alx_wait4enter	(void);
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-# if !defined(ALX_SRC__)
 ALX_ALIAS_DECLARATION(seekc,		alx_seekc);
 ALX_ALIAS_DECLARATION(fseekc,		alx_fseekc);
 ALX_ALIAS_DECLARATION(wait4enter,	alx_wait4enter);
-# endif
 #endif
 
 
