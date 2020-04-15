@@ -7,9 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#define ALX_SRC__
 #include "libalx/base/signal/sigterm.h"
-#undef ALX_SRC__
 
 #include <signal.h>
 #include <stdbool.h>
@@ -60,8 +58,8 @@ int	alx_sigterm_init	(void)
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_DEFINITION(sigterm,		alx_sigterm);
-ALX_ALIAS_DEFINITION(sigterm_init,	alx_sigterm_init);
+ALX_ALIAS_WEAK_DEFINITION(sigterm,	alx_sigterm);
+ALX_ALIAS_WEAK_DEFINITION(sigterm_init,	alx_sigterm_init);
 
 
 /******************************************************************************
@@ -73,7 +71,7 @@ void	sigterm_handler		(int sig)
 
 	ALX_UNUSED(sig);
 
-	sigterm	= true;
+	alx_sigterm	= true;
 	asm volatile ("" : : : "memory");
 }
 

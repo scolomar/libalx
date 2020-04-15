@@ -7,9 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#define ALX_SRC__
 #include "libalx/base/stdio/printf/snprintfs.h"
-#undef ALX_SRC__
 
 #include <errno.h>
 #include <stdarg.h>
@@ -84,8 +82,8 @@ err:	if (written)
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_DEFINITION(snprintfs,		alx_snprintfs);
-ALX_ALIAS_DEFINITION(vsnprintfs,	alx_vsnprintfs);
+ALX_ALIAS_WEAK_DEFINITION(snprintfs,	alx_snprintfs);
+ALX_ALIAS_WEAK_DEFINITION(vsnprintfs,	alx_vsnprintfs);
 
 
 /******************************************************************************

@@ -7,9 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#define ALX_SRC__
 #include "libalx/base/signal/sigpipe.h"
-#undef ALX_SRC__
 
 #include <signal.h>
 #include <stdbool.h>
@@ -60,8 +58,8 @@ int	alx_sigpipe_init	(void)
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_DEFINITION(sigpipe,		alx_sigpipe);
-ALX_ALIAS_DEFINITION(sigpipe_init,	alx_sigpipe_init);
+ALX_ALIAS_WEAK_DEFINITION(sigpipe,	alx_sigpipe);
+ALX_ALIAS_WEAK_DEFINITION(sigpipe_init,	alx_sigpipe_init);
 
 
 /******************************************************************************
@@ -73,7 +71,7 @@ void	sigpipe_handler		(int sig)
 
 	ALX_UNUSED(sig);
 
-	sigpipe	= true;
+	alx_sigpipe	= true;
 	asm volatile ("" : : : "memory");
 }
 

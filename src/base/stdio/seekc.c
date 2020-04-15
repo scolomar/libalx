@@ -7,9 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#define ALX_SRC__
 #include "libalx/base/stdio/seekc.h"
-#undef ALX_SRC__
 
 #include <stdio.h>
 
@@ -43,9 +41,9 @@ int	alx_wait4enter	(void);
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_DEFINITION(seekc,		alx_seekc);
-ALX_ALIAS_DEFINITION(fseekc,		alx_fseekc);
-ALX_ALIAS_DEFINITION(wait4enter,	alx_wait4enter);
+ALX_ALIAS_WEAK_DEFINITION(seekc,	alx_seekc);
+ALX_ALIAS_WEAK_DEFINITION(fseekc,	alx_fseekc);
+ALX_ALIAS_WEAK_DEFINITION(wait4enter,	alx_wait4enter);
 
 
 /******************************************************************************
