@@ -4,7 +4,7 @@
 VERSION		= 1
 PATCHLEVEL	= 0
 SUBLEVEL	=
-EXTRAVERSION	= ~b18
+EXTRAVERSION	= ~b19
 NAME		=
 
 export	VERSION
@@ -77,6 +77,7 @@ MAKEFLAGS += --no-print-directory
 
 LIBALX_DIR	= $(CURDIR)
 
+BIN_DIR		= $(LIBALX_DIR)/bin
 INC_DIR		= $(LIBALX_DIR)/include
 SRC_DIR		= $(LIBALX_DIR)/src
 LIB_DIR		= $(LIBALX_DIR)/lib
@@ -93,6 +94,7 @@ BUILD_SO_DIR	= $(BUILD_LIB_DIR)/shared
 
 export	LIBALX_DIR
 
+export	BIN_DIR
 export	INC_DIR
 export	SRC_DIR
 export	LIB_DIR
@@ -119,13 +121,13 @@ endif
 INSTALL_INC_DIR		= /usr/$(LOCAL)/include
 INSTALL_LIB_DIR		= /usr/$(LOCAL)/lib
 INSTALL_SHARE_DIR	= /usr/$(LOCAL)/share
-INSTALL_PKGCONFIG_DIR	= $(INSTALL_LIB_DIR)/pkgconfig
+INSTALL_PC_DIR		= $(INSTALL_LIB_DIR)/pkgconfig
 
 export	INSTALL_ETC_DIR
 export	INSTALL_INC_DIR
 export	INSTALL_LIB_DIR
 export	INSTALL_SHARE_DIR
-export	INSTALL_PKGCONFIG_DIR
+export	INSTALL_PC_DIR
 
 ################################################################################
 # Make variables (CC, etc...)
@@ -499,10 +501,11 @@ inst--lib%.so:
 
 PHONY += inst--lib%.pc
 inst--lib%.pc:
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
-	@echo	"	CP	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/lib$*.pc"
-	$(Q)cp -f $(v)		$(LIB_DIR)/pkgconfig/lib$*.pc		\
-					$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PC_DIR)/
+	@echo	"	CP	$(DESTDIR)/$(INSTALL_PC_DIR)/lib$*.pc"
+	$(Q)sed	"/^Version/c\\Version: $(LIBVERSION)"			\
+				$(LIB_DIR)/pkgconfig/lib$*.pc		\
+				>	$(DESTDIR)/$(INSTALL_PC_DIR)/lib$*.pc
 
 
 ################################################################################
@@ -519,9 +522,9 @@ uninstall:
 	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/"
 	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
-	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/libalx*.pc"
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
-	$(Q)find		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/	\
+	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_PC_DIR)/libalx*.pc"
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PC_DIR)/
+	$(Q)find		$(DESTDIR)/$(INSTALL_PC_DIR)/	\
 				-type f -name 'libalx*.pc' -exec rm '{}' '+'
 	@echo	"	LDCONFIG"
 	$(Q)ldconfig
