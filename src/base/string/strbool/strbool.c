@@ -23,9 +23,9 @@
 /******************************************************************************
  ******* variables ************************************************************
  ******************************************************************************/
-const char *const alx_strbool[2]	= {"false", "true"};
-const char *const alx_strBool[2]	= {"False", "True"};
-const char *const alx_strBOOL[2]	= {"FALSE", "TRUE"};
+const char alx_strbool[2][6]	= {"false", "true"};
+const char alx_strBool[2][6]	= {"False", "True"};
+const char alx_strBOOL[2][6]	= {"FALSE", "TRUE"};
 
 
 /******************************************************************************

@@ -31,9 +31,9 @@
  ******************************************************************************/
 extern	"C"
 {
-extern	const char *const alx_strbool[2];
-extern	const char *const alx_strBool[2];
-extern	const char *const alx_strBOOL[2];
+extern	const char alx_strbool[2][6];
+extern	const char alx_strBool[2][6];
+extern	const char alx_strBOOL[2][6];
 }
 
 
