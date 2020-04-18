@@ -408,7 +408,7 @@ void	comp		(ptrdiff_t dim,
 	 * Their objective is to run the compX() funtions in correct order.
 	 *
 	 * Each compZ() function has to run compX() functions in this order:
-	 * 	0, 1;
+	 *	0, 1;
 	 *
 	 * Their second objective is to exit whenever there aren't any rows
 	 * valid for a solution, making MAX_NUM = 0 to decrease lvl.
@@ -1048,3 +1048,4 @@ void	init_mat	(ptrdiff_t dim,
 /******************************************************************************
  ******* end of file **********************************************************
  ******************************************************************************/
+

@@ -328,8 +328,7 @@ int	df_ins_col_value	(struct Alx_DF_Col *col,
 
 	if (col->values->cmp != &df_cmp_data)
 		alx_bst_reorder(col->values, &df_cmp_data);
-	status1	= alx_bst_insert(col->values, value, strlen(value) + 1, 
-									&node);
+	status1	= alx_bst_insert(col->values, value, strlen(value) + 1, &node);
 	if (status1 < 0)
 		return	status1;
 out:

@@ -21,20 +21,20 @@
 #define ALX_ALIAS_DECLARATION(aka, original)				\
 [[gnu::copy(original)]]							\
 extern									\
-typeof(original)	aka;
+typeof(original)	aka
 
 #define ALX_ALIAS_DEFINITION(aka, original)				\
 [[gnu::alias(#original)]]						\
 [[gnu::copy(original)]]							\
 extern									\
-typeof(original)	aka;
+typeof(original)	aka
 
 #define ALX_ALIAS_WEAK_DEFINITION(aka, original)			\
 [[gnu::alias(#original)]]						\
 [[gnu::copy(original)]]							\
 [[gnu::weak]]								\
 extern									\
-typeof(original)	aka;
+typeof(original)	aka
 
 
 /******************************************************************************

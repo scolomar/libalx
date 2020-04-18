@@ -336,7 +336,7 @@ int	alx_llist_delete_node		(struct Alx_LinkedList *list,
 {
 
 	if (alx_llist_remove_node(list, node))
-			return	ENOENT;
+		return	ENOENT;
 	alx_node_deinit(node);
 
 	return	0;

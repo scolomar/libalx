@@ -38,7 +38,7 @@ __attribute__((nonnull, pure))
 inline
 int	alx_compare_ldbl(const void *a_ptr, const void *b_ptr);
 __attribute__((nonnull, pure))
-inline	
+inline
 int	alx_compare	(const void *a_ptr, const void *b_ptr);
 __attribute__((nonnull, pure))
 inline

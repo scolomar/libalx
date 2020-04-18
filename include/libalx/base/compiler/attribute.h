@@ -21,20 +21,20 @@
 #define ALX_ALIAS_DECLARATION(aka, original)				\
 __attribute__((copy(original)))						\
 extern									\
-typeof(original)	aka;
+typeof(original)	aka
 
 #define ALX_ALIAS_DEFINITION(aka, original)				\
 __attribute__((alias(#original)))					\
 __attribute__((copy(original)))						\
 extern									\
-typeof(original)	aka;
+typeof(original)	aka
 
 #define ALX_ALIAS_WEAK_DEFINITION(aka, original)			\
 __attribute__((alias(#original)))					\
 __attribute__((copy(original)))						\
 __attribute__((weak))							\
 extern									\
-typeof(original)	aka;
+typeof(original)	aka
 
 
 /******************************************************************************
