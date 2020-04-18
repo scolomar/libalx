@@ -130,7 +130,7 @@ int	b_output	(FILE *stream, const struct printf_info *info,
 			return	EOF;
 		len += tmp;
 	}
-	
+
 	/* Padding with '0' */
 	if (pad.ch == '0') {
 		tmp = b_pad_zeros(stream, info, min_len);
