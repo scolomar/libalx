@@ -77,8 +77,8 @@ BASE_MODULES	=							\
 		base/stdlib/getenv/getenv_s				\
 		base/stdlib/getenv/getenv_u				\
 		base/stdlib/local_maxima				\
-		base/stdlib/maximum					\
-		base/stdlib/minimum					\
+		base/stdlib/max						\
+		base/stdlib/min						\
 		base/stdlib/popcnt					\
 		base/stdlib/pow						\
 		base/stdlib/search					\
@@ -226,6 +226,8 @@ GMP_MODULES	=							\
 GMP_A_OBJ	= $(GMP_MODULES:%=$(BUILD_TMP_DIR)/%.a.o)
 GMP_SO_OBJ	= $(GMP_MODULES:%=$(BUILD_TMP_DIR)/%.so.o)
 GSL_MODULES	=							\
+		extra/gsl/cblas/iXamax					\
+		extra/gsl/cblas/iXamin					\
 		extra/gsl/distance/chebyshev				\
 		extra/gsl/distance/euclidean				\
 		extra/gsl/distance/manhattan				\

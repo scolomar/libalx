@@ -18,8 +18,8 @@
 
 #include "libalx/alx/data-structures/types.h"
 #include "libalx/base/assert/stddef.h"
-#include "libalx/base/stdlib/maximum.h"
-#include "libalx/base/stdlib/minimum.h"
+#include "libalx/base/stdlib/max.h"
+#include "libalx/base/stdlib/min.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
 #include "libalx/base/stdlib/alloc/mallocs.h"
 #include "libalx/base/stdlib/alloc/frees.h"

@@ -13,6 +13,8 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
+#include <libalx/extra/gsl/cblas/iXamax.h>
+#include <libalx/extra/gsl/cblas/iXamin.h>
 #include <libalx/extra/gsl/distance/chebyshev.h>
 #include <libalx/extra/gsl/distance/euclidean.h>
 #include <libalx/extra/gsl/distance/manhattan.h>

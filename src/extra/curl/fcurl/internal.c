@@ -42,7 +42,7 @@
 #include <curl/curl.h>
 
 #include "libalx/alx/data-structures/dyn-buffer.h"
-#include "libalx/base/stdlib/maximum.h"
+#include "libalx/base/stdlib/max.h"
 #include "libalx/extra/curl/fcurl/URL_FILE.h"
 
 

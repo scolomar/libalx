@@ -58,7 +58,7 @@
 #include <stdio.h>
 
 #include "libalx/alx/data-structures/dyn-buffer.h"
-#include "libalx/base/stdlib/minimum.h"
+#include "libalx/base/stdlib/min.h"
 #include "libalx/base/string/memchr/memchrend.h"
 #include "libalx/extra/curl/fcurl/URL_FILE.h"
 

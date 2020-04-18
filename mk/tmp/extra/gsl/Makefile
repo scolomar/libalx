@@ -18,6 +18,8 @@ MK_DEPS	=								\
 	$(LIBALX_DIR)/Makefile
 
 MODULES	=								\
+	extra/gsl/cblas/iXamax						\
+	extra/gsl/cblas/iXamin						\
 	extra/gsl/distance/chebyshev					\
 	extra/gsl/distance/euclidean					\
 	extra/gsl/distance/manhattan					\

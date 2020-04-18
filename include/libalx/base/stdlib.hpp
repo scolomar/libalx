@@ -37,8 +37,8 @@
 #include <libalx/base/stdlib/compare.hpp>
 #include <libalx/base/stdlib/ctz.hpp>
 #include <libalx/base/stdlib/local_maxima.hpp>
-#include <libalx/base/stdlib/maximum.hpp>
-#include <libalx/base/stdlib/minimum.hpp>
+#include <libalx/base/stdlib/max.hpp>
+#include <libalx/base/stdlib/min.hpp>
 #include <libalx/base/stdlib/popcnt.hpp>
 #include <libalx/base/stdlib/pow.hpp>
 #include <libalx/base/stdlib/search.hpp>

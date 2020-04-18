@@ -1,5 +1,5 @@
 /******************************************************************************
- *	Copyright (C) 2020	Alejandro Colomar Andrés		      *
+ *	Copyright (C) 2019	Alejandro Colomar Andrés		      *
  *	SPDX-License-Identifier:	LGPL-2.0-only			      *
  ******************************************************************************/
 
@@ -7,14 +7,7 @@
 /******************************************************************************
  ******* headers **************************************************************
  ******************************************************************************/
-#include "libalx/extra/cv/imgproc/features/edges.hpp"
-
-#include <cstdbool>
-#include <cstddef>
-#include <cstdint>
-
-#include <opencv2/core/mat.hpp>
-#include <opencv2/imgproc.hpp>
+#include "libalx/base/stdlib/min.h"
 
 
 /******************************************************************************
@@ -35,23 +28,6 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx::CV::canny	(class cv::Mat *img, uint8_t thr_lo, uint8_t thr_hi,
-			 ptrdiff_t ksize, bool l2grad)
-{
-
-	if (!(ksize % 2)  ||  ksize < -1)
-		return	1;
-	cv::Canny(*img, *img, thr_lo, thr_hi, ksize, l2grad);
-
-	return	0;
-}
-
-int	alx_cv_canny	(void *img, uint8_t thr_lo, uint8_t thr_hi,
-			 ptrdiff_t ksize, bool l2grad)
-{
-	return	alx::CV::canny((class cv::Mat *)img, thr_lo, thr_hi,
-								ksize, l2grad);
-}
 
 
 /******************************************************************************
