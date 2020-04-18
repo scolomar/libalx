@@ -503,7 +503,7 @@ PHONY += inst--lib%.pc
 inst--lib%.pc:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PC_DIR)/
 	@echo	"	CP	$(DESTDIR)/$(INSTALL_PC_DIR)/lib$*.pc"
-	$(Q)sed	"/^Version/c\\Version: $(LIBVERSION)"			\
+	$(Q)sed	"s/<version>/$(LIBVERSION)/"				\
 				$(LIB_DIR)/pkgconfig/lib$*.pc		\
 				>	$(DESTDIR)/$(INSTALL_PC_DIR)/lib$*.pc
 
