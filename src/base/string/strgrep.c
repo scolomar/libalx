@@ -216,7 +216,7 @@ ptrdiff_t	alx_strncasefgrep(ptrdiff_t size,
 		if (llen < plen)
 			goto short_line;
 		dpos += _strncasefgrep_line(llen, &dest[dpos], &src[spos],
-					 		pattern);
+							pattern);
 		spos += llen;
 short_line:
 		if (!src[spos - 1])
@@ -253,7 +253,7 @@ ptrdiff_t	alx_strlcasefgrep(ptrdiff_t size,
 		if (llen < plen)
 			goto short_line;
 		dpos += _strncasefgrep_line(llen, &dest[dpos], &src[spos],
-					 		pattern);
+							pattern);
 		spos += llen;
 short_line:
 		if (!src[spos - 1]) {
@@ -296,7 +296,7 @@ ptrdiff_t	alx_strscasefgrep(ptrdiff_t size,
 		if (llen < plen)
 			goto short_line;
 		dpos += _strscasefgrep_line(llen, &dest[dpos], &src[spos],
-					 		pattern);
+							pattern);
 		spos += llen;
 short_line:
 		if (!src[spos - 1]) {
@@ -453,7 +453,7 @@ ptrdiff_t	alx_strncasefgrepv(ptrdiff_t size,
 		if (llen < plen)
 			goto short_line;
 		dpos += _strncasefgrepv_line(llen, &dest[dpos], &src[spos],
-					 		pattern);
+							pattern);
 		spos += llen;
 short_line:
 		if (!src[spos - 1])
@@ -490,7 +490,7 @@ ptrdiff_t	alx_strlcasefgrepv(ptrdiff_t size,
 		if (llen < plen)
 			goto short_line;
 		dpos += _strncasefgrepv_line(llen, &dest[dpos], &src[spos],
-					 		pattern);
+							pattern);
 		spos += llen;
 short_line:
 		if (!src[spos - 1]) {
@@ -533,7 +533,7 @@ ptrdiff_t	alx_strscasefgrepv(ptrdiff_t size,
 		if (llen < plen)
 			goto short_line;
 		dpos += _strscasefgrepv_line(llen, &dest[dpos], &src[spos],
-					 		pattern);
+							pattern);
 		spos += llen;
 short_line:
 		if (!src[spos - 1]) {
