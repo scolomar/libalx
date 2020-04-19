@@ -19,7 +19,7 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
-#include <cstdio>
+#include <cstddef>
 
 #include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
@@ -36,7 +36,8 @@
 extern	"C"
 {
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_dirname_s	(char dest[FILENAME_MAX],
+int	alx_dirname_s	(ptrdiff_t size,
+			 char *restrict dest/*[size]*/,
 			 const char *restrict path);
 }
 

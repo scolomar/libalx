@@ -19,7 +19,7 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
-#include <stdio.h>
+#include <stddef.h>
 
 #include "libalx/base/compiler/attribute.h"
 
@@ -43,8 +43,9 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((nonnull, warn_unused_result))
-int	alx_dirname_s	(char dest[static restrict FILENAME_MAX],
-			 const char *restrict path);
+int	alx_dirname_s	(ptrdiff_t size,
+			 char dest[static restrict size],
+			 const char path[restrict size]);
 
 
 /******************************************************************************

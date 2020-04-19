@@ -10,7 +10,7 @@
 #include "libalx/base/libgen/dirname.h"
 
 #include <libgen.h>
-#include <stdio.h>
+#include <stddef.h>
 
 #include "libalx/base/compiler/size.h"
 #include "libalx/base/string/strcpy/strlcpys.h"
@@ -34,14 +34,15 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_dirname_s	(char dest[static restrict FILENAME_MAX],
-			 const char *restrict path)
+int	alx_dirname_s	(ptrdiff_t size,
+			 char dest[static restrict size],
+			 const char path[restrict size])
 {
-	char	tmp[FILENAME_MAX];
+	char	tmp[size];
 
 	if (alx_strlcpys(tmp, path, ARRAY_SIZE(tmp), NULL))
 		return	-1;
-	if (alx_strlcpys(dest, dirname(tmp), FILENAME_MAX, NULL))
+	if (alx_strlcpys(dest, dirname(tmp), size, NULL))
 		return	-1;
 
 	return	0;
