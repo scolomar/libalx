@@ -48,7 +48,8 @@
 /******************************************************************************
  ******* variables ************************************************************
  ******************************************************************************/
-static const char *const styles[/*ALX_GNUPLOT_STYLES*/]	= {
+/* styles[ALX_GNUPLOT_STYLES][strlen("boxerrorbars")] */
+static const char styles[][13]	= {
 	[ALX_GNUPLOT_STYLE_BOXERRORBARS]	= "boxerrorbars",
 	[ALX_GNUPLOT_STYLE_BOXES]		= "boxes",
 	[ALX_GNUPLOT_STYLE_DOTS]		= "dots",

@@ -170,8 +170,8 @@ int	alx_gnuplot_plot_multi_xy	(struct Alx_Gnuplot *restrict gnuplot,
 static
 const char *multi__cmd__	(const struct Alx_Gnuplot *gnuplot)
 {
-	static const char *const plot	= "plot";
-	static const char *const replot	= "replot";
+	static const char plot[]	= "plot";
+	static const char replot[]	= "replot";
 
 	if (gnuplot->nplots  &&  !gnuplot->multi)
 		return	replot;
@@ -181,7 +181,7 @@ const char *multi__cmd__	(const struct Alx_Gnuplot *gnuplot)
 static
 const char *multi__title__	(const char *title[restrict], ptrdiff_t i)
 {
-	static const char *const none	= "(none)";
+	static const char none[]	= "(none)";
 
 	if (!title)
 		return	none;
