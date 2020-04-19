@@ -22,23 +22,12 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define bsearch_uint(nmemb, arr, x)	alx_bsearch_uint(nmemb, arr, x)
-#define bsearch_int(nmemb, arr, x)	alx_bsearch_int(nmemb, arr, x)
-#define bsearch_u8(nmemb, arr, x)	alx_bsearch_u8(nmemb, arr, x)
-#define bsearch_s8(nmemb, arr, x)	alx_bsearch_s8(nmemb, arr, x)
-#define bsearch_u16(nmemb, arr, x)	alx_bsearch_u16(nmemb, arr, x)
-#define bsearch_s16(nmemb, arr, x)	alx_bsearch_s16(nmemb, arr, x)
-#define bsearch_u32(nmemb, arr, x)	alx_bsearch_u32(nmemb, arr, x)
-#define bsearch_s32(nmemb, arr, x)	alx_bsearch_s32(nmemb, arr, x)
-#define bsearch_u64(nmemb, arr, x)	alx_bsearch_u64(nmemb, arr, x)
-#define bsearch_s64(nmemb, arr, x)	alx_bsearch_s64(nmemb, arr, x)
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -94,6 +83,23 @@ __attribute__((nonnull, pure))
 ptrdiff_t	alx_bsearch_s64	(ptrdiff_t nmemb,
 				 const int64_t arr[static restrict nmemb],
 				 int64_t x);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(bsearch_uint,	alx_bsearch_uint);
+ALX_ALIAS_DECLARATION(bsearch_int,	alx_bsearch_int);
+ALX_ALIAS_DECLARATION(bsearch_u8,	alx_bsearch_u8);
+ALX_ALIAS_DECLARATION(bsearch_s8,	alx_bsearch_s8);
+ALX_ALIAS_DECLARATION(bsearch_u16,	alx_bsearch_u16);
+ALX_ALIAS_DECLARATION(bsearch_s16,	alx_bsearch_s16);
+ALX_ALIAS_DECLARATION(bsearch_u32,	alx_bsearch_u32);
+ALX_ALIAS_DECLARATION(bsearch_s32,	alx_bsearch_s32);
+ALX_ALIAS_DECLARATION(bsearch_u64,	alx_bsearch_u64);
+ALX_ALIAS_DECLARATION(bsearch_s64,	alx_bsearch_s64);
+#endif
 
 
 /******************************************************************************
