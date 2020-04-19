@@ -11,20 +11,17 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stdarg.h>
 #include <stddef.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define strscatfs(str, written, nmemb, fmt, ...)			\
-	alx_strscatfs(str, written, nmemb, fmt, ##__VA_ARGS__)
-#endif
 
 
 /******************************************************************************
@@ -51,19 +48,11 @@ int	alx_vstrscatfs	(char str[restrict /*nmemb*/],
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline))
-__attribute__((nonnull(1, 4), format(printf, 4, 0), warn_unused_result))
-inline
-int	vstrscatfs	(char str[restrict /*nmemb*/],
-			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
-			 const char *restrict format, va_list ap)
-{
-	return	alx_vstrscatfs(size, dest, format, ap);
-}
+ALX_ALIAS_DECLARATION(strscatfs,	alx_strscatfs);
+ALX_ALIAS_DECLARATION(vstrscatfs,	alx_vstrscatfs);
 #endif
 
 
