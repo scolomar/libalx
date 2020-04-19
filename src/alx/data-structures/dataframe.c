@@ -30,7 +30,6 @@
 #include "libalx/base/compiler/unused.h"
 #include "libalx/base/stdlib/alloc/frees.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
-#include "libalx/base/stdlib/compare.h"
 
 
 /******************************************************************************

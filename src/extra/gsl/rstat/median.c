@@ -17,7 +17,7 @@
 
 #include "libalx/base/compiler/size.h"
 #include "libalx/base/stdlib/average.h"
-#include "libalx/base/stdlib/compare.h"
+#include "libalx/base/stdlib/cmp.h"
 
 
 /******************************************************************************
@@ -45,7 +45,7 @@ long double alx_gsl_rstat_median_ldbl(ptrdiff_t nmemb,
 	long double	median;
 
 	memcpy(sorted, arr, ARRAY_BYTES(sorted));
-	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_ldbl);
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_cmp_ldbl);
 
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
@@ -62,7 +62,7 @@ float	alx_gsl_rstat_median_flt(ptrdiff_t nmemb,
 	float	median;
 
 	memcpy(sorted, arr, ARRAY_BYTES(sorted));
-	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_f);
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_cmp_f);
 
 	if (nmemb % 2)
 		median = sorted[nmemb/2];
@@ -79,7 +79,7 @@ double	alx_gsl_rstat_median_uint(ptrdiff_t nmemb,
 	double		median;
 
 	memcpy(sorted, arr, ARRAY_BYTES(sorted));
-	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_uint);
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_cmp_uint);
 
 	if (nmemb % 2)
 		median = sorted[nmemb/2];
@@ -97,7 +97,7 @@ double	alx_gsl_rstat_median_int(ptrdiff_t nmemb,
 	double	median;
 
 	memcpy(sorted, arr, ARRAY_BYTES(sorted));
-	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_int);
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_cmp_int);
 
 	if (nmemb % 2)
 		median = sorted[nmemb/2];
@@ -115,7 +115,7 @@ double	alx_gsl_rstat_median_u8	(ptrdiff_t nmemb,
 	double	median;
 
 	memcpy(sorted, arr, ARRAY_BYTES(sorted));
-	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_u8);
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_cmp_u8);
 
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
@@ -133,7 +133,7 @@ double	alx_gsl_rstat_median_s8	(ptrdiff_t nmemb,
 	double	median;
 
 	memcpy(sorted, arr, ARRAY_BYTES(sorted));
-	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s8);
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_cmp_s8);
 
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
@@ -151,7 +151,7 @@ double	alx_gsl_rstat_median_u16(ptrdiff_t nmemb,
 	double		median;
 
 	memcpy(sorted, arr, ARRAY_BYTES(sorted));
-	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_u16);
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_cmp_u16);
 
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
@@ -169,7 +169,7 @@ double	alx_rstat_median_s16	(ptrdiff_t nmemb,
 	double	median;
 
 	memcpy(sorted, arr, ARRAY_BYTES(sorted));
-	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s16);
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_cmp_s16);
 
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
@@ -187,7 +187,7 @@ double	alx_rgsl_stat_median_u32(ptrdiff_t nmemb,
 	double		median;
 
 	memcpy(sorted, arr, ARRAY_BYTES(sorted));
-	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_u32);
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_cmp_u32);
 
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
@@ -205,7 +205,7 @@ double	alx_gsl_rstat_median_s32(ptrdiff_t nmemb,
 	double	median;
 
 	memcpy(sorted, arr, ARRAY_BYTES(sorted));
-	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s32);
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_cmp_s32);
 
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
@@ -223,7 +223,7 @@ long double alx_gsl_rstat_median_u64(ptrdiff_t nmemb,
 	long double	median;
 
 	memcpy(sorted, arr, ARRAY_BYTES(sorted));
-	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_u64);
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_cmp_u64);
 
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
@@ -241,7 +241,7 @@ long double alx_gsl_rstat_median_s64(ptrdiff_t nmemb,
 	long double	median;
 
 	memcpy(sorted, arr, ARRAY_BYTES(sorted));
-	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s64);
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_cmp_s64);
 
 	if (nmemb % 2)
 		median	= sorted[nmemb/2];
