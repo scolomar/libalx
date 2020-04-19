@@ -70,7 +70,7 @@ BASE_MODULES	=							\
 		base/stdlib/array_split_pos_neg				\
 		base/stdlib/average					\
 		base/stdlib/clz						\
-		base/stdlib/compare					\
+		base/stdlib/cmp						\
 		base/stdlib/ctz						\
 		base/stdlib/getenv/getenv_f				\
 		base/stdlib/getenv/getenv_i				\

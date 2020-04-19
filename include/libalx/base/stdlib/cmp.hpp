@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/stdlib/compare.hpp */
+#pragma once	/* libalx/base/stdlib/cmp.hpp */
 
 #if !defined(__cplusplus)
 #warning	This header file should only be included in C++.  In C,	\
@@ -33,33 +33,33 @@
 extern	"C"
 {
 [[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_ldbl(const void *a_ptr, const void *b_ptr);
+int	alx_cmp_ldbl	(const void *a_ptr, const void *b_ptr);
 [[gnu::nonnull]][[gnu::pure]]
-int	alx_compare	(const void *a_ptr, const void *b_ptr);
+int	alx_cmp		(const void *a_ptr, const void *b_ptr);
 [[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_f	(const void *a_ptr, const void *b_ptr);
+int	alx_cmp_f	(const void *a_ptr, const void *b_ptr);
 [[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_uint(const void *a_ptr, const void *b_ptr);
+int	alx_cmp_uint	(const void *a_ptr, const void *b_ptr);
 [[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_int	(const void *a_ptr, const void *b_ptr);
+int	alx_cmp_int	(const void *a_ptr, const void *b_ptr);
 [[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_char(const void *a_ptr, const void *b_ptr);
+int	alx_cmp_char	(const void *a_ptr, const void *b_ptr);
 [[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_u8	(const void *a_ptr, const void *b_ptr);
+int	alx_cmp_u8	(const void *a_ptr, const void *b_ptr);
 [[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_s8	(const void *a_ptr, const void *b_ptr);
+int	alx_cmp_s8	(const void *a_ptr, const void *b_ptr);
 [[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_u16	(const void *a_ptr, const void *b_ptr);
+int	alx_cmp_u16	(const void *a_ptr, const void *b_ptr);
 [[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_s16	(const void *a_ptr, const void *b_ptr);
+int	alx_cmp_s16	(const void *a_ptr, const void *b_ptr);
 [[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_u32	(const void *a_ptr, const void *b_ptr);
+int	alx_cmp_u32	(const void *a_ptr, const void *b_ptr);
 [[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_s32	(const void *a_ptr, const void *b_ptr);
+int	alx_cmp_s32	(const void *a_ptr, const void *b_ptr);
 [[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_u64	(const void *a_ptr, const void *b_ptr);
+int	alx_cmp_u64	(const void *a_ptr, const void *b_ptr);
 [[gnu::nonnull]][[gnu::pure]]
-int	alx_compare_s64	(const void *a_ptr, const void *b_ptr);
+int	alx_cmp_s64	(const void *a_ptr, const void *b_ptr);
 }
 
 

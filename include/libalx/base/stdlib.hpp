@@ -40,7 +40,7 @@
 #include <libalx/base/stdlib/average.hpp>
 #include <libalx/base/stdlib/bsearch.hpp>
 #include <libalx/base/stdlib/clz.hpp>
-#include <libalx/base/stdlib/compare.hpp>
+#include <libalx/base/stdlib/cmp.hpp>
 #include <libalx/base/stdlib/ctz.hpp>
 #include <libalx/base/stdlib/local_maxima.hpp>
 #include <libalx/base/stdlib/max.hpp>
