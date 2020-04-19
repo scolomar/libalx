@@ -49,24 +49,24 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 __attribute__((pure, nonnull))
-int64_t	alx_timespec_ms			(const struct timespec *tm);
+int64_t	alx_timespec_ms		(const struct timespec *tm);
 __attribute__((pure, nonnull))
-int64_t	alx_timespec_us			(const struct timespec *tm);
+int64_t	alx_timespec_us		(const struct timespec *tm);
 __attribute__((pure, nonnull))
-int64_t	alx_timespec_ns			(const struct timespec *tm);
+int64_t	alx_timespec_ns		(const struct timespec *tm);
 __attribute__((nonnull))
-void	alx_timespec_diff		(struct timespec *diff,
-					 const struct timespec *start,
-					 const struct timespec *stop);
+void	alx_timespec_diff	(struct timespec *diff,
+				 const struct timespec *start,
+				 const struct timespec *stop);
 __attribute__((pure, nonnull))
-int64_t	alx_timespec_diff_ms		(const struct timespec *start,
-					 const struct timespec *stop);
+int64_t	alx_timespec_diff_ms	(const struct timespec *start,
+				 const struct timespec *stop);
 __attribute__((pure, nonnull))
-int64_t	alx_timespec_diff_us		(const struct timespec *start,
-					 const struct timespec *stop);
+int64_t	alx_timespec_diff_us	(const struct timespec *start,
+				 const struct timespec *stop);
 __attribute__((pure, nonnull))
-int64_t	alx_timespec_diff_ns		(const struct timespec *start,
-					 const struct timespec *stop);
+int64_t	alx_timespec_diff_ns	(const struct timespec *start,
+				 const struct timespec *stop);
 
 
 
