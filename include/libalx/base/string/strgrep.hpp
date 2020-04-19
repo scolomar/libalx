@@ -22,7 +22,7 @@
 #include <cstddef>
 #include <cstring>
 
-#include "libalx/base/stddef/restrict.hpp"
+#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************

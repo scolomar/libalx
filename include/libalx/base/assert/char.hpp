@@ -21,8 +21,8 @@
  ******************************************************************************/
 #include <cassert>
 
-#include "libalx/base/assert/assert.h"
-#include "libalx/base/compiler/type.h"
+#include "libalx/base/assert/assert.hpp"
+#include "libalx/base/compiler/type.hpp"
 
 
 /******************************************************************************

@@ -22,7 +22,7 @@
 #include <cstddef>
 
 #include "libalx/base/compiler/attribute.hpp"
-#include "libalx/base/stddef/restrict.hpp"
+#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************

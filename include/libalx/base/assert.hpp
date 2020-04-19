@@ -22,7 +22,7 @@
 #include <libalx/base/assert/array.hpp>
 #include <libalx/base/assert/assert.hpp>
 #include <libalx/base/assert/char.hpp>
-#include <libalx/base/assert/pointer.h>
+#include <libalx/base/assert/pointer.hpp>
 #include <libalx/base/assert/stddef.hpp>
 #include <libalx/base/assert/stdint.hpp>
 #include <libalx/base/assert/type.hpp>
