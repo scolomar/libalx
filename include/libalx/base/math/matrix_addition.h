@@ -10,6 +10,12 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/math/matrix_addition.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
  ******* include **************************************************************

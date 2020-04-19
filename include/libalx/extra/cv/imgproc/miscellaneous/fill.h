@@ -9,6 +9,12 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/cv/imgproc/miscellaneous/fill.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
  ******* headers **************************************************************

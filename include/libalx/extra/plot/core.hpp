@@ -29,6 +29,12 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/plot/core.hpp */
 
+#if !defined(__cplusplus)
+#warning	This header file should only be included in C++.  In C,	\
+		include the header file of the same name and `.h`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
  ******* headers **************************************************************

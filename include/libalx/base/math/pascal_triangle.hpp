@@ -9,6 +9,12 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/math/pascal_triangle.hpp */
 
+#if !defined(__cplusplus)
+#warning	This header file should only be included in C++.  In C,	\
+		include the header file of the same name and `.h`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
  ******* include **************************************************************
