@@ -42,7 +42,7 @@
 #include <libalx/base/stdlib/clz.hpp>
 #include <libalx/base/stdlib/cmp.hpp>
 #include <libalx/base/stdlib/ctz.hpp>
-#include <libalx/base/stdlib/local_maxima.hpp>
+#include <libalx/base/stdlib/lmax.hpp>
 #include <libalx/base/stdlib/max.hpp>
 #include <libalx/base/stdlib/min.hpp>
 #include <libalx/base/stdlib/popcnt.hpp>
