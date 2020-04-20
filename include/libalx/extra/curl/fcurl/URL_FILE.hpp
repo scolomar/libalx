@@ -54,6 +54,7 @@
 #include <curl/curl.h>
 
 #include "libalx/alx/data-structures/dyn-buffer.hpp"
+#include "libalx/base/compiler/attribute.hpp"
 
 
 /******************************************************************************
@@ -104,11 +105,11 @@ extern	ALX_URL_FILE	*alx_url_stderr;
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-typedef struct Alx_URL_Data	URL_FILE;
+ALX_ALIAS_DECLARATION(url_stdin,	alx_url_stdin);
+ALX_ALIAS_DECLARATION(url_stdout,	alx_url_stdout);
+ALX_ALIAS_DECLARATION(url_stderr,	alx_url_stderr);
 
-#define url_stdin	alx_url_stdin
-#define url_stdout	alx_url_stdout
-#define url_stderr	alx_url_stderr
+typedef struct Alx_URL_Data	URL_FILE;
 #endif
 
 

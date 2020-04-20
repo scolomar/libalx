@@ -50,7 +50,9 @@
  ******************************************************************************/
 #include <cstddef>
 
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
+
 #include "libalx/extra/curl/fcurl/URL_FILE.hpp"
 
 
@@ -82,7 +84,7 @@ int	alx_url_fopen	(const char *restrict url,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define url_fopen(url, mode)	alx_url_fopen(url, mode)
+ALX_ALIAS_DECLARATION(url_fopen, alx_url_fopen);
 #endif
 
 

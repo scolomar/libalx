@@ -83,6 +83,11 @@ ALX_URL_FILE	*alx_url_stderr	= &url_stderr__;
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_WEAK_DEFINITION(url_stdin,	alx_url_stdin);
+ALX_ALIAS_WEAK_DEFINITION(url_stdout,	alx_url_stdout);
+ALX_ALIAS_WEAK_DEFINITION(url_stderr,	alx_url_stderr);
+#endif
 
 
 /******************************************************************************

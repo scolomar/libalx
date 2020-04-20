@@ -50,6 +50,8 @@
  ******************************************************************************/
 #include <stddef.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 #include "libalx/extra/curl/fcurl/URL_FILE.h"
 
 
@@ -78,19 +80,8 @@ int	alx_url_rewind	(ALX_URL_FILE *stream);
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* always_inline ********************************************************
- ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-int	url_rewind	(ALX_URL_FILE *stream)
-{
-	return	alx_url_rewind(stream);
-}
+ALX_ALIAS_DECLARATION(url_rewind, alx_url_rewind);
 #endif
 
 

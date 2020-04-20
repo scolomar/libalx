@@ -50,6 +50,8 @@
  ******************************************************************************/
 #include <stddef.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 #include "libalx/extra/curl/fcurl/URL_FILE.h"
 
 
@@ -79,20 +81,8 @@ char	*alx_url_fgets	(char *restrict str, size_t size,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* always_inline ********************************************************
- ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-char	*url_fgets	(char *restrict str, size_t size,
-			 ALX_URL_FILE *restrict stream)
-{
-	return	alx_url_fgets(str, size, stream);
-}
+ALX_ALIAS_DECLARATION(url_fgets, alx_url_fgets);
 #endif
 
 

@@ -50,7 +50,9 @@
  ******************************************************************************/
 #include <cstddef>
 
+#include "libalx/base/compiler/attribute.h"
 #include "libalx/base/compiler/restrict.hpp"
+
 #include "libalx/extra/curl/fcurl/URL_FILE.hpp"
 
 
@@ -82,8 +84,7 @@ ptrdiff_t	alx_url_fread	(void *restrict ptr, size_t size,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define url_fread(ptr, size, nmemb, stream)	alx_url_fread(ptr, size, \
-							      nmemb, stream)
+ALX_ALIAS_DECLARATION(url_fread, alx_url_fread);
 #endif
 
 

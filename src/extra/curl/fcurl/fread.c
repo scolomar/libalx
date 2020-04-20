@@ -61,6 +61,7 @@
 
 #include "libalx/alx/data-structures/dyn-buffer.h"
 #include "libalx/base/stdlib/min.h"
+
 #include "libalx/extra/curl/fcurl/URL_FILE.h"
 
 #include "internal.h"
@@ -113,6 +114,9 @@ ptrdiff_t	alx_url_fread	(void *restrict ptr, size_t size,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_WEAK_DEFINITION(url_fread, alx_url_fread);
+#endif
 
 
 /******************************************************************************

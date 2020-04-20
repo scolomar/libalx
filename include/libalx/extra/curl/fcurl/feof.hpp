@@ -50,6 +50,8 @@
  ******************************************************************************/
 #include <cstddef>
 
+#include "libalx/base/compiler/attribute.hpp"
+
 #include "libalx/extra/curl/fcurl/URL_FILE.hpp"
 
 
@@ -80,7 +82,7 @@ int	alx_url_feof	(ALX_URL_FILE *stream);
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define url_feof(stream)	alx_url_feof(stream)
+ALX_ALIAS_DECLARATION(url_feof, alx_url_feof);
 #endif
 
 

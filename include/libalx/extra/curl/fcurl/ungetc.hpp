@@ -19,6 +19,8 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
+#include "libalx/base/compiler/attribute.hpp"
+
 #include "libalx/extra/curl/fcurl/URL_FILE.hpp"
 
 
@@ -49,7 +51,7 @@ int	alx_url_ungetc	(int c, ALX_URL_FILE *stream);
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define url_ungetc(c, stream)	alx_url_ungetc(c, stream)
+ALX_ALIAS_DECLARATION(url_ungetc, alx_url_ungetc);
 #endif
 
 

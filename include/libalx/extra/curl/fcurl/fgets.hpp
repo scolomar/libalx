@@ -50,7 +50,9 @@
  ******************************************************************************/
 #include <cstddef>
 
+#include "libalx/base/compiler/attribute.h"
 #include "libalx/base/compiler/restrict.hpp"
+
 #include "libalx/extra/curl/fcurl/URL_FILE.hpp"
 
 
@@ -82,7 +84,7 @@ char	*alx_url_fgets	(char *restrict str, size_t size,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define url_fgets(str, size, stream)	alx_url_fgets(str, size, stream)
+ALX_ALIAS_DECLARATION(url_fgets, alx_url_fgets);
 #endif
 
 
