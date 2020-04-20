@@ -37,7 +37,7 @@
 #include <libalx/base/stdlib/strto/strtoi_s.h>
 #include <libalx/base/stdlib/strto/strtou_s.h>
 #include <libalx/base/stdlib/array_split_pos_neg.h>
-#include <libalx/base/stdlib/average.h>
+#include <libalx/base/stdlib/avg.h>
 #include <libalx/base/stdlib/bsearch.h>
 #include <libalx/base/stdlib/clz.h>
 #include <libalx/base/stdlib/cmp.h>

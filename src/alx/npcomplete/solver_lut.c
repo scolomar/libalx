@@ -18,7 +18,7 @@
 
 #include "libalx/base/compiler/size.h"
 #include "libalx/base/stdint/types.h"
-#include "libalx/base/stdlib/compare.h"
+#include "libalx/base/stdlib/cmp.h"
 
 
 /******************************************************************************
