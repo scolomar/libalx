@@ -21,23 +21,13 @@
  ******************************************************************************/
 #include <cstdint>
 
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define getenv_u64(num, name)		alx_getenv_u64(num, name)
-#define getenv_u32(num, name)		alx_getenv_u32(num, name)
-#define getenv_u16(num, name)		alx_getenv_u16(num, name)
-#define getenv_u8(num, name)		alx_getenv_u8(num, name)
-#define secure_getenv_u64(num, name)	alx_secure_getenv_u64(num, name)
-#define secure_getenv_u32(num, name)	alx_secure_getenv_u32(num, name)
-#define secure_getenv_u16(num, name)	alx_secure_getenv_u16(num, name)
-#define secure_getenv_u8(num, name)	alx_secure_getenv_u8(num, name)
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -91,6 +81,21 @@ namespace alx {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(getenv_u64,		alx_getenv_u64);
+ALX_ALIAS_DECLARATION(getenv_u32,		alx_getenv_u32);
+ALX_ALIAS_DECLARATION(getenv_u16,		alx_getenv_u16);
+ALX_ALIAS_DECLARATION(getenv_u8,		alx_getenv_u8);
+ALX_ALIAS_DECLARATION(secure_getenv_u64,	alx_secure_getenv_u64);
+ALX_ALIAS_DECLARATION(secure_getenv_u32,	alx_secure_getenv_u32);
+ALX_ALIAS_DECLARATION(secure_getenv_u16,	alx_secure_getenv_u16);
+ALX_ALIAS_DECLARATION(secure_getenv_u8,		alx_secure_getenv_u8);
+#endif
 
 
 /******************************************************************************

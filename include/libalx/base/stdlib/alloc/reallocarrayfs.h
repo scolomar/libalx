@@ -85,12 +85,6 @@
 )
 
 
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define reallocarrayfs(ptr, nmemb)	alx_reallocarrayfs(ptr, nmemb)
-#endif	/* defined(ALX_NO_PREFIX) */
-
-
 /******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
@@ -132,6 +126,14 @@
 __attribute__((nonnull, warn_unused_result))
 void	*alx_reallocarrayfs__	(void *restrict ptr, ptrdiff_t nmemb,
 				 size_t size, int *restrict error);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+#define reallocarrayfs(ptr, nmemb)	alx_reallocarrayfs(ptr, nmemb)
+#endif
 
 
 /******************************************************************************

@@ -82,12 +82,6 @@
 )
 
 
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define mallocarrays(ptr, nmemb)	alx_mallocarrays(ptr, nmemb)
-#endif	/* defined(ALX_NO_PREFIX) */
-
-
 /******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
@@ -129,6 +123,14 @@
  */
 __attribute__((malloc, nonnull, warn_unused_result))
 void	*alx_mallocarrays__	(ptrdiff_t nmemb, size_t size, int *error);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+#define mallocarrays(ptr, nmemb)	alx_mallocarrays(ptr, nmemb)
+#endif
 
 
 /******************************************************************************

@@ -21,6 +21,7 @@
  ******************************************************************************/
 #include <cstdint>
 
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/stdint/types.hpp"
 
 

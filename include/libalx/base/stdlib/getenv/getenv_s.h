@@ -20,17 +20,13 @@
  ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
-#include <stdint.h>
+
+#include "libalx/base/compiler/attribute.h"
 
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define getenv_s(dest, size, name)	   alx_getenv_s(dest, size, name)
-#define secure_getenv_s(dest, size, name)  alx_secure_getenv_s(dest, size, name)
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -52,6 +48,15 @@ int	alx_getenv_s		(char dest[/*size*/], ptrdiff_t size,
 __attribute__((nonnull, warn_unused_result))
 int	alx_secure_getenv_s	(char dest[/*size*/], ptrdiff_t size,
 				 const char *name);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(getenv_s,		alx_getenv_s);
+ALX_ALIAS_DECLARATION(secure_getenv_s,	alx_secure_getenv_s);
+#endif
 
 
 /******************************************************************************

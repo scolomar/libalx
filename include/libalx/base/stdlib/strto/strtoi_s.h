@@ -22,17 +22,12 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define strtoi8_s(num, str, base, nread)   alx_strtoi8_s(num, str, base, nread)
-#define strtoi16_s(num, str, base, nread)  alx_strtoi16_s(num, str, base, nread)
-#define strtoi32_s(num, str, base, nread)  alx_strtoi32_s(num, str, base, nread)
-#define strtoi64_s(num, str, base, nread)  alx_strtoi64_s(num, str, base, nread)
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -69,6 +64,17 @@ __attribute__((nonnull, warn_unused_result))
 int	alx_strtol_status	(const char *restrict str,
 				 const char *restrict endptr,
 				 int errno_after, int errno_before);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(strtoi8_s,	alx_strtoi8_s);
+ALX_ALIAS_DECLARATION(strtoi16_s,	alx_strtoi16_s);
+ALX_ALIAS_DECLARATION(strtoi32_s,	alx_strtoi32_s);
+ALX_ALIAS_DECLARATION(strtoi64_s,	alx_strtoi64_s);
+#endif
 
 
 /******************************************************************************

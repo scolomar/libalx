@@ -23,6 +23,7 @@
 #include <stdint.h>
 
 #include "libalx/base/assert/stdint.h"
+#include "libalx/base/compiler/attribute.h"
 #include "libalx/base/stdint/types.h"
 
 

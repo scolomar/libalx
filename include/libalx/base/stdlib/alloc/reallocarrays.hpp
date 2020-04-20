@@ -32,6 +32,7 @@
  ******************************************************************************/
 #include <cstddef>
 
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
 #include "libalx/base/compiler/unused.hpp"
 
@@ -50,15 +51,6 @@
 	alx_warn_unused_int(err_);					\
 }									\
 )
-
-
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define reallocarrays(ptr, nmemb)	alx_reallocarrays(ptr, nmemb)
-#define reallocarrays__(ptr, nmemb, size, error)			\
-					alx_reallocarrays__(ptr, nmemb,	\
-							    size, error)
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -91,6 +83,15 @@ namespace alx {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(reallocarrays__,	alx_reallocarrays__);
+#define reallocarrays(ptr, nmemb)	alx_reallocarrays(ptr, nmemb)
+#endif
 
 
 /******************************************************************************

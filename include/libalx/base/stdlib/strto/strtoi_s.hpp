@@ -22,19 +22,13 @@
 #include <cstddef>
 #include <cstdint>
 
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define strtoi8_s(num, str, base, nread)   alx_strtoi8_s(num, str, base, nread)
-#define strtoi16_s(num, str, base, nread)  alx_strtoi16_s(num, str, base, nread)
-#define strtoi32_s(num, str, base, nread)  alx_strtoi32_s(num, str, base, nread)
-#define strtoi64_s(num, str, base, nread)  alx_strtoi64_s(num, str, base, nread)
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -85,6 +79,17 @@ namespace alx {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(strtoi8_s,	alx_strtoi8_s);
+ALX_ALIAS_DECLARATION(strtoi16_s,	alx_strtoi16_s);
+ALX_ALIAS_DECLARATION(strtoi32_s,	alx_strtoi32_s);
+ALX_ALIAS_DECLARATION(strtoi64_s,	alx_strtoi64_s);
+#endif
 
 
 /******************************************************************************

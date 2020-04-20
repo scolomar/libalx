@@ -21,18 +21,13 @@
  ******************************************************************************/
 #include <stddef.h>
 
+#include "libalx/base/compiler/attribute.h"
 #include "libalx/base/stdlib/strto/strtoi_s.h"
 
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define strtod_s(num, str, nread)	alx_strtod_s(num, str, nread)
-#define strtof_s(num, str, nread)	alx_strtof_s(num, str, nread)
-#define strtold_s(num, str, nread)	alx_strtold_s(num, str, nread)
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -67,6 +62,16 @@ inline
 int	alx_strtof_status	(const char *restrict str,
 				 const char *restrict endptr,
 				 int errno_after, int errno_before);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(strtod_s,		alx_strtod_s);
+ALX_ALIAS_DECLARATION(strtof_s,		alx_strtof_s);
+ALX_ALIAS_DECLARATION(strtold_s,	alx_strtold_s);
+#endif
 
 
 /******************************************************************************

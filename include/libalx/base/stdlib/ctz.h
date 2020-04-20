@@ -22,6 +22,7 @@
 #include <stdint.h>
 
 #include "libalx/base/assert/stdint.h"
+#include "libalx/base/compiler/attribute.h"
 #include "libalx/base/stdint/types.h"
 
 
@@ -75,56 +76,20 @@ uint64_t	alx_ctz_u256	(uint256_t n);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, const))
-inline
-ptrdiff_t	ctz_u8		(uint8_t n)
-{
-	return	alx_ctz_u8(n);
-}
-
-__attribute__((always_inline, const))
-inline
-ptrdiff_t	ctz_u16		(uint16_t n)
-{
-	return	alx_ctz_u16(n);
-}
-
-__attribute__((always_inline, const))
-inline
-ptrdiff_t	ctz_u32		(uint32_t n)
-{
-	return	alx_ctz_u32(n);
-}
-
-__attribute__((always_inline, const))
-inline
-ptrdiff_t	ctz_u64		(uint64_t n)
-{
-	return	alx_ctz_u64(n);
-}
-
+ALX_ALIAS_DECLARATION(ctz_u8,	alx_ctz_u8);
+ALX_ALIAS_DECLARATION(ctz_u16,	alx_ctz_u16);
+ALX_ALIAS_DECLARATION(ctz_u32,	alx_ctz_u32);
+ALX_ALIAS_DECLARATION(ctz_u64,	alx_ctz_u64);
 # if defined(uint128_t)
-__attribute__((always_inline, const))
-inline
-ptrdiff_t	ctz_u128	(uint128_t n)
-{
-	return	alx_ctz_u128(n);
-}
+ALX_ALIAS_DECLARATION(ctz_u128,	alx_ctz_u128);
 # endif
-
 # if defined(uint256_t)
-__attribute__((always_inline, const))
-inline
-ptrdiff_t	ctz_u256	(uint256_t n)
-{
-	return	alx_ctz_u256(n);
-}
+ALX_ALIAS_DECLARATION(ctz_u256,	alx_ctz_u256);
 # endif
-#endif	/* defined(ALX_NO_PREFIX) */
+#endif
 
 
 /******************************************************************************

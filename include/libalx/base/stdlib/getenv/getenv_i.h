@@ -21,21 +21,12 @@
  ******************************************************************************/
 #include <stdint.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define getenv_i64(num, name)		alx_getenv_i64(num, name)
-#define getenv_i32(num, name)		alx_getenv_i32(num, name)
-#define getenv_i16(num, name)		alx_getenv_i16(num, name)
-#define getenv_i8(num, name)		alx_getenv_i8(num, name)
-#define secure_getenv_i64(num, name)	alx_secure_getenv_i64(num, name)
-#define secure_getenv_i32(num, name)	alx_secure_getenv_i32(num, name)
-#define secure_getenv_i16(num, name)	alx_secure_getenv_i16(num, name)
-#define secure_getenv_i8(num, name)	alx_secure_getenv_i8(num, name)
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -75,6 +66,21 @@ int	alx_secure_getenv_i16	(int16_t *restrict num,
 __attribute__((nonnull, warn_unused_result))
 int	alx_secure_getenv_i8	(int8_t *restrict num,
 				 const char *restrict name);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(getenv_i64,		alx_getenv_i64);
+ALX_ALIAS_DECLARATION(getenv_i32,		alx_getenv_i32);
+ALX_ALIAS_DECLARATION(getenv_i16,		alx_getenv_i16);
+ALX_ALIAS_DECLARATION(getenv_i8,		alx_getenv_i8);
+ALX_ALIAS_DECLARATION(secure_getenv_i64,	alx_secure_getenv_i64);
+ALX_ALIAS_DECLARATION(secure_getenv_i32,	alx_secure_getenv_i32);
+ALX_ALIAS_DECLARATION(secure_getenv_i16,	alx_secure_getenv_i16);
+ALX_ALIAS_DECLARATION(secure_getenv_i8,		alx_secure_getenv_i8);
+#endif
 
 
 /******************************************************************************

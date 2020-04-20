@@ -21,21 +21,14 @@
  ******************************************************************************/
 #include <cstdint>
 
+#include "libalx/base/assert/stdint.hpp"
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/stdint/types.hpp"
 
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define popcnt_u8(n)	alx_popcnt_u8(n)
-#define popcnt_u16(n)	alx_popcnt_u16(n)
-#define popcnt_u32(n)	alx_popcnt_u32(n)
-#define popcnt_u64(n)	alx_popcnt_u64(n)
-#define popcnt_u128(n)	alx_popcnt_u128(n)
-#define popcnt_u256(n)	alx_popcnt_u256(n)
-#endif
 
 
 /******************************************************************************
@@ -82,6 +75,23 @@ namespace alx {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(popcnt_u8,	alx_popcnt_u8);
+ALX_ALIAS_DECLARATION(popcnt_u16,	alx_popcnt_u16);
+ALX_ALIAS_DECLARATION(popcnt_u32,	alx_popcnt_u32);
+ALX_ALIAS_DECLARATION(popcnt_u64,	alx_popcnt_u64);
+# if defined(uint128_t)
+ALX_ALIAS_DECLARATION(popcnt_u128,	alx_popcnt_u128);
+# endif
+# if defined(uint256_t)
+ALX_ALIAS_DECLARATION(popcnt_u256,	alx_popcnt_u256);
+# endif
+#endif
 
 
 /******************************************************************************

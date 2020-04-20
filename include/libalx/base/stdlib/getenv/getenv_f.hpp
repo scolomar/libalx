@@ -19,21 +19,13 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define getenv_d(num, name)		alx_getenv_d(num, name)
-#define getenv_f(num, name)		alx_getenv_f(num, name)
-#define getenv_ld(num, name)		alx_getenv_ld(num, name)
-#define secure_getenv_d(num, name)	alx_secure_getenv_d(num, name)
-#define secure_getenv_f(num, name)	alx_secure_getenv_f(num, name)
-#define secure_getenv_ld(num, name)	alx_secure_getenv_ld(num, name)
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -81,6 +73,19 @@ namespace alx {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(getenv_d,		alx_getenv_d);
+ALX_ALIAS_DECLARATION(getenv_f,		alx_getenv_f);
+ALX_ALIAS_DECLARATION(getenv_ld,	alx_getenv_ld);
+ALX_ALIAS_DECLARATION(secure_getenv_d,	alx_secure_getenv_d);
+ALX_ALIAS_DECLARATION(secure_getenv_f,	alx_secure_getenv_f);
+ALX_ALIAS_DECLARATION(secure_getenv_ld,	alx_secure_getenv_ld);
+#endif
 
 
 /******************************************************************************
