@@ -34,22 +34,22 @@
 extern	"C"
 {
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	getenv_d		(double *restrict num,
+int	alx_getenv_d		(double *restrict num,
 				 const char *restrict name);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	getenv_f		(float *restrict num,
+int	alx_getenv_f		(float *restrict num,
 				 const char *restrict name);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	getenv_ld		(long double *restrict num,
+int	alx_getenv_ld		(long double *restrict num,
 				 const char *restrict name);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	secure_getenv_d		(double *restrict num,
+int	alx_secure_getenv_d	(double *restrict num,
 				 const char *restrict name);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	secure_getenv_f		(float *restrict num,
+int	alx_secure_getenv_f	(float *restrict num,
 				 const char *restrict name);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	secure_getenv_ld	(long double *restrict num,
+int	alx_secure_getenv_ld	(long double *restrict num,
 				 const char *restrict name);
 }
 

@@ -21,7 +21,7 @@
  ******************************************************************************/
 #include <cstddef>
 
-#include "libalx/base/compiler/attribute.h"
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
 
 

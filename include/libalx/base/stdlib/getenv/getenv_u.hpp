@@ -36,28 +36,28 @@
 extern	"C"
 {
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	getenv_u64		(uint64_t *restrict num,
+int	alx_getenv_u64		(uint64_t *restrict num,
 				 const char *restrict name);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	getenv_u32		(uint32_t *restrict num,
+int	alx_getenv_u32		(uint32_t *restrict num,
 				 const char *restrict name);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	getenv_u16		(uint16_t *restrict num,
+int	alx_getenv_u16		(uint16_t *restrict num,
 				 const char *restrict name);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	getenv_u8		(uint8_t *restrict num,
+int	alx_getenv_u8		(uint8_t *restrict num,
 				 const char *restrict name);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	secure_getenv_u64	(uint64_t *restrict num,
+int	alx_secure_getenv_u64	(uint64_t *restrict num,
 				 const char *restrict name);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	secure_getenv_u32	(uint32_t *restrict num,
+int	alx_secure_getenv_u32	(uint32_t *restrict num,
 				 const char *restrict name);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	secure_getenv_u16	(uint16_t *restrict num,
+int	alx_secure_getenv_u16	(uint16_t *restrict num,
 				 const char *restrict name);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	secure_getenv_u8	(uint8_t *restrict num,
+int	alx_secure_getenv_u8	(uint8_t *restrict num,
 				 const char *restrict name);
 }
 
