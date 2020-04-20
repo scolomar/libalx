@@ -26,23 +26,22 @@
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-#define clock_gettime_diff(clk_id, diff, rt_base)			\
-	alx_clock_gettime_diff(clk_id, diff, rt_base)
-#define clock_gettime_diff_s(clk_id, rt_base)				\
-	alx_clock_gettime_diff_s(clk_id, rt_base)
-#define clock_gettime_diff_ms(clk_id, rt_base)				\
-	alx_clock_gettime_diff_ms(clk_id, rt_base)
-#define clock_gettime_diff_us(clk_id, rt_base)				\
-	alx_clock_gettime_diff_us(clk_id, rt_base)
-#define clock_gettime_diff_ns(clk_id, rt_base)				\
-	alx_clock_gettime_diff_ns(clk_id, rt_base)
 
 
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-extern	"C"
-{
+extern "C" {
+
+
+/******************************************************************************
+ ******* struct / union *******************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* C prototypes *********************************************************
+ ******************************************************************************/
 [[gnu::nonnull]]
 void	alx_clock_gettime_diff		(clockid_t clk_id,
 					 struct timespec *diff,
@@ -59,7 +58,29 @@ int64_t	alx_clock_gettime_diff_us	(clockid_t clk_id,
 [[gnu::nonnull]]
 int64_t	alx_clock_gettime_diff_ns	(clockid_t clk_id,
 					 const struct timespec *rt_base);
-}
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+#define clock_gettime_diff(clk_id, diff, rt_base)			\
+	alx_clock_gettime_diff(clk_id, diff, rt_base)
+#define clock_gettime_diff_s(clk_id, rt_base)				\
+	alx_clock_gettime_diff_s(clk_id, rt_base)
+#define clock_gettime_diff_ms(clk_id, rt_base)				\
+	alx_clock_gettime_diff_ms(clk_id, rt_base)
+#define clock_gettime_diff_us(clk_id, rt_base)				\
+	alx_clock_gettime_diff_us(clk_id, rt_base)
+#define clock_gettime_diff_ns(clk_id, rt_base)				\
+	alx_clock_gettime_diff_ns(clk_id, rt_base)
+#endif
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+}	/* extern "C" */
 
 
 /******************************************************************************
@@ -70,11 +91,6 @@ namespace alx {
 
 /******************************************************************************
  ******* enum *****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* struct / union *******************************************************
  ******************************************************************************/
 
 

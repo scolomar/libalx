@@ -48,26 +48,22 @@
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define gnuplot_reset_plot(gnuplot)					\
-			alx_gnuplot_reset_plot(gnuplot)
-#define gnuplot_plot_y(gnuplot, size, y, title)				\
-			alx_gnuplot_plot_y(gnuplot, size, y, title)
-#define gnuplot_plot_xy(gnuplot, size, x, y, title)			\
-			alx_gnuplot_plot_xy(gnuplot, size, x, y, title)
-#define gnuplot_plot_slope(gnuplot, a, b, title)			\
-			alx_gnuplot_plot_slope(gnuplot, a, b, title)
-#define gnuplot_plot_equation(gnuplot, equation, title)			\
-			alx_gnuplot_plot_equation(gnuplot, equation, title)
-#endif
 
 
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-extern	"C"
-{
+extern "C" {
+
+
+/******************************************************************************
+ ******* struct / union *******************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* C prototypes *********************************************************
+ ******************************************************************************/
 [[gnu::nonnull]]
 void	alx_gnuplot_reset_plot		(struct Alx_Gnuplot *gnuplot);
 [[gnu::nonnull(1, 3)]]
@@ -89,7 +85,29 @@ int	alx_gnuplot_plot_slope		(struct Alx_Gnuplot *restrict gnuplot,
 int	alx_gnuplot_plot_equation	(struct Alx_Gnuplot *restrict gnuplot,
 					 const char *equation,
 					 const char *title);
-}
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+#define gnuplot_reset_plot(gnuplot)					\
+			alx_gnuplot_reset_plot(gnuplot)
+#define gnuplot_plot_y(gnuplot, size, y, title)				\
+			alx_gnuplot_plot_y(gnuplot, size, y, title)
+#define gnuplot_plot_xy(gnuplot, size, x, y, title)			\
+			alx_gnuplot_plot_xy(gnuplot, size, x, y, title)
+#define gnuplot_plot_slope(gnuplot, a, b, title)			\
+			alx_gnuplot_plot_slope(gnuplot, a, b, title)
+#define gnuplot_plot_equation(gnuplot, equation, title)			\
+			alx_gnuplot_plot_equation(gnuplot, equation, title)
+#endif
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+}	/* extern "C" */
 
 
 /******************************************************************************
@@ -101,11 +119,6 @@ namespace plot {
 
 /******************************************************************************
  ******* enum *****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* struct / union *******************************************************
  ******************************************************************************/
 
 

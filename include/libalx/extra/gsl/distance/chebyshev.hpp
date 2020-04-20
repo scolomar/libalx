@@ -25,7 +25,41 @@
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern "C" {
+
+
+/******************************************************************************
+ ******* struct / union *******************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* C prototypes *********************************************************
+ ******************************************************************************/
+[[gnu::const]]
+long double alx_gsl_distance2D_chebyshev_ldbl	(long double dx, long double dy);
+[[gnu::const]]
+double	alx_gsl_distance2D_chebyshev		(double dx, double dy);
+[[gnu::const]]
+float	alx_gsl_distance2D_chebyshev_flt	(float dx, float dy);
+[[gnu::const]]
+float	alx_gsl_distance2D_chebyshev_8b		(int8_t dx, int8_t dy);
+[[gnu::const]]
+float	alx_gsl_distance2D_chebyshev_16b	(int16_t dx, int16_t dy);
+[[gnu::const]]
+double	alx_gsl_distance2D_chebyshev_32b	(int32_t dx, int32_t dy);
+[[gnu::const]]
+long double alx_gsl_distance2D_chebyshev_64b	(int64_t dx, int64_t dy);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
 #define distance2D_chebyshev_ldbl(dx, dy)				\
 	alx_gsl_distance2D_chebyshev_ldbl(dx, dy)
@@ -41,29 +75,13 @@
 	alx_gsl_distance2D_chebyshev_32b(dx, dy)
 #define distance2D_chebyshev_64b(dx, dy)				\
 	alx_gsl_distance2D_chebyshev_64b(dx, dy)
-#endif	/* defined(ALX_NO_PREFIX) */
+#endif
 
 
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-extern	"C"
-{
-[[gnu::const]]
-long double alx_gsl_distance2D_chebyshev_ldbl	(long double dx, long double dy);
-[[gnu::const]]
-double	alx_gsl_distance2D_chebyshev		(double dx, double dy);
-[[gnu::const]]
-float	alx_gsl_distance2D_chebyshev_flt	(float dx, float dy);
-[[gnu::const]]
-float	alx_gsl_distance2D_chebyshev_8b		(int8_t dx, int8_t dy);
-[[gnu::const]]
-float	alx_gsl_distance2D_chebyshev_16b	(int16_t dx, int16_t dy);
-[[gnu::const]]
-double	alx_gsl_distance2D_chebyshev_32b	(int32_t dx, int32_t dy);
-[[gnu::const]]
-long double alx_gsl_distance2D_chebyshev_64b	(int64_t dx, int64_t dy);
-}
+}	/* extern "C" */
 
 
 /******************************************************************************
@@ -75,11 +93,6 @@ namespace gsl {
 
 /******************************************************************************
  ******* enum *****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* struct / union *******************************************************
  ******************************************************************************/
 
 

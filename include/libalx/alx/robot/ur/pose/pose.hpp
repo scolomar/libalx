@@ -53,27 +53,14 @@
 }
 
 
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define UR_POSE_INIT_XYZ(x, y, z, rx, ry, rz)				\
-	ALX_UR_POSE_INIT_XYZ(x, y, z, rx, ry, rz)
-#define UR_POSE_INIT_JOINTS(b, s, e, w1, w2, w3)			\
-	ALX_UR_POSE_INIT_JOINTS(b, s, e, w1, w2, w3)
-
-#define ur_pose_diff(diff, a, b)	alx_ur_pose_diff(diff, a, b)
-#define ur_is_at_pose(ur, pose)		alx_ur_is_at_pose(ur, pose)
-#define ur_is_at_target(ur)		alx_ur_is_at_target(ur)
-
-#define ur_sprintf_pose(nmemb, str, pose)				\
-	alx_ur_sprintf_pose(nmemb, str, pose)
-#define ur_sprintf_pose_rel(nmemb, str, pose_rel)			\
-	alx_ur_sprintf_pose_rel(nmemb, str, pose_rel)
-}
-#endif	/* defined(ALX_NO_PREFIX) */
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern "C" {
 
 
 /******************************************************************************
- ******* extern "C" ***********************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 struct	Alx_UR_Pose {
 	int	type;
@@ -83,8 +70,10 @@ struct	Alx_UR_Pose {
 	};
 };
 
-extern	"C"
-{
+
+/******************************************************************************
+ ******* C prototypes *********************************************************
+ ******************************************************************************/
 [[gnu::nonnull]]
 int	alx_ur_pose_diff	(struct Alx_UR_Pose *restrict diff,
 				 const struct Alx_UR_Pose *restrict a,
@@ -102,7 +91,32 @@ int	alx_ur_sprintf_pose	(ptrdiff_t nmemb,
 int	alx_ur_sprintf_pose_rel	(ptrdiff_t nmemb,
 				 char *restrict str/*[nmemb]*/,
 				 const struct Alx_UR_Pose *restrict pose_rel);
-}
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+#define UR_POSE_INIT_XYZ(x, y, z, rx, ry, rz)				\
+	ALX_UR_POSE_INIT_XYZ(x, y, z, rx, ry, rz)
+#define UR_POSE_INIT_JOINTS(b, s, e, w1, w2, w3)			\
+	ALX_UR_POSE_INIT_JOINTS(b, s, e, w1, w2, w3)
+
+#define ur_pose_diff(diff, a, b)	alx_ur_pose_diff(diff, a, b)
+#define ur_is_at_pose(ur, pose)		alx_ur_is_at_pose(ur, pose)
+#define ur_is_at_target(ur)		alx_ur_is_at_target(ur)
+
+#define ur_sprintf_pose(nmemb, str, pose)				\
+	alx_ur_sprintf_pose(nmemb, str, pose)
+#define ur_sprintf_pose_rel(nmemb, str, pose_rel)			\
+	alx_ur_sprintf_pose_rel(nmemb, str, pose_rel)
+#endif
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+}	/* extern "C" */
 
 
 /******************************************************************************
@@ -120,11 +134,6 @@ enum	Pose_Types {
 	POSE_XYZ,
 	POSE_JOINTS
 };
-
-
-/******************************************************************************
- ******* struct / union *******************************************************
- ******************************************************************************/
 
 
 /******************************************************************************

@@ -28,26 +28,22 @@
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define gsl_stats_mean_ldbl(nmemb, arr)	 alx_gsl_stats_mean_ldbl(nmemb, arr)
-#define gsl_stats_mean_flt(nmemb, arr)	 alx_gsl_stats_mean_flt(nmemb, arr)
-#define gsl_stats_mean_u8(nmemb, arr)	 alx_gsl_stats_mean_u8(nmemb, arr)
-#define gsl_stats_mean_s8(nmemb, arr)	 alx_gsl_stats_mean_s8(nmemb, arr)
-#define gsl_stats_mean_u16(nmemb, arr)	 alx_gsl_stats_mean_u16(nmemb, arr)
-#define gsl_stats_mean_s16(nmemb, arr)	 alx_gsl_stats_mean_s16(nmemb, arr)
-#define gsl_stats_mean_u32(nmemb, arr)	 alx_gsl_stats_mean_u32(nmemb, arr)
-#define gsl_stats_mean_s32(nmemb, arr)	 alx_gsl_stats_mean_s32(nmemb, arr)
-#define gsl_stats_mean_u64(nmemb, arr)	 alx_gsl_stats_mean_u64(nmemb, arr)
-#define gsl_stats_mean_s64(nmemb, arr)	 alx_gsl_stats_mean_s64(nmemb, arr)
-#endif
 
 
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-extern	"C"
-{
+extern "C" {
+
+
+/******************************************************************************
+ ******* struct / union *******************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* C prototypes *********************************************************
+ ******************************************************************************/
 [[gnu::nonnull]][[gnu::pure]]
 long double alx_gsl_stats_mean_ldbl(ptrdiff_t nmemb,
 				 const long double *restrict arr);
@@ -78,7 +74,29 @@ long double alx_gsl_stats_mean_u64(ptrdiff_t nmemb,
 [[gnu::nonnull]][[gnu::pure]]
 long double alx_gsl_stats_mean_s64(ptrdiff_t nmemb,
 				 const int64_t *restrict arr);
-}
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+#define gsl_stats_mean_ldbl(nmemb, arr)	 alx_gsl_stats_mean_ldbl(nmemb, arr)
+#define gsl_stats_mean_flt(nmemb, arr)	 alx_gsl_stats_mean_flt(nmemb, arr)
+#define gsl_stats_mean_u8(nmemb, arr)	 alx_gsl_stats_mean_u8(nmemb, arr)
+#define gsl_stats_mean_s8(nmemb, arr)	 alx_gsl_stats_mean_s8(nmemb, arr)
+#define gsl_stats_mean_u16(nmemb, arr)	 alx_gsl_stats_mean_u16(nmemb, arr)
+#define gsl_stats_mean_s16(nmemb, arr)	 alx_gsl_stats_mean_s16(nmemb, arr)
+#define gsl_stats_mean_u32(nmemb, arr)	 alx_gsl_stats_mean_u32(nmemb, arr)
+#define gsl_stats_mean_s32(nmemb, arr)	 alx_gsl_stats_mean_s32(nmemb, arr)
+#define gsl_stats_mean_u64(nmemb, arr)	 alx_gsl_stats_mean_u64(nmemb, arr)
+#define gsl_stats_mean_s64(nmemb, arr)	 alx_gsl_stats_mean_s64(nmemb, arr)
+#endif
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+}	/* extern "C" */
 
 
 /******************************************************************************
@@ -90,11 +108,6 @@ namespace gsl {
 
 /******************************************************************************
  ******* enum *****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* struct / union *******************************************************
  ******************************************************************************/
 
 

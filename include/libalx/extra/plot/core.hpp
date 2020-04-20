@@ -49,7 +49,45 @@
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern "C" {
+
+
+/******************************************************************************
+ ******* struct / union *******************************************************
+ ******************************************************************************/
+struct	Alx_Gnuplot {
+	FILE	*pipe;
+	int	nplots;
+	char	style[BUFSIZ];
+	bool	multi;
+};
+
+
+/******************************************************************************
+ ******* C prototypes *********************************************************
+ ******************************************************************************/
+[[gnu::nonnull]]
+int	alx_gnuplot_init	(struct Alx_Gnuplot **gnuplot);
+int	alx_gnuplot_deinit	(struct Alx_Gnuplot *gnuplot);
+[[gnu::nonnull]] [[gnu::format(printf, 2, 3)]]
+int	alx_gnuplot_cmd		(const struct Alx_Gnuplot *restrict gnuplot,
+				 const char *restrict fmt, ...);
+[[gnu::nonnull]] [[gnu::format(printf, 2, 3)]]
+int	alx_gnuplot_printf	(const struct Alx_Gnuplot *restrict gnuplot,
+				 const char *restrict fmt, ...);
+[[gnu::nonnull]] [[gnu::format(printf, 2, 0)]]
+int	alx_gnuplot_vprintf	(const struct Alx_Gnuplot *restrict gnuplot,
+				 const char *restrict fmt, va_list ap);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
 #define Gnuplot			      Alx_Gnuplot
 #define gnuplot_init(gnuplot)	      alx_gnuplot_init(gnuplot)
@@ -63,28 +101,7 @@
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-struct	Alx_Gnuplot {
-	FILE	*pipe;
-	int	nplots;
-	char	style[BUFSIZ];
-	bool	multi;
-};
-
-extern	"C"
-{
-[[gnu::nonnull]]
-int	alx_gnuplot_init	(struct Alx_Gnuplot **gnuplot);
-int	alx_gnuplot_deinit	(struct Alx_Gnuplot *gnuplot);
-[[gnu::nonnull]] [[gnu::format(printf, 2, 3)]]
-int	alx_gnuplot_cmd		(const struct Alx_Gnuplot *restrict gnuplot,
-				 const char *restrict fmt, ...);
-[[gnu::nonnull]] [[gnu::format(printf, 2, 3)]]
-int	alx_gnuplot_printf	(const struct Alx_Gnuplot *restrict gnuplot,
-				 const char *restrict fmt, ...);
-[[gnu::nonnull]] [[gnu::format(printf, 2, 0)]]
-int	alx_gnuplot_vprintf	(const struct Alx_Gnuplot *restrict gnuplot,
-				 const char *restrict fmt, va_list ap);
-}
+}	/* extern "C" */
 
 
 /******************************************************************************
@@ -96,11 +113,6 @@ namespace plot {
 
 /******************************************************************************
  ******* enum *****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* struct / union *******************************************************
  ******************************************************************************/
 
 

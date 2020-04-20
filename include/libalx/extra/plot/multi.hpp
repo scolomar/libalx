@@ -48,26 +48,22 @@
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define gnuplot_set_multiplot(gnuplot, opt)				\
-			alx_gnuplot_set_multiplot(gnuplot, opt)
-#define gnuplot_unset_multiplot(gnuplot)				\
-			alx_gnuplot_unset_multiplot(gnuplot)
-#define gnuplot_plot_multi_y(gp, n, size, y, title)			\
-			alx_gnuplot_plot_multi_y(gp, n, size, y, title)
-#define gnuplot_plot_x_multi_y(gp, n, size, x, y, title)		\
-			alx_gnuplot_plot_x_multi_y(gp, n, size, x, y, title)
-#define gnuplot_plot_multi_xy(gp, n, size, x, y, title)			\
-			alx_gnuplot_plot_multi_xy(gp, n, size, x, y, title)
-#endif
 
 
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-extern	"C"
-{
+extern "C" {
+
+
+/******************************************************************************
+ ******* struct / union *******************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* C prototypes *********************************************************
+ ******************************************************************************/
 [[gnu::nonnull(1)]]
 int	alx_gnuplot_set_multiplot	(struct Alx_Gnuplot *restrict gnuplot,
 					 const char *restrict opt);
@@ -94,7 +90,29 @@ int	alx_gnuplot_plot_multi_xy	(struct Alx_Gnuplot *restrict gnuplot,
 					 const double *restrict x/*[n][size]*/,
 					 const double *restrict y/*[n][size]*/,
 					 const char *restrict title/*[n]*/);
-}
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+#define gnuplot_set_multiplot(gnuplot, opt)				\
+			alx_gnuplot_set_multiplot(gnuplot, opt)
+#define gnuplot_unset_multiplot(gnuplot)				\
+			alx_gnuplot_unset_multiplot(gnuplot)
+#define gnuplot_plot_multi_y(gp, n, size, y, title)			\
+			alx_gnuplot_plot_multi_y(gp, n, size, y, title)
+#define gnuplot_plot_x_multi_y(gp, n, size, x, y, title)		\
+			alx_gnuplot_plot_x_multi_y(gp, n, size, x, y, title)
+#define gnuplot_plot_multi_xy(gp, n, size, x, y, title)			\
+			alx_gnuplot_plot_multi_xy(gp, n, size, x, y, title)
+#endif
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+}	/* extern "C" */
 
 
 /******************************************************************************
@@ -106,11 +124,6 @@ namespace plot {
 
 /******************************************************************************
  ******* enum *****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* struct / union *******************************************************
  ******************************************************************************/
 
 
