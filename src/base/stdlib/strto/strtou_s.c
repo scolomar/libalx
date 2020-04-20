@@ -114,6 +114,17 @@ int	alx_strtoul_status	(const char *restrict str,
 
 
 /******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_WEAK_DEFINITION(strtou8_s,	alx_strtou8_s);
+ALX_ALIAS_WEAK_DEFINITION(strtou16_s,	alx_strtou16_s);
+ALX_ALIAS_WEAK_DEFINITION(strtou32_s,	alx_strtou32_s);
+ALX_ALIAS_WEAK_DEFINITION(strtou64_s,	alx_strtou64_s);
+#endif
+
+
+/******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
 

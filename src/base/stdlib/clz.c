@@ -47,6 +47,23 @@ uint64_t	alx_clz_u256	(uint256_t n);
 
 
 /******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_WEAK_DEFINITION(clz_u8,	alx_clz_u8);
+ALX_ALIAS_WEAK_DEFINITION(clz_u16,	alx_clz_u16);
+ALX_ALIAS_WEAK_DEFINITION(clz_u32,	alx_clz_u32);
+ALX_ALIAS_WEAK_DEFINITION(clz_u64,	alx_clz_u64);
+# if defined(uint128_t)
+ALX_ALIAS_WEAK_DEFINITION(clz_u128,	alx_clz_u128);
+# endif
+# if defined(uint256_t)
+ALX_ALIAS_WEAK_DEFINITION(clz_u256,	alx_clz_u256);
+# endif
+#endif
+
+
+/******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
 
