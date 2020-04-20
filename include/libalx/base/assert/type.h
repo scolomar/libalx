@@ -77,7 +77,6 @@
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define Static_assert_unsigned(x)	alx_Static_assert_unsigned(x)
 #define Static_assert_signed(x)		alx_Static_assert_signed(x)

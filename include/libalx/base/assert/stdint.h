@@ -146,7 +146,6 @@
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define Static_assert_stdint_types()	alx_Static_assert_stdint_types()
 #define Static_assert_u8_uchar()	alx_Static_assert_u8_uchar()

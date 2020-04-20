@@ -63,7 +63,6 @@ void	alx__vperrorx__	(const char *restrict file, int line,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define perrorx(fmt, ...)	alx_perrorx(fmt, ##__VA_ARGS__)
 #endif

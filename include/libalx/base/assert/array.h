@@ -50,7 +50,6 @@
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define Static_assert_array(a)		alx_Static_assert_array(a)
 #define Static_assert_char_array(a)	alx_Static_assert_char_array(a)

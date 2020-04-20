@@ -61,7 +61,6 @@ void	alx__errorx__	(int status, const char *restrict file, int line,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define errorx(status, fmt, ...)	alx_errorx(status, fmt, ##__VA_ARGS__)
 #endif

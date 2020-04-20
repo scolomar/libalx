@@ -65,7 +65,6 @@
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
 #define Static_assert_size_ptrdiff()	alx_Static_assert_size_ptrdiff()
 #define assert_size_ptrdiff()		alx_assert_size_ptrdiff()
