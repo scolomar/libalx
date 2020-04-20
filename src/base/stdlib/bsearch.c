@@ -12,7 +12,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "libalx/base/stdlib/average.h"
+#include "libalx/base/stdlib/avg.h"
 
 
 /******************************************************************************

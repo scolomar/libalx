@@ -68,7 +68,7 @@ BASE_MODULES	=							\
 		base/stdlib/alloc/reallocfs				\
 		base/stdlib/alloc/reallocs				\
 		base/stdlib/array_split_pos_neg				\
-		base/stdlib/average					\
+		base/stdlib/avg						\
 		base/stdlib/clz						\
 		base/stdlib/cmp						\
 		base/stdlib/ctz						\
