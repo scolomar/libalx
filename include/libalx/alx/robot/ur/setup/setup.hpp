@@ -19,9 +19,11 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
+#include "libalx/base/compiler/attribute.hpp"
+#include "libalx/base/compiler/restrict.hpp"
+
 #include "libalx/alx/robot/ur/core/core.hpp"
 #include "libalx/alx/robot/ur/pose/pose.hpp"
-#include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
@@ -52,7 +54,7 @@ int	alx_ur_set_tcp	(struct Alx_UR *restrict ur,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define ur_set_tcp(ur, tcp)	alx_ur_set_tcp(ur, tcp)
+ALX_ALIAS_DECLARATION(ur_set_tcp, alx_ur_set_tcp);
 #endif
 
 

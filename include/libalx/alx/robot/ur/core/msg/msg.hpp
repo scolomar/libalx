@@ -21,6 +21,8 @@
  ******************************************************************************/
 #include <cstdint>
 
+#include "libalx/base/compiler/attribute.hpp"
+
 #include "libalx/alx/robot/ur/core/core.hpp"
 
 
@@ -57,8 +59,8 @@ int	alx_ur_buffer_read	(struct Alx_UR *ur);
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define ur_recvmsg(ur)		alx_ur_recvmsg(ur)
-#define ur_buffer_read(ur)	alx_ur_buffer_read(ur)
+ALX_ALIAS_DECLARATION(ur_recvmsg,	alx_ur_recvmsg);
+ALX_ALIAS_DECLARATION(ur_buffer_read,	alx_ur_buffer_read);
 #endif
 
 

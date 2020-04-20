@@ -19,6 +19,7 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
 
 #include "libalx/alx/robot/ur/core/core.hpp"
@@ -51,7 +52,7 @@ int	alx_ur_puts	(struct Alx_UR *restrict ur, const char *restrict msg);
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define ur_puts(ur, msg)	alx_ur_puts(ur, msg)
+ALX_ALIAS_DECLARATION(ur_puts, alx_ur_puts);
 #endif
 
 

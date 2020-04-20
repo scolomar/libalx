@@ -131,6 +131,12 @@ int	alx_ur_poweroff	(const struct Alx_UR *restrict ur)
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_WEAK_DEFINITION(ur_init,	alx_ur_init);
+ALX_ALIAS_WEAK_DEFINITION(ur_deinit,	alx_ur_deinit);
+ALX_ALIAS_WEAK_DEFINITION(ur_cmd,	alx_ur_cmd);
+ALX_ALIAS_WEAK_DEFINITION(ur_poweroff,	alx_ur_poweroff);
+#endif
 
 
 /******************************************************************************

@@ -23,18 +23,14 @@
 
 #include <sys/types.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 #include "libalx/alx/robot/ur/core/core.h"
 
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define ur_robot_state_update(ur)	alx_ur_robot_state_update(ur)
-#define ur_parse_msg_robot_state(ur, sz, msg, ts)			\
-	alx_ur_parse_msg_robot_state(ur, sz, msg, ts)
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -72,6 +68,10 @@ void	alx_ur_parse_msg_robot_state	(struct Alx_UR *restrict ur,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(ur_robot_state_update,	alx_ur_robot_state_update);
+ALX_ALIAS_DECLARATION(ur_parse_msg_robot_state,	alx_ur_parse_msg_robot_state);
+#endif
 
 
 /******************************************************************************

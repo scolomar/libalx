@@ -19,6 +19,7 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
 
 #include "libalx/alx/robot/ur/core/core.hpp"
@@ -90,20 +91,16 @@ int	alx_ur_movec_rel	(struct Alx_UR *restrict ur,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define ur_halt(ur, timeout)		alx_ur_halt(ur, timeout)
-
-#define ur_check_movement(ur, timeout)	alx_ur_check_movement(ur, timeout)
-#define ur_wait_while_moving(ur, timeout, tm_start)			\
-	alx_ur_wait_while_moving(ur, timeout, tm_start)
-#define ur_is_moving(ur)		alx_ur_is_moving(ur)
-
-#define ur_movej(ur, pose, timeout)	alx_ur_movej(ur, pose, timeout)
-#define ur_movej_rel(ur, pose, timeout)	alx_ur_movej_rel(ur, pose, timeout)
-#define ur_movel(ur, pose, timeout)	alx_ur_movel(ur, pose, timeout)
-#define ur_movel_rel(ur, pose, timeout)	alx_ur_movel_rel(ur, pose, timeout)
-#define ur_movec(ur, via, to, timeout)	alx_ur_movec(ur, via, to, timeout)
-#define ur_movec_rel(ur, via, to, timeout)				\
-	alx_ur_movec_rel(ur, via, to, timeout)
+ALX_ALIAS_DECLARATION(ur_halt,			alx_ur_halt);
+ALX_ALIAS_DECLARATION(ur_check_movement,	alx_ur_check_movement);
+ALX_ALIAS_DECLARATION(ur_wait_while_moving,	alx_ur_wait_while_moving);
+ALX_ALIAS_DECLARATION(ur_is_moving,		alx_ur_is_moving);
+ALX_ALIAS_DECLARATION(ur_movej,			alx_ur_movej);
+ALX_ALIAS_DECLARATION(ur_movej_rel,		alx_ur_movej_rel);
+ALX_ALIAS_DECLARATION(ur_movel,			alx_ur_movel);
+ALX_ALIAS_DECLARATION(ur_movel_rel,		alx_ur_movel_rel);
+ALX_ALIAS_DECLARATION(ur_movec,			alx_ur_movec);
+ALX_ALIAS_DECLARATION(ur_movec_rel,		alx_ur_movec_rel);
 #endif
 
 

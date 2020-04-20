@@ -22,17 +22,14 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 #include "libalx/alx/robot/ur/core/core.h"
 
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define ur_set_Dout(ur, i, state, timeout)				\
-	alx_ur_set_Dout(ur, i, state, timeout)
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -56,6 +53,9 @@ int	alx_ur_set_Dout	(struct Alx_UR *ur, ptrdiff_t i, bool state,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(ur_set_Dout, alx_ur_set_Dout);
+#endif
 
 
 /******************************************************************************

@@ -29,6 +29,8 @@
  ******************************************************************************/
 #include <stdint.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 #include "libalx/alx/robot/ur/core/core.h"
 
 
@@ -55,13 +57,6 @@
 	t_;								\
 }									\
 )
-
-
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define ur_recvmsg(ur)		alx_ur_recvmsg(ur)
-#define ur_buffer_read(ur)	alx_ur_buffer_read(ur)
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -94,6 +89,10 @@ int	alx_ur_buffer_read	(struct Alx_UR *ur);
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(ur_recvmsg,	alx_ur_recvmsg);
+ALX_ALIAS_DECLARATION(ur_buffer_read,	alx_ur_buffer_read);
+#endif
 
 
 /******************************************************************************

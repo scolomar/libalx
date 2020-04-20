@@ -24,6 +24,8 @@
 #include <stdio.h>
 #include <time.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
  ******* define ***************************************************************
@@ -31,15 +33,6 @@
 #define NJOINTS			(6)
 #define ROBOT_FREQUENCY		(10)
 #define ROBOT_UPDATE_PERIOD_MS	(100)
-
-
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define ur_init(ur, ur_ip)	alx_ur_init(ur, ur_ip)
-#define ur_deinit(ur)		alx_ur_deinit(ur)
-#define ur_cmd(ur, fmt, ...)	alx_ur_cmd(ur, fmt, ##__VA_ARGS__)
-#define ur_poweroff(ur)		alx_ur_poweroff(ur)
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -355,6 +348,12 @@ int	alx_ur_poweroff	(const struct Alx_UR *ur);
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(ur_init,		alx_ur_init);
+ALX_ALIAS_DECLARATION(ur_deinit,	alx_ur_deinit);
+ALX_ALIAS_DECLARATION(ur_cmd,		alx_ur_cmd);
+ALX_ALIAS_DECLARATION(ur_poweroff,	alx_ur_poweroff);
+#endif
 
 
 /******************************************************************************

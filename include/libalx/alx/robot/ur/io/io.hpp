@@ -22,6 +22,8 @@
 #include <cstdbool>
 #include <cstddef>
 
+#include "libalx/base/compiler/attribute.hpp"
+
 #include "libalx/alx/robot/ur/core/core.hpp"
 
 
@@ -53,8 +55,7 @@ int	alx_ur_Dout_set	(struct Alx_UR *ur, ptrdiff_t i, bool state,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define ur_set_Dout(ur, i, state, timeout)				\
-	alx_ur_set_Dout(ur, i, state, timeout)
+ALX_ALIAS_DECLARATION(ur_set_Dout, alx_ur_set_Dout);
 #endif
 
 
