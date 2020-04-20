@@ -16,7 +16,7 @@
 #include <string.h>
 
 #include "libalx/base/compiler/size.h"
-#include "libalx/base/stdlib/average.h"
+#include "libalx/base/stdlib/avg.h"
 #include "libalx/base/stdlib/cmp.h"
 
 

@@ -22,7 +22,7 @@
 #include <errno.h>
 #include <math.h>
 
-#include "libalx/base/stdlib/average.h"
+#include "libalx/base/stdlib/avg.h"
 
 
 /******************************************************************************
