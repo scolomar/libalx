@@ -19,6 +19,7 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
+#include "libalx/base/compiler/attribute.hpp"
 
 
 /******************************************************************************
@@ -48,8 +49,7 @@ int	alx_tcp_server_open	(const char *server_port, int backlog);
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define tcp_server_open(server_port, backlog)	alx_tcp_server_open(	\
-							server_port, backlog)
+ALX_ALIAS_DECLARATION(tcp_server_open, alx_tcp_server_open);
 #endif
 
 

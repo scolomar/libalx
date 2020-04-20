@@ -24,6 +24,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
 
 
@@ -57,8 +58,7 @@ void	alx_wrap_msghdr	(struct msghdr *restrict msg,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define wrap_msghdr(msg, iov, bsz, buf, cbsz, cbuf)			\
-	alx_wrap_msghdr(msg, iov, bsz, buf, cbsz, cbuf)
+ALX_ALIAS_DECLARATION(wrap_msghdr, alx_wrap_msghdr);
 #endif
 
 

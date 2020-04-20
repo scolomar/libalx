@@ -19,6 +19,7 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
 
 
@@ -50,8 +51,7 @@ int	alx_tcp_client_open	(const char *restrict server_addr,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define tcp_client_open(server_addr, server_port)			\
-				alx_tcp_client_open(server_addr, server_port)
+ALX_ALIAS_DECLARATION(tcp_client_open, alx_tcp_client_open);
 #endif
 
 

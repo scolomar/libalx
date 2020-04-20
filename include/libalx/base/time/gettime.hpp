@@ -22,6 +22,8 @@
 #include <cstdint>
 #include <ctime>
 
+#include "libalx/base/compiler/attribute.hpp"
+
 
 /******************************************************************************
  ******* define ***************************************************************
@@ -64,16 +66,11 @@ int64_t	alx_clock_gettime_diff_ns	(clockid_t clk_id,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define clock_gettime_diff(clk_id, diff, rt_base)			\
-	alx_clock_gettime_diff(clk_id, diff, rt_base)
-#define clock_gettime_diff_s(clk_id, rt_base)				\
-	alx_clock_gettime_diff_s(clk_id, rt_base)
-#define clock_gettime_diff_ms(clk_id, rt_base)				\
-	alx_clock_gettime_diff_ms(clk_id, rt_base)
-#define clock_gettime_diff_us(clk_id, rt_base)				\
-	alx_clock_gettime_diff_us(clk_id, rt_base)
-#define clock_gettime_diff_ns(clk_id, rt_base)				\
-	alx_clock_gettime_diff_ns(clk_id, rt_base)
+ALX_ALIAS_DECLARATION(clock_gettime_diff,	alx_clock_gettime_diff);
+ALX_ALIAS_DECLARATION(clock_gettime_diff_s,	alx_clock_gettime_diff_s);
+ALX_ALIAS_DECLARATION(clock_gettime_diff_ms,	alx_clock_gettime_diff_ms);
+ALX_ALIAS_DECLARATION(clock_gettime_diff_us,	alx_clock_gettime_diff_us);
+ALX_ALIAS_DECLARATION(clock_gettime_diff_ns,	alx_clock_gettime_diff_ns);
 #endif
 
 

@@ -24,6 +24,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
 
 
@@ -55,7 +56,7 @@ int	alx_msg_get_timestampns	(struct timespec *restrict tm,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define msg_get_timestampns(tm, msg)	alx_msg_get_timestampns(tm, msg)
+ALX_ALIAS_DECLARATION(msg_get_timestampns, alx_msg_get_timestampns);
 #endif
 
 

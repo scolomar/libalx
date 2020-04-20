@@ -24,15 +24,12 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define wrap_msghdr(msg, iov, bsz, buf, cbsz, cbuf)			\
-	alx_wrap_msghdr(msg, iov, bsz, buf, cbsz, cbuf)
-#endif	 /* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -58,6 +55,9 @@ void	alx_wrap_msghdr	(struct msghdr *restrict msg,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(wrap_msghdr, alx_wrap_msghdr);
+#endif
 
 
 /******************************************************************************

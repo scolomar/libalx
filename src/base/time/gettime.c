@@ -81,6 +81,18 @@ int64_t	alx_clock_gettime_diff_ns	(clockid_t clk_id,
 
 
 /******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_WEAK_DEFINITION(clock_gettime_diff,	 alx_clock_gettime_diff);
+ALX_ALIAS_WEAK_DEFINITION(clock_gettime_diff_s,	 alx_clock_gettime_diff_s);
+ALX_ALIAS_WEAK_DEFINITION(clock_gettime_diff_ms, alx_clock_gettime_diff_ms);
+ALX_ALIAS_WEAK_DEFINITION(clock_gettime_diff_us, alx_clock_gettime_diff_us);
+ALX_ALIAS_WEAK_DEFINITION(clock_gettime_diff_ns, alx_clock_gettime_diff_ns);
+#endif
+
+
+/******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
 

@@ -22,17 +22,12 @@
 #include <stdint.h>
 #include <time.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-#define timespec_ms(tm)			    alx_timespec_ms(tm)
-#define timespec_us(tm)			    alx_timespec_us(tm)
-#define timespec_ns(tm)			    alx_timespec_ns(tm)
-#define timespec_diff(diff, start, stop)    alx_timespec_diff(diff, start, stop)
-#define timespec_diff_ms(start, stop)	    alx_timespec_diff_ms(start, stop)
-#define timespec_diff_us(start, stop)	    alx_timespec_diff_us(start, stop)
-#define timespec_diff_ns(start, stop)	    alx_timespec_diff_ns(start, stop)
 
 
 /******************************************************************************
@@ -72,6 +67,15 @@ int64_t	alx_timespec_diff_ns	(const struct timespec *start,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(timespec_ms,	alx_timespec_ms);
+ALX_ALIAS_DECLARATION(timespec_us,	alx_timespec_us);
+ALX_ALIAS_DECLARATION(timespec_ns,	alx_timespec_ns);
+ALX_ALIAS_DECLARATION(timespec_diff,	alx_timespec_diff);
+ALX_ALIAS_DECLARATION(timespec_diff_ms,	alx_timespec_diff_ms);
+ALX_ALIAS_DECLARATION(timespec_diff_us,	alx_timespec_diff_us);
+ALX_ALIAS_DECLARATION(timespec_diff_ns,	alx_timespec_diff_ns);
+#endif
 
 
 

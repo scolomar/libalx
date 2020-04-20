@@ -24,14 +24,12 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define msg_get_timestampns(tm, msg)	alx_msg_get_timestampns(tm, msg)
-#endif	 /* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
@@ -55,6 +53,9 @@ int	alx_msg_get_timestampns	(struct timespec *restrict tm,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(msg_get_timestampns, alx_msg_get_timestampns);
+#endif
 
 
 /******************************************************************************
