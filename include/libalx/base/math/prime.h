@@ -56,10 +56,10 @@ extern		uint16_t	alx_prime_16b[PRIME_NUMS_QTY_16b];
  ******************************************************************************/
 void	alx_prime_16b_init	(void);
 
-__attribute__((always_inline, const))
+__attribute__((const))
 inline
 ptrdiff_t	alx_prime_index_8b	(uint8_t n);
-__attribute__((always_inline, const))
+__attribute__((const))
 inline
 ptrdiff_t	alx_prime_index_16b	(uint16_t n);
 

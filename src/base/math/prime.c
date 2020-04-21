@@ -67,6 +67,11 @@ void	alx_prime_16b_init	(void)
 	}
 }
 
+extern
+ptrdiff_t	alx_prime_index_8b	(uint8_t n);
+extern
+ptrdiff_t	alx_prime_index_16b	(uint16_t n);
+
 
 /******************************************************************************
  ******* alias ****************************************************************
