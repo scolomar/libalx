@@ -25,9 +25,9 @@
 #include <libalx/extra/gsl/distance/euclidean.h>
 #include <libalx/extra/gsl/distance/manhattan.h>
 #include <libalx/extra/gsl/distributions/binomial.h>
-#include <libalx/extra/gsl/distributions/exponential.h>
+#include <libalx/extra/gsl/distributions/exp.h>
+#include <libalx/extra/gsl/distributions/gauss.h>
 #include <libalx/extra/gsl/distributions/geometric.h>
-#include <libalx/extra/gsl/distributions/normal.h>
 #include <libalx/extra/gsl/distributions/poisson.h>
 #include <libalx/extra/gsl/distributions/uniform.h>
 #include <libalx/extra/gsl/rstat/median.h>
