@@ -21,6 +21,7 @@
  ******************************************************************************/
 #include <cstdio>
 
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
 
 
@@ -65,14 +66,10 @@ int	alx_telnet_sendf	(FILE *restrict telnet,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define telnet_open_client(telnet, server_addr, server_port, rw)	\
-	alx_telnet_open_client(telnet, server_addr, server_port, rw)
-#define telnet_login(telnet, user, passwd, delay_us)			\
-	alx_telnet_login(telnet, user, passwd, delay_us)
-#define telnet_send(telnet, msg)					\
-	alx_telnet_send(telnet, msg)
-#define telnet_sendf(telnet, fmt, ...)					\
-	alx_telnet_sendf(telnet, fmt, ##__VA_ARGS__)
+ALX_ALIAS_DECLARATION(telnet_open_client,	alx_telnet_open_client);
+ALX_ALIAS_DECLARATION(telnet_login,		alx_telnet_login);
+ALX_ALIAS_DECLARATION(telnet_send,		alx_telnet_send);
+ALX_ALIAS_DECLARATION(telnet_sendf,		alx_telnet_sendf);
 #endif
 
 

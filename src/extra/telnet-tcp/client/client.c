@@ -103,6 +103,12 @@ int	alx_telnet_sendf	(FILE *restrict telnet,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_WEAK_DEF(telnet_open_client,	alx_telnet_open_client);
+ALX_ALIAS_WEAK_DEF(telnet_login,	alx_telnet_login);
+ALX_ALIAS_WEAK_DEF(telnet_send,		alx_telnet_send);
+ALX_ALIAS_WEAK_DEF(telnet_sendf,	alx_telnet_sendf);
+#endif
 
 
 /******************************************************************************

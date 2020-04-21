@@ -21,15 +21,12 @@
  ******************************************************************************/
 #include <stdio.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define telnet_sendf(telnet, fmt, ...)					\
-	alx_telnet_sendf(telnet, fmt, ##__VA_ARGS__)
-#endif
 
 
 /******************************************************************************
@@ -66,40 +63,11 @@ int	alx_telnet_sendf	(FILE *restrict telnet,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-
-
-/******************************************************************************
- ******* always_inline ********************************************************
- ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull(1, 2, 4), warn_unused_result))
-inline
-int	telnet_open_client	(FILE **restrict telnet,
-				 const char *restrict server_addr,
-				 const char *restrict server_port,
-				 const char *restrict rw)
-{
-	return	alx_telnet_open_client(telnet, server_addr, server_port, rw);
-}
-
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-inline
-int	telnet_login		(FILE *restrict telnet,
-				 const char *restrict user,
-				 const char *restrict passwd,
-				 int delay_us)
-{
-	return	alx_telnet_login(telnet, user, passwd, delay_us);
-}
-
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-int	telnet_send		(FILE *restrict telnet,
-				 const char *restrict msg)
-{
-	return	alx_telnet_send(telnet, msg);
-}
+ALX_ALIAS_DECLARATION(telnet_open_client,	alx_telnet_open_client);
+ALX_ALIAS_DECLARATION(telnet_login,		alx_telnet_login);
+ALX_ALIAS_DECLARATION(telnet_send,		alx_telnet_send);
+ALX_ALIAS_DECLARATION(telnet_sendf,		alx_telnet_sendf);
 #endif
 
 
