@@ -156,6 +156,11 @@ int	alx_gnuplot_plot_equation	(struct Alx_Gnuplot *restrict gnuplot,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+ALX_ALIAS_WEAK_DEF(gnuplot_reset_plot,		alx_gnuplot_reset_plot);
+ALX_ALIAS_WEAK_DEF(gnuplot_plot_y,		alx_gnuplot_plot_y);
+ALX_ALIAS_WEAK_DEF(gnuplot_plot_xy,		alx_gnuplot_plot_xy);
+ALX_ALIAS_WEAK_DEF(gnuplot_plot_slope,		alx_gnuplot_plot_slope);
+ALX_ALIAS_WEAK_DEF(gnuplot_plot_equation,	alx_gnuplot_plot_equation);
 
 
 /******************************************************************************

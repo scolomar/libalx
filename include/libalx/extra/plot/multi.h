@@ -41,25 +41,14 @@
  ******************************************************************************/
 #include <stddef.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 #include "libalx/extra/plot/core.h"
 
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define gnuplot_set_multiplot(gnuplot, opt)				\
-			alx_gnuplot_set_multiplot(gnuplot, opt)
-#define gnuplot_unset_multiplot(gnuplot)				\
-			alx_gnuplot_unset_multiplot(gnuplot)
-#define gnuplot_plot_multi_y(gp, n, size, y, title)			\
-			alx_gnuplot_plot_multi_y(gp, n, size, y, title)
-#define gnuplot_plot_x_multi_y(gp, n, size, x, y, title)		\
-			alx_gnuplot_plot_x_multi_y(gp, n, size, x, y, title)
-#define gnuplot_plot_multi_xy(gp, n, size, x, y, title)			\
-			alx_gnuplot_plot_multi_xy(gp, n, size, x, y, title)
-#endif
 
 
 /******************************************************************************
@@ -106,6 +95,13 @@ int	alx_gnuplot_plot_multi_xy	(struct Alx_Gnuplot *restrict gnuplot,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(gnuplot_set_multiplot,	alx_gnuplot_set_multiplot);
+ALX_ALIAS_DECLARATION(gnuplot_unset_multiplot,	alx_gnuplot_unset_multiplot);
+ALX_ALIAS_DECLARATION(gnuplot_plot_multi_y,	alx_gnuplot_plot_multi_y);
+ALX_ALIAS_DECLARATION(gnuplot_plot_x_multi_y,	alx_gnuplot_plot_x_multi_y);
+ALX_ALIAS_DECLARATION(gnuplot_plot_multi_xy,	alx_gnuplot_plot_multi_xy);
+#endif
 
 
 /******************************************************************************

@@ -131,6 +131,11 @@ int	alx_gnuplot_vprintf	(const struct Alx_Gnuplot *restrict gnuplot,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+ALX_ALIAS_WEAK_DEF(gnuplot_init,	alx_gnuplot_init);
+ALX_ALIAS_WEAK_DEF(gnuplot_deinit,	alx_gnuplot_deinit);
+ALX_ALIAS_WEAK_DEF(gnuplot_cmd,		alx_gnuplot_cmd);
+ALX_ALIAS_WEAK_DEF(gnuplot_printf,	alx_gnuplot_printf);
+ALX_ALIAS_WEAK_DEF(gnuplot_vprintf,	alx_gnuplot_vprintf);
 
 
 /******************************************************************************

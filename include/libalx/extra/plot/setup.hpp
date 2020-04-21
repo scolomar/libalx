@@ -39,7 +39,9 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
+
 #include "libalx/extra/plot/core.h"
 
 
@@ -77,12 +79,9 @@ int	alx_gnuplot_set_ylabel	(struct Alx_Gnuplot *restrict gnuplot,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define gnuplot_set_style(gnuplot, style, opt)				\
-			alx_gnuplot_set_style(gnuplot, style, opt)
-#define gnuplot_set_xlabel(gnuplot, label)				\
-			alx_gnuplot_set_xlabel(gnuplot, label)
-#define gnuplot_set_ylabel(gnuplot, label)				\
-			alx_gnuplot_set_ylabel(gnuplot, label)
+ALX_ALIAS_DECLARATION(gnuplot_set_style,	alx_gnuplot_set_style);
+ALX_ALIAS_DECLARATION(gnuplot_set_xlabel,	alx_gnuplot_set_xlabel);
+ALX_ALIAS_DECLARATION(gnuplot_set_ylabel,	alx_gnuplot_set_ylabel);
 #endif
 
 

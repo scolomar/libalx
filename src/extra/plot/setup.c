@@ -102,6 +102,9 @@ int	alx_gnuplot_set_ylabel		(struct Alx_Gnuplot *restrict gnuplot,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+ALX_ALIAS_WEAK_DEF(gnuplot_set_style,	alx_gnuplot_set_style);
+ALX_ALIAS_WEAK_DEF(gnuplot_set_xlabel,	alx_gnuplot_set_xlabel);
+ALX_ALIAS_WEAK_DEF(gnuplot_set_ylabel,	alx_gnuplot_set_ylabel);
 
 
 /******************************************************************************

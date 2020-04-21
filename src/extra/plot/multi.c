@@ -167,6 +167,11 @@ int	alx_gnuplot_plot_multi_xy	(struct Alx_Gnuplot *restrict gnuplot,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+ALX_ALIAS_WEAK_DEF(gnuplot_set_multiplot,	alx_gnuplot_set_multiplot);
+ALX_ALIAS_WEAK_DEF(gnuplot_unset_multiplot,	alx_gnuplot_unset_multiplot);
+ALX_ALIAS_WEAK_DEF(gnuplot_plot_multi_y,	alx_gnuplot_plot_multi_y);
+ALX_ALIAS_WEAK_DEF(gnuplot_plot_x_multi_y,	alx_gnuplot_plot_x_multi_y);
+ALX_ALIAS_WEAK_DEF(gnuplot_plot_multi_xy,	alx_gnuplot_plot_multi_xy);
 
 
 /******************************************************************************

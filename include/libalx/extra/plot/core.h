@@ -43,19 +43,12 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define Gnuplot			      Alx_Gnuplot
-#define gnuplot_init(gnuplot)	      alx_gnuplot_init(gnuplot)
-#define gnuplot_deinit(gnuplot)	      alx_gnuplot_deinit(gnuplot)
-#define gnuplot_cmd(gp, fmt, ...)     alx_gnuplot_cmd(gp, fmt, ##__VA_ARGS__)
-#define gnuplot_printf(gp, fmt, ...)  alx_gnuplot_printf(gp, fmt, ##__VA_ARGS__)
-#define gnuplot_vprintf(gp, fmt, ap)  alx_gnuplot_vprintf(gp, fmt, ap)
-#endif
 
 
 /******************************************************************************
@@ -95,6 +88,15 @@ int	alx_gnuplot_vprintf	(const struct Alx_Gnuplot *restrict gnuplot,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(gnuplot_init,	alx_gnuplot_init);
+ALX_ALIAS_DECLARATION(gnuplot_deinit,	alx_gnuplot_deinit);
+ALX_ALIAS_DECLARATION(gnuplot_cmd,	alx_gnuplot_cmd);
+ALX_ALIAS_DECLARATION(gnuplot_printf,	alx_gnuplot_printf);
+ALX_ALIAS_DECLARATION(gnuplot_vprintf,	alx_gnuplot_vprintf);
+
+typedef struct Alx_Gnuplot	Gnuplot_s;
+#endif
 
 
 /******************************************************************************
