@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/gsl/distributions/normal.hpp */
+#pragma once	/* libalx/extra/gsl/distributions/gauss.hpp */
 
 #if !defined(__cplusplus)
 #warning	This header file should only be included in C++.  In C,	\
@@ -41,34 +41,34 @@ extern "C" {
  ******* C prototypes *********************************************************
  ******************************************************************************/
 [[gnu::const]]
-long double	alx_gsl_dist_normal_A_ldbl	(long double o);
+long double	alx_gsl_distr_gauss_A_ldbl	(long double o);
 [[gnu::const]]
-double		alx_gsl_dist_normal_A		(double o);
+double		alx_gsl_distr_gauss_A		(double o);
 [[gnu::const]]
-float		alx_gsl_dist_normal_A_flt	(float o);
+float		alx_gsl_distr_gauss_A_flt	(float o);
 
 [[gnu::const]]
-long double	alx_gsl_dist_normal_B_ldbl	(long double u, long double o);
+long double	alx_gsl_distr_gauss_B_ldbl	(long double u, long double o);
 [[gnu::const]]
-double		alx_gsl_dist_normal_B		(double u, double o);
+double		alx_gsl_distr_gauss_B		(double u, double o);
 [[gnu::const]]
-float		alx_gsl_dist_normal_B_flt	(float u, float o);
+float		alx_gsl_distr_gauss_B_flt	(float u, float o);
 
 [[gnu::const]]
-long double	alx_gsl_dist_normal_X2Z_ldbl	(long double a, long double b,
+long double	alx_gsl_distr_gauss_X2Z_ldbl	(long double a, long double b,
 						 long double x);
 [[gnu::const]]
-double		alx_gsl_dist_normal_X2Z		(double a, double b, double x);
+double		alx_gsl_distr_gauss_X2Z		(double a, double b, double x);
 [[gnu::const]]
-float		alx_gsl_dist_normal_X2Z_flt	(float a, float b, float x);
+float		alx_gsl_distr_gauss_X2Z_flt	(float a, float b, float x);
 
 [[gnu::const]]
-long double	alx_gsl_dist_normal_Z2X_ldbl	(long double a, long double b,
+long double	alx_gsl_distr_gauss_Z2X_ldbl	(long double a, long double b,
 						 long double z);
 [[gnu::const]]
-double		alx_gsl_dist_normal_Z2X		(double a, double b, double z);
+double		alx_gsl_distr_gauss_Z2X		(double a, double b, double z);
 [[gnu::const]]
-float		alx_gsl_dist_normal_Z2X_flt	(float a, float b, float z);
+float		alx_gsl_distr_gauss_Z2X_flt	(float a, float b, float z);
 
 
 /******************************************************************************

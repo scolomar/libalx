@@ -206,7 +206,7 @@ int	alx::CV::conts_closest	(const class std::vector<
 	if (!n)
 		return	-1;
 	if (!fdist)
-		fdist	= &alx_gsl_distance2D_euclidean_32b;
+		fdist	= &alx_gsl_dist2D_euclidean_32b;
 
 	for (ptrdiff_t j = 0; j < n; j++) {
 		c	= &(*conts)[j];

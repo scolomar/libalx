@@ -43,23 +43,23 @@
  ******************************************************************************/
 __attribute__((const))
 inline
-long double	alx_gsl_dist_poisson_E_ldbl	(long double l);
+long double	alx_gsl_distr_poisson_E_ldbl	(long double l);
 __attribute__((const))
 inline
-double		alx_gsl_dist_poisson_E		(double l);
+double		alx_gsl_distr_poisson_E		(double l);
 __attribute__((const))
 inline
-float		alx_gsl_dist_poisson_E_flt	(float l);
+float		alx_gsl_distr_poisson_E_flt	(float l);
 
 __attribute__((const))
 inline
-long double	alx_gsl_dist_poisson_Var_ldbl	(long double l);
+long double	alx_gsl_distr_poisson_Var_ldbl	(long double l);
 __attribute__((const))
 inline
-double		alx_gsl_dist_poisson_Var	(double l);
+double		alx_gsl_distr_poisson_Var	(double l);
 __attribute__((const))
 inline
-float		alx_gsl_dist_poisson_Var_flt	(float l);
+float		alx_gsl_distr_poisson_Var_flt	(float l);
 
 
 /******************************************************************************
@@ -71,7 +71,7 @@ float		alx_gsl_dist_poisson_Var_flt	(float l);
  ******* inline ***************************************************************
  ******************************************************************************/
 inline
-long double	alx_gsl_dist_poisson_E_ldbl	(long double l)
+long double	alx_gsl_distr_poisson_E_ldbl	(long double l)
 {
 
 	if (l <= 0.0L) {
@@ -83,7 +83,7 @@ long double	alx_gsl_dist_poisson_E_ldbl	(long double l)
 }
 
 inline
-double		alx_gsl_dist_poisson_E		(double l)
+double		alx_gsl_distr_poisson_E		(double l)
 {
 
 	if (l <= 0.0) {
@@ -95,7 +95,7 @@ double		alx_gsl_dist_poisson_E		(double l)
 }
 
 inline
-float		alx_gsl_dist_poisson_E_flt	(float l)
+float		alx_gsl_distr_poisson_E_flt	(float l)
 {
 
 	if (l <= 0.0f) {
@@ -108,7 +108,7 @@ float		alx_gsl_dist_poisson_E_flt	(float l)
 
 
 inline
-long double	alx_gsl_dist_poisson_Var_ldbl	(long double l)
+long double	alx_gsl_distr_poisson_Var_ldbl	(long double l)
 {
 
 	if (l <= 0.0L) {
@@ -120,7 +120,7 @@ long double	alx_gsl_dist_poisson_Var_ldbl	(long double l)
 }
 
 inline
-double		alx_gsl_dist_poisson_Var	(double l)
+double		alx_gsl_distr_poisson_Var	(double l)
 {
 
 	if (l <= 0.0) {
@@ -132,7 +132,7 @@ double		alx_gsl_dist_poisson_Var	(double l)
 }
 
 inline
-float		alx_gsl_dist_poisson_Var_flt	(float l)
+float		alx_gsl_distr_poisson_Var_flt	(float l)
 {
 
 	if (l <= 0.0f) {

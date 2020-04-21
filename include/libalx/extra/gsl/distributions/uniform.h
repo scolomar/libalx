@@ -45,23 +45,23 @@
  ******************************************************************************/
 __attribute__((const))
 inline
-long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b);
+long double	alx_gsl_distr_uniform_E_ldbl	(long double a, long double b);
 __attribute__((const))
 inline
-double		alx_gsl_dist_uniform_E		(double a, double b);
+double		alx_gsl_distr_uniform_E		(double a, double b);
 __attribute__((const))
 inline
-float		alx_gsl_dist_uniform_E_flt	(float a, float b);
+float		alx_gsl_distr_uniform_E_flt	(float a, float b);
 
 __attribute__((const))
 inline
-long double	alx_gsl_dist_uniform_Var_ldbl	(long double a, long double b);
+long double	alx_gsl_distr_uniform_Var_ldbl	(long double a, long double b);
 __attribute__((const))
 inline
-double		alx_gsl_dist_uniform_Var	(double a, double b);
+double		alx_gsl_distr_uniform_Var	(double a, double b);
 __attribute__((const))
 inline
-float		alx_gsl_dist_uniform_Var_flt	(float a, float b);
+float		alx_gsl_distr_uniform_Var_flt	(float a, float b);
 
 
 /******************************************************************************
@@ -73,7 +73,7 @@ float		alx_gsl_dist_uniform_Var_flt	(float a, float b);
  ******* inline ***************************************************************
  ******************************************************************************/
 inline
-long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b)
+long double	alx_gsl_distr_uniform_E_ldbl	(long double a, long double b)
 {
 
 	if (b < a) {
@@ -85,7 +85,7 @@ long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b)
 }
 
 inline
-double		alx_gsl_dist_uniform_E		(double a, double b)
+double		alx_gsl_distr_uniform_E		(double a, double b)
 {
 
 	if (b < a) {
@@ -97,7 +97,7 @@ double		alx_gsl_dist_uniform_E		(double a, double b)
 }
 
 inline
-float		alx_gsl_dist_uniform_E_flt	(float a, float b)
+float		alx_gsl_distr_uniform_E_flt	(float a, float b)
 {
 
 	if (b < a) {
@@ -110,7 +110,7 @@ float		alx_gsl_dist_uniform_E_flt	(float a, float b)
 
 
 inline
-long double	alx_gsl_dist_uniform_Var_ldbl	(long double a, long double b)
+long double	alx_gsl_distr_uniform_Var_ldbl	(long double a, long double b)
 {
 
 	if (b < a) {
@@ -122,7 +122,7 @@ long double	alx_gsl_dist_uniform_Var_ldbl	(long double a, long double b)
 }
 
 inline
-double		alx_gsl_dist_uniform_Var	(double a, double b)
+double		alx_gsl_distr_uniform_Var	(double a, double b)
 {
 
 	if (b < a) {
@@ -134,7 +134,7 @@ double		alx_gsl_dist_uniform_Var	(double a, double b)
 }
 
 inline
-float		alx_gsl_dist_uniform_Var_flt	(float a, float b)
+float		alx_gsl_distr_uniform_Var_flt	(float a, float b)
 {
 
 	if (b < a) {

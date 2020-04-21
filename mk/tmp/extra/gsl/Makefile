@@ -24,9 +24,9 @@ MODULES	=								\
 	extra/gsl/distance/euclidean					\
 	extra/gsl/distance/manhattan					\
 	extra/gsl/distributions/binomial				\
-	extra/gsl/distributions/exponential				\
+	extra/gsl/distributions/exp					\
+	extra/gsl/distributions/gauss					\
 	extra/gsl/distributions/geometric				\
-	extra/gsl/distributions/normal					\
 	extra/gsl/distributions/poisson					\
 	extra/gsl/distributions/uniform					\
 	extra/gsl/rstat/median						\

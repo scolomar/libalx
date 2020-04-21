@@ -41,18 +41,18 @@ extern "C" {
  ******* C prototypes *********************************************************
  ******************************************************************************/
 [[gnu::const]]
-long double	alx_gsl_dist_poisson_E_ldbl	(long double l);
+long double	alx_gsl_distr_poisson_E_ldbl	(long double l);
 [[gnu::const]]
-double		alx_gsl_dist_poisson_E		(double l);
+double		alx_gsl_distr_poisson_E		(double l);
 [[gnu::const]]
-float		alx_gsl_dist_poisson_E_flt	(float l);
+float		alx_gsl_distr_poisson_E_flt	(float l);
 
 [[gnu::const]]
-long double	alx_gsl_dist_poisson_Var_ldbl	(long double l);
+long double	alx_gsl_distr_poisson_Var_ldbl	(long double l);
 [[gnu::const]]
-double		alx_gsl_dist_poisson_Var	(double l);
+double		alx_gsl_distr_poisson_Var	(double l);
 [[gnu::const]]
-float		alx_gsl_dist_poisson_Var_flt	(float l);
+float		alx_gsl_distr_poisson_Var_flt	(float l);
 
 
 /******************************************************************************

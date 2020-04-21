@@ -41,18 +41,18 @@ extern "C" {
  ******* C prototypes *********************************************************
  ******************************************************************************/
 [[gnu::const]]
-long double	alx_gsl_dist_geometric_E_ldbl	(long double p);
+long double	alx_gsl_distr_geom_E_ldbl	(long double p);
 [[gnu::const]]
-double		alx_gsl_dist_geometric_E	(double p);
+double		alx_gsl_distr_geom_E		(double p);
 [[gnu::const]]
-float		alx_gsl_dist_geometric_E_flt	(float p);
+float		alx_gsl_distr_geom_E_flt	(float p);
 
 [[gnu::const]]
-long double	alx_gsl_dist_geometric_Var_ldbl	(long double p);
+long double	alx_gsl_distr_geom_Var_ldbl	(long double p);
 [[gnu::const]]
-double		alx_gsl_dist_geometric_Var	(double p);
+double		alx_gsl_distr_geom_Var		(double p);
 [[gnu::const]]
-float		alx_gsl_dist_geometric_Var_flt	(float p);
+float		alx_gsl_distr_geom_Var_flt	(float p);
 
 
 /******************************************************************************

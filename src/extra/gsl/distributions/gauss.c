@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
-#include "libalx/extra/gsl/distributions/normal.h"
+#include "libalx/extra/gsl/distributions/gauss.h"
 
 #include <errno.h>
 #include <math.h>
@@ -31,7 +31,7 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-long double	alx_gsl_dist_normal_A_ldbl	(long double o)
+long double	alx_gsl_distr_gauss_A_ldbl	(long double o)
 {
 
 	if (o <= 0.0L) {
@@ -42,7 +42,7 @@ long double	alx_gsl_dist_normal_A_ldbl	(long double o)
 	return	1.0L / o;
 }
 
-double		alx_gsl_dist_normal_A		(double o)
+double		alx_gsl_distr_gauss_A		(double o)
 {
 
 	if (o <= 0.0) {
@@ -53,7 +53,7 @@ double		alx_gsl_dist_normal_A		(double o)
 	return	1.0 / o;
 }
 
-float		alx_gsl_dist_normal_A_flt	(float o)
+float		alx_gsl_distr_gauss_A_flt	(float o)
 {
 
 	if (o <= 0.0f) {
@@ -64,7 +64,7 @@ float		alx_gsl_dist_normal_A_flt	(float o)
 	return	1.0f / o;
 }
 
-long double	alx_gsl_dist_normal_B_ldbl	(long double u, long double o)
+long double	alx_gsl_distr_gauss_B_ldbl	(long double u, long double o)
 {
 
 	if (o <= 0.0L) {
@@ -75,7 +75,7 @@ long double	alx_gsl_dist_normal_B_ldbl	(long double u, long double o)
 	return	-u / o;
 }
 
-double		alx_gsl_dist_normal_B		(double u, double o)
+double		alx_gsl_distr_gauss_B		(double u, double o)
 {
 
 	if (o <= 0.0) {
@@ -86,7 +86,7 @@ double		alx_gsl_dist_normal_B		(double u, double o)
 	return	-u / o;
 }
 
-float		alx_gsl_dist_normal_B_flt	(float u, float o)
+float		alx_gsl_distr_gauss_B_flt	(float u, float o)
 {
 
 	if (o <= 0.0f) {
@@ -97,39 +97,39 @@ float		alx_gsl_dist_normal_B_flt	(float u, float o)
 	return	-u / o;
 }
 
-long double	alx_gsl_dist_normal_X2Z_ldbl	(long double a, long double b,
+long double	alx_gsl_distr_gauss_X2Z_ldbl	(long double a, long double b,
 						long double x)
 {
 
 	return	a * x + b;
 }
 
-double		alx_gsl_dist_normal_X2Z		(double a, double b, double x)
+double		alx_gsl_distr_gauss_X2Z		(double a, double b, double x)
 {
 
 	return	a * x + b;
 }
 
-float		alx_gsl_dist_normal_X2Z_flt	(float a, float b, float x)
+float		alx_gsl_distr_gauss_X2Z_flt	(float a, float b, float x)
 {
 
 	return	a * x + b;
 }
 
-long double	alx_gsl_dist_normal_Z2X_ldbl	(long double a, long double b,
+long double	alx_gsl_distr_gauss_Z2X_ldbl	(long double a, long double b,
 						long double z)
 {
 
 	return	(z - b) / a;
 }
 
-double		alx_gsl_dist_normal_Z2X		(double a, double b, double z)
+double		alx_gsl_distr_gauss_Z2X		(double a, double b, double z)
 {
 
 	return	(z - b) / a;
 }
 
-float		alx_gsl_dist_normal_Z2X_flt	(float a, float b, float z)
+float		alx_gsl_distr_gauss_Z2X_flt	(float a, float b, float z)
 {
 
 	return	(z - b) / a;

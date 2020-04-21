@@ -5,20 +5,9 @@
 
 
 /******************************************************************************
- ******* include guard ********************************************************
- ******************************************************************************/
-#pragma once	/* libalx/extra/gsl/distributions/normal.h */
-
-#if defined(__cplusplus)
-#warning	This header file should only be included in C.  In C++,	\
-		include the header file of the same name and `.hpp`	\
-		extension instead.
-#endif
-
-
-/******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
+#include "libalx/extra/gsl/distributions/exp.h"
 
 
 /******************************************************************************
@@ -27,47 +16,31 @@
 
 
 /******************************************************************************
- ******* enum *****************************************************************
+ ******* enum / struct / union ************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* struct / union *******************************************************
+ ******* static prototypes ****************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* prototypes ***********************************************************
+ ******* global functions *****************************************************
  ******************************************************************************/
-__attribute__((const))
-long double	alx_gsl_dist_normal_A_ldbl	(long double o);
-__attribute__((const))
-double		alx_gsl_dist_normal_A		(double o);
-__attribute__((const))
-float		alx_gsl_dist_normal_A_flt	(float o);
+extern
+long double	alx_gsl_distr_exp_E_ldbl	(long double b);
+extern
+double		alx_gsl_distr_exp_E		(double b);
+extern
+float		alx_gsl_distr_exp_E_flt		(float b);
 
-__attribute__((const))
-long double	alx_gsl_dist_normal_B_ldbl	(long double u, long double o);
-__attribute__((const))
-double		alx_gsl_dist_normal_B		(double u, double o);
-__attribute__((const))
-float		alx_gsl_dist_normal_B_flt	(float u, float o);
-
-__attribute__((const))
-long double	alx_gsl_dist_normal_X2Z_ldbl	(long double a, long double b,
-						 long double x);
-__attribute__((const))
-double		alx_gsl_dist_normal_X2Z		(double a, double b, double x);
-__attribute__((const))
-float		alx_gsl_dist_normal_X2Z_flt	(float a, float b, float x);
-
-__attribute__((const))
-long double	alx_gsl_dist_normal_Z2X_ldbl	(long double a, long double b,
-						 long double z);
-__attribute__((const))
-double		alx_gsl_dist_normal_Z2X		(double a, double b, double z);
-__attribute__((const))
-float		alx_gsl_dist_normal_Z2X_flt	(float a, float b, float z);
+extern
+long double	alx_gsl_distr_exp_Var_ldbl	(long double b);
+extern
+double		alx_gsl_distr_exp_Var		(double b);
+extern
+float		alx_gsl_distr_exp_Var_flt	(float b);
 
 
 /******************************************************************************
@@ -76,7 +49,7 @@ float		alx_gsl_dist_normal_Z2X_flt	(float a, float b, float z);
 
 
 /******************************************************************************
- ******* inline ***************************************************************
+ ******* static function definitions ******************************************
  ******************************************************************************/
 
 

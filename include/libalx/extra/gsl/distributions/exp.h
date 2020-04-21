@@ -7,11 +7,11 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/extra/gsl/distributions/exponential.hpp */
+#pragma once	/* libalx/extra/gsl/distributions/exp.h */
 
-#if !defined(__cplusplus)
-#warning	This header file should only be included in C++.  In C,	\
-		include the header file of the same name and `.h`	\
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
 		extension instead.
 #endif
 
@@ -19,6 +19,8 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
+#include <errno.h>
+#include <math.h>
 
 
 /******************************************************************************
@@ -27,9 +29,8 @@
 
 
 /******************************************************************************
- ******* extern "C" ***********************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
-extern "C" {
 
 
 /******************************************************************************
@@ -38,21 +39,27 @@ extern "C" {
 
 
 /******************************************************************************
- ******* C prototypes *********************************************************
+ ******* prototypes ***********************************************************
  ******************************************************************************/
-[[gnu::const]]
-long double	alx_gsl_dist_exponential_E_ldbl		(long double b);
-[[gnu::const]]
-double		alx_gsl_dist_exponential_E		(double b);
-[[gnu::const]]
-float		alx_gsl_dist_exponential_E_flt		(float b);
+__attribute__((const))
+inline
+long double	alx_gsl_distr_exp_E_ldbl	(long double b);
+__attribute__((const))
+inline
+double		alx_gsl_distr_exp_E		(double b);
+__attribute__((const))
+inline
+float		alx_gsl_distr_exp_E_flt		(float b);
 
-[[gnu::const]]
-long double	alx_gsl_dist_exponential_Var_ldbl	(long double b);
-[[gnu::const]]
-double		alx_gsl_dist_exponential_Var		(double b);
-[[gnu::const]]
-float		alx_gsl_dist_exponential_Var_flt	(float b);
+__attribute__((const))
+inline
+long double	alx_gsl_distr_exp_Var_ldbl	(long double b);
+__attribute__((const))
+inline
+double		alx_gsl_distr_exp_Var		(double b);
+__attribute__((const))
+inline
+float		alx_gsl_distr_exp_Var_flt	(float b);
 
 
 /******************************************************************************
@@ -61,33 +68,80 @@ float		alx_gsl_dist_exponential_Var_flt	(float b);
 
 
 /******************************************************************************
- ******* extern "C" ***********************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-}	/* extern "C" */
+inline
+long double	alx_gsl_distr_exp_E_ldbl	(long double b)
+{
+
+	if (b <= 0.0L) {
+		errno	= EDOM;
+		return	nanl("");
+	}
+
+	return	1.0L / b;
+}
+
+inline
+double		alx_gsl_distr_exp_E		(double b)
+{
+
+	if (b <= 0.0) {
+		errno	= EDOM;
+		return	nan("");
+	}
+
+	return	1.0 / b;
+}
+
+inline
+float		alx_gsl_distr_exp_E_flt		(float b)
+{
+
+	if (b <= 0.0f) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+
+	return	1.0f / b;
+}
 
 
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-namespace alx {
-namespace gsl {
+inline
+long double	alx_gsl_distr_exp_Var_ldbl	(long double b)
+{
 
+	if (b <= 0.0L) {
+		errno	= EDOM;
+		return	nanl("");
+	}
 
-/******************************************************************************
- ******* enum *****************************************************************
- ******************************************************************************/
+	return	1.0L / (b * b);
+}
 
+inline
+double		alx_gsl_distr_exp_Var		(double b)
+{
 
-/******************************************************************************
- ******* prototypes ***********************************************************
- ******************************************************************************/
+	if (b <= 0.0) {
+		errno	= EDOM;
+		return	nan("");
+	}
 
+	return	1.0 / (b * b);
+}
 
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-}	/* namespace gsl */
-}	/* namespace alx */
+inline
+float		alx_gsl_distr_exp_Var_flt	(float b)
+{
+
+	if (b <= 0.0f) {
+		errno	= EDOM;
+		return	nanf("");
+	}
+
+	return	1.0f / (b * b);
+}
 
 
 /******************************************************************************

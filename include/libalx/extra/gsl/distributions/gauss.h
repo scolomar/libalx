@@ -5,9 +5,20 @@
 
 
 /******************************************************************************
+ ******* include guard ********************************************************
+ ******************************************************************************/
+#pragma once	/* libalx/extra/gsl/distributions/gauss.h */
+
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
+
+/******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
-#include "libalx/extra/gsl/distributions/exponential.h"
 
 
 /******************************************************************************
@@ -16,31 +27,47 @@
 
 
 /******************************************************************************
- ******* enum / struct / union ************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* static prototypes ****************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* global functions *****************************************************
+ ******* prototypes ***********************************************************
  ******************************************************************************/
-extern
-long double	alx_gsl_dist_exponential_E_ldbl		(long double b);
-extern
-double		alx_gsl_dist_exponential_E		(double b);
-extern
-float		alx_gsl_dist_exponential_E_flt		(float b);
+__attribute__((const))
+long double	alx_gsl_distr_gauss_A_ldbl	(long double o);
+__attribute__((const))
+double		alx_gsl_distr_gauss_A		(double o);
+__attribute__((const))
+float		alx_gsl_distr_gauss_A_flt	(float o);
 
-extern
-long double	alx_gsl_dist_exponential_Var_ldbl	(long double b);
-extern
-double		alx_gsl_dist_exponential_Var		(double b);
-extern
-float		alx_gsl_dist_exponential_Var_flt	(float b);
+__attribute__((const))
+long double	alx_gsl_distr_gauss_B_ldbl	(long double u, long double o);
+__attribute__((const))
+double		alx_gsl_distr_gauss_B		(double u, double o);
+__attribute__((const))
+float		alx_gsl_distr_gauss_B_flt	(float u, float o);
+
+__attribute__((const))
+long double	alx_gsl_distr_gauss_X2Z_ldbl	(long double a, long double b,
+						 long double x);
+__attribute__((const))
+double		alx_gsl_distr_gauss_X2Z		(double a, double b, double x);
+__attribute__((const))
+float		alx_gsl_distr_gauss_X2Z_flt	(float a, float b, float x);
+
+__attribute__((const))
+long double	alx_gsl_distr_gauss_Z2X_ldbl	(long double a, long double b,
+						 long double z);
+__attribute__((const))
+double		alx_gsl_distr_gauss_Z2X		(double a, double b, double z);
+__attribute__((const))
+float		alx_gsl_distr_gauss_Z2X_flt	(float a, float b, float z);
 
 
 /******************************************************************************
@@ -49,7 +76,7 @@ float		alx_gsl_dist_exponential_Var_flt	(float b);
 
 
 /******************************************************************************
- ******* static function definitions ******************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
 
 

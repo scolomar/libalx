@@ -41,18 +41,18 @@ extern "C" {
  ******* C prototypes *********************************************************
  ******************************************************************************/
 [[gnu::const]]
-long double	alx_gsl_dist_binomial_E_ldbl	(uint64_t n, long double p);
+long double	alx_gsl_distr_binomial_E_ldbl	(uint64_t n, long double p);
 [[gnu::const]]
-double		alx_gsl_dist_binomial_E		(uint32_t n, double p);
+double		alx_gsl_distr_binomial_E	(uint32_t n, double p);
 [[gnu::const]]
-float		alx_gsl_dist_binomial_E_flt	(uint16_t n, float p);
+float		alx_gsl_distr_binomial_E_flt	(uint16_t n, float p);
 
 [[gnu::const]]
-long double	alx_gsl_dist_binomial_Var_ldbl	(uint64_t n, long double p);
+long double	alx_gsl_distr_binomial_Var_ldbl	(uint64_t n, long double p);
 [[gnu::const]]
-double		alx_gsl_dist_binomial_Var	(uint32_t n, double p);
+double		alx_gsl_distr_binomial_Var	(uint32_t n, double p);
 [[gnu::const]]
-float		alx_gsl_dist_binomial_Var_flt	(uint16_t n, float p);
+float		alx_gsl_distr_binomial_Var_flt	(uint16_t n, float p);
 
 
 /******************************************************************************

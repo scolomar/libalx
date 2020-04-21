@@ -41,18 +41,18 @@ extern "C" {
  ******* C prototypes *********************************************************
  ******************************************************************************/
 [[gnu::const]]
-long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b);
+long double	alx_gsl_distr_uniform_E_ldbl	(long double a, long double b);
 [[gnu::const]]
-double		alx_gsl_dist_uniform_E		(double a, double b);
+double		alx_gsl_distr_uniform_E		(double a, double b);
 [[gnu::const]]
-float		alx_gsl_dist_uniform_E_flt	(float a, float b);
+float		alx_gsl_distr_uniform_E_flt	(float a, float b);
 
 [[gnu::const]]
-long double	alx_gsl_dist_uniform_Var_ldbl	(long double a, long double b);
+long double	alx_gsl_distr_uniform_Var_ldbl	(long double a, long double b);
 [[gnu::const]]
-double		alx_gsl_dist_uniform_Var	(double a, double b);
+double		alx_gsl_distr_uniform_Var	(double a, double b);
 [[gnu::const]]
-float		alx_gsl_dist_uniform_Var_flt	(float a, float b);
+float		alx_gsl_distr_uniform_Var_flt	(float a, float b);
 
 
 /******************************************************************************

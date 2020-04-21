@@ -42,39 +42,39 @@ extern "C" {
  ******* C prototypes *********************************************************
  ******************************************************************************/
 [[gnu::const]]
-long double alx_gsl_distance2D_manhattan_ldbl	(long double dx, long double dy);
+long double alx_gsl_dist2D_manhattan_ldbl	(long double dx, long double dy);
 [[gnu::const]]
-double	alx_gsl_distance2D_manhattan		(double dx, double dy);
+double	alx_gsl_dist2D_manhattan		(double dx, double dy);
 [[gnu::const]]
-float	alx_gsl_distance2D_manhattan_flt	(float dx, float dy);
+float	alx_gsl_dist2D_manhattan_flt		(float dx, float dy);
 [[gnu::const]]
-float	alx_gsl_distance2D_manhattan_8b		(int8_t dx, int8_t dy);
+float	alx_gsl_dist2D_manhattan_8b		(int8_t dx, int8_t dy);
 [[gnu::const]]
-float	alx_gsl_distance2D_manhattan_16b	(int16_t dx, int16_t dy);
+float	alx_gsl_dist2D_manhattan_16b		(int16_t dx, int16_t dy);
 [[gnu::const]]
-double	alx_gsl_distance2D_manhattan_32b	(int32_t dx, int32_t dy);
+double	alx_gsl_dist2D_manhattan_32b		(int32_t dx, int32_t dy);
 [[gnu::const]]
-long double alx_gsl_distance2D_manhattan_64b	(int64_t dx, int64_t dy);
+long double alx_gsl_dist2D_manhattan_64b	(int64_t dx, int64_t dy);
 
 
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define distance2D_manhattan_ldbl(dx, dy)				\
-	alx_gsl_distance2D_manhattan_ldbl(dx, dy)
-#define distance2D_manhattan(dx, dy)					\
-	alx_gsl_distance2D_manhattan(dx, dy)
-#define distance2D_manhattan_flt(dx, dy)				\
-	alx_gsl_distance2D_manhattan_flt(dx, dy)
-#define distance2D_manhattan_8b(dx, dy)					\
-	alx_gsl_distance2D_manhattan_8b(dx, dy)
-#define distance2D_manhattan_16b(dx, dy)				\
-	alx_gsl_distance2D_manhattan_16b(dx, dy)
-#define distance2D_manhattan_32b(dx, dy)				\
-	alx_gsl_distance2D_manhattan_32b(dx, dy)
-#define distance2D_manhattan_64b(dx, dy)				\
-	alx_gsl_distance2D_manhattan_64b(dx, dy)
+#define dist2D_manhattan_ldbl(dx, dy)				\
+	alx_gsl_dist2D_manhattan_ldbl(dx, dy)
+#define dist2D_manhattan(dx, dy)					\
+	alx_gsl_dist2D_manhattan(dx, dy)
+#define dist2D_manhattan_flt(dx, dy)				\
+	alx_gsl_dist2D_manhattan_flt(dx, dy)
+#define dist2D_manhattan_8b(dx, dy)					\
+	alx_gsl_dist2D_manhattan_8b(dx, dy)
+#define dist2D_manhattan_16b(dx, dy)				\
+	alx_gsl_dist2D_manhattan_16b(dx, dy)
+#define dist2D_manhattan_32b(dx, dy)				\
+	alx_gsl_dist2D_manhattan_32b(dx, dy)
+#define dist2D_manhattan_64b(dx, dy)				\
+	alx_gsl_dist2D_manhattan_64b(dx, dy)
 #endif
 
 
