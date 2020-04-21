@@ -114,7 +114,7 @@ int	alx_ur_robot_state_update	(struct Alx_UR *ur)
 	return	0;
 }
 
-void	parse_msg_robot_state		(struct Alx_UR *restrict ur,
+void	alx_ur_parse_msg_robot_state	(struct Alx_UR *restrict ur,
 					 ssize_t sz,
 					 const unsigned char msg[static restrict sz],
 					 const struct timespec *restrict ts)
