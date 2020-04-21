@@ -318,6 +318,7 @@ COMPILE_ACTUAL_TMP_TARGETS	= $(COMPILE_TARGETS:=_tmp)
 COMPILE_ACTUAL_LIB_TARGETS	= $(COMPILE_TARGETS:=_lib)
 
 $(filter-out base_lib, $(COMPILE_ACTUAL_LIB_TARGETS)): base_lib
+curl_lib: data-structures_lib
 cv_lib: gsl_lib
 
 PHONY	+= $(COMPILE_ACTUAL_TMP_TARGETS)
@@ -401,7 +402,7 @@ install_extra: | install-zbar
 install_extra: | install-base
 
 PHONY	+= install-curl
-install-curl: | inst-inc-x-curl inst-libalx-curl install-base
+install-curl: | inst-inc-x-curl inst-libalx-curl install-base install-data-structures
 PHONY	+= install-cv
 install-cv: | inst-inc-x-cv inst-libalx-cv install-base install-gsl
 PHONY	+= install-gmp
