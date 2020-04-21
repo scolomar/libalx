@@ -265,6 +265,18 @@ ptrdiff_t alx_cblas_iXamin_pdif	(ptrdiff_t nmemb,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+ALX_ALIAS_WEAK_DEFINITION(cblas_iXamin_ldbl,	alx_cblas_iXamin_ldbl);
+ALX_ALIAS_WEAK_DEFINITION(cblas_iXamin_uint,	alx_cblas_iXamin_uint);
+ALX_ALIAS_WEAK_DEFINITION(cblas_iXamin_int,	alx_cblas_iXamin_int);
+ALX_ALIAS_WEAK_DEFINITION(cblas_iXamin_u8,	alx_cblas_iXamin_u8);
+ALX_ALIAS_WEAK_DEFINITION(cblas_iXamin_s8,	alx_cblas_iXamin_s8);
+ALX_ALIAS_WEAK_DEFINITION(cblas_iXamin_u16,	alx_cblas_iXamin_u16);
+ALX_ALIAS_WEAK_DEFINITION(cblas_iXamin_s16,	alx_cblas_iXamin_s16);
+ALX_ALIAS_WEAK_DEFINITION(cblas_iXamin_u32,	alx_cblas_iXamin_u32);
+ALX_ALIAS_WEAK_DEFINITION(cblas_iXamin_s32,	alx_cblas_iXamin_s32);
+ALX_ALIAS_WEAK_DEFINITION(cblas_iXamin_u64,	alx_cblas_iXamin_u64);
+ALX_ALIAS_WEAK_DEFINITION(cblas_iXamin_s64,	alx_cblas_iXamin_s64);
+ALX_ALIAS_WEAK_DEFINITION(cblas_iXamin_pdif,	alx_cblas_iXamin_pdif);
 
 
 /******************************************************************************
