@@ -49,14 +49,12 @@ bool	alx_mpz_fits_s16	(const mpz_t op);
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-#if defined(ALX_NO_PREFIX)
 ALX_ALIAS_WEAK_DEFINITION(mpz_fits_u64, alx_mpz_fits_u64);
 ALX_ALIAS_WEAK_DEFINITION(mpz_fits_s64, alx_mpz_fits_s64);
 ALX_ALIAS_WEAK_DEFINITION(mpz_fits_u32, alx_mpz_fits_u32);
 ALX_ALIAS_WEAK_DEFINITION(mpz_fits_s32, alx_mpz_fits_s32);
 ALX_ALIAS_WEAK_DEFINITION(mpz_fits_u16, alx_mpz_fits_u16);
 ALX_ALIAS_WEAK_DEFINITION(mpz_fits_s16, alx_mpz_fits_s16);
-#endif
 
 
 /******************************************************************************

@@ -200,7 +200,6 @@ int	alx_ur_movec_rel	(struct Alx_UR *restrict ur,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-#if defined(ALX_NO_PREFIX)
 ALX_ALIAS_WEAK_DEFINITION(ur_halt,		alx_ur_halt);
 ALX_ALIAS_WEAK_DEFINITION(ur_check_movement,	alx_ur_check_movement);
 ALX_ALIAS_WEAK_DEFINITION(ur_wait_while_moving,	alx_ur_wait_while_moving);
@@ -211,7 +210,6 @@ ALX_ALIAS_WEAK_DEFINITION(ur_movel,		alx_ur_movel);
 ALX_ALIAS_WEAK_DEFINITION(ur_movel_rel,		alx_ur_movel_rel);
 ALX_ALIAS_WEAK_DEFINITION(ur_movec,		alx_ur_movec);
 ALX_ALIAS_WEAK_DEFINITION(ur_movec_rel,		alx_ur_movec_rel);
-#endif
 
 
 /******************************************************************************

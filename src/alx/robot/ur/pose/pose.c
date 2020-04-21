@@ -158,13 +158,11 @@ int	alx_ur_sprintf_pose_rel	(ptrdiff_t nmemb,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-#if defined(ALX_NO_PREFIX)
 ALX_ALIAS_WEAK_DEFINITION(ur_pose_diff,		alx_ur_pose_diff);
 ALX_ALIAS_WEAK_DEFINITION(ur_is_at_pose,	alx_ur_is_at_pose);
 ALX_ALIAS_WEAK_DEFINITION(ur_is_at_target,	alx_ur_is_at_target);
 ALX_ALIAS_WEAK_DEFINITION(ur_sprintf_pose,	alx_ur_sprintf_pose);
 ALX_ALIAS_WEAK_DEFINITION(ur_sprintf_pose_rel,	alx_ur_sprintf_pose_rel);
-#endif
 
 
 /******************************************************************************
