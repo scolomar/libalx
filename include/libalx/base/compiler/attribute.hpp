@@ -35,7 +35,7 @@ typeof(original)	aka
 extern									\
 typeof(original)	aka
 
-#define ALX_ALIAS_WEAK_DEFINITION(aka, original)			\
+#define ALX_ALIAS_WEAK_DEF(aka, original)			\
 [[gnu::alias(#original)]]						\
 [[gnu::copy(original)]]							\
 [[gnu::weak]]								\

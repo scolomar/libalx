@@ -66,8 +66,8 @@ uint32_t alx_seed_mix(uint32_t a, uint32_t b, uint32_t c)
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-ALX_ALIAS_WEAK_DEFINITION(prsrand,	alx_prsrand);
-ALX_ALIAS_WEAK_DEFINITION(prseed,	alx_prseed);
+ALX_ALIAS_WEAK_DEF(prsrand,	alx_prsrand);
+ALX_ALIAS_WEAK_DEF(prseed,	alx_prseed);
 #endif
 
 

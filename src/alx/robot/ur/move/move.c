@@ -200,16 +200,16 @@ int	alx_ur_movec_rel	(struct Alx_UR *restrict ur,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_WEAK_DEFINITION(ur_halt,		alx_ur_halt);
-ALX_ALIAS_WEAK_DEFINITION(ur_check_movement,	alx_ur_check_movement);
-ALX_ALIAS_WEAK_DEFINITION(ur_wait_while_moving,	alx_ur_wait_while_moving);
-ALX_ALIAS_WEAK_DEFINITION(ur_is_moving,		alx_ur_is_moving);
-ALX_ALIAS_WEAK_DEFINITION(ur_movej,		alx_ur_movej);
-ALX_ALIAS_WEAK_DEFINITION(ur_movej_rel,		alx_ur_movej_rel);
-ALX_ALIAS_WEAK_DEFINITION(ur_movel,		alx_ur_movel);
-ALX_ALIAS_WEAK_DEFINITION(ur_movel_rel,		alx_ur_movel_rel);
-ALX_ALIAS_WEAK_DEFINITION(ur_movec,		alx_ur_movec);
-ALX_ALIAS_WEAK_DEFINITION(ur_movec_rel,		alx_ur_movec_rel);
+ALX_ALIAS_WEAK_DEF(ur_halt,		alx_ur_halt);
+ALX_ALIAS_WEAK_DEF(ur_check_movement,	alx_ur_check_movement);
+ALX_ALIAS_WEAK_DEF(ur_wait_while_moving,	alx_ur_wait_while_moving);
+ALX_ALIAS_WEAK_DEF(ur_is_moving,		alx_ur_is_moving);
+ALX_ALIAS_WEAK_DEF(ur_movej,		alx_ur_movej);
+ALX_ALIAS_WEAK_DEF(ur_movej_rel,		alx_ur_movej_rel);
+ALX_ALIAS_WEAK_DEF(ur_movel,		alx_ur_movel);
+ALX_ALIAS_WEAK_DEF(ur_movel_rel,		alx_ur_movel_rel);
+ALX_ALIAS_WEAK_DEF(ur_movec,		alx_ur_movec);
+ALX_ALIAS_WEAK_DEF(ur_movec_rel,		alx_ur_movec_rel);
 
 
 /******************************************************************************

@@ -86,9 +86,9 @@ int	alx_strtof_status	(const char *restrict str,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-ALX_ALIAS_WEAK_DEFINITION(strtod_s,	alx_strtod_s);
-ALX_ALIAS_WEAK_DEFINITION(strtof_s,	alx_strtof_s);
-ALX_ALIAS_WEAK_DEFINITION(strtold_s,	alx_strtold_s);
+ALX_ALIAS_WEAK_DEF(strtod_s,	alx_strtod_s);
+ALX_ALIAS_WEAK_DEF(strtof_s,	alx_strtof_s);
+ALX_ALIAS_WEAK_DEF(strtold_s,	alx_strtold_s);
 #endif
 
 

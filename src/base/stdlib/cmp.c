@@ -62,20 +62,20 @@ int	alx_cmp_s64	(const void *a_ptr, const void *b_ptr);
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-ALX_ALIAS_WEAK_DEFINITION(cmp_ldbl,	alx_cmp_ldbl);
-ALX_ALIAS_WEAK_DEFINITION(cmp,		alx_cmp);
-ALX_ALIAS_WEAK_DEFINITION(cmp_f,	alx_cmp_f);
-ALX_ALIAS_WEAK_DEFINITION(cmp_uint,	alx_cmp_uint);
-ALX_ALIAS_WEAK_DEFINITION(cmp_int,	alx_cmp_int);
-ALX_ALIAS_WEAK_DEFINITION(cmp_char,	alx_cmp_char);
-ALX_ALIAS_WEAK_DEFINITION(cmp_u8,	alx_cmp_u8);
-ALX_ALIAS_WEAK_DEFINITION(cmp_s8,	alx_cmp_s8);
-ALX_ALIAS_WEAK_DEFINITION(cmp_u16,	alx_cmp_u16);
-ALX_ALIAS_WEAK_DEFINITION(cmp_s16,	alx_cmp_s16);
-ALX_ALIAS_WEAK_DEFINITION(cmp_u32,	alx_cmp_u32);
-ALX_ALIAS_WEAK_DEFINITION(cmp_s32,	alx_cmp_s32);
-ALX_ALIAS_WEAK_DEFINITION(cmp_u64,	alx_cmp_u64);
-ALX_ALIAS_WEAK_DEFINITION(cmp_s64,	alx_cmp_s64);
+ALX_ALIAS_WEAK_DEF(cmp_ldbl,	alx_cmp_ldbl);
+ALX_ALIAS_WEAK_DEF(cmp,		alx_cmp);
+ALX_ALIAS_WEAK_DEF(cmp_f,	alx_cmp_f);
+ALX_ALIAS_WEAK_DEF(cmp_uint,	alx_cmp_uint);
+ALX_ALIAS_WEAK_DEF(cmp_int,	alx_cmp_int);
+ALX_ALIAS_WEAK_DEF(cmp_char,	alx_cmp_char);
+ALX_ALIAS_WEAK_DEF(cmp_u8,	alx_cmp_u8);
+ALX_ALIAS_WEAK_DEF(cmp_s8,	alx_cmp_s8);
+ALX_ALIAS_WEAK_DEF(cmp_u16,	alx_cmp_u16);
+ALX_ALIAS_WEAK_DEF(cmp_s16,	alx_cmp_s16);
+ALX_ALIAS_WEAK_DEF(cmp_u32,	alx_cmp_u32);
+ALX_ALIAS_WEAK_DEF(cmp_s32,	alx_cmp_s32);
+ALX_ALIAS_WEAK_DEF(cmp_u64,	alx_cmp_u64);
+ALX_ALIAS_WEAK_DEF(cmp_s64,	alx_cmp_s64);
 #endif
 
 

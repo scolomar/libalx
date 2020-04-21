@@ -58,8 +58,8 @@ int	alx_sigpipe_init	(void)
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_WEAK_DEFINITION(sigpipe,	alx_sigpipe);
-ALX_ALIAS_WEAK_DEFINITION(sigpipe_init,	alx_sigpipe_init);
+ALX_ALIAS_WEAK_DEF(sigpipe,	alx_sigpipe);
+ALX_ALIAS_WEAK_DEF(sigpipe_init,	alx_sigpipe_init);
 
 
 /******************************************************************************

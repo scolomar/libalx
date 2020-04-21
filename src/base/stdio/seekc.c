@@ -41,9 +41,9 @@ int	alx_wait4enter	(void);
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_WEAK_DEFINITION(seekc,	alx_seekc);
-ALX_ALIAS_WEAK_DEFINITION(fseekc,	alx_fseekc);
-ALX_ALIAS_WEAK_DEFINITION(wait4enter,	alx_wait4enter);
+ALX_ALIAS_WEAK_DEF(seekc,	alx_seekc);
+ALX_ALIAS_WEAK_DEF(fseekc,	alx_fseekc);
+ALX_ALIAS_WEAK_DEF(wait4enter,	alx_wait4enter);
 
 
 /******************************************************************************

@@ -181,8 +181,8 @@ void	alx_ur_parse_msg_robot_state	(struct Alx_UR *restrict ur,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_WEAK_DEFINITION(ur_robot_state_update,   alx_ur_robot_state_update);
-ALX_ALIAS_WEAK_DEFINITION(ur_parse_msg_robot_state,alx_ur_parse_msg_robot_state);
+ALX_ALIAS_WEAK_DEF(ur_robot_state_update,   alx_ur_robot_state_update);
+ALX_ALIAS_WEAK_DEF(ur_parse_msg_robot_state,alx_ur_parse_msg_robot_state);
 
 
 /******************************************************************************

@@ -44,9 +44,9 @@ void	alx_mpz_u64_pow_u64	(mpz_t rop, uint64_t base, uint64_t exp);
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_WEAK_DEFINITION(mpz_powm_u64,		alx_mpz_powm_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_pow_u64,		alx_mpz_pow_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_u64_pow_u64,	alx_mpz_u64_pow_u64);
+ALX_ALIAS_WEAK_DEF(mpz_powm_u64,		alx_mpz_powm_u64);
+ALX_ALIAS_WEAK_DEF(mpz_pow_u64,		alx_mpz_pow_u64);
+ALX_ALIAS_WEAK_DEF(mpz_u64_pow_u64,	alx_mpz_u64_pow_u64);
 
 
 /******************************************************************************

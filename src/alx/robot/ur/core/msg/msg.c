@@ -99,8 +99,8 @@ int	alx_ur_buffer_read		(struct Alx_UR *ur)
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_WEAK_DEFINITION(ur_recvmsg,		alx_ur_recvmsg);
-ALX_ALIAS_WEAK_DEFINITION(ur_buffer_read,	alx_ur_buffer_read);
+ALX_ALIAS_WEAK_DEF(ur_recvmsg,		alx_ur_recvmsg);
+ALX_ALIAS_WEAK_DEF(ur_buffer_read,	alx_ur_buffer_read);
 
 
 /******************************************************************************

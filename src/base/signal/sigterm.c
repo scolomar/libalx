@@ -58,8 +58,8 @@ int	alx_sigterm_init	(void)
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_WEAK_DEFINITION(sigterm,	alx_sigterm);
-ALX_ALIAS_WEAK_DEFINITION(sigterm_init,	alx_sigterm_init);
+ALX_ALIAS_WEAK_DEF(sigterm,	alx_sigterm);
+ALX_ALIAS_WEAK_DEF(sigterm_init,	alx_sigterm_init);
 
 
 /******************************************************************************

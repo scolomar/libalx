@@ -72,22 +72,22 @@ bool	alx_mpz_congruent_u64_p	(const mpz_t n, uint64_t c, uint64_t d);
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_WEAK_DEFINITION(mpz_cdiv_q_u64,	alx_mpz_cdiv_q_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_cdiv_r_u64,	alx_mpz_cdiv_r_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_cdiv_qr_u64,	alx_mpz_cdiv_qr_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_cdiv_u64,		alx_mpz_cdiv_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_fdiv_q_u64,	alx_mpz_fdiv_q_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_fdiv_r_u64,	alx_mpz_fdiv_r_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_fdiv_qr_u64,	alx_mpz_fdiv_qr_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_fdiv_u64,		alx_mpz_fdiv_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_tdiv_q_u64,	alx_mpz_tdiv_q_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_tdiv_r_u64,	alx_mpz_tdiv_r_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_tdiv_qr_u64,	alx_mpz_tdiv_qr_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_tdiv_u64,		alx_mpz_tdiv_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_mod_u64,		alx_mpz_mod_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_divexact_u64,	alx_mpz_divexact_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_divisible_u64_p,	alx_mpz_divisible_u64_p);
-ALX_ALIAS_WEAK_DEFINITION(mpz_congruent_u64_p,	alx_mpz_congruent_u64_p);
+ALX_ALIAS_WEAK_DEF(mpz_cdiv_q_u64,	alx_mpz_cdiv_q_u64);
+ALX_ALIAS_WEAK_DEF(mpz_cdiv_r_u64,	alx_mpz_cdiv_r_u64);
+ALX_ALIAS_WEAK_DEF(mpz_cdiv_qr_u64,	alx_mpz_cdiv_qr_u64);
+ALX_ALIAS_WEAK_DEF(mpz_cdiv_u64,		alx_mpz_cdiv_u64);
+ALX_ALIAS_WEAK_DEF(mpz_fdiv_q_u64,	alx_mpz_fdiv_q_u64);
+ALX_ALIAS_WEAK_DEF(mpz_fdiv_r_u64,	alx_mpz_fdiv_r_u64);
+ALX_ALIAS_WEAK_DEF(mpz_fdiv_qr_u64,	alx_mpz_fdiv_qr_u64);
+ALX_ALIAS_WEAK_DEF(mpz_fdiv_u64,		alx_mpz_fdiv_u64);
+ALX_ALIAS_WEAK_DEF(mpz_tdiv_q_u64,	alx_mpz_tdiv_q_u64);
+ALX_ALIAS_WEAK_DEF(mpz_tdiv_r_u64,	alx_mpz_tdiv_r_u64);
+ALX_ALIAS_WEAK_DEF(mpz_tdiv_qr_u64,	alx_mpz_tdiv_qr_u64);
+ALX_ALIAS_WEAK_DEF(mpz_tdiv_u64,		alx_mpz_tdiv_u64);
+ALX_ALIAS_WEAK_DEF(mpz_mod_u64,		alx_mpz_mod_u64);
+ALX_ALIAS_WEAK_DEF(mpz_divexact_u64,	alx_mpz_divexact_u64);
+ALX_ALIAS_WEAK_DEF(mpz_divisible_u64_p,	alx_mpz_divisible_u64_p);
+ALX_ALIAS_WEAK_DEF(mpz_congruent_u64_p,	alx_mpz_congruent_u64_p);
 
 
 /******************************************************************************

@@ -92,13 +92,13 @@ int64_t	alx_timespec_diff_ns		(const struct timespec *start,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-ALX_ALIAS_WEAK_DEFINITION(timespec_ms,		alx_timespec_ms);
-ALX_ALIAS_WEAK_DEFINITION(timespec_us,		alx_timespec_us);
-ALX_ALIAS_WEAK_DEFINITION(timespec_ns,		alx_timespec_ns);
-ALX_ALIAS_WEAK_DEFINITION(timespec_diff,	alx_timespec_diff);
-ALX_ALIAS_WEAK_DEFINITION(timespec_diff_ms,	alx_timespec_diff_ms);
-ALX_ALIAS_WEAK_DEFINITION(timespec_diff_us,	alx_timespec_diff_us);
-ALX_ALIAS_WEAK_DEFINITION(timespec_diff_ns,	alx_timespec_diff_ns);
+ALX_ALIAS_WEAK_DEF(timespec_ms,		alx_timespec_ms);
+ALX_ALIAS_WEAK_DEF(timespec_us,		alx_timespec_us);
+ALX_ALIAS_WEAK_DEF(timespec_ns,		alx_timespec_ns);
+ALX_ALIAS_WEAK_DEF(timespec_diff,	alx_timespec_diff);
+ALX_ALIAS_WEAK_DEF(timespec_diff_ms,	alx_timespec_diff_ms);
+ALX_ALIAS_WEAK_DEF(timespec_diff_us,	alx_timespec_diff_us);
+ALX_ALIAS_WEAK_DEF(timespec_diff_ns,	alx_timespec_diff_ns);
 #endif
 
 

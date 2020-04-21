@@ -64,7 +64,7 @@ zero:
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-ALX_ALIAS_WEAK_DEFINITION(reallocarrays__, alx_reallocarrays__);
+ALX_ALIAS_WEAK_DEF(reallocarrays__, alx_reallocarrays__);
 #endif
 
 

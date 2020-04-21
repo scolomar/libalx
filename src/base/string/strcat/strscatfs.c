@@ -84,8 +84,8 @@ err:	if (written)
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_WEAK_DEFINITION(strscatfs,	alx_strscatfs);
-ALX_ALIAS_WEAK_DEFINITION(vstrscatfs,	alx_vstrscatfs);
+ALX_ALIAS_WEAK_DEF(strscatfs,	alx_strscatfs);
+ALX_ALIAS_WEAK_DEF(vstrscatfs,	alx_vstrscatfs);
 
 
 /******************************************************************************

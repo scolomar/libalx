@@ -82,8 +82,8 @@ err:	if (written)
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_WEAK_DEFINITION(snprintfs,	alx_snprintfs);
-ALX_ALIAS_WEAK_DEFINITION(vsnprintfs,	alx_vsnprintfs);
+ALX_ALIAS_WEAK_DEF(snprintfs,	alx_snprintfs);
+ALX_ALIAS_WEAK_DEF(vsnprintfs,	alx_vsnprintfs);
 
 
 /******************************************************************************

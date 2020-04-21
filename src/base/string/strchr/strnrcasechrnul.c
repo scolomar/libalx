@@ -54,7 +54,7 @@ ptrdiff_t alx_strnrcasechrnul	(ptrdiff_t size, const char str[restrict size],
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_WEAK_DEFINITION(strnrcasechrnul, alx_strnrcasechrnul);
+ALX_ALIAS_WEAK_DEF(strnrcasechrnul, alx_strnrcasechrnul);
 
 
 /******************************************************************************

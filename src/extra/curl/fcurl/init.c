@@ -126,8 +126,8 @@ int	alx_url_deinit	(void)
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_WEAK_DEFINITION(url_init,	alx_url_init);
-ALX_ALIAS_WEAK_DEFINITION(url_deinit,	alx_url_deinit);
+ALX_ALIAS_WEAK_DEF(url_init,	alx_url_init);
+ALX_ALIAS_WEAK_DEF(url_deinit,	alx_url_deinit);
 
 
 /******************************************************************************

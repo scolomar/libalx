@@ -50,15 +50,15 @@ uint64_t	alx_popcnt_u256	(uint256_t n);
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-ALX_ALIAS_WEAK_DEFINITION(popcnt_u8,	alx_popcnt_u8);
-ALX_ALIAS_WEAK_DEFINITION(popcnt_u16,	alx_popcnt_u16);
-ALX_ALIAS_WEAK_DEFINITION(popcnt_u32,	alx_popcnt_u32);
-ALX_ALIAS_WEAK_DEFINITION(popcnt_u64,	alx_popcnt_u64);
+ALX_ALIAS_WEAK_DEF(popcnt_u8,	alx_popcnt_u8);
+ALX_ALIAS_WEAK_DEF(popcnt_u16,	alx_popcnt_u16);
+ALX_ALIAS_WEAK_DEF(popcnt_u32,	alx_popcnt_u32);
+ALX_ALIAS_WEAK_DEF(popcnt_u64,	alx_popcnt_u64);
 # if defined(uint128_t)
-ALX_ALIAS_WEAK_DEFINITION(popcnt_u128,	alx_popcnt_u128);
+ALX_ALIAS_WEAK_DEF(popcnt_u128,	alx_popcnt_u128);
 # endif
 # if defined(uint256_t)
-ALX_ALIAS_WEAK_DEFINITION(popcnt_u256,	alx_popcnt_u256);
+ALX_ALIAS_WEAK_DEF(popcnt_u256,	alx_popcnt_u256);
 # endif
 #endif
 

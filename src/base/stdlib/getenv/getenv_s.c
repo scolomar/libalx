@@ -60,8 +60,8 @@ int	alx_secure_getenv_s	(char dest[/*size*/], ptrdiff_t size,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-ALX_ALIAS_WEAK_DEFINITION(getenv_s,		alx_getenv_s);
-ALX_ALIAS_WEAK_DEFINITION(secure_getenv_s,	alx_secure_getenv_s);
+ALX_ALIAS_WEAK_DEF(getenv_s,		alx_getenv_s);
+ALX_ALIAS_WEAK_DEF(secure_getenv_s,	alx_secure_getenv_s);
 #endif
 
 

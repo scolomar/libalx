@@ -63,7 +63,7 @@ zero:
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-ALX_ALIAS_WEAK_DEFINITION(mallocarray, alx_mallocarray);
+ALX_ALIAS_WEAK_DEF(mallocarray, alx_mallocarray);
 #endif
 
 

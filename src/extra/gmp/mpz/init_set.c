@@ -41,8 +41,8 @@ void	alx_mpz_init_set_s64	(mpz_t rop, int64_t op);
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_WEAK_DEFINITION(mpz_init_set_u64, alx_mpz_init_set_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_init_set_s64, alx_mpz_init_set_s64);
+ALX_ALIAS_WEAK_DEF(mpz_init_set_u64, alx_mpz_init_set_u64);
+ALX_ALIAS_WEAK_DEF(mpz_init_set_s64, alx_mpz_init_set_s64);
 
 
 /******************************************************************************

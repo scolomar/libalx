@@ -165,16 +165,16 @@ ptrdiff_t	alx_search_s64	(ptrdiff_t nmemb,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-ALX_ALIAS_WEAK_DEFINITION(search_uint,	alx_search_uint);
-ALX_ALIAS_WEAK_DEFINITION(search_int,	alx_search_int);
-ALX_ALIAS_WEAK_DEFINITION(search_u8,	alx_search_u8);
-ALX_ALIAS_WEAK_DEFINITION(search_s8,	alx_search_s8);
-ALX_ALIAS_WEAK_DEFINITION(search_u16,	alx_search_u16);
-ALX_ALIAS_WEAK_DEFINITION(search_s16,	alx_search_s16);
-ALX_ALIAS_WEAK_DEFINITION(search_u32,	alx_search_u32);
-ALX_ALIAS_WEAK_DEFINITION(search_s32,	alx_search_s32);
-ALX_ALIAS_WEAK_DEFINITION(search_u64,	alx_search_u64);
-ALX_ALIAS_WEAK_DEFINITION(search_s64,	alx_search_s64);
+ALX_ALIAS_WEAK_DEF(search_uint,	alx_search_uint);
+ALX_ALIAS_WEAK_DEF(search_int,	alx_search_int);
+ALX_ALIAS_WEAK_DEF(search_u8,	alx_search_u8);
+ALX_ALIAS_WEAK_DEF(search_s8,	alx_search_s8);
+ALX_ALIAS_WEAK_DEF(search_u16,	alx_search_u16);
+ALX_ALIAS_WEAK_DEF(search_s16,	alx_search_s16);
+ALX_ALIAS_WEAK_DEF(search_u32,	alx_search_u32);
+ALX_ALIAS_WEAK_DEF(search_s32,	alx_search_s32);
+ALX_ALIAS_WEAK_DEF(search_u64,	alx_search_u64);
+ALX_ALIAS_WEAK_DEF(search_s64,	alx_search_s64);
 #endif
 
 

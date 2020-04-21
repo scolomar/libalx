@@ -43,8 +43,8 @@ void	alx_mpz_rootrem_u64	(mpz_t root, mpz_t rem,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_WEAK_DEFINITION(mpz_root_u64,		alx_mpz_root_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_rootrem_u64,	alx_mpz_rootrem_u64);
+ALX_ALIAS_WEAK_DEF(mpz_root_u64,		alx_mpz_root_u64);
+ALX_ALIAS_WEAK_DEF(mpz_rootrem_u64,	alx_mpz_rootrem_u64);
 
 
 /******************************************************************************

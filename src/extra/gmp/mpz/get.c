@@ -43,9 +43,9 @@ double		alx_mpz_get_d_2exp_s64	(int64_t *exp, const mpz_t op);
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_WEAK_DEFINITION(mpz_get_u64,		alx_mpz_get_u64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_get_s64,		alx_mpz_get_s64);
-ALX_ALIAS_WEAK_DEFINITION(mpz_get_d_2exp_s64,	alx_mpz_get_d_2exp_s64);
+ALX_ALIAS_WEAK_DEF(mpz_get_u64,		alx_mpz_get_u64);
+ALX_ALIAS_WEAK_DEF(mpz_get_s64,		alx_mpz_get_s64);
+ALX_ALIAS_WEAK_DEF(mpz_get_d_2exp_s64,	alx_mpz_get_d_2exp_s64);
 
 
 /******************************************************************************

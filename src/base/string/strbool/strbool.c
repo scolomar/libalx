@@ -41,9 +41,9 @@ const char alx_strBOOL[2][6]	= {"FALSE", "TRUE"};
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_WEAK_DEFINITION(strbool, alx_strbool);
-ALX_ALIAS_WEAK_DEFINITION(strBool, alx_strBool);
-ALX_ALIAS_WEAK_DEFINITION(strBOOL, alx_strBOOL);
+ALX_ALIAS_WEAK_DEF(strbool, alx_strbool);
+ALX_ALIAS_WEAK_DEF(strBool, alx_strBool);
+ALX_ALIAS_WEAK_DEF(strBOOL, alx_strBOOL);
 
 
 /******************************************************************************

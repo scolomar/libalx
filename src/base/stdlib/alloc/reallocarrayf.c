@@ -64,7 +64,7 @@ zero:
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-ALX_ALIAS_WEAK_DEFINITION(reallocarrayf, alx_reallocarrayf);
+ALX_ALIAS_WEAK_DEF(reallocarrayf, alx_reallocarrayf);
 #endif
 
 

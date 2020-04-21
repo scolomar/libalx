@@ -77,8 +77,8 @@ err:
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_WEAK_DEFINITION(strscatf,	alx_strscatf);
-ALX_ALIAS_WEAK_DEFINITION(vstrscatf,	alx_vstrscatf);
+ALX_ALIAS_WEAK_DEF(strscatf,	alx_strscatf);
+ALX_ALIAS_WEAK_DEF(vstrscatf,	alx_vstrscatf);
 
 
 /******************************************************************************

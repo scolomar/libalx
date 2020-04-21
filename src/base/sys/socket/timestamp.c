@@ -53,7 +53,7 @@ int	alx_msg_get_timestampns	(struct timespec *restrict tm,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-ALX_ALIAS_WEAK_DEFINITION(msg_get_timestampns, alx_msg_get_timestampns);
+ALX_ALIAS_WEAK_DEF(msg_get_timestampns, alx_msg_get_timestampns);
 
 
 /******************************************************************************
