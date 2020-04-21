@@ -256,6 +256,18 @@ long double alx_gsl_rstat_median_s64(ptrdiff_t nmemb,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+ALX_ALIAS_DECLARATION(gsl_rstat_median_ldbl,	alx_gsl_rstat_median_ldbl);
+ALX_ALIAS_DECLARATION(gsl_rstat_median_flt,	alx_gsl_rstat_median_flt);
+ALX_ALIAS_DECLARATION(gsl_rstat_median_uint,	alx_gsl_rstat_median_uint);
+ALX_ALIAS_DECLARATION(gsl_rstat_median_int,	alx_gsl_rstat_median_int);
+ALX_ALIAS_DECLARATION(gsl_rstat_median_u8,	alx_gsl_rstat_median_u8);
+ALX_ALIAS_DECLARATION(gsl_rstat_median_s8,	alx_gsl_rstat_median_u8);
+ALX_ALIAS_DECLARATION(gsl_rstat_median_u16,	alx_gsl_rstat_median_u16);
+ALX_ALIAS_DECLARATION(gsl_rstat_median_s16,	alx_gsl_rstat_median_s16);
+ALX_ALIAS_DECLARATION(gsl_rstat_median_u32,	alx_gsl_rstat_median_u32);
+ALX_ALIAS_DECLARATION(gsl_rstat_median_s32,	alx_gsl_rstat_median_s32);
+ALX_ALIAS_DECLARATION(gsl_rstat_median_u64,	alx_gsl_rstat_median_u64);
+ALX_ALIAS_DECLARATION(gsl_rstat_median_s64,	alx_gsl_rstat_median_s64);
 
 
 /******************************************************************************

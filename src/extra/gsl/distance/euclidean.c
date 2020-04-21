@@ -47,6 +47,13 @@ long double alx_gsl_dist2D_euclidean_64b	(int64_t dx, int64_t dy);
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+ALX_ALIAS_WEAK_DEF(gsl_dist2D_euclidean_ldbl,	alx_gsl_dist2D_euclidean_ldbl);
+ALX_ALIAS_WEAK_DEF(gsl_dist2D_euclidean,	alx_gsl_dist2D_euclidean);
+ALX_ALIAS_WEAK_DEF(gsl_dist2D_euclidean_flt,	alx_gsl_dist2D_euclidean_flt);
+ALX_ALIAS_WEAK_DEF(gsl_dist2D_euclidean_8b,	alx_gsl_dist2D_euclidean_8b);
+ALX_ALIAS_WEAK_DEF(gsl_dist2D_euclidean_16b,	alx_gsl_dist2D_euclidean_16b);
+ALX_ALIAS_WEAK_DEF(gsl_dist2D_euclidean_32b,	alx_gsl_dist2D_euclidean_32b);
+ALX_ALIAS_WEAK_DEF(gsl_dist2D_euclidean_64b,	alx_gsl_dist2D_euclidean_64b);
 
 
 /******************************************************************************

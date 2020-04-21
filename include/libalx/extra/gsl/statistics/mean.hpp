@@ -22,6 +22,7 @@
 #include <cstddef>
 #include <cstdint>
 
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
 
 
@@ -80,16 +81,16 @@ long double alx_gsl_stats_mean_s64(ptrdiff_t nmemb,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define gsl_stats_mean_ldbl(nmemb, arr)	 alx_gsl_stats_mean_ldbl(nmemb, arr)
-#define gsl_stats_mean_flt(nmemb, arr)	 alx_gsl_stats_mean_flt(nmemb, arr)
-#define gsl_stats_mean_u8(nmemb, arr)	 alx_gsl_stats_mean_u8(nmemb, arr)
-#define gsl_stats_mean_s8(nmemb, arr)	 alx_gsl_stats_mean_s8(nmemb, arr)
-#define gsl_stats_mean_u16(nmemb, arr)	 alx_gsl_stats_mean_u16(nmemb, arr)
-#define gsl_stats_mean_s16(nmemb, arr)	 alx_gsl_stats_mean_s16(nmemb, arr)
-#define gsl_stats_mean_u32(nmemb, arr)	 alx_gsl_stats_mean_u32(nmemb, arr)
-#define gsl_stats_mean_s32(nmemb, arr)	 alx_gsl_stats_mean_s32(nmemb, arr)
-#define gsl_stats_mean_u64(nmemb, arr)	 alx_gsl_stats_mean_u64(nmemb, arr)
-#define gsl_stats_mean_s64(nmemb, arr)	 alx_gsl_stats_mean_s64(nmemb, arr)
+ALX_ALIAS_DECLARATION(gsl_stats_mean_ldbl,	alx_gsl_stats_mean_ldbl);
+ALX_ALIAS_DECLARATION(gsl_stats_mean_flt,	alx_gsl_stats_mean_flt);
+ALX_ALIAS_DECLARATION(gsl_stats_mean_u8,	alx_gsl_stats_mean_u8);
+ALX_ALIAS_DECLARATION(gsl_stats_mean_s8,	alx_gsl_stats_mean_s8);
+ALX_ALIAS_DECLARATION(gsl_stats_mean_u16,	alx_gsl_stats_mean_u16);
+ALX_ALIAS_DECLARATION(gsl_stats_mean_s16,	alx_gsl_stats_mean_s16);
+ALX_ALIAS_DECLARATION(gsl_stats_mean_u32,	alx_gsl_stats_mean_u32);
+ALX_ALIAS_DECLARATION(gsl_stats_mean_s32,	alx_gsl_stats_mean_s32);
+ALX_ALIAS_DECLARATION(gsl_stats_mean_u64,	alx_gsl_stats_mean_u64);
+ALX_ALIAS_DECLARATION(gsl_stats_mean_s64,	alx_gsl_stats_mean_s64);
 #endif
 
 

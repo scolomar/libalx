@@ -22,6 +22,8 @@
 #include <math.h>
 #include <stdint.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
  ******* _Static_assert *******************************************************
@@ -72,6 +74,15 @@ long double alx_gsl_dist2D_euclidean_64b	(int64_t dx, int64_t dy);
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(gsl_dist2D_euclidean_ldbl,alx_gsl_dist2D_euclidean_ldbl);
+ALX_ALIAS_DECLARATION(gsl_dist2D_euclidean,	alx_gsl_dist2D_euclidean);
+ALX_ALIAS_DECLARATION(gsl_dist2D_euclidean_flt,	alx_gsl_dist2D_euclidean_flt);
+ALX_ALIAS_DECLARATION(gsl_dist2D_euclidean_8b,	alx_gsl_dist2D_euclidean_8b);
+ALX_ALIAS_DECLARATION(gsl_dist2D_euclidean_16b,	alx_gsl_dist2D_euclidean_16b);
+ALX_ALIAS_DECLARATION(gsl_dist2D_euclidean_32b,	alx_gsl_dist2D_euclidean_32b);
+ALX_ALIAS_DECLARATION(gsl_dist2D_euclidean_64b,	alx_gsl_dist2D_euclidean_64b);
+#endif
 
 
 /******************************************************************************
@@ -151,55 +162,6 @@ long double alx_gsl_dist2D_euclidean_64b	(int64_t dx, int64_t dy)
 
 	return	sqrtl(dx2 + dy2);
 }
-
-
-/******************************************************************************
- ******* always_inline ********************************************************
- ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, const))
-long double dist2D_euclidean_ldbl	(long double dx, long double dy)
-{
-	return	alx_gsl_dist2D_euclidean_ldbl(dx, dy);
-}
-
-__attribute__((always_inline, const))
-double	dist2D_euclidean		(double dx, double dy)
-{
-	return	alx_gsl_dist2D_euclidean(dx, dy);
-}
-
-__attribute__((always_inline, const))
-float	dist2D_euclidean_flt		(float dx, float dy)
-{
-	return	alx_gsl_dist2D_euclidean_flt(dx, dy);
-}
-
-__attribute__((always_inline, const))
-float	dist2D_euclidean_8b		(int8_t dx, int8_t dy)
-{
-	return	alx_gsl_dist2D_euclidean_8b(dx, dy);
-}
-
-__attribute__((always_inline, const))
-float	dist2D_euclidean_16b		(int16_t dx, int16_t dy)
-{
-	return	alx_gsl_dist2D_euclidean_16b(dx, dy);
-}
-
-__attribute__((always_inline, const))
-double	dist2D_euclidean_32b		(int32_t dx, int32_t dy)
-{
-	return	alx_gsl_dist2D_euclidean_32b(dx, dy);
-}
-
-__attribute__((always_inline, const))
-long double dist2D_euclidean_64b	(int64_t dx, int64_t dy)
-{
-	return	alx_gsl_dist2D_euclidean_64b(dx, dy);
-}
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
