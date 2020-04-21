@@ -23,6 +23,8 @@
 
 #include <gmp.h>
 
+#include "libalx/base/compiler/attribute.hpp"
+
 
 /******************************************************************************
  ******* define ***************************************************************
@@ -51,8 +53,8 @@ void	alx_mpz_init_set_s64	(mpz_t rop, int64_t op);
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define mpz_init_set_u64(rop, op)	alx_mpz_init_set_u64(rop, op)
-#define mpz_init_set_s64(rop, op)	alx_mpz_init_set_s64(rop, op)
+ALX_ALIAS_DECLARATION(mpz_init_set_u64, alx_mpz_init_set_u64);
+ALX_ALIAS_DECLARATION(mpz_init_set_s64, alx_mpz_init_set_s64);
 #endif
 
 

@@ -25,6 +25,7 @@
 #include <gmp.h>
 
 #include "libalx/base/assert/stdint.h"
+#include "libalx/base/compiler/attribute.h"
 
 
 /******************************************************************************
@@ -36,11 +37,6 @@ alx_Static_assert_stdint_types();
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define mpz_root_u64(rop, op, n)	  alx_mpz_root_u64(rop, op, n)
-#define mpz_rootrem_u64(root, rem, u, n)  alx_mpz_rootrem_u64(root, rem, u, n)
-#endif
 
 
 /******************************************************************************
@@ -66,6 +62,10 @@ void	alx_mpz_rootrem_u64	(mpz_t root, mpz_t rem,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(mpz_root_u64,	alx_mpz_root_u64);
+ALX_ALIAS_DECLARATION(mpz_rootrem_u64,	alx_mpz_rootrem_u64);
+#endif
 
 
 /******************************************************************************

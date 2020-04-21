@@ -23,6 +23,8 @@
 
 #include <gmp.h>
 
+#include "libalx/base/compiler/attribute.hpp"
+
 
 /******************************************************************************
  ******* define ***************************************************************
@@ -51,8 +53,8 @@ int	alx_mpq_cmp_s64	(const mpq_t op1, int64_t num2, int64_t den2);
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define mpq_cmp_u64(op1, num2, den2)	alx_mpq_cmp_u64(op1, num2, den2)
-#define mpq_cmp_s64(op1, num2, den2)	alx_mpq_cmp_s64(op1, num2, den2)
+ALX_ALIAS_DECLARATION(mpq_cmp_u64, alx_mpq_cmp_u64);
+ALX_ALIAS_DECLARATION(mpq_cmp_s64, alx_mpq_cmp_s64);
 #endif
 
 

@@ -24,6 +24,7 @@
 #include <gmp.h>
 
 #include "libalx/base/assert/stdint.h"
+#include "libalx/base/compiler/attribute.h"
 
 
 /******************************************************************************
@@ -35,12 +36,6 @@ alx_Static_assert_stdint_types();
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define mpz_powm_u64(rop, base, exp, mod)  alx_mpz_powm_u64(rop, base, exp, mod)
-#define mpz_pow_u64(rop, base, exp)	   alx_mpz_pow_u64(rop, base, exp)
-#define mpz_u64_pow_u64(rop, base, exp)	   alx_mpz_u64_pow_u64(rop, base, exp)
-#endif
 
 
 /******************************************************************************
@@ -68,6 +63,11 @@ void	alx_mpz_u64_pow_u64	(mpz_t rop, uint64_t base, uint64_t exp);
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(mpz_powm_u64,	alx_mpz_powm_u64);
+ALX_ALIAS_DECLARATION(mpz_pow_u64,	alx_mpz_pow_u64);
+ALX_ALIAS_DECLARATION(mpz_u64_pow_u64,	alx_mpz_u64_pow_u64);
+#endif
 
 
 /******************************************************************************

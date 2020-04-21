@@ -75,6 +75,24 @@ void	alx_mpz_lucnum2_u64	(mpz_t ln, mpz_t lnsub1, uint64_t n);
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_WEAK_DEFINITION(mpz_gcd_u64,		alx_mpz_gcd_u64);
+ALX_ALIAS_WEAK_DEFINITION(mpz_lcm_u64,		alx_mpz_lcm_u64);
+ALX_ALIAS_WEAK_DEFINITION(mpz_kronecker_s64,	alx_mpz_kronecker_s64);
+ALX_ALIAS_WEAK_DEFINITION(mpz_kronecker_u64,	alx_mpz_kronecker_u64);
+ALX_ALIAS_WEAK_DEFINITION(mpz_s64_kronecker,	alx_mpz_s64_kronecker);
+ALX_ALIAS_WEAK_DEFINITION(mpz_u64_kronecker,	alx_mpz_u64_kronecker);
+ALX_ALIAS_WEAK_DEFINITION(mpz_fac_u64,		alx_mpz_fac_u64);
+ALX_ALIAS_WEAK_DEFINITION(mpz_2fac_u64,		alx_mpz_2fac_u64);
+ALX_ALIAS_WEAK_DEFINITION(mpz_mfac_u64,		alx_mpz_mfac_u64);
+ALX_ALIAS_WEAK_DEFINITION(mpz_primorial_u64,	alx_mpz_primorial_u64);
+ALX_ALIAS_WEAK_DEFINITION(mpz_bin_u64,		alx_mpz_bin_u64);
+ALX_ALIAS_WEAK_DEFINITION(mpz_bin_u64u64,	alx_mpz_bin_u64u64);
+ALX_ALIAS_WEAK_DEFINITION(mpz_fib_u64,		alx_mpz_fib_u64);
+ALX_ALIAS_WEAK_DEFINITION(mpz_fib2_u64,		alx_mpz_fib2_u64);
+ALX_ALIAS_WEAK_DEFINITION(mpz_lucnum_u64,	alx_mpz_lucnum_u64);
+ALX_ALIAS_WEAK_DEFINITION(mpz_lucnum2_u64,	alx_mpz_lucnum2_u64);
+#endif
 
 
 /******************************************************************************

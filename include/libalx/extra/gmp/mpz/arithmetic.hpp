@@ -23,6 +23,8 @@
 
 #include <gmp.h>
 
+#include "libalx/base/compiler/attribute.hpp"
+
 
 /******************************************************************************
  ******* define ***************************************************************
@@ -56,13 +58,13 @@ void	alx_mpz_submul_u64	(mpz_t rop, const mpz_t op1, uint64_t op2);
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define mpz_add_u64(rop, op1, op2)	alx_mpz_add_u64(rop, op1, op2)
-#define mpz_sub_u64(rop, op1, op2)	alx_mpz_sub_u64(rop, op1, op2)
-#define mpz_u64_sub(rop, op1, op2)	alx_mpz_u64_sub(rop, op1, op2)
-#define mpz_mul_u64(rop, op1, op2)	alx_mpz_mul_u64(rop, op1, op2)
-#define mpz_mul_s64(rop, op1, op2)	alx_mpz_mul_s64(rop, op1, op2)
-#define mpz_addmul_u64(rop, op1, op2)	alx_mpz_addmul_u64(rop, op1, op2)
-#define mpz_submul_u64(rop, op1, op2)	alx_mpz_submul_u64(rop, op1, op2)
+ALX_ALIAS_DECLARATION(mpz_add_u64,	alx_mpz_add_u64);
+ALX_ALIAS_DECLARATION(mpz_sub_u64,	alx_mpz_sub_u64);
+ALX_ALIAS_DECLARATION(mpz_u64_sub,	alx_mpz_u64_sub);
+ALX_ALIAS_DECLARATION(mpz_mul_u64,	alx_mpz_mul_u64);
+ALX_ALIAS_DECLARATION(mpz_mul_s64,	alx_mpz_mul_s64);
+ALX_ALIAS_DECLARATION(mpz_addmul_u64,	alx_mpz_addmul_u64);
+ALX_ALIAS_DECLARATION(mpz_submul_u64,	alx_mpz_submul_u64);
 #endif
 
 

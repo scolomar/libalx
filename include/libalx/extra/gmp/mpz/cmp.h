@@ -24,6 +24,7 @@
 #include <gmp.h>
 
 #include "libalx/base/assert/stdint.h"
+#include "libalx/base/compiler/attribute.h"
 
 
 /******************************************************************************
@@ -35,12 +36,6 @@ alx_Static_assert_stdint_types();
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define mpz_cmp_s64(op1, op2)		alx_mpz_cmp_s64(op1, op2)
-#define mpz_cmp_u64(op1, op2)		alx_mpz_cmp_u64(op1, op2)
-#define mpz_cmpabs_u64(op1, op2)	alx_mpz_cmpabs_u64(op1, op2)
-#endif
 
 
 /******************************************************************************
@@ -67,6 +62,11 @@ int	alx_mpz_cmpabs_u64	(const mpz_t op1, uint64_t op2);
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(mpz_cmp_s64,	alx_mpz_cmp_s64);
+ALX_ALIAS_DECLARATION(mpz_cmp_u64,	alx_mpz_cmp_u64);
+ALX_ALIAS_DECLARATION(mpz_cmpabs_u64,	alx_mpz_cmpabs_u64);
+#endif
 
 
 /******************************************************************************

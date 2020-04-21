@@ -43,6 +43,11 @@ int	alx_mpz_cmpabs_u64	(const mpz_t op1, uint64_t op2);
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_WEAK_DEFINITION(mpz_cmp_s64,		alx_mpz_cmp_s64);
+ALX_ALIAS_WEAK_DEFINITION(mpz_cmp_u64,		alx_mpz_cmp_u64);
+ALX_ALIAS_WEAK_DEFINITION(mpz_cmpabs_u64,	alx_mpz_cmpabs_u64);
+#endif
 
 
 /******************************************************************************

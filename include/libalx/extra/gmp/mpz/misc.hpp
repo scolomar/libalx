@@ -23,6 +23,8 @@
 
 #include <gmp.h>
 
+#include "libalx/base/compiler/attribute.hpp"
+
 
 /******************************************************************************
  ******* define ***************************************************************
@@ -55,12 +57,12 @@ bool	alx_mpz_fits_s16	(const mpz_t op);
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define mpz_fits_u64(op)	alx_mpz_fits_u64(op)
-#define mpz_fits_s64(op)	alx_mpz_fits_s64(op)
-#define mpz_fits_u32(op)	alx_mpz_fits_u32(op)
-#define mpz_fits_s32(op)	alx_mpz_fits_s32(op)
-#define mpz_fits_u16(op)	alx_mpz_fits_u16(op)
-#define mpz_fits_s16(op)	alx_mpz_fits_s16(op)
+ALX_ALIAS_WEAK_DEFINITION(mpz_fits_u64, alx_mpz_fits_u64);
+ALX_ALIAS_WEAK_DEFINITION(mpz_fits_s64, alx_mpz_fits_s64);
+ALX_ALIAS_WEAK_DEFINITION(mpz_fits_u32, alx_mpz_fits_u32);
+ALX_ALIAS_WEAK_DEFINITION(mpz_fits_s32, alx_mpz_fits_s32);
+ALX_ALIAS_WEAK_DEFINITION(mpz_fits_u16, alx_mpz_fits_u16);
+ALX_ALIAS_WEAK_DEFINITION(mpz_fits_s16, alx_mpz_fits_s16);
 #endif
 
 
