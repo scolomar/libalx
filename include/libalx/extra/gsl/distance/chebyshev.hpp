@@ -21,6 +21,8 @@
  ******************************************************************************/
 #include <cstdint>
 
+#include "libalx/base/compiler/attribute.hpp"
+
 
 /******************************************************************************
  ******* define ***************************************************************
@@ -61,13 +63,13 @@ long double alx_gsl_dist2D_chebyshev_64b	(int64_t dx, int64_t dy);
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define dist2D_chebyshev_ldbl(dx, dy)	alx_gsl_dist2D_chebyshev_ldbl(dx, dy)
-#define dist2D_chebyshev(dx, dy)	alx_gsl_dist2D_chebyshev(dx, dy)
-#define dist2D_chebyshev_flt(dx, dy)	alx_gsl_dist2D_chebyshev_flt(dx, dy)
-#define dist2D_chebyshev_8b(dx, dy)	alx_gsl_dist2D_chebyshev_8b(dx, dy)
-#define dist2D_chebyshev_16b(dx, dy)	alx_gsl_dist2D_chebyshev_16b(dx, dy)
-#define dist2D_chebyshev_32b(dx, dy)	alx_gsl_dist2D_chebyshev_32b(dx, dy)
-#define dist2D_chebyshev_64b(dx, dy)	alx_gsl_dist2D_chebyshev_64b(dx, dy)
+ALX_ALIAS_DECLARATION(gsl_dist2D_chebyshev_ldbl, alx_gsl_dist2D_chebyshev_ldbl);
+ALX_ALIAS_DECLARATION(gsl_dist2D_chebyshev,	 alx_gsl_dist2D_chebyshev);
+ALX_ALIAS_DECLARATION(gsl_dist2D_chebyshev_flt,	 alx_gsl_dist2D_chebyshev_flt);
+ALX_ALIAS_DECLARATION(gsl_dist2D_chebyshev_8b,	 alx_gsl_dist2D_chebyshev_8b);
+ALX_ALIAS_DECLARATION(gsl_dist2D_chebyshev_16b,	 alx_gsl_dist2D_chebyshev_16b);
+ALX_ALIAS_DECLARATION(gsl_dist2D_chebyshev_32b,	 alx_gsl_dist2D_chebyshev_32b);
+ALX_ALIAS_DECLARATION(gsl_dist2D_chebyshev_64b,	 alx_gsl_dist2D_chebyshev_64b);
 #endif
 
 
