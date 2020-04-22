@@ -23,6 +23,8 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+#include "libalx/base/compiler/build_bug.h"
+
 
 /******************************************************************************
  ******* define ***************************************************************
@@ -32,6 +34,7 @@
 	__builtin_types_compatible_p(typeof(a), typeof(b))
 /* Is a an array? */
 #define alx_is_array(a)			(!alx_is_same_type((a), &(a)[0]))
+#define alx_must_be_array(a)		BUILD_BUG_OR_ZERO(!alx_is_array(a))
 /* Is p a pointer? */
 #define alx_is_pointer(p)		(!alx_is_array(p))
 /* Is a a char array */
@@ -82,6 +85,7 @@
 #if defined(ALX_NO_PREFIX)
 #define same_type(a, b)			alx_same_type(a, b)
 #define is_array(a)			alx_is_array(a)
+#define must_be_array(a)		alx_must_be_array(a)
 #define is_pointer(p)			alx_is_pointer(p)
 #define is_char_array(a)		alx_is_char_array(a)
 #define is_unsigned_type(x)		alx_is_unsigned_type(x)
