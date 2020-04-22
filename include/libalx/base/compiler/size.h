@@ -22,18 +22,21 @@
 #include <limits.h>
 #include <stddef.h>
 
+#include <sys/cdefs.h>
+
+#include "libalx/base/compiler/type.h"
+
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-#define ARRAY_SIZE(arr)		(sizeof(arr) / sizeof((arr)[0]))
+#define ARRAY_SIZE(arr)		(__arraycount((arr)))
 #define ARRAY_SSIZE(arr)	((ptrdiff_t)ARRAY_SIZE(arr))
 #define ARRAY_BYTES(arr)	(sizeof((arr)[0]) * ARRAY_SIZE(arr))
 #define ARRAY_BITS(arr)		(ARRAY_BYTES(arr) * CHAR_BIT)
 
 #define FIELD_SIZEOF(t, f)	(sizeof(((t *)NULL)->f))
-#define FIELD_ARRAY_SIZE(t, f)	(sizeof(((t *)NULL)->f) /		\
-				 sizeof(((t *)NULL)->f[0]))
+#define FIELD_ARRAY_SIZE(t, f)	__arraycount(sizeof( ((t *)NULL)->f ))
 #define FIELD_ARRAY_BYTES(t, f)	(sizeof(((t *)NULL)->f[0]) *		\
 				 FIELD_ARRAY_SIZE(t, f))
 
