@@ -43,8 +43,6 @@
 #include <libalx/base/stdlib/cmp.h>
 #include <libalx/base/stdlib/ctz.h>
 #include <libalx/base/stdlib/lmax.h>
-#include <libalx/base/stdlib/max.h>
-#include <libalx/base/stdlib/min.h>
 #include <libalx/base/stdlib/popcnt.h>
 #include <libalx/base/stdlib/pow.h>
 #include <libalx/base/stdlib/search.h>

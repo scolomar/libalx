@@ -14,12 +14,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <sys/param.h>
 #include <sys/types.h>
 
 #include "libalx/alx/data-structures/types.h"
 #include "libalx/base/assert/stddef.h"
-#include "libalx/base/stdlib/max.h"
-#include "libalx/base/stdlib/min.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
 #include "libalx/base/stdlib/alloc/mallocs.h"
 #include "libalx/base/stdlib/alloc/frees.h"
@@ -149,7 +148,7 @@ ssize_t	alx_dynbuf_read		(void *restrict data, size_t size,
 
 	if (offset >= buf->written)
 		return	-1;
-	sz	= ALX_MIN(size, buf->written - offset);
+	sz	= MIN(size, buf->written - offset);
 	memcpy(data, &((char *)buf->data)[offset], sz);
 
 	if (size  <  buf->written - offset)
@@ -204,7 +203,7 @@ int	alx_dynbuf_grow		(struct Alx_DynBuf *buf, size_t size)
 	else
 		sz	= buf->size * 2;
 
-	sz	= ALX_MAX(sz, size);
+	sz	= MAX(sz, size);
 
 	if (sz <= buf->size)
 		return	ENOMEM;

@@ -85,8 +85,6 @@ MODULES	=								\
 	base/stdlib/getenv/getenv_s					\
 	base/stdlib/getenv/getenv_u					\
 	base/stdlib/lmax						\
-	base/stdlib/max							\
-	base/stdlib/min							\
 	base/stdlib/popcnt						\
 	base/stdlib/pow							\
 	base/stdlib/search						\

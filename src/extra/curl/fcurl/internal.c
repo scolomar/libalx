@@ -39,10 +39,11 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include <sys/param.h>
+
 #include <curl/curl.h>
 
 #include "libalx/alx/data-structures/dyn-buffer.h"
-#include "libalx/base/stdlib/max.h"
 #include "libalx/extra/curl/fcurl/URL_FILE.h"
 
 
@@ -85,7 +86,7 @@ int	alx_url_fill_buffer__	(ALX_URL_FILE *stream, size_t want)
 		status	= curl_multi_timeout(alx_url_mhandle__, &curl_timeo);
 		if (status)
 			return	status;
-		curl_timeo	= ALX_MAX(curl_timeo, 10);
+		curl_timeo	= MAX(curl_timeo, 10);
 		status	= curl_multi_poll(alx_url_mhandle__, NULL, 0,
 							curl_timeo, NULL);
 		if (status)

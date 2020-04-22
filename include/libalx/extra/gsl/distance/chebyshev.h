@@ -21,8 +21,9 @@
  ******************************************************************************/
 #include <stdint.h>
 
+#include <sys/param.h>
+
 #include "libalx/base/compiler/attribute.h"
-#include "libalx/base/stdlib/max.h"
 
 
 /******************************************************************************
@@ -91,43 +92,43 @@ ALX_ALIAS_DECLARATION(gsl_dist2D_chebyshev_64b,	 alx_gsl_dist2D_chebyshev_64b);
 inline
 long double alx_gsl_dist2D_chebyshev_ldbl	(long double dx, long double dy)
 {
-	return	ALX_MAX(dx, dy);
+	return	MAX(dx, dy);
 }
 
 inline
 double	alx_gsl_dist2D_chebyshev		(double dx, double dy)
 {
-	return	ALX_MAX(dx, dy);
+	return	MAX(dx, dy);
 }
 
 inline
 float	alx_gsl_dist2D_chebyshev_flt		(float dx, float dy)
 {
-	return	ALX_MAX(dx, dy);
+	return	MAX(dx, dy);
 }
 
 inline
 float	alx_gsl_dist2D_chebyshev_8b		(int8_t dx, int8_t dy)
 {
-	return	ALX_MAX(dx, dy);
+	return	MAX(dx, dy);
 }
 
 inline
 float	alx_gsl_dist2D_chebyshev_16b		(int16_t dx, int16_t dy)
 {
-	return	ALX_MAX(dx, dy);
+	return	MAX(dx, dy);
 }
 
 inline
 double	alx_gsl_dist2D_chebyshev_32b		(int32_t dx, int32_t dy)
 {
-	return	ALX_MAX(dx, dy);
+	return	MAX(dx, dy);
 }
 
 inline
 long double alx_gsl_dist2D_chebyshev_64b	(int64_t dx, int64_t dy)
 {
-	return	ALX_MAX(dx, dy);
+	return	MAX(dx, dy);
 }
 
 

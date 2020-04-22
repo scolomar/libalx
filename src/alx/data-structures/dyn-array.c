@@ -14,10 +14,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <sys/param.h>
+
 #include "libalx/alx/data-structures/llist.h"
 #include "libalx/alx/data-structures/types.h"
 #include "libalx/base/assert/stddef.h"
-#include "libalx/base/stdlib/max.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
 #include "libalx/base/stdlib/alloc/frees.h"
 #include "libalx/base/stdlib/alloc/reallocarrays.h"
@@ -253,7 +254,7 @@ int	alx_dynarr_grow		(struct Alx_DynArr *arr, ptrdiff_t nmemb)
 	if ((size_t)n > (SIZE_MAX / arr->elsize))
 		n	= SIZE_MAX / arr->elsize;
 
-	n	= ALX_MAX(n, nmemb);
+	n	= MAX(n, nmemb);
 
 	if (n <= arr->nmemb)
 		return	ENOMEM;

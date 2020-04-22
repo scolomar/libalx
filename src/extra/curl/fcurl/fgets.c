@@ -57,8 +57,9 @@
 #include <stddef.h>
 #include <stdio.h>
 
+#include <sys/param.h>
+
 #include "libalx/alx/data-structures/dyn-buffer.h"
-#include "libalx/base/stdlib/min.h"
 #include "libalx/base/string/memchr/memchrend.h"
 #include "libalx/extra/curl/fcurl/URL_FILE.h"
 
@@ -128,7 +129,7 @@ char	*url_fgets__	(char *restrict str, size_t size,
 		return	NULL;
 	}
 
-	len	= ALX_MIN(len, stream->buf->written);
+	len	= MIN(len, stream->buf->written);
 	len	= alx_memchrend(stream->buf->data, '\n', len) + 1;
 	if (alx_dynbuf_read(str, len, stream->buf, 0))
 		return	NULL;
