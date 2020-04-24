@@ -121,7 +121,7 @@
  * - Fails safely if (nmemb * size) would overflow.
  * - error is non-zero if the result is NULL.
  */
-__attribute__((malloc, nonnull, warn_unused_result))
+[[gnu::malloc]] [[gnu::nonnull]] [[gnu::warn_unused_result]]
 void	*alx_callocs__	(ptrdiff_t nmemb, size_t size, int *error);
 
 

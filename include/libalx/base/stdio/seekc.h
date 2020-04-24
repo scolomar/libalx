@@ -44,7 +44,7 @@
  ******************************************************************************/
 inline
 int	alx_seekc	(char c);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 inline
 int	alx_fseekc	(FILE *stream, char c);
 inline

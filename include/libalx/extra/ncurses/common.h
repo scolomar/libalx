@@ -48,12 +48,12 @@ void	alx_ncurses_init	(void);
 void	alx_ncurses_pause	(void);
 void	alx_ncurses_resume	(void);
 void	alx_ncurses_deinit	(void);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_ncurses_delwin	(WINDOW *restrict win);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_ncurses_title	(WINDOW *restrict win,
 				 const char *restrict title);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_ncurses_subtitle	(WINDOW *restrict win,
 				 const char *restrict subtitle);
 

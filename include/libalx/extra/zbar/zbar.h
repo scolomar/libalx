@@ -40,7 +40,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull(2, 4)))
+[[gnu::nonnull(2, 4)]]
 int	alx_zbar_read	(ptrdiff_t bufsiz,
 			 char bcode_data[static restrict bufsiz],
 			 char bcode_type[static restrict bufsiz],

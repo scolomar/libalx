@@ -86,9 +86,9 @@
  * If this function returns non-zero, something went wrong and you cannot use
  * the other url_ functions.
  */
-__attribute__((warn_unused_result))
+[[gnu::warn_unused_result]]
 int	alx_url_init	(void);
-__attribute__((destructor, warn_unused_result))
+[[gnu::destructor]] [[gnu::warn_unused_result]]
 int	alx_url_deinit	(void);
 
 

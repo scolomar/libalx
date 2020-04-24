@@ -43,7 +43,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 inline
 ptrdiff_t alx_strnrchrnul	(ptrdiff_t size,
 				 const char str[static restrict size],

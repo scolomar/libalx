@@ -42,13 +42,13 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_white_mask	(img_s *img, int16_t SL_tolerance,
 				 int16_t S_tolerance, int16_t L_tolerance);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_black_mask	(img_s *img, int16_t SL_tolerance,
 				 int16_t S_tolerance, int16_t L_tolerance);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_gray_mask	(img_s *img, int16_t SL_tolerance,
 				 int16_t S_tolerance, int16_t L_tolerance);
 

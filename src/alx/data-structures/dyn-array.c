@@ -43,7 +43,7 @@ alx_Static_assert_size_ptrdiff();
 /******************************************************************************
  ******* static prototypes ****************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 static
 int	alx_dynarr_grow		(struct Alx_DynArr *arr, ptrdiff_t nmemb);
 

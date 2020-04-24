@@ -43,23 +43,23 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_distr_uniform_E_ldbl	(long double a, long double b);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_distr_uniform_E		(double a, double b);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_distr_uniform_E_flt	(float a, float b);
 
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_distr_uniform_Var_ldbl	(long double a, long double b);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_distr_uniform_Var	(double a, double b);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_distr_uniform_Var_flt	(float a, float b);
 

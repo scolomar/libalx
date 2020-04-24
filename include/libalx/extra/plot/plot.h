@@ -64,24 +64,24 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_gnuplot_reset_plot		(struct Alx_Gnuplot *gnuplot);
-__attribute__((nonnull(1, 3)))
+[[gnu::nonnull(1, 3)]]
 int	alx_gnuplot_plot_y		(struct Alx_Gnuplot *restrict gnuplot,
 					 ptrdiff_t size,
 					 const double y[static restrict size],
 					 const char *restrict title);
-__attribute__((nonnull(1, 3, 4)))
+[[gnu::nonnull(1, 3, 4)]]
 int	alx_gnuplot_plot_xy		(struct Alx_Gnuplot *restrict gnuplot,
 					 ptrdiff_t size,
 					 const double x[static restrict size],
 					 const double y[static restrict size],
 					 const char *restrict title);
-__attribute__((nonnull(1)))
+[[gnu::nonnull(1)]]
 int	alx_gnuplot_plot_slope		(struct Alx_Gnuplot *restrict gnuplot,
 					 double a, double b,
 					 const char *restrict title);
-__attribute__((nonnull(1)))
+[[gnu::nonnull(1)]]
 int	alx_gnuplot_plot_equation	(struct Alx_Gnuplot *restrict gnuplot,
 					 const char *equation,
 					 const char *title);

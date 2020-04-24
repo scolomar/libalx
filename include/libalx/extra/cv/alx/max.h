@@ -42,13 +42,13 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_maximum_flt	(const img_s *restrict img,
 				 float *restrict max);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_maximum_u8	(const img_s *restrict img,
 				 uint8_t *restrict max);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_local_max	(img_s *img);
 
 

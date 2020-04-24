@@ -117,7 +117,7 @@
  * - Returns NULL on zero size allocation.
  * - error is non-zero if the result is NULL.
  */
-__attribute__((malloc, nonnull, warn_unused_result))
+[[gnu::malloc]] [[gnu::nonnull]] [[gnu::warn_unused_result]]
 void	*alx_mallocs__	(size_t size, int *error);
 
 

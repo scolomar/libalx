@@ -25,20 +25,20 @@
  ******* define ***************************************************************
  ******************************************************************************/
 #define ALX_ALIAS_DECLARATION(aka, original)				\
-__attribute__((copy(original)))						\
+[[gnu::copy(original)]]							\
 extern									\
 typeof(original)	aka
 
 #define ALX_ALIAS_DEFINITION(aka, original)				\
-__attribute__((alias(#original)))					\
-__attribute__((copy(original)))						\
+[[gnu::alias(#original)]]						\
+[[gnu::copy(original)]]							\
 extern									\
 typeof(original)	aka
 
 #define ALX_ALIAS_WEAK_DEF(aka, original)				\
-__attribute__((alias(#original)))					\
-__attribute__((copy(original)))						\
-__attribute__((weak))							\
+[[gnu::alias(#original)]]						\
+[[gnu::copy(original)]]							\
+[[gnu::weak]]								\
 extern									\
 typeof(original)	aka
 

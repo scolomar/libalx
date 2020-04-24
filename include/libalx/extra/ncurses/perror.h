@@ -48,7 +48,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull(1, 2, 4)))
+[[gnu::nonnull(1, 2, 4)]]
 void	alx_ncurses_perror__	(WINDOW *restrict win,
 				 const char *restrict file, int line,
 				 const char *restrict func,

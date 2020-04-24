@@ -88,7 +88,7 @@
  * If this function returns NULL, something went wrong and you cannot use the
  * other url_ functions.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 ALX_URL_FILE	*alx_url_fopen	(const char *restrict url,
 				 const char *restrict mode);
 

@@ -77,7 +77,7 @@
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the array.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynarr_init		(struct Alx_DynArr **arr, size_t elsize);
 
 /*
@@ -104,7 +104,7 @@ void	alx_dynarr_deinit	(struct Alx_DynArr *arr);
  *	ENOMEM:		Aborted; failure to reallocate the data.  Previous
  *			data is left untouched.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynarr_write	(struct Alx_DynArr *restrict arr,
 				 ptrdiff_t cell, const void *restrict data);
 
@@ -123,7 +123,7 @@ int	alx_dynarr_write	(struct Alx_DynArr *restrict arr,
  *	ENOMEM:		Aborted; failure to reallocate the data.  Previous
  *			data is left untouched.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynarr_insert	(struct Alx_DynArr *restrict arr,
 				 ptrdiff_t cell, const void *restrict data);
 
@@ -138,7 +138,7 @@ int	alx_dynarr_insert	(struct Alx_DynArr *restrict arr,
  *	0:		OK.
  *	EBADSLT:	Aborted; cell >= arr->nmemb.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynarr_read		(void *restrict data,
 				 const struct Alx_DynArr *restrict arr,
 				 ptrdiff_t cell);
@@ -154,7 +154,7 @@ int	alx_dynarr_read		(void *restrict data,
  *	0:		OK.
  *	EBADSLT:	Aborted; cell >= arr->nmemb.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynarr_remove	(struct Alx_DynArr *arr,
 				 ptrdiff_t cell);
 
@@ -169,7 +169,7 @@ int	alx_dynarr_remove	(struct Alx_DynArr *arr,
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to reallocate the array.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynarr_resize	(struct Alx_DynArr *arr,
 				 ptrdiff_t nmemb, size_t elsize);
 
@@ -183,7 +183,7 @@ int	alx_dynarr_resize	(struct Alx_DynArr *arr,
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to reallocate the array.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynarr_reset	(struct Alx_DynArr *arr, size_t elsize);
 
 /*
@@ -195,7 +195,7 @@ int	alx_dynarr_reset	(struct Alx_DynArr *arr, size_t elsize);
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to reallocate the array.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynarr_fit		(struct Alx_DynArr *arr);
 
 /*
@@ -210,7 +210,7 @@ int	alx_dynarr_fit		(struct Alx_DynArr *arr);
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the nodes.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynarr_to_llist	(struct Alx_DynArr *arr,
 				 struct Alx_LinkedList *list);
 

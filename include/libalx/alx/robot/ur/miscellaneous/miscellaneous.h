@@ -42,7 +42,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_puts	(struct Alx_UR *restrict ur, const char *restrict msg);
 
 

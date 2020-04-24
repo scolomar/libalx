@@ -50,11 +50,11 @@ enum	{
 void	alx_prime_factorization_8b_init		(void);
 void	alx_prime_factorization_16b_init	(void);
 
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_prime_factorization_8b(uint8_t n,
 				int8_t pf[static restrict PRIME_NUMS_QTY_8b],
 				bool denominator);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_prime_factorization_16b(uint16_t n,
 				int16_t pf[static restrict PRIME_NUMS_QTY_16b],
 				bool denominator);

@@ -42,7 +42,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull(1, 2), warn_unused_result))
+[[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 int	alx_strlcpys		(char dest[restrict /*size*/],
 				 const char src[restrict /*size*/],
 				 ptrdiff_t size, ptrdiff_t *restrict len);

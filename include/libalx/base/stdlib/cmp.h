@@ -42,46 +42,46 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 inline
 int	alx_cmp_ldbl	(const void *a_ptr, const void *b_ptr);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 inline
 int	alx_cmp		(const void *a_ptr, const void *b_ptr);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 inline
 int	alx_cmp_f	(const void *a_ptr, const void *b_ptr);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 inline
 int	alx_cmp_uint	(const void *a_ptr, const void *b_ptr);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 inline
 int	alx_cmp_int	(const void *a_ptr, const void *b_ptr);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 inline
 int	alx_cmp_char	(const void *a_ptr, const void *b_ptr);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 inline
 int	alx_cmp_u8	(const void *a_ptr, const void *b_ptr);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 inline
 int	alx_cmp_s8	(const void *a_ptr, const void *b_ptr);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 inline
 int	alx_cmp_u16	(const void *a_ptr, const void *b_ptr);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 inline
 int	alx_cmp_s16	(const void *a_ptr, const void *b_ptr);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 inline
 int	alx_cmp_u32	(const void *a_ptr, const void *b_ptr);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 inline
 int	alx_cmp_s32	(const void *a_ptr, const void *b_ptr);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 inline
 int	alx_cmp_u64	(const void *a_ptr, const void *b_ptr);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 inline
 int	alx_cmp_s64	(const void *a_ptr, const void *b_ptr);
 

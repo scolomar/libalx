@@ -41,7 +41,7 @@
  * Comparison function.  Return value logic should work as in strcmp().
  */
 typedef int	alx_bst_cmp_f	(const void *user_data, const void *ds_data)
-__attribute__((nonnull, warn_unused_result));
+[[gnu::nonnull]] [[gnu::warn_unused_result]];
 
 
 /******************************************************************************

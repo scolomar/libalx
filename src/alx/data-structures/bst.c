@@ -49,7 +49,7 @@ void	bst_delete_all			(struct Alx_Node *restrict node);
  *
  * node:	Pointer to a node.
  */
-__attribute__((nonnull, pure, warn_unused_result))
+[[gnu::nonnull]] [[gnu::pure]] [[gnu::warn_unused_result]]
 static
 struct Alx_Node	*bst_leftmost_node	(struct Alx_Node *node);
 
@@ -58,7 +58,7 @@ struct Alx_Node	*bst_leftmost_node	(struct Alx_Node *node);
  *
  * node:	Pointer to a node.
  */
-__attribute__((nonnull, pure, warn_unused_result))
+[[gnu::nonnull]] [[gnu::pure]] [[gnu::warn_unused_result]]
 static
 struct Alx_Node	*bst_rightmost_node	(struct Alx_Node *node);
 
@@ -69,7 +69,7 @@ struct Alx_Node	*bst_rightmost_node	(struct Alx_Node *node);
  *
  * node:	Pointer to a node.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 struct Alx_Node	*bst_join_L_R		(struct Alx_Node *restrict node);
 

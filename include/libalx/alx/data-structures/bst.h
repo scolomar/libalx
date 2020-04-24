@@ -85,7 +85,7 @@
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the bst.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_bst_init		(struct Alx_BST **restrict bst,
 				 alx_bst_cmp_f *cmp, bool dup);
 
@@ -117,7 +117,7 @@ void	alx_bst_deinit		(struct Alx_BST *bst);
  *	-ENOMEM:	Aborted; failure to allocate the node.
  *	EEXIST:		Aborted; existing equivalent node in the BST.
  */
-__attribute__((nonnull(1), warn_unused_result))
+[[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
 int	alx_bst_insert		(struct Alx_BST *restrict bst,
 				 const void *restrict data, size_t size,
 				 struct Alx_Node **restrict bstnode);
@@ -136,7 +136,7 @@ int	alx_bst_insert		(struct Alx_BST *restrict bst,
  *	0:		OK.
  *	EEXIST:		Aborted; existing equivalent node in the BST.
  */
-__attribute__((nonnull(1, 2), warn_unused_result))
+[[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
 				 struct Alx_Node *restrict node,
 				 struct Alx_Node **restrict bstnode);
@@ -147,7 +147,7 @@ int	alx_bst_insert_node	(struct Alx_BST *restrict bst,
  *
  * bst:		Pointer to a BST.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_bst_delete_all	(struct Alx_BST *bst);
 
 /*
@@ -158,7 +158,7 @@ void	alx_bst_delete_all	(struct Alx_BST *bst);
  *		node will be stored here.
  * bst:		Pointer to a BST.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_bst_leftmost_node	(struct Alx_Node **restrict node,
 				 struct Alx_BST *restrict bst);
 
@@ -170,7 +170,7 @@ int	alx_bst_leftmost_node	(struct Alx_Node **restrict node,
  *		node will be stored here.
  * bst:		Pointer to a BST.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_bst_rightmost_node	(struct Alx_Node **restrict node,
 				 struct Alx_BST *restrict bst);
 
@@ -185,7 +185,7 @@ int	alx_bst_rightmost_node	(struct Alx_Node **restrict node,
  * key:		Key value to search for.
  * data:	Data to search for.
  */
-__attribute__((nonnull(1, 2), warn_unused_result))
+[[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 int	alx_bst_find		(struct Alx_Node **restrict node,
 				 struct Alx_BST *restrict bst,
 				 const void *restrict data);
@@ -201,7 +201,7 @@ int	alx_bst_find		(struct Alx_Node **restrict node,
  * key:		Key value to search for.
  * data:	Data to search for.
  */
-__attribute__((nonnull(1, 2), warn_unused_result))
+[[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 int	alx_bst_remove		(struct Alx_Node **restrict node,
 				 struct Alx_BST *restrict bst,
 				 const void *restrict data);
@@ -212,7 +212,7 @@ int	alx_bst_remove		(struct Alx_Node **restrict node,
  * bst:		Pointer to a BST.
  * node:	Pointer to the node to be removed from the BST.
  */
-__attribute__((nonnull(1)))
+[[gnu::nonnull(1)]]
 void	alx_bst_remove_node	(struct Alx_BST *restrict bst,
 				 struct Alx_Node *restrict node);
 
@@ -231,7 +231,7 @@ void	alx_bst_remove_node	(struct Alx_BST *restrict bst,
  *			immediately and the return value is passed to the
  *			caller.
  */
-__attribute__((nonnull(1, 2)))
+[[gnu::nonnull(1, 2)]]
 int	alx_bst_apply		(struct Alx_BST *restrict bst,
 				 int (*f)(struct Alx_Node *restrict node,
 					  void *restrict state),
@@ -252,7 +252,7 @@ int	alx_bst_apply		(struct Alx_BST *restrict bst,
  *			immediately and the return value is passed to the
  *			caller.
  */
-__attribute__((nonnull(1, 2)))
+[[gnu::nonnull(1, 2)]]
 int	alx_bst_apply_bwd	(struct Alx_BST *restrict bst,
 				 int (*f)(struct Alx_Node *restrict node,
 					  void *restrict state),
@@ -269,7 +269,7 @@ int	alx_bst_apply_bwd	(struct Alx_BST *restrict bst,
  *	0:		OK.
  *	ENOMEM:		Aborted; internal failure.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_bst_reorder		(struct Alx_BST *restrict bst,
 				 alx_bst_cmp_f *cmp);
 
@@ -279,7 +279,7 @@ int	alx_bst_reorder		(struct Alx_BST *restrict bst,
  * list:	Pointer to a list.
  * bst:		Pointer to a BST.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_bst_to_llist	(struct Alx_LinkedList *restrict list,
 				 struct Alx_BST *restrict bst);
 

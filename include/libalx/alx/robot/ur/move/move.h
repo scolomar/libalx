@@ -43,42 +43,42 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_halt		(struct Alx_UR *ur,
 				 double timeout);
 
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_check_movement	(struct Alx_UR *restrict ur,
 				 double timeout);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_wait_while_moving(struct Alx_UR *restrict ur,
 				 double timeout,
 				 const struct timespec *restrict tm_start);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 bool	alx_ur_is_moving	(const struct Alx_UR *ur);
 
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_movej		(struct Alx_UR *restrict ur,
 				 const struct Alx_UR_Pose *restrict pose,
 				 double timeout);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_movej_rel	(struct Alx_UR *restrict ur,
 				 const struct Alx_UR_Pose *restrict pose_rel,
 				 double timeout);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_movel		(struct Alx_UR *restrict ur,
 				 const struct Alx_UR_Pose *restrict pose,
 				 double timeout);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_movel_rel	(struct Alx_UR *restrict ur,
 				 const struct Alx_UR_Pose *restrict pose_rel,
 				 double timeout);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_movec		(struct Alx_UR *restrict ur,
 				 const struct Alx_UR_Pose *restrict via,
 				 const struct Alx_UR_Pose *restrict to,
 				 double timeout);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_movec_rel	(struct Alx_UR *restrict ur,
 				 const struct Alx_UR_Pose *restrict via,
 				 const struct Alx_UR_Pose *restrict to,

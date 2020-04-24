@@ -42,23 +42,23 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_units_kg_to_lb_ldbl	(long double kg);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_units_kg_to_lb		(double kg);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_units_kg_to_lb_flt	(float kg);
 
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_units_lb_to_kg_ldbl	(long double lb);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_units_lb_to_kg		(double lb);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_units_lb_to_kg_flt	(float lb);
 

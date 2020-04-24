@@ -42,12 +42,12 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_histogram1D(ptrdiff_t hist[static restrict 256],
 			   const img_s *restrict img);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_draw_hist1D(img_s *restrict hist, const img_s *restrict img);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_draw_hist3D(img_s *restrict hist, const img_s *restrict img);
 
 

@@ -45,7 +45,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_msg_get_timestampns	(struct timespec *restrict tm,
 				 struct msghdr *restrict msg);
 

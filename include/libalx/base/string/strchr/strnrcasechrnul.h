@@ -42,7 +42,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t alx_strnrcasechrnul	(ptrdiff_t size,
 				 const char str[static restrict size],
 				 char c);

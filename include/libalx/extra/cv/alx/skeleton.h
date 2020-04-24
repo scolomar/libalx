@@ -41,12 +41,12 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 #if 0
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_skeleton_B	(img_s *img);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_skeleton_A	(img_s *img);
 #endif
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_skeleton_endpts	(img_s *img);
 
 

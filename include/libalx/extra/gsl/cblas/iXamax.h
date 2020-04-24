@@ -43,51 +43,51 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t alx_cblas_iXamax_ldbl	(ptrdiff_t nmemb,
 				 const long double arr[static restrict nmemb],
 				 ptrdiff_t step);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t alx_cblas_iXamax_uint	(ptrdiff_t nmemb,
 				 const unsigned arr[static restrict nmemb],
 				 ptrdiff_t step);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t alx_cblas_iXamax_int	(ptrdiff_t nmemb,
 				 const int arr[static restrict nmemb],
 				 ptrdiff_t step);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t alx_cblas_iXamax_u8	(ptrdiff_t nmemb,
 				 const uint8_t arr[static restrict nmemb],
 				 ptrdiff_t step);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t alx_cblas_iXamax_s8	(ptrdiff_t nmemb,
 				 const int8_t arr[static restrict nmemb],
 				 ptrdiff_t step);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t alx_cblas_iXamax_u16	(ptrdiff_t nmemb,
 				 const uint16_t arr[static restrict nmemb],
 				 ptrdiff_t step);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t alx_cblas_iXamax_s16	(ptrdiff_t nmemb,
 				 const int16_t arr[static restrict nmemb],
 				 ptrdiff_t step);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t alx_cblas_iXamax_u32	(ptrdiff_t nmemb,
 				 const uint32_t arr[static restrict nmemb],
 				 ptrdiff_t step);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t alx_cblas_iXamax_s32	(ptrdiff_t nmemb,
 				 const int32_t arr[static restrict nmemb],
 				 ptrdiff_t step);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t alx_cblas_iXamax_u64	(ptrdiff_t nmemb,
 				 const uint64_t arr[static restrict nmemb],
 				 ptrdiff_t step);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t alx_cblas_iXamax_s64	(ptrdiff_t nmemb,
 				 const int64_t arr[static restrict nmemb],
 				 ptrdiff_t step);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t alx_cblas_iXamax_pdif	(ptrdiff_t nmemb,
 				 const ptrdiff_t arr[static restrict nmemb],
 				 ptrdiff_t step);

@@ -57,7 +57,7 @@ enum	Alx_Cv_Thinning_Types{
  * @param method	Value that defines which thinning algorithm should be
  *		used. See Alx_Cv_Thinning_Types (cv::ximgproc::ThinningTypes).
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_thinning	(img_s *img, int method);
 
 

@@ -78,7 +78,7 @@
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the buffer.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynbuf_init		(struct Alx_DynBuf **buf);
 
 /*
@@ -93,7 +93,7 @@ int	alx_dynbuf_init		(struct Alx_DynBuf **buf);
  *	ENOANO:		Aborted; ref was NULL.
  *	ENOMEM:		Aborted; failure to allocate the buffer.
  */
-__attribute__((nonnull(1), warn_unused_result))
+[[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
 int	alx_dynbuf_init_clone	(struct Alx_DynBuf **restrict clone,
 				 const struct Alx_DynBuf *restrict ref);
 
@@ -121,7 +121,7 @@ void	alx_dynbuf_deinit	(struct Alx_DynBuf *buf);
  *	ENOMEM:		Aborted; failure to reallocate the data.  Previous
  *			data is left untouched.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynbuf_write	(struct Alx_DynBuf *restrict buf,
 				 size_t offset,
 				 const void *restrict data, size_t size);
@@ -143,7 +143,7 @@ int	alx_dynbuf_write	(struct Alx_DynBuf *restrict buf,
  *	ENOMEM:		Aborted; failure to reallocate the data.  Previous
  *			data is left untouched.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynbuf_insert	(struct Alx_DynBuf *restrict buf,
 				 size_t offset,
 				 const void *restrict data, size_t size);
@@ -161,7 +161,7 @@ int	alx_dynbuf_insert	(struct Alx_DynBuf *restrict buf,
  *	>0:		OK. data was truncated. number of bytes actually read.
  *	-1:		Aborted; invalid offset.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 ssize_t	alx_dynbuf_read		(void *restrict data, size_t size,
 				 const struct Alx_DynBuf *restrict buf,
 				 size_t offset);
@@ -173,7 +173,7 @@ ssize_t	alx_dynbuf_read		(void *restrict data, size_t size,
  * buf:		Pointer to a buffer.
  * size:	Number of bytes to be consumed.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_dynbuf_consume	(struct Alx_DynBuf *buf, size_t size);
 
 /*
@@ -186,7 +186,7 @@ void	alx_dynbuf_consume	(struct Alx_DynBuf *buf, size_t size);
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the data.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynbuf_resize	(struct Alx_DynBuf *buf, size_t size);
 
 

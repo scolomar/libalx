@@ -73,13 +73,13 @@ enum	Alx_Gnuplot_Styles {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull(1)))
+[[gnu::nonnull(1)]]
 int	alx_gnuplot_set_style	(struct Alx_Gnuplot *restrict gnuplot,
 				 int style, const char *restrict opt);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_gnuplot_set_xlabel	(struct Alx_Gnuplot *restrict gnuplot,
 				 const char *restrict label);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_gnuplot_set_ylabel	(struct Alx_Gnuplot *restrict gnuplot,
 				 const char *restrict label);
 

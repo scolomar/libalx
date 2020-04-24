@@ -42,10 +42,10 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_getenv_s		(char dest[/*size*/], ptrdiff_t size,
 				 const char *name);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_secure_getenv_s	(char dest[/*size*/], ptrdiff_t size,
 				 const char *name);
 

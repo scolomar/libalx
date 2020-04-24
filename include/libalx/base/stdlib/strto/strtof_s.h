@@ -47,17 +47,17 @@
  * `errno` needs to be cleared before calling these functions.  If not, false
  * negatives could happen (the function succeds, but it reports error).
  */
-__attribute__((nonnull(1, 2), warn_unused_result))
+[[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 int	alx_strtod_s	(double *restrict num, const char *restrict str,
 			 ptrdiff_t *restrict nread);
-__attribute__((nonnull(1, 2), warn_unused_result))
+[[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 int	alx_strtof_s	(float *restrict num, const char *restrict str,
 			 ptrdiff_t *restrict nread);
-__attribute__((nonnull(1, 2), warn_unused_result))
+[[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 int	alx_strtold_s	(long double *restrict num, const char *restrict str,
 			 ptrdiff_t *restrict nread);
 
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 inline
 int	alx_strtof_status	(const char *restrict str,
 				 const char *restrict endptr,

@@ -40,7 +40,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_tcp_client_open	(const char *restrict server_addr,
 				 const char *restrict server_port);
 

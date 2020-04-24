@@ -123,7 +123,7 @@
  * - Upon failure, the passed pointer is freed.
  * - error is non-zero if the result is NULL.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 void	*alx_reallocarrayfs__	(void *restrict ptr, ptrdiff_t nmemb,
 				 size_t size, int *restrict error);
 

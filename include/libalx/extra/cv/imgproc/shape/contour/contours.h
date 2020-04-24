@@ -40,30 +40,30 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_contours		(const img_s *restrict img,
 				 conts_s *restrict conts);
-__attribute__((nonnull(1)))
+[[gnu::nonnull(1)]]
 void	alx_cv_contour_dimensions(const cont_s *restrict cont,
 				 double *restrict area,
 				 double *restrict perimeter,
 				 ptrdiff_t *restrict ctr_x,
 				 ptrdiff_t *restrict ctr_y);
-__attribute__((nonnull(3), warn_unused_result))
+[[gnu::nonnull(3)]] [[gnu::warn_unused_result]]
 int	alx_cv_conts_largest_a	(const cont_s **restrict cont,
 				 ptrdiff_t *restrict i,
 				 const conts_s *restrict conts);
-__attribute__((nonnull(3), warn_unused_result))
+[[gnu::nonnull(3)]] [[gnu::warn_unused_result]]
 int	alx_cv_conts_largest_p	(const cont_s **restrict cont,
 				 ptrdiff_t *restrict i,
 				 const conts_s *restrict conts);
-__attribute__((nonnull(3), warn_unused_result))
+[[gnu::nonnull(3)]] [[gnu::warn_unused_result]]
 int	alx_cv_conts_closest	(const void **restrict cont,
 				 ptrdiff_t *restrict i,
 				 const void *restrict conts,
 				 ptrdiff_t x, ptrdiff_t y,
 				 double (*fdist)(int32_t dx, int32_t dy));
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_contour_mask	(const img_s **restrict img,
 				 const conts_s *restrict conts, ptrdiff_t i);
 

@@ -131,8 +131,8 @@ export	INSTALL_PC_DIR
 
 ################################################################################
 # Make variables (CC, etc...)
-  CC	= gcc
-  CXX	= g++
+  CC	= gcc-10
+  CXX	= g++-10
   AS	= as
   AR	= ar
   LD	= ld
@@ -147,7 +147,7 @@ export	SZ
 
 ################################################################################
 # cflags
-CFLAGS_STD	= -std=gnu17
+CFLAGS_STD	= -std=gnu2x
 
 CFLAGS_OPT	= -O3
 ## XXX: optimize for native if portability is not needed
@@ -185,7 +185,7 @@ export	CFLAGS_SO
 
 ################################################################################
 # c++flags
-CXXFLAGS_STD	= -std=gnu++17
+CXXFLAGS_STD	= -std=gnu++20
 
 CXXFLAGS_OPT	= -O3
 ## XXX: optimize for native if portability is not needed

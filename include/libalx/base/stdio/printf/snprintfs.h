@@ -43,11 +43,11 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull(1, 4), format(printf, 4, 5), warn_unused_result))
+[[gnu::nonnull(1, 4)]] [[gnu::format(printf, 4, 5)]] [[gnu::warn_unused_result]]
 int	alx_snprintfs	(char str[restrict /*nmemb*/],
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, ...);
-__attribute__((nonnull(1, 4), format(printf, 4, 0), warn_unused_result))
+[[gnu::nonnull(1, 4)]] [[gnu::format(printf, 4, 0)]] [[gnu::warn_unused_result]]
 int	alx_vsnprintfs	(char str[restrict /*nmemb*/],
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, va_list ap);

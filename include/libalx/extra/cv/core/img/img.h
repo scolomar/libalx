@@ -43,11 +43,11 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 /* ----- init / deinit */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_init_img		(img_s **img);
 void	alx_cv_deinit_img	(img_s *img);
 /* ----- Extract */
-__attribute__((nonnull(1)))
+[[gnu::nonnull(1)]]
 void	alx_cv_extract_imgdata	(const img_s *restrict img,
 				 void **restrict data,
 				 ptrdiff_t *restrict w,
@@ -56,7 +56,7 @@ void	alx_cv_extract_imgdata	(const img_s *restrict img,
 				 ptrdiff_t *restrict B_per_line,
 				 int *restrict type);
 /* ----- Copy */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_clone		(img_s *restrict clone,
 				 const img_s *restrict img);
 

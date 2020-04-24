@@ -80,9 +80,9 @@ struct	Alx_UR_Msg_Hdr {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_recvmsg		(struct Alx_UR *ur);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_buffer_read	(struct Alx_UR *ur);
 
 

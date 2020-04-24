@@ -44,7 +44,7 @@ alx_Static_assert_size_ptrdiff();
 /******************************************************************************
  ******* static prototypes ****************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 static
 int	alx_dynbuf_grow		(struct Alx_DynBuf *buf, size_t size);
 

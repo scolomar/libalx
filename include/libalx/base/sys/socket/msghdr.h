@@ -45,7 +45,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_wrap_msghdr	(struct msghdr *restrict msg,
 			 struct iovec *restrict iov,
 			 size_t bufsiz, void *restrict buf,

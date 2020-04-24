@@ -42,7 +42,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 ptrdiff_t alx_strscat		(ptrdiff_t size,
 				 char dest[static restrict size],
 				 const char src[static restrict size]);

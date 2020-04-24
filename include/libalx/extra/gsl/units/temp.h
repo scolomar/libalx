@@ -50,63 +50,63 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_units_K_to_C_ldbl	(long double k);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_units_K_to_C		(double k);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_units_K_to_C_flt	(float k);
 
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_units_C_to_K_ldbl	(long double c);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_units_C_to_K		(double c);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_units_C_to_K_flt	(float c);
 
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_units_K_to_F_ldbl	(long double k);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_units_K_to_F		(double k);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_units_K_to_F_flt	(float k);
 
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_units_F_to_K_ldbl	(long double f);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_units_F_to_K		(double f);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_units_F_to_K_flt	(float f);
 
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_units_K_to_R_ldbl	(long double k);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_units_K_to_R		(double k);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_units_K_to_R_flt	(float k);
 
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_units_R_to_K_ldbl	(long double r);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_units_R_to_K		(double r);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_units_R_to_K_flt	(float r);
 

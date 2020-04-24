@@ -42,23 +42,23 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_units_m_to_ft_ldbl	(long double m);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_units_m_to_ft		(double m);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_units_m_to_ft_flt	(float m);
 
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_units_ft_to_m_ldbl	(long double ft);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_units_ft_to_m		(double ft);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_units_ft_to_m_flt	(float ft);
 

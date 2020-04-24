@@ -40,11 +40,11 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_resize_w_2largest(img_s *restrict img_a, img_s *restrict img_b);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_resize_h_2largest(img_s *restrict img_a, img_s *restrict img_b);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_resize_2largest	(img_s *restrict img_a, img_s *restrict img_b);
 
 

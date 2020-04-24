@@ -64,26 +64,26 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull(1)))
+[[gnu::nonnull(1)]]
 int	alx_gnuplot_set_multiplot	(struct Alx_Gnuplot *restrict gnuplot,
 					 const char *restrict opt);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_gnuplot_unset_multiplot	(struct Alx_Gnuplot *gnuplot);
 
-__attribute__((nonnull(1, 4)))
+[[gnu::nonnull(1, 4)]]
 int	alx_gnuplot_plot_multi_y	(struct Alx_Gnuplot *restrict gnuplot,
 					 ptrdiff_t n,
 					 ptrdiff_t size,
 					 const double y[static restrict n][size],
 					 const char *title[static restrict n]);
-__attribute__((nonnull(1, 4, 5)))
+[[gnu::nonnull(1, 4, 5)]]
 int	alx_gnuplot_plot_x_multi_y	(struct Alx_Gnuplot *restrict gnuplot,
 					 ptrdiff_t n,
 					 ptrdiff_t size,
 					 const double x[static restrict size],
 					 const double y[static restrict n][size],
 					 const char *title[static restrict n]);
-__attribute__((nonnull(1, 4, 5)))
+[[gnu::nonnull(1, 4, 5)]]
 int	alx_gnuplot_plot_multi_xy	(struct Alx_Gnuplot *restrict gnuplot,
 					 ptrdiff_t n,
 					 ptrdiff_t size,

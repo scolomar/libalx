@@ -43,24 +43,24 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull(1, 2), warn_unused_result))
+[[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 int	alx_strtoi8_s		(int8_t *restrict num,
 				 const char *restrict str,
 				 int base, ptrdiff_t *restrict nread);
-__attribute__((nonnull(1, 2), warn_unused_result))
+[[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 int	alx_strtoi16_s		(int16_t *restrict num,
 				 const char *restrict str,
 				 int base, ptrdiff_t *restrict nread);
-__attribute__((nonnull(1, 2), warn_unused_result))
+[[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 int	alx_strtoi32_s		(int32_t *restrict num,
 				 const char *restrict str,
 				 int base, ptrdiff_t *restrict nread);
-__attribute__((nonnull(1, 2), warn_unused_result))
+[[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 int	alx_strtoi64_s		(int64_t *restrict num,
 				 const char *restrict str,
 				 int base, ptrdiff_t *restrict nread);
 
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_strtol_status	(const char *restrict str,
 				 const char *restrict endptr,
 				 int errno_after, int errno_before);

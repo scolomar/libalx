@@ -41,7 +41,7 @@
  * the list is empty (list->nmemb == 0).
  * Inserts an already existing node, and updates any necessary metadata.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 void	add_first_node		(struct Alx_LinkedList *list,
 				 struct Alx_Node *node);
@@ -59,7 +59,7 @@ void	add_first_node		(struct Alx_LinkedList *list,
  *	ENOENT:		Aborted; `list` has only one node and is different
  *			from `node`.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 int	remove_node		(struct Alx_LinkedList *list,
 				 struct Alx_Node *node);
@@ -70,7 +70,7 @@ int	remove_node		(struct Alx_LinkedList *list,
  * Updates any necessary metadata.
  * A pointer to the orphan node is passed through `node`.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 void	remove_last_node	(struct Alx_LinkedList *list,
 				 struct Alx_Node **node);

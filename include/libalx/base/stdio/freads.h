@@ -43,7 +43,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull(2, 3)))
+[[gnu::nonnull(2, 3)]]
 int	alx_freads	(ptrdiff_t bufsiz, char buf[static restrict bufsiz],
 			 FILE *restrict stream, ptrdiff_t *restrict len);
 
