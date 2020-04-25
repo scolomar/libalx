@@ -158,6 +158,7 @@ CFLAGS_W	= -Wall
 CFLAGS_W       += -Wextra
 CFLAGS_W       += -Wstrict-prototypes
 CFLAGS_W       += -fno-common
+CFLAGS_W       += -fanalyzer
 CFLAGS_W       += -Werror
 
 CFLAGS_D	= -D _GNU_SOURCE
