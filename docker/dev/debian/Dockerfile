@@ -2,8 +2,8 @@ FROM	debian:testing
 RUN	apt-get update							&& \
 	apt-get upgrade --yes						&& \
 	apt-get install -V \
-			gcc \
-			g++ \
+			gcc-10 \
+			g++-10 \
 			make \
 			git \
 			pkg-config \

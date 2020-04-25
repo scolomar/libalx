@@ -10,7 +10,7 @@ Modules and dependencies:
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 base:
-	- gcc (>= 8)
+	- gcc (>= 10)
 	- libbsd-dev
 	- pkg-config
 
@@ -28,7 +28,7 @@ curl:
 cv:
 	+ base
 	+ gsl
-	- g++ (>= 8)
+	- g++ (>= 10)
 	- libopencv-dev (>= 4)
 
 gmp:
