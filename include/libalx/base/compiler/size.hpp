@@ -32,19 +32,20 @@
  ******************************************************************************/
 #define ARRAY_SIZE(arr)		__extension__(				\
 {									\
-	/* alx_Static_assert_array(arr); */				\
+	alx_Static_assert_array(arr);					\
 	__arraycount((arr));						\
 }									\
 )
 
 #define ARRAY_SSIZE(arr)	((ptrdiff_t)ARRAY_SIZE(arr))
 #define ARRAY_BYTES(arr)	(ARRAY_SIZE(arr) * sizeof((arr)[0]))
+#define ARRAY_BYTES__(arr)	(sizeof((arr)[0]) * __arraycount((arr)))
 #define ARRAY_BITS(arr)		(ARRAY_BYTES(arr) * CHAR_BIT)
 
 #define FIELD_SIZEOF(t, f)	(sizeof(((t *)NULL)->f))
 #define FIELD_ARRAY_SIZE(t, f)	__extension__(				\
 {									\
-	/* alx_Static_assert_array(((t *)NULL)->f); */			\
+	alx_Static_assert_array(((t *)NULL)->f);			\
 	__arraycount(((t *)NULL)->f)					\
 }									\
 )
