@@ -26,7 +26,7 @@
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-#define BITFIELD_SET(x, pos, len)		(			\
+#define BITFIELD_SET(x, pos, len)	__extension__(			\
 {									\
 	__auto_type	x_	= (x);					\
 	__auto_type	p_	= (pos);				\
@@ -40,7 +40,7 @@
 }									\
 )
 
-#define BITFIELD_CLEAR(x, pos, len)		(			\
+#define BITFIELD_CLEAR(x, pos, len)	__extension__(			\
 {									\
 	__auto_type	x_	= (x);					\
 	__auto_type	p_	= (pos);				\
@@ -54,7 +54,7 @@
 }									\
 )
 
-#define BITFIELD_FLIP(x, pos, len)		(			\
+#define BITFIELD_FLIP(x, pos, len)	__extension__(			\
 {									\
 	__auto_type	x_	= (x);					\
 	__auto_type	p_	= (pos);				\
@@ -68,7 +68,7 @@
 }									\
 )
 
-#define BITFIELD_READ(x, pos, len)		(			\
+#define BITFIELD_READ(x, pos, len)	__extension__(			\
 {									\
 	__auto_type	x_	= (x);					\
 	__auto_type	p_	= (pos);				\
@@ -83,7 +83,7 @@
 }									\
 )
 
-#define BITFIELD_WRITE(x, pos, len, field)	(			\
+#define BITFIELD_WRITE(x, pos, len, field)	__extension__(		\
 {									\
 	__auto_type	x_	= (x);					\
 	__auto_type	p_	= (pos);				\

@@ -27,7 +27,7 @@
  ******************************************************************************/
 #define BITMASK_GEN(pos, len)	(~(~0ull << len) << pos)
 
-#define BITMASK_SET(x, mask)	(					\
+#define BITMASK_SET(x, mask)	__extension__(				\
 {									\
 	__auto_type	x_	= (x);					\
 	__auto_type	m_	= (mask);				\
@@ -40,7 +40,7 @@
 }									\
 )
 
-#define BITMASK_CLEAR(x, mask)	(					\
+#define BITMASK_CLEAR(x, mask)	__extension__(				\
 {									\
 	__auto_type	x_	= (x);					\
 	__auto_type	m_	= (mask);				\
@@ -53,7 +53,7 @@
 }									\
 )
 
-#define BITMASK_FLIP(x, mask)	(					\
+#define BITMASK_FLIP(x, mask)	__extension__(				\
 {									\
 	__auto_type	x_	= (x);					\
 	__auto_type	m_	= (mask);				\
@@ -66,7 +66,7 @@
 }									\
 )
 
-#define BITMASK_READ(x, mask)	(					\
+#define BITMASK_READ(x, mask)	__extension__(				\
 {									\
 	__auto_type	x_	= (x);					\
 	__auto_type	m_	= (mask);				\

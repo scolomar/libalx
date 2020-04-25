@@ -28,7 +28,7 @@
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-#define BIT_SET(x, bit)		(					\
+#define BIT_SET(x, bit)		__extension__(				\
 {									\
 	auto	x_	= (x);						\
 	auto	b_	= (bit);					\
@@ -41,7 +41,7 @@
 }									\
 )
 
-#define BIT_CLEAR(x, bit)	(					\
+#define BIT_CLEAR(x, bit)	__extension__(				\
 {									\
 	auto	x_	= (x);						\
 	auto	b_	= (bit);					\
@@ -54,7 +54,7 @@
 }									\
 )
 
-#define BIT_FLIP(x, bit)	(					\
+#define BIT_FLIP(x, bit)	__extension__(				\
 {									\
 	auto	x_	= (x);						\
 	auto	b_	= (bit);					\
@@ -67,7 +67,7 @@
 }									\
 )
 
-#define BIT_READ(x, bit)	(					\
+#define BIT_READ(x, bit)	__extension__(				\
 {									\
 	auto	x_	= (x);						\
 	auto	b_	= (bit);					\

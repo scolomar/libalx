@@ -194,6 +194,7 @@ struct	Alx_UR_Calib_Data {
 	struct Alx_UR_Coord	f;
 };
 
+__extension__
 struct	Alx_UR_Safety_Data {
 };
 

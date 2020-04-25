@@ -36,6 +36,7 @@
 int	alx::CV::component	(class cv::Mat *img, ptrdiff_t cmp)
 {
 	const ptrdiff_t	chans	= img->channels();
+	__extension__
 	class cv::Mat	cmp_img[chans];
 
 	if (chans < 2)

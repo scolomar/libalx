@@ -213,7 +213,7 @@ int	alx_dynarr_fit		(struct Alx_DynArr *arr)
 int	alx_dynarr_to_llist	(struct Alx_DynArr *arr,
 				 struct Alx_LinkedList *list)
 {
-	const void	*cell;
+	const char	*cell;
 
 	alx_llist_delete_all(list);
 

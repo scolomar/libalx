@@ -108,6 +108,7 @@ int	alx::CV::local_max		(class cv::Mat *img)
 	/* Minimum value of local maxima */
 	const float	val_min = 2.0f;
 	class cv::Mat	imgtmp;
+	__extension__
 	int		arr_tmp[rows][cols];
 	bool		wh;
 	/* pointer to a pixel (in img) */

@@ -27,8 +27,8 @@
  ******************************************************************************/
 #if defined(__SIZEOF_INT128__)
 # if !defined(UINT128_MAX)	/* This is to test if uint128_t already exists */
-typedef	unsigned __int128	uint128_t;
-typedef	__int128		int128_t;
+typedef	unsigned __int128__	uint128_t;
+typedef	__int128__		int128_t;
 #  if !defined(uint128_t)
 #define uint128_t	uint128_t
 #  endif

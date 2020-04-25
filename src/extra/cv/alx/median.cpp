@@ -40,7 +40,8 @@ int	alx::CV::median_horizontal	(class cv::Mat *img)
 	const ptrdiff_t	rows = img->rows;
 	const ptrdiff_t	cols = img->cols;
 	const ptrdiff_t	step = img->step;
-	uint8_t		row [cols];
+	__extension__
+	uint8_t		row[cols];
 	uint8_t		median;
 	/* pointer to a pixel (in img) */
 	uint8_t		*pix;
@@ -73,7 +74,8 @@ int	alx::CV::median_vertical	(class cv::Mat *img)
 	const ptrdiff_t	rows = img->rows;
 	const ptrdiff_t	cols = img->cols;
 	const ptrdiff_t	step = img->step;
-	uint8_t		col [rows];
+	__extension__
+	uint8_t		col[rows];
 	uint8_t		median;
 	/* pointer to a pixel (in img) */
 	uint8_t		*pix;

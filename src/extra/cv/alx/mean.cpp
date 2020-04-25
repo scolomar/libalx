@@ -40,6 +40,7 @@ int	alx::CV::mean_horizontal	(class cv::Mat *img)
 	const ptrdiff_t	rows = img->rows;
 	const ptrdiff_t	cols = img->cols;
 	const ptrdiff_t	step = img->step;
+	__extension__
 	uint8_t		row[cols];
 	uint8_t		mean;
 	/* pointer to a pixel (in img) */
@@ -73,6 +74,7 @@ int	alx::CV::mean_vertical		(class cv::Mat *img)
 	const ptrdiff_t	rows = img->rows;
 	const ptrdiff_t	cols = img->cols;
 	const ptrdiff_t	step = img->step;
+	__extension__
 	uint8_t		col[rows];
 	uint8_t		mean;
 	/* pointer to a pixel (in img) */
