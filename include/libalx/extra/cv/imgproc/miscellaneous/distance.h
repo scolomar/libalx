@@ -40,9 +40,9 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_distance_transform	(img_s *img);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_distance_transform_8b	(img_s *img);
 
 

@@ -40,19 +40,19 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_bounding_rect	(rect_s *restrict rect,
 				 const cont_s *restrict contour);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_fit_ellipse	(rect_rot_s *restrict rect_rot,
 				 const cont_s *restrict contour);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_min_area_rect	(rect_rot_s *restrict rect_rot,
 				 const cont_s *restrict contour);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_draw_rect	(img_s *restrict img,
 				 const rect_s *restrict rect);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_draw_rect_rot	(img_s *restrict img,
 				 const rect_rot_s *restrict rect_rot);
 

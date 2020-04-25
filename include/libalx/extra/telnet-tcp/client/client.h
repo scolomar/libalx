@@ -42,20 +42,20 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull(1, 2, 4), warn_unused_result))
+[[gnu::nonnull(1, 2, 4)]] [[gnu::warn_unused_result]]
 int	alx_telnet_open_client	(FILE **restrict telnet,
 				 const char *restrict server_addr,
 				 const char *restrict server_port,
 				 const char *restrict rw);
-__attribute__((nonnull(1, 2), warn_unused_result))
+[[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 int	alx_telnet_login	(FILE *restrict telnet,
 				 const char *restrict user,
 				 const char *restrict passwd,
 				 int delay_us);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_telnet_send		(FILE *restrict telnet,
 				 const char *restrict msg);
-__attribute__((nonnull, format(printf, 2, 3), warn_unused_result))
+[[gnu::nonnull]] [[gnu::format(printf, 2, 3)]] [[gnu::warn_unused_result]]
 int	alx_telnet_sendf	(FILE *restrict telnet,
 				 const char *restrict fmt, ...);
 

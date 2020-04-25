@@ -40,13 +40,13 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_imread		(img_s *restrict img,
 				 const char *restrict fname);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_imread_gray	(img_s *restrict img,
 				 const char *restrict fname);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_imwrite		(const img_s *restrict img,
 				 const char *restrict fname);
 

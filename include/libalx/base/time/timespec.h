@@ -43,23 +43,23 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((pure, nonnull))
+[[gnu::nonnull]] [[gnu::pure]]
 int64_t	alx_timespec_ms		(const struct timespec *tm);
-__attribute__((pure, nonnull))
+[[gnu::nonnull]] [[gnu::pure]]
 int64_t	alx_timespec_us		(const struct timespec *tm);
-__attribute__((pure, nonnull))
+[[gnu::nonnull]] [[gnu::pure]]
 int64_t	alx_timespec_ns		(const struct timespec *tm);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_timespec_diff	(struct timespec *diff,
 				 const struct timespec *start,
 				 const struct timespec *stop);
-__attribute__((pure, nonnull))
+[[gnu::nonnull]] [[gnu::pure]]
 int64_t	alx_timespec_diff_ms	(const struct timespec *start,
 				 const struct timespec *stop);
-__attribute__((pure, nonnull))
+[[gnu::nonnull]] [[gnu::pure]]
 int64_t	alx_timespec_diff_us	(const struct timespec *start,
 				 const struct timespec *stop);
-__attribute__((pure, nonnull))
+[[gnu::nonnull]] [[gnu::pure]]
 int64_t	alx_timespec_diff_ns	(const struct timespec *start,
 				 const struct timespec *stop);
 

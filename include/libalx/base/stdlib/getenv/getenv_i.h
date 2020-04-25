@@ -42,28 +42,28 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_getenv_i64		(int64_t *restrict num,
 				 const char *restrict name);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_getenv_i32		(int32_t *restrict num,
 				 const char *restrict name);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_getenv_i16		(int16_t *restrict num,
 				 const char *restrict name);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_getenv_i8		(int8_t *restrict num,
 				 const char *restrict name);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_secure_getenv_i64	(int64_t *restrict num,
 				 const char *restrict name);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_secure_getenv_i32	(int32_t *restrict num,
 				 const char *restrict name);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_secure_getenv_i16	(int16_t *restrict num,
 				 const char *restrict name);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_secure_getenv_i8	(int8_t *restrict num,
 				 const char *restrict name);
 

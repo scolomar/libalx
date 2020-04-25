@@ -73,7 +73,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 char	*alx_url_fgets	(char *restrict str, size_t size,
 			 ALX_URL_FILE *restrict stream);
 

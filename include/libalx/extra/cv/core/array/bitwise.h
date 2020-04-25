@@ -40,15 +40,15 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_and_2ref		(img_s *restrict img,
 				 const img_s *restrict ref);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_invert		(img_s *img);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_or_2ref		(img_s *restrict img,
 				 const img_s *restrict ref);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_xor_2ref		(img_s *restrict img,
 				 const img_s *restrict ref);
 

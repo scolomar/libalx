@@ -63,10 +63,10 @@ enum	Alx_Cv_Win {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_named_window		(const char *restrict win, int flags);
 void	alx_cv_destroy_all_windows	(void);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_imshow			(const img_s *restrict img,
 					 const char *restrict win, int delay);
 

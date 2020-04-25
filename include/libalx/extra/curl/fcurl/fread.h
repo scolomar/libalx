@@ -73,7 +73,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 ptrdiff_t	alx_url_fread	(void *restrict ptr, size_t size,
 				 ptrdiff_t nmemb, ALX_URL_FILE *restrict stream);
 

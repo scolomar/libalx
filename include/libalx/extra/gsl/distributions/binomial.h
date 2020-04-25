@@ -42,23 +42,23 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_distr_binomial_E_ldbl	(uint64_t n, long double p);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_distr_binomial_E	(uint32_t n, double p);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_distr_binomial_E_flt	(uint16_t n, float p);
 
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_distr_binomial_Var_ldbl	(uint64_t n, long double p);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_distr_binomial_Var	(uint32_t n, double p);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_distr_binomial_Var_flt	(uint16_t n, float p);
 

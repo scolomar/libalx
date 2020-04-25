@@ -45,7 +45,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_set_Dout	(struct Alx_UR *ur, ptrdiff_t i, bool state,
 			 double timeout);
 

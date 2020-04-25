@@ -118,7 +118,7 @@
  * - Upon failure, the passed pointer is freed.
  * - error is non-zero if the result is NULL.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 void	*alx_reallocfs__	(void *restrict ptr, size_t size,
 				 int *restrict error);
 

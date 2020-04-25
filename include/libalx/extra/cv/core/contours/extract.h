@@ -42,11 +42,11 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull(1)))
+[[gnu::nonnull(1)]]
 int	alx_cv_extract_conts	(const conts_s *restrict conts,
 				 const cont_s **restrict cont,
 				 ptrdiff_t *restrict size);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_cv_extract_conts_cont(const cont_s **restrict cont,
 				 const conts_s *restrict conts, ptrdiff_t i);
 

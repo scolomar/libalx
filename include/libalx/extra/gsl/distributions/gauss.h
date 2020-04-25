@@ -39,34 +39,34 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((const))
+[[gnu::const]]
 long double	alx_gsl_distr_gauss_A_ldbl	(long double o);
-__attribute__((const))
+[[gnu::const]]
 double		alx_gsl_distr_gauss_A		(double o);
-__attribute__((const))
+[[gnu::const]]
 float		alx_gsl_distr_gauss_A_flt	(float o);
 
-__attribute__((const))
+[[gnu::const]]
 long double	alx_gsl_distr_gauss_B_ldbl	(long double u, long double o);
-__attribute__((const))
+[[gnu::const]]
 double		alx_gsl_distr_gauss_B		(double u, double o);
-__attribute__((const))
+[[gnu::const]]
 float		alx_gsl_distr_gauss_B_flt	(float u, float o);
 
-__attribute__((const))
+[[gnu::const]]
 long double	alx_gsl_distr_gauss_X2Z_ldbl	(long double a, long double b,
 						 long double x);
-__attribute__((const))
+[[gnu::const]]
 double		alx_gsl_distr_gauss_X2Z		(double a, double b, double x);
-__attribute__((const))
+[[gnu::const]]
 float		alx_gsl_distr_gauss_X2Z_flt	(float a, float b, float x);
 
-__attribute__((const))
+[[gnu::const]]
 long double	alx_gsl_distr_gauss_Z2X_ldbl	(long double a, long double b,
 						 long double z);
-__attribute__((const))
+[[gnu::const]]
 double		alx_gsl_distr_gauss_Z2X		(double a, double b, double z);
-__attribute__((const))
+[[gnu::const]]
 float		alx_gsl_distr_gauss_Z2X_flt	(float a, float b, float z);
 
 

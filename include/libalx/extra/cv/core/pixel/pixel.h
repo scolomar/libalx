@@ -42,14 +42,14 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_pixel_get_u8	(const img_s *restrict img,
 				 uint8_t *restrict val,
 				 ptrdiff_t x, ptrdiff_t y);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_pixel_set_u8	(img_s *img,
 				 uint8_t val, ptrdiff_t x, ptrdiff_t y);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_pixel_get_flt	(const img_s *restrict img,
 				 float *restrict val, ptrdiff_t x, ptrdiff_t y);
 

@@ -43,20 +43,20 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_clock_gettime_diff		(clockid_t clk_id,
 					 struct timespec *diff,
 					 const struct timespec *rt_base);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int64_t	alx_clock_gettime_diff_s	(clockid_t clk_id,
 					 const struct timespec *rt_base);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int64_t	alx_clock_gettime_diff_ms	(clockid_t clk_id,
 					 const struct timespec *rt_base);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int64_t	alx_clock_gettime_diff_us	(clockid_t clk_id,
 					 const struct timespec *rt_base);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int64_t	alx_clock_gettime_diff_ns	(clockid_t clk_id,
 					 const struct timespec *rt_base);
 

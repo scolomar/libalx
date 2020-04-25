@@ -43,7 +43,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_set_tcp	(struct Alx_UR *restrict ur,
 			 const struct Alx_UR_Pose *restrict tcp);
 

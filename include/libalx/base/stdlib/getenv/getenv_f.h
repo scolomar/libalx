@@ -40,22 +40,22 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_getenv_d		(double *restrict num,
 				 const char *restrict name);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_getenv_f		(float *restrict num,
 				 const char *restrict name);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_getenv_ld		(long double *restrict num,
 				 const char *restrict name);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_secure_getenv_d	(double *restrict num,
 				 const char *restrict name);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_secure_getenv_f	(float *restrict num,
 				 const char *restrict name);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_secure_getenv_ld	(long double *restrict num,
 				 const char *restrict name);
 

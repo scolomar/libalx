@@ -56,9 +56,9 @@ struct	Alx_UR_Robot_State_Pkg_Hdr {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_robot_state_update	(struct Alx_UR *ur);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_ur_parse_msg_robot_state	(struct Alx_UR *restrict ur,
 					 ssize_t sz,
 					 const unsigned char msg[static restrict sz],

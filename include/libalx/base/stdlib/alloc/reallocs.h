@@ -118,7 +118,7 @@
  * - Upon failure, the pointer is returned untouched.
  * - error is non-zero if the resulting pointer is NULL or untouched.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 void	*alx_reallocs__	(void *restrict ptr, size_t size, int *restrict error);
 
 

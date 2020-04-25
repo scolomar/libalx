@@ -41,23 +41,23 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_distr_poisson_E_ldbl	(long double l);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_distr_poisson_E		(double l);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_distr_poisson_E_flt	(float l);
 
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_distr_poisson_Var_ldbl	(long double l);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_distr_poisson_Var	(double l);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_distr_poisson_Var_flt	(float l);
 

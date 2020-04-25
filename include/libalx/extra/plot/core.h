@@ -70,17 +70,17 @@ struct	Alx_Gnuplot {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_gnuplot_init	(struct Alx_Gnuplot **gnuplot);
 int	alx_gnuplot_deinit	(struct Alx_Gnuplot *gnuplot);
 
-__attribute__((nonnull, format(printf, 2, 3)))
+[[gnu::nonnull]] [[gnu::format(printf, 2, 3)]]
 int	alx_gnuplot_cmd		(const struct Alx_Gnuplot *restrict gnuplot,
 				 const char *restrict fmt, ...);
-__attribute__((nonnull, format(printf, 2, 3)))
+[[gnu::nonnull]] [[gnu::format(printf, 2, 3)]]
 int	alx_gnuplot_printf	(const struct Alx_Gnuplot *restrict gnuplot,
 				 const char *restrict fmt, ...);
-__attribute__((nonnull, format(printf, 2, 0)))
+[[gnu::nonnull]] [[gnu::format(printf, 2, 0)]]
 int	alx_gnuplot_vprintf	(const struct Alx_Gnuplot *restrict gnuplot,
 				 const char *restrict fmt, va_list ap);
 

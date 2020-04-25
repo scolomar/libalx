@@ -40,9 +40,9 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_max	(img_s *max, const img_s *a, const img_s *b);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_min	(img_s *min, const img_s *a, const img_s *b);
 
 

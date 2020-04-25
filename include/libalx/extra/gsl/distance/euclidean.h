@@ -48,25 +48,25 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((const))
+[[gnu::const]]
 inline
 long double alx_gsl_dist2D_euclidean_ldbl	(long double dx, long double dy);
-__attribute__((const))
+[[gnu::const]]
 inline
 double	alx_gsl_dist2D_euclidean		(double dx, double dy);
-__attribute__((const))
+[[gnu::const]]
 inline
 float	alx_gsl_dist2D_euclidean_flt		(float dx, float dy);
-__attribute__((const))
+[[gnu::const]]
 inline
 float	alx_gsl_dist2D_euclidean_8b		(int8_t dx, int8_t dy);
-__attribute__((const))
+[[gnu::const]]
 inline
 float	alx_gsl_dist2D_euclidean_16b		(int16_t dx, int16_t dy);
-__attribute__((const))
+[[gnu::const]]
 inline
 double	alx_gsl_dist2D_euclidean_32b		(int32_t dx, int32_t dy);
-__attribute__((const))
+[[gnu::const]]
 inline
 long double alx_gsl_dist2D_euclidean_64b	(int64_t dx, int64_t dy);
 

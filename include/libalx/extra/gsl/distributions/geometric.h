@@ -41,23 +41,23 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_distr_geom_E_ldbl	(long double p);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_distr_geom_E		(double p);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_distr_geom_E_flt	(float p);
 
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_distr_geom_Var_ldbl	(long double p);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_distr_geom_Var		(double p);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_distr_geom_Var_flt	(float p);
 

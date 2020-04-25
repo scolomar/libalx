@@ -61,10 +61,10 @@ enum	Alx_Cv_Thresh {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_adaptive_thr	(img_s *img, int method,
 				 int thr_typ, int ksize, int c);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_threshold	(img_s *img, int thr_typ, int thr_val);
 
 

@@ -42,7 +42,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dirname_s	(ptrdiff_t size,
 			 char dest[static restrict size],
 			 const char path[restrict size]);

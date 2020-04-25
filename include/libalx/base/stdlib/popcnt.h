@@ -50,26 +50,26 @@ alx_Static_assert_stdint_types();
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((const))
+[[gnu::const]]
 inline
 uint8_t		alx_popcnt_u8	(uint8_t n);
-__attribute__((const))
+[[gnu::const]]
 inline
 uint16_t	alx_popcnt_u16	(uint16_t n);
-__attribute__((const))
+[[gnu::const]]
 inline
 uint32_t	alx_popcnt_u32	(uint32_t n);
-__attribute__((const))
+[[gnu::const]]
 inline
 uint64_t	alx_popcnt_u64	(uint64_t n);
-__attribute__((const))
+[[gnu::const]]
 #if defined(uint128_t)
-__attribute__((const))
+[[gnu::const]]
 inline
 uint64_t	alx_popcnt_u128	(uint128_t n);
 #endif
 #if defined(uint256_t)
-__attribute__((const))
+[[gnu::const]]
 inline
 uint64_t	alx_popcnt_u256	(uint256_t n);
 #endif

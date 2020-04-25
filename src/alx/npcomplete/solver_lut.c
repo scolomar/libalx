@@ -35,21 +35,21 @@
  ******* static prototypes ****************************************************
  ******************************************************************************/
 /* Clean ---------------------------------------------------------------------*/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 void	clean		(ptrdiff_t dim,
 			 uint256_a mat_m[static restrict dim][dim],
 			 int64_t cmp_m[static restrict dim][dim],
 			 int64_t alt_m[static restrict dim],
 			 ptrdiff_t l);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 void	clean_x		(ptrdiff_t dim,
 			 uint256_a mat_m_x[static restrict dim],
 			 ptrdiff_t l);
 
 /* Comp ----------------------------------------------------------------------*/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 void	comp		(ptrdiff_t dim,
 			 uint256_a mat_m[static restrict dim][dim],
@@ -57,7 +57,7 @@ void	comp		(ptrdiff_t dim,
 			 int64_t alt_m[static restrict dim],
 			 ptrdiff_t len, ptrdiff_t lvl,
 			 int64_t *restrict num_m, ptrdiff_t *restrict pos_m);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 void	comp_a		(ptrdiff_t dim,
 			 uint256_a mat_m[static restrict dim][dim],
@@ -65,7 +65,7 @@ void	comp_a		(ptrdiff_t dim,
 			 int64_t alt_m[static restrict dim],
 			 ptrdiff_t len, ptrdiff_t lvl,
 			 int64_t *restrict num_m, ptrdiff_t *restrict pos_m);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 void	comp_z		(ptrdiff_t dim,
 			 uint256_a mat_m[static restrict dim][dim],
@@ -73,7 +73,7 @@ void	comp_z		(ptrdiff_t dim,
 			 int64_t alt_m[static restrict dim],
 			 ptrdiff_t len, ptrdiff_t lvl,
 			 int64_t *restrict num_m, ptrdiff_t *restrict pos_m);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 void	comp_0		(ptrdiff_t dim,
 			 uint256_a mat_m[static restrict dim][dim],
@@ -81,41 +81,41 @@ void	comp_0		(ptrdiff_t dim,
 			 int64_t alt_m[static restrict dim],
 			 ptrdiff_t len, ptrdiff_t lvl,
 			 int64_t *restrict num_m, ptrdiff_t *restrict pos_m);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 bool	comp_1_8	(ptrdiff_t dim,
 			 uint256_a mat_m[static restrict dim][dim],
 			 int64_t cmp_m[static restrict dim][dim],
 			 int64_t alt_m[static restrict dim],
 			 int64_t *restrict num_m);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 void	comp_9		(ptrdiff_t dim,
 			 uint256_a mat_m[static restrict dim][dim],
 			 int64_t cmp_m[static restrict dim][dim],
 			 int64_t alt_m[static restrict dim],
 			 ptrdiff_t pos_m);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 int	calc_pos	(ptrdiff_t dim,
 			 const int64_t cmp_m[static restrict dim][dim],
 			 const int64_t alt_m[static restrict dim],
 			 int64_t *restrict num_m, ptrdiff_t *restrict pos_m,
 			 bool a_z);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 int64_t	calc_num	(ptrdiff_t dim,
 			 const uint256_a mat_m_a[static restrict dim],
 			 int64_t cmp_m_a[static restrict dim],
 			 int64_t num_m, ptrdiff_t pos_m);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 static
 int	comp_zrs	(ptrdiff_t dim,
 			 const int64_t cmp_m_a[static restrict dim],
 			 ptrdiff_t len, ptrdiff_t lvl);
 
 /* Next ----------------------------------------------------------------------*/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 void	lvl_up		(ptrdiff_t dim,
 			 int64_t sol[static restrict 3][dim],
@@ -138,7 +138,7 @@ void	lvl_up		(ptrdiff_t dim,
 			 uint64_t lutbit_num[static restrict LUTBIT_SZ],
 			 uint64_t lutbit_all[static restrict LUTBIT_SZ],
 			 int64_t *restrict count);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 void	lvl_next	(ptrdiff_t dim,
 			 int64_t sol[static restrict 3][dim],
@@ -161,7 +161,7 @@ void	lvl_next	(ptrdiff_t dim,
 			 uint64_t lutbit_num[static restrict LUTBIT_SZ],
 			 uint64_t lutbit_all[static restrict LUTBIT_SZ],
 			 int64_t *restrict count);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 void	update_sol	(ptrdiff_t dim,
 			 int64_t sol[static restrict 3][dim],
@@ -173,7 +173,7 @@ void	update_sol	(ptrdiff_t dim,
 			 const bool lut_rdy[static restrict lut_sz],
 			 ptrdiff_t lut_ind,
 			 int64_t *restrict count);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 void	init_lvl	(ptrdiff_t dim,
 			 uint256_a mat[static restrict dim][dim][dim],
@@ -192,7 +192,7 @@ void	init_lvl	(ptrdiff_t dim,
 			 uint64_t lutbit_rws[static restrict LUTBIT_SZ],
 			 uint64_t lutbit_num[static restrict LUTBIT_SZ],
 			 uint64_t lutbit_all[static restrict LUTBIT_SZ]);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 bool	chk_LUT_unuseful(uint256_a rws_m, ptrdiff_t len, ptrdiff_t lvl,
 			 ptrdiff_t lut_sz,
@@ -203,7 +203,7 @@ bool	chk_LUT_unuseful(uint256_a rws_m, ptrdiff_t len, ptrdiff_t lvl,
 			 uint64_t lutbit_rws[static restrict LUTBIT_SZ],
 			 uint64_t lutbit_num[static restrict LUTBIT_SZ],
 			 uint64_t lutbit_all[static restrict LUTBIT_SZ]);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 void	LUTbit_init	(uint256_a rws_m, ptrdiff_t len, ptrdiff_t lvl,
 			 ptrdiff_t lut_sz,
@@ -216,7 +216,7 @@ void	LUTbit_init	(uint256_a rws_m, ptrdiff_t len, ptrdiff_t lvl,
 			 uint64_t lutbit_all[static restrict LUTBIT_SZ]);
 
 /* Prev ----------------------------------------------------------------------*/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 void	lvl_dwn		(ptrdiff_t dim,
 			 int64_t sol[static restrict 3][dim],
@@ -226,25 +226,25 @@ void	lvl_dwn		(ptrdiff_t dim,
 			 uint64_t lutbit_rdy[static restrict LUTBIT_SZ]);
 
 /* Check ---------------------------------------------------------------------*/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 int	check_mat	(ptrdiff_t dim,
 			 const int64_t sol[static restrict 3][dim],
 			 const bool prb_mat[static restrict dim][dim],
 			 ptrdiff_t len);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 int	check_sol	(ptrdiff_t dim,
 			 int64_t sol[static restrict 3][dim],
 			 ptrdiff_t len);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 int	check_unique_sol(ptrdiff_t dim,
 			 int64_t sol[static restrict 3][dim],
 			 ptrdiff_t len);
 
 /* Init ----------------------------------------------------------------------*/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 void	init_mat	(ptrdiff_t dim,
 			 const bool prb_mat[static restrict dim][dim],

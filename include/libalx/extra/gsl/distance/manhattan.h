@@ -47,25 +47,25 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((const))
+[[gnu::const]]
 inline
 long double alx_gsl_dist2D_manhattan_ldbl	(long double dx, long double dy);
-__attribute__((const))
+[[gnu::const]]
 inline
 double	alx_gsl_dist2D_manhattan		(double dx, double dy);
-__attribute__((const))
+[[gnu::const]]
 inline
 float	alx_gsl_dist2D_manhattan_flt		(float dx, float dy);
-__attribute__((const))
+[[gnu::const]]
 inline
 float	alx_gsl_dist2D_manhattan_8b		(int8_t dx, int8_t dy);
-__attribute__((const))
+[[gnu::const]]
 inline
 float	alx_gsl_dist2D_manhattan_16b		(int16_t dx, int16_t dy);
-__attribute__((const))
+[[gnu::const]]
 inline
 double	alx_gsl_dist2D_manhattan_32b		(int32_t dx, int32_t dy);
-__attribute__((const))
+[[gnu::const]]
 inline
 long double alx_gsl_dist2D_manhattan_64b	(int64_t dx, int64_t dy);
 

@@ -332,17 +332,17 @@ struct	Alx_UR {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_init	(struct Alx_UR **restrict ur,
 			 const char *restrict ur_ip);
-__attribute__((warn_unused_result))
+[[gnu::warn_unused_result]]
 int	alx_ur_deinit	(struct Alx_UR *ur);
 
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
 			 const char *restrict fmt, ...);
 
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_poweroff	(const struct Alx_UR *ur);
 
 

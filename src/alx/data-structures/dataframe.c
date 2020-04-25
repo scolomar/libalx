@@ -45,11 +45,11 @@
 /******************************************************************************
  ******* static prototypes ****************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 static
 int	df_cmp_data		(const void *user_data, const void *ds_data);
 
-__attribute__((nonnull(1, 2), warn_unused_result))
+[[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 static
 int	df_ins_col_value	(struct Alx_DF_Col *col,
 				 const char *restrict value,
