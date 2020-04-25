@@ -27,9 +27,9 @@
  ******************************************************************************/
 #define ALX_SWAP(a_ptr, b_ptr)	do					\
 {									\
-	__auto_type	a_ptr_ = (a_ptr);				\
-	__auto_type	b_ptr_ = (b_ptr);				\
-	typeof(*a_ptr_)	tmp_;						\
+	__auto_type		a_ptr_ = (a_ptr);			\
+	__auto_type		b_ptr_ = (b_ptr);			\
+	__typeof__(*a_ptr_)	tmp_;					\
 									\
 	alx_Static_assert_same_type(a_ptr_, b_ptr_);			\
 									\
