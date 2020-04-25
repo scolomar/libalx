@@ -88,8 +88,8 @@
 	auto		x_	= (x);					\
 	auto		p_	= (pos);				\
 	auto		l_	= (len);				\
-	typeof(*x_)	f_	= (field);				\
-	typeof(*x_)	m_;						\
+	__typeof__(*x_)	f_	= (field);				\
+	__typeof__(*x_)	m_;						\
 									\
 	alx_Static_assert_unsigned(*x_);				\
 	alx_assert_bit_fits_type(p_ + l_ - 1, *x_);			\

@@ -46,7 +46,7 @@
 	int	err_;							\
 									\
 	vp_	= alx_reallocs__(*ptr_, size, &err_);			\
-	*ptr_	= static_cast<typeof(*ptr_)>(vp_);			\
+	*ptr_	= static_cast<__typeof__(*ptr_)>(vp_);			\
 	alx_warn_unused_int(err_);					\
 }									\
 )

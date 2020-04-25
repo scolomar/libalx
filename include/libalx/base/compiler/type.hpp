@@ -30,18 +30,19 @@
  ******* define ***************************************************************
  ******************************************************************************/
 /* Are two types/vars the same type (ignoring qualifiers)? */
-#define alx_is_same_type(a, b)  (std::is_same <typeof(a), typeof(b)>::value)
+#define alx_is_same_type(a, b)						\
+			(std::is_same <__typeof__(a), __typeof__(b)>::value)
 /* Is a an array? */
-#define alx_is_array(a)			(std::is_array <typeof(a)>::value)
+#define alx_is_array(a)			(std::is_array <__typeof__(a)>::value)
 /* Is p a pointer? */
 #define alx_is_pointer(p)		(!alx_is_array(p))
 /* Is a a char array */
 #define alx_is_char_array(a)		(alx_is_array(a)  &&		\
 					 alx_is_same_type(char, (a)[0]))
 /* Is x of unsigned type? */
-#define alx_is_unsigned_type(x)		(((typeof(x))-1) > 0)
+#define alx_is_unsigned_type(x)		(((__typeof__(x))-1) > 0)
 /* Is x of signed type? */
-#define alx_is_signed_type(x)		(((typeof(x))-1) < 0)
+#define alx_is_signed_type(x)		(((__typeof__(x))-1) < 0)
 /* Bit b overflows type t? */
 #define alx_bit_overflows_type(b, t)	((size_t)b >= sizeof(t) * CHAR_BIT)
 /* Is x of a basic type? */

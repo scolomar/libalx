@@ -45,7 +45,7 @@
 	int	err_;							\
 									\
 	vp_	= alx_mallocarrays__(nmemb, sizeof(**ptr_), &err_);	\
-	*ptr_	= static_cast<typeof(*ptr_)>(vp_);			\
+	*ptr_	= static_cast<__typeof__(*ptr_)>(vp_);			\
 	alx_warn_unused_int(err_);					\
 }									\
 )
