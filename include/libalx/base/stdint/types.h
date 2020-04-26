@@ -29,12 +29,6 @@
 # if !defined(UINT128_MAX)	/* This is to test if uint128_t already exists */
 typedef	unsigned __int128__	uint128_t;
 typedef	__int128__		int128_t;
-#  if !defined(uint128_t)
-#define uint128_t	uint128_t
-#  endif
-#  if !defined(int128_t)
-#define int128_t	int128_t
-#  endif
 # endif
 #endif
 
@@ -42,7 +36,6 @@ typedef	__int128__		int128_t;
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-#if defined(uint128_t)
 #define UINT128_C(c)	((uint128_t)c)
 #define INT128_C(c)	(( int128_t)c)
 #define UINT128_MAX	((uint128_t)~UINT128_C(0))
@@ -50,7 +43,6 @@ typedef	__int128__		int128_t;
 #define INT128_MIN	(( int128_t)(-INT128_MAX - 1))
 #define SQRT_U128_MAX	((uint128_t)(0xFFFFFFFFFFFFFFFF))
 #define SQRT_S128_MAX	(( int128_t)(0xB504F333F9DE6800))
-#endif
 
 
 /******************************************************************************
