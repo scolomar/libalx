@@ -157,6 +157,8 @@ CFLAGS_OPT	= -O3
 CFLAGS_W	= -Wall
 CFLAGS_W       += -Wextra
 CFLAGS_W       += -Wstrict-prototypes
+CFLAGS_W       += -Wpedantic
+CFLAGS_W       += -pedantic-errors
 CFLAGS_W       += -fno-common
 CFLAGS_W       += -fanalyzer
 CFLAGS_W       += -Werror
@@ -195,6 +197,8 @@ CXXFLAGS_OPT	= -O3
 
 CXXFLAGS_W	= -Wall
 CXXFLAGS_W     += -Wextra
+CXXFLAGS_W     += -Wpedantic
+CXXFLAGS_W     += -pedantic-errors
 CXXFLAGS_W     += -fno-common
 CXXFLAGS_W     += -Werror
 
