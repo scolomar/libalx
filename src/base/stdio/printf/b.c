@@ -10,7 +10,6 @@
 #include "libalx/base/stdio/printf/b.h"
 
 #include <limits.h>
-#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -49,7 +48,7 @@ int	b_arginf_sz	(const struct printf_info *info,
 static
 uintmax_t b_value	(const struct printf_info *info, const void *arg);
 static
-int	b_bin_repr	(bool bin[BIN_REPR_BUFSIZ],
+int	b_bin_repr	(char bin[BIN_REPR_BUFSIZ],
 			 const struct printf_info *info, const void *arg);
 static
 int	b_bin_len	(const struct printf_info *info, int min_len);
@@ -62,7 +61,7 @@ int	b_pad_zeros	(FILE *stream, const struct printf_info *info,
 			 int min_len);
 static
 int	b_print_number	(FILE *stream, const struct printf_info *info,
-			 bool bin[BIN_REPR_BUFSIZ], int min_len, int bin_len);
+			 char bin[BIN_REPR_BUFSIZ], int min_len, int bin_len);
 static
 char	pad_ch		(const struct printf_info *info);
 static
@@ -100,7 +99,7 @@ int	b_output	(FILE *stream, const struct printf_info *info,
 			 const void *const args[])
 {
 	struct	Printf_Pad	pad = {0};
-	bool	bin[BIN_REPR_BUFSIZ];
+	char	bin[BIN_REPR_BUFSIZ];
 	int	min_len;
 	int	bin_len;
 	int	len;
@@ -186,7 +185,7 @@ uintmax_t b_value	(const struct printf_info *info, const void *arg)
 }
 
 static
-int	b_bin_repr	(bool bin[BIN_REPR_BUFSIZ],
+int	b_bin_repr	(char bin[BIN_REPR_BUFSIZ],
 			 const struct printf_info *info, const void *arg)
 {
 	uintmax_t	val;
@@ -194,10 +193,9 @@ int	b_bin_repr	(bool bin[BIN_REPR_BUFSIZ],
 
 	val	= b_value(info, arg);
 
-	memset(bin, 0, sizeof(bin[0]) * BIN_REPR_BUFSIZ);
+	bin[0]	= '0';
 	for (min_len = 0; val; min_len++) {
-		if (val % 2)
-			bin[min_len]	= 1;
+		bin[min_len]	= '0' + (val % 2);
 		val >>= 1;
 	}
 
@@ -274,7 +272,7 @@ int	b_pad_zeros	(FILE *stream, const struct printf_info *info,
 
 static
 int	b_print_number	(FILE *stream, const struct printf_info *info,
-			 bool bin[BIN_REPR_BUFSIZ], int min_len, int bin_len)
+			 char bin[BIN_REPR_BUFSIZ], int min_len, int bin_len)
 {
 	int	len;
 
@@ -294,7 +292,7 @@ int	b_print_number	(FILE *stream, const struct printf_info *info,
 
 	/* Print number */
 	for (int i = min_len - 1; i; i--) {
-		if (fputc('0' + bin[i], stream) == EOF)
+		if (fputc(bin[i], stream) == EOF)
 			return	EOF;
 		len++;
 		if (info->group  &&  !(i % 4)) {
