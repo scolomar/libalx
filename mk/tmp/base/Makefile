@@ -44,9 +44,6 @@ MODULES	=								\
 	base/math/matrix_addition					\
 	base/math/matrix_subtraction					\
 	base/math/pascal_triangle					\
-	base/math/prime							\
-	base/math/prime_defactorization					\
-	base/math/prime_factorization					\
 	base/math/scale_linear						\
 	base/signal/sigpipe						\
 	base/signal/sigterm						\

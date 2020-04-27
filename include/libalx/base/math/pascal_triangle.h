@@ -21,8 +21,6 @@
  ******************************************************************************/
 #include <stdint.h>
 
-#include "libalx/base/math/prime.h"
-
 
 /******************************************************************************
  ******* define ***************************************************************
@@ -48,9 +46,6 @@ long double alx_pascal_triangle_ldbl	(int32_t n, int32_t k);
 double	alx_pascal_triangle		(int16_t n, int16_t k);
 [[gnu::const]]
 float	alx_pascal_triangle_flt		(int16_t n, int16_t k);
-[[gnu::nonnull]]
-int	alx_pascal_triangle_factorized	(int16_t n, int16_t k,
-				int16_t pf[static restrict PRIME_NUMS_QTY_16b]);
 
 
 /******************************************************************************

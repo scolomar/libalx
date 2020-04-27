@@ -14,7 +14,6 @@
 #include <stdint.h>
 
 #include "libalx/base/math/pascal_triangle.h"
-#include "libalx/base/math/prime.h"
 
 
 /******************************************************************************
@@ -84,24 +83,6 @@ float	alx_binomial_coefficient_flt		(int16_t n, int16_t k)
 		return	n;
 
 	return	alx_pascal_triangle_flt(n, k);
-}
-
-int	alx_binomial_coefficient_factorized	(int16_t n, int16_t k,
-				int16_t pf[static restrict PRIME_NUMS_QTY_16b])
-{
-
-	if ((n < 0) || (k < 0)) {
-		errno	= EDOM;
-		return	-EDOM;
-	}
-	if (k > n) {
-		errno	= EDOM;
-		return	-EDOM;
-	}
-	if ((n == k) || (!k))
-		return	0;
-
-	return	alx_pascal_triangle_factorized(n, k, pf);
 }
 
 

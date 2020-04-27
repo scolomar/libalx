@@ -21,9 +21,6 @@
  ******************************************************************************/
 #include <cstdint>
 
-#include "libalx/base/math/prime.hpp"
-#include "libalx/base/stddef/restrict.hpp"
-
 
 /******************************************************************************
  ******* define ***************************************************************
@@ -50,9 +47,6 @@ long double alx_binomial_coefficient_ldbl	(int32_t n, int32_t k);
 double	alx_binomial_coefficient		(int16_t n, int16_t k);
 [[gnu::const]]
 float	alx_binomial_coefficient_flt		(int16_t n, int16_t k);
-[[gnu::nonnull]]
-int	alx_binomial_coefficient_factorized	(int16_t n, int16_t k,
-				int16_t pf[static restrict PRIME_NUMS_QTY_16b]);
 
 
 /******************************************************************************
