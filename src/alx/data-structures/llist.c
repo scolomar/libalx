@@ -378,7 +378,7 @@ int	alx_llist_get_node_at		(const struct Alx_LinkedList *list,
 
 int	alx_llist_get_relative		(const struct Alx_LinkedList *list,
 					 struct Alx_Node **node,
-					 const struct Alx_Node *ref,
+					 struct Alx_Node *ref,
 					 ptrdiff_t pos)
 {
 

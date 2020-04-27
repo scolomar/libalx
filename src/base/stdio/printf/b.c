@@ -174,14 +174,14 @@ uintmax_t b_value	(const struct printf_info *info, const void *arg)
 {
 
 	if (info->is_long_double)
-		return	*(unsigned long long *)arg;
+		return	*(const unsigned long long *)arg;
 	if (info->is_long)
-		return	*(unsigned long *)arg;
+		return	*(const unsigned long *)arg;
 	if (info->is_char)
-		return	*(unsigned char *)arg;
+		return	*(const unsigned char *)arg;
 	if (info->is_short)
-		return	*(unsigned short *)arg;
-	return	*(unsigned *)arg;
+		return	*(const unsigned short *)arg;
+	return	*(const unsigned *)arg;
 }
 
 static

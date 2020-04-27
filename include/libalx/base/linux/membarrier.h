@@ -45,7 +45,7 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 inline
-int	alx_membarrier	(int cmd, int flags);
+long	alx_membarrier	(int cmd, int flags);
 
 
 /******************************************************************************
@@ -61,7 +61,7 @@ ALX_ALIAS_DECLARATION(membarrier, alx_membarrier);
  ******* inline ***************************************************************
  ******************************************************************************/
 inline
-int	alx_membarrier	(int cmd, int flags)
+long	alx_membarrier	(int cmd, int flags)
 {
 	return	syscall(__NR_membarrier, cmd, flags);
 }

@@ -92,6 +92,8 @@ ovf:
 	return	-1;
 }
 
+#pragma GCC diagnostic push	/* Over(/under)flow is explicitly handled */
+#pragma GCC diagnostic ignored	"-Wconversion"
 int	alx_array_multiplication_u8	(ptrdiff_t nmemb,
 					 uint8_t dest[static nmemb],
 					 const uint8_t src1[static nmemb],
@@ -217,6 +219,7 @@ ovf:
 	errno	= ERANGE;
 	return	-1;
 }
+#pragma GCC diagnostic pop
 
 int	alx_array_multiplication_u64	(ptrdiff_t nmemb,
 					 uint64_t dest[static nmemb],

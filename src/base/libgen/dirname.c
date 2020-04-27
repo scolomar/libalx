@@ -40,7 +40,7 @@ int	alx_dirname_s	(ptrdiff_t size,
 {
 	char	tmp[size];
 
-	if (alx_strlcpys(tmp, path, ARRAY_SIZE(tmp), NULL))
+	if (alx_strlcpys(tmp, path, ARRAY_SSIZE(tmp), NULL))
 		return	-1;
 	if (alx_strlcpys(dest, dirname(tmp), size, NULL))
 		return	-1;

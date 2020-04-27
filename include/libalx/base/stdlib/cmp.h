@@ -113,8 +113,8 @@ ALX_ALIAS_DECLARATION(cmp_s64,	alx_cmp_s64);
 inline
 int	alx_cmp_ldbl	(const void *a_ptr, const void *b_ptr)
 {
-	long double	a =	*(long double *)a_ptr;
-	long double	b =	*(long double *)b_ptr;
+	long double	a =	*(const long double *)a_ptr;
+	long double	b =	*(const long double *)b_ptr;
 
 	if (a < b)
 		return	-1;
@@ -127,8 +127,8 @@ int	alx_cmp_ldbl	(const void *a_ptr, const void *b_ptr)
 inline
 int	alx_cmp		(const void *a_ptr, const void *b_ptr)
 {
-	double	a =	*(double *)a_ptr;
-	double	b =	*(double *)b_ptr;
+	double	a =	*(const double *)a_ptr;
+	double	b =	*(const double *)b_ptr;
 
 	if (a < b)
 		return	-1;
@@ -141,8 +141,8 @@ int	alx_cmp		(const void *a_ptr, const void *b_ptr)
 inline
 int	alx_cmp_f	(const void *a_ptr, const void *b_ptr)
 {
-	float	a =	*(float *)a_ptr;
-	float	b =	*(float *)b_ptr;
+	float	a =	*(const float *)a_ptr;
+	float	b =	*(const float *)b_ptr;
 
 	if (a < b)
 		return	-1;
@@ -155,8 +155,8 @@ int	alx_cmp_f	(const void *a_ptr, const void *b_ptr)
 inline
 int	alx_cmp_uint	(const void *a_ptr, const void *b_ptr)
 {
-	unsigned	a =	*(unsigned *)a_ptr;
-	unsigned	b =	*(unsigned *)b_ptr;
+	unsigned	a =	*(const unsigned *)a_ptr;
+	unsigned	b =	*(const unsigned *)b_ptr;
 
 	if (a < b)
 		return	-1;
@@ -169,8 +169,8 @@ int	alx_cmp_uint	(const void *a_ptr, const void *b_ptr)
 inline
 int	alx_cmp_int	(const void *a_ptr, const void *b_ptr)
 {
-	int	a =	*(int *)a_ptr;
-	int	b =	*(int *)b_ptr;
+	int	a =	*(const int *)a_ptr;
+	int	b =	*(const int *)b_ptr;
 
 	if (a < b)
 		return	-1;
@@ -183,8 +183,8 @@ int	alx_cmp_int	(const void *a_ptr, const void *b_ptr)
 inline
 int	alx_cmp_char	(const void *a_ptr, const void *b_ptr)
 {
-	char	a =	*(char *)a_ptr;
-	char	b =	*(char *)b_ptr;
+	char	a =	*(const char *)a_ptr;
+	char	b =	*(const char *)b_ptr;
 
 	if (a < b)
 		return	-1;
@@ -197,8 +197,8 @@ int	alx_cmp_char	(const void *a_ptr, const void *b_ptr)
 inline
 int	alx_cmp_u8	(const void *a_ptr, const void *b_ptr)
 {
-	uint8_t	a =	*(uint8_t *)a_ptr;
-	uint8_t	b =	*(uint8_t *)b_ptr;
+	uint8_t	a =	*(const uint8_t *)a_ptr;
+	uint8_t	b =	*(const uint8_t *)b_ptr;
 
 	if (a < b)
 		return	-1;
@@ -211,8 +211,8 @@ int	alx_cmp_u8	(const void *a_ptr, const void *b_ptr)
 inline
 int	alx_cmp_s8	(const void *a_ptr, const void *b_ptr)
 {
-	int8_t	a =	*(int8_t *)a_ptr;
-	int8_t	b =	*(int8_t *)b_ptr;
+	int8_t	a =	*(const int8_t *)a_ptr;
+	int8_t	b =	*(const int8_t *)b_ptr;
 
 	if (a < b)
 		return	-1;
@@ -225,8 +225,8 @@ int	alx_cmp_s8	(const void *a_ptr, const void *b_ptr)
 inline
 int	alx_cmp_u16	(const void *a_ptr, const void *b_ptr)
 {
-	uint16_t	a =	*(uint16_t *)a_ptr;
-	uint16_t	b =	*(uint16_t *)b_ptr;
+	uint16_t	a =	*(const uint16_t *)a_ptr;
+	uint16_t	b =	*(const uint16_t *)b_ptr;
 
 	if (a < b)
 		return	-1;
@@ -239,8 +239,8 @@ int	alx_cmp_u16	(const void *a_ptr, const void *b_ptr)
 inline
 int	alx_cmp_s16	(const void *a_ptr, const void *b_ptr)
 {
-	int16_t	a =	*(int16_t *)a_ptr;
-	int16_t	b =	*(int16_t *)b_ptr;
+	int16_t	a =	*(const int16_t *)a_ptr;
+	int16_t	b =	*(const int16_t *)b_ptr;
 
 	if (a < b)
 		return	-1;
@@ -253,8 +253,8 @@ int	alx_cmp_s16	(const void *a_ptr, const void *b_ptr)
 inline
 int	alx_cmp_u32	(const void *a_ptr, const void *b_ptr)
 {
-	uint32_t	a =	*(uint32_t *)a_ptr;
-	uint32_t	b =	*(uint32_t *)b_ptr;
+	uint32_t	a =	*(const uint32_t *)a_ptr;
+	uint32_t	b =	*(const uint32_t *)b_ptr;
 
 	if (a < b)
 		return	-1;
@@ -267,8 +267,8 @@ int	alx_cmp_u32	(const void *a_ptr, const void *b_ptr)
 inline
 int	alx_cmp_s32	(const void *a_ptr, const void *b_ptr)
 {
-	int32_t	a =	*(int32_t *)a_ptr;
-	int32_t	b =	*(int32_t *)b_ptr;
+	int32_t	a =	*(const int32_t *)a_ptr;
+	int32_t	b =	*(const int32_t *)b_ptr;
 
 	if (a < b)
 		return	-1;
@@ -281,8 +281,8 @@ int	alx_cmp_s32	(const void *a_ptr, const void *b_ptr)
 inline
 int	alx_cmp_u64	(const void *a_ptr, const void *b_ptr)
 {
-	uint64_t	a =	*(uint64_t *)a_ptr;
-	uint64_t	b =	*(uint64_t *)b_ptr;
+	uint64_t	a =	*(const uint64_t *)a_ptr;
+	uint64_t	b =	*(const uint64_t *)b_ptr;
 
 	if (a < b)
 		return	-1;
@@ -295,8 +295,8 @@ int	alx_cmp_u64	(const void *a_ptr, const void *b_ptr)
 inline
 int	alx_cmp_s64	(const void *a_ptr, const void *b_ptr)
 {
-	int64_t	a =	*(int64_t *)a_ptr;
-	int64_t	b =	*(int64_t *)b_ptr;
+	int64_t	a =	*(const int64_t *)a_ptr;
+	int64_t	b =	*(const int64_t *)b_ptr;
 
 	if (a < b)
 		return	-1;

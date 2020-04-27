@@ -130,14 +130,6 @@ float	alx_flt_array_sum_flt		(ptrdiff_t nmemb,
 					 const float arr[restrict nmemb]);
 [[gnu::nonnull]] [[gnu::pure]]
 inline
-float	alx_flt_array_sum_uint		(ptrdiff_t nmemb,
-					 const unsigned arr[restrict nmemb]);
-[[gnu::nonnull]] [[gnu::pure]]
-inline
-float	alx_flt_array_sum_int		(ptrdiff_t nmemb,
-					 const int arr[restrict nmemb]);
-[[gnu::nonnull]] [[gnu::pure]]
-inline
 float	alx_flt_array_sum_u8		(ptrdiff_t nmemb,
 					 const uint8_t arr[restrict nmemb]);
 [[gnu::nonnull]] [[gnu::pure]]
@@ -458,32 +450,6 @@ double	alx_dbl_array_sum_s32	(ptrdiff_t nmemb,
 inline
 float	alx_flt_array_sum_flt	(ptrdiff_t nmemb,
 				 const float arr[restrict nmemb])
-{
-	float_t	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-float	alx_flt_array_sum_uint	(ptrdiff_t nmemb,
-				 const unsigned arr[restrict nmemb])
-{
-	float_t	sum;
-
-	sum	= 0;
-	for (ptrdiff_t i = 0; i < nmemb; i++)
-		sum += arr[i];
-
-	return	sum;
-}
-
-inline
-float	alx_flt_array_sum_int	(ptrdiff_t nmemb,
-				 const int arr[restrict nmemb])
 {
 	float_t	sum;
 

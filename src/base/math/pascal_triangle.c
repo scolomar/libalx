@@ -56,6 +56,9 @@ long double alx_pascal_triangle_ldbl	(int32_t n, int32_t k)
 	return	x;
 }
 
+#pragma GCC diagnostic push	/* Over(/under)flow is not possible */
+#pragma GCC diagnostic ignored	"-Warith-conversion"
+#pragma GCC diagnostic ignored	"-Wconversion"
 double	alx_pascal_triangle		(int16_t n, int16_t k)
 {
 	double_t	x;
@@ -99,6 +102,7 @@ float	alx_pascal_triangle_flt		(int16_t n, int16_t k)
 
 	return	x;
 }
+#pragma GCC diagnostic pop
 
 
 /******************************************************************************

@@ -79,6 +79,8 @@ err_ovf_lo:
 	return	-ERANGE;
 }
 
+#pragma GCC diagnostic push	/* Over(/under)flow is explicitly handled */
+#pragma GCC diagnostic ignored	"-Warith-conversion"
 int	alx_matrix_subtraction_u8	(ptrdiff_t n,
 					uint8_t dest[n],
 					const uint8_t src1[n],
@@ -213,6 +215,7 @@ err_ovf_lo:
 	errno	= ERANGE;
 	return	-ERANGE;
 }
+#pragma GCC diagnostic pop
 
 int	alx_matrix_subtraction_u64	(ptrdiff_t n,
 					uint64_t dest[n],
