@@ -33,6 +33,14 @@
 #define alx_static_assert_char_array(a)					\
 	static_assert(alx_is_char_array(a), "Not a `char[]` !")
 
+#define alx_must_be_array(a)	(					\
+	0 * sizeof(							\
+		struct {						\
+			alx_Static_assert_array(a);			\
+		}							\
+	)								\
+)
+
 
 /******************************************************************************
  ******* extern "C" ***********************************************************
@@ -56,6 +64,7 @@ extern "C" {
 #if defined(ALX_NO_PREFIX)
 #define Static_assert_array(a)		alx_Static_assert_array(a)
 #define Static_assert_char_array(a)	alx_Static_assert_char_array(a)
+#define must_be_array(a)		alx_must_be_array(a)
 #endif
 
 

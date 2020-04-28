@@ -30,13 +30,7 @@
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-#define ARRAY_SIZE(arr)		__extension__(				\
-{									\
-	alx_Static_assert_array(arr);					\
-	__arraycount((arr));						\
-}									\
-)
-
+#define ARRAY_SIZE(arr)		(__arraycount((arr)) + alx_must_be_array(arr))
 #define ARRAY_SSIZE(arr)	((ptrdiff_t)ARRAY_SIZE(arr))
 #define ARRAY_BYTES(arr)	(sizeof((arr)[0]) * ARRAY_SIZE(arr))
 #define ARRAY_BITS(arr)		(ARRAY_BYTES(arr) * CHAR_BIT)
