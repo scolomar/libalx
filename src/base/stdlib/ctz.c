@@ -9,6 +9,10 @@
  ******************************************************************************/
 #include "libalx/base/stdlib/ctz.h"
 
+#include <stdint.h>
+
+#include "libalx/base/stdint/types.h"
+
 
 /******************************************************************************
  ******* define ***************************************************************
@@ -36,11 +40,11 @@ extern
 uint32_t	alx_ctz_u32	(uint32_t n);
 extern
 uint64_t	alx_ctz_u64	(uint64_t n);
-#if defined(uint128_t)
+#if defined(UINT128_MAX)
 extern
 uint64_t	alx_ctz_u128	(uint128_t n);
 #endif
-#if defined(uint256_t)
+#if defined(UINT256_MAX)
 extern
 uint64_t	alx_ctz_u256	(uint256_t n);
 #endif
@@ -49,17 +53,15 @@ uint64_t	alx_ctz_u256	(uint256_t n);
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-#if defined(ALX_NO_PREFIX)
 ALX_ALIAS_WEAK_DEF(ctz_u8,	alx_ctz_u8);
 ALX_ALIAS_WEAK_DEF(ctz_u16,	alx_ctz_u16);
 ALX_ALIAS_WEAK_DEF(ctz_u32,	alx_ctz_u32);
 ALX_ALIAS_WEAK_DEF(ctz_u64,	alx_ctz_u64);
-# if defined(uint128_t)
+#if defined(UINT128_MAX)
 ALX_ALIAS_WEAK_DEF(ctz_u128,	alx_ctz_u128);
-# endif
-# if defined(uint256_t)
+#endif
+#if defined(UINT256_MAX)
 ALX_ALIAS_WEAK_DEF(ctz_u256,	alx_ctz_u256);
-# endif
 #endif
 
 

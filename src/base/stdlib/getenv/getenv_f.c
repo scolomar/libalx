@@ -138,14 +138,12 @@ int	alx_secure_getenv_ld	(long double *restrict num,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-#if defined(ALX_NO_PREFIX)
 ALX_ALIAS_WEAK_DEF(getenv_d,		alx_getenv_d);
 ALX_ALIAS_WEAK_DEF(getenv_f,		alx_getenv_f);
 ALX_ALIAS_WEAK_DEF(getenv_ld,		alx_getenv_ld);
 ALX_ALIAS_WEAK_DEF(secure_getenv_d,	alx_secure_getenv_d);
 ALX_ALIAS_WEAK_DEF(secure_getenv_f,	alx_secure_getenv_f);
 ALX_ALIAS_WEAK_DEF(secure_getenv_ld,	alx_secure_getenv_ld);
-#endif
 
 
 /******************************************************************************

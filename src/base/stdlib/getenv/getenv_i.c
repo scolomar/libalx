@@ -173,7 +173,6 @@ int	alx_secure_getenv_i8	(int8_t *restrict num,
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-#if defined(ALX_NO_PREFIX)
 ALX_ALIAS_WEAK_DEF(getenv_i64,		alx_getenv_i64);
 ALX_ALIAS_WEAK_DEF(getenv_i32,		alx_getenv_i32);
 ALX_ALIAS_WEAK_DEF(getenv_i16,		alx_getenv_i16);
@@ -182,7 +181,6 @@ ALX_ALIAS_WEAK_DEF(secure_getenv_i64,	alx_secure_getenv_i64);
 ALX_ALIAS_WEAK_DEF(secure_getenv_i32,	alx_secure_getenv_i32);
 ALX_ALIAS_WEAK_DEF(secure_getenv_i16,	alx_secure_getenv_i16);
 ALX_ALIAS_WEAK_DEF(secure_getenv_i8,	alx_secure_getenv_i8);
-#endif
 
 
 /******************************************************************************
