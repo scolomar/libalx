@@ -21,7 +21,7 @@
  ******************************************************************************/
 /*
  * [[gnu::warn_unused_result]]
- * void	*reallocarrayf(void *ptr, ptrdiff_t nmemb, size_t size);
+ * void	*reallocarrayf(void *ptr, ptrdiff_t nmemb, ssize_t size);
  *
  * Almost equivalent to `reallocarray()`.
  *
@@ -63,6 +63,8 @@
  ******************************************************************************/
 #include <stddef.h>
 
+#include <sys/types.h>
+
 #include "libalx/base/compiler/attribute.h"
 
 
@@ -85,7 +87,7 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 [[gnu::warn_unused_result]]
-void	*alx_reallocarrayf	(void *ptr, ptrdiff_t nmemb, size_t size);
+void	*alx_reallocarrayf	(void *ptr, ptrdiff_t nmemb, ssize_t size);
 
 
 /******************************************************************************

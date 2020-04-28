@@ -32,8 +32,11 @@
  ******************************************************************************/
 #include <cstddef>
 
+#include <sys/types.h>
+
 #include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
+#include "libalx/base/compiler/size.h"
 #include "libalx/base/compiler/unused.hpp"
 
 
@@ -46,7 +49,7 @@
 	void	*vp_;							\
 	int	err_;							\
 									\
-	vp_	= alx_reallocarrays__(*ptr_, nmemb, sizeof(**ptr_), &err_); \
+	vp_	= alx_reallocarrays__(*ptr_, nmemb, ssizeof(**ptr_), &err_); \
 	*ptr_	= static_cast<__typeof__(*ptr_)>(vp_);			\
 	alx_warn_unused_int(err_);					\
 }									\
@@ -69,7 +72,7 @@ extern "C" {
  ******************************************************************************/
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
 void	*alx_reallocarrays__	(void *restrict ptr, ptrdiff_t nmemb,
-				 size_t size, int *restrict error);
+				 ssize_t size, int *restrict error);
 
 
 /******************************************************************************

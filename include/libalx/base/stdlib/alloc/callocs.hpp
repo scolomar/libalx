@@ -32,6 +32,9 @@
  ******************************************************************************/
 #include <cstddef>
 
+#include <sys/types.h>
+
+#include "libalx/base/compiler/size.hpp"
 #include "libalx/base/compiler/unused.hpp"
 
 
@@ -44,7 +47,7 @@
 	void	*vp_;							\
 	int	err_;							\
 									\
-	vp_	= alx_callocs__(nmemb, sizeof(**ptr_), &err_);		\
+	vp_	= alx_callocs__(nmemb, ssizeof(**ptr_), &err_);		\
 	*ptr_	= static_cast<__typeof__(*ptr_)>(vp_);			\
 	alx_warn_unused_int(err_);					\
 }									\
@@ -66,7 +69,7 @@ extern "C" {
  ******* C prototypes *********************************************************
  ******************************************************************************/
 [[gnu::malloc]] [[gnu::nonnull]] [[gnu::warn_unused_result]]
-void	*alx_callocs__	(ptrdiff_t nmemb, size_t size, int *error);
+void	*alx_callocs__	(ptrdiff_t nmemb, ssize_t size, int *error);
 
 
 /******************************************************************************

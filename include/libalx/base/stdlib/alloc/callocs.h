@@ -65,6 +65,9 @@
  ******************************************************************************/
 #include <stddef.h>
 
+#include <sys/types.h>
+
+#include "libalx/base/compiler/size.h"
 #include "libalx/base/compiler/unused.h"
 
 
@@ -76,7 +79,7 @@
 	__auto_type	ptr_	= (ptr);				\
 	int		err_;						\
 									\
-	*ptr_	= alx_callocs__(nmemb, sizeof(**ptr_), &err_);		\
+	*ptr_	= alx_callocs__(nmemb, ssizeof(**ptr_), &err_);		\
 	alx_warn_unused_int(err_);					\
 }									\
 )
@@ -97,7 +100,7 @@
  ******************************************************************************/
 /*
  * [[gnu::malloc]] [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * void	*alx_callocs__(ptrdiff_t nmemb, size_t size, int *error);
+ * void	*alx_callocs__(ptrdiff_t nmemb, ssize_t size, int *error);
  *
  * Helper function for `callocs()`.
  *
@@ -122,7 +125,7 @@
  * - error is non-zero if the result is NULL.
  */
 [[gnu::malloc]] [[gnu::nonnull]] [[gnu::warn_unused_result]]
-void	*alx_callocs__	(ptrdiff_t nmemb, size_t size, int *error);
+void	*alx_callocs__	(ptrdiff_t nmemb, ssize_t size, int *error);
 
 
 /******************************************************************************

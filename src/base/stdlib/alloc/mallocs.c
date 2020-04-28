@@ -10,8 +10,9 @@
 #include "libalx/base/stdlib/alloc/mallocs.h"
 
 #include <errno.h>
-#include <stddef.h>
 #include <stdlib.h>
+
+#include <sys/types.h>
 
 
 /******************************************************************************
@@ -32,19 +33,25 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-void	*alx_mallocs__	(size_t size, int *error)
+#pragma GCC diagnostic push	/* Overflow is explicitly handled */
+#pragma GCC diagnostic ignored	"-Wsign-conversion"
+void	*alx_mallocs__	(ssize_t size, int *error)
 {
 	void	*p;
 
 	*error	= 0;
 	if (!size)
 		goto zero;
+	if (size < 0)
+		goto ovf;
 
 	p	= malloc(size);
 	if (!p)
 		goto err;
 
 	return	p;
+ovf:
+	errno	= ENOMEM;
 err:
 	*error	= -ENOMEM;
 	return	NULL;
@@ -52,6 +59,7 @@ zero:
 	*error	= ENOMEM;
 	return	NULL;
 }
+#pragma GCC diagnostic pop
 
 
 /******************************************************************************

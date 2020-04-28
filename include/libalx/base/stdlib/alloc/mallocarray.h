@@ -21,7 +21,7 @@
  ******************************************************************************/
 /*
  * [[gnu::malloc]] [[gnu::warn_unused_result]]
- * void	*mallocarray(ptrdiff_t nmemb, size_t size);
+ * void	*mallocarray(ptrdiff_t nmemb, ssize_t size);
  *
  * Almost equivalent to `malloc(nmemb * size)`.
  *
@@ -60,6 +60,8 @@
  ******************************************************************************/
 #include <stddef.h>
 
+#include <sys/types.h>
+
 #include "libalx/base/compiler/attribute.h"
 
 
@@ -82,7 +84,7 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 [[gnu::malloc]] [[gnu::warn_unused_result]]
-void	*alx_mallocarray	(ptrdiff_t nmemb, size_t size);
+void	*alx_mallocarray	(ptrdiff_t nmemb, ssize_t size);
 
 
 /******************************************************************************

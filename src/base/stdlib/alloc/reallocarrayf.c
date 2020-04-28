@@ -10,9 +10,11 @@
 #include "libalx/base/stdlib/alloc/reallocarrayf.h"
 
 #include <errno.h>
+#include <limits.h>
 #include <stddef.h>
-#include <stdint.h>
 #include <stdlib.h>
+
+#include <sys/types.h>
 
 #include "libalx/base/assert/stddef.h"
 
@@ -41,23 +43,26 @@ alx_Static_assert_size_ptrdiff();
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-void	*alx_reallocarrayf	(void *ptr, ptrdiff_t nmemb, size_t size)
+#pragma GCC diagnostic push	/* Overflow is explicitly handled */
+#pragma GCC diagnostic ignored	"-Wsign-conversion"
+void	*alx_reallocarrayf	(void *ptr, ptrdiff_t nmemb, ssize_t size)
 {
 
 	if (!nmemb || !size)
 		goto zero;
-	if (nmemb < 0)
+	if (nmemb < 0 || size < 0)
 		goto ovf;
-	if ((size_t)nmemb  >  (SIZE_MAX / size))
+	if (nmemb  >  (SSIZE_MAX / size))
 		goto ovf;
 
-	return	reallocf(ptr, (size_t)nmemb * size);
+	return	reallocf(ptr, nmemb * size);
 ovf:
 	errno	= ENOMEM;
 zero:
 	free(ptr);
 	return	NULL;
 }
+#pragma GCC diagnostic pop
 
 
 /******************************************************************************

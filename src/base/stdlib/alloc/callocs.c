@@ -13,6 +13,8 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+#include <sys/types.h>
+
 #include "libalx/base/assert/stddef.h"
 
 
@@ -40,17 +42,19 @@ alx_Static_assert_size_ptrdiff();
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-void	*alx_callocs__	(ptrdiff_t nmemb, size_t size, int *error)
+#pragma GCC diagnostic push	/* Overflow is explicitly handled */
+#pragma GCC diagnostic ignored	"-Wsign-conversion"
+void	*alx_callocs__	(ptrdiff_t nmemb, ssize_t size, int *error)
 {
 	void	*p;
 
 	*error	= 0;
 	if (!nmemb || !size)
 		goto zero;
-	if (nmemb < 0)
+	if (nmemb < 0 || size < 0)
 		goto ovf;
 
-	p	= calloc((size_t)nmemb, size);
+	p	= calloc(nmemb, size);
 	if (!p)
 		goto err;
 
@@ -64,6 +68,7 @@ zero:
 	*error	= ENOMEM;
 	return	NULL;
 }
+#pragma GCC diagnostic pop
 
 
 /******************************************************************************

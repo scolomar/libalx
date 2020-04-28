@@ -10,8 +10,9 @@
 #include "libalx/base/stdlib/alloc/reallocs.h"
 
 #include <errno.h>
-#include <stddef.h>
 #include <stdlib.h>
+
+#include <sys/types.h>
 
 
 /******************************************************************************
@@ -32,19 +33,25 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-void	*alx_reallocs__	(void *restrict ptr, size_t size, int *restrict error)
+#pragma GCC diagnostic push	/* Overflow is explicitly handled */
+#pragma GCC diagnostic ignored	"-Wsign-conversion"
+void	*alx_reallocs__	(void *restrict ptr, ssize_t size, int *restrict error)
 {
 	void	*p;
 
 	*error	= 0;
 	if (!size)
 		goto zero;
+	if (size < 0)
+		goto ovf;
 
 	p	= realloc(ptr, size);
 	if (!p)
 		goto err;
 
 	return	p;
+ovf:
+	errno	= ENOMEM;
 err:
 	*error	= -ENOMEM;
 	return	ptr;
@@ -53,6 +60,7 @@ zero:
 	*error	= ENOMEM;
 	return	NULL;
 }
+#pragma GCC diagnostic pop
 
 
 /******************************************************************************

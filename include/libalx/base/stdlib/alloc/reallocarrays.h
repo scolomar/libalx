@@ -21,7 +21,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * int	reallocarrays(type **ptr, size_t nmemb);
+ * int	reallocarrays(type **ptr, ssize_t nmemb);
  *
  * Safe & simple wrapper for `reallocarray()`.
  *
@@ -68,7 +68,10 @@
  ******************************************************************************/
 #include <stddef.h>
 
+#include <sys/types.h>
+
 #include "libalx/base/compiler/attribute.h"
+#include "libalx/base/compiler/size.h"
 #include "libalx/base/compiler/unused.h"
 
 
@@ -80,7 +83,7 @@
 	__auto_type	ptr_	= (ptr);				\
 	int		err_;						\
 									\
-	*ptr_	= alx_reallocarrays__(*ptr_, nmemb, sizeof(**ptr_), &err_); \
+	*ptr_	= alx_reallocarrays__(*ptr_, nmemb, ssizeof(**ptr_), &err_); \
 	alx_warn_unused_int(err_);					\
 }									\
 )
@@ -101,7 +104,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * void	*alx_reallocarrays__(void *restrict ptr, ptrdiff_t nmemb, size_t size,
+ * void	*alx_reallocarrays__(void *restrict ptr, ptrdiff_t nmemb, ssize_t size,
  *			     int *restrict error);
  *
  * Helper function for `reallocarrays()`.
@@ -126,7 +129,7 @@
  */
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
 void	*alx_reallocarrays__	(void *restrict ptr, ptrdiff_t nmemb,
-				 size_t size, int *restrict error);
+				 ssize_t size, int *restrict error);
 
 
 /******************************************************************************

@@ -21,7 +21,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * int	reallocfs(void **ptr, size_t size);
+ * int	reallocfs(void **ptr, ssize_t size);
  *
  * Read  <libalx/base/stdlib/alloc/reallocfs.h>  for documentation.
  */
@@ -30,7 +30,7 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
-#include <cstddef>
+#include <sys/types.h>
 
 #include "libalx/base/compiler/restrict.hpp"
 #include "libalx/base/compiler/unused.hpp"
@@ -67,7 +67,7 @@ extern "C" {
  ******* C prototypes *********************************************************
  ******************************************************************************/
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-void	*alx_reallocfs__	(void *restrict ptr, size_t size,
+void	*alx_reallocfs__	(void *restrict ptr, ssize_t size,
 				 int *restrict error);
 
 

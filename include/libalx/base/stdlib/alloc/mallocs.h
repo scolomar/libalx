@@ -21,7 +21,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]]  [[gnu::warn_unused_result]]
- * int	mallocs(void **ptr, size_t size);
+ * int	mallocs(void **ptr, ssize_t size);
  *
  * Safe & simple wrapper for `malloc()`.
  * To be used for generic buffers of bytes, and not for arrays (use
@@ -62,7 +62,7 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
-#include <stddef.h>
+#include <sys/types.h>
 
 #include "libalx/base/compiler/unused.h"
 
@@ -96,7 +96,7 @@
  ******************************************************************************/
 /*
  * [[gnu::malloc]] [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * void	*alx_mallocs__(size_t size, int *error);
+ * void	*alx_mallocs__(ssize_t size, int *error);
  *
  * Helper function for `mallocs()`.
  *
@@ -118,7 +118,7 @@
  * - error is non-zero if the result is NULL.
  */
 [[gnu::malloc]] [[gnu::nonnull]] [[gnu::warn_unused_result]]
-void	*alx_mallocs__	(size_t size, int *error);
+void	*alx_mallocs__	(ssize_t size, int *error);
 
 
 /******************************************************************************

@@ -13,6 +13,8 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+#include <sys/types.h>
+
 #include "libalx/base/stdlib/alloc/reallocarrayf.h"
 
 
@@ -35,13 +37,13 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 void	*alx_reallocarrayfs__	(void *restrict ptr, ptrdiff_t nmemb,
-				 size_t size, int *restrict error)
+				 ssize_t size, int *restrict error)
 {
 
 	*error	= 0;
 	if (!nmemb || !size)
 		goto zero;
-	if (nmemb < 0)
+	if (nmemb < 0 || size < 0)
 		goto ovf;
 
 	ptr	= alx_reallocarrayf(ptr, nmemb, size);

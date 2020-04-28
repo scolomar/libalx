@@ -68,6 +68,9 @@
  ******************************************************************************/
 #include <stddef.h>
 
+#include <sys/types.h>
+
+#include "libalx/base/compiler/size.h"
 #include "libalx/base/compiler/unused.h"
 
 
@@ -79,7 +82,7 @@
 	__auto_type	ptr_	= (ptr);				\
 	int		err_;						\
 									\
-	*ptr_	= alx_reallocarrayfs__(*ptr_, nmemb, sizeof(**ptr_), &err_); \
+	*ptr_	= alx_reallocarrayfs__(*ptr_, nmemb, ssizeof(**ptr_), &err_); \
 	alx_warn_unused_int(err_);					\
 }									\
 )
@@ -100,7 +103,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * void	*alx_reallocarrayfs__(void *restrict ptr, ptrdiff_t nmemb, size_t size,
+ * void	*alx_reallocarrayfs__(void *restrict ptr, ptrdiff_t nmemb, ssize_t size,
  *			      int *restrict error);
  *
  * Helper function for `reallocarrayfs()`.
@@ -125,7 +128,7 @@
  */
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
 void	*alx_reallocarrayfs__	(void *restrict ptr, ptrdiff_t nmemb,
-				 size_t size, int *restrict error);
+				 ssize_t size, int *restrict error);
 
 
 /******************************************************************************

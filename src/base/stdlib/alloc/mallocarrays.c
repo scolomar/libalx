@@ -13,6 +13,8 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+#include <sys/types.h>
+
 #include "libalx/base/stdlib/alloc/mallocarray.h"
 
 
@@ -34,14 +36,14 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-void	*alx_mallocarrays__	(ptrdiff_t nmemb, size_t size, int *error)
+void	*alx_mallocarrays__	(ptrdiff_t nmemb, ssize_t size, int *error)
 {
 	void	*p;
 
 	*error	= 0;
 	if (!nmemb || !size)
 		goto zero;
-	if (nmemb < 0)
+	if (nmemb < 0 || size < 0)
 		goto ovf;
 
 	p	= alx_mallocarray(nmemb, size);

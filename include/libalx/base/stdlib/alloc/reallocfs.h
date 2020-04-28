@@ -21,7 +21,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * int	reallocfs(void **ptr, size_t size);
+ * int	reallocfs(void **ptr, ssize_t size);
  *
  * Safe & simple wrapper for `reallocf()`.
  * To be used for generic buffers of bytes, and not for arrays (use
@@ -65,7 +65,7 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
-#include <stddef.h>
+#include <sys/types.h>
 
 #include "libalx/base/compiler/unused.h"
 
@@ -99,7 +99,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * void	*alx_reallocfs__(void *restrict ptr, size_t size, int *restrict error);
+ * void	*alx_reallocfs__(void *restrict ptr, ssize_t size, int *restrict error);
  *
  * Helper function for `reallocfs()`.
  *
@@ -119,7 +119,7 @@
  * - error is non-zero if the result is NULL.
  */
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-void	*alx_reallocfs__	(void *restrict ptr, size_t size,
+void	*alx_reallocfs__	(void *restrict ptr, ssize_t size,
 				 int *restrict error);
 
 

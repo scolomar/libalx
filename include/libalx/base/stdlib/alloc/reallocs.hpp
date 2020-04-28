@@ -30,7 +30,7 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
-#include <cstddef>
+#include <sys/types.h>
 
 #include "libalx/base/compiler/restrict.hpp"
 #include "libalx/base/compiler/unused.hpp"
@@ -67,7 +67,7 @@ extern "C" {
  ******* C prototypes *********************************************************
  ******************************************************************************/
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-void	*alx_reallocs__	(void *restrict ptr, size_t size, int *restrict error);
+void	*alx_reallocs__	(void *restrict ptr, ssize_t size, int *restrict error);
 
 
 /******************************************************************************
