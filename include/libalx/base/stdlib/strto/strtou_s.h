@@ -61,12 +61,6 @@ int	alx_strtou64_s		(uint64_t *restrict num,
 				 const char *restrict str,
 				 int base, ptrdiff_t *restrict nread);
 
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-inline
-int	alx_strtoul_status	(const char *restrict str,
-				 const char *restrict endptr,
-				 int errno_after, int errno_before);
-
 
 /******************************************************************************
  ******* alias ****************************************************************
@@ -77,18 +71,12 @@ ALX_ALIAS_DECLARATION(strtou16_s,	alx_strtou16_s);
 ALX_ALIAS_DECLARATION(strtou32_s,	alx_strtou32_s);
 ALX_ALIAS_DECLARATION(strtou64_s,	alx_strtou64_s);
 #endif
+#define alx_strtoul_status		alx_strtol_status
 
 
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
-inline
-int	alx_strtoul_status	(const char *restrict str,
-				 const char *restrict endptr,
-				 int errno_after, int errno_before)
-{
-	return	alx_strtol_status(str, endptr, errno_after, errno_before);
-}
 
 
 /******************************************************************************

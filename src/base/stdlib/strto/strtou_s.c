@@ -110,21 +110,13 @@ int	alx_strtou64_s		(uint64_t *restrict num,
 #pragma GCC diagnostic pop
 
 
-extern
-int	alx_strtoul_status	(const char *restrict str,
-				 const char *restrict endptr,
-				 int errno_after, int errno_before);
-
-
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
-#if defined(ALX_NO_PREFIX)
 ALX_ALIAS_WEAK_DEF(strtou8_s,	alx_strtou8_s);
 ALX_ALIAS_WEAK_DEF(strtou16_s,	alx_strtou16_s);
 ALX_ALIAS_WEAK_DEF(strtou32_s,	alx_strtou32_s);
 ALX_ALIAS_WEAK_DEF(strtou64_s,	alx_strtou64_s);
-#endif
 
 
 /******************************************************************************
