@@ -43,17 +43,12 @@ void	*alx_reallocarrayfs__	(void *restrict ptr, ptrdiff_t nmemb,
 	*error	= 0;
 	if (!nmemb || !size)
 		goto zero;
-	if (nmemb < 0 || size < 0)
-		goto ovf;
 
 	ptr	= alx_reallocarrayf(ptr, nmemb, size);
 	if (!ptr)
 		goto err;
 
 	return	ptr;
-ovf:
-	errno	= ENOMEM;
-	free(ptr);
 err:
 	*error	= -ENOMEM;
 	return	NULL;

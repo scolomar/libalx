@@ -10,6 +10,7 @@
 #include "libalx/base/stdlib/alloc/reallocarrays.h"
 
 #include <errno.h>
+#include <limits.h>
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -53,6 +54,8 @@ void	*alx_reallocarrays__	(void *restrict ptr, ptrdiff_t nmemb,
 	if (!nmemb || !size)
 		goto zero;
 	if (nmemb < 0 || size < 0)
+		goto ovf;
+	if (nmemb  >  (SSIZE_MAX / size))
 		goto ovf;
 
 	p	= reallocarray(ptr, nmemb, size);

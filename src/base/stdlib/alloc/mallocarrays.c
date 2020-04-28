@@ -43,16 +43,12 @@ void	*alx_mallocarrays__	(ptrdiff_t nmemb, ssize_t size, int *error)
 	*error	= 0;
 	if (!nmemb || !size)
 		goto zero;
-	if (nmemb < 0 || size < 0)
-		goto ovf;
 
 	p	= alx_mallocarray(nmemb, size);
 	if (!p)
 		goto err;
 
 	return	p;
-ovf:
-	errno	= ENOMEM;
 err:
 	*error	= -ENOMEM;
 	return	NULL;
