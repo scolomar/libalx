@@ -34,7 +34,7 @@
 
 #include <sys/types.h>
 
-#include "libalx/base/compiler/size.h"
+#include "libalx/base/compiler/size.hpp"
 #include "libalx/base/compiler/restrict.hpp"
 #include "libalx/base/compiler/unused.hpp"
 
