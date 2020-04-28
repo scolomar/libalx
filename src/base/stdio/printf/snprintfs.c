@@ -14,6 +14,14 @@
 #include <stddef.h>
 #include <stdio.h>
 
+#include "libalx/base/assert/stddef.h"
+
+
+/******************************************************************************
+ ******* _Static_assert *******************************************************
+ ******************************************************************************/
+alx_Static_assert_size_ptrdiff();
+
 
 /******************************************************************************
  ******* define ***************************************************************
@@ -56,7 +64,7 @@ int	alx_vsnprintfs	(char str[restrict /*nmemb*/],
 	if (nmemb <= 0)
 		goto ovf;
 
-	len	= vsnprintf(str, nmemb, format, ap);
+	len	= vsnprintf(str, (size_t)nmemb, format, ap);
 
 	if (len < 0)
 		goto err;

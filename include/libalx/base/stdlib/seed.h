@@ -76,7 +76,8 @@ void	alx_prsrand	(void)
 inline
 uint32_t alx_prseed	(void)
 {
-	return	alx_seed_mix(clock(), time(NULL), getpid());
+	return	alx_seed_mix((uint32_t)clock(), (uint32_t)time(NULL),
+							(uint32_t)getpid());
 }
 
 

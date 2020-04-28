@@ -13,6 +13,14 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+#include "libalx/base/assert/stddef.h"
+
+
+/******************************************************************************
+ ******* _Static_assert *******************************************************
+ ******************************************************************************/
+alx_Static_assert_size_ptrdiff();
+
 
 /******************************************************************************
  ******* define ***************************************************************
@@ -43,7 +51,7 @@ void	*alx_reallocarrays__	(void *restrict ptr, ptrdiff_t nmemb,
 	if (nmemb < 0)
 		goto ovf;
 
-	p	= reallocarray(ptr, nmemb, size);
+	p	= reallocarray(ptr, (size_t)nmemb, size);
 	if (!p)
 		goto err;
 

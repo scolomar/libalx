@@ -13,6 +13,14 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+#include "libalx/base/assert/stddef.h"
+
+
+/******************************************************************************
+ ******* _Static_assert *******************************************************
+ ******************************************************************************/
+alx_Static_assert_size_ptrdiff();
+
 
 /******************************************************************************
  ******* define ***************************************************************
@@ -42,7 +50,7 @@ void	*alx_callocs__	(ptrdiff_t nmemb, size_t size, int *error)
 	if (nmemb < 0)
 		goto ovf;
 
-	p	= calloc(nmemb, size);
+	p	= calloc((size_t)nmemb, size);
 	if (!p)
 		goto err;
 

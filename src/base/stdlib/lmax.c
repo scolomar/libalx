@@ -42,6 +42,8 @@ enum	Cell {
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
+#pragma GCC diagnostic push	/* Over/underflow is explicitly handled */
+#pragma GCC diagnostic ignored	"-Wsign-conversion"
 void	alx_lmax_ldbl	(ptrdiff_t rows, ptrdiff_t cols,
 			 const long double arr_in[static restrict rows][cols],
 			 bool arr_out[static restrict rows][cols])
@@ -869,6 +871,7 @@ not_maxima_2:
 			arr_out[i][j]	= arr_tmp[i][j];
 	}
 }
+#pragma GCC diagnostic pop
 
 
 /******************************************************************************

@@ -64,12 +64,12 @@ uint32_t	alx_clz_u32	(uint32_t n);
 inline
 uint64_t	alx_clz_u64	(uint64_t n);
 [[gnu::const]]
-#if defined(uint128_t)
+#if defined(UINT128_MAX)
 [[gnu::const]]
 inline
 uint64_t	alx_clz_u128	(uint128_t n);
 #endif
-#if defined(uint256_t)
+#if defined(UINT256_MAX)
 [[gnu::const]]
 inline
 uint64_t	alx_clz_u256	(uint256_t n);
@@ -84,10 +84,10 @@ ALX_ALIAS_DECLARATION(clz_u8,	alx_clz_u8);
 ALX_ALIAS_DECLARATION(clz_u16,	alx_clz_u16);
 ALX_ALIAS_DECLARATION(clz_u32,	alx_clz_u32);
 ALX_ALIAS_DECLARATION(clz_u64,	alx_clz_u64);
-# if defined(uint128_t)
+# if defined(UINT128_MAX)
 ALX_ALIAS_DECLARATION(clz_u128,	alx_clz_u128);
 # endif
-# if defined(uint256_t)
+# if defined(UINT256_MAX)
 ALX_ALIAS_DECLARATION(clz_u256,	alx_clz_u256);
 # endif
 #endif
@@ -96,6 +96,8 @@ ALX_ALIAS_DECLARATION(clz_u256,	alx_clz_u256);
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
+#pragma GCC diagnostic push	/* Over/underflow is impossible */
+#pragma GCC diagnostic ignored	"-Wconversion"
 inline
 uint8_t		alx_clz_u8	(uint8_t n)
 {
@@ -113,7 +115,10 @@ uint16_t	alx_clz_u16	(uint16_t n)
 
 	return	__builtin_clz(n) - unused_bits;
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push	/* Overflow is impossible */
+#pragma GCC diagnostic ignored	"-Wsign-conversion"
 inline
 uint32_t	alx_clz_u32	(uint32_t n)
 {
@@ -127,8 +132,11 @@ uint64_t	alx_clz_u64	(uint64_t n)
 
 	return	__builtin_clzl(n);
 }
+#pragma GCC diagnostic pop
 
-#if defined(uint128_t)
+#pragma GCC diagnostic push	/* Modulo truncation is useful here */
+#pragma GCC diagnostic ignored	"-Wconversion"
+#if defined(UINT128_MAX)
 inline
 uint64_t	alx_clz_u128	(uint128_t n)
 {
@@ -139,7 +147,7 @@ uint64_t	alx_clz_u128	(uint128_t n)
 }
 #endif
 
-#if defined(uint256_t)
+#if defined(UINT256_MAX)
 inline
 uint64_t	alx_clz_u256	(uint256_t n)
 {
@@ -149,6 +157,7 @@ uint64_t	alx_clz_u256	(uint256_t n)
 	return	alx_clz_u128(n >> 128);
 }
 #endif
+#pragma GCC diagnostic pop
 
 
 /******************************************************************************

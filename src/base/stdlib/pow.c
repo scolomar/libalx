@@ -32,6 +32,9 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
+#pragma GCC diagnostic push	/* FIXME: handle overflow */
+#pragma GCC diagnostic ignored	"-Warith-conversion"
+#pragma GCC diagnostic ignored	"-Wconversion"
 uint8_t		alx_pow_u8	(uint8_t base, uint8_t exp)
 {
 	uint_fast8_t	base_;
@@ -271,6 +274,7 @@ int64_t		alx_pow_s64	(int64_t base, uint8_t exp)
 
 	return	result;
 }
+#pragma GCC diagnostic pop
 
 
 /******************************************************************************

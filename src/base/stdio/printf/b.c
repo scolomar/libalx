@@ -184,6 +184,8 @@ uintmax_t b_value	(const struct printf_info *info, const void *arg)
 	return	*(const unsigned *)arg;
 }
 
+#pragma GCC diagnostic push	/* '0' + (val % 2) will not overflow */
+#pragma GCC diagnostic ignored	"-Warith-conversion"
 static
 int	b_bin_repr	(char bin[BIN_REPR_BUFSIZ],
 			 const struct printf_info *info, const void *arg)
@@ -203,6 +205,7 @@ int	b_bin_repr	(char bin[BIN_REPR_BUFSIZ],
 		return	1;
 	return	min_len;
 }
+#pragma GCC diagnostic pop
 
 static
 int	b_bin_len	(const struct printf_info *info, int min_len)
