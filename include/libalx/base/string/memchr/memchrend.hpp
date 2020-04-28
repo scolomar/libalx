@@ -21,6 +21,8 @@
  ******************************************************************************/
 #include <cstddef>
 
+#include <sys/types.h>
+
 #include "libalx/base/compiler/attribute.hpp"
 
 
@@ -44,7 +46,7 @@ extern "C" {
  ******* C prototypes *********************************************************
  ******************************************************************************/
 [[gnu::nonnull]][[gnu::pure]]
-size_t	alx_memchrend	(const void *ptr, unsigned char c, size_t size);
+ssize_t	alx_memchrend	(const void *ptr, unsigned char c, size_t size);
 
 
 /******************************************************************************

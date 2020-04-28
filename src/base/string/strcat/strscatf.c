@@ -14,7 +14,14 @@
 #include <stddef.h>
 #include <string.h>
 
+#include "libalx/base/assert/stddef.h"
 #include "libalx/base/stdio/printf/snprintfs.h"
+
+
+/******************************************************************************
+ ******* _Static_assert *******************************************************
+ ******************************************************************************/
+alx_Static_assert_size_ptrdiff();
 
 
 /******************************************************************************
@@ -49,6 +56,8 @@ ptrdiff_t alx_strscatf		(ptrdiff_t size,
 	return	len;
 }
 
+#pragma GCC diagnostic push	/* Overflow is explicitly handled */
+#pragma GCC diagnostic ignored	"-Wsign-conversion"
 ptrdiff_t alx_vstrscatf		(ptrdiff_t size,
 				 char dest[static restrict size],
 				 const char *restrict format, va_list ap)
@@ -72,6 +81,7 @@ err:
 	return	-1;
 
 }
+#pragma GCC diagnostic pop
 
 
 /******************************************************************************

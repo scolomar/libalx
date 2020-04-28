@@ -78,6 +78,8 @@ ptrdiff_t	_strscasefgrepv_line(ptrdiff_t len,
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
+#pragma GCC diagnostic push	/* Large arrays unsupported (UB) */
+#pragma GCC diagnostic ignored	"-Wsign-conversion"
 ptrdiff_t	alx_strnfgrep	(ptrdiff_t size,
 				 char dest[static restrict size],
 				 const char src[static restrict size],
@@ -667,6 +669,7 @@ ptrdiff_t	_strscasefgrepv_line(ptrdiff_t len,
 	memcpy(dest, src, len);
 	return	len;
 }
+#pragma GCC diagnostic pop
 
 
 /******************************************************************************

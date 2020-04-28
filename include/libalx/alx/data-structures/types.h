@@ -84,7 +84,7 @@ struct	Alx_DynBuf {
  */
 struct	Alx_DynArr {
 	void		*data;
-	size_t		elsize;
+	ssize_t		elsize;
 	ptrdiff_t	nmemb;
 	ptrdiff_t	written;
 };

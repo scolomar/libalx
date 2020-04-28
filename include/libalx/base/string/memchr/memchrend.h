@@ -19,8 +19,9 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
-#include <stddef.h>
 #include <string.h>
+
+#include <sys/types.h>
 
 #include "libalx/base/compiler/attribute.h"
 
@@ -45,7 +46,7 @@
  ******************************************************************************/
 [[gnu::nonnull]] [[gnu::pure]]
 inline
-size_t	alx_memchrend	(const void *ptr, unsigned char c, size_t size);
+ssize_t	alx_memchrend	(const void *ptr, unsigned char c, ssize_t size);
 
 
 /******************************************************************************
@@ -60,10 +61,13 @@ ALX_ALIAS_DECLARATION(memchrend, alx_memchrend);
  ******* inline ***************************************************************
  ******************************************************************************/
 inline
-size_t	alx_memchrend	(const void *ptr, unsigned char c, size_t size)
+ssize_t	alx_memchrend	(const void *ptr, unsigned char c, ssize_t size)
 {
 	const unsigned char	*p0 = ptr;
+#pragma GCC diagnostic push	/* Large arrays unsupported (UB) */
+#pragma GCC diagnostic ignored	"-Wsign-conversion"
 	const unsigned char	*pc = memchr(ptr, c, size);
+#pragma GCC diagnostic pop
 
 	if (!pc)
 		return	size - 1;

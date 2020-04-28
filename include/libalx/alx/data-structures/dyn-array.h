@@ -44,6 +44,8 @@
  ******************************************************************************/
 #include <stddef.h>
 
+#include <sys/types.h>
+
 #include "libalx/alx/data-structures/llist.h"
 #include "libalx/alx/data-structures/types.h"
 
@@ -78,7 +80,7 @@
  *	ENOMEM:		Aborted; failure to allocate the array.
  */
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_dynarr_init		(struct Alx_DynArr **arr, size_t elsize);
+int	alx_dynarr_init		(struct Alx_DynArr **arr, ssize_t elsize);
 
 /*
  * Deletes `arr`.
@@ -171,7 +173,7 @@ int	alx_dynarr_remove	(struct Alx_DynArr *arr,
  */
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynarr_resize	(struct Alx_DynArr *arr,
-				 ptrdiff_t nmemb, size_t elsize);
+				 ptrdiff_t nmemb, ssize_t elsize);
 
 /*
  * Reset the array as if just initialized.
@@ -184,7 +186,7 @@ int	alx_dynarr_resize	(struct Alx_DynArr *arr,
  *	ENOMEM:		Aborted; failure to reallocate the array.
  */
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_dynarr_reset	(struct Alx_DynArr *arr, size_t elsize);
+int	alx_dynarr_reset	(struct Alx_DynArr *arr, ssize_t elsize);
 
 /*
  * Shrink the array to fit the used space.

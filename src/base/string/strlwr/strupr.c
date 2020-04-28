@@ -31,6 +31,8 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
+#pragma GCC diagnostic push	/* input is char */
+#pragma GCC diagnostic ignored	"-Wconversion"
 char	*alx_strupr	(char *restrict str)
 {
 
@@ -39,6 +41,7 @@ char	*alx_strupr	(char *restrict str)
 
 	return	str;
 }
+#pragma GCC diagnostic pop
 
 
 /******************************************************************************

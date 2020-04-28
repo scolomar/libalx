@@ -31,6 +31,8 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
+#pragma GCC diagnostic push	/* Overflow is explicitly handled */
+#pragma GCC diagnostic ignored	"-Wsign-conversion"
 ptrdiff_t alx_strscpy		(char dest[restrict /*size*/],
 				 const char src[restrict /*size*/],
 				 ptrdiff_t size)
@@ -46,6 +48,7 @@ ptrdiff_t alx_strscpy		(char dest[restrict /*size*/],
 
 	return	len;
 }
+#pragma GCC diagnostic pop
 
 
 /******************************************************************************

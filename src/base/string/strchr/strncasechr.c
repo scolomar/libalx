@@ -32,6 +32,10 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
+#pragma GCC diagnostic push	/* Large arrays unsupported (UB) */
+#pragma GCC diagnostic ignored	"-Wsign-conversion"
+#pragma GCC diagnostic push	/* input is char */
+#pragma GCC diagnostic ignored	"-Wconversion"
 ptrdiff_t alx_strncasechr	(ptrdiff_t size, const char str[restrict size],
 				 char c)
 {
@@ -49,6 +53,8 @@ ptrdiff_t alx_strncasechr	(ptrdiff_t size, const char str[restrict size],
 
 	return	-1;
 }
+#pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 
 
 /******************************************************************************

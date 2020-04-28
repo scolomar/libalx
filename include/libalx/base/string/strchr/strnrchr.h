@@ -61,18 +61,21 @@ ALX_ALIAS_DECLARATION(strnrchr, alx_strnrchr);
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
+#pragma GCC diagnostic push	/* Large arrays unsupported (UB) */
+#pragma GCC diagnostic ignored	"-Wsign-conversion"
 inline
 ptrdiff_t alx_strnrchr		(ptrdiff_t size,
 				 const char str[static restrict size],
 				 char c)
 {
-	const char	len = strnlen(str, size);
+	const ptrdiff_t	len = strnlen(str, size);
 	const char	*p = memrchr(str, c, len);
 
 	if (!p)
 		return	-1;
 	return	p - str;
 }
+#pragma GCC diagnostic pop
 
 
 /******************************************************************************

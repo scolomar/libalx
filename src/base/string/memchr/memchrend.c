@@ -9,7 +9,7 @@
  ******************************************************************************/
 #include "libalx/base/string/memchr/memchrend.h"
 
-#include <stddef.h>
+#include <sys/types.h>
 
 
 /******************************************************************************
@@ -31,7 +31,7 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 extern
-size_t	alx_memchrend	(const void *ptr, unsigned char c, size_t size);
+ssize_t	alx_memchrend	(const void *ptr, unsigned char c, ssize_t size);
 
 
 /******************************************************************************

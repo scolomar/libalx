@@ -31,6 +31,8 @@
  ******************************************************************************/
 #include <cstddef>
 
+#include <sys/types.h>
+
 #include "libalx/base/compiler/restrict.hpp"
 #include "libalx/alx/data-structures/llist.hpp"
 
@@ -51,7 +53,7 @@ extern "C" {
  ******************************************************************************/
 struct	Alx_Dyn_Array {
 	unsigned char	*data;
-	size_t		elsize;
+	ssize_t		elsize;
 	ptrdiff_t	nmemb;
 	ptrdiff_t	written;
 };
@@ -64,7 +66,7 @@ struct	Alx_LinkedList;
  ******* C prototypes *********************************************************
  ******************************************************************************/
 [[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_init		(struct Alx_Dyn_Array **arr, size_t elsize);
+int	alx_dynarr_init		(struct Alx_Dyn_Array **arr, ssize_t elsize);
 void	alx_dynarr_deinit	(struct Alx_Dyn_Array *arr);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_dynarr_write	(struct Alx_Dyn_Array *restrict arr,
@@ -81,9 +83,9 @@ int	alx_dynarr_remove	(struct Alx_Dyn_Array *arr,
 				 ptrdiff_t cell);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_dynarr_resize	(struct Alx_Dyn_Array *arr,
-				 ptrdiff_t nmemb, size_t elsize);
+				 ptrdiff_t nmemb, ssize_t elsize);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
-int	alx_dynarr_reset	(struct Alx_Dyn_Array *arr, size_t elsize);
+int	alx_dynarr_reset	(struct Alx_Dyn_Array *arr, ssize_t elsize);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_dynarr_fit		(struct Alx_Dyn_Array *arr);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
