@@ -34,7 +34,7 @@
 	static_assert(alx_is_char_array(a), "Not a `char[]` !")
 
 #define alx_must_be_array(a)	(					\
-	0 * sizeof(							\
+	0 * (int)sizeof(						\
 		struct {						\
 			alx_Static_assert_array(a);			\
 		}							\
