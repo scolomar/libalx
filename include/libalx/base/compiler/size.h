@@ -23,6 +23,7 @@
 #include <stddef.h>
 
 #include <sys/cdefs.h>
+#include <sys/types.h>
 
 #include "libalx/base/assert/array.h"
 
@@ -30,6 +31,8 @@
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
+#define ssizeof(x)		((ssize_t)sizeof(x))
+
 #define ARRAY_SIZE(arr)		(__arraycount((arr)) + alx_must_be_array(arr))
 #define ARRAY_SSIZE(arr)	((ptrdiff_t)ARRAY_SIZE(arr))
 #define ARRAY_BYTES(arr)	(sizeof((arr)[0]) * ARRAY_SIZE(arr))
