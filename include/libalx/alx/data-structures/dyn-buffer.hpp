@@ -29,8 +29,6 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
-#include <cstddef>
-
 #include <sys/types.h>
 
 #include "libalx/base/compiler/restrict.hpp"
@@ -50,35 +48,30 @@ extern "C" {
 /******************************************************************************
  ******* struct / union *******************************************************
  ******************************************************************************/
-struct	Alx_Dyn_Buffer {
-	unsigned char	*data;
-	size_t		size;
-	size_t		written;
-};
 
 
 /******************************************************************************
  ******* C prototypes *********************************************************
  ******************************************************************************/
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_dynbuf_init		(struct Alx_Dyn_Buffer **buf);
-void	alx_dynbuf_deinit	(struct Alx_Dyn_Buffer *buf);
+int	alx_dynbuf_init		(struct Alx_DynBuf **buf);
+void	alx_dynbuf_deinit	(struct Alx_DynBuf *buf);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_dynbuf_write	(struct Alx_Dyn_Buffer *restrict buf,
-				 size_t offset,
-				 const void *restrict data, size_t size);
+int	alx_dynbuf_write	(struct Alx_DynBuf *restrict buf,
+				 ssize_t offset,
+				 const void *restrict data, ssize_t size);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_dynbuf_insert	(struct Alx_Dyn_Buffer *restrict buf,
-				 size_t offset,
-				 const void *restrict data, size_t size);
+int	alx_dynbuf_insert	(struct Alx_DynBuf *restrict buf,
+				 ssize_t offset,
+				 const void *restrict data, ssize_t size);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-ssize_t	alx_dynbuf_read		(void *restrict data, size_t size,
-				 const struct Alx_Dyn_Buffer *restrict buf,
-				 size_t offset);
+ssize_t	alx_dynbuf_read		(void *restrict data, ssize_t size,
+				 const struct Alx_DynBuf *restrict buf,
+				 ssize_t offset);
 [[gnu::nonnull]]
-void	alx_dynbuf_consume	(struct Alx_Dyn_Buffer *buf, size_t size);
+void	alx_dynbuf_consume	(struct Alx_DynBuf *buf, ssize_t size);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_dynbuf_resize	(struct Alx_Dyn_Buffer *buf, size_t size);
+int	alx_dynbuf_resize	(struct Alx_DynBuf *buf, ssize_t size);
 
 
 /******************************************************************************

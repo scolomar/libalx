@@ -42,8 +42,6 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
-#include <stddef.h>
-
 #include <sys/types.h>
 
 #include "libalx/alx/data-structures/types.h"
@@ -123,8 +121,8 @@ void	alx_dynbuf_deinit	(struct Alx_DynBuf *buf);
  */
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynbuf_write	(struct Alx_DynBuf *restrict buf,
-				 size_t offset,
-				 const void *restrict data, size_t size);
+				 ssize_t offset,
+				 const void *restrict data, ssize_t size);
 
 /*
  * Inserts into the buffer.
@@ -145,8 +143,8 @@ int	alx_dynbuf_write	(struct Alx_DynBuf *restrict buf,
  */
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynbuf_insert	(struct Alx_DynBuf *restrict buf,
-				 size_t offset,
-				 const void *restrict data, size_t size);
+				 ssize_t offset,
+				 const void *restrict data, ssize_t size);
 
 /*
  * Reads from the buffer.
@@ -162,9 +160,9 @@ int	alx_dynbuf_insert	(struct Alx_DynBuf *restrict buf,
  *	-1:		Aborted; invalid offset.
  */
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-ssize_t	alx_dynbuf_read		(void *restrict data, size_t size,
+ssize_t	alx_dynbuf_read		(void *restrict data, ssize_t size,
 				 const struct Alx_DynBuf *restrict buf,
-				 size_t offset);
+				 ssize_t offset);
 
 /*
  * Consume part of the buffer.
@@ -174,7 +172,7 @@ ssize_t	alx_dynbuf_read		(void *restrict data, size_t size,
  * size:	Number of bytes to be consumed.
  */
 [[gnu::nonnull]]
-void	alx_dynbuf_consume	(struct Alx_DynBuf *buf, size_t size);
+void	alx_dynbuf_consume	(struct Alx_DynBuf *buf, ssize_t size);
 
 /*
  * Reallocates memory for the buffer, and updates any necessary metadata.
@@ -187,7 +185,7 @@ void	alx_dynbuf_consume	(struct Alx_DynBuf *buf, size_t size);
  *	ENOMEM:		Aborted; failure to allocate the data.
  */
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_dynbuf_resize	(struct Alx_DynBuf *buf, size_t size);
+int	alx_dynbuf_resize	(struct Alx_DynBuf *buf, ssize_t size);
 
 
 /******************************************************************************

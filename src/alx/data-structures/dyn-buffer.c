@@ -46,7 +46,7 @@ alx_Static_assert_size_ptrdiff();
  ******************************************************************************/
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
 static
-int	alx_dynbuf_grow		(struct Alx_DynBuf *buf, size_t size);
+int	alx_dynbuf_grow		(struct Alx_DynBuf *buf, ssize_t size);
 
 
 /******************************************************************************
@@ -101,10 +101,10 @@ void	alx_dynbuf_deinit	(struct Alx_DynBuf *buf)
 }
 
 int	alx_dynbuf_write	(struct Alx_DynBuf *restrict buf,
-				 size_t offset,
-				 const void *restrict data, size_t size)
+				 ssize_t offset,
+				 const void *restrict data, ssize_t size)
 {
-	size_t	written;
+	ssize_t	written;
 
 	if ((size + offset) > buf->size) {
 		if (alx_dynbuf_grow(buf, size + offset))
@@ -123,8 +123,8 @@ int	alx_dynbuf_write	(struct Alx_DynBuf *restrict buf,
 }
 
 int	alx_dynbuf_insert	(struct Alx_DynBuf *restrict buf,
-				 size_t offset,
-				 const void *restrict data, size_t size)
+				 ssize_t offset,
+				 const void *restrict data, ssize_t size)
 {
 
 	if ((size + buf->written) > buf->size) {
@@ -140,11 +140,11 @@ int	alx_dynbuf_insert	(struct Alx_DynBuf *restrict buf,
 	return	0;
 }
 
-ssize_t	alx_dynbuf_read		(void *restrict data, size_t size,
+ssize_t	alx_dynbuf_read		(void *restrict data, ssize_t size,
 				 const struct Alx_DynBuf *restrict buf,
-				 size_t offset)
+				 ssize_t offset)
 {
-	size_t	sz;
+	ssize_t	sz;
 
 	if (offset >= buf->written)
 		return	-1;
@@ -156,7 +156,7 @@ ssize_t	alx_dynbuf_read		(void *restrict data, size_t size,
 	return	0;
 }
 
-void	alx_dynbuf_consume	(struct Alx_DynBuf *buf, size_t size)
+void	alx_dynbuf_consume	(struct Alx_DynBuf *buf, ssize_t size)
 {
 
 	if (size >= buf->written) {
@@ -168,7 +168,7 @@ void	alx_dynbuf_consume	(struct Alx_DynBuf *buf, size_t size)
 	memmove(buf->data, &((char *)buf->data)[size], buf->written);
 }
 
-int	alx_dynbuf_resize	(struct Alx_DynBuf *buf, size_t size)
+int	alx_dynbuf_resize	(struct Alx_DynBuf *buf, ssize_t size)
 {
 
 	if (size > PTRDIFF_MAX  ||  !size)
@@ -191,9 +191,9 @@ int	alx_dynbuf_resize	(struct Alx_DynBuf *buf, size_t size)
  ******* static function definitions ******************************************
  ******************************************************************************/
 static
-int	alx_dynbuf_grow		(struct Alx_DynBuf *buf, size_t size)
+int	alx_dynbuf_grow		(struct Alx_DynBuf *buf, ssize_t size)
 {
-	size_t	sz;
+	ssize_t	sz;
 
 	if (size > PTRDIFF_MAX)
 		return	ENOMEM;

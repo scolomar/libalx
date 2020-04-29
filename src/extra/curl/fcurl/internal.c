@@ -40,6 +40,7 @@
 #include <stdint.h>
 
 #include <sys/param.h>
+#include <sys/types.h>
 
 #include <curl/curl.h>
 
@@ -72,7 +73,7 @@ CURLM	*alx_url_mhandle__;
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_url_fill_buffer__	(ALX_URL_FILE *stream, size_t want)
+int	alx_url_fill_buffer__	(ALX_URL_FILE *stream, ssize_t want)
 {
 	int64_t	curl_timeo;
 	int	status;

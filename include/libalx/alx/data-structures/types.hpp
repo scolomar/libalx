@@ -63,8 +63,8 @@ extern "C" {
  */
 struct	Alx_DynBuf {
 	void	*data;
-	size_t	size;
-	size_t	written;
+	ssize_t	size;
+	ssize_t	written;
 };
 
 /*
