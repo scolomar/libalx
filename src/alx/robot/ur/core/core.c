@@ -93,6 +93,8 @@ int	alx_ur_deinit	(struct Alx_UR *restrict ur)
 	return	status;
 }
 
+#pragma GCC diagnostic push	/* Overflow is impossible (vsbprintf) */
+#pragma GCC diagnostic ignored	"-Wsign-conversion"
 int	alx_ur_cmd	(const struct Alx_UR *restrict ur,
 			 const char *restrict fmt, ...)
 {
@@ -121,6 +123,7 @@ err:
 	fprintf(stderr, "%s", buf);
 	return	-1;
 }
+#pragma GCC diagnostic pop
 
 int	alx_ur_poweroff	(const struct Alx_UR *restrict ur)
 {

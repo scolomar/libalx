@@ -126,7 +126,7 @@ void	alx_ur_parse_msg_robot_state	(struct Alx_UR *restrict ur,
 	while (sz > 0) {
 		memcpy(&hdr, msg, sizeof(hdr));
 		msg	+= sizeof(hdr);
-		sz	-= sizeof(hdr);
+		sz	-= ssizeof(hdr);
 
 		switch (hdr.type) {
 		case ROBOT_STATE_PKG_TYPE_ROBOT_MODE_DATA:
@@ -188,6 +188,8 @@ ALX_ALIAS_WEAK_DEF(ur_parse_msg_robot_state,alx_ur_parse_msg_robot_state);
 /******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
+#pragma GCC diagnostic push	/* Handle weird UR type decissions */
+#pragma GCC diagnostic ignored	"-Wsign-conversion"
 static
 void	parse_rspkg_robot_mode_data	(struct Alx_UR *restrict ur,
 					 ssize_t sz,
@@ -320,6 +322,7 @@ void	parse_rspkg_mb_data		(struct Alx_UR *restrict ur,
 
 	data->_reserved_1	= alx_ur_parse_pkg_elem__(uint8_t, &msg);
 }
+#pragma GCC diagnostic pop
 
 static
 void	parse_rspkg_cartesian_info	(struct Alx_UR *restrict ur,
