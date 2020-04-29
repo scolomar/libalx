@@ -33,23 +33,23 @@
 #define ALX_UR_POSE_INIT_XYZ(x_, y_, z_, rx_, ry_, rz_)			\
 (struct Alx_UR_Pose){							\
 	.type	= (ALX_UR_POSE_XYZ),					\
-	.x	= (x_),							\
-	.y	= (y_),							\
-	.z	= (z_),							\
-	.rx	= (rx_),						\
-	.ry	= (ry_),						\
-	.rz	= (rz_)							\
+	.xyz.x	= (x_),							\
+	.xyz.y	= (y_),							\
+	.xyz.z	= (z_),							\
+	.xyz.rx	= (rx_),						\
+	.xyz.ry	= (ry_),						\
+	.xyz.rz	= (rz_)							\
 }
 
 #define ALX_UR_POSE_INIT_JOINTS(b_, s_, e_, w1_, w2_, w3_)		\
 (struct Alx_UR_Pose){							\
 	.type		= (ALX_UR_POSE_JOINTS),				\
-	.base		= (b_),						\
-	.shoulder	= (s_),						\
-	.elbow		= (e_),						\
-	.wrist1		= (w1_),					\
-	.wrist2		= (w2_),					\
-	.wrist3		= (w3_)						\
+	.j.base		= (b_),						\
+	.j.shoulder	= (s_),						\
+	.j.elbow	= (e_),						\
+	.j.wrist1	= (w1_),					\
+	.j.wrist2	= (w2_),					\
+	.j.wrist3	= (w3_)						\
 }
 
 
