@@ -80,14 +80,14 @@
  ******* static prototypes ****************************************************
  ******************************************************************************/
 static
-char	*url_fgets__	(char *restrict str, size_t size,
+char	*url_fgets__	(char *restrict str, ssize_t size,
 			 ALX_URL_FILE *restrict stream);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-char	*alx_url_fgets	(char *restrict str, size_t size,
+char	*alx_url_fgets	(char *restrict str, ssize_t size,
 			 ALX_URL_FILE *restrict stream)
 {
 
@@ -116,10 +116,10 @@ ALX_ALIAS_WEAK_DEF(url_fgets, alx_url_fgets);
  ******* static function definitions ******************************************
  ******************************************************************************/
 static
-char	*url_fgets__	(char *restrict str, size_t size,
+char	*url_fgets__	(char *restrict str, ssize_t size,
 			 ALX_URL_FILE *restrict stream)
 {
-	size_t	len;
+	ssize_t	len;
 
 	len	= size - 1;
 

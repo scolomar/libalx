@@ -48,7 +48,7 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
-#include <stddef.h>
+#include <sys/types.h>
 
 #include "libalx/base/compiler/attribute.h"
 
@@ -74,7 +74,7 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-char	*alx_url_fgets	(char *restrict str, size_t size,
+char	*alx_url_fgets	(char *restrict str, ssize_t size,
 			 ALX_URL_FILE *restrict stream);
 
 

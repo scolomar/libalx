@@ -50,6 +50,8 @@
  ******************************************************************************/
 #include <stddef.h>
 
+#include <sys/types.h>
+
 #include "libalx/base/compiler/attribute.h"
 
 #include "libalx/extra/curl/fcurl/URL_FILE.h"
@@ -74,7 +76,7 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-ptrdiff_t	alx_url_fread	(void *restrict ptr, size_t size,
+ptrdiff_t	alx_url_fread	(void *restrict ptr, ssize_t size,
 				 ptrdiff_t nmemb, ALX_URL_FILE *restrict stream);
 
 

@@ -48,7 +48,7 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
-#include <cstddef>
+#include <sys/types>
 
 #include "libalx/base/compiler/attribute.h"
 #include "libalx/base/compiler/restrict.hpp"
@@ -76,7 +76,7 @@ extern "C" {
  ******* C prototypes *********************************************************
  ******************************************************************************/
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-char	*alx_url_fgets	(char *restrict str, size_t size,
+char	*alx_url_fgets	(char *restrict str, ssize_t size,
 			 ALX_URL_FILE *restrict stream);
 
 
