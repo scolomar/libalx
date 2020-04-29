@@ -54,7 +54,7 @@ void	*alx_callocs__	(ptrdiff_t nmemb, ssize_t size, int *error)
 		goto zero;
 	if (nmemb < 0 || size < 0)
 		goto ovf;
-	if (nmemb  >  (SSIZE_MAX / size))
+	if (nmemb  >=  (SSIZE_MAX / size))
 		goto ovf;
 
 	p	= calloc(nmemb, size);

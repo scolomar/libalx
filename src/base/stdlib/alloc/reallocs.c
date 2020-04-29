@@ -10,6 +10,7 @@
 #include "libalx/base/stdlib/alloc/reallocs.h"
 
 #include <errno.h>
+#include <limits.h>
 #include <stdlib.h>
 
 #include <sys/types.h>
@@ -42,7 +43,7 @@ void	*alx_reallocs__	(void *restrict ptr, ssize_t size, int *restrict error)
 	*error	= 0;
 	if (!size)
 		goto zero;
-	if (size < 0)
+	if (size < 0 || size >= SSIZE_MAX)
 		goto ovf;
 
 	p	= realloc(ptr, size);

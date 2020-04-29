@@ -55,7 +55,7 @@ void	*alx_reallocarrays__	(void *restrict ptr, ptrdiff_t nmemb,
 		goto zero;
 	if (nmemb < 0 || size < 0)
 		goto ovf;
-	if (nmemb  >  (SSIZE_MAX / size))
+	if (nmemb  >=  (SSIZE_MAX / size))
 		goto ovf;
 
 	p	= reallocarray(ptr, nmemb, size);
