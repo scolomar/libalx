@@ -43,8 +43,9 @@
  ******* include **************************************************************
  ******************************************************************************/
 #include <stdbool.h>
-#include <stddef.h>
 #include <stdint.h>
+
+#include <sys/types.h>
 
 #include "libalx/alx/data-structures/llist.h"
 #include "libalx/alx/data-structures/node.h"
@@ -119,7 +120,7 @@ void	alx_bst_deinit		(struct Alx_BST *bst);
  */
 [[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
 int	alx_bst_insert		(struct Alx_BST *restrict bst,
-				 const void *restrict data, size_t size,
+				 const void *restrict data, ssize_t size,
 				 struct Alx_Node **restrict bstnode);
 
 /*

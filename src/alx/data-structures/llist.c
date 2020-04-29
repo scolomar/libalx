@@ -14,6 +14,8 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+#include <sys/types.h>
+
 #include "libalx/alx/data-structures/bst.h"
 #include "libalx/alx/data-structures/dyn-array.h"
 #include "libalx/alx/data-structures/dyn-buffer.h"
@@ -102,7 +104,7 @@ void	alx_llist_deinit		(struct Alx_LinkedList *list)
 }
 
 int	alx_llist_prepend		(struct Alx_LinkedList *list,
-					 const void *data, size_t size)
+					 const void *data, ssize_t size)
 {
 	struct Alx_Node	*node;
 
@@ -134,7 +136,7 @@ void	alx_llist_prepend_node		(struct Alx_LinkedList *list,
 }
 
 int	alx_llist_append		(struct Alx_LinkedList *list,
-					 const void *data, size_t size)
+					 const void *data, ssize_t size)
 {
 	struct Alx_Node	*node;
 
@@ -166,7 +168,7 @@ void	alx_llist_append_node		(struct Alx_LinkedList *list,
 }
 
 int	alx_llist_insert_before		(struct Alx_LinkedList *list,
-					 const void *data, size_t size,
+					 const void *data, ssize_t size,
 					 struct Alx_Node *ref)
 {
 	struct Alx_Node	*node;
@@ -202,7 +204,7 @@ void	alx_llist_insert_node_before	(struct Alx_LinkedList *list,
 }
 
 int	alx_llist_insert_after		(struct Alx_LinkedList *list,
-					 const void *data, size_t size,
+					 const void *data, ssize_t size,
 					 struct Alx_Node *ref)
 {
 	struct Alx_Node	*node;
@@ -238,7 +240,7 @@ void	alx_llist_insert_node_after	(struct Alx_LinkedList *list,
 }
 
 int	alx_llist_insert_at		(struct Alx_LinkedList *list,
-					 const void *data, size_t size,
+					 const void *data, ssize_t size,
 					 ptrdiff_t pos)
 {
 	struct Alx_Node	*node;

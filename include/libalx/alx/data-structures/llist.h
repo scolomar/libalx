@@ -43,6 +43,8 @@
  ******************************************************************************/
 #include <stddef.h>
 
+#include <sys/types.h>
+
 #include "libalx/alx/data-structures/dyn-array.h"
 #include "libalx/alx/data-structures/types.h"
 
@@ -108,7 +110,7 @@ void	alx_llist_deinit		(struct Alx_LinkedList *list);
  */
 [[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
 int	alx_llist_prepend		(struct Alx_LinkedList *list,
-					 const void *data, size_t size);
+					 const void *data, ssize_t size);
 
 /*
  * Inserts an already existing node at the begining of the list.
@@ -136,7 +138,7 @@ void	alx_llist_prepend_node		(struct Alx_LinkedList *list,
  */
 [[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
 int	alx_llist_append		(struct Alx_LinkedList *list,
-					 const void *data, size_t size);
+					 const void *data, ssize_t size);
 
 /*
  * Inserts an already existing node at the end of the list.
@@ -164,7 +166,7 @@ void	alx_llist_append_node		(struct Alx_LinkedList *list,
  */
 [[gnu::nonnull(1, 4)]] [[gnu::warn_unused_result]]
 int	alx_llist_insert_before		(struct Alx_LinkedList *list,
-					 const void *data, size_t size,
+					 const void *data, ssize_t size,
 					 struct Alx_Node *ref);
 
 /*
@@ -194,7 +196,7 @@ void	alx_llist_insert_node_before	(struct Alx_LinkedList *list,
  */
 [[gnu::nonnull(1, 4)]] [[gnu::warn_unused_result]]
 int	alx_llist_insert_after		(struct Alx_LinkedList *list,
-					 const void *data, size_t size,
+					 const void *data, ssize_t size,
 					 struct Alx_Node *ref);
 
 /*
@@ -228,7 +230,7 @@ void	alx_llist_insert_node_after	(struct Alx_LinkedList *list,
  */
 [[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
 int	alx_llist_insert_at		(struct Alx_LinkedList *list,
-					 const void *data, size_t size,
+					 const void *data, ssize_t size,
 					 ptrdiff_t pos);
 
 /*

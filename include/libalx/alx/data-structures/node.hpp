@@ -31,6 +31,8 @@
  ******************************************************************************/
 #include <cstddef>
 
+#include <sys/types.h>
+
 #include "libalx/base/compiler/restrict.hpp"
 #include "libalx/alx/data-structures/dyn-buffer.hpp"
 
@@ -62,15 +64,15 @@ struct	Alx_Node {
  ******************************************************************************/
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_node_init		(struct Alx_Node **restrict node,
-				 const void *restrict data, size_t size);
+				 const void *restrict data, ssize_t size);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_node_init_empty	(struct Alx_Node **node);
 void	alx_node_deinit		(struct Alx_Node *node);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_node_write		(struct Alx_Node *node,
-				 const void *data, size_t size);
+				 const void *data, ssize_t size);
 [[gnu::nonnull]]
-int	alx_node_read		(void *data, size_t size
+ssize_t	alx_node_read		(void *data, ssize_t size
 				 const struct Alx_Node *node);
 
 

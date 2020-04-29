@@ -46,6 +46,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include <sys/types.h>
+
 #include "libalx/alx/data-structures/types.h"
 
 
@@ -89,7 +91,7 @@
  */
 [[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
 int	alx_node_init		(struct Alx_Node **restrict node,
-				 const void *restrict data, size_t size);
+				 const void *restrict data, ssize_t size);
 
 /*
  * Initializes empty node.
@@ -147,7 +149,7 @@ void	alx_node_deinit		(struct Alx_Node *node);
  */
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_node_write		(struct Alx_Node *node,
-				 const void *data, size_t size);
+				 const void *data, ssize_t size);
 
 /*
  * Reads from the buffer.
@@ -161,7 +163,7 @@ int	alx_node_write		(struct Alx_Node *node,
  *	ENOBUFS:	OK. data was truncated.
  */
 [[gnu::nonnull]]
-int	alx_node_read		(void *data, size_t size,
+ssize_t	alx_node_read		(void *data, ssize_t size,
 				 const struct Alx_Node *node);
 
 /*

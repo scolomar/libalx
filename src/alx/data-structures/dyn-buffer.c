@@ -10,6 +10,7 @@
 #include "libalx/alx/data-structures/dyn-buffer.h"
 
 #include <errno.h>
+#include <limits.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
@@ -56,7 +57,7 @@ int	alx_dynbuf_init		(struct Alx_DynBuf **buf)
 {
 
 	if (alx_mallocarrays(buf, 1))
-		return	ENOMEM;
+		return	-ENOMEM;
 	/* Initial size of 1 (minimum allocation) */
 	if (alx_mallocs(&(*buf)->data, 1))
 		goto enomem;
@@ -66,7 +67,7 @@ int	alx_dynbuf_init		(struct Alx_DynBuf **buf)
 	return	0;
 enomem:
 	alx_frees(buf);
-	return	ENOMEM;
+	return	-ENOMEM;
 }
 
 int	alx_dynbuf_init_clone	(struct Alx_DynBuf **restrict clone,
@@ -75,7 +76,7 @@ int	alx_dynbuf_init_clone	(struct Alx_DynBuf **restrict clone,
 
 	if (!ref) {
 		*clone	= NULL;
-		return	ENOANO;
+		return	-ENOANO;
 	}
 
 	if (alx_dynbuf_init(clone))
@@ -87,7 +88,7 @@ int	alx_dynbuf_init_clone	(struct Alx_DynBuf **restrict clone,
 enomem:
 	alx_dynbuf_deinit(*clone);
 	*clone	= NULL;
-	return	ENOMEM;
+	return	-ENOMEM;
 }
 
 void	alx_dynbuf_deinit	(struct Alx_DynBuf *buf)
@@ -100,17 +101,21 @@ void	alx_dynbuf_deinit	(struct Alx_DynBuf *buf)
 	free(buf);
 }
 
+#pragma GCC diagnostic push	/* Overflow is explicitly handled */
+#pragma GCC diagnostic ignored	"-Wsign-conversion"
 int	alx_dynbuf_write	(struct Alx_DynBuf *restrict buf,
 				 ssize_t offset,
 				 const void *restrict data, ssize_t size)
 {
 	ssize_t	written;
 
+	if (size < 0 || size >= SSIZE_MAX || offset < 0 || offset >= SSIZE_MAX)
+		return	-ENOMEM;
+
 	if ((size + offset) > buf->size) {
 		if (alx_dynbuf_grow(buf, size + offset))
-			return	ENOMEM;
+			return	-ENOMEM;
 	}
-
 	if (!size)
 		return	0;
 
@@ -127,9 +132,12 @@ int	alx_dynbuf_insert	(struct Alx_DynBuf *restrict buf,
 				 const void *restrict data, ssize_t size)
 {
 
+	if (size < 0 || size >= SSIZE_MAX || offset < 0 || offset >= SSIZE_MAX)
+		return	-ENOMEM;
+
 	if ((size + buf->written) > buf->size) {
 		if (alx_dynbuf_grow(buf, size + buf->written))
-			return	ENOMEM;
+			return	-ENOMEM;
 	}
 
 	memmove(&((char *)buf->data)[offset + size],
@@ -146,8 +154,10 @@ ssize_t	alx_dynbuf_read		(void *restrict data, ssize_t size,
 {
 	ssize_t	sz;
 
+	if (size < 0 || offset < 0)
+		return	-EBADSLT;
 	if (offset >= buf->written)
-		return	-1;
+		return	-EBADSLT;
 	sz	= MIN(size, buf->written - offset);
 	memcpy(data, &((char *)buf->data)[offset], sz);
 
@@ -159,6 +169,8 @@ ssize_t	alx_dynbuf_read		(void *restrict data, ssize_t size,
 void	alx_dynbuf_consume	(struct Alx_DynBuf *buf, ssize_t size)
 {
 
+	if (size < 0)
+		return;
 	if (size >= buf->written) {
 		buf->written	= 0;
 		return;
@@ -167,15 +179,16 @@ void	alx_dynbuf_consume	(struct Alx_DynBuf *buf, ssize_t size)
 	buf->written	-= size;
 	memmove(buf->data, &((char *)buf->data)[size], buf->written);
 }
+#pragma GCC diagnostic pop
 
 int	alx_dynbuf_resize	(struct Alx_DynBuf *buf, ssize_t size)
 {
 
-	if (size > PTRDIFF_MAX  ||  !size)
-		return	ENOMEM;
+	if (size > SSIZE_MAX  ||  size <= 0)
+		return	-ENOMEM;
 
 	if (alx_reallocs(&buf->data, size))
-		return	ENOMEM;
+		return	-ENOMEM;
 	buf->size	= size;
 
 	return	0;

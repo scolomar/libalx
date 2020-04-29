@@ -21,7 +21,7 @@
  ******************************************************************************/
 /*
  * Binary search tree
- *
+ * FIXME: update with .h
  * Read  <libalx/alx/data-structures/bst.h>  for documentation.
  */
 
@@ -29,7 +29,7 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
-#include <cstddef>
+#include <sys/types.h>
 
 #include "libalx/base/compiler/restrict.hpp"
 #include "libalx/alx/data-structures/llist.hpp"
