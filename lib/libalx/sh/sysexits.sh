@@ -72,7 +72,7 @@
 if [ -n "${SYSEXITS_H}" ]; then
 	return;
 fi
-export	SYSEXITS_H=$(date)
+export	SYSEXITS_H="/lib/libalx/sh/sysexits.sh included"
 
 
 ################################################################################
