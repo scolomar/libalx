@@ -60,6 +60,8 @@
 ##		perform the operation.  This is not intended for
 ##		file system problems, which should use NOINPUT or
 ##		CANTCREAT, but rather for higher level permissions.
+##	EX_CONFIG -- Something was found in an unconfigured or
+##		misconfigured state.
 ##
 ################################################################################
 
@@ -87,6 +89,8 @@ export	EX_TEMPFAIL=75		## temp failure; user is invited to retry
 export	EX_PROTOCOL=76		## remote error in protocol
 export	EX_NOPERM=77		## permission denied
 export	EX_CONFIG=78		## configuration error
+
+export	EX__MAX=78		## maximum listed value
 
 
 ################################################################################
