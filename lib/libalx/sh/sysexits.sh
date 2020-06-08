@@ -1,7 +1,7 @@
 ##	source	/lib/libalx/sh/sysexits.sh
 ################################################################################
-##	Copyright (C) 2020	Alejandro Colomar Andrés		      ##
-##	SPDX-License-Identifier:	BSD-2-Clause			      ##
+##	Copyright (C) 2020	  Alejandro Colomar Andrés		      ##
+##	SPDX-License-Identifier:  BSD-2-Clause				      ##
 ################################################################################
 ##
 ## Exit codes (based on <sysexits.h>)
