@@ -73,7 +73,6 @@ export	EX_OK=0			## successful termination
 
 export	EX__BASE=64		## base value for error messages
 
-export	EX_USAGE=64		## base value for error messages
 export	EX_USAGE=64		## command line usage error
 export	EX_DATAERR=65		## data format error
 export	EX_NOINPUT=66		## cannot open input
