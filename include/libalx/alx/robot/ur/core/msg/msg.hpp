@@ -52,15 +52,18 @@ struct	Alx_UR_Msg_Hdr {
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_ur_recvmsg		(struct Alx_UR *ur);
 [[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	alx_ur_buffer_read	(struct Alx_UR *ur);
+int	alx_ur_buffer_read	(struct Alx_UR *ur, int64_t min_timediff_ms);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_ur_buffer_consume	(struct Alx_UR *ur);
 
 
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-ALX_ALIAS_DECLARATION(ur_recvmsg,	alx_ur_recvmsg);
-ALX_ALIAS_DECLARATION(ur_buffer_read,	alx_ur_buffer_read);
+ALX_ALIAS_DECLARATION(ur_recvmsg,		alx_ur_recvmsg);
+ALX_ALIAS_DECLARATION(ur_buffer_read,		alx_ur_buffer_read);
+ALX_ALIAS_DECLARATION(ur_buffer_consume,	alx_ur_buffer_consume);
 #endif
 
 

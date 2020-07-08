@@ -22,7 +22,7 @@
 #include "libalx/base/compiler/unused.h"
 #include "libalx/base/sys/socket/msghdr.h"
 #include "libalx/base/sys/socket/timestamp.h"
-#include "libalx/base/time/timespec.h"
+#include "libalx/base/sys/time/timespec/sub.h"
 
 #include "libalx/alx/robot/ur/core/core.h"
 #include "libalx/alx/robot/ur/core/msg/robot_state.h"
@@ -80,7 +80,8 @@ int	alx_ur_recvmsg			(struct Alx_UR *ur)
 	}
 }
 
-int	alx_ur_buffer_read		(struct Alx_UR *ur)
+int	alx_ur_buffer_read		(struct Alx_UR *ur,
+					 int64_t min_timediff_ms)
 {
 	int64_t		time_ms;
 	struct timespec	start;
@@ -90,9 +91,14 @@ int	alx_ur_buffer_read		(struct Alx_UR *ur)
 	do {
 		if (alx_ur_recvmsg(ur))
 			return	-1;
-		time_ms	= alx_timespec_diff_ms(&start, &ur->state.timestamp);
-	} while (time_ms < -ROBOT_UPDATE_PERIOD_MS);
+		time_ms	= alx_timespec_sub_ms(&ur->state.timestamp, &start);
+	} while (time_ms < min_timediff_ms);
 	return	0;
+}
+
+int	alx_ur_buffer_consume		(struct Alx_UR *ur)
+{
+	return	alx_ur_buffer_read(ur, -ROBOT_UPDATE_PERIOD_MS);
 }
 
 
@@ -101,6 +107,7 @@ int	alx_ur_buffer_read		(struct Alx_UR *ur)
  ******************************************************************************/
 ALX_ALIAS_WEAK_DEF(ur_recvmsg,		alx_ur_recvmsg);
 ALX_ALIAS_WEAK_DEF(ur_buffer_read,	alx_ur_buffer_read);
+ALX_ALIAS_WEAK_DEF(ur_buffer_consume,	alx_ur_buffer_consume);
 
 
 /******************************************************************************

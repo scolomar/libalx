@@ -7,11 +7,11 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/time/timespec.hpp */
+#pragma once	/* libalx/base/sys/time/timespec/sub.h */
 
-#if !defined(__cplusplus)
-#warning	This header file should only be included in C++.  In C,	\
-		include the header file of the same name and `.h`	\
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
 		extension instead.
 #endif
 
@@ -19,10 +19,10 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
-#include <cstdint>
-#include <ctime>
+#include <stdint.h>
+#include <time.h>
 
-#include "libalx/base/compiler/attribute.hpp"
+#include "libalx/base/compiler/attribute.h"
 
 
 /******************************************************************************
@@ -31,9 +31,8 @@
 
 
 /******************************************************************************
- ******* extern "C" ***********************************************************
+ ******* enum *****************************************************************
  ******************************************************************************/
-extern "C" {
 
 
 /******************************************************************************
@@ -42,52 +41,38 @@ extern "C" {
 
 
 /******************************************************************************
- ******* C prototypes *********************************************************
+ ******* prototypes ***********************************************************
  ******************************************************************************/
-[[gnu::pure]] [[gnu::nonnull]]
-int64_t	alx_timespec_ms		(const struct timespec *tm);
-[[gnu::pure]] [[gnu::nonnull]]
-int64_t	alx_timespec_us		(const struct timespec *tm);
-[[gnu::pure]] [[gnu::nonnull]]
-int64_t	alx_timespec_ns		(const struct timespec *tm);
+[[gnu::nonnull]]
+void	alx_timespec_sub	(const struct timespec *stop,
+				 const struct timespec *start,
+				 struct timespec *diff);
+[[gnu::nonnull]] [[gnu::pure]]
+int64_t	alx_timespec_sub_ms	(const struct timespec *stop,
+				 const struct timespec *start);
+[[gnu::nonnull]] [[gnu::pure]]
+int64_t	alx_timespec_sub_us	(const struct timespec *stop,
+				 const struct timespec *start);
+[[gnu::nonnull]] [[gnu::pure]]
+int64_t	alx_timespec_sub_ns	(const struct timespec *stop,
+				 const struct timespec *start);
 
 
 /******************************************************************************
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-ALX_ALIAS_DECLARATION(timespec_ms,	alx_timespec_ms);
-ALX_ALIAS_DECLARATION(timespec_us,	alx_timespec_us);
-ALX_ALIAS_DECLARATION(timespec_ns,	alx_timespec_ns);
+ALX_ALIAS_DECLARATION(timespec_sub,	alx_timespec_sub);
+ALX_ALIAS_DECLARATION(timespec_sub_ms,	alx_timespec_sub_ms);
+ALX_ALIAS_DECLARATION(timespec_sub_us,	alx_timespec_sub_us);
+ALX_ALIAS_DECLARATION(timespec_sub_ns,	alx_timespec_sub_ns);
 #endif
 
 
-/******************************************************************************
- ******* extern "C" ***********************************************************
- ******************************************************************************/
-}	/* extern "C" */
-
 
 /******************************************************************************
- ******* namespace ************************************************************
+ ******* inline ***************************************************************
  ******************************************************************************/
-namespace alx {
-
-
-/******************************************************************************
- ******* enum *****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* prototypes ***********************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* namespace ************************************************************
- ******************************************************************************/
-}	/* namespace alx */
 
 
 /******************************************************************************

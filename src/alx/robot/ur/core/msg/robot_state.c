@@ -13,7 +13,6 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <string.h>
-#include <time.h>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -22,7 +21,6 @@
 #include "libalx/base/compiler/unused.h"
 #include "libalx/base/sys/socket/msghdr.h"
 #include "libalx/base/sys/socket/timestamp.h"
-#include "libalx/base/time/timespec.h"
 
 #include "libalx/alx/robot/ur/core/core.h"
 #include "libalx/alx/robot/ur/core/msg/msg.h"
@@ -101,17 +99,7 @@ void	parse_rspkg_tool_mode_info	(struct Alx_UR *restrict ur,
  ******************************************************************************/
 int	alx_ur_robot_state_update	(struct Alx_UR *ur)
 {
-	int64_t		time_ms;
-	struct timespec	start;
-
-	clock_gettime(CLOCK_REALTIME, &start);
-
-	do {
-		if (alx_ur_recvmsg(ur))
-			return	-1;
-		time_ms	= alx_timespec_diff_ms(&start, &ur->state.timestamp);
-	} while (time_ms < ROBOT_UPDATE_PERIOD_MS);
-	return	0;
+	return	alx_ur_buffer_read(ur, ROBOT_UPDATE_PERIOD_MS);
 }
 
 void	alx_ur_parse_msg_robot_state	(struct Alx_UR *restrict ur,
