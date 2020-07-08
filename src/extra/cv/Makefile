@@ -13,8 +13,8 @@
 # dependencies
 
 MK_DEPS	=								\
-	$(MK_TMP_DIR)/extra/cv/Makefile					\
-	$(MK_TMP_DIR)/Makefile						\
+	$(SRC_DIR)/extra/cv/Makefile					\
+	$(SRC_DIR)/tmp.mk						\
 	$(LIBALX_DIR)/Makefile
 
 MODULES	=								\

@@ -1,11 +1,11 @@
-#! /usr/bin/make -f
+#!/usr/bin/make -f
 
 # MACRO = substitute with this
 
 # dependencies
 
 MK_DEPS	=								\
-	$(MK_LIB_DIR)/Makefile						\
+	$(SRC_DIR)/lib.mk						\
 	$(LIBALX_DIR)/Makefile
 
 BUILD_A_PATH	= $(BUILD_A_DIR)/libalx
@@ -283,9 +283,11 @@ all: $(ALL)
 
 
 PHONY += base
-base:
-	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
+base: base_a base_so
+PHONY += base_a
+base_a: $(BUILD_A_PATH)/libalx-base.a
+PHONY += base_so
+base_so: $(BUILD_SO_PATH)/libalx-base.so.$(LIBVERSION)
 
 
 PHONY += alx
@@ -294,19 +296,25 @@ alx: data-structures
 alx: robot
 
 PHONY += data-structures
-data-structures:
-	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
+data-structures: data-structures_a data-structures_so
+PHONY += data-structures_a
+data-structures_a: $(BUILD_A_PATH)/libalx-data-structures.a
+PHONY += data-structures_a
+data-structures_so: $(BUILD_SO_PATH)/libalx-data-structures.so.$(LIBVERSION)
 
 PHONY += npcomplete
-npcomplete:
-	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
+npcomplete: npcomplete_a npcomplete_so
+PHONY += npcomplete_a
+npcomplete_a: $(BUILD_A_PATH)/libalx-npcomplete.a
+PHONY += npcomplete_so
+npcomplete_so: $(BUILD_SO_PATH)/libalx-npcomplete.so.$(LIBVERSION)
 
 PHONY += robot
-robot:
-	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
+robot: robot_a robot_so
+PHONY += robot_a
+robot_a: $(BUILD_A_PATH)/libalx-robot.a
+PHONY += robot_so
+robot_so: $(BUILD_SO_PATH)/libalx-robot.so.$(LIBVERSION)
 
 
 PHONY += extra
@@ -321,49 +329,67 @@ extra: telnet-tcp
 extra: zbar
 
 PHONY += curl
-curl:
-	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
+curl: curl_a curl_so
+PHONY += curl_a
+curl_a: $(BUILD_A_PATH)/libalx-curl.a
+PHONY += curl_so
+curl_so: $(BUILD_SO_PATH)/libalx-curl.so.$(LIBVERSION)
 
 PHONY += cv
-cv:
-	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
+cv: cv_a cv_so
+PHONY += cv_a
+cv_a: $(BUILD_A_PATH)/libalx-cv.a
+PHONY += cv_so
+cv_so: $(BUILD_SO_PATH)/libalx-cv.so.$(LIBVERSION)
 
 PHONY += gmp
-gmp:
-	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
+gmp: gmp_a gmp_so
+PHONY += gmp_a
+gmp_a: $(BUILD_A_PATH)/libalx-gmp.a
+PHONY += gmp_so
+gmp_so: $(BUILD_SO_PATH)/libalx-gmp.so.$(LIBVERSION)
 
 PHONY += gsl
-gsl:
-	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
+gsl: gsl_a gsl_so
+PHONY += gsl_a
+gsl_a: $(BUILD_A_PATH)/libalx-gsl.a
+PHONY += gsl_so
+gsl_so: $(BUILD_SO_PATH)/libalx-gsl.so.$(LIBVERSION)
 
 PHONY += ncurses
-ncurses:
-	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
+ncurses: ncurses_a ncurses_so
+PHONY += ncurses_a
+ncurses_a: $(BUILD_A_PATH)/libalx-ncurses.a
+PHONY += ncurses_so
+ncurses_so: $(BUILD_SO_PATH)/libalx-ncurses.so.$(LIBVERSION)
 
 PHONY += ocr
-ocr:
-	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
+ocr: ocr_a ocr_so
+PHONY += ocr_a
+ocr_a: $(BUILD_A_PATH)/libalx-ocr.a
+PHONY += ocr_so
+ocr_so: $(BUILD_SO_PATH)/libalx-ocr.so.$(LIBVERSION)
 
 PHONY += plot
-plot:
-	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
+plot: plot_a plot_so
+PHONY += plot_a
+plot_a: $(BUILD_A_PATH)/libalx-plot.a
+PHONY += plot_so
+plot_so: $(BUILD_SO_PATH)/libalx-plot.so.$(LIBVERSION)
 
 PHONY += telnet-tcp
-telnet-tcp:
-	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
+telnet-tcp: telnet-tcp_a telnet-tcp_so
+PHONY += telnet-tcp_a
+telnet-tcp_a: $(BUILD_A_PATH)/libalx-telnet-tcp.a
+PHONY += telnet-tcp_so
+telnet-tcp_so: $(BUILD_SO_PATH)/libalx-telnet-tcp.so.$(LIBVERSION)
 
 PHONY += zbar
-zbar:
-	$(Q)$(MAKE)	$(BUILD_A_PATH)/libalx-$@.a
-	$(Q)$(MAKE)	$(BUILD_SO_PATH)/libalx-$@.so.$(LIBVERSION)
+zbar: zbar_a zbar_so
+PHONY += zbar_a
+zbar_a: $(BUILD_A_PATH)/libalx-zbar.a
+PHONY += zbar_so
+zbar_so: $(BUILD_SO_PATH)/libalx-zbar.so.$(LIBVERSION)
 
 
 %.so.$(LIBVERSION):

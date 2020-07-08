@@ -13,8 +13,8 @@
 # dependencies
 
 MK_DEPS	=								\
-	$(MK_TMP_DIR)/base/Makefile					\
-	$(MK_TMP_DIR)/Makefile						\
+	$(SRC_DIR)/base/Makefile					\
+	$(SRC_DIR)/tmp.mk						\
 	$(LIBALX_DIR)/Makefile
 
 MODULES	=								\
@@ -129,9 +129,9 @@ MODULES	=								\
 	base/time/timespec
 
 SRC	= $(MODULES:%=$(SRC_DIR)/%.c)
+DEP	= $(MODULES:%=$(BUILD_TMP_DIR)/%.d)
 OBJ	= $(MODULES:%=$(BUILD_TMP_DIR)/%.o)
 
-DEP		= $(OBJ:.o=.d)
 BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################

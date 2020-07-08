@@ -1,20 +1,24 @@
 #! /usr/bin/make -f
 
 ################################################################################
+# Copyright (C) 2020	Alejandro Colomar Andrés
+# SPDX-License-Identifier:	LGPL-2.0-only
+################################################################################
+# *AUTHOR*
+# FULL NAME	"Alejandro Colomar Andrés"
+# EMAIL		"1903716@gmail.com"
+################################################################################
 
 ################################################################################
 # dependencies
 
 MK_DEPS	=								\
-	$(MK_TMP_DIR)/extra/plot/Makefile				\
-	$(MK_TMP_DIR)/Makefile						\
+	$(SRC_DIR)/extra/telnet-tcp/Makefile				\
+	$(SRC_DIR)/tmp.mk						\
 	$(LIBALX_DIR)/Makefile
 
 MODULES	=								\
-	extra/plot/core							\
-	extra/plot/multi						\
-	extra/plot/plot							\
-	extra/plot/setup
+	extra/telnet-tcp/client/client
 
 SRC	= $(MODULES:%=$(SRC_DIR)/%.c)
 OBJ	= $(MODULES:%=$(BUILD_TMP_DIR)/%.o)
@@ -24,8 +28,8 @@ BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
-CFLAGS_A	+=
-CFLAGS_SO	+=
+#CFLAGS_A	+=
+#CFLAGS_SO	+=
 
 ################################################################################
 # target: dependencies

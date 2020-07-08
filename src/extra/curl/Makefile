@@ -1,7 +1,7 @@
 #! /usr/bin/make -f
 
 ################################################################################
-# Copyright (C) 2020	Alejandro Colomar Andrés
+# Copyright (C) 2019	Alejandro Colomar Andrés
 # SPDX-License-Identifier:	LGPL-2.0-only
 ################################################################################
 # *AUTHOR*
@@ -13,25 +13,33 @@
 # dependencies
 
 MK_DEPS	=								\
-	$(MK_TMP_DIR)/alx/robot/ur/Makefile				\
-	$(MK_TMP_DIR)/Makefile						\
+	$(SRC_DIR)/extra/curl/Makefile				\
+	$(SRC_DIR)/tmp.mk						\
 	$(LIBALX_DIR)/Makefile
 
 MODULES	=								\
-	alx/robot/ur/core/core						\
-	alx/robot/ur/core/msg/msg					\
-	alx/robot/ur/core/msg/robot_state				\
-	alx/robot/ur/io/io						\
-	alx/robot/ur/miscellaneous/miscellaneous			\
-	alx/robot/ur/move/move						\
-	alx/robot/ur/pose/pose						\
-	alx/robot/ur/setup/setup
+	extra/curl/fcurl/fclose						\
+	extra/curl/fcurl/feof						\
+	extra/curl/fcurl/fgetc						\
+	extra/curl/fcurl/fgets						\
+	extra/curl/fcurl/fopen						\
+	extra/curl/fcurl/fread						\
+	extra/curl/fcurl/init						\
+	extra/curl/fcurl/internal					\
+	extra/curl/fcurl/rewind						\
+	extra/curl/fcurl/ungetc						\
+	extra/curl/fcurl/URL_FILE
 
 SRC	= $(MODULES:%=$(SRC_DIR)/%.c)
 OBJ	= $(MODULES:%=$(BUILD_TMP_DIR)/%.o)
 
 DEP		= $(OBJ:.o=.d)
 BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
+
+################################################################################
+# cflags
+#CFLAGS_A	+=
+#CFLAGS_SO	+=
 
 ################################################################################
 # target: dependencies
@@ -76,4 +84,3 @@ clean:
 ################################################################################
 ######## End of file ###########################################################
 ################################################################################
-

@@ -1,4 +1,4 @@
-#! /usr/bin/make -f
+#!/usr/bin/make -f
 
 ################################################################################
 # Copyright (C) 2019	Alejandro Colomar Andrés
@@ -21,7 +21,7 @@ all: base alx extra
 
 PHONY += base
 base:
-	$(Q)$(MAKE)	-C $(MK_TMP_DIR)/base/
+	$(Q)$(MAKE)	-C $(SRC_DIR)/base/
 
 
 PHONY += alx
@@ -31,16 +31,16 @@ alx: robot
 
 PHONY += data-structures
 data-structures:
-	$(Q)$(MAKE)	-C $(MK_TMP_DIR)/alx/$@/
+	$(Q)$(MAKE)	-C $(SRC_DIR)/alx/$@/
 
 PHONY += npcomplete
 npcomplete:
-	$(Q)$(MAKE)	-C $(MK_TMP_DIR)/alx/$@/
+	$(Q)$(MAKE)	-C $(SRC_DIR)/alx/$@/
 
 PHONY += robot
 robot:
-	$(Q)$(MAKE)	-C $(MK_TMP_DIR)/alx/$@/ur/
-#	$(Q)$(MAKE)	-C $(MK_TMP_DIR)/alx/$@/kawasaki/
+	$(Q)$(MAKE)	-C $(SRC_DIR)/alx/$@/ur/
+#	$(Q)$(MAKE)	-C $(SRC_DIR)/alx/$@/kawasaki/
 
 
 PHONY += extra
@@ -56,39 +56,39 @@ extra: zbar
 
 PHONY += curl
 curl:
-	$(Q)$(MAKE)	-C $(MK_TMP_DIR)/extra/$@/
+	$(Q)$(MAKE)	-C $(SRC_DIR)/extra/$@/
 
 PHONY += cv
 cv:
-	$(Q)$(MAKE)	-C $(MK_TMP_DIR)/extra/$@/
+	$(Q)$(MAKE)	-C $(SRC_DIR)/extra/$@/
 
 PHONY += gmp
 gmp:
-	$(Q)$(MAKE)	-C $(MK_TMP_DIR)/extra/$@/
+	$(Q)$(MAKE)	-C $(SRC_DIR)/extra/$@/
 
 PHONY += gsl
 gsl:
-	$(Q)$(MAKE)	-C $(MK_TMP_DIR)/extra/$@/
+	$(Q)$(MAKE)	-C $(SRC_DIR)/extra/$@/
 
 PHONY += ncurses
 ncurses:
-	$(Q)$(MAKE)	-C $(MK_TMP_DIR)/extra/$@/
+	$(Q)$(MAKE)	-C $(SRC_DIR)/extra/$@/
 
 PHONY += ocr
 ocr:
-	$(Q)$(MAKE)	-C $(MK_TMP_DIR)/extra/$@/
+	$(Q)$(MAKE)	-C $(SRC_DIR)/extra/$@/
 
 PHONY += plot
 plot:
-	$(Q)$(MAKE)	-C $(MK_TMP_DIR)/extra/$@/
+	$(Q)$(MAKE)	-C $(SRC_DIR)/extra/$@/
 
 PHONY += telnet-tcp
 telnet-tcp:
-	$(Q)$(MAKE)	-C $(MK_TMP_DIR)/extra/$@/
+	$(Q)$(MAKE)	-C $(SRC_DIR)/extra/$@/
 
 PHONY += zbar
 zbar:
-	$(Q)$(MAKE)	-C $(MK_TMP_DIR)/extra/$@/
+	$(Q)$(MAKE)	-C $(SRC_DIR)/extra/$@/
 
 
 PHONY += clean

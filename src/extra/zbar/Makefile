@@ -13,12 +13,12 @@
 # dependencies
 
 MK_DEPS	=								\
-	$(MK_TMP_DIR)/alx/npcomplete/Makefile				\
-	$(MK_TMP_DIR)/Makefile						\
+	$(SRC_DIR)/extra/gsl/Makefile				\
+	$(SRC_DIR)/tmp.mk						\
 	$(LIBALX_DIR)/Makefile
 
 MODULES	=								\
-	alx/npcomplete/solver_lut
+	extra/zbar/zbar
 
 SRC	= $(MODULES:%=$(SRC_DIR)/%.c)
 OBJ	= $(MODULES:%=$(BUILD_TMP_DIR)/%.o)
@@ -28,8 +28,8 @@ BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
-CFLAGS_A	+= -fopenmp
-CFLAGS_SO	+= -fopenmp
+CFLAGS_A	+= `pkg-config --cflags zbar`
+CFLAGS_SO	+= `pkg-config --cflags zbar`
 
 ################################################################################
 # target: dependencies

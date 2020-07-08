@@ -13,12 +13,22 @@
 # dependencies
 
 MK_DEPS	=								\
-	$(MK_TMP_DIR)/extra/gsl/Makefile				\
-	$(MK_TMP_DIR)/Makefile						\
+	$(SRC_DIR)/extra/gmp/Makefile				\
+	$(SRC_DIR)/tmp.mk						\
 	$(LIBALX_DIR)/Makefile
 
 MODULES	=								\
-	extra/zbar/zbar
+	extra/gmp/mpq/cmp						\
+	extra/gmp/mpz/arithmetic					\
+	extra/gmp/mpz/cmp						\
+	extra/gmp/mpz/division						\
+	extra/gmp/mpz/exp						\
+	extra/gmp/mpz/get						\
+	extra/gmp/mpz/init_set						\
+	extra/gmp/mpz/misc						\
+	extra/gmp/mpz/root						\
+	extra/gmp/mpz/set						\
+	extra/gmp/mpz/theoretic
 
 SRC	= $(MODULES:%=$(SRC_DIR)/%.c)
 OBJ	= $(MODULES:%=$(BUILD_TMP_DIR)/%.o)
@@ -28,8 +38,8 @@ BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
-CFLAGS_A	+= `pkg-config --cflags zbar`
-CFLAGS_SO	+= `pkg-config --cflags zbar`
+#CFLAGS_A	+=
+#CFLAGS_SO	+=
 
 ################################################################################
 # target: dependencies
@@ -74,4 +84,3 @@ clean:
 ################################################################################
 ######## End of file ###########################################################
 ################################################################################
-

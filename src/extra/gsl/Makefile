@@ -13,22 +13,27 @@
 # dependencies
 
 MK_DEPS	=								\
-	$(MK_TMP_DIR)/extra/curl/Makefile				\
-	$(MK_TMP_DIR)/Makefile						\
+	$(SRC_DIR)/extra/gsl/Makefile				\
+	$(SRC_DIR)/tmp.mk						\
 	$(LIBALX_DIR)/Makefile
 
 MODULES	=								\
-	extra/curl/fcurl/fclose						\
-	extra/curl/fcurl/feof						\
-	extra/curl/fcurl/fgetc						\
-	extra/curl/fcurl/fgets						\
-	extra/curl/fcurl/fopen						\
-	extra/curl/fcurl/fread						\
-	extra/curl/fcurl/init						\
-	extra/curl/fcurl/internal					\
-	extra/curl/fcurl/rewind						\
-	extra/curl/fcurl/ungetc						\
-	extra/curl/fcurl/URL_FILE
+	extra/gsl/cblas/lvl1/iXamax					\
+	extra/gsl/cblas/lvl1/iXamin					\
+	extra/gsl/distance/chebyshev					\
+	extra/gsl/distance/euclidean					\
+	extra/gsl/distance/manhattan					\
+	extra/gsl/distributions/binomial				\
+	extra/gsl/distributions/exp					\
+	extra/gsl/distributions/gauss					\
+	extra/gsl/distributions/geometric				\
+	extra/gsl/distributions/poisson					\
+	extra/gsl/distributions/uniform					\
+	extra/gsl/rstat/median						\
+	extra/gsl/statistics/mean					\
+	extra/gsl/units/len						\
+	extra/gsl/units/temp						\
+	extra/gsl/units/weight
 
 SRC	= $(MODULES:%=$(SRC_DIR)/%.c)
 OBJ	= $(MODULES:%=$(BUILD_TMP_DIR)/%.o)
@@ -38,8 +43,8 @@ BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
-#CFLAGS_A	+=
-#CFLAGS_SO	+=
+CFLAGS_A	+= `pkg-config --cflags gsl`
+CFLAGS_SO	+= `pkg-config --cflags gsl`
 
 ################################################################################
 # target: dependencies
@@ -84,3 +89,4 @@ clean:
 ################################################################################
 ######## End of file ###########################################################
 ################################################################################
+

@@ -1,7 +1,7 @@
 #! /usr/bin/make -f
 
 ################################################################################
-# Copyright (C) 2020	Alejandro Colomar Andrés
+# Copyright (C) 2019	Alejandro Colomar Andrés
 # SPDX-License-Identifier:	LGPL-2.0-only
 ################################################################################
 # *AUTHOR*
@@ -13,12 +13,15 @@
 # dependencies
 
 MK_DEPS	=								\
-	$(MK_TMP_DIR)/extra/telnet-tcp/Makefile				\
-	$(MK_TMP_DIR)/Makefile						\
+	$(SRC_DIR)/extra/ncurses/Makefile				\
+	$(SRC_DIR)/tmp.mk						\
 	$(LIBALX_DIR)/Makefile
 
 MODULES	=								\
-	extra/telnet-tcp/client/client
+	extra/ncurses/common						\
+	extra/ncurses/get						\
+	extra/ncurses/menu						\
+	extra/ncurses/perror
 
 SRC	= $(MODULES:%=$(SRC_DIR)/%.c)
 OBJ	= $(MODULES:%=$(BUILD_TMP_DIR)/%.o)
@@ -28,8 +31,8 @@ BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
-#CFLAGS_A	+=
-#CFLAGS_SO	+=
+CFLAGS_A	+= `pkg-config --cflags ncurses`
+CFLAGS_SO	+= `pkg-config --cflags ncurses`
 
 ################################################################################
 # target: dependencies
@@ -74,4 +77,3 @@ clean:
 ################################################################################
 ######## End of file ###########################################################
 ################################################################################
-

@@ -1,27 +1,20 @@
 #! /usr/bin/make -f
 
 ################################################################################
-# Copyright (C) 2019	Alejandro Colomar Andrés
-# SPDX-License-Identifier:	LGPL-2.0-only
-################################################################################
-# *AUTHOR*
-# FULL NAME	"Alejandro Colomar Andrés"
-# EMAIL		"1903716@gmail.com"
-################################################################################
 
 ################################################################################
 # dependencies
 
 MK_DEPS	=								\
-	$(MK_TMP_DIR)/extra/ncurses/Makefile				\
-	$(MK_TMP_DIR)/Makefile						\
+	$(SRC_DIR)/extra/plot/Makefile				\
+	$(SRC_DIR)/tmp.mk						\
 	$(LIBALX_DIR)/Makefile
 
 MODULES	=								\
-	extra/ncurses/common						\
-	extra/ncurses/get						\
-	extra/ncurses/menu						\
-	extra/ncurses/perror
+	extra/plot/core							\
+	extra/plot/multi						\
+	extra/plot/plot							\
+	extra/plot/setup
 
 SRC	= $(MODULES:%=$(SRC_DIR)/%.c)
 OBJ	= $(MODULES:%=$(BUILD_TMP_DIR)/%.o)
@@ -31,8 +24,8 @@ BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
-CFLAGS_A	+= `pkg-config --cflags ncurses`
-CFLAGS_SO	+= `pkg-config --cflags ncurses`
+CFLAGS_A	+=
+CFLAGS_SO	+=
 
 ################################################################################
 # target: dependencies
@@ -77,3 +70,4 @@ clean:
 ################################################################################
 ######## End of file ###########################################################
 ################################################################################
+

@@ -13,23 +13,24 @@
 # dependencies
 
 MK_DEPS	=								\
-	$(MK_TMP_DIR)/extra/ocr/Makefile				\
-	$(MK_TMP_DIR)/Makefile						\
+	$(SRC_DIR)/alx/data-structures/Makefile			\
+	$(SRC_DIR)/tmp.mk						\
 	$(LIBALX_DIR)/Makefile
 
 MODULES	=								\
-	extra/ocr/ocr
+	alx/data-structures/bst						\
+	alx/data-structures/dataframe					\
+	alx/data-structures/dyn-array					\
+	alx/data-structures/dyn-buffer					\
+	alx/data-structures/llist					\
+	alx/data-structures/node					\
+	alx/data-structures/types
 
 SRC	= $(MODULES:%=$(SRC_DIR)/%.c)
 OBJ	= $(MODULES:%=$(BUILD_TMP_DIR)/%.o)
 
 DEP		= $(OBJ:.o=.d)
 BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
-
-################################################################################
-# cflags
-CFLAGS_A	+= `pkg-config --cflags tesseract`
-CFLAGS_SO	+= `pkg-config --cflags tesseract`
 
 ################################################################################
 # target: dependencies

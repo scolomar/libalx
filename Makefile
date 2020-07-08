@@ -1,10 +1,10 @@
-#! /usr/bin/make -f
+#!/usr/bin/make -f
 
 ################################################################################
 VERSION		= 1
 PATCHLEVEL	= 0
 SUBLEVEL	=
-EXTRAVERSION	= ~b21
+EXTRAVERSION	= ~b22
 NAME		=
 
 export	VERSION
@@ -83,9 +83,6 @@ SRC_DIR		= $(LIBALX_DIR)/src
 LIB_DIR		= $(LIBALX_DIR)/lib
 ETC_DIR		= $(LIBALX_DIR)/etc
 SHARE_DIR	= $(LIBALX_DIR)/share
-MK_DIR		= $(LIBALX_DIR)/mk
-MK_TMP_DIR	= $(MK_DIR)/tmp
-MK_LIB_DIR	= $(MK_DIR)/lib
 BUILD_DIR	= $(LIBALX_DIR)/build
 BUILD_TMP_DIR	= $(BUILD_DIR)/tmp
 BUILD_LIB_DIR	= $(BUILD_DIR)/lib
@@ -100,9 +97,6 @@ export	SRC_DIR
 export	LIB_DIR
 export	ETC_DIR
 export	SHARE_DIR
-export	MK_DIR
-export	MK_TMP_DIR
-export	MK_LIB_DIR
 export	BUILD_DIR
 export	BUILD_TMP_DIR
 export	BUILD_LIB_DIR
@@ -328,10 +322,10 @@ cv_lib: gsl_lib
 
 PHONY	+= $(COMPILE_ACTUAL_TMP_TARGETS)
 $(COMPILE_ACTUAL_TMP_TARGETS): %_tmp:
-	$(Q)$(MAKE) $*		-C $(MK_TMP_DIR)
+	$(Q)$(MAKE) $*	-f tmp.mk	-C $(SRC_DIR)
 PHONY	+= $(COMPILE_ACTUAL_LIB_TARGETS)
 $(COMPILE_ACTUAL_LIB_TARGETS): %_lib: %_tmp
-	$(Q)$(MAKE) $*		-C $(MK_LIB_DIR)
+	$(Q)$(MAKE) $*	-f lib.mk	-C $(SRC_DIR)
 
 
 ################################################################################

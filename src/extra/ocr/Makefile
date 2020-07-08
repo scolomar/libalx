@@ -13,27 +13,12 @@
 # dependencies
 
 MK_DEPS	=								\
-	$(MK_TMP_DIR)/extra/gsl/Makefile				\
-	$(MK_TMP_DIR)/Makefile						\
+	$(SRC_DIR)/extra/ocr/Makefile				\
+	$(SRC_DIR)/tmp.mk						\
 	$(LIBALX_DIR)/Makefile
 
 MODULES	=								\
-	extra/gsl/cblas/lvl1/iXamax					\
-	extra/gsl/cblas/lvl1/iXamin					\
-	extra/gsl/distance/chebyshev					\
-	extra/gsl/distance/euclidean					\
-	extra/gsl/distance/manhattan					\
-	extra/gsl/distributions/binomial				\
-	extra/gsl/distributions/exp					\
-	extra/gsl/distributions/gauss					\
-	extra/gsl/distributions/geometric				\
-	extra/gsl/distributions/poisson					\
-	extra/gsl/distributions/uniform					\
-	extra/gsl/rstat/median						\
-	extra/gsl/statistics/mean					\
-	extra/gsl/units/len						\
-	extra/gsl/units/temp						\
-	extra/gsl/units/weight
+	extra/ocr/ocr
 
 SRC	= $(MODULES:%=$(SRC_DIR)/%.c)
 OBJ	= $(MODULES:%=$(BUILD_TMP_DIR)/%.o)
@@ -43,8 +28,8 @@ BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
 # cflags
-CFLAGS_A	+= `pkg-config --cflags gsl`
-CFLAGS_SO	+= `pkg-config --cflags gsl`
+CFLAGS_A	+= `pkg-config --cflags tesseract`
+CFLAGS_SO	+= `pkg-config --cflags tesseract`
 
 ################################################################################
 # target: dependencies
