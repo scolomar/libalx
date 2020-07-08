@@ -21,9 +21,9 @@ MODULES	=								\
 	alx/npcomplete/solver_lut
 
 SRC	= $(MODULES:%=$(SRC_DIR)/%.c)
+DEP	= $(MODULES:%=$(BUILD_TMP_DIR)/%.d)
 OBJ	= $(MODULES:%=$(BUILD_TMP_DIR)/%.o)
 
-DEP		= $(OBJ:.o=.d)
 BOTH_OBJ	= $(subst .a.o,.a.o ,$(join $(OBJ:.o=.a.o),$(OBJ:.o=.so.o)))
 
 ################################################################################
