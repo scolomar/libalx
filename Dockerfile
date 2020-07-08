@@ -27,7 +27,6 @@ RUN									\
 			libzbar-dev \
 			telnet \
 			gnuplot \
-			deborphan \
 			--yes						&& \
 	apt-get autoremove --purge --yes				&& \
 	apt-get autoclean						&& \
