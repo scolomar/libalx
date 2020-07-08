@@ -15,6 +15,7 @@
 #include <string.h>
 #include <time.h>
 
+#include <sys/time.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 
@@ -22,7 +23,7 @@
 #include "libalx/base/compiler/unused.h"
 #include "libalx/base/sys/socket/msghdr.h"
 #include "libalx/base/sys/socket/timestamp.h"
-#include "libalx/base/sys/time/timespec/sub.h"
+#include "libalx/base/time/timespec.h"
 
 #include "libalx/alx/robot/ur/core/core.h"
 #include "libalx/alx/robot/ur/core/msg/robot_state.h"
@@ -85,13 +86,15 @@ int	alx_ur_buffer_read		(struct Alx_UR *ur,
 {
 	int64_t		time_ms;
 	struct timespec	start;
+	struct timespec	diff;
 
 	clock_gettime(CLOCK_REALTIME, &start);
 
 	do {
 		if (alx_ur_recvmsg(ur))
 			return	-1;
-		time_ms	= alx_timespec_sub_ms(&ur->state.timestamp, &start);
+		timespecsub(&ur->state.timestamp, &start, &diff);
+		time_ms	= alx_timespec_ms(&diff);
 	} while (time_ms < min_timediff_ms);
 	return	0;
 }

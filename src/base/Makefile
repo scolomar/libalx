@@ -123,7 +123,6 @@ MODULES	=								\
 	base/sys/socket/tcp/server					\
 	base/sys/socket/msghdr						\
 	base/sys/socket/timestamp					\
-	base/sys/time/timespec/sub					\
 	base/sys/types							\
 	base/time/gettime						\
 	base/time/timespec

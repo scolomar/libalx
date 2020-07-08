@@ -12,7 +12,9 @@
 #include <stdint.h>
 #include <time.h>
 
-#include "libalx/base/sys/time/timespec/sub.h"
+#include <sys/time.h>
+
+#include "libalx/base/time/timespec.h"
 
 
 /******************************************************************************
@@ -39,7 +41,7 @@ void	alx_clock_gettime_diff		(clockid_t clk_id,
 {
 
 	clock_gettime(clk_id, diff);
-	alx_timespec_sub(diff, rt_base, diff);
+	timespecsub(diff, rt_base, diff);
 }
 
 int64_t	alx_clock_gettime_diff_s	(clockid_t clk_id,
@@ -47,8 +49,7 @@ int64_t	alx_clock_gettime_diff_s	(clockid_t clk_id,
 {
 	struct timespec	tm;
 
-	clock_gettime(clk_id, &tm);
-	alx_timespec_sub(&tm, rt_base, &tm);
+	alx_clock_gettime_diff(clk_id, &tm, rt_base);
 	return	tm.tv_sec;
 }
 
@@ -57,8 +58,8 @@ int64_t	alx_clock_gettime_diff_ms	(clockid_t clk_id,
 {
 	struct timespec	tm;
 
-	clock_gettime(clk_id, &tm);
-	return	alx_timespec_sub_ms(&tm, rt_base);
+	alx_clock_gettime_diff(clk_id, &tm, rt_base);
+	return	alx_timespec_ms(&tm);
 }
 
 int64_t	alx_clock_gettime_diff_us	(clockid_t clk_id,
@@ -66,8 +67,8 @@ int64_t	alx_clock_gettime_diff_us	(clockid_t clk_id,
 {
 	struct timespec	tm;
 
-	clock_gettime(clk_id, &tm);
-	return	alx_timespec_sub_us(&tm, rt_base);
+	alx_clock_gettime_diff(clk_id, &tm, rt_base);
+	return	alx_timespec_us(&tm);
 }
 
 int64_t	alx_clock_gettime_diff_ns	(clockid_t clk_id,
@@ -75,8 +76,8 @@ int64_t	alx_clock_gettime_diff_ns	(clockid_t clk_id,
 {
 	struct timespec	tm;
 
-	clock_gettime(clk_id, &tm);
-	return	alx_timespec_sub_ns(&tm, rt_base);
+	alx_clock_gettime_diff(clk_id, &tm, rt_base);
+	return	alx_timespec_ns(&tm);
 }
 
 
