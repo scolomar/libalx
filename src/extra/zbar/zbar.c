@@ -56,9 +56,9 @@ int	alx_zbar_read	(ptrdiff_t bufsiz,
 
 	/* wrap image data */
 	image_zb = zbar_image_create();
-#pragma GCC diagnostic push	/* XXX: Why is this function so weird? */
+#pragma GCC diagnostic push
 #pragma GCC diagnostic ignored	"-Wcast-align"
-	zbar_image_set_format(image_zb, *(int *)"GREY");
+	zbar_image_set_format(image_zb, *(uint32_t *)"GREY");
 #pragma GCC diagnostic pop
 	zbar_image_set_size(image_zb, cols, rows);
 	zbar_image_set_data(image_zb, imgdata, cols * rows, NULL);
