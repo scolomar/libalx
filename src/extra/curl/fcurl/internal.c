@@ -73,8 +73,8 @@ CURLM	*alx_url_mhandle__;
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-#pragma GCC diagnostic push	/* curl is inconsistent */
-#pragma GCC diagnostic ignored	"-Wconversion"
+//#pragma GCC diagnostic push	/* curl is inconsistent */
+//#pragma GCC diagnostic ignored	"-Wconversion"
 int	alx_url_fill_buffer__	(ALX_URL_FILE *stream, ssize_t want)
 {
 	int64_t	curl_timeo;
@@ -104,7 +104,7 @@ int	alx_url_fill_buffer__	(ALX_URL_FILE *stream, ssize_t want)
 
 	return	0;
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

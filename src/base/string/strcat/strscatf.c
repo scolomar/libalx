@@ -56,8 +56,8 @@ ptrdiff_t alx_strscatf		(ptrdiff_t size,
 	return	len;
 }
 
-#pragma GCC diagnostic push	/* Overflow is explicitly handled */
-#pragma GCC diagnostic ignored	"-Wsign-conversion"
+//#pragma GCC diagnostic push	/* Overflow is explicitly handled */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 ptrdiff_t alx_vstrscatf		(ptrdiff_t size,
 				 char dest[static restrict size],
 				 const char *restrict format, va_list ap)
@@ -81,7 +81,7 @@ err:
 	return	-1;
 
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

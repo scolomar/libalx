@@ -64,10 +64,10 @@ inline
 ssize_t	alx_memchrend	(const void *ptr, unsigned char c, ssize_t size)
 {
 	const unsigned char	*p0 = ptr;
-#pragma GCC diagnostic push	/* Large arrays unsupported (UB) */
-#pragma GCC diagnostic ignored	"-Wsign-conversion"
+//#pragma GCC diagnostic push	/* Large arrays unsupported (UB) */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 	const unsigned char	*pc = memchr(ptr, c, size);
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 	if (!pc)
 		return	size - 1;

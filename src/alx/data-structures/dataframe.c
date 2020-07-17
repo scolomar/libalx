@@ -93,8 +93,8 @@ void	alx_df_deinit		(struct Alx_DataFrame *df)
 	free(df);
 }
 
-#pragma GCC diagnostic push	/* Overflow is explicitly handled by dynbuf */
-#pragma GCC diagnostic ignored	"-Wsign-conversion"
+//#pragma GCC diagnostic push	/* Overflow is explicitly handled by dynbuf */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 int	alx_df_ins_col		(struct Alx_DataFrame *restrict df,
 				 ptrdiff_t ncol, int type, char *restrict hdr,
 				 const char *values[restrict])
@@ -346,7 +346,7 @@ out:
 
 	return	status1;
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

@@ -61,8 +61,8 @@ ALX_ALIAS_DECLARATION(strnchrnul, alx_strnchrnul);
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
-#pragma GCC diagnostic push	/* Large arrays unsupported (UB) */
-#pragma GCC diagnostic ignored	"-Wsign-conversion"
+//#pragma GCC diagnostic push	/* Large arrays unsupported (UB) */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 inline
 ptrdiff_t alx_strnchrnul	(ptrdiff_t size,
 				 const char str[static restrict size],
@@ -75,7 +75,7 @@ ptrdiff_t alx_strnchrnul	(ptrdiff_t size,
 		return	len;
 	return	p - str;
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

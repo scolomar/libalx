@@ -43,8 +43,8 @@ alx_Static_assert_size_ptrdiff();
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-#pragma GCC diagnostic push	/* Overflow is explicitly handled */
-#pragma GCC diagnostic ignored	"-Wsign-conversion"
+//#pragma GCC diagnostic push	/* Overflow is explicitly handled */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 void	*alx_reallocarrayf	(void *ptr, ptrdiff_t nmemb, ssize_t size)
 {
 
@@ -62,7 +62,7 @@ zero:
 	free(ptr);
 	return	NULL;
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

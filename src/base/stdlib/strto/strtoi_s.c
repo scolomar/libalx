@@ -34,8 +34,8 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-#pragma GCC diagnostic push	/* Over/underflow is explicitly handled */
-#pragma GCC diagnostic ignored	"-Wconversion"
+//#pragma GCC diagnostic push	/* Over/underflow is explicitly handled */
+//#pragma GCC diagnostic ignored	"-Wconversion"
 
 int	alx_strtoi8_s		(int8_t *restrict num,
 				 const char *restrict str,
@@ -107,7 +107,7 @@ int	alx_strtoi64_s		(int64_t *restrict num,
 
 	return	alx_strtol_status(str, endptr, errno, errno_before);
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 
 int	alx_strtol_status	(const char *restrict str,

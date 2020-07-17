@@ -40,8 +40,8 @@ alx_Static_assert_size_ptrdiff();
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-#pragma GCC diagnostic push	/* Negative bufsiz is handled */
-#pragma GCC diagnostic ignored	"-Wsign-conversion"
+//#pragma GCC diagnostic push	/* Negative bufsiz is handled */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 int	alx_freads	(ptrdiff_t bufsiz, char buf[static restrict bufsiz],
 			 FILE *restrict stream, ptrdiff_t *restrict len)
 {
@@ -57,7 +57,7 @@ int	alx_freads	(ptrdiff_t bufsiz, char buf[static restrict bufsiz],
 	buf[bytes]	= '\0';
 	return	ferror(stream);
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

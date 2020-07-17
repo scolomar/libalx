@@ -33,8 +33,8 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-#pragma GCC diagnostic push	/* Hope fgets handles negative bufsiz */
-#pragma GCC diagnostic ignored	"-Wsign-conversion"
+//#pragma GCC diagnostic push	/* Hope fgets handles negative bufsiz */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 int	alx_fgets_nonl	(char buf[restrict /*bufsiz*/], int bufsiz,
 			 FILE *restrict stream, ptrdiff_t *restrict len)
 {
@@ -66,7 +66,7 @@ err:
 		*len	= 0;
 	return	-errno;
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

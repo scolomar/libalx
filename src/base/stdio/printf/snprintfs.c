@@ -64,7 +64,7 @@ int	alx_vsnprintfs	(char str[restrict /*nmemb*/],
 	if (nmemb <= 0)
 		goto ovf;
 
-	len	= vsnprintf(str, (size_t)nmemb, format, ap);
+	len	= vsnprintf(str, nmemb, format, ap);
 
 	if (len < 0)
 		goto err;

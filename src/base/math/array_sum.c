@@ -135,8 +135,8 @@ ovf:
 	return	UINT_MAX;
 }
 
-#pragma GCC diagnostic push /* Arrays larger than PTRDIFF_MAX not supported */
-#pragma GCC diagnostic ignored	"-Wsign-conversion"
+//#pragma GCC diagnostic push /* Arrays larger than PTRDIFF_MAX not supported */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 int		alx_array_sum_int	(ptrdiff_t nmemb,
 					 const int arr[restrict nmemb])
 {
@@ -184,9 +184,9 @@ ovf:
 	return	INT_MIN;
 }
 
-#pragma GCC diagnostic push	/* Over(/under)flow is explicitly handled */
-#pragma GCC diagnostic ignored	"-Warith-conversion"
-#pragma GCC diagnostic ignored	"-Wconversion"
+//#pragma GCC diagnostic push	/* Over(/under)flow is explicitly handled */
+//#pragma GCC diagnostic ignored	"-Warith-conversion"
+//#pragma GCC diagnostic ignored	"-Wconversion"
 uint8_t		alx_array_sum_u8	(ptrdiff_t nmemb,
 					 const uint8_t arr[restrict nmemb])
 {
@@ -381,7 +381,7 @@ ovf:
 	errno	= ERANGE;
 	return	INT32_MIN;
 }
-#pragma GCC diagnostic pop	/* "-Warith-conversion" "-Wconversion" */
+//#pragma GCC diagnostic pop	/* "-Warith-conversion" "-Wconversion" */
 
 uint64_t	alx_array_sum_u64	(ptrdiff_t nmemb,
 					 const uint64_t arr[restrict nmemb])
@@ -447,7 +447,7 @@ ovf:
 	errno	= ERANGE;
 	return	INT64_MIN;
 }
-#pragma GCC diagnostic pop	/* "-Wsign-conversion" */
+//#pragma GCC diagnostic pop	/* "-Wsign-conversion" */
 
 
 /******************************************************************************

@@ -65,8 +65,8 @@ int	alx_ur_check_movement	(struct Alx_UR *restrict ur,
 	return	0;
 }
 
-#pragma GCC diagnostic push	/* Don't need precission */
-#pragma GCC diagnostic ignored	"-Wconversion"
+//#pragma GCC diagnostic push	/* Don't need precission */
+//#pragma GCC diagnostic ignored	"-Wconversion"
 int	alx_ur_wait_while_moving(struct Alx_UR *restrict ur,
 				 double timeout,
 				 const struct timespec *restrict tm_start)
@@ -83,7 +83,7 @@ int	alx_ur_wait_while_moving(struct Alx_UR *restrict ur,
 
 	return	-1;
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 bool	alx_ur_is_moving	(const struct Alx_UR *ur)
 {

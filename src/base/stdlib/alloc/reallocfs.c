@@ -34,8 +34,8 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-#pragma GCC diagnostic push	/* Overflow is explicitly handled */
-#pragma GCC diagnostic ignored	"-Wsign-conversion"
+//#pragma GCC diagnostic push	/* Overflow is explicitly handled */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 void	*alx_reallocfs__	(void *restrict ptr, ssize_t size,
 				 int *restrict error)
 {
@@ -61,7 +61,7 @@ zero:
 	*error	= ENOMEM;
 	return	NULL;
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

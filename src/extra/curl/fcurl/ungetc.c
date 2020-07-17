@@ -63,8 +63,8 @@ ALX_ALIAS_WEAK_DEF(url_ungetc, alx_url_ungetc);
 /******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
-#pragma GCC diagnostic push	/* Input should be char */
-#pragma GCC diagnostic ignored	"-Wconversion"
+//#pragma GCC diagnostic push	/* Input should be char */
+//#pragma GCC diagnostic ignored	"-Wconversion"
 static
 int	url_ungetc__	(int c, ALX_URL_FILE *restrict stream)
 {
@@ -76,7 +76,7 @@ int	url_ungetc__	(int c, ALX_URL_FILE *restrict stream)
 
 	return	c;
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

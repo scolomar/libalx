@@ -101,8 +101,8 @@ void	alx_dynbuf_deinit	(struct Alx_DynBuf *buf)
 	free(buf);
 }
 
-#pragma GCC diagnostic push	/* Overflow is explicitly handled */
-#pragma GCC diagnostic ignored	"-Wsign-conversion"
+//#pragma GCC diagnostic push	/* Overflow is explicitly handled */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 int	alx_dynbuf_write	(struct Alx_DynBuf *restrict buf,
 				 ssize_t offset,
 				 const void *restrict data, ssize_t size)
@@ -179,7 +179,7 @@ void	alx_dynbuf_consume	(struct Alx_DynBuf *buf, ssize_t size)
 	buf->written	-= size;
 	memmove(buf->data, &((char *)buf->data)[size], buf->written);
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 int	alx_dynbuf_resize	(struct Alx_DynBuf *buf, ssize_t size)
 {

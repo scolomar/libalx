@@ -95,8 +95,8 @@ ALX_ALIAS_DECLARATION(popcnt_u256,	alx_popcnt_u256);
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
-#pragma GCC diagnostic push	/* Over/underflow is impossible */
-#pragma GCC diagnostic ignored	"-Wconversion"
+//#pragma GCC diagnostic push	/* Over/underflow is impossible */
+//#pragma GCC diagnostic ignored	"-Wconversion"
 inline
 uint8_t		alx_popcnt_u8	(uint8_t n)
 {
@@ -110,10 +110,10 @@ uint16_t	alx_popcnt_u16	(uint16_t n)
 
 	return	__builtin_popcount(n);
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
-#pragma GCC diagnostic push	/* Overflow is impossible */
-#pragma GCC diagnostic ignored	"-Wsign-conversion"
+//#pragma GCC diagnostic push	/* Overflow is impossible */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 inline
 uint32_t	alx_popcnt_u32	(uint32_t n)
 {
@@ -127,10 +127,10 @@ uint64_t	alx_popcnt_u64	(uint64_t n)
 
 	return	__builtin_popcountl(n);
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
-#pragma GCC diagnostic push	/* Modulo truncation is useful here */
-#pragma GCC diagnostic ignored	"-Wconversion"
+//#pragma GCC diagnostic push	/* Modulo truncation is useful here */
+//#pragma GCC diagnostic ignored	"-Wconversion"
 #if defined(UINT128_MAX)
 inline
 uint64_t	alx_popcnt_u128	(uint128_t n)
@@ -156,7 +156,7 @@ uint64_t	alx_popcnt_u256	(uint256_t n)
 	return	cnt;
 }
 #endif
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

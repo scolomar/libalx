@@ -39,8 +39,8 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-#pragma GCC diagnostic push	/* Don't need precission */
-#pragma GCC diagnostic ignored	"-Wconversion"
+//#pragma GCC diagnostic push	/* Don't need precission */
+//#pragma GCC diagnostic ignored	"-Wconversion"
 int	alx_ur_set_Dout	(struct Alx_UR *ur, ptrdiff_t i, bool state,
 			 double timeout)
 {
@@ -64,7 +64,7 @@ int	alx_ur_set_Dout	(struct Alx_UR *ur, ptrdiff_t i, bool state,
 
 	return	0;
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

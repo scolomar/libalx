@@ -85,8 +85,8 @@ void	alx_dynarr_deinit	(struct Alx_DynArr *arr)
 	free(arr);
 }
 
-#pragma GCC diagnostic push	/* Overflow is explicitly handled */
-#pragma GCC diagnostic ignored	"-Wsign-conversion"
+//#pragma GCC diagnostic push	/* Overflow is explicitly handled */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 int	alx_dynarr_write	(struct Alx_DynArr *restrict arr,
 				 ptrdiff_t cell, const void *restrict data)
 {
@@ -165,7 +165,7 @@ int	alx_dynarr_remove	(struct Alx_DynArr *arr,
 
 	return	0;
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 int	alx_dynarr_resize	(struct Alx_DynArr *arr,
 				 ptrdiff_t nmemb, ssize_t elsize)

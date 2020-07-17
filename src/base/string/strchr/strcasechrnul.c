@@ -32,10 +32,10 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-#pragma GCC diagnostic push	/* Large arrays unsupported (UB) */
-#pragma GCC diagnostic ignored	"-Wsign-conversion"
-#pragma GCC diagnostic push	/* input is char */
-#pragma GCC diagnostic ignored	"-Wconversion"
+//#pragma GCC diagnostic push	/* Large arrays unsupported (UB) */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
+//#pragma GCC diagnostic push	/* input is char */
+//#pragma GCC diagnostic ignored	"-Wconversion"
 ptrdiff_t alx_strcasechrnul	(const char str[restrict], char c)
 {
 	const ptrdiff_t	len	= strlen(str);
@@ -52,8 +52,8 @@ ptrdiff_t alx_strcasechrnul	(const char str[restrict], char c)
 
 	return	len;
 }
-#pragma GCC diagnostic pop
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

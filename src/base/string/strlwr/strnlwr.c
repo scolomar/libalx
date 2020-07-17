@@ -31,8 +31,8 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-#pragma GCC diagnostic push	/* input is char */
-#pragma GCC diagnostic ignored	"-Wconversion"
+//#pragma GCC diagnostic push	/* input is char */
+//#pragma GCC diagnostic ignored	"-Wconversion"
 char	*alx_strnlwr	(ptrdiff_t n, char str[static restrict n])
 {
 
@@ -44,7 +44,7 @@ char	*alx_strnlwr	(ptrdiff_t n, char str[static restrict n])
 
 	return	str;
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

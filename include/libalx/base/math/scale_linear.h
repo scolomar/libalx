@@ -159,9 +159,9 @@ float		alx_scale_linear_flt	(float input,
 }
 
 /* FIXME: Write new functions which return error code for over/underflow */
-#pragma GCC diagnostic push	/* No over(/under)flow for valid input */
-#pragma GCC diagnostic ignored	"-Wfloat-conversion"
-#pragma GCC diagnostic ignored	"-Wconversion"
+//#pragma GCC diagnostic push	/* No over(/under)flow for valid input */
+//#pragma GCC diagnostic ignored	"-Wfloat-conversion"
+//#pragma GCC diagnostic ignored	"-Wconversion"
 inline
 unsigned	alx_scale_linear_uint	(unsigned input,
 					unsigned in_lo, unsigned in_hi,
@@ -351,7 +351,7 @@ int64_t		alx_scale_linear_s64	(int64_t input,
 
 	return	output;
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

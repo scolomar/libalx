@@ -33,8 +33,8 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-#pragma GCC diagnostic push	/* Overflow is avoided with a wide cast */
-#pragma GCC diagnostic ignored	"-Wsign-conversion"
+//#pragma GCC diagnostic push	/* Overflow is avoided with a wide cast */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 ptrdiff_t	alx_bsearch_uint(ptrdiff_t nmemb,
 				 const unsigned arr[static restrict nmemb],
 				 unsigned x)
@@ -274,7 +274,7 @@ ptrdiff_t	alx_bsearch_s64	(ptrdiff_t nmemb,
 
 	return	-1;
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

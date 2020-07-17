@@ -40,8 +40,8 @@ alx_Static_assert_size_ptrdiff();
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-#pragma GCC diagnostic push	/* Overflow is explicitly handled */
-#pragma GCC diagnostic ignored	"-Wsign-conversion"
+//#pragma GCC diagnostic push	/* Overflow is explicitly handled */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 ptrdiff_t alx_strscat		(ptrdiff_t size,
 				 char dest[static restrict size],
 				 const char src[static restrict size])
@@ -68,7 +68,7 @@ nul:
 
 	return	len;
 }
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************
