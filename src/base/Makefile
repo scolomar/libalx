@@ -115,7 +115,6 @@ MODULES	=								\
 	base/string/strlwr/strnlwr					\
 	base/string/strlwr/strupr					\
 	base/string/strlwr/strnupr					\
-	base/string/strgrep						\
 	base/string/strstr/strncasestr					\
 	base/string/strstr/strscasestr					\
 	base/string/strstr/strsstr					\

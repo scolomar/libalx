@@ -47,7 +47,6 @@
 #include <libalx/base/string/strstr/strncasestr.hpp>
 #include <libalx/base/string/strstr/strscasestr.hpp>
 #include <libalx/base/string/strstr/strsstr.hpp>
-#include <libalx/base/string/strgrep.hpp>
 
 
 /******************************************************************************
