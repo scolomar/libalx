@@ -49,7 +49,7 @@ void	alx_lmax_ldbl	(ptrdiff_t rows, ptrdiff_t cols,
 			 bool arr_out[static restrict rows][cols])
 {
 
-	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+	if ((size_t)rows > (SSIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
 		errno	= EOVERFLOW;
 		return;
 	}
@@ -85,7 +85,7 @@ void	alx_lmax	(ptrdiff_t rows, ptrdiff_t cols,
 			 bool arr_out[static restrict rows][cols])
 {
 
-	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+	if ((size_t)rows > (SSIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
 		errno	= EOVERFLOW;
 		return;
 	}
@@ -121,7 +121,7 @@ void	alx_lmax_f	(ptrdiff_t rows, ptrdiff_t cols,
 			 bool arr_out[static restrict rows][cols])
 {
 
-	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+	if ((size_t)rows > (SSIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
 		errno	= EOVERFLOW;
 		return;
 	}
@@ -159,7 +159,7 @@ void	alx_lmax_uint	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
-	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+	if ((size_t)rows > (SSIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
 		errno	= EOVERFLOW;
 		return;
 	}
@@ -231,7 +231,7 @@ void	alx_lmax_int	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
-	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+	if ((size_t)rows > (SSIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
 		errno	= EOVERFLOW;
 		return;
 	}
@@ -303,7 +303,7 @@ void	alx_lmax_u8	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
-	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+	if ((size_t)rows > (SSIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
 		errno	= EOVERFLOW;
 		return;
 	}
@@ -375,7 +375,7 @@ void	alx_lmax_s8	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
-	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+	if ((size_t)rows > (SSIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
 		errno	= EOVERFLOW;
 		return;
 	}
@@ -447,7 +447,7 @@ void	alx_lmax_u16	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
-	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+	if ((size_t)rows > (SSIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
 		errno	= EOVERFLOW;
 		return;
 	}
@@ -519,7 +519,7 @@ void	alx_lmax_s16	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
-	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+	if ((size_t)rows > (SSIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
 		errno	= EOVERFLOW;
 		return;
 	}
@@ -591,7 +591,7 @@ void	alx_lmax_u32	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
-	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+	if ((size_t)rows > (SSIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
 		errno	= EOVERFLOW;
 		return;
 	}
@@ -663,7 +663,7 @@ void	alx_lmax_s32	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
-	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+	if ((size_t)rows > (SSIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
 		errno	= EOVERFLOW;
 		return;
 	}
@@ -735,7 +735,7 @@ void	alx_lmax_u64	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
-	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+	if ((size_t)rows > (SSIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
 		errno	= EOVERFLOW;
 		return;
 	}
@@ -807,7 +807,7 @@ void	alx_lmax_s64	(ptrdiff_t rows, ptrdiff_t cols,
 	int	arr_tmp[rows][cols];
 	bool	wh;
 
-	if ((size_t)rows > (SIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
+	if ((size_t)rows > (SSIZE_MAX / (cols * sizeof(arr_out[0][0])))) {
 		errno	= EOVERFLOW;
 		return;
 	}

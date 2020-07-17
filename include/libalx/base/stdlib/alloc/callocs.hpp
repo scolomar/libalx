@@ -21,7 +21,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]]
- * int	callocs(type **ptr, size_t nmemb);
+ * int	callocs(type **ptr, ssize_t nmemb);
  *
  * Read  <libalx/base/stdlib/alloc/callocs.h>  for documentation.
  */

@@ -19,8 +19,6 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
-#include <stddef.h>
-
 #include <sys/types.h>
 #include <sys/socket.h>
 
@@ -48,8 +46,8 @@
 [[gnu::nonnull]]
 void	alx_wrap_msghdr	(struct msghdr *restrict msg,
 			 struct iovec *restrict iov,
-			 size_t bufsiz, void *restrict buf,
-			 size_t cbufsiz, void *restrict cbuf);
+			 ssize_t bufsiz, void *restrict buf,
+			 ssize_t cbufsiz, void *restrict cbuf);
 
 
 /******************************************************************************

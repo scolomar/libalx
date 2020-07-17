@@ -21,7 +21,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * int	reallocs(void **ptr, size_t size);
+ * int	reallocs(void **ptr, ssize_t size);
  *
  * Read  <libalx/base/stdlib/alloc/reallocs.h>  for documentation.
  */

@@ -21,7 +21,7 @@
  ******************************************************************************/
 /*
  * [[gnu::malloc]] [[gnu::warn_unused_result]]
- * void	*mallocarray(ptrdiff_t nmemb, size_t size);
+ * void	*mallocarray(ptrdiff_t nmemb, ssize_t size);
  *
  * Read  <libalx/base/stdlib/alloc/mallocarray.h>  for documentation.
  */

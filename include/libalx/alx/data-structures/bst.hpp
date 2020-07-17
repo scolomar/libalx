@@ -59,7 +59,7 @@ struct	Alx_LinkedList;
  ******************************************************************************/
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_bst_insert			(struct Alx_Node *bst,
-					 const void *data, size_t size,
+					 const void *data, ssize_t size,
 					 int (*cmp)(const void *bst_data,
 						    const void *node_data));
 [[gnu::nonnull]]

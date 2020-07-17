@@ -21,7 +21,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]]  [[gnu::warn_unused_result]]
- * int	mallocs(void **ptr, size_t size);
+ * int	mallocs(void **ptr, ssize_t size);
  *
  * Read  <libalx/base/stdlib/alloc/mallocs.h>  for documentation.
  */
