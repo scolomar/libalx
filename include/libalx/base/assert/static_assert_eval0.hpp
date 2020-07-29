@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/assert/static_assert_container.hpp */
+#pragma once	/* libalx/base/assert/static_assert_eval0.hpp */
 
 #if !defined(__cplusplus)
 #warning	This header file should only be included in C++.  In C,	\
@@ -24,10 +24,10 @@
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-#define ALX_STATIC_ASSERT_EVAL0(sa)	(				\
+#define alx_Static_assert_eval0(e, ...)	(				\
 	0 * (int)sizeof(						\
 		struct {						\
-			sa;						\
+			_Static_assert((e)  __VA_OPT__(,)  __VA_ARGS__); \
 			char ISO_C_forbids_a_struct_with_no_members__;	\
 		}							\
 	)								\
@@ -54,7 +54,7 @@ extern "C" {
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define STATIC_ASSERT_EVAL0(sa)	ALX_STATIC_ASSERT_EVAL0(sa)
+#define Static_assert_eval0(e, ...)	alx_Static_assert_eval0(e, __VA_OPT__)
 #endif
 
 

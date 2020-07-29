@@ -33,7 +33,7 @@
  ******************************************************************************/
 #define ssizeof(x)		((ssize_t)sizeof(x))
 
-#define ARRAY_SIZE(arr)		(__arraycount((arr)) + alx_must_be_array(arr))
+#define ARRAY_SIZE(arr)		(__arraycount((arr)) + alx_Static_assert_eval0_array(arr))
 #define ARRAY_SSIZE(arr)	((ptrdiff_t)ARRAY_SIZE(arr))
 #define ARRAY_BYTES(arr)	(ARRAY_SIZE(arr) * sizeof((arr)[0]))
 #define ARRAY_BYTES__(arr)	(sizeof((arr)[0]) * __arraycount((arr)))
@@ -41,7 +41,7 @@
 
 #define FIELD_SIZEOF(t, f)	(sizeof(((t *)NULL)->f))
 #define FIELD_ARRAY_SIZE(t, f)						\
-	(__arraycount((((t *)NULL)->f)) + alx_must_be_array(arr))
+	(__arraycount((((t *)NULL)->f)) + alx_Static_assert_eval0_array(arr))
 
 #define FIELD_ARRAY_BYTES(t, f)	(sizeof(((t *)NULL)->f[0]) *		\
 				 FIELD_ARRAY_SIZE(t, f))
