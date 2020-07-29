@@ -21,6 +21,7 @@
  ******************************************************************************/
 #include <cassert>
 
+#include "libalx/base/assert/static_assert_eval0.hpp"
 #include "libalx/base/compiler/type.hpp"
 
 
@@ -33,13 +34,7 @@
 #define alx_static_assert_char_array(a)					\
 	static_assert(alx_is_char_array(a), "Not a `char[]` !")
 
-#define alx_must_be_array(a)	(					\
-	0 * (int)sizeof(						\
-		struct {						\
-			alx_Static_assert_array(a);			\
-		}							\
-	)								\
-)
+#define alx_must_be_array(a)	ALX_STATIC_ASSERT_EVAL0(alx_Static_assert_array(a))
 
 
 /******************************************************************************

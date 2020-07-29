@@ -7,7 +7,7 @@
 /******************************************************************************
  ******* include guard ********************************************************
  ******************************************************************************/
-#pragma once	/* libalx/base/assert/array.h */
+#pragma once	/* libalx/base/assert/static_assert_container.h */
 
 #if defined(__cplusplus)
 #warning	This header file should only be included in C.  In C++,	\
@@ -19,20 +19,19 @@
 /******************************************************************************
  ******* include **************************************************************
  ******************************************************************************/
-#include "libalx/base/assert/static_assert_eval0.h"
-#include "libalx/base/compiler/type.h"
 
 
 /******************************************************************************
  ******* define ***************************************************************
  ******************************************************************************/
-#define alx_Static_assert_array(a)					\
-	_Static_assert(alx_is_array(a), "Not a `[]` !")
-
-#define alx_Static_assert_char_array(a)					\
-	_Static_assert(alx_is_char_array(a), "Not a `char[]` !")
-
-#define alx_must_be_array(a)	ALX_STATIC_ASSERT_EVAL0(alx_Static_assert_array(a))
+#define ALX_STATIC_ASSERT_EVAL0(sa)	(				\
+	0 * (int)sizeof(						\
+		struct {						\
+			sa;						\
+			char ISO_C_forbids_a_struct_with_no_members__;	\
+		}							\
+	)								\
+)
 
 
 /******************************************************************************
@@ -54,9 +53,7 @@
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define Static_assert_array(a)		alx_Static_assert_array(a)
-#define Static_assert_char_array(a)	alx_Static_assert_char_array(a)
-#define must_be_array(a)		alx_must_be_array(a)
+#define STATIC_ASSERT_EVAL0(sa)	ALX_STATIC_ASSERT_EVAL0(sa)
 #endif
 
 
