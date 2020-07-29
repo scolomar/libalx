@@ -40,7 +40,7 @@
 
 #define FIELD_SIZEOF(t, f)	(sizeof(((t *)NULL)->f))
 #define FIELD_ARRAY_SIZE(t, f)						\
-	(__arraycount((((t *)NULL)->f)) + alx_must_be_array(arr))
+	(__arraycount((((t *)NULL)->f)) + alx_must_be_array(((t *)NULL)->f))
 
 #define FIELD_ARRAY_BYTES(t, f)	(sizeof((((t *)NULL)->f)[0]) *		\
 				 FIELD_ARRAY_SIZE(t, f))
