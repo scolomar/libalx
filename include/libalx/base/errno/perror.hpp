@@ -35,7 +35,7 @@
 #define alx_perrorx(fmt, ...)		do				\
 {									\
 	alx__perrorx__(__FILE__, __LINE__, __func__, errno,		\
-					fmt, ##__VA_ARGS__);		\
+				(fmt)  __VA_OPT__(,)  __VA_ARGS__);	\
 } while (0)
 
 
@@ -63,7 +63,7 @@ void	alx__perrorx__	(const char *restrict file, int line,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define perrorx(fmt, ...)	alx_perrorx(fmt, ##__VA_ARGS__)
+#define perrorx(fmt, ...)	alx_perrorx((fmt)  __VA_OPT__(,)  __VA_ARGS__)
 #endif
 
 

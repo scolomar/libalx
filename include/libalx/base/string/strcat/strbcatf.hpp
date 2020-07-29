@@ -33,7 +33,8 @@
  *			 const char *restrict fmt, ...);
  */
 #define alx_strbcatf(buff, written, fmt, ...)				\
-	alx_strscatfs(buff, written, ARRAY_SIZE(buff), fmt, ##__VA_ARGS__)
+	alx_strscatfs((buff), (written), ARRAY_SIZE(buff),		\
+					(fmt)  __VA_OPT__(,)  __VA_ARGS__)
 
 
 /******************************************************************************
@@ -57,7 +58,7 @@ extern "C" {
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
 #define strbcatf(buff, written, fmt, ...)				\
-	alx_strbcatf(buff, written, fmt, ##__VA_ARGS__)
+	alx_strbcatf((buff), (written), (fmt)  __VA_OPT__(,)  __VA_ARGS__)
 #endif
 
 

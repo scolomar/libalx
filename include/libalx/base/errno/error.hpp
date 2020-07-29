@@ -31,8 +31,8 @@
  */
 #define alx_errorx(status, fmt, ...)	do				\
 {									\
-	alx__errorx__(status, __FILE__, __LINE__, __func__, errno,	\
-						fmt, ##__VA_ARGS__);	\
+	alx__errorx__((status), __FILE__, __LINE__, __func__, errno,	\
+				(fmt)  __VA_OPT__(,)  __VA_ARGS__);	\
 } while (0)
 
 
@@ -60,7 +60,8 @@ void	alx__errorx__	(int status, const char *restrict file, int line,
  ******* alias ****************************************************************
  ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define errorx(status, fmt, ...)	alx_errorx(status, fmt, ##__VA_ARGS__)
+#define errorx(status, fmt, ...)					\
+	alx_errorx((status), (fmt)  __VA_OPT__(,)  __VA_ARGS__)
 #endif
 
 
