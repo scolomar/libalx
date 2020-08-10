@@ -5,7 +5,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/base/math/pascal_triangle.h"
 
@@ -14,12 +14,10 @@
 #include <stdint.h>
 
 #include "libalx/base/float/constant.h"
-#include "libalx/base/math/prime.h"
-#include "libalx/base/math/prime_factorization.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -58,6 +56,9 @@ long double alx_pascal_triangle_ldbl	(int32_t n, int32_t k)
 	return	x;
 }
 
+//#pragma GCC diagnostic push	/* Over(/under)flow is not possible */
+//#pragma GCC diagnostic ignored	"-Warith-conversion"
+//#pragma GCC diagnostic ignored	"-Wconversion"
 double	alx_pascal_triangle		(int16_t n, int16_t k)
 {
 	double_t	x;
@@ -101,28 +102,12 @@ float	alx_pascal_triangle_flt		(int16_t n, int16_t k)
 
 	return	x;
 }
-
-int	alx_pascal_triangle_factorized	(int16_t n, int16_t k,
-				int16_t pf[static restrict PRIME_NUMS_QTY_16b])
-{
-
-	if ((n < 0) || (k < 0) || (k > n)) {
-		errno	= EDOM;
-		return	-EDOM;
-	}
-	if (!k)
-		return	0;
-	if (k > (n / 2))
-		return	alx_pascal_triangle_factorized(n, n - k, pf);
+//#pragma GCC diagnostic pop
 
 
-	for (int_fast16_t i = 0; i < k; i++) {
-		alx_prime_factorization_16b(n - i, pf, PF_NUMERATOR);
-		alx_prime_factorization_16b(i + 1, pf, PF_DENOMINATOR);
-	}
-
-	return	-errno;
-}
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

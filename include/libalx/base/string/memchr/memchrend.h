@@ -9,16 +9,25 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/string/memchr/memchrend.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
-#include <stddef.h>
 #include <string.h>
 
+#include <sys/types.h>
+
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -35,22 +44,16 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 inline
-size_t	alx_memchrend	(const void *ptr, unsigned char c, size_t size);
+ssize_t	alx_memchrend	(const void *ptr, unsigned char c, ssize_t size);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, pure))
-inline
-size_t	memchrend	(const void *ptr, unsigned char c, size_t size)
-{
-	return	alx_memchrend(ptr, c, size);
-}
+ALX_ALIAS_DECLARATION(memchrend, alx_memchrend);
 #endif
 
 
@@ -58,10 +61,13 @@ size_t	memchrend	(const void *ptr, unsigned char c, size_t size)
  ******* inline ***************************************************************
  ******************************************************************************/
 inline
-size_t	alx_memchrend	(const void *ptr, unsigned char c, size_t size)
+ssize_t	alx_memchrend	(const void *ptr, unsigned char c, ssize_t size)
 {
 	const unsigned char	*p0 = ptr;
+//#pragma GCC diagnostic push	/* Large arrays unsupported (UB) */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 	const unsigned char	*pc = memchr(ptr, c, size);
+//#pragma GCC diagnostic pop
 
 	if (!pc)
 		return	size - 1;

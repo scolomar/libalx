@@ -9,6 +9,12 @@
  ******************************************************************************/
 #pragma once	/* libalx/alx/data-structures/dyn-array.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
  ******* about ****************************************************************
@@ -34,16 +40,18 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
+
+#include <sys/types.h>
 
 #include "libalx/alx/data-structures/llist.h"
 #include "libalx/alx/data-structures/types.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -71,8 +79,8 @@
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the array.
  */
-__attribute__((nonnull, warn_unused_result))
-int	alx_dynarr_init		(struct Alx_DynArr **arr, size_t elsize);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_dynarr_init		(struct Alx_DynArr **arr, ssize_t elsize);
 
 /*
  * Deletes `arr`.
@@ -98,7 +106,7 @@ void	alx_dynarr_deinit	(struct Alx_DynArr *arr);
  *	ENOMEM:		Aborted; failure to reallocate the data.  Previous
  *			data is left untouched.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynarr_write	(struct Alx_DynArr *restrict arr,
 				 ptrdiff_t cell, const void *restrict data);
 
@@ -117,7 +125,7 @@ int	alx_dynarr_write	(struct Alx_DynArr *restrict arr,
  *	ENOMEM:		Aborted; failure to reallocate the data.  Previous
  *			data is left untouched.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynarr_insert	(struct Alx_DynArr *restrict arr,
 				 ptrdiff_t cell, const void *restrict data);
 
@@ -132,7 +140,7 @@ int	alx_dynarr_insert	(struct Alx_DynArr *restrict arr,
  *	0:		OK.
  *	EBADSLT:	Aborted; cell >= arr->nmemb.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynarr_read		(void *restrict data,
 				 const struct Alx_DynArr *restrict arr,
 				 ptrdiff_t cell);
@@ -148,7 +156,7 @@ int	alx_dynarr_read		(void *restrict data,
  *	0:		OK.
  *	EBADSLT:	Aborted; cell >= arr->nmemb.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynarr_remove	(struct Alx_DynArr *arr,
 				 ptrdiff_t cell);
 
@@ -163,9 +171,9 @@ int	alx_dynarr_remove	(struct Alx_DynArr *arr,
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to reallocate the array.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynarr_resize	(struct Alx_DynArr *arr,
-				 ptrdiff_t nmemb, size_t elsize);
+				 ptrdiff_t nmemb, ssize_t elsize);
 
 /*
  * Reset the array as if just initialized.
@@ -177,8 +185,8 @@ int	alx_dynarr_resize	(struct Alx_DynArr *arr,
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to reallocate the array.
  */
-__attribute__((nonnull, warn_unused_result))
-int	alx_dynarr_reset	(struct Alx_DynArr *arr, size_t elsize);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_dynarr_reset	(struct Alx_DynArr *arr, ssize_t elsize);
 
 /*
  * Shrink the array to fit the used space.
@@ -189,7 +197,7 @@ int	alx_dynarr_reset	(struct Alx_DynArr *arr, size_t elsize);
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to reallocate the array.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynarr_fit		(struct Alx_DynArr *arr);
 
 /*
@@ -204,9 +212,14 @@ int	alx_dynarr_fit		(struct Alx_DynArr *arr);
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the nodes.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_dynarr_to_llist	(struct Alx_DynArr *arr,
 				 struct Alx_LinkedList *list);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

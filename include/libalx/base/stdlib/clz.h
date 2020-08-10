@@ -9,14 +9,21 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/stdlib/clz.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <limits.h>
 #include <stdint.h>
 
-#include "libalx/base/assert/assert.h"
+#include "libalx/base/assert/stdint.h"
+#include "libalx/base/compiler/attribute.h"
 #include "libalx/base/stdint/types.h"
 
 
@@ -27,7 +34,7 @@ alx_Static_assert_stdint_types();
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -44,87 +51,53 @@ alx_Static_assert_stdint_types();
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((const))
+[[gnu::const]]
 inline
 uint8_t		alx_clz_u8	(uint8_t n);
-__attribute__((const))
+[[gnu::const]]
 inline
 uint16_t	alx_clz_u16	(uint16_t n);
-__attribute__((const))
+[[gnu::const]]
 inline
 uint32_t	alx_clz_u32	(uint32_t n);
-__attribute__((const))
+[[gnu::const]]
 inline
 uint64_t	alx_clz_u64	(uint64_t n);
-__attribute__((const))
-#if defined(uint128_t)
-__attribute__((const))
+[[gnu::const]]
+#if defined(UINT128_MAX)
+[[gnu::const]]
 inline
 uint64_t	alx_clz_u128	(uint128_t n);
 #endif
-#if defined(uint256_t)
-__attribute__((const))
+#if defined(UINT256_MAX)
+[[gnu::const]]
 inline
 uint64_t	alx_clz_u256	(uint256_t n);
 #endif
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, const))
-inline
-ptrdiff_t	clz_u8		(uint8_t n)
-{
-	return	alx_clz_u8(n);
-}
-
-__attribute__((always_inline, const))
-inline
-ptrdiff_t	clz_u16		(uint16_t n)
-{
-	return	alx_clz_u16(n);
-}
-
-__attribute__((always_inline, const))
-inline
-ptrdiff_t	clz_u32		(uint32_t n)
-{
-	return	alx_clz_u32(n);
-}
-
-__attribute__((always_inline, const))
-inline
-ptrdiff_t	clz_u64		(uint64_t n)
-{
-	return	alx_clz_u64(n);
-}
-
-# if defined(uint128_t)
-__attribute__((always_inline, const))
-inline
-ptrdiff_t	clz_u128	(uint128_t n)
-{
-	return	alx_clz_u128(n);
-}
+ALX_ALIAS_DECLARATION(clz_u8,	alx_clz_u8);
+ALX_ALIAS_DECLARATION(clz_u16,	alx_clz_u16);
+ALX_ALIAS_DECLARATION(clz_u32,	alx_clz_u32);
+ALX_ALIAS_DECLARATION(clz_u64,	alx_clz_u64);
+# if defined(UINT128_MAX)
+ALX_ALIAS_DECLARATION(clz_u128,	alx_clz_u128);
 # endif
-
-# if defined(uint256_t)
-__attribute__((always_inline, const))
-inline
-ptrdiff_t	clz_u256	(uint256_t n)
-{
-	return	alx_clz_u256(n);
-}
+# if defined(UINT256_MAX)
+ALX_ALIAS_DECLARATION(clz_u256,	alx_clz_u256);
 # endif
-#endif	/* defined(ALX_NO_PREFIX) */
+#endif
 
 
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
+//#pragma GCC diagnostic push	/* Over/underflow is impossible */
+//#pragma GCC diagnostic ignored	"-Wconversion"
 inline
 uint8_t		alx_clz_u8	(uint8_t n)
 {
@@ -142,7 +115,10 @@ uint16_t	alx_clz_u16	(uint16_t n)
 
 	return	__builtin_clz(n) - unused_bits;
 }
+//#pragma GCC diagnostic pop
 
+//#pragma GCC diagnostic push	/* Overflow is impossible */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 inline
 uint32_t	alx_clz_u32	(uint32_t n)
 {
@@ -156,8 +132,11 @@ uint64_t	alx_clz_u64	(uint64_t n)
 
 	return	__builtin_clzl(n);
 }
+//#pragma GCC diagnostic pop
 
-#if defined(uint128_t)
+//#pragma GCC diagnostic push	/* Modulo truncation is useful here */
+//#pragma GCC diagnostic ignored	"-Wconversion"
+#if defined(UINT128_MAX)
 inline
 uint64_t	alx_clz_u128	(uint128_t n)
 {
@@ -168,7 +147,7 @@ uint64_t	alx_clz_u128	(uint128_t n)
 }
 #endif
 
-#if defined(uint256_t)
+#if defined(UINT256_MAX)
 inline
 uint64_t	alx_clz_u256	(uint256_t n)
 {
@@ -178,6 +157,7 @@ uint64_t	alx_clz_u256	(uint256_t n)
 	return	alx_clz_u128(n >> 128);
 }
 #endif
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

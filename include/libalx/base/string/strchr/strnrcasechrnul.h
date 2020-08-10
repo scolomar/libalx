@@ -9,15 +9,23 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/string/strchr/strnrcasechrnul.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -34,25 +42,17 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t alx_strnrcasechrnul	(ptrdiff_t size,
 				 const char str[static restrict size],
 				 char c);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, pure))
-inline
-ptrdiff_t strnrcasechrnul	(ptrdiff_t size,
-				 const char str[static restrict size],
-				 char c)
-{
-	return	alx_strnrcasechrnul(size, str, c);
-}
+ALX_ALIAS_DECLARATION(strnrcasechrnul, alx_strnrcasechrnul);
 #endif
 
 

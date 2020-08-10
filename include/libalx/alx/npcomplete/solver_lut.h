@@ -9,9 +9,15 @@
  ******************************************************************************/
 #pragma once	/* libalx/alx/npcomplete/solver_lut.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 #include <stdint.h>
@@ -27,7 +33,7 @@ typedef	uint64_t	uint256_a[4];
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 #define LUTBIT_SZ	(lut_sz / 64 + (lut_sz % 64 != 0))
 
@@ -56,7 +62,7 @@ extern	uint256_a	foovar__256b;
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_npcomplete_solver_lut(ptrdiff_t dim,
 			 const bool prb_mat[static restrict dim][dim],
 			 int64_t sol[static restrict 3][dim],
@@ -82,9 +88,14 @@ int	alx_npcomplete_solver_lut(ptrdiff_t dim,
 
 
 /******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
  ******* always_inline ********************************************************
  ******************************************************************************/
-__attribute__((always_inline, nonnull))
+[[gnu::always_inline]] [[gnu::nonnull]]
 inline
 void	mask_256b	(uint256_a mask, uint8_t pos)
 {
@@ -101,7 +112,7 @@ void	mask_256b	(uint256_a mask, uint8_t pos)
 		mask[3]	= UINT64_C(1) << (pos - 64 * 3);
 }
 
-__attribute__((always_inline, nonnull))
+[[gnu::always_inline]] [[gnu::nonnull]]
 inline
 void	nmask_256b	(uint256_a mask, uint8_t pos)
 {
@@ -118,7 +129,7 @@ void	nmask_256b	(uint256_a mask, uint8_t pos)
 		mask[3]	= ~(UINT64_C(1) << (pos - 64 * 3));
 }
 
-__attribute__((always_inline, nonnull))
+[[gnu::always_inline]] [[gnu::nonnull]]
 inline
 void	not_256b	(uint256_a dest, const uint256_a x)
 {
@@ -128,7 +139,7 @@ void	not_256b	(uint256_a dest, const uint256_a x)
 		dest[i] = ~x[i];
 }
 
-__attribute__((always_inline, nonnull))
+[[gnu::always_inline]] [[gnu::nonnull]]
 inline
 void	and_256b	(uint256_a dest, const uint256_a a, const uint256_a b)
 {
@@ -138,7 +149,7 @@ void	and_256b	(uint256_a dest, const uint256_a a, const uint256_a b)
 		dest[i] = a[i] & b[i];
 }
 
-__attribute__((always_inline, nonnull))
+[[gnu::always_inline]] [[gnu::nonnull]]
 inline
 void	or_256b		(uint256_a dest, const uint256_a a, const uint256_a b)
 {
@@ -148,7 +159,7 @@ void	or_256b		(uint256_a dest, const uint256_a a, const uint256_a b)
 		dest[i] = a[i] | b[i];
 }
 
-__attribute__((always_inline, nonnull))
+[[gnu::always_inline]] [[gnu::nonnull]]
 inline
 void	andassign_256b	(uint256_a x, const uint256_a mask)
 {
@@ -158,7 +169,7 @@ void	andassign_256b	(uint256_a x, const uint256_a mask)
 		x[i] &= mask[i];
 }
 
-__attribute__((always_inline, nonnull))
+[[gnu::always_inline]] [[gnu::nonnull]]
 inline
 void	orassign_256b	(uint256_a x, const uint256_a mask)
 {
@@ -168,7 +179,7 @@ void	orassign_256b	(uint256_a x, const uint256_a mask)
 		x[i] |= mask[i];
 }
 
-__attribute__((always_inline, nonnull))
+[[gnu::always_inline]] [[gnu::nonnull]]
 inline
 void	reset_256b	(uint256_a x)
 {
@@ -178,7 +189,7 @@ void	reset_256b	(uint256_a x)
 		x[i] = 0;
 }
 
-__attribute__((always_inline, nonnull, pure))
+[[gnu::always_inline]] [[gnu::nonnull]] [[gnu::pure]]
 inline
 int64_t popcnt_256b	(const uint256_a x)
 {
@@ -190,7 +201,7 @@ int64_t popcnt_256b	(const uint256_a x)
 	return	cnt;
 }
 
-__attribute__((always_inline, nonnull))
+[[gnu::always_inline]] [[gnu::nonnull]]
 inline
 bool	bool_256b	(const uint256_a x)
 {
@@ -202,7 +213,7 @@ bool	bool_256b	(const uint256_a x)
 	return	false;
 }
 
-__attribute__((always_inline, nonnull))
+[[gnu::always_inline]] [[gnu::nonnull]]
 inline
 void	assign_256b	(uint256_a dest, const uint256_a src)
 {
@@ -211,7 +222,7 @@ void	assign_256b	(uint256_a dest, const uint256_a src)
 		dest[i]	= src[i];
 }
 
-__attribute__((always_inline, nonnull))
+[[gnu::always_inline]] [[gnu::nonnull]]
 inline
 void	shlassign_256b	(uint256_a x, uint8_t shift)
 {
@@ -230,3 +241,4 @@ void	shlassign_256b	(uint256_a x, uint8_t shift)
 /******************************************************************************
  ******* end of file **********************************************************
  ******************************************************************************/
+

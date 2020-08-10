@@ -5,7 +5,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/base/stdlib/array_split_pos_neg.h"
 
@@ -15,7 +15,7 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -89,16 +89,14 @@ void	alx_array_split_pos_neg_int(ptrdiff_t nmemb,
 				 int neg[static restrict nmemb])
 {
 
-	memset(pos, 0, sizeof(pos[0]) * nmemb);
-	memset(neg, 0, sizeof(neg[0]) * nmemb);
-
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (!mix[i])
-			continue;
-		if (mix[i] > 0)
+		if (mix[i] > 0) {
 			pos[i]	= mix[i];
-		else
+			neg[i]	= 0;
+		} else {
+			pos[i]	= 0;
 			neg[i]	= mix[i];
+		}
 	}
 }
 
@@ -108,16 +106,14 @@ void	alx_array_split_pos_neg_s8(ptrdiff_t nmemb,
 				 int8_t neg[static restrict nmemb])
 {
 
-	memset(pos, 0, sizeof(pos[0]) * nmemb);
-	memset(neg, 0, sizeof(neg[0]) * nmemb);
-
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (!mix[i])
-			continue;
-		if (mix[i] > 0)
+		if (mix[i] > 0) {
 			pos[i]	= mix[i];
-		else
+			neg[i]	= 0;
+		} else {
+			pos[i]	= 0;
 			neg[i]	= mix[i];
+		}
 	}
 }
 
@@ -127,16 +123,14 @@ void	alx_array_split_pos_neg_s16(ptrdiff_t nmemb,
 				 int16_t neg[static restrict nmemb])
 {
 
-	memset(pos, 0, sizeof(pos[0]) * nmemb);
-	memset(neg, 0, sizeof(neg[0]) * nmemb);
-
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (!mix[i])
-			continue;
-		if (mix[i] > 0)
+		if (mix[i] > 0) {
 			pos[i]	= mix[i];
-		else
+			neg[i]	= 0;
+		} else {
+			pos[i]	= 0;
 			neg[i]	= mix[i];
+		}
 	}
 }
 
@@ -146,16 +140,14 @@ void	alx_array_split_pos_neg_s32(ptrdiff_t nmemb,
 				 int32_t neg[static restrict nmemb])
 {
 
-	memset(pos, 0, sizeof(pos[0]) * nmemb);
-	memset(neg, 0, sizeof(neg[0]) * nmemb);
-
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (!mix[i])
-			continue;
-		if (mix[i] > 0)
+		if (mix[i] > 0) {
 			pos[i]	= mix[i];
-		else
+			neg[i]	= 0;
+		} else {
+			pos[i]	= 0;
 			neg[i]	= mix[i];
+		}
 	}
 }
 
@@ -165,18 +157,21 @@ void	alx_array_split_pos_neg_s64(ptrdiff_t nmemb,
 				 int64_t neg[static restrict nmemb])
 {
 
-	memset(pos, 0, sizeof(pos[0]) * nmemb);
-	memset(neg, 0, sizeof(neg[0]) * nmemb);
-
 	for (ptrdiff_t i = 0; i < nmemb; i++) {
-		if (!mix[i])
-			continue;
-		if (mix[i] > 0)
+		if (mix[i] > 0) {
 			pos[i]	= mix[i];
-		else
+			neg[i]	= 0;
+		} else {
+			pos[i]	= 0;
 			neg[i]	= mix[i];
+		}
 	}
 }
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

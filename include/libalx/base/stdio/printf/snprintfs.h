@@ -9,22 +9,25 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/stdio/printf/snprintfs.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stdarg.h>
 #include <stddef.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define snprintfs(str, written, nmemb, fmt, ...)			\
-	alx_snprintfs(str, written, nmemb, fmt, ##__VA_ARGS__)
-#endif
 
 
 /******************************************************************************
@@ -40,30 +43,22 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull(1, 4), format(printf, 4, 5), warn_unused_result))
+[[gnu::nonnull(1, 4)]] [[gnu::format(printf, 4, 5)]] [[gnu::warn_unused_result]]
 int	alx_snprintfs	(char str[restrict /*nmemb*/],
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, ...);
-__attribute__((nonnull(1, 4), format(printf, 4, 0), warn_unused_result))
+[[gnu::nonnull(1, 4)]] [[gnu::format(printf, 4, 0)]] [[gnu::warn_unused_result]]
 int	alx_vsnprintfs	(char str[restrict /*nmemb*/],
 			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
 			 const char *restrict format, va_list ap);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline))
-__attribute__((nonnull(1, 4), format(printf, 4, 0), warn_unused_result))
-inline
-int	vsnprintfs	(char str[restrict /*nmemb*/],
-			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
-			 const char *restrict format, va_list ap)
-{
-	return	alx_vsnprintfs(str, written, nmemb, format, ap);
-}
+ALX_ALIAS_DECLARATION(snprintfs,	alx_snprintfs);
+ALX_ALIAS_DECLARATION(vsnprintfs,	alx_vsnprintfs);
 #endif
 
 

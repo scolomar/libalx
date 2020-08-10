@@ -9,14 +9,20 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/gsl/units/weight.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 #define ALX_GSL_UNITS_lb_TO_kg_LDBL	(0.45359237L)
 #define ALX_GSL_UNITS_lb_TO_kg		(0.45359237)
@@ -36,25 +42,30 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_units_kg_to_lb_ldbl	(long double kg);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_units_kg_to_lb		(double kg);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_units_kg_to_lb_flt	(float kg);
 
-__attribute__((const))
+[[gnu::const]]
 inline
 long double	alx_gsl_units_lb_to_kg_ldbl	(long double lb);
-__attribute__((const))
+[[gnu::const]]
 inline
 double		alx_gsl_units_lb_to_kg		(double lb);
-__attribute__((const))
+[[gnu::const]]
 inline
 float		alx_gsl_units_lb_to_kg_flt	(float lb);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

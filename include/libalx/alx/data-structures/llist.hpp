@@ -9,6 +9,12 @@
  ******************************************************************************/
 #pragma once	/* libalx/alx/data-structures/llist.hpp */
 
+#if !defined(__cplusplus)
+#warning	This header file should only be included in C++.  In C,	\
+		include the header file of the same name and `.h`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
  ******* about ****************************************************************
@@ -21,7 +27,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <cstddef>
 
@@ -31,12 +37,18 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
  ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern "C" {
+
+
+/******************************************************************************
+ ******* struct / union *******************************************************
  ******************************************************************************/
 struct	Alx_LinkedList {
 	struct Alx_Node	*head;
@@ -47,26 +59,28 @@ struct	Alx_LinkedList {
 /* Avoid circular dependence */
 struct	Alx_Dyn_Array;
 
-extern	"C"
-{
+
+/******************************************************************************
+ ******* C prototypes *********************************************************
+ ******************************************************************************/
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_llist_init			(struct Alx_LinkedList **list);
 void	alx_llist_deinit		(struct Alx_LinkedList *list);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_llist_prepend		(struct Alx_LinkedList *list,
-					 const void *data, size_t size);
+					 const void *data, ssize_t size);
 [[gnu::nonnull]]
 void	alx_llist_prepend_node		(struct Alx_LinkedList *list,
 					 struct Alx_Node *node);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_llist_append		(struct Alx_LinkedList *list,
-					 const void *data, size_t size);
+					 const void *data, ssize_t size);
 [[gnu::nonnull]]
 void	alx_llist_append_node		(struct Alx_LinkedList *list,
 					 struct Alx_Node *node);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_llist_insert_before		(struct Alx_LinkedList *list,
-					 const void *data, size_t size,
+					 const void *data, ssize_t size,
 					 struct Alx_Node *ref);
 [[gnu::nonnull]]
 int	alx_llist_insert_node_before	(struct Alx_LinkedList *list,
@@ -74,7 +88,7 @@ int	alx_llist_insert_node_before	(struct Alx_LinkedList *list,
 					 struct Alx_Node *ref);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_llist_insert_after		(struct Alx_LinkedList *list,
-					 const void *data, size_t size,
+					 const void *data, ssize_t size,
 					 struct Alx_Node *ref);
 [[gnu::nonnull]]
 int	alx_llist_insert_node_after	(struct Alx_LinkedList *list,
@@ -82,7 +96,7 @@ int	alx_llist_insert_node_after	(struct Alx_LinkedList *list,
 					 struct Alx_Node *ref);
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_llist_insert_at		(struct Alx_LinkedList *list,
-					 const void *data, size_t size,
+					 const void *data, ssize_t size,
 					 ptrdiff_t pos);
 [[gnu::nonnull]]
 void	alx_llist_insert_node_at	(struct Alx_LinkedList *list,
@@ -116,7 +130,7 @@ int	alx_llist_get_node_at		(const struct Alx_LinkedList *list,
 [[gnu::nonnull]][[gnu::warn_unused_result]]
 int	alx_llist_get_relative		(const struct Alx_LinkedList *list,
 					 struct Alx_Node **node,
-					 const struct Alx_Node *ref,
+					 struct Alx_Node *ref,
 					 ptrdiff_t pos);
 [[gnu::nonnull]]
 void	alx_llist_move_node_to		(struct Alx_LinkedList *list,
@@ -158,7 +172,17 @@ int	alx_llist_to_bst		(struct Alx_LinkedList *restrict list,
 void	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
 					 int (*cmp)(const void *bst_data,
 						    const void *node_data));
-}
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+}	/* extern "C" */
 
 
 /******************************************************************************
@@ -170,11 +194,6 @@ namespace CV {
 
 /******************************************************************************
  ******* enum *****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* struct / union *******************************************************
  ******************************************************************************/
 
 

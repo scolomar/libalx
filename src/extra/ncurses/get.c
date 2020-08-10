@@ -5,7 +5,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/extra/ncurses/get.h"
 
@@ -23,7 +23,7 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -143,7 +143,7 @@ long double alx_ncurses_get_ldbl(long double m, long double def, long double M,
 		wprintw(win2, "%s", help);
 	else
 		wprintw(win2, "Introduce a real number [%Lf U %Lf] (default %Lf)",
-				 			m, M, def);
+							m, M, def);
 	wrefresh(win2);
 
 	/* Input */
@@ -201,7 +201,7 @@ double	alx_ncurses_get_dbl	(double m, double def, double M,
 		wprintw(win2, "%s", help);
 	else
 		wprintw(win2, "Introduce a real number [%lf U %lf] (default %lf)",
-				 			m, M, def);
+							m, M, def);
 	wrefresh(win2);
 
 	/* Input */
@@ -259,7 +259,7 @@ float	alx_ncurses_get_flt	(float m, float def, float M,
 		wprintw(win2, "%s", help);
 	else
 		wprintw(win2, "Introduce a real number [%f U %f] (default %f)",
-				 			m, M, def);
+							m, M, def);
 	wrefresh(win2);
 
 	/* Input */
@@ -317,7 +317,7 @@ unsigned alx_ncurses_get_uint	(unsigned m, unsigned def, unsigned M,
 		wprintw(win2, "%s", help);
 	else
 		wprintw(win2, "Introduce an integer [%u U %u] (default %u)",
-				 			m, M, def);
+							m, M, def);
 	wrefresh(win2);
 
 	/* Input */
@@ -375,7 +375,7 @@ int	alx_ncurses_get_int	(int m, int def, int M,
 		wprintw(win2, "%s", help);
 	else
 		wprintw(win2, "Introduce an integer [%i U %i] (default %i)",
-				 			m, M, def);
+							m, M, def);
 	wrefresh(win2);
 
 	/* Input */
@@ -433,7 +433,7 @@ uint8_t	alx_ncurses_get_u8	(uint8_t m, uint8_t def, uint8_t M,
 		wprintw(win2, "%s", help);
 	else
 		wprintw(win2, "Introduce an integer [%"PRIu8" U %"PRIu8"] (default %"PRIu8")",
-				 			m, M, def);
+							m, M, def);
 	wrefresh(win2);
 
 	/* Input */
@@ -491,7 +491,7 @@ int8_t	alx_ncurses_get_s8	(int8_t m, int8_t def, int8_t M,
 		wprintw(win2, "%s", help);
 	else
 		wprintw(win2, "Introduce an integer [%"PRIi8" U %"PRIi8"] (default %"PRIi8")",
-				 			m, M, def);
+							m, M, def);
 	wrefresh(win2);
 
 	/* Input */
@@ -549,7 +549,7 @@ uint16_t alx_ncurses_get_u16	(uint16_t m, uint16_t def, uint16_t M,
 		wprintw(win2, "%s", help);
 	else
 		wprintw(win2, "Introduce an integer [%"PRIu16" U %"PRIu16"] (default %"PRIu16")",
-				 			m, M, def);
+							m, M, def);
 	wrefresh(win2);
 
 	/* Input */
@@ -607,7 +607,7 @@ int16_t	alx_ncurses_get_s16	(int16_t m, int16_t def, int16_t M,
 		wprintw(win2, "%s", help);
 	else
 		wprintw(win2, "Introduce an integer [%"PRIi16" U %"PRIi16"] (default %"PRIi16")",
-				 			m, M, def);
+							m, M, def);
 	wrefresh(win2);
 
 	/* Input */
@@ -665,7 +665,7 @@ uint32_t alx_ncurses_get_u32	(uint32_t m, uint32_t def, uint32_t M,
 		wprintw(win2, "%s", help);
 	else
 		wprintw(win2, "Introduce an integer [%"PRIu32" U %"PRIu32"] (default %"PRIu32")",
-				 			m, M, def);
+							m, M, def);
 	wrefresh(win2);
 
 	/* Input */
@@ -723,7 +723,7 @@ int32_t	alx_ncurses_get_s32	(int32_t m, int32_t def, int32_t M,
 		wprintw(win2, "%s", help);
 	else
 		wprintw(win2, "Introduce an integer [%"PRIi32" U %"PRIi32"] (default %"PRIi32")",
-				 			m, M, def);
+							m, M, def);
 	wrefresh(win2);
 
 	/* Input */
@@ -781,7 +781,7 @@ uint64_t alx_ncurses_get_u64	(uint64_t m, uint64_t def, uint64_t M,
 		wprintw(win2, "%s", help);
 	else
 		wprintw(win2, "Introduce an integer [%"PRIu64" U %"PRIu64"] (default %"PRIu64")",
-				 			m, M, def);
+							m, M, def);
 	wrefresh(win2);
 
 	/* Input */
@@ -839,7 +839,7 @@ int64_t	alx_ncurses_get_s64	(int64_t m, int64_t def, int64_t M,
 		wprintw(win2, "%s", help);
 	else
 		wprintw(win2, "Introduce an integer [%"PRIi64" U %"PRIi64"] (default %"PRIi64")",
-				 			m, M, def);
+							m, M, def);
 	wrefresh(win2);
 
 	/* Input */
@@ -897,7 +897,7 @@ ptrdiff_t alx_ncurses_get_pdif	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 		wprintw(win2, "%s", help);
 	else
 		wprintw(win2, "Introduce an integer [%ti U %ti] (default %ti)",
-				 			m, M, def);
+							m, M, def);
 	wrefresh(win2);
 
 	/* Input */
@@ -1033,6 +1033,11 @@ int	alx_ncurses_get_fname	(const char *restrict fpath,
 
 	return	status;
 }
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

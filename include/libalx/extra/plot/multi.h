@@ -29,17 +29,25 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/plot/multi.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
+
+#include "libalx/base/compiler/attribute.h"
 
 #include "libalx/extra/plot/core.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -56,32 +64,44 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull(1)))
+[[gnu::nonnull(1)]]
 int	alx_gnuplot_set_multiplot	(struct Alx_Gnuplot *restrict gnuplot,
 					 const char *restrict opt);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_gnuplot_unset_multiplot	(struct Alx_Gnuplot *gnuplot);
 
-__attribute__((nonnull(1, 4)))
+[[gnu::nonnull(1, 4)]]
 int	alx_gnuplot_plot_multi_y	(struct Alx_Gnuplot *restrict gnuplot,
 					 ptrdiff_t n,
 					 ptrdiff_t size,
 					 const double y[static restrict n][size],
 					 const char *title[static restrict n]);
-__attribute__((nonnull(1, 4, 5)))
+[[gnu::nonnull(1, 4, 5)]]
 int	alx_gnuplot_plot_x_multi_y	(struct Alx_Gnuplot *restrict gnuplot,
 					 ptrdiff_t n,
 					 ptrdiff_t size,
 					 const double x[static restrict size],
 					 const double y[static restrict n][size],
 					 const char *title[static restrict n]);
-__attribute__((nonnull(1, 4, 5)))
+[[gnu::nonnull(1, 4, 5)]]
 int	alx_gnuplot_plot_multi_xy	(struct Alx_Gnuplot *restrict gnuplot,
 					 ptrdiff_t n,
 					 ptrdiff_t size,
 					 const double x[static restrict n][size],
 					 const double y[static restrict n][size],
 					 const char *title[static restrict n]);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(gnuplot_set_multiplot,	alx_gnuplot_set_multiplot);
+ALX_ALIAS_DECLARATION(gnuplot_unset_multiplot,	alx_gnuplot_unset_multiplot);
+ALX_ALIAS_DECLARATION(gnuplot_plot_multi_y,	alx_gnuplot_plot_multi_y);
+ALX_ALIAS_DECLARATION(gnuplot_plot_x_multi_y,	alx_gnuplot_plot_x_multi_y);
+ALX_ALIAS_DECLARATION(gnuplot_plot_multi_xy,	alx_gnuplot_plot_multi_xy);
+#endif
 
 
 /******************************************************************************

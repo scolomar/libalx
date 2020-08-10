@@ -9,15 +9,23 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/string/strstr/strscasestr.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -34,25 +42,17 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t alx_strscasestr	(ptrdiff_t size,
 				 const char str[static restrict size],
 				 const char pattern[static restrict size]);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, pure))
-inline
-ptrdiff_t strscasestr		(ptrdiff_t size,
-				 const char str[static restrict size],
-				 const char pattern[static restrict size])
-{
-	return	alx_strscasestr(size, str, pattern);
-}
+ALX_ALIAS_DECLARATION(strscasestr, alx_strscasestr);
 #endif
 
 

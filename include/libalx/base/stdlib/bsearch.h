@@ -9,16 +9,24 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/stdlib/bsearch.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 #include <stdint.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -35,143 +43,63 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t	alx_bsearch_uint(ptrdiff_t nmemb,
 				 const unsigned arr[static restrict nmemb],
 				 unsigned x);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t	alx_bsearch_int	(ptrdiff_t nmemb,
 				 const int arr[static restrict nmemb],
 				 int x);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t	alx_bsearch_u8	(ptrdiff_t nmemb,
 				 const uint8_t arr[static restrict nmemb],
 				 uint8_t x);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t	alx_bsearch_s8	(ptrdiff_t nmemb,
 				 const int8_t arr[static restrict nmemb],
 				 int8_t x);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t	alx_bsearch_u16	(ptrdiff_t nmemb,
 				 const uint16_t arr[static restrict nmemb],
 				 uint16_t x);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t	alx_bsearch_s16	(ptrdiff_t nmemb,
 				 const int16_t arr[static restrict nmemb],
 				 int16_t x);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t	alx_bsearch_u32	(ptrdiff_t nmemb,
 				 const uint32_t arr[static restrict nmemb],
 				 uint32_t x);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t	alx_bsearch_s32	(ptrdiff_t nmemb,
 				 const int32_t arr[static restrict nmemb],
 				 int32_t x);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t	alx_bsearch_u64	(ptrdiff_t nmemb,
 				 const uint64_t arr[static restrict nmemb],
 				 uint64_t x);
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 ptrdiff_t	alx_bsearch_s64	(ptrdiff_t nmemb,
 				 const int64_t arr[static restrict nmemb],
 				 int64_t x);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, pure))
-inline
-ptrdiff_t	bsearch_uint	(ptrdiff_t nmemb,
-				 const unsigned arr[static restrict nmemb],
-				 unsigned x)
-{
-	return	alx_bsearch_uint(nmemb, arr, x);
-}
-
-__attribute__((always_inline, nonnull, pure))
-inline
-ptrdiff_t	bsearch_int	(ptrdiff_t nmemb,
-				 const int arr[static restrict nmemb],
-				 int x)
-{
-	return	alx_bsearch_int(nmemb, arr, x);
-}
-
-__attribute__((always_inline, nonnull, pure))
-inline
-ptrdiff_t	bsearch_u8	(ptrdiff_t nmemb,
-				 const uint8_t arr[static restrict nmemb],
-				 uint8_t x)
-{
-	return	alx_bsearch_u8(nmemb, arr, x);
-}
-
-__attribute__((always_inline, nonnull, pure))
-inline
-ptrdiff_t	bsearch_s8	(ptrdiff_t nmemb,
-				 const int8_t arr[static restrict nmemb],
-				 int8_t x)
-{
-	return	alx_bsearch_s8(nmemb, arr, x);
-}
-
-__attribute__((always_inline, nonnull, pure))
-inline
-ptrdiff_t	bsearch_u16	(ptrdiff_t nmemb,
-				 const uint16_t arr[static restrict nmemb],
-				 uint16_t x)
-{
-	return	alx_bsearch_u16(nmemb, arr, x);
-}
-
-__attribute__((always_inline, nonnull, pure))
-inline
-ptrdiff_t	bsearch_s16	(ptrdiff_t nmemb,
-				 const int16_t arr[static restrict nmemb],
-				 int16_t x)
-{
-	return	alx_bsearch_s16(nmemb, arr, x);
-}
-
-__attribute__((always_inline, nonnull, pure))
-inline
-ptrdiff_t	bsearch_u32	(ptrdiff_t nmemb,
-				 const uint32_t arr[static restrict nmemb],
-				 uint32_t x)
-{
-	return	alx_bsearch_u32(nmemb, arr, x);
-}
-
-__attribute__((always_inline, nonnull, pure))
-inline
-ptrdiff_t	bsearch_s32	(ptrdiff_t nmemb,
-				 const int32_t arr[static restrict nmemb],
-				 int32_t x)
-{
-	return	alx_bsearch_s32(nmemb, arr, x);
-}
-
-__attribute__((always_inline, nonnull, pure))
-inline
-ptrdiff_t	bsearch_u64	(ptrdiff_t nmemb,
-				 const uint64_t arr[static restrict nmemb],
-				 uint64_t x)
-{
-	return	alx_bsearch_u64(nmemb, arr, x);
-}
-
-__attribute__((always_inline, nonnull, pure))
-inline
-ptrdiff_t	bsearch_s64	(ptrdiff_t nmemb,
-				 const int64_t arr[static restrict nmemb],
-				 int64_t x)
-{
-	return	alx_bsearch_s64(nmemb, arr, x);
-}
-#endif	/* defined(ALX_NO_PREFIX) */
+ALX_ALIAS_DECLARATION(bsearch_uint,	alx_bsearch_uint);
+ALX_ALIAS_DECLARATION(bsearch_int,	alx_bsearch_int);
+ALX_ALIAS_DECLARATION(bsearch_u8,	alx_bsearch_u8);
+ALX_ALIAS_DECLARATION(bsearch_s8,	alx_bsearch_s8);
+ALX_ALIAS_DECLARATION(bsearch_u16,	alx_bsearch_u16);
+ALX_ALIAS_DECLARATION(bsearch_s16,	alx_bsearch_s16);
+ALX_ALIAS_DECLARATION(bsearch_u32,	alx_bsearch_u32);
+ALX_ALIAS_DECLARATION(bsearch_s32,	alx_bsearch_s32);
+ALX_ALIAS_DECLARATION(bsearch_u64,	alx_bsearch_u64);
+ALX_ALIAS_DECLARATION(bsearch_s64,	alx_bsearch_s64);
+#endif
 
 
 /******************************************************************************

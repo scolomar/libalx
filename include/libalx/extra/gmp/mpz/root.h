@@ -9,16 +9,23 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/gmp/mpz/root.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stdbool.h>
 #include <stdint.h>
 
 #include <gmp.h>
 
-#include "libalx/base/assert/assert.h"
+#include "libalx/base/assert/stdint.h"
+#include "libalx/base/compiler/attribute.h"
 
 
 /******************************************************************************
@@ -28,13 +35,8 @@ alx_Static_assert_stdint_types();
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define mpz_root_u64(rop, op, n)	  alx_mpz_root_u64(rop, op, n)
-#define mpz_rootrem_u64(root, rem, u, n)  alx_mpz_rootrem_u64(root, rem, u, n)
-#endif
 
 
 /******************************************************************************
@@ -55,6 +57,15 @@ bool	alx_mpz_root_u64	(mpz_t rop, const mpz_t op, uint64_t n);
 inline
 void	alx_mpz_rootrem_u64	(mpz_t root, mpz_t rem,
 				 const mpz_t u, uint64_t n);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(mpz_root_u64,	alx_mpz_root_u64);
+ALX_ALIAS_DECLARATION(mpz_rootrem_u64,	alx_mpz_rootrem_u64);
+#endif
 
 
 /******************************************************************************

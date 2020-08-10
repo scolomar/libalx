@@ -31,7 +31,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "internal.h"
 
@@ -39,15 +39,17 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include <sys/param.h>
+#include <sys/types.h>
+
 #include <curl/curl.h>
 
 #include "libalx/alx/data-structures/dyn-buffer.h"
-#include "libalx/base/stdlib/maximum.h"
 #include "libalx/extra/curl/fcurl/URL_FILE.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -71,7 +73,9 @@ CURLM	*alx_url_mhandle__;
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_url_fill_buffer__	(ALX_URL_FILE *stream, size_t want)
+//#pragma GCC diagnostic push	/* curl is inconsistent */
+//#pragma GCC diagnostic ignored	"-Wconversion"
+int	alx_url_fill_buffer__	(ALX_URL_FILE *stream, ssize_t want)
 {
 	int64_t	curl_timeo;
 	int	status;
@@ -85,7 +89,7 @@ int	alx_url_fill_buffer__	(ALX_URL_FILE *stream, size_t want)
 		status	= curl_multi_timeout(alx_url_mhandle__, &curl_timeo);
 		if (status)
 			return	status;
-		curl_timeo	= ALX_MAX(curl_timeo, 10);
+		curl_timeo	= MAX(curl_timeo, 10);
 		status	= curl_multi_poll(alx_url_mhandle__, NULL, 0,
 							curl_timeo, NULL);
 		if (status)
@@ -100,6 +104,12 @@ int	alx_url_fill_buffer__	(ALX_URL_FILE *stream, size_t want)
 
 	return	0;
 }
+//#pragma GCC diagnostic pop
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

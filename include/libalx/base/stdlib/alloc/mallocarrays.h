@@ -9,6 +9,12 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/stdlib/alloc/mallocarrays.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
  ******* about ****************************************************************
@@ -55,31 +61,28 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 
+#include <sys/types.h>
+
+#include "libalx/base/compiler/size.h"
 #include "libalx/base/compiler/unused.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-#define alx_mallocarrays(ptr, nmemb)	(				\
+#define alx_mallocarrays(ptr, nmemb)	__extension__(			\
 {									\
 	__auto_type	ptr_	= (ptr);				\
 	int		err_;						\
 									\
-	*ptr_	= alx_mallocarrays__(nmemb, sizeof(**ptr_), &err_);	\
+	*ptr_	= alx_mallocarrays__(nmemb, ssizeof(**ptr_), &err_);	\
 	alx_warn_unused_int(err_);					\
 }									\
 )
-
-
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define mallocarrays(ptr, nmemb)	alx_mallocarrays(ptr, nmemb)
-#endif
 
 
 /******************************************************************************
@@ -97,7 +100,7 @@
  ******************************************************************************/
 /*
  * [[gnu::malloc]] [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * void	*alx_mallocarrays__(ptrdiff_t nmemb, size_t size, int *error);
+ * void	*alx_mallocarrays__(ptrdiff_t nmemb, ssize_t size, int *error);
  *
  * Helper function for `mallocarrays()`.
  *
@@ -121,8 +124,16 @@
  * - Fails safely if (nmemb * size) would overflow.
  * - error is non-zero if the result is NULL.
  */
-__attribute__((malloc, nonnull, warn_unused_result))
-void	*alx_mallocarrays__	(ptrdiff_t nmemb, size_t size, int *error);
+[[gnu::malloc]] [[gnu::nonnull]] [[gnu::warn_unused_result]]
+void	*alx_mallocarrays__	(ptrdiff_t nmemb, ssize_t size, int *error);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+#define mallocarrays(ptr, nmemb)	alx_mallocarrays(ptr, nmemb)
+#endif
 
 
 /******************************************************************************

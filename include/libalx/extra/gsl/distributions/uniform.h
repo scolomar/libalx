@@ -9,18 +9,24 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/gsl/distributions/uniform.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <errno.h>
 #include <math.h>
 
-#include "libalx/base/stdlib/average.h"
+#include "libalx/base/stdlib/avg.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -37,32 +43,37 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((const))
+[[gnu::const]]
 inline
-long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b);
-__attribute__((const))
+long double	alx_gsl_distr_uniform_E_ldbl	(long double a, long double b);
+[[gnu::const]]
 inline
-double		alx_gsl_dist_uniform_E		(double a, double b);
-__attribute__((const))
+double		alx_gsl_distr_uniform_E		(double a, double b);
+[[gnu::const]]
 inline
-float		alx_gsl_dist_uniform_E_flt	(float a, float b);
+float		alx_gsl_distr_uniform_E_flt	(float a, float b);
 
-__attribute__((const))
+[[gnu::const]]
 inline
-long double	alx_gsl_dist_uniform_Var_ldbl	(long double a, long double b);
-__attribute__((const))
+long double	alx_gsl_distr_uniform_Var_ldbl	(long double a, long double b);
+[[gnu::const]]
 inline
-double		alx_gsl_dist_uniform_Var	(double a, double b);
-__attribute__((const))
+double		alx_gsl_distr_uniform_Var	(double a, double b);
+[[gnu::const]]
 inline
-float		alx_gsl_dist_uniform_Var_flt	(float a, float b);
+float		alx_gsl_distr_uniform_Var_flt	(float a, float b);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
 inline
-long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b)
+long double	alx_gsl_distr_uniform_E_ldbl	(long double a, long double b)
 {
 
 	if (b < a) {
@@ -74,7 +85,7 @@ long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b)
 }
 
 inline
-double		alx_gsl_dist_uniform_E		(double a, double b)
+double		alx_gsl_distr_uniform_E		(double a, double b)
 {
 
 	if (b < a) {
@@ -86,7 +97,7 @@ double		alx_gsl_dist_uniform_E		(double a, double b)
 }
 
 inline
-float		alx_gsl_dist_uniform_E_flt	(float a, float b)
+float		alx_gsl_distr_uniform_E_flt	(float a, float b)
 {
 
 	if (b < a) {
@@ -99,7 +110,7 @@ float		alx_gsl_dist_uniform_E_flt	(float a, float b)
 
 
 inline
-long double	alx_gsl_dist_uniform_Var_ldbl	(long double a, long double b)
+long double	alx_gsl_distr_uniform_Var_ldbl	(long double a, long double b)
 {
 
 	if (b < a) {
@@ -111,7 +122,7 @@ long double	alx_gsl_dist_uniform_Var_ldbl	(long double a, long double b)
 }
 
 inline
-double		alx_gsl_dist_uniform_Var	(double a, double b)
+double		alx_gsl_distr_uniform_Var	(double a, double b)
 {
 
 	if (b < a) {
@@ -123,7 +134,7 @@ double		alx_gsl_dist_uniform_Var	(double a, double b)
 }
 
 inline
-float		alx_gsl_dist_uniform_Var_flt	(float a, float b)
+float		alx_gsl_distr_uniform_Var_flt	(float a, float b)
 {
 
 	if (b < a) {

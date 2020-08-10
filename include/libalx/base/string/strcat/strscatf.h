@@ -9,22 +9,25 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/string/strcat/strscatf.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stdarg.h>
 #include <stddef.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define strscatf(size, dest, fmt, ...)					\
-	alx_strscatf(size, dest, fmt, ##__VA_ARGS__)
-#endif
 
 
 /******************************************************************************
@@ -40,30 +43,22 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, format(printf, 3, 4), warn_unused_result))
+[[gnu::nonnull]] [[gnu::format(printf, 3, 4)]] [[gnu::warn_unused_result]]
 ptrdiff_t alx_strscatf		(ptrdiff_t size,
 				 char dest[static restrict size],
 				 const char *restrict format, ...);
-__attribute__((nonnull, format(printf, 3, 0), warn_unused_result))
+[[gnu::nonnull]] [[gnu::format(printf, 3, 0)]] [[gnu::warn_unused_result]]
 ptrdiff_t alx_vstrscatf		(ptrdiff_t size,
 				 char dest[static restrict size],
 				 const char *restrict format, va_list ap);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline))
-__attribute__((nonnull, format(printf, 3, 0), warn_unused_result))
-inline
-ptrdiff_t vstrscatf		(ptrdiff_t size,
-				 char dest[static restrict size],
-				 const char *restrict format, va_list ap)
-{
-	return	alx_vstrscatf(size, dest, format, ap);
-}
+ALX_ALIAS_DECLARATION(strscatf,		alx_strscatf);
+ALX_ALIAS_DECLARATION(vstrscatf,	alx_vstrscatf);
 #endif
 
 

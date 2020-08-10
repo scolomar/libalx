@@ -9,13 +9,19 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/stdlib/alloc/reallocfs.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
  ******* about ****************************************************************
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * int	reallocfs(void **ptr, size_t size);
+ * int	reallocfs(void **ptr, ssize_t size);
  *
  * Safe & simple wrapper for `reallocf()`.
  * To be used for generic buffers of bytes, and not for arrays (use
@@ -57,17 +63,17 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
-#include <stddef.h>
+#include <sys/types.h>
 
 #include "libalx/base/compiler/unused.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-#define alx_reallocfs(ptr, size)	(				\
+#define alx_reallocfs(ptr, size)	__extension__(			\
 {									\
 	__auto_type	ptr_	= (ptr);				\
 	int		err_;						\
@@ -76,12 +82,6 @@
 	alx_warn_unused_int(err_);					\
 }									\
 )
-
-
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define reallocfs(ptr, size)	alx_reallocfs(ptr, size)
-#endif
 
 
 /******************************************************************************
@@ -99,7 +99,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * void	*alx_reallocfs__(void *restrict ptr, size_t size, int *restrict error);
+ * void	*alx_reallocfs__(void *restrict ptr, ssize_t size, int *restrict error);
  *
  * Helper function for `reallocfs()`.
  *
@@ -118,9 +118,17 @@
  * - Upon failure, the passed pointer is freed.
  * - error is non-zero if the result is NULL.
  */
-__attribute__((nonnull, warn_unused_result))
-void	*alx_reallocfs__	(void *restrict ptr, size_t size,
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+void	*alx_reallocfs__	(void *restrict ptr, ssize_t size,
 				 int *restrict error);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+#define reallocfs(ptr, size)	alx_reallocfs(ptr, size)
+#endif
 
 
 /******************************************************************************

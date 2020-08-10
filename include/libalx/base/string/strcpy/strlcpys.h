@@ -9,15 +9,23 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/string/strcpy/strlcpys.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -34,25 +42,17 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull(1, 2), warn_unused_result))
+[[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 int	alx_strlcpys		(char dest[restrict /*size*/],
 				 const char src[restrict /*size*/],
 				 ptrdiff_t size, ptrdiff_t *restrict len);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-inline
-int	strlcpys		(char dest[restrict /*size*/],
-				 const char src[restrict /*size*/],
-				 ptrdiff_t size, ptrdiff_t *restrict len)
-{
-	return	alx_strlcpys(dest, src, size, len);
-}
+ALX_ALIAS_DECLARATION(strlcpys, alx_strlcpys);
 #endif
 
 

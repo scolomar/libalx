@@ -5,7 +5,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/alx/data-structures/llist.h"
 
@@ -13,6 +13,8 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
+
+#include <sys/types.h>
 
 #include "libalx/alx/data-structures/bst.h"
 #include "libalx/alx/data-structures/dyn-array.h"
@@ -24,7 +26,7 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -41,7 +43,7 @@
  * the list is empty (list->nmemb == 0).
  * Inserts an already existing node, and updates any necessary metadata.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 void	add_first_node		(struct Alx_LinkedList *list,
 				 struct Alx_Node *node);
@@ -59,7 +61,7 @@ void	add_first_node		(struct Alx_LinkedList *list,
  *	ENOENT:		Aborted; `list` has only one node and is different
  *			from `node`.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 int	remove_node		(struct Alx_LinkedList *list,
 				 struct Alx_Node *node);
@@ -70,7 +72,7 @@ int	remove_node		(struct Alx_LinkedList *list,
  * Updates any necessary metadata.
  * A pointer to the orphan node is passed through `node`.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 void	remove_last_node	(struct Alx_LinkedList *list,
 				 struct Alx_Node **node);
@@ -102,7 +104,7 @@ void	alx_llist_deinit		(struct Alx_LinkedList *list)
 }
 
 int	alx_llist_prepend		(struct Alx_LinkedList *list,
-					 const void *data, size_t size)
+					 const void *data, ssize_t size)
 {
 	struct Alx_Node	*node;
 
@@ -134,7 +136,7 @@ void	alx_llist_prepend_node		(struct Alx_LinkedList *list,
 }
 
 int	alx_llist_append		(struct Alx_LinkedList *list,
-					 const void *data, size_t size)
+					 const void *data, ssize_t size)
 {
 	struct Alx_Node	*node;
 
@@ -166,7 +168,7 @@ void	alx_llist_append_node		(struct Alx_LinkedList *list,
 }
 
 int	alx_llist_insert_before		(struct Alx_LinkedList *list,
-					 const void *data, size_t size,
+					 const void *data, ssize_t size,
 					 struct Alx_Node *ref)
 {
 	struct Alx_Node	*node;
@@ -202,7 +204,7 @@ void	alx_llist_insert_node_before	(struct Alx_LinkedList *list,
 }
 
 int	alx_llist_insert_after		(struct Alx_LinkedList *list,
-					 const void *data, size_t size,
+					 const void *data, ssize_t size,
 					 struct Alx_Node *ref)
 {
 	struct Alx_Node	*node;
@@ -238,7 +240,7 @@ void	alx_llist_insert_node_after	(struct Alx_LinkedList *list,
 }
 
 int	alx_llist_insert_at		(struct Alx_LinkedList *list,
-					 const void *data, size_t size,
+					 const void *data, ssize_t size,
 					 ptrdiff_t pos)
 {
 	struct Alx_Node	*node;
@@ -262,7 +264,7 @@ void	alx_llist_insert_node_at	(struct Alx_LinkedList *list,
 	}
 
 	/* list->nmemb != 0, so it will return 0 */
-	ALX_UNUSED(alx_llist_get_node_at(list, &ref, pos));
+	ALX_RETURN_0(alx_llist_get_node_at(list, &ref, pos));
 	if (pos >= 0)
 		alx_llist_insert_node_before(list, node, ref);
 	else
@@ -336,7 +338,7 @@ int	alx_llist_delete_node		(struct Alx_LinkedList *list,
 {
 
 	if (alx_llist_remove_node(list, node))
-			return	ENOENT;
+		return	ENOENT;
 	alx_node_deinit(node);
 
 	return	0;
@@ -378,7 +380,7 @@ int	alx_llist_get_node_at		(const struct Alx_LinkedList *list,
 
 int	alx_llist_get_relative		(const struct Alx_LinkedList *list,
 					 struct Alx_Node **node,
-					 const struct Alx_Node *ref,
+					 struct Alx_Node *ref,
 					 ptrdiff_t pos)
 {
 
@@ -415,7 +417,7 @@ void	alx_llist_move_node_to		(struct Alx_LinkedList *list,
 		alx_llist_prepend_node(list, node);
 	} else {
 		/* list->nmemb != 0, so it will return 0 */
-		ALX_UNUSED(alx_llist_get_node_at(list, &ref, pos));
+		ALX_RETURN_0(alx_llist_get_node_at(list, &ref, pos));
 		if (pos >= 0)
 			alx_llist_insert_node_before(list, node, ref);
 		else
@@ -435,7 +437,7 @@ void	alx_llist_move_relative		(struct Alx_LinkedList *list,
 		return;
 
 	/* list->nmemb != 0, so it will return 0 */
-	ALX_UNUSED(alx_llist_get_relative(list, &ref, node, pos));
+	ALX_RETURN_0(alx_llist_get_relative(list, &ref, node, pos));
 	remove_node(list, node);
 
 	if (pos > 0)
@@ -453,7 +455,7 @@ void	alx_llist_set_head		(struct Alx_LinkedList *list,
 		return;
 
 	/* list->nmemb != 0, so it will return 0 */
-	ALX_UNUSED(alx_llist_get_node_at(list, &node, pos));
+	ALX_RETURN_0(alx_llist_get_node_at(list, &node, pos));
 	list->head	= node;
 	list->tail	= node->left;
 }
@@ -547,7 +549,7 @@ void	alx_llist_to_bst		(struct Alx_BST *restrict bst,
 	struct Alx_Node	*node;
 
 	while (list->nmemb) {
-		ALX_UNUSED(alx_llist_remove_head(list, &node));
+		ALX_RETURN_0(alx_llist_remove_head(list, &node));
 		if (alx_bst_insert_node(bst, node, NULL))
 			alx_node_deinit(node);
 	}
@@ -567,6 +569,11 @@ int	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
 	alx_bst_deinit(bst);
 	return	0;
 }
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

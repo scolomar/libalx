@@ -9,9 +9,15 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/ncurses/get.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stdbool.h>
 #include <stddef.h>
@@ -20,7 +26,7 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -107,12 +113,12 @@ ptrdiff_t alx_ncurses_get_pdif	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 				const char *restrict title,
 				const char *restrict help,
 				uint8_t attempts);
-__attribute__((nonnull(2)))
+[[gnu::nonnull(2)]]
 int	alx_ncurses_get_nstr	(ptrdiff_t size, char dest[restrict size],
 				int8_t width, int8_t row,
 				const char *restrict title,
 				const char *restrict help);
-__attribute__((nonnull(1, 2)))
+[[gnu::nonnull(1, 2)]]
 int	alx_ncurses_get_fname	(const char *restrict fpath,
 				char fname[static restrict FILENAME_MAX],
 				bool exist,
@@ -120,6 +126,11 @@ int	alx_ncurses_get_fname	(const char *restrict fpath,
 				const char *restrict title,
 				const char *restrict help,
 				uint8_t attempts);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

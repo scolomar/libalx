@@ -38,17 +38,27 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/curl/fcurl/fread.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
+
+#include <sys/types.h>
+
+#include "libalx/base/compiler/attribute.h"
 
 #include "libalx/extra/curl/fcurl/URL_FILE.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -65,23 +75,16 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
-ptrdiff_t	alx_url_fread	(void *restrict ptr, size_t size,
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+ptrdiff_t	alx_url_fread	(void *restrict ptr, ssize_t size,
 				 ptrdiff_t nmemb, ALX_URL_FILE *restrict stream);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-ptrdiff_t	url_fread	(void *restrict ptr, size_t size,
-				 ptrdiff_t nmemb, ALX_URL_FILE *restrict stream)
-{
-	return	alx_url_fread(ptr, size, nmemb, stream);
-}
+ALX_ALIAS_DECLARATION(url_fread, alx_url_fread);
 #endif
 
 

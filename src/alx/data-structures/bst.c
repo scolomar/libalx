@@ -5,7 +5,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/alx/data-structures/bst.h"
 
@@ -15,6 +15,8 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#include <sys/types.h>
+
 #include "libalx/alx/data-structures/llist.h"
 #include "libalx/alx/data-structures/node.h"
 #include "libalx/alx/data-structures/types.h"
@@ -23,7 +25,7 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -49,7 +51,7 @@ void	bst_delete_all			(struct Alx_Node *restrict node);
  *
  * node:	Pointer to a node.
  */
-__attribute__((nonnull, pure, warn_unused_result))
+[[gnu::nonnull]] [[gnu::pure]] [[gnu::warn_unused_result]]
 static
 struct Alx_Node	*bst_leftmost_node	(struct Alx_Node *node);
 
@@ -58,7 +60,7 @@ struct Alx_Node	*bst_leftmost_node	(struct Alx_Node *node);
  *
  * node:	Pointer to a node.
  */
-__attribute__((nonnull, pure, warn_unused_result))
+[[gnu::nonnull]] [[gnu::pure]] [[gnu::warn_unused_result]]
 static
 struct Alx_Node	*bst_rightmost_node	(struct Alx_Node *node);
 
@@ -69,7 +71,7 @@ struct Alx_Node	*bst_rightmost_node	(struct Alx_Node *node);
  *
  * node:	Pointer to a node.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 static
 struct Alx_Node	*bst_join_L_R		(struct Alx_Node *restrict node);
 
@@ -127,7 +129,7 @@ void	alx_bst_deinit		(struct Alx_BST *bst)
 }
 
 int	alx_bst_insert		(struct Alx_BST *restrict bst,
-				 const void *restrict data, size_t size,
+				 const void *restrict data, ssize_t size,
 				 struct Alx_Node **restrict bstnode)
 {
 	struct Alx_Node	*node;
@@ -332,6 +334,11 @@ void	alx_bst_to_llist	(struct Alx_LinkedList *restrict list,
 	bst->root	= NULL;
 	bst->nmemb	= 0;
 }
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

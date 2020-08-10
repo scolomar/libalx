@@ -9,13 +9,19 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/stdlib/alloc/mallocs.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
  ******* about ****************************************************************
  ******************************************************************************/
 /*
  * [[gnu::nonnull]]  [[gnu::warn_unused_result]]
- * int	mallocs(void **ptr, size_t size);
+ * int	mallocs(void **ptr, ssize_t size);
  *
  * Safe & simple wrapper for `malloc()`.
  * To be used for generic buffers of bytes, and not for arrays (use
@@ -54,17 +60,17 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
-#include <stddef.h>
+#include <sys/types.h>
 
 #include "libalx/base/compiler/unused.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-#define alx_mallocs(ptr, size)	(					\
+#define alx_mallocs(ptr, size)	__extension__(				\
 {									\
 	__auto_type	ptr_	= (ptr);				\
 	int		err_;						\
@@ -73,12 +79,6 @@
 	alx_warn_unused_int(err_);					\
 }									\
 )
-
-
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define mallocs(ptr, size)	alx_mallocs(ptr, size)
-#endif
 
 
 /******************************************************************************
@@ -96,7 +96,7 @@
  ******************************************************************************/
 /*
  * [[gnu::malloc]] [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * void	*alx_mallocs__(size_t size, int *error);
+ * void	*alx_mallocs__(ssize_t size, int *error);
  *
  * Helper function for `mallocs()`.
  *
@@ -117,8 +117,16 @@
  * - Returns NULL on zero size allocation.
  * - error is non-zero if the result is NULL.
  */
-__attribute__((malloc, nonnull, warn_unused_result))
-void	*alx_mallocs__	(size_t size, int *error);
+[[gnu::malloc]] [[gnu::nonnull]] [[gnu::warn_unused_result]]
+void	*alx_mallocs__	(ssize_t size, int *error);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+#define mallocs(ptr, size)	alx_mallocs(ptr, size)
+#endif
 
 
 /******************************************************************************

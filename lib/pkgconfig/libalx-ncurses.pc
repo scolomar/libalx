@@ -1,12 +1,14 @@
 Name: libalx-ncurses
 Description: The libalx C/C++ library (ncurses extension)
 URL: https://github.com/alejandro-colomar/libalx
-Version: 1~b17
+Version: <version>
 Requires:
-Requires.private: ncurses libalx-base
+Requires.private: libalx-base ncurses
 
-prefix=/usr/
-libdir=${prefix}/lib/
+prefix=/usr/local
+includedir=${prefix}/include
+libdir=${prefix}/lib
 
-Cflags: -D_GNU_SOURCE -D_POSIX_C_SOURCE=200809L
-Libs: -L${libdir}/libalx/ -lalx-ncurses
+Cflags: -I${includedir} -D_GNU_SOURCE -D_POSIX_C_SOURCE=200809L
+Libs: -L${libdir}/libalx -lalx-ncurses
+Libs.private:

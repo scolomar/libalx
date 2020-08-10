@@ -9,45 +9,43 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/gmp/mpz/division.hpp */
 
+#if !defined(__cplusplus)
+#warning	This header file should only be included in C++.  In C,	\
+		include the header file of the same name and `.h`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <cstdbool>
 #include <cstdint>
 
 #include <gmp.h>
 
+#include "libalx/base/compiler/attribute.hpp"
+
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define mpz_cdiv_q_u64(q, n, d)		alx_mpz_cdiv_q_u64(q, n, d)
-#define mpz_cdiv_r_u64(r, n, d)		alx_mpz_cdiv_r_u64(r, n, d)
-#define mpz_cdiv_qr_u64(q, r, n, d)	alx_mpz_cdiv_qr_u64(q, r, n, d)
-#define mpz_cdiv_u64(n, d)		alx_mpz_cdiv_u64(n, d)
-#define mpz_fdiv_q_u64(q, n, d)		alx_mpz_fdiv_q_u64(q, n, d)
-#define mpz_fdiv_r_u64(r, n, d)		alx_mpz_fdiv_r_u64(r, n, d)
-#define mpz_fdiv_qr_u64(q, r, n, d)	alx_mpz_fdiv_qr_u64(q, r, n, d)
-#define mpz_fdiv_u64(n, d)		alx_mpz_fdiv_u64(n, d)
-#define mpz_tdiv_q_u64(q, n, d)		alx_mpz_tdiv_q_u64(q, n, d)
-#define mpz_tdiv_r_u64(r, n, d)		alx_mpz_tdiv_r_u64(r, n, d)
-#define mpz_tdiv_qr_u64(q, r, n, d)	alx_mpz_tdiv_qr_u64(q, r, n, d)
-#define mpz_tdiv_u64(n, d)		alx_mpz_tdiv_u64(n, d)
-#define mpz_mod_u64(r, n, d)		alx_mpz_mod_u64(r, n, d)
-#define mpz_divexact_u64(q, n, d)	alx_mpz_divexact_u64(q, n, d)
-#define mpz_divisible_u64_p(n, d)	alx_mpz_divisible_u64_p(n, d)
-#define mpz_congruent_u64_p(n, c, d)	alx_mpz_congruent_u64_p(n, c, d)
-#endif
 
 
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-extern	"C"
-{
+extern "C" {
+
+
+/******************************************************************************
+ ******* struct / union *******************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* C prototypes *********************************************************
+ ******************************************************************************/
 uint64_t alx_mpz_cdiv_q_u64	(mpz_t q, const mpz_t n, uint64_t d);
 uint64_t alx_mpz_cdiv_r_u64	(mpz_t r, const mpz_t n, uint64_t d);
 uint64_t alx_mpz_cdiv_qr_u64	(mpz_t q, mpz_t r, const mpz_t n, uint64_t d);
@@ -67,7 +65,35 @@ uint64_t alx_mpz_mod_u64	(mpz_t r, const mpz_t n, uint64_t d);
 void	alx_mpz_divexact_u64	(mpz_t q, const mpz_t n, uint64_t d);
 bool	alx_mpz_divisible_u64_p	(const mpz_t n, uint64_t d);
 bool	alx_mpz_congruent_u64_p	(const mpz_t n, uint64_t c, uint64_t d);
-}
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(mpz_cdiv_q_u64,		alx_mpz_cdiv_q_u64);
+ALX_ALIAS_DECLARATION(mpz_cdiv_r_u64,		alx_mpz_cdiv_r_u64);
+ALX_ALIAS_DECLARATION(mpz_cdiv_qr_u64,		alx_mpz_cdiv_qr_u64);
+ALX_ALIAS_DECLARATION(mpz_cdiv_u64,		alx_mpz_cdiv_u64);
+ALX_ALIAS_DECLARATION(mpz_fdiv_q_u64,		alx_mpz_fdiv_q_u64);
+ALX_ALIAS_DECLARATION(mpz_fdiv_r_u64,		alx_mpz_fdiv_r_u64);
+ALX_ALIAS_DECLARATION(mpz_fdiv_qr_u64,		alx_mpz_fdiv_qr_u64);
+ALX_ALIAS_DECLARATION(mpz_fdiv_u64,		alx_mpz_fdiv_u64);
+ALX_ALIAS_DECLARATION(mpz_tdiv_q_u64,		alx_mpz_tdiv_q_u64);
+ALX_ALIAS_DECLARATION(mpz_tdiv_r_u64,		alx_mpz_tdiv_r_u64);
+ALX_ALIAS_DECLARATION(mpz_tdiv_qr_u64,		alx_mpz_tdiv_qr_u64);
+ALX_ALIAS_DECLARATION(mpz_tdiv_u64,		alx_mpz_tdiv_u64);
+ALX_ALIAS_DECLARATION(mpz_mod_u64,		alx_mpz_mod_u64);
+ALX_ALIAS_DECLARATION(mpz_divexact_u64,		alx_mpz_divexact_u64);
+ALX_ALIAS_DECLARATION(mpz_divisible_u64_p,	alx_mpz_divisible_u64_p);
+ALX_ALIAS_DECLARATION(mpz_congruent_u64_p,	alx_mpz_congruent_u64_p);
+#endif
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+}	/* extern "C" */
 
 
 /******************************************************************************
@@ -79,11 +105,6 @@ namespace gmp {
 
 /******************************************************************************
  ******* enum *****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* struct / union *******************************************************
  ******************************************************************************/
 
 

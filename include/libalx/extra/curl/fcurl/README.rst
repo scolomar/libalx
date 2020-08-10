@@ -52,13 +52,13 @@ lib namesakes and are preceaded by url_ .
 	int	url_fgetc(URL_FILE *stream);
 
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]
-	char	*url_fgets(char *str, size_t size, URL_FILE *stream);
+	char	*url_fgets(char *str, ssize_t size, URL_FILE *stream);
 
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]
 	URL_FILE *url_fopen(const char *url, const char *mode);
 
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]
-	ptrdiff_t url_fread(void *ptr, size_t size, ptrdiff_t nmemb,
+	ptrdiff_t url_fread(void *ptr, ssize_t size, ptrdiff_t nmemb,
 			    URL_FILE *stream);
 
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]

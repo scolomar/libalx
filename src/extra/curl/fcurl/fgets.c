@@ -49,7 +49,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/extra/curl/fcurl/fgets.h"
 
@@ -57,8 +57,9 @@
 #include <stddef.h>
 #include <stdio.h>
 
+#include <sys/param.h>
+
 #include "libalx/alx/data-structures/dyn-buffer.h"
-#include "libalx/base/stdlib/minimum.h"
 #include "libalx/base/string/memchr/memchrend.h"
 #include "libalx/extra/curl/fcurl/URL_FILE.h"
 
@@ -66,7 +67,7 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -79,14 +80,14 @@
  ******* static prototypes ****************************************************
  ******************************************************************************/
 static
-char	*url_fgets__	(char *restrict str, size_t size,
+char	*url_fgets__	(char *restrict str, ssize_t size,
 			 ALX_URL_FILE *restrict stream);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-char	*alx_url_fgets	(char *restrict str, size_t size,
+char	*alx_url_fgets	(char *restrict str, ssize_t size,
 			 ALX_URL_FILE *restrict stream)
 {
 
@@ -106,13 +107,19 @@ char	*alx_url_fgets	(char *restrict str, size_t size,
 
 
 /******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+ALX_ALIAS_WEAK_DEF(url_fgets, alx_url_fgets);
+
+
+/******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
 static
-char	*url_fgets__	(char *restrict str, size_t size,
+char	*url_fgets__	(char *restrict str, ssize_t size,
 			 ALX_URL_FILE *restrict stream)
 {
-	size_t	len;
+	ssize_t	len;
 
 	len	= size - 1;
 
@@ -122,7 +129,7 @@ char	*url_fgets__	(char *restrict str, size_t size,
 		return	NULL;
 	}
 
-	len	= ALX_MIN(len, stream->buf->written);
+	len	= MIN(len, stream->buf->written);
 	len	= alx_memchrend(stream->buf->data, '\n', len) + 1;
 	if (alx_dynbuf_read(str, len, stream->buf, 0))
 		return	NULL;

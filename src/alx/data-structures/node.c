@@ -5,7 +5,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/alx/data-structures/node.h"
 
@@ -14,13 +14,15 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#include <sys/types.h>
+
 #include "libalx/alx/data-structures/dyn-buffer.h"
 #include "libalx/alx/data-structures/types.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -38,7 +40,7 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 int	alx_node_init		(struct Alx_Node **restrict node,
-				 const void *restrict data, size_t size)
+				 const void *restrict data, ssize_t size)
 {
 
 	if (alx_node_init_empty(node))
@@ -107,12 +109,12 @@ void	alx_node_deinit		(struct Alx_Node *node)
 }
 
 int	alx_node_write		(struct Alx_Node *node,
-				 const void *data, size_t size)
+				 const void *data, ssize_t size)
 {
 	return	alx_dynbuf_write(node->buf, 0, data, size);
 }
 
-int	alx_node_read		(void *data, size_t size,
+ssize_t	alx_node_read		(void *data, ssize_t size,
 				 const struct Alx_Node *node)
 {
 	return	alx_dynbuf_read(data, size, node->buf, 0);
@@ -129,6 +131,11 @@ int	alx_node_get_data	(void **restrict data,
 	*data	= node->buf->data;
 	return	0;
 }
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

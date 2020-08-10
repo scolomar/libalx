@@ -9,13 +9,19 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/stdlib/alloc/reallocarrays.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
  ******* about ****************************************************************
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * int	reallocarrays(type **ptr, size_t nmemb);
+ * int	reallocarrays(type **ptr, ssize_t nmemb);
  *
  * Safe & simple wrapper for `reallocarray()`.
  *
@@ -58,31 +64,29 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 
+#include <sys/types.h>
+
+#include "libalx/base/compiler/attribute.h"
+#include "libalx/base/compiler/size.h"
 #include "libalx/base/compiler/unused.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-#define alx_reallocarrays(ptr, nmemb)	(				\
+#define alx_reallocarrays(ptr, nmemb)	__extension__(			\
 {									\
 	__auto_type	ptr_	= (ptr);				\
 	int		err_;						\
 									\
-	*ptr_	= alx_reallocarrays__(*ptr_, nmemb, sizeof(**ptr_), &err_); \
+	*ptr_	= alx_reallocarrays__(*ptr_, nmemb, ssizeof(**ptr_), &err_); \
 	alx_warn_unused_int(err_);					\
 }									\
 )
-
-
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define reallocarrays(ptr, nmemb)	alx_reallocarrays(ptr, nmemb)
-#endif
 
 
 /******************************************************************************
@@ -100,7 +104,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * void	*alx_reallocarrays__(void *restrict ptr, ptrdiff_t nmemb, size_t size,
+ * void	*alx_reallocarrays__(void *restrict ptr, ptrdiff_t nmemb, ssize_t size,
  *			     int *restrict error);
  *
  * Helper function for `reallocarrays()`.
@@ -123,23 +127,17 @@
  * - Upon failure, the pointer is returned untouched.
  * - error is non-zero if the resulting pointer is NULL or untouched.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 void	*alx_reallocarrays__	(void *restrict ptr, ptrdiff_t nmemb,
-				 size_t size, int *restrict error);
+				 ssize_t size, int *restrict error);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-void	*reallocarrays__	(void *restrict ptr, ptrdiff_t nmemb,
-				 size_t size, int *restrict error)
-{
-	return	alx_reallocarrays__(ptr, nmemb, size, error);
-}
+ALX_ALIAS_DECLARATION(reallocarrays__,	alx_reallocarrays__);
+#define reallocarrays(ptr, nmemb)	alx_reallocarrays(ptr, nmemb)
 #endif
 
 

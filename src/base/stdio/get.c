@@ -5,7 +5,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/base/stdio/get.h"
 
@@ -20,7 +20,7 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -100,7 +100,7 @@ long double	alx_get_ldbl	(long double m, long double def, long double M,
 		printf("%s\n", help);
 	else
 		printf("Introduce a real number [%Lf U %Lf] (default %Lf):...\t",
-				 			m, M, def);
+							m, M, def);
 
 	return	loop_get_ldbl(m, def, M, attempts);
 }
@@ -117,7 +117,7 @@ double		alx_get_dbl	(double m, double def, double M,
 		printf("%s\n", help);
 	else
 		printf("Introduce a real number [%lf U %lf] (default %lf):...\t",
-				 			m, M, def);
+							m, M, def);
 
 	return	loop_get_dbl(m, def, M, attempts);
 }
@@ -134,7 +134,7 @@ float		alx_get_flt	(float m, float def, float M,
 		printf("%s\n", help);
 	else
 		printf("Introduce a real number [%f U %f] (default %f):...\t",
-				 			m, M, def);
+							m, M, def);
 
 	return	loop_get_flt(m, def, M, attempts);
 }
@@ -151,7 +151,7 @@ unsigned	alx_get_uint	(unsigned m, unsigned def, unsigned M,
 		printf("%s\n", help);
 	else
 		printf("Introduce an integer [%u U %u] (default %u):...\t",
-				 			m, M, def);
+							m, M, def);
 
 	return	loop_get_uint(m, def, M, attempts);
 }
@@ -168,7 +168,7 @@ int		alx_get_int	(int m, int def, int M,
 		printf("%s\n", help);
 	else
 		printf("Introduce an integer [%i U %i] (default %i):...\t",
-				 			m, M, def);
+							m, M, def);
 
 	return	loop_get_int(m, def, M, attempts);
 }
@@ -185,7 +185,7 @@ uint8_t		alx_get_u8	(uint8_t m, uint8_t def, uint8_t M,
 		printf("%s\n", help);
 	else
 		printf("Introduce an integer [%"PRIu8" U %"PRIu8"] (default %"PRIu8"):...\t",
-				 			m, M, def);
+							m, M, def);
 
 	return	loop_get_u8(m, def, M, attempts);
 }
@@ -202,7 +202,7 @@ int8_t		alx_get_s8	(int8_t m, int8_t def, int8_t M,
 		printf("%s\n", help);
 	else
 		printf("Introduce an integer [%"PRIi8" U %"PRIi8"] (default %"PRIi8"):...\t",
-				 			m, M, def);
+							m, M, def);
 
 	return	loop_get_s8(m, def, M, attempts);
 }
@@ -219,7 +219,7 @@ uint16_t	alx_get_u16	(uint16_t m, uint16_t def, uint16_t M,
 		printf("%s\n", help);
 	else
 		printf("Introduce an integer [%"PRIu16" U %"PRIu16"] (default %"PRIu16"):...\t",
-				 			m, M, def);
+							m, M, def);
 
 	return	loop_get_u16(m, def, M, attempts);
 }
@@ -236,7 +236,7 @@ int16_t		alx_get_s16	(int16_t m, int16_t def, int16_t M,
 		printf("%s\n", help);
 	else
 		printf("Introduce an integer [%"PRIi16" U %"PRIi16"] (default %"PRIi16"):...\t",
-				 			m, M, def);
+							m, M, def);
 
 	return	loop_get_s16(m, def, M, attempts);
 }
@@ -253,7 +253,7 @@ uint32_t	alx_get_u32	(uint32_t m, uint32_t def, uint32_t M,
 		printf("%s\n", help);
 	else
 		printf("Introduce an integer [%"PRIu32" U %"PRIu32"] (default %"PRIu32"):...\t",
-				 			m, M, def);
+							m, M, def);
 
 	return	loop_get_u32(m, def, M, attempts);
 }
@@ -270,7 +270,7 @@ int32_t		alx_get_s32	(int32_t m, int32_t def, int32_t M,
 		printf("%s\n", help);
 	else
 		printf("Introduce an integer [%"PRIi32" U %"PRIi32"] (default %"PRIi32"):...\t",
-				 			m, M, def);
+							m, M, def);
 
 	return	loop_get_s32(m, def, M, attempts);
 }
@@ -287,7 +287,7 @@ uint64_t	alx_get_u64	(uint64_t m, uint64_t def, uint64_t M,
 		printf("%s\n", help);
 	else
 		printf("Introduce an integer [%"PRIu64" U %"PRIu64"] (default %"PRIu64"):...\t",
-				 			m, M, def);
+							m, M, def);
 
 	return	loop_get_u64(m, def, M, attempts);
 }
@@ -304,7 +304,7 @@ int64_t		alx_get_s64	(int64_t m, int64_t def, int64_t M,
 		printf("%s\n", help);
 	else
 		printf("Introduce an integer [%"PRIi64" U %"PRIi64"] (default %"PRIi64"):...\t",
-				 			m, M, def);
+							m, M, def);
 
 	return	loop_get_s64(m, def, M, attempts);
 }
@@ -321,7 +321,7 @@ ptrdiff_t	alx_get_pdif	(ptrdiff_t m, ptrdiff_t def, ptrdiff_t M,
 		printf("%s\n", help);
 	else
 		printf("Introduce an integer [%ti U %ti] (default %ti):...\t",
-				 			m, M, def);
+							m, M, def);
 
 	return	loop_get_pdif(m, def, M, attempts);
 }
@@ -339,7 +339,7 @@ char		alx_get_ch	(const char *restrict valid,
 		printf("%s\n", help);
 	else
 		printf("Introduce a character [%s] (default %c):...\t",
-				 		valid, valid[0]);
+							valid, valid[0]);
 
 	return	loop_get_ch(valid, skip_space, ignore_case, attempts);
 }
@@ -361,6 +361,11 @@ int		alx_get_fname	(const char *restrict path,
 
 	return	loop_get_fname(path, fname, exist, attempts);
 }
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

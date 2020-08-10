@@ -5,13 +5,17 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/base/stdlib/popcnt.h"
 
+#include <stdint.h>
+
+#include "libalx/base/stdint/types.h"
+
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -36,13 +40,28 @@ extern
 uint32_t	alx_popcnt_u32	(uint32_t n);
 extern
 uint64_t	alx_popcnt_u64	(uint64_t n);
-#if defined(uint128_t)
+#if defined(UINT128_MAX)
 extern
 uint64_t	alx_popcnt_u128	(uint128_t n);
 #endif
-#if defined(uint256_t)
+#if defined(UINT256_MAX)
 extern
 uint64_t	alx_popcnt_u256	(uint256_t n);
+#endif
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+ALX_ALIAS_WEAK_DEF(popcnt_u8,	alx_popcnt_u8);
+ALX_ALIAS_WEAK_DEF(popcnt_u16,	alx_popcnt_u16);
+ALX_ALIAS_WEAK_DEF(popcnt_u32,	alx_popcnt_u32);
+ALX_ALIAS_WEAK_DEF(popcnt_u64,	alx_popcnt_u64);
+#if defined(UINT128_MAX)
+ALX_ALIAS_WEAK_DEF(popcnt_u128,	alx_popcnt_u128);
+#endif
+#if defined(UINT256_MAX)
+ALX_ALIAS_WEAK_DEF(popcnt_u256,	alx_popcnt_u256);
 #endif
 
 

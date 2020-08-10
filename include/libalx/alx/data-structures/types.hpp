@@ -9,33 +9,31 @@
  ******************************************************************************/
 #pragma once	/* libalx/alx/data-structures/types.hpp */
 
+#if !defined(__cplusplus)
+#warning	This header file should only be included in C++.  In C,	\
+		include the header file of the same name and `.h`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <cstdbool>
 #include <cstddef>
 #include <cstdint>
 
+#include <sys/types.h>
+
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
 /******************************************************************************
- ******* extern "C" ***********************************************************
+ ******* typedef **************************************************************
  ******************************************************************************/
-enum	Alx_DF_Generic_Type {
-	ALX_DF_TYPE_NONE,
-
-	ALX_DF_TYPE_S64,
-	ALX_DF_TYPE_DBL,
-	ALX_DF_TYPE_STR,
-
-	ALX_DF_TYPES
-};
-
 /*
  * Comparison function.  This function should return
  *		0:	The user_node compares equal to the compared ds_node.
@@ -46,6 +44,16 @@ typedef int	cmp_f	(int64_t user_key, int64_t ds_key,
 			 const void *user_data,
 			 const void *ds_data);
 
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern "C" {
+
+
+/******************************************************************************
+ ******* struct / union *******************************************************
+ ******************************************************************************/
 /*
  * Dynamic buffer
  *
@@ -54,9 +62,9 @@ typedef int	cmp_f	(int64_t user_key, int64_t ds_key,
  * written:	Data used (in bytes).
  */
 struct	Alx_DynBuf {
-	void		*data;
-	size_t		size;
-	size_t		written;
+	void	*data;
+	ssize_t	size;
+	ssize_t	written;
 };
 
 /*
@@ -69,7 +77,7 @@ struct	Alx_DynBuf {
  */
 struct	Alx_DynArr {
 	void		*data;
-	size_t		elsize;
+	ssize_t		elsize;
 	ptrdiff_t	nmemb;
 	ptrdiff_t	written;
 };
@@ -85,11 +93,11 @@ struct	Alx_DynArr {
  * count:	Count (for repeated nodes in trees that don't accept duplicates).
  */
 struct	Alx_Node {
-	int64_t		key;
+	int64_t			key;
 	struct Alx_DynBuf	*buf;
-	struct Alx_Node	*left;
-	struct Alx_Node	*right;
-	struct Alx_Node	*parent;
+	struct Alx_Node		*left;
+	struct Alx_Node		*right;
+	struct Alx_Node		*parent;
 	ptrdiff_t		dup;
 };
 
@@ -103,7 +111,7 @@ struct	Alx_Node {
 struct	Alx_LinkedList {
 	struct Alx_Node	*head;
 	struct Alx_Node	*tail;
-	ptrdiff_t		nmemb;
+	ptrdiff_t	nmemb;
 	int64_t		key_min;	/* minimum key in the BST */
 	int64_t		key_max;	/* maximum key in the BST */
 };
@@ -113,16 +121,16 @@ struct	Alx_LinkedList {
  */
 struct	Alx_BST {
 	struct Alx_Node	*root;
-	ptrdiff_t		nmemb;
-	cmp_f			*cmp;		/* comparison function pointer */
+	ptrdiff_t	nmemb;
+	cmp_f		*cmp;		/* comparison function pointer */
 	int64_t		key_min;	/* minimum key in the BST */
 	int64_t		key_max;	/* maximum key in the BST */
-	bool			dup;		/* Allow for duplicate members? */
+	bool		dup;		/* Allow for duplicate members? */
 };
 
 struct	Alx_DF_Generic {
 	union {
-		int64_t		i64;
+		int64_t			i64;
 		double			lf;
 		struct Alx_DynBuf	*buf;
 	};
@@ -177,9 +185,21 @@ struct	Alx_DataFrame {
 	struct Alx_LinkedList	*rows;
 };
 
-extern	"C"
-{
-}
+
+/******************************************************************************
+ ******* C prototypes *********************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+}	/* extern "C" */
 
 
 /******************************************************************************
@@ -192,11 +212,15 @@ namespace ds {
 /******************************************************************************
  ******* enum *****************************************************************
  ******************************************************************************/
+enum	DF_Generic_Type {
+	DF_TYPE_NONE,
 
+	DF_TYPE_S64,
+	DF_TYPE_DBL,
+	DF_TYPE_STR,
 
-/******************************************************************************
- ******* struct / union *******************************************************
- ******************************************************************************/
+	DF_TYPES
+};
 
 
 /******************************************************************************

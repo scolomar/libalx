@@ -38,17 +38,25 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/curl/fcurl/fgets.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
-#include <stddef.h>
+#include <sys/types.h>
+
+#include "libalx/base/compiler/attribute.h"
 
 #include "libalx/extra/curl/fcurl/URL_FILE.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -65,23 +73,16 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
-char	*alx_url_fgets	(char *restrict str, size_t size,
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+char	*alx_url_fgets	(char *restrict str, ssize_t size,
 			 ALX_URL_FILE *restrict stream);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-char	*url_fgets	(char *restrict str, size_t size,
-			 ALX_URL_FILE *restrict stream)
-{
-	return	alx_url_fgets(str, size, stream);
-}
+ALX_ALIAS_DECLARATION(url_fgets, alx_url_fgets);
 #endif
 
 

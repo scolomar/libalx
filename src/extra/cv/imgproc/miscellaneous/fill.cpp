@@ -5,7 +5,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/extra/cv/imgproc/miscellaneous/fill.hpp"
 
@@ -19,7 +19,7 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -97,6 +97,58 @@ int	alx_cv_holes_fill	(void *img)
 {
 	return	alx::CV::holes_fill((class cv::Mat *)img);
 }
+
+int	alx::CV::holes_mask_fill(class cv::Mat *img)
+{
+
+	if (alx::CV::holes_mask(img))
+		return	1;
+	alx::CV::holes_fill(img);
+	return	0;
+}
+
+int	alx_cv_holes_mask_fill	(void *img)
+{
+	return	alx::CV::holes_mask_fill((class cv::Mat *)img);
+}
+
+int	alx::CV::holes_remove(class cv::Mat *img)
+{
+	class cv::Mat	mask;
+
+	img->copyTo(mask);
+	if (alx::CV::holes_mask_fill(&mask))
+		return	1;
+	cv::bitwise_not(mask, mask);
+	cv::bitwise_and(*img, mask, *img);
+	return	0;
+}
+
+int	alx_cv_holes_remove	(void *img)
+{
+	return	alx::CV::holes_remove((class cv::Mat *)img);
+}
+
+int	alx::CV::holes_extract(class cv::Mat *img)
+{
+	class cv::Mat	mask;
+
+	img->copyTo(mask);
+	if (alx::CV::holes_mask_fill(&mask))
+		return	1;
+	cv::bitwise_and(*img, mask, *img);
+	return	0;
+}
+
+int	alx_cv_holes_extract	(void *img)
+{
+	return	alx::CV::holes_extract((class cv::Mat *)img);
+}
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

@@ -1,12 +1,14 @@
 Name: libalx-gsl
 Description: The libalx C/C++ library (GSL extension)
 URL: https://github.com/alejandro-colomar/libalx
-Version: 1~b17
-Requires: gsl
-Requires.private: libalx-base
+Version: <version>
+Requires: gsl libalx-base
+Requires.private:
 
-prefix=/usr/
-libdir=${prefix}/lib/
+prefix=/usr/local
+includedir=${prefix}/include
+libdir=${prefix}/lib
 
-Cflags: -D_GNU_SOURCE -D_POSIX_C_SOURCE=200809L
-Libs: -L${libdir}/libalx/ -lalx-gsl
+Cflags: -I${includedir} -D_GNU_SOURCE -D_POSIX_C_SOURCE=200809L
+Libs: -L${libdir}/libalx -lalx-gsl
+Libs.private:

@@ -9,15 +9,21 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/cv/ximgproc/thinning.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/extra/cv/types.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -46,13 +52,18 @@ enum	Alx_Cv_Thinning_Types{
  * the technique of Zhang-Suen.
  *
  * @param img	Source & Destination 8-bit single-channel image,
- * 		containing binary blobs, with blobs having 255 pixel values.
- * 		The function works in-place.
+ *		containing binary blobs, with blobs having 255 pixel values.
+ *		The function works in-place.
  * @param method	Value that defines which thinning algorithm should be
- * 		used. See Alx_Cv_Thinning_Types (cv::ximgproc::ThinningTypes).
+ *		used. See Alx_Cv_Thinning_Types (cv::ximgproc::ThinningTypes).
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_thinning	(img_s *img, int method);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

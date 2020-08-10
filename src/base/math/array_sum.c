@@ -5,7 +5,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/base/math/array_sum.h"
 
@@ -18,11 +18,11 @@
 #include <string.h>
 
 #include "libalx/base/compiler/size.h"
-#include "libalx/base/stdlib/compare.h"
+#include "libalx/base/stdlib/cmp.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -105,12 +105,6 @@ extern
 float	alx_flt_array_sum_flt		(ptrdiff_t nmemb,
 					 const float arr[restrict nmemb]);
 extern
-float	alx_flt_array_sum_uint		(ptrdiff_t nmemb,
-					 const unsigned arr[restrict nmemb]);
-extern
-float	alx_flt_array_sum_int		(ptrdiff_t nmemb,
-					 const int arr[restrict nmemb]);
-extern
 float	alx_flt_array_sum_u8		(ptrdiff_t nmemb,
 					 const uint8_t arr[restrict nmemb]);
 extern
@@ -124,7 +118,7 @@ float	alx_flt_array_sum_s16		(ptrdiff_t nmemb,
 					 const int16_t arr[restrict nmemb]);
 
 unsigned	alx_array_sum_uint	(ptrdiff_t nmemb,
-					const unsigned arr[restrict nmemb])
+					 const unsigned arr[restrict nmemb])
 {
 	unsigned	sum;
 
@@ -141,8 +135,10 @@ ovf:
 	return	UINT_MAX;
 }
 
+//#pragma GCC diagnostic push /* Arrays larger than PTRDIFF_MAX not supported */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 int		alx_array_sum_int	(ptrdiff_t nmemb,
-					const int arr[restrict nmemb])
+					 const int arr[restrict nmemb])
 {
 	int		sorted[nmemb];
 	ptrdiff_t	i, j;
@@ -150,7 +146,7 @@ int		alx_array_sum_int	(ptrdiff_t nmemb,
 	int		sum;
 
 	memcpy(sorted, arr, ARRAY_BYTES(sorted));
-	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_int);
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_cmp_int);
 
 	tmp	= 0;
 	i	= 0;
@@ -188,8 +184,11 @@ ovf:
 	return	INT_MIN;
 }
 
+//#pragma GCC diagnostic push	/* Over(/under)flow is explicitly handled */
+//#pragma GCC diagnostic ignored	"-Warith-conversion"
+//#pragma GCC diagnostic ignored	"-Wconversion"
 uint8_t		alx_array_sum_u8	(ptrdiff_t nmemb,
-					const uint8_t arr[restrict nmemb])
+					 const uint8_t arr[restrict nmemb])
 {
 	uint_fast16_t		sum;
 
@@ -207,7 +206,7 @@ ovf:
 }
 
 int8_t		alx_array_sum_s8	(ptrdiff_t nmemb,
-					const int8_t arr[restrict nmemb])
+					 const int8_t arr[restrict nmemb])
 {
 	int8_t		sorted[nmemb];
 	ptrdiff_t	i, j;
@@ -215,7 +214,7 @@ int8_t		alx_array_sum_s8	(ptrdiff_t nmemb,
 	int_fast8_t	sum;
 
 	memcpy(sorted, arr, ARRAY_BYTES(sorted));
-	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s8);
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_cmp_s8);
 
 	tmp	= 0;
 	i	= 0;
@@ -254,7 +253,7 @@ ovf:
 }
 
 uint16_t	alx_array_sum_u16	(ptrdiff_t nmemb,
-					const uint16_t arr[restrict nmemb])
+					 const uint16_t arr[restrict nmemb])
 {
 	uint_fast32_t	sum;
 
@@ -272,7 +271,7 @@ ovf:
 }
 
 int16_t		alx_array_sum_s16	(ptrdiff_t nmemb,
-					const int16_t arr[restrict nmemb])
+					 const int16_t arr[restrict nmemb])
 {
 	int16_t		sorted[nmemb];
 	ptrdiff_t	i, j;
@@ -280,7 +279,7 @@ int16_t		alx_array_sum_s16	(ptrdiff_t nmemb,
 	int_fast16_t	sum;
 
 	memcpy(sorted, arr, ARRAY_BYTES(sorted));
-	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s16);
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_cmp_s16);
 
 	tmp	= 0;
 	i	= 0;
@@ -319,7 +318,7 @@ ovf:
 }
 
 uint32_t	alx_array_sum_u32	(ptrdiff_t nmemb,
-					const uint32_t arr[restrict nmemb])
+					 const uint32_t arr[restrict nmemb])
 {
 	uint_fast64_t	sum;
 
@@ -337,7 +336,7 @@ ovf:
 }
 
 int32_t		alx_array_sum_s32	(ptrdiff_t nmemb,
-					const int32_t arr[restrict nmemb])
+					 const int32_t arr[restrict nmemb])
 {
 	int32_t		sorted[nmemb];
 	ptrdiff_t	i, j;
@@ -345,7 +344,7 @@ int32_t		alx_array_sum_s32	(ptrdiff_t nmemb,
 	int_fast32_t	sum;
 
 	memcpy(sorted, arr, ARRAY_BYTES(sorted));
-	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s32);
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_cmp_s32);
 
 	tmp	= 0;
 	i	= 0;
@@ -382,9 +381,10 @@ ovf:
 	errno	= ERANGE;
 	return	INT32_MIN;
 }
+//#pragma GCC diagnostic pop	/* "-Warith-conversion" "-Wconversion" */
 
 uint64_t	alx_array_sum_u64	(ptrdiff_t nmemb,
-					const uint64_t arr[restrict nmemb])
+					 const uint64_t arr[restrict nmemb])
 {
 	uint_fast64_t	sum;
 
@@ -402,15 +402,15 @@ ovf:
 }
 
 int64_t		alx_array_sum_s64	(ptrdiff_t nmemb,
-					const int64_t arr[restrict nmemb])
+					 const int64_t arr[restrict nmemb])
 {
 	int64_t		sorted[nmemb];
 	ptrdiff_t	i, j;
-	double_t	tmp;
+	long double	tmp;
 	int_fast64_t	sum;
 
 	memcpy(sorted, arr, ARRAY_BYTES(sorted));
-	qsort(sorted, nmemb, sizeof(sorted[0]), alx_compare_s64);
+	qsort(sorted, nmemb, sizeof(sorted[0]), alx_cmp_s64);
 
 	tmp	= 0;
 	i	= 0;
@@ -420,15 +420,15 @@ int64_t		alx_array_sum_s64	(ptrdiff_t nmemb,
 			tmp += arr[i++];
 		else
 			tmp += arr[j--];
-		if (nextafter(tmp, tmp + 1) > INT64_MAX)
+		if (nextafterl(tmp, tmp + 1) > INT64_MAX)
 			goto ovf;
-		if (nextafter(tmp, tmp - 1) < INT64_MIN)
+		if (nextafterl(tmp, tmp - 1) < INT64_MIN)
 			goto ovf;
 	}
 	tmp += arr[i];
-	if (nextafter(tmp, tmp + 1) > INT64_MAX)
+	if (nextafterl(tmp, tmp + 1) > INT64_MAX)
 		goto ovf;
-	if (nextafter(tmp, tmp - 1) < INT64_MIN)
+	if (nextafterl(tmp, tmp - 1) < INT64_MIN)
 		goto ovf;
 
 	sum	= 0;
@@ -447,6 +447,12 @@ ovf:
 	errno	= ERANGE;
 	return	INT64_MIN;
 }
+//#pragma GCC diagnostic pop	/* "-Wsign-conversion" */
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

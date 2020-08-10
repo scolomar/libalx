@@ -5,19 +5,23 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/alx/data-structures/dyn-array.h"
 
 #include <errno.h>
+#include <limits.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 
+#include <sys/param.h>
+#include <sys/types.h>
+
 #include "libalx/alx/data-structures/llist.h"
 #include "libalx/alx/data-structures/types.h"
-#include "libalx/base/assert/assert.h"
-#include "libalx/base/stdlib/maximum.h"
+#include "libalx/base/assert/stddef.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
 #include "libalx/base/stdlib/alloc/frees.h"
 #include "libalx/base/stdlib/alloc/reallocarrays.h"
@@ -30,7 +34,7 @@ alx_Static_assert_size_ptrdiff();
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -42,7 +46,7 @@ alx_Static_assert_size_ptrdiff();
 /******************************************************************************
  ******* static prototypes ****************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 static
 int	alx_dynarr_grow		(struct Alx_DynArr *arr, ptrdiff_t nmemb);
 
@@ -50,12 +54,10 @@ int	alx_dynarr_grow		(struct Alx_DynArr *arr, ptrdiff_t nmemb);
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_dynarr_init		(struct Alx_DynArr **arr, size_t elsize)
+int	alx_dynarr_init		(struct Alx_DynArr **arr, ssize_t elsize)
 {
 	int	err;
 
-	if (!elsize)
-		return	ENOMEM;
 	if (alx_mallocarrays(arr, 1))
 		return	ENOMEM;
 	/* Initial nmemb of 1 (minimum allocation) */
@@ -83,6 +85,8 @@ void	alx_dynarr_deinit	(struct Alx_DynArr *arr)
 	free(arr);
 }
 
+//#pragma GCC diagnostic push	/* Overflow is explicitly handled */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 int	alx_dynarr_write	(struct Alx_DynArr *restrict arr,
 				 ptrdiff_t cell, const void *restrict data)
 {
@@ -105,7 +109,7 @@ int	alx_dynarr_write	(struct Alx_DynArr *restrict arr,
 int	alx_dynarr_insert	(struct Alx_DynArr *restrict arr,
 				 ptrdiff_t cell, const void *restrict data)
 {
-	size_t	elsz;
+	ssize_t	elsz;
 
 	if (cell < 0)
 		return	EBADSLT;
@@ -132,9 +136,9 @@ int	alx_dynarr_read		(void *restrict data,
 				 ptrdiff_t cell)
 {
 
-	if (cell >= arr->written)
-		return	EBADSLT;
 	if (cell < 0)
+		return	EBADSLT;
+	if (cell >= arr->written)
 		return	EBADSLT;
 
 	memcpy(data, &((char *)arr->data)[cell * arr->elsize], arr->elsize);
@@ -145,13 +149,13 @@ int	alx_dynarr_read		(void *restrict data,
 int	alx_dynarr_remove	(struct Alx_DynArr *arr,
 				 ptrdiff_t cell)
 {
-	size_t	elsz;
+	ssize_t	elsz;
 
 	elsz	= arr->elsize;
 
-	if (cell >= arr->written)
-		return	EBADSLT;
 	if (cell < 0)
+		return	EBADSLT;
+	if (cell >= arr->written)
 		return	EBADSLT;
 
 	memmove(&((char *)arr->data)[(cell) * elsz],
@@ -161,9 +165,10 @@ int	alx_dynarr_remove	(struct Alx_DynArr *arr,
 
 	return	0;
 }
+//#pragma GCC diagnostic pop
 
 int	alx_dynarr_resize	(struct Alx_DynArr *arr,
-				 ptrdiff_t nmemb, size_t elsize)
+				 ptrdiff_t nmemb, ssize_t elsize)
 {
 	int	err;
 
@@ -172,8 +177,6 @@ int	alx_dynarr_resize	(struct Alx_DynArr *arr,
 
 	if (!elsize)
 		elsize	= arr->elsize;
-	if ((size_t)nmemb > (SIZE_MAX / elsize))
-		return	ENOMEM;
 
 	arr->data	= alx_reallocarrays__(arr->data, nmemb, elsize, &err);
 	if (err)
@@ -186,7 +189,7 @@ int	alx_dynarr_resize	(struct Alx_DynArr *arr,
 	return	0;
 }
 
-int	alx_dynarr_reset	(struct Alx_DynArr *arr, size_t elsize)
+int	alx_dynarr_reset	(struct Alx_DynArr *arr, ssize_t elsize)
 {
 	int	err;
 
@@ -212,7 +215,7 @@ int	alx_dynarr_fit		(struct Alx_DynArr *arr)
 int	alx_dynarr_to_llist	(struct Alx_DynArr *arr,
 				 struct Alx_LinkedList *list)
 {
-	const void	*cell;
+	const char	*cell;
 
 	alx_llist_delete_all(list);
 
@@ -231,6 +234,11 @@ err:
 
 
 /******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
 static
@@ -242,13 +250,13 @@ int	alx_dynarr_grow		(struct Alx_DynArr *arr, ptrdiff_t nmemb)
 		return	ENOMEM;
 
 	if (arr->nmemb >= PTRDIFF_MAX / 2)
-		n	= PTRDIFF_MAX;
+		n	= PTRDIFF_MAX - 1;
 	else
 		n	= arr->nmemb * 2;
-	if ((size_t)n > (SIZE_MAX / arr->elsize))
-		n	= SIZE_MAX / arr->elsize;
+	if (n > (SSIZE_MAX / arr->elsize))
+		n	= SSIZE_MAX / arr->elsize;
 
-	n	= ALX_MAX(n, nmemb);
+	n	= MAX(n, nmemb);
 
 	if (n <= arr->nmemb)
 		return	ENOMEM;

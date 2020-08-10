@@ -9,6 +9,12 @@
  ******************************************************************************/
 #pragma once	/* libalx/alx/data-structures/llist.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
  ******* about ****************************************************************
@@ -33,16 +39,18 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
+
+#include <sys/types.h>
 
 #include "libalx/alx/data-structures/dyn-array.h"
 #include "libalx/alx/data-structures/types.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -72,7 +80,7 @@
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the list.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_llist_init			(struct Alx_LinkedList **list);
 
 /*
@@ -100,9 +108,9 @@ void	alx_llist_deinit		(struct Alx_LinkedList *list);
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the node.
  */
-__attribute__((nonnull(1), warn_unused_result))
+[[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
 int	alx_llist_prepend		(struct Alx_LinkedList *list,
-					 const void *data, size_t size);
+					 const void *data, ssize_t size);
 
 /*
  * Inserts an already existing node at the begining of the list.
@@ -111,7 +119,7 @@ int	alx_llist_prepend		(struct Alx_LinkedList *list,
  * list:	Pointer to a list.
  * node:	Pointer to the node to be prepended.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_llist_prepend_node		(struct Alx_LinkedList *list,
 					 struct Alx_Node *node);
 
@@ -128,9 +136,9 @@ void	alx_llist_prepend_node		(struct Alx_LinkedList *list,
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the node.
  */
-__attribute__((nonnull(1), warn_unused_result))
+[[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
 int	alx_llist_append		(struct Alx_LinkedList *list,
-					 const void *data, size_t size);
+					 const void *data, ssize_t size);
 
 /*
  * Inserts an already existing node at the end of the list.
@@ -139,7 +147,7 @@ int	alx_llist_append		(struct Alx_LinkedList *list,
  * list:	Pointer to a list.
  * node:	Pointer to the node to be appended.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_llist_append_node		(struct Alx_LinkedList *list,
 					 struct Alx_Node *node);
 
@@ -156,9 +164,9 @@ void	alx_llist_append_node		(struct Alx_LinkedList *list,
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the node.
  */
-__attribute__((nonnull(1, 4), warn_unused_result))
+[[gnu::nonnull(1, 4)]] [[gnu::warn_unused_result]]
 int	alx_llist_insert_before		(struct Alx_LinkedList *list,
-					 const void *data, size_t size,
+					 const void *data, ssize_t size,
 					 struct Alx_Node *ref);
 
 /*
@@ -168,7 +176,7 @@ int	alx_llist_insert_before		(struct Alx_LinkedList *list,
  * list:	Pointer to a list.
  * node:	Pointer to the node to be inserted.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_llist_insert_node_before	(struct Alx_LinkedList *list,
 					 struct Alx_Node *node,
 					 struct Alx_Node *ref);
@@ -186,9 +194,9 @@ void	alx_llist_insert_node_before	(struct Alx_LinkedList *list,
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the node.
  */
-__attribute__((nonnull(1, 4), warn_unused_result))
+[[gnu::nonnull(1, 4)]] [[gnu::warn_unused_result]]
 int	alx_llist_insert_after		(struct Alx_LinkedList *list,
-					 const void *data, size_t size,
+					 const void *data, ssize_t size,
 					 struct Alx_Node *ref);
 
 /*
@@ -198,7 +206,7 @@ int	alx_llist_insert_after		(struct Alx_LinkedList *list,
  * list:	Pointer to a list.
  * node:	Pointer to the node to be inserted.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_llist_insert_node_after	(struct Alx_LinkedList *list,
 					 struct Alx_Node *node,
 					 struct Alx_Node *ref);
@@ -220,9 +228,9 @@ void	alx_llist_insert_node_after	(struct Alx_LinkedList *list,
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the node.
  */
-__attribute__((nonnull(1), warn_unused_result))
+[[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
 int	alx_llist_insert_at		(struct Alx_LinkedList *list,
-					 const void *data, size_t size,
+					 const void *data, ssize_t size,
 					 ptrdiff_t pos);
 
 /*
@@ -235,7 +243,7 @@ int	alx_llist_insert_at		(struct Alx_LinkedList *list,
  *		negative, which results in natural wrapping around the list
  *		(a value of -1 would be the tail, and so on).
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_llist_insert_node_at	(struct Alx_LinkedList *list,
 					 struct Alx_Node *node,
 					 ptrdiff_t pos);
@@ -251,7 +259,7 @@ void	alx_llist_insert_node_at	(struct Alx_LinkedList *list,
  *	0:		OK.
  *	ENOENT:		Aborted; the list is already empty.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_llist_remove_head		(struct Alx_LinkedList *list,
 					 struct Alx_Node **node);
 
@@ -266,7 +274,7 @@ int	alx_llist_remove_head		(struct Alx_LinkedList *list,
  *	0:		OK.
  *	ENOENT:		Aborted; the list is already empty.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_llist_delete_head		(struct Alx_LinkedList *list);
 
 /*
@@ -281,7 +289,7 @@ int	alx_llist_delete_head		(struct Alx_LinkedList *list);
  *	0:		OK.
  *	ENOENT:		Aborted; the list is already empty.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_llist_remove_tail		(struct Alx_LinkedList *list,
 					 struct Alx_Node **node);
 
@@ -296,7 +304,7 @@ int	alx_llist_remove_tail		(struct Alx_LinkedList *list,
  *	0:		OK.
  *	ENOENT:		Aborted; the list is already empty.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_llist_delete_tail		(struct Alx_LinkedList *list);
 
 /*
@@ -315,7 +323,7 @@ int	alx_llist_delete_tail		(struct Alx_LinkedList *list);
  *	ENOENT:		Aborted; either the list is already empty, or
  *			it has only one node and is different from `node`.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_llist_remove_node		(struct Alx_LinkedList *list,
 					 struct Alx_Node *node);
 
@@ -330,7 +338,7 @@ int	alx_llist_remove_node		(struct Alx_LinkedList *list,
  *	0:		OK.
  *	ENOENT:		Aborted; the list is already empty.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_llist_delete_node		(struct Alx_LinkedList *list,
 					 struct Alx_Node *node);
 
@@ -340,7 +348,7 @@ int	alx_llist_delete_node		(struct Alx_LinkedList *list,
  *
  * list:	Pointer to a list.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_llist_delete_all		(struct Alx_LinkedList *list);
 
 /*
@@ -353,7 +361,7 @@ void	alx_llist_delete_all		(struct Alx_LinkedList *list);
  *	>= 0:		Found at that position relative to the head.
  *	-ENOENT:	Not found.
  */
-__attribute__((nonnull, pure, warn_unused_result))
+[[gnu::nonnull]] [[gnu::pure]] [[gnu::warn_unused_result]]
 ptrdiff_t alx_llist_find		(const struct Alx_LinkedList *list,
 					 const struct Alx_Node *node);
 
@@ -371,7 +379,7 @@ ptrdiff_t alx_llist_find		(const struct Alx_LinkedList *list,
  *	0:		OK.
  *	ENOENT:		List is empty.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_llist_get_node_at		(const struct Alx_LinkedList *list,
 					 struct Alx_Node **node,
 					 ptrdiff_t pos);
@@ -391,10 +399,10 @@ int	alx_llist_get_node_at		(const struct Alx_LinkedList *list,
  *	0:		OK.
  *	ENOENT:		List is empty.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_llist_get_relative		(const struct Alx_LinkedList *list,
 					 struct Alx_Node **node,
-					 const struct Alx_Node *ref,
+					 struct Alx_Node *ref,
 					 ptrdiff_t pos);
 
 /*
@@ -409,7 +417,7 @@ int	alx_llist_get_relative		(const struct Alx_LinkedList *list,
  * node:	Pointer to the node to be moved.
  * pos:		Position where to put the node.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_llist_move_node_to		(struct Alx_LinkedList *list,
 					 struct Alx_Node *node,
 					 ptrdiff_t pos);
@@ -427,7 +435,7 @@ void	alx_llist_move_node_to		(struct Alx_LinkedList *list,
  * node:	Pointer to the node to be moved.
  * pos:		Position where to put the node.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_llist_move_relative		(struct Alx_LinkedList *list,
 					 struct Alx_Node *node,
 					 ptrdiff_t pos);
@@ -439,7 +447,7 @@ void	alx_llist_move_relative		(struct Alx_LinkedList *list,
  * list:	Pointer to a list.
  * pos:		Position.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_llist_set_head		(struct Alx_LinkedList *list,
 					 ptrdiff_t pos);
 
@@ -449,7 +457,7 @@ void	alx_llist_set_head		(struct Alx_LinkedList *list,
  * list:	Pointer to a list.
  * node:	Pointer to a node.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_llist_set_node_as_head	(struct Alx_LinkedList *list,
 					 struct Alx_Node *node);
 
@@ -473,7 +481,7 @@ void	alx_llist_set_node_as_head	(struct Alx_LinkedList *list,
  *	else:		If `*f` fails (returns != 0), the loop breaks and
  *			the return value is passed to the caller.
  */
-__attribute__((nonnull(1, 2)))
+[[gnu::nonnull(1, 2)]]
 int	alx_llist_apply			(struct Alx_LinkedList *restrict list,
 					 int (*f)(struct Alx_LinkedList *list,
 						  struct Alx_Node *node,
@@ -502,7 +510,7 @@ int	alx_llist_apply			(struct Alx_LinkedList *restrict list,
  *	else:		If `*f` fails (returns != 0), the loop breaks and
  *			the return value is passed to the caller.
  */
-__attribute__((nonnull(1, 2)))
+[[gnu::nonnull(1, 2)]]
 int	alx_llist_apply_bwd		(struct Alx_LinkedList *restrict list,
 					 int (*f)(struct Alx_LinkedList *list,
 						  struct Alx_Node *node,
@@ -524,7 +532,7 @@ int	alx_llist_apply_bwd		(struct Alx_LinkedList *restrict list,
  *	ENOMEM:		Aborted; failure to reallocate the array.
  *	ENOBUFS:	Aborted; nodes have different data sizes.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_llist_to_dynarr		(struct Alx_LinkedList *restrict list,
 					 struct Alx_DynArr *restrict arr);
 
@@ -545,7 +553,7 @@ int	alx_llist_to_dynarr		(struct Alx_LinkedList *restrict list,
  *	0:		OK.
  *	ENOENT:		Aborted; the list is empty.
  */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_llist_to_bst		(struct Alx_BST *restrict bst,
 					 struct Alx_LinkedList *restrict list);
 
@@ -558,9 +566,14 @@ void	alx_llist_to_bst		(struct Alx_BST *restrict bst,
  *			< 0:	The node data goes to the left of the bst node.
  *			> 0:	The node data goes to the right of the bst node.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_llist_treesort		(struct Alx_LinkedList *restrict list,
 					 alx_bst_cmp_f *cmp);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

@@ -9,42 +9,65 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/string/strcat/strscatfs.hpp */
 
+#if !defined(__cplusplus)
+#warning	This header file should only be included in C++.  In C,	\
+		include the header file of the same name and `.h`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <cstdarg>
 #include <cstddef>
 
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern "C" {
+
+
+/******************************************************************************
+ ******* struct / union *******************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* C prototypes *********************************************************
+ ******************************************************************************/
+[[gnu::nonnull(1, 4)]] [[gnu::format(printf, 4, 5)]] [[gnu::warn_unused_result]]
+int	alx_strscatfs	(char *restrict str/*[nmemb]*/,
+			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
+			 const char *restrict format, ...);
+[[gnu::nonnull(1, 4)]] [[gnu::format(printf, 4, 0)]] [[gnu::warn_unused_result]]
+int	alx_vstrscatfs	(char *restrict str/*[nmemb]*/,
+			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
+			 const char *restrict format, va_list ap);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define strscatfs(str, written, nmemb, fmt, ...)			\
-	alx_strscatfs(str, written, nmemb, fmt, ##__VA_ARGS__)
-#define vstrscatfs(str, written, nmemb, fmt, ap)			\
-	alx_vstrscatfs(str, written, nmemb, fmt, ap)
+ALX_ALIAS_DECLARATION(strscatfs,	alx_strscatfs);
+ALX_ALIAS_DECLARATION(vstrscatfs,	alx_vstrscatfs);
 #endif
 
 
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-extern	"C"
-{
-[[gnu::nonnull]] [[gnu::format(printf, 3, 4)]] [[gnu::warn_unused_result]]
-int	alx_strscatfs	(char str[restrict /*nmemb*/],
-			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
-			 const char *restrict format, ...);
-[[gnu::nonnull]] [[gnu::format(printf, 3, 0)]] [[gnu::warn_unused_result]]
-int	alx_vstrscatfs	(char str[restrict /*nmemb*/],
-			 ptrdiff_t *restrict written, ptrdiff_t nmemb,
-			 const char *restrict format, va_list ap);
-}
+}	/* extern "C" */
 
 
 /******************************************************************************
@@ -55,11 +78,6 @@ namespace alx {
 
 /******************************************************************************
  ******* enum *****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* struct / union *******************************************************
  ******************************************************************************/
 
 

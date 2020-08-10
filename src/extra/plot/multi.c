@@ -25,7 +25,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/extra/plot/multi.h"
 
@@ -38,7 +38,7 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -165,13 +165,23 @@ int	alx_gnuplot_plot_multi_xy	(struct Alx_Gnuplot *restrict gnuplot,
 
 
 /******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+ALX_ALIAS_WEAK_DEF(gnuplot_set_multiplot,	alx_gnuplot_set_multiplot);
+ALX_ALIAS_WEAK_DEF(gnuplot_unset_multiplot,	alx_gnuplot_unset_multiplot);
+ALX_ALIAS_WEAK_DEF(gnuplot_plot_multi_y,	alx_gnuplot_plot_multi_y);
+ALX_ALIAS_WEAK_DEF(gnuplot_plot_x_multi_y,	alx_gnuplot_plot_x_multi_y);
+ALX_ALIAS_WEAK_DEF(gnuplot_plot_multi_xy,	alx_gnuplot_plot_multi_xy);
+
+
+/******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
 static
 const char *multi__cmd__	(const struct Alx_Gnuplot *gnuplot)
 {
-	static const char *const plot	= "plot";
-	static const char *const replot	= "replot";
+	static const char plot[]	= "plot";
+	static const char replot[]	= "replot";
 
 	if (gnuplot->nplots  &&  !gnuplot->multi)
 		return	replot;
@@ -181,7 +191,7 @@ const char *multi__cmd__	(const struct Alx_Gnuplot *gnuplot)
 static
 const char *multi__title__	(const char *title[restrict], ptrdiff_t i)
 {
-	static const char *const none	= "(none)";
+	static const char none[]	= "(none)";
 
 	if (!title)
 		return	none;

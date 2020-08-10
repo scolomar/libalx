@@ -9,51 +9,76 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/stdlib/getenv/getenv_f.hpp */
 
+#if !defined(__cplusplus)
+#warning	This header file should only be included in C++.  In C,	\
+		include the header file of the same name and `.h`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern "C" {
+
+
+/******************************************************************************
+ ******* struct / union *******************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* C prototypes *********************************************************
+ ******************************************************************************/
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_getenv_d		(double *restrict num,
+				 const char *restrict name);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_getenv_f		(float *restrict num,
+				 const char *restrict name);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_getenv_ld		(long double *restrict num,
+				 const char *restrict name);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_secure_getenv_d	(double *restrict num,
+				 const char *restrict name);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_secure_getenv_f	(float *restrict num,
+				 const char *restrict name);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_secure_getenv_ld	(long double *restrict num,
+				 const char *restrict name);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define getenv_d(num, name)		alx_getenv_d(num, name)
-#define getenv_f(num, name)		alx_getenv_f(num, name)
-#define getenv_ld(num, name)		alx_getenv_ld(num, name)
-#define secure_getenv_d(num, name)	alx_secure_getenv_d(num, name)
-#define secure_getenv_f(num, name)	alx_secure_getenv_f(num, name)
-#define secure_getenv_ld(num, name)	alx_secure_getenv_ld(num, name)
+ALX_ALIAS_DECLARATION(getenv_d,		alx_getenv_d);
+ALX_ALIAS_DECLARATION(getenv_f,		alx_getenv_f);
+ALX_ALIAS_DECLARATION(getenv_ld,	alx_getenv_ld);
+ALX_ALIAS_DECLARATION(secure_getenv_d,	alx_secure_getenv_d);
+ALX_ALIAS_DECLARATION(secure_getenv_f,	alx_secure_getenv_f);
+ALX_ALIAS_DECLARATION(secure_getenv_ld,	alx_secure_getenv_ld);
 #endif
 
 
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-extern	"C"
-{
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	getenv_d		(double *restrict num,
-				 const char *restrict name);
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	getenv_f		(float *restrict num,
-				 const char *restrict name);
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	getenv_ld		(long double *restrict num,
-				 const char *restrict name);
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	secure_getenv_d		(double *restrict num,
-				 const char *restrict name);
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	secure_getenv_f		(float *restrict num,
-				 const char *restrict name);
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	secure_getenv_ld	(long double *restrict num,
-				 const char *restrict name);
-}
+}	/* extern "C" */
 
 
 /******************************************************************************
@@ -64,11 +89,6 @@ namespace alx {
 
 /******************************************************************************
  ******* enum *****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* struct / union *******************************************************
  ******************************************************************************/
 
 

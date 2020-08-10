@@ -9,9 +9,15 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/ncurses/common.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stdbool.h>
 #include <stdio.h>
@@ -21,7 +27,7 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -42,14 +48,19 @@ void	alx_ncurses_init	(void);
 void	alx_ncurses_pause	(void);
 void	alx_ncurses_resume	(void);
 void	alx_ncurses_deinit	(void);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_ncurses_delwin	(WINDOW *restrict win);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_ncurses_title	(WINDOW *restrict win,
 				 const char *restrict title);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_ncurses_subtitle	(WINDOW *restrict win,
 				 const char *restrict subtitle);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

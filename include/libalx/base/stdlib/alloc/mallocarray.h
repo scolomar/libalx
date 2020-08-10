@@ -9,13 +9,19 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/stdlib/alloc/mallocarray.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
  ******* about ****************************************************************
  ******************************************************************************/
 /*
  * [[gnu::malloc]] [[gnu::warn_unused_result]]
- * void	*mallocarray(ptrdiff_t nmemb, size_t size);
+ * void	*mallocarray(ptrdiff_t nmemb, ssize_t size);
  *
  * Almost equivalent to `malloc(nmemb * size)`.
  *
@@ -50,13 +56,17 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 
+#include <sys/types.h>
+
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -73,21 +83,15 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((malloc, warn_unused_result))
-void	*alx_mallocarray	(ptrdiff_t nmemb, size_t size);
+[[gnu::malloc]] [[gnu::warn_unused_result]]
+void	*alx_mallocarray	(ptrdiff_t nmemb, ssize_t size);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, malloc, warn_unused_result))
-inline
-void	*mallocarray		(ptrdiff_t nmemb, size_t size)
-{
-	return	alx_mallocarray(nmemb, size);
-}
+ALX_ALIAS_DECLARATION(mallocarray, alx_mallocarray);
 #endif
 
 

@@ -9,6 +9,12 @@
  ******************************************************************************/
 #pragma once	/* libalx/alx/data-structures/node.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
  ******* about ****************************************************************
@@ -35,16 +41,18 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 #include <stdint.h>
+
+#include <sys/types.h>
 
 #include "libalx/alx/data-structures/types.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -81,9 +89,9 @@
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the node or the buffer.
  */
-__attribute__((nonnull(1), warn_unused_result))
+[[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
 int	alx_node_init		(struct Alx_Node **restrict node,
-				 const void *restrict data, size_t size);
+				 const void *restrict data, ssize_t size);
 
 /*
  * Initializes empty node.
@@ -97,7 +105,7 @@ int	alx_node_init		(struct Alx_Node **restrict node,
  *	0:		OK.
  *	ENOMEM:		Aborted; failure to allocate the node.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_node_init_empty	(struct Alx_Node **node);
 
 /*
@@ -112,7 +120,7 @@ int	alx_node_init_empty	(struct Alx_Node **node);
  *	ENOANO:		Aborted; ref was NULL.
  *	ENOMEM:		Aborted; failure to allocate the node.
  */
-__attribute__((nonnull(1), warn_unused_result))
+[[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
 int	alx_node_init_clone	(struct Alx_Node **restrict clone,
 				 const struct Alx_Node *restrict ref);
 
@@ -139,9 +147,9 @@ void	alx_node_deinit		(struct Alx_Node *node);
  *	ENOMEM:		Aborted; failure to reallocate the data.  Previous
  *			data is left untouched.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_node_write		(struct Alx_Node *node,
-				 const void *data, size_t size);
+				 const void *data, ssize_t size);
 
 /*
  * Reads from the buffer.
@@ -154,8 +162,8 @@ int	alx_node_write		(struct Alx_Node *node,
  *	0:		OK.
  *	ENOBUFS:	OK. data was truncated.
  */
-__attribute__((nonnull))
-int	alx_node_read		(void *data, size_t size,
+[[gnu::nonnull]]
+ssize_t	alx_node_read		(void *data, ssize_t size,
 				 const struct Alx_Node *node);
 
 /*
@@ -168,9 +176,14 @@ int	alx_node_read		(void *data, size_t size,
  *	0:		OK.
  *	ENOANO:	No data pointer in the node.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_node_get_data	(void **restrict data,
 				 struct Alx_Node *node);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

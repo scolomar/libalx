@@ -9,15 +9,22 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/gmp/mpz/set.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stdint.h>
 
 #include <gmp.h>
 
-#include "libalx/base/assert/assert.h"
+#include "libalx/base/assert/stdint.h"
+#include "libalx/base/compiler/attribute.h"
 
 
 /******************************************************************************
@@ -27,13 +34,8 @@ alx_Static_assert_stdint_types();
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define mpz_set_u64(rop, op)	alx_mpz_set_u64(rop, op)
-#define mpz_set_s64(rop, op)	alx_mpz_set_s64(rop, op)
-#endif
 
 
 /******************************************************************************
@@ -53,6 +55,15 @@ inline
 void	alx_mpz_set_u64	(mpz_t rop, uint64_t op);
 inline
 void	alx_mpz_set_s64	(mpz_t rop, int64_t op);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(mpz_set_u64, alx_mpz_set_u64);
+ALX_ALIAS_DECLARATION(mpz_set_s64, alx_mpz_set_s64);
+#endif
 
 
 /******************************************************************************

@@ -9,15 +9,22 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/gmp/mpz/arithmetic.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stdint.h>
 
 #include <gmp.h>
 
-#include "libalx/base/assert/assert.h"
+#include "libalx/base/assert/stdint.h"
+#include "libalx/base/compiler/attribute.h"
 
 
 /******************************************************************************
@@ -27,18 +34,8 @@ alx_Static_assert_stdint_types();
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define mpz_add_u64(rop, op1, op2)	alx_mpz_add_u64(rop, op1, op2)
-#define mpz_sub_u64(rop, op1, op2)	alx_mpz_sub_u64(rop, op1, op2)
-#define mpz_u64_sub(rop, op1, op2)	alx_mpz_u64_sub(rop, op1, op2)
-#define mpz_mul_u64(rop, op1, op2)	alx_mpz_mul_u64(rop, op1, op2)
-#define mpz_mul_s64(rop, op1, op2)	alx_mpz_mul_s64(rop, op1, op2)
-#define mpz_addmul_u64(rop, op1, op2)	alx_mpz_addmul_u64(rop, op1, op2)
-#define mpz_submul_u64(rop, op1, op2)	alx_mpz_submul_u64(rop, op1, op2)
-#endif
 
 
 /******************************************************************************
@@ -68,6 +65,20 @@ inline
 void	alx_mpz_addmul_u64	(mpz_t rop, const mpz_t op1, uint64_t op2);
 inline
 void	alx_mpz_submul_u64	(mpz_t rop, const mpz_t op1, uint64_t op2);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(mpz_add_u64,	alx_mpz_add_u64);
+ALX_ALIAS_DECLARATION(mpz_sub_u64,	alx_mpz_sub_u64);
+ALX_ALIAS_DECLARATION(mpz_u64_sub,	alx_mpz_u64_sub);
+ALX_ALIAS_DECLARATION(mpz_mul_u64,	alx_mpz_mul_u64);
+ALX_ALIAS_DECLARATION(mpz_mul_s64,	alx_mpz_mul_s64);
+ALX_ALIAS_DECLARATION(mpz_addmul_u64,	alx_mpz_addmul_u64);
+ALX_ALIAS_DECLARATION(mpz_submul_u64,	alx_mpz_submul_u64);
+#endif
 
 
 /******************************************************************************

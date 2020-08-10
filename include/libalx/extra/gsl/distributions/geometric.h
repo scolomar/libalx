@@ -9,16 +9,22 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/gsl/distributions/geometric.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <errno.h>
 #include <math.h>
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -35,32 +41,37 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((const))
+[[gnu::const]]
 inline
-long double	alx_gsl_dist_geometric_E_ldbl	(long double p);
-__attribute__((const))
+long double	alx_gsl_distr_geom_E_ldbl	(long double p);
+[[gnu::const]]
 inline
-double		alx_gsl_dist_geometric_E	(double p);
-__attribute__((const))
+double		alx_gsl_distr_geom_E		(double p);
+[[gnu::const]]
 inline
-float		alx_gsl_dist_geometric_E_flt	(float p);
+float		alx_gsl_distr_geom_E_flt	(float p);
 
-__attribute__((const))
+[[gnu::const]]
 inline
-long double	alx_gsl_dist_geometric_Var_ldbl	(long double p);
-__attribute__((const))
+long double	alx_gsl_distr_geom_Var_ldbl	(long double p);
+[[gnu::const]]
 inline
-double		alx_gsl_dist_geometric_Var	(double p);
-__attribute__((const))
+double		alx_gsl_distr_geom_Var		(double p);
+[[gnu::const]]
 inline
-float		alx_gsl_dist_geometric_Var_flt	(float p);
+float		alx_gsl_distr_geom_Var_flt	(float p);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
 inline
-long double	alx_gsl_dist_geometric_E_ldbl	(long double p)
+long double	alx_gsl_distr_geom_E_ldbl	(long double p)
 {
 
 	if ((p < 0.0L) || (p > 1.0L)) {
@@ -72,7 +83,7 @@ long double	alx_gsl_dist_geometric_E_ldbl	(long double p)
 }
 
 inline
-double		alx_gsl_dist_geometric_E	(double p)
+double		alx_gsl_distr_geom_E		(double p)
 {
 
 	if ((p < 0.0) || (p > 1.0)) {
@@ -84,7 +95,7 @@ double		alx_gsl_dist_geometric_E	(double p)
 }
 
 inline
-float		alx_gsl_dist_geometric_E_flt	(float p)
+float		alx_gsl_distr_geom_E_flt	(float p)
 {
 
 	if ((p < 0.0f) || (p > 1.0f)) {
@@ -97,7 +108,7 @@ float		alx_gsl_dist_geometric_E_flt	(float p)
 
 
 inline
-long double	alx_gsl_dist_geometric_Var_ldbl	(long double p)
+long double	alx_gsl_distr_geom_Var_ldbl	(long double p)
 {
 
 	if ((p < 0.0L) || (p > 1.0L)) {
@@ -109,7 +120,7 @@ long double	alx_gsl_dist_geometric_Var_ldbl	(long double p)
 }
 
 inline
-double		alx_gsl_dist_geometric_Var	(double p)
+double		alx_gsl_distr_geom_Var		(double p)
 {
 
 	if ((p < 0.0) || (p > 1.0)) {
@@ -121,7 +132,7 @@ double		alx_gsl_dist_geometric_Var	(double p)
 }
 
 inline
-float		alx_gsl_dist_geometric_Var_flt	(float p)
+float		alx_gsl_distr_geom_Var_flt	(float p)
 {
 
 	if ((p < 0.0f) || (p > 1.0f)) {

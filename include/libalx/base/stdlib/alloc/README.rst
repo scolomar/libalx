@@ -47,16 +47,16 @@ checks for all the different possible errors.
 	int	callocs(type **ptr, ptrdiff_t nmemb);
 
 	[[gnu::malloc]] [[gnu::warn_unused_result]]
-	void	*mallocarray(ptrdiff_t nmemb, size_t size);
+	void	*mallocarray(ptrdiff_t nmemb, ssize_t size);
 
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]
 	int	mallocarrays(type **ptr, ptrdiff_t nmemb);
 
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]
-	int	mallocs(type **ptr, size_t size);
+	int	mallocs(type **ptr, ssize_t size);
 
 	[[gnu::warn_unused_result]]
-	void	*reallocarrayf(void *ptr, ptrdiff_t nmemb, size_t size);
+	void	*reallocarrayf(void *ptr, ptrdiff_t nmemb, ssize_t size);
 
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]
 	int	reallocarrayfs(type **ptr, ptrdiff_t nmemb);
@@ -65,10 +65,10 @@ checks for all the different possible errors.
 	int	reallocarrays(type **ptr, ptrdiff_t nmemb);
 
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]
-	int	reallocfs(type **ptr, size_t size);
+	int	reallocfs(type **ptr, ssize_t size);
 
 	[[gnu::nonnull]] [[gnu::warn_unused_result]]
-	int	reallocs(type **ptr, size_t size);
+	int	reallocs(type **ptr, ssize_t size);
 
 	[[gnu::nonnull]]
 	void	frees(type **ptr);

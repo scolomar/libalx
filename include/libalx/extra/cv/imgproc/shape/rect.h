@@ -9,15 +9,21 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/cv/imgproc/shape/rect.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/extra/cv/types.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -34,21 +40,26 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_bounding_rect	(rect_s *restrict rect,
 				 const cont_s *restrict contour);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_fit_ellipse	(rect_rot_s *restrict rect_rot,
 				 const cont_s *restrict contour);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_min_area_rect	(rect_rot_s *restrict rect_rot,
 				 const cont_s *restrict contour);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_draw_rect	(img_s *restrict img,
 				 const rect_s *restrict rect);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_draw_rect_rot	(img_s *restrict img,
 				 const rect_rot_s *restrict rect_rot);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

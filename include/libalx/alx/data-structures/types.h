@@ -9,6 +9,12 @@
  ******************************************************************************/
 #pragma once	/* libalx/alx/data-structures/types.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
  ******* about ****************************************************************
@@ -16,15 +22,17 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 
+#include <sys/types.h>
+
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -35,7 +43,7 @@
  * Comparison function.  Return value logic should work as in strcmp().
  */
 typedef int	alx_bst_cmp_f	(const void *user_data, const void *ds_data)
-__attribute__((nonnull, warn_unused_result));
+[[gnu::nonnull]] [[gnu::warn_unused_result]];
 
 
 /******************************************************************************
@@ -63,9 +71,9 @@ enum	Alx_DF_Generic_Type {
  * written:	Data used (in bytes).
  */
 struct	Alx_DynBuf {
-	void		*data;
-	size_t		size;
-	size_t		written;
+	void	*data;
+	ssize_t	size;
+	ssize_t	written;
 };
 
 /*
@@ -78,7 +86,7 @@ struct	Alx_DynBuf {
  */
 struct	Alx_DynArr {
 	void		*data;
-	size_t		elsize;
+	ssize_t		elsize;
 	ptrdiff_t	nmemb;
 	ptrdiff_t	written;
 };
@@ -94,9 +102,9 @@ struct	Alx_DynArr {
  */
 struct	Alx_Node {
 	struct Alx_DynBuf	*buf;
-	struct Alx_Node	*left;
-	struct Alx_Node	*right;
-	struct Alx_Node	*parent;
+	struct Alx_Node		*left;
+	struct Alx_Node		*right;
+	struct Alx_Node		*parent;
 	ptrdiff_t		dup;
 };
 
@@ -110,7 +118,7 @@ struct	Alx_Node {
 struct	Alx_LinkedList {
 	struct Alx_Node	*head;
 	struct Alx_Node	*tail;
-	ptrdiff_t		nmemb;
+	ptrdiff_t	nmemb;
 };
 
 /*
@@ -118,14 +126,14 @@ struct	Alx_LinkedList {
  */
 struct	Alx_BST {
 	struct Alx_Node	*root;
-	ptrdiff_t		nmemb;
-	alx_bst_cmp_f		*cmp;		/* comparison function pointer */
-	bool			dup;		/* Allow for duplicate members? */
+	ptrdiff_t	nmemb;
+	alx_bst_cmp_f	*cmp;		/* comparison function pointer */
+	bool		dup;		/* Allow for duplicate members? */
 };
 
 struct	Alx_DF_Cell {
 	union {
-		int64_t	i;
+		int64_t		i;
 		double		f;
 		const char	*s;
 	};
@@ -179,6 +187,11 @@ struct	Alx_DataFrame {
 
 /******************************************************************************
  ******* prototypes ***********************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
 
 

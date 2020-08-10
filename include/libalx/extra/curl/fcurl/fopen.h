@@ -38,17 +38,25 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/curl/fcurl/fopen.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
+
+#include "libalx/base/compiler/attribute.h"
 
 #include "libalx/extra/curl/fcurl/URL_FILE.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -80,23 +88,16 @@
  * If this function returns NULL, something went wrong and you cannot use the
  * other url_ functions.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 ALX_URL_FILE	*alx_url_fopen	(const char *restrict url,
 				 const char *restrict mode);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-ALX_URL_FILE	*url_fopen	(const char *restrict url,
-				 const char *restrict mode)
-{
-	return	alx_url_fopen(url, mode);
-}
+ALX_ALIAS_DECLARATION(url_fopen, alx_url_fopen);
 #endif
 
 

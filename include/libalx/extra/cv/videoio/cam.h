@@ -9,15 +9,21 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/cv/videoio/cam.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/extra/cv/types.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -35,19 +41,24 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 /* ----- alloc / free */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_cv_alloc_cam	(cam_s **cam);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_free_cam		(cam_s *cam);
 /* ----- init / deinit */
-__attribute__((nonnull(1)))
+[[gnu::nonnull(1)]]
 void	alx_cv_init_cam		(cam_s *restrict cam,
 				 const char *restrict dev, int index, int api);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_deinit_cam	(cam_s *cam);
 /* ----- read */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_cam_read		(img_s *restrict img, cam_s *restrict cam);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

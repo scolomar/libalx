@@ -5,13 +5,13 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/extra/gsl/distance/chebyshev.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -29,19 +29,31 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 extern
-long double alx_gsl_distance2D_chebyshev_ldbl	(long double dx, long double dy);
+long double alx_gsl_dist2D_chebyshev_ldbl	(long double dx, long double dy);
 extern
-double	alx_gsl_distance2D_chebyshev		(double dx, double dy);
+double	alx_gsl_dist2D_chebyshev		(double dx, double dy);
 extern
-float	alx_gsl_distance2D_chebyshev_flt	(float dx, float dy);
+float	alx_gsl_dist2D_chebyshev_flt		(float dx, float dy);
 extern
-float	alx_gsl_distance2D_chebyshev_8b		(int8_t dx, int8_t dy);
+float	alx_gsl_dist2D_chebyshev_8b		(int8_t dx, int8_t dy);
 extern
-float	alx_gsl_distance2D_chebyshev_16b	(int16_t dx, int16_t dy);
+float	alx_gsl_dist2D_chebyshev_16b		(int16_t dx, int16_t dy);
 extern
-double	alx_gsl_distance2D_chebyshev_32b	(int32_t dx, int32_t dy);
+double	alx_gsl_dist2D_chebyshev_32b		(int32_t dx, int32_t dy);
 extern
-long double alx_gsl_distance2D_chebyshev_64b	(int64_t dx, int64_t dy);
+long double alx_gsl_dist2D_chebyshev_64b	(int64_t dx, int64_t dy);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+ALX_ALIAS_WEAK_DEF(gsl_dist2D_chebyshev_ldbl,	alx_gsl_dist2D_chebyshev_ldbl);
+ALX_ALIAS_WEAK_DEF(gsl_dist2D_chebyshev,	alx_gsl_dist2D_chebyshev);
+ALX_ALIAS_WEAK_DEF(gsl_dist2D_chebyshev_flt,	alx_gsl_dist2D_chebyshev_flt);
+ALX_ALIAS_WEAK_DEF(gsl_dist2D_chebyshev_8b,	alx_gsl_dist2D_chebyshev_8b);
+ALX_ALIAS_WEAK_DEF(gsl_dist2D_chebyshev_16b,	alx_gsl_dist2D_chebyshev_16b);
+ALX_ALIAS_WEAK_DEF(gsl_dist2D_chebyshev_32b,	alx_gsl_dist2D_chebyshev_32b);
+ALX_ALIAS_WEAK_DEF(gsl_dist2D_chebyshev_64b,	alx_gsl_dist2D_chebyshev_64b);
 
 
 /******************************************************************************

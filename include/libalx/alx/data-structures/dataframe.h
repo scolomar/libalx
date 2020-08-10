@@ -9,6 +9,12 @@
  ******************************************************************************/
 #pragma once	/* libalx/alx/data-structures/dataframe.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
  ******* about ****************************************************************
@@ -19,7 +25,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stdbool.h>
 #include <stddef.h>
@@ -30,7 +36,7 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -47,40 +53,40 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_df_init		(struct Alx_DataFrame **df, ptrdiff_t ncols);
 void	alx_df_deinit		(struct Alx_DataFrame *df);
-__attribute__((nonnull(1), warn_unused_result))
+[[gnu::nonnull(1)]] [[gnu::warn_unused_result]]
 int	alx_df_ins_col		(struct Alx_DataFrame *restrict df,
 				 ptrdiff_t ncol, int type, char *restrict hdr,
 				 const char *values[restrict]);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_df_get_col		(struct Alx_DF_Col **col,
 				 struct Alx_DataFrame *df, ptrdiff_t ncol);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_df_drop_col	(struct Alx_DataFrame *df,
 				 ptrdiff_t ncol);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_df_ins_row		(struct Alx_DataFrame *restrict df,
 				 ptrdiff_t nrow);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_df_get_row		(struct Alx_DF_Row **row,
 				 struct Alx_DataFrame *df, ptrdiff_t nrow);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_df_drop_row	(struct Alx_DataFrame *df,
 				 ptrdiff_t nrow);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_df_ins_cell	(struct Alx_DataFrame *restrict df,
 				 ptrdiff_t nrow, ptrdiff_t ncol,
 				 const struct Alx_DF_Cell *restrict cell);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_df_ovr_cell	(struct Alx_DataFrame *restrict df,
 				 ptrdiff_t nrow, ptrdiff_t ncol,
 				 const struct Alx_DF_Cell *restrict cell);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_df_get_row_cell	(struct Alx_DF_Cell **cell,
 				 struct Alx_DF_Row *row, ptrdiff_t ncol);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_df_get_cell	(struct Alx_DF_Cell **restrict cell,
 				 struct Alx_DataFrame *restrict df,
 				 ptrdiff_t nrow, ptrdiff_t ncol);
@@ -94,6 +100,11 @@ int	alx_df_fprn_data	(FILE *restrict ostream,
 				 struct Alx_DataFrame *restrict df);
 int	alx_df_fprn_desc	(FILE *restrict ostream,
 				 struct Alx_DataFrame *restrict df);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

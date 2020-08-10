@@ -9,61 +9,86 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/stdlib/getenv/getenv_i.hpp */
 
+#if !defined(__cplusplus)
+#warning	This header file should only be included in C++.  In C,	\
+		include the header file of the same name and `.h`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <cstdint>
 
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+extern "C" {
+
+
+/******************************************************************************
+ ******* struct / union *******************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* C prototypes *********************************************************
+ ******************************************************************************/
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_getenv_i64		(int64_t *restrict num,
+				 const char *restrict name);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_getenv_i32		(int32_t *restrict num,
+				 const char *restrict name);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_getenv_i16		(int16_t *restrict num,
+				 const char *restrict name);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_getenv_i8		(int8_t *restrict num,
+				 const char *restrict name);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_secure_getenv_i64	(int64_t *restrict num,
+				 const char *restrict name);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_secure_getenv_i32	(int32_t *restrict num,
+				 const char *restrict name);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_secure_getenv_i16	(int16_t *restrict num,
+				 const char *restrict name);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_secure_getenv_i8	(int8_t *restrict num,
+				 const char *restrict name);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define getenv_i64(num, name)		alx_getenv_i64(num, name)
-#define getenv_i32(num, name)		alx_getenv_i32(num, name)
-#define getenv_i16(num, name)		alx_getenv_i16(num, name)
-#define getenv_i8(num, name)		alx_getenv_i8(num, name)
-#define secure_getenv_i64(num, name)	alx_secure_getenv_i64(num, name)
-#define secure_getenv_i32(num, name)	alx_secure_getenv_i32(num, name)
-#define secure_getenv_i16(num, name)	alx_secure_getenv_i16(num, name)
-#define secure_getenv_i8(num, name)	alx_secure_getenv_i8(num, name)
+ALX_ALIAS_DECLARATION(getenv_i64,		alx_getenv_i64);
+ALX_ALIAS_DECLARATION(getenv_i32,		alx_getenv_i32);
+ALX_ALIAS_DECLARATION(getenv_i16,		alx_getenv_i16);
+ALX_ALIAS_DECLARATION(getenv_i8,		alx_getenv_i8);
+ALX_ALIAS_DECLARATION(secure_getenv_i64,	alx_secure_getenv_i64);
+ALX_ALIAS_DECLARATION(secure_getenv_i32,	alx_secure_getenv_i32);
+ALX_ALIAS_DECLARATION(secure_getenv_i16,	alx_secure_getenv_i16);
+ALX_ALIAS_DECLARATION(secure_getenv_i8,		alx_secure_getenv_i8);
 #endif
 
 
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-extern	"C"
-{
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	getenv_i64		(int64_t *restrict num,
-				 const char *restrict name);
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	getenv_i32		(int32_t *restrict num,
-				 const char *restrict name);
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	getenv_i16		(int16_t *restrict num,
-				 const char *restrict name);
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	getenv_i8		(int8_t *restrict num,
-				 const char *restrict name);
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	secure_getenv_i64	(int64_t *restrict num,
-				 const char *restrict name);
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	secure_getenv_i32	(int32_t *restrict num,
-				 const char *restrict name);
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	secure_getenv_i16	(int16_t *restrict num,
-				 const char *restrict name);
-[[gnu::nonnull]] [[gnu::warn_unused_result]]
-int	secure_getenv_i8	(int8_t *restrict num,
-				 const char *restrict name);
-}
+}	/* extern "C" */
 
 
 /******************************************************************************
@@ -74,11 +99,6 @@ namespace alx {
 
 /******************************************************************************
  ******* enum *****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* struct / union *******************************************************
  ******************************************************************************/
 
 

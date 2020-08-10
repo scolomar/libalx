@@ -49,25 +49,27 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/extra/curl/fcurl/fread.h"
 
 #include <errno.h>
+#include <limits.h>
 #include <stdint.h>
 #include <stdio.h>
 
+#include <sys/param.h>
 #include <sys/types.h>
 
 #include "libalx/alx/data-structures/dyn-buffer.h"
-#include "libalx/base/stdlib/minimum.h"
+
 #include "libalx/extra/curl/fcurl/URL_FILE.h"
 
 #include "internal.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -80,22 +82,22 @@
  ******* static prototypes ****************************************************
  ******************************************************************************/
 static
-ptrdiff_t	url_fread__	(void *restrict ptr, size_t size,
+ptrdiff_t	url_fread__	(void *restrict ptr, ssize_t size,
 				 ptrdiff_t nmemb, ALX_URL_FILE *restrict stream);
 
 
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-ptrdiff_t	alx_url_fread	(void *restrict ptr, size_t size,
+//#pragma GCC diagnostic push	/* Overflow is explicitly handled */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
+ptrdiff_t	alx_url_fread	(void *restrict ptr, ssize_t size,
 				 ptrdiff_t nmemb, ALX_URL_FILE *restrict stream)
 {
 
-	if (!nmemb || !size)
+	if (nmemb <= 0 || size <= 0)
 		return	0;
-	if (nmemb < 0)
-		return	0;
-	if ((size_t)nmemb  >  (SIZE_MAX / size))
+	if (nmemb  >=  (SSIZE_MAX / size))
 		return	0;
 
 	switch (stream->type) {
@@ -108,25 +110,32 @@ ptrdiff_t	alx_url_fread	(void *restrict ptr, size_t size,
 		return	0;
 	}
 }
+//#pragma GCC diagnostic pop
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+ALX_ALIAS_WEAK_DEF(url_fread, alx_url_fread);
 
 
 /******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
 static
-ptrdiff_t	url_fread__	(void *restrict ptr, size_t size,
+ptrdiff_t	url_fread__	(void *restrict ptr, ssize_t size,
 				 ptrdiff_t nmemb, ALX_URL_FILE *restrict stream)
 {
-	size_t	bytes;
+	ssize_t	bytes;
 	ssize_t	b;
 
-	bytes	= (size_t)nmemb * size;
+	bytes	= nmemb * size;
 
 	alx_url_fill_buffer__(stream, bytes);
 	if (!stream->buf->written)
 		return	0;
 
-	bytes	= ALX_MIN(bytes, stream->buf->written);
+	bytes	= MIN(bytes, stream->buf->written);
 	b	= alx_dynbuf_read(ptr, bytes, stream->buf, 0);
 	if (b < 0)
 		return	0;

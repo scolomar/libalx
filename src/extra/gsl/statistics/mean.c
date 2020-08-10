@@ -5,7 +5,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/extra/gsl/statistics/mean.h"
 
@@ -15,7 +15,7 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -118,6 +118,21 @@ long double alx_gsl_stats_mean_s64(ptrdiff_t nmemb,
 
 	return	mean;
 }
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+ALX_ALIAS_WEAK_DEF(gsl_stats_mean_ldbl,	alx_gsl_stats_mean_ldbl);
+ALX_ALIAS_WEAK_DEF(gsl_stats_mean_flt,	alx_gsl_stats_mean_flt);
+ALX_ALIAS_WEAK_DEF(gsl_stats_mean_u8,	alx_gsl_stats_mean_u8);
+ALX_ALIAS_WEAK_DEF(gsl_stats_mean_s8,	alx_gsl_stats_mean_s8);
+ALX_ALIAS_WEAK_DEF(gsl_stats_mean_u16,	alx_gsl_stats_mean_u16);
+ALX_ALIAS_WEAK_DEF(gsl_stats_mean_s16,	alx_gsl_stats_mean_s16);
+ALX_ALIAS_WEAK_DEF(gsl_stats_mean_u32,	alx_gsl_stats_mean_u32);
+ALX_ALIAS_WEAK_DEF(gsl_stats_mean_s32,	alx_gsl_stats_mean_s32);
+ALX_ALIAS_WEAK_DEF(gsl_stats_mean_u64,	alx_gsl_stats_mean_u64);
+ALX_ALIAS_WEAK_DEF(gsl_stats_mean_s64,	alx_gsl_stats_mean_s64);
 
 
 /******************************************************************************

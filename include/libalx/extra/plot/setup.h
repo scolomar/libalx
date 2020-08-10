@@ -29,15 +29,23 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/plot/setup.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
+#include "libalx/base/compiler/attribute.h"
+
 #include "libalx/extra/plot/core.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -65,15 +73,25 @@ enum	Alx_Gnuplot_Styles {
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull(1)))
+[[gnu::nonnull(1)]]
 int	alx_gnuplot_set_style	(struct Alx_Gnuplot *restrict gnuplot,
 				 int style, const char *restrict opt);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_gnuplot_set_xlabel	(struct Alx_Gnuplot *restrict gnuplot,
 				 const char *restrict label);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_gnuplot_set_ylabel	(struct Alx_Gnuplot *restrict gnuplot,
 				 const char *restrict label);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(gnuplot_set_style,	alx_gnuplot_set_style);
+ALX_ALIAS_DECLARATION(gnuplot_set_xlabel,	alx_gnuplot_set_xlabel);
+ALX_ALIAS_DECLARATION(gnuplot_set_ylabel,	alx_gnuplot_set_ylabel);
+#endif
 
 
 /******************************************************************************

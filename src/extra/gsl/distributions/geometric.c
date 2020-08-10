@@ -5,13 +5,13 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/extra/gsl/distributions/geometric.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -29,18 +29,23 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 extern
-long double	alx_gsl_dist_geometric_E_ldbl	(long double p);
+long double	alx_gsl_distr_geom_E_ldbl	(long double p);
 extern
-double		alx_gsl_dist_geometric_E	(double p);
+double		alx_gsl_distr_geom_E		(double p);
 extern
-float		alx_gsl_dist_geometric_E_flt	(float p);
+float		alx_gsl_distr_geom_E_flt	(float p);
 
 extern
-long double	alx_gsl_dist_geometric_Var_ldbl	(long double p);
+long double	alx_gsl_distr_geom_Var_ldbl	(long double p);
 extern
-double		alx_gsl_dist_geometric_Var	(double p);
+double		alx_gsl_distr_geom_Var		(double p);
 extern
-float		alx_gsl_dist_geometric_Var_flt	(float p);
+float		alx_gsl_distr_geom_Var_flt	(float p);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

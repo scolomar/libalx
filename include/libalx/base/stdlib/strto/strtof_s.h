@@ -9,17 +9,24 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/stdlib/strto/strtof_s.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 
+#include "libalx/base/compiler/attribute.h"
 #include "libalx/base/stdlib/strto/strtoi_s.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -40,17 +47,17 @@
  * `errno` needs to be cleared before calling these functions.  If not, false
  * negatives could happen (the function succeds, but it reports error).
  */
-__attribute__((nonnull(1, 2), warn_unused_result))
+[[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 int	alx_strtod_s	(double *restrict num, const char *restrict str,
 			 ptrdiff_t *restrict nread);
-__attribute__((nonnull(1, 2), warn_unused_result))
+[[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 int	alx_strtof_s	(float *restrict num, const char *restrict str,
 			 ptrdiff_t *restrict nread);
-__attribute__((nonnull(1, 2), warn_unused_result))
+[[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 int	alx_strtold_s	(long double *restrict num, const char *restrict str,
 			 ptrdiff_t *restrict nread);
 
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 inline
 int	alx_strtof_status	(const char *restrict str,
 				 const char *restrict endptr,
@@ -58,34 +65,13 @@ int	alx_strtof_status	(const char *restrict str,
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-inline
-int	strtod_s	(double *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict nread)
-{
-	return	alx_strtod_s(num, str, nread);
-}
-
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-inline
-int	strtof_s	(float *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict nread)
-{
-	return	alx_strtof_s(num, str, nread);
-}
-
-__attribute__((always_inline, nonnull(1, 2), warn_unused_result))
-inline
-int	strtold_s	(long double *restrict num, const char *restrict str,
-			 ptrdiff_t *restrict nread)
-{
-	return	alx_strtold_s(num, str, nread);
-}
-#endif	 /* defined(ALX_NO_PREFIX) */
+ALX_ALIAS_DECLARATION(strtod_s,		alx_strtod_s);
+ALX_ALIAS_DECLARATION(strtof_s,		alx_strtof_s);
+ALX_ALIAS_DECLARATION(strtold_s,	alx_strtold_s);
+#endif
 
 
 /******************************************************************************

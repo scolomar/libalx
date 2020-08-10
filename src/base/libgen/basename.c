@@ -5,20 +5,19 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/base/libgen/basename.h"
 
-#include <errno.h>
 #include <libgen.h>
-#include <stdio.h>
+#include <stddef.h>
 
 #include "libalx/base/compiler/size.h"
 #include "libalx/base/string/strcpy/strlcpys.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -35,18 +34,25 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
-int	alx_basename_s	(char dest[static restrict FILENAME_MAX],
-			 const char *restrict path)
+int	alx_basename_s	(ptrdiff_t size,
+			 char dest[static restrict size],
+			 const char path[restrict size])
 {
-	char	tmp[FILENAME_MAX];
+	char	tmp[size];
 
-	if (alx_strlcpys(tmp, path, ARRAY_SIZE(tmp), NULL))
-		return	ENAMETOOLONG;
-	if (alx_strlcpys(dest, basename(tmp), FILENAME_MAX, NULL))
-		return	ENAMETOOLONG;
+	if (alx_strlcpys(tmp, path, ARRAY_SSIZE(tmp), NULL))
+		return	-1;
+	if (alx_strlcpys(dest, basename(tmp), size, NULL))
+		return	-1;
 
 	return	0;
 }
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+ALX_ALIAS_WEAK_DEF(basename_s, alx_basename_s);
 
 
 /******************************************************************************

@@ -25,18 +25,19 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/extra/plot/plot.h"
 
 #include <stddef.h>
+#include <stdio.h>
 
 #include "libalx/base/stdio/tmpfname.h"
 #include "libalx/extra/plot/core.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -83,7 +84,7 @@ int	alx_gnuplot_plot_y		(struct Alx_Gnuplot *restrict gnuplot,
 
 	for (ptrdiff_t x = 0; x < size; x++) {
 		if (fprintf(fp, "%11le\n", y[x]) < 0)
-			return	-1;
+			goto err;
 	}
 
 	if (plot__end__(gnuplot, title, fname, fp))
@@ -91,6 +92,9 @@ int	alx_gnuplot_plot_y		(struct Alx_Gnuplot *restrict gnuplot,
 
 	gnuplot->nplots++;
 	return	0;
+err:
+	fclose(fp);
+	return	-1;
 }
 
 int	alx_gnuplot_plot_xy		(struct Alx_Gnuplot *restrict gnuplot,
@@ -106,8 +110,8 @@ int	alx_gnuplot_plot_xy		(struct Alx_Gnuplot *restrict gnuplot,
 		return	-1;
 
 	for (ptrdiff_t i = 0; i < size; i++) {
-		if (fprintf(fp, "%11le %11le\n", x[i], y[i]))
-			return	-1;
+		if (fprintf(fp, "%11le %11le\n", x[i], y[i]) < 0)
+			goto err;
 	}
 
 	if (plot__end__(gnuplot, title, fname, fp))
@@ -115,6 +119,9 @@ int	alx_gnuplot_plot_xy		(struct Alx_Gnuplot *restrict gnuplot,
 
 	gnuplot->nplots++;
 	return	0;
+err:
+	fclose(fp);
+	return	-1;
 }
 
 int	alx_gnuplot_plot_slope		(struct Alx_Gnuplot *restrict gnuplot,
@@ -153,13 +160,23 @@ int	alx_gnuplot_plot_equation	(struct Alx_Gnuplot *restrict gnuplot,
 
 
 /******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+ALX_ALIAS_WEAK_DEF(gnuplot_reset_plot,		alx_gnuplot_reset_plot);
+ALX_ALIAS_WEAK_DEF(gnuplot_plot_y,		alx_gnuplot_plot_y);
+ALX_ALIAS_WEAK_DEF(gnuplot_plot_xy,		alx_gnuplot_plot_xy);
+ALX_ALIAS_WEAK_DEF(gnuplot_plot_slope,		alx_gnuplot_plot_slope);
+ALX_ALIAS_WEAK_DEF(gnuplot_plot_equation,	alx_gnuplot_plot_equation);
+
+
+/******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
 static
 const char *plot__cmd__		(const struct Alx_Gnuplot *gnuplot)
 {
-	static const char *const plot	= "plot";
-	static const char *const replot	= "replot";
+	static const char plot[]	= "plot";
+	static const char replot[]	= "replot";
 
 	if (gnuplot->nplots  &&  !gnuplot->multi)
 		return	replot;
@@ -169,7 +186,7 @@ const char *plot__cmd__		(const struct Alx_Gnuplot *gnuplot)
 static
 const char *plot__title__	(const char *title)
 {
-	static const char *const none	= "(none)";
+	static const char none[]	= "(none)";
 
 	if (!title)
 		return	none;

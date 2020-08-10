@@ -9,16 +9,24 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/string/strchr/strrchrnul.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 #include <string.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -35,28 +43,24 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 inline
 ptrdiff_t alx_strrchrnul	(const char str[restrict], char c);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, pure))
-inline
-ptrdiff_t strrchrnul		(const char str[restrict], char c)
-{
-	return	alx_strrchrnul(str, c);
-}
+ALX_ALIAS_DECLARATION(strrchrnul, alx_strrchrnul);
 #endif
 
 
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
+//#pragma GCC diagnostic push	/* Large arrays unsupported (UB) */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 inline
 ptrdiff_t alx_strrchrnul	(const char str[restrict], char c)
 {
@@ -66,6 +70,7 @@ ptrdiff_t alx_strrchrnul	(const char str[restrict], char c)
 		return	strlen(str);
 	return	p - str;
 }
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

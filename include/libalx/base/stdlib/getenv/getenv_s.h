@@ -9,16 +9,23 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/stdlib/getenv/getenv_s.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
-#include <stdint.h>
+
+#include "libalx/base/compiler/attribute.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -35,35 +42,21 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_getenv_s		(char dest[/*size*/], ptrdiff_t size,
 				 const char *name);
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 int	alx_secure_getenv_s	(char dest[/*size*/], ptrdiff_t size,
 				 const char *name);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-int	getenv_s		(char dest[/*size*/], ptrdiff_t size,
-				 const char *name)
-{
-	return	alx_getenv_s(dest, size, name);
-}
-
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-int	secure_getenv_s		(char dest[/*size*/], ptrdiff_t size,
-				 const char *name)
-{
-	return	alx_secure_getenv_s(dest, size, name);
-}
-#endif	/* defined(ALX_NO_PREFIX) */
+ALX_ALIAS_DECLARATION(getenv_s,		alx_getenv_s);
+ALX_ALIAS_DECLARATION(secure_getenv_s,	alx_secure_getenv_s);
+#endif
 
 
 /******************************************************************************

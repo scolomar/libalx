@@ -9,16 +9,22 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/errno/perror.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <errno.h>
 #include <stdarg.h>
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 /*
  * [[gnu::format(printf, 1, 2)]]
@@ -27,14 +33,8 @@
 #define alx_perrorx(fmt, ...)		do				\
 {									\
 	alx__perrorx__(__FILE__, __LINE__, __func__, errno,		\
-					fmt, ##__VA_ARGS__);		\
+				(fmt)  __VA_OPT__(,)  __VA_ARGS__);	\
 } while (0)
-
-
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define perrorx(fmt, ...)	alx_perrorx(fmt, ##__VA_ARGS__)
-#endif
 
 
 /******************************************************************************
@@ -50,14 +50,22 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull(1, 3), format(printf, 5, 6)))
+[[gnu::nonnull(1, 3)]] [[gnu::format(printf, 5, 6)]] [[gnu::cold]]
 void	alx__perrorx__	(const char *restrict file, int line,
 			 const char *restrict func, int errno_val,
 			 const char *restrict format, ...);
-__attribute__((nonnull(1, 3), format(printf, 5, 0)))
+[[gnu::nonnull(1, 3)]] [[gnu::format(printf, 5, 0)]] [[gnu::cold]]
 void	alx__vperrorx__	(const char *restrict file, int line,
 			 const char *restrict func, int errno_val,
 			 const char *restrict format, va_list ap);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+#define perrorx(fmt, ...)	alx_perrorx((fmt)  __VA_OPT__(,)  __VA_ARGS__)
+#endif
 
 
 /******************************************************************************

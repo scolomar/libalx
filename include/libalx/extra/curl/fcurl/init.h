@@ -38,14 +38,21 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/curl/fcurl/init.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
+#include "libalx/base/compiler/attribute.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -79,30 +86,18 @@
  * If this function returns non-zero, something went wrong and you cannot use
  * the other url_ functions.
  */
-__attribute__((warn_unused_result))
+[[gnu::warn_unused_result]]
 int	alx_url_init	(void);
-__attribute__((destructor, warn_unused_result))
+[[gnu::destructor]] [[gnu::warn_unused_result]]
 int	alx_url_deinit	(void);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, warn_unused_result))
-inline
-int	url_init	(void)
-{
-	return	alx_url_init();
-}
-
-__attribute__((always_inline, warn_unused_result))
-inline
-int	url_deinit	(void)
-{
-	return	alx_url_deinit();
-}
+ALX_ALIAS_DECLARATION(url_init,		alx_url_init);
+ALX_ALIAS_DECLARATION(url_deinit,	alx_url_deinit);
 #endif
 
 

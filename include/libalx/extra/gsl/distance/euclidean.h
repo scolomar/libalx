@@ -9,12 +9,20 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/gsl/distance/euclidean.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <math.h>
 #include <stdint.h>
+
+#include "libalx/base/compiler/attribute.h"
 
 
 /******************************************************************************
@@ -23,7 +31,7 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -40,34 +48,48 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((const))
+[[gnu::const]]
 inline
-long double alx_gsl_distance2D_euclidean_ldbl	(long double dx, long double dy);
-__attribute__((const))
+long double alx_gsl_dist2D_euclidean_ldbl	(long double dx, long double dy);
+[[gnu::const]]
 inline
-double	alx_gsl_distance2D_euclidean		(double dx, double dy);
-__attribute__((const))
+double	alx_gsl_dist2D_euclidean		(double dx, double dy);
+[[gnu::const]]
 inline
-float	alx_gsl_distance2D_euclidean_flt	(float dx, float dy);
-__attribute__((const))
+float	alx_gsl_dist2D_euclidean_flt		(float dx, float dy);
+[[gnu::const]]
 inline
-float	alx_gsl_distance2D_euclidean_8b		(int8_t dx, int8_t dy);
-__attribute__((const))
+float	alx_gsl_dist2D_euclidean_8b		(int8_t dx, int8_t dy);
+[[gnu::const]]
 inline
-float	alx_gsl_distance2D_euclidean_16b	(int16_t dx, int16_t dy);
-__attribute__((const))
+float	alx_gsl_dist2D_euclidean_16b		(int16_t dx, int16_t dy);
+[[gnu::const]]
 inline
-double	alx_gsl_distance2D_euclidean_32b	(int32_t dx, int32_t dy);
-__attribute__((const))
+double	alx_gsl_dist2D_euclidean_32b		(int32_t dx, int32_t dy);
+[[gnu::const]]
 inline
-long double alx_gsl_distance2D_euclidean_64b	(int64_t dx, int64_t dy);
+long double alx_gsl_dist2D_euclidean_64b	(int64_t dx, int64_t dy);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(gsl_dist2D_euclidean_ldbl,alx_gsl_dist2D_euclidean_ldbl);
+ALX_ALIAS_DECLARATION(gsl_dist2D_euclidean,	alx_gsl_dist2D_euclidean);
+ALX_ALIAS_DECLARATION(gsl_dist2D_euclidean_flt,	alx_gsl_dist2D_euclidean_flt);
+ALX_ALIAS_DECLARATION(gsl_dist2D_euclidean_8b,	alx_gsl_dist2D_euclidean_8b);
+ALX_ALIAS_DECLARATION(gsl_dist2D_euclidean_16b,	alx_gsl_dist2D_euclidean_16b);
+ALX_ALIAS_DECLARATION(gsl_dist2D_euclidean_32b,	alx_gsl_dist2D_euclidean_32b);
+ALX_ALIAS_DECLARATION(gsl_dist2D_euclidean_64b,	alx_gsl_dist2D_euclidean_64b);
+#endif
 
 
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
 inline
-long double alx_gsl_distance2D_euclidean_ldbl	(long double dx, long double dy)
+long double alx_gsl_dist2D_euclidean_ldbl	(long double dx, long double dy)
 {
 	const long double	dx2	= dx * dx;
 	const long double	dy2	= dy * dy;
@@ -76,7 +98,7 @@ long double alx_gsl_distance2D_euclidean_ldbl	(long double dx, long double dy)
 }
 
 inline
-double	alx_gsl_distance2D_euclidean		(double dx, double dy)
+double	alx_gsl_dist2D_euclidean		(double dx, double dy)
 {
 	const double_t	dx_	= dx;
 	const double_t	dy_	= dy;
@@ -87,7 +109,7 @@ double	alx_gsl_distance2D_euclidean		(double dx, double dy)
 }
 
 inline
-float	alx_gsl_distance2D_euclidean_flt	(float dx, float dy)
+float	alx_gsl_dist2D_euclidean_flt		(float dx, float dy)
 {
 	const float_t	dx_	= dx;
 	const float_t	dy_	= dy;
@@ -98,7 +120,7 @@ float	alx_gsl_distance2D_euclidean_flt	(float dx, float dy)
 }
 
 inline
-float	alx_gsl_distance2D_euclidean_8b		(int8_t dx, int8_t dy)
+float	alx_gsl_dist2D_euclidean_8b		(int8_t dx, int8_t dy)
 {
 	const float_t	dx_	= dx;
 	const float_t	dy_	= dy;
@@ -109,7 +131,7 @@ float	alx_gsl_distance2D_euclidean_8b		(int8_t dx, int8_t dy)
 }
 
 inline
-float	alx_gsl_distance2D_euclidean_16b	(int16_t dx, int16_t dy)
+float	alx_gsl_dist2D_euclidean_16b		(int16_t dx, int16_t dy)
 {
 	const float_t	dx_	= dx;
 	const float_t	dy_	= dy;
@@ -120,7 +142,7 @@ float	alx_gsl_distance2D_euclidean_16b	(int16_t dx, int16_t dy)
 }
 
 inline
-double	alx_gsl_distance2D_euclidean_32b	(int32_t dx, int32_t dy)
+double	alx_gsl_dist2D_euclidean_32b		(int32_t dx, int32_t dy)
 {
 	const double_t	dx_	= dx;
 	const double_t	dy_	= dy;
@@ -131,7 +153,7 @@ double	alx_gsl_distance2D_euclidean_32b	(int32_t dx, int32_t dy)
 }
 
 inline
-long double alx_gsl_distance2D_euclidean_64b	(int64_t dx, int64_t dy)
+long double alx_gsl_dist2D_euclidean_64b	(int64_t dx, int64_t dy)
 {
 	const long double	dx_	= dx;
 	const long double	dy_	= dy;
@@ -140,55 +162,6 @@ long double alx_gsl_distance2D_euclidean_64b	(int64_t dx, int64_t dy)
 
 	return	sqrtl(dx2 + dy2);
 }
-
-
-/******************************************************************************
- ******* always_inline ********************************************************
- ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, const))
-long double distance2D_euclidean_ldbl	(long double dx, long double dy)
-{
-	return	alx_gsl_distance2D_euclidean_ldbl(dx, dy);
-}
-
-__attribute__((always_inline, const))
-double	distance2D_euclidean		(double dx, double dy)
-{
-	return	alx_gsl_distance2D_euclidean(dx, dy);
-}
-
-__attribute__((always_inline, const))
-float	distance2D_euclidean_flt	(float dx, float dy)
-{
-	return	alx_gsl_distance2D_euclidean_flt(dx, dy);
-}
-
-__attribute__((always_inline, const))
-float	distance2D_euclidean_8b		(int8_t dx, int8_t dy)
-{
-	return	alx_gsl_distance2D_euclidean_8b(dx, dy);
-}
-
-__attribute__((always_inline, const))
-float	distance2D_euclidean_16b	(int16_t dx, int16_t dy)
-{
-	return	alx_gsl_distance2D_euclidean_16b(dx, dy);
-}
-
-__attribute__((always_inline, const))
-double	distance2D_euclidean_32b	(int32_t dx, int32_t dy)
-{
-	return	alx_gsl_distance2D_euclidean_32b(dx, dy);
-}
-
-__attribute__((always_inline, const))
-long double distance2D_euclidean_64b	(int64_t dx, int64_t dy)
-{
-	return	alx_gsl_distance2D_euclidean_64b(dx, dy);
-}
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************

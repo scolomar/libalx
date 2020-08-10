@@ -11,7 +11,7 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/alx/data-structures/dataframe.h"
 
@@ -30,11 +30,10 @@
 #include "libalx/base/compiler/unused.h"
 #include "libalx/base/stdlib/alloc/frees.h"
 #include "libalx/base/stdlib/alloc/mallocarrays.h"
-#include "libalx/base/stdlib/compare.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -46,11 +45,11 @@
 /******************************************************************************
  ******* static prototypes ****************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 static
 int	df_cmp_data		(const void *user_data, const void *ds_data);
 
-__attribute__((nonnull(1, 2), warn_unused_result))
+[[gnu::nonnull(1, 2)]] [[gnu::warn_unused_result]]
 static
 int	df_ins_col_value	(struct Alx_DF_Col *col,
 				 const char *restrict value,
@@ -94,6 +93,8 @@ void	alx_df_deinit		(struct Alx_DataFrame *df)
 	free(df);
 }
 
+//#pragma GCC diagnostic push	/* Overflow is explicitly handled by dynbuf */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 int	alx_df_ins_col		(struct Alx_DataFrame *restrict df,
 				 ptrdiff_t ncol, int type, char *restrict hdr,
 				 const char *values[restrict])
@@ -301,6 +302,11 @@ err:
 
 
 /******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
  ******* static function definitions ******************************************
  ******************************************************************************/
 static
@@ -328,8 +334,7 @@ int	df_ins_col_value	(struct Alx_DF_Col *col,
 
 	if (col->values->cmp != &df_cmp_data)
 		alx_bst_reorder(col->values, &df_cmp_data);
-	status1	= alx_bst_insert(col->values, value, strlen(value) + 1, 
-									&node);
+	status1	= alx_bst_insert(col->values, value, strlen(value) + 1, &node);
 	if (status1 < 0)
 		return	status1;
 out:
@@ -341,6 +346,7 @@ out:
 
 	return	status1;
 }
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

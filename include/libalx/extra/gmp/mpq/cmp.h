@@ -9,15 +9,22 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/gmp/mpq/cmp.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stdint.h>
 
 #include <gmp.h>
 
-#include "libalx/base/assert/assert.h"
+#include "libalx/base/assert/stdint.h"
+#include "libalx/base/compiler/attribute.h"
 
 
 /******************************************************************************
@@ -27,13 +34,8 @@ alx_Static_assert_stdint_types();
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define mpq_cmp_u64(op1, num2, den2)	alx_mpq_cmp_u64(op1, num2, den2)
-#define mpq_cmp_s64(op1, num2, den2)	alx_mpq_cmp_s64(op1, num2, den2)
-#endif
 
 
 /******************************************************************************
@@ -53,6 +55,15 @@ inline
 int	alx_mpq_cmp_u64	(const mpq_t op1, uint64_t num2, uint64_t den2);
 inline
 int	alx_mpq_cmp_s64	(const mpq_t op1, int64_t num2, int64_t den2);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(mpq_cmp_u64, alx_mpq_cmp_u64);
+ALX_ALIAS_DECLARATION(mpq_cmp_s64, alx_mpq_cmp_s64);
+#endif
 
 
 /******************************************************************************

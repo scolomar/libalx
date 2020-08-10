@@ -9,16 +9,24 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/string/strchr/strnrchr.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 #include <string.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -35,7 +43,7 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, pure))
+[[gnu::nonnull]] [[gnu::pure]]
 inline
 ptrdiff_t alx_strnrchr		(ptrdiff_t size,
 				 const char str[static restrict size],
@@ -43,36 +51,31 @@ ptrdiff_t alx_strnrchr		(ptrdiff_t size,
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, pure))
-inline
-ptrdiff_t strnrchr		(ptrdiff_t size,
-				 const char str[static restrict size],
-				 char c)
-{
-	return	alx_strnrchr(size, str, c);
-}
+ALX_ALIAS_DECLARATION(strnrchr, alx_strnrchr);
 #endif
 
 
 /******************************************************************************
  ******* inline ***************************************************************
  ******************************************************************************/
+//#pragma GCC diagnostic push	/* Large arrays unsupported (UB) */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 inline
 ptrdiff_t alx_strnrchr		(ptrdiff_t size,
 				 const char str[static restrict size],
 				 char c)
 {
-	const char	len = strnlen(str, size);
+	const ptrdiff_t	len = strnlen(str, size);
 	const char	*p = memrchr(str, c, len);
 
 	if (!p)
 		return	-1;
 	return	p - str;
 }
+//#pragma GCC diagnostic pop
 
 
 /******************************************************************************

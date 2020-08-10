@@ -9,9 +9,15 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/cv/core/rect/rect.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 
@@ -19,7 +25,7 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -37,30 +43,35 @@
  ******* prototypes ***********************************************************
  ******************************************************************************/
 /* ----- alloc / free */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_init_rect	(rect_s **rect);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_deinit_rect	(rect_s *rect);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_init_rect_rot	(rect_rot_s **rect_rot);
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_cv_deinit_rect_rot	(rect_rot_s *rect_rot);
 /* ----- init / deinit */
-__attribute__((nonnull))
+[[gnu::nonnull]]
 int	alx_cv_set_rect		(rect_s *rect,
 				 ptrdiff_t x, ptrdiff_t y,
 				 ptrdiff_t w, ptrdiff_t h);
 /* ----- Extract */
-__attribute__((nonnull(1)))
+[[gnu::nonnull(1)]]
 void	alx_cv_extract_rect	(const rect_s *restrict rect,
 				 ptrdiff_t *restrict x, ptrdiff_t *restrict y,
 				 ptrdiff_t *restrict w, ptrdiff_t *restrict h);
-__attribute__((nonnull(1)))
+[[gnu::nonnull(1)]]
 void	alx_cv_extract_rect_rot	(const rect_rot_s *restrict rect_rot,
 				 ptrdiff_t *restrict ctr_x,
 				 ptrdiff_t *restrict ctr_y,
 				 ptrdiff_t *restrict w, ptrdiff_t *restrict h,
 				 double *restrict angle);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************

@@ -29,17 +29,25 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/plot/plot.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
+
+#include "libalx/base/compiler/attribute.h"
 
 #include "libalx/extra/plot/core.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -56,27 +64,39 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 void	alx_gnuplot_reset_plot		(struct Alx_Gnuplot *gnuplot);
-__attribute__((nonnull(1, 3)))
+[[gnu::nonnull(1, 3)]]
 int	alx_gnuplot_plot_y		(struct Alx_Gnuplot *restrict gnuplot,
 					 ptrdiff_t size,
 					 const double y[static restrict size],
 					 const char *restrict title);
-__attribute__((nonnull(1, 3, 4)))
+[[gnu::nonnull(1, 3, 4)]]
 int	alx_gnuplot_plot_xy		(struct Alx_Gnuplot *restrict gnuplot,
 					 ptrdiff_t size,
 					 const double x[static restrict size],
 					 const double y[static restrict size],
 					 const char *restrict title);
-__attribute__((nonnull(1)))
+[[gnu::nonnull(1)]]
 int	alx_gnuplot_plot_slope		(struct Alx_Gnuplot *restrict gnuplot,
 					 double a, double b,
 					 const char *restrict title);
-__attribute__((nonnull(1)))
+[[gnu::nonnull(1)]]
 int	alx_gnuplot_plot_equation	(struct Alx_Gnuplot *restrict gnuplot,
 					 const char *equation,
 					 const char *title);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(gnuplot_reset_plot,	alx_gnuplot_reset_plot);
+ALX_ALIAS_DECLARATION(gnuplot_plot_y,		alx_gnuplot_plot_y);
+ALX_ALIAS_DECLARATION(gnuplot_plot_xy,		alx_gnuplot_plot_xy);
+ALX_ALIAS_DECLARATION(gnuplot_plot_slope,	alx_gnuplot_plot_slope);
+ALX_ALIAS_DECLARATION(gnuplot_plot_equation,	alx_gnuplot_plot_equation);
+#endif
 
 
 /******************************************************************************

@@ -38,9 +38,15 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/curl/fcurl/URL_FILE.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 #include <stdio.h>
@@ -48,10 +54,11 @@
 #include <curl/curl.h>
 
 #include "libalx/alx/data-structures/dyn-buffer.h"
+#include "libalx/base/compiler/attribute.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -84,15 +91,6 @@ struct	Alx_URL_Data {
  ******************************************************************************/
 typedef struct Alx_URL_Data	ALX_URL_FILE;
 
-#if defined(ALX_NO_PREFIX)
-typedef struct Alx_URL_Data	URL_FILE;
-#endif
-
-
-/******************************************************************************
- ******* prototypes ***********************************************************
- ******************************************************************************/
-
 
 /******************************************************************************
  ******* variables ************************************************************
@@ -101,10 +99,21 @@ extern	ALX_URL_FILE	*alx_url_stdin;
 extern	ALX_URL_FILE	*alx_url_stdout;
 extern	ALX_URL_FILE	*alx_url_stderr;
 
+
+/******************************************************************************
+ ******* prototypes ***********************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 #if defined(ALX_NO_PREFIX)
-#define url_stdin	alx_url_stdin
-#define url_stdout	alx_url_stdout
-#define url_stderr	alx_url_stderr
+ALX_ALIAS_DECLARATION(url_stdin,	alx_url_stdin);
+ALX_ALIAS_DECLARATION(url_stdout,	alx_url_stdout);
+ALX_ALIAS_DECLARATION(url_stderr,	alx_url_stderr);
+
+typedef struct Alx_URL_Data	URL_FILE;
 #endif
 
 

@@ -9,15 +9,23 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/libgen/basename.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
-#include <stdio.h>
+#include <stddef.h>
+
+#include "libalx/base/compiler/attribute.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -34,23 +42,17 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull, warn_unused_result))
-int	alx_basename_s	(char dest[static restrict FILENAME_MAX],
-			 const char *restrict path);
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
+int	alx_basename_s	(ptrdiff_t size,
+			 char dest[static restrict size],
+			 const char path[restrict size]);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull, warn_unused_result))
-inline
-int	basename_s	(char dest[static restrict FILENAME_MAX],
-			 const char *restrict path)
-{
-	return	alx_basename_s(dest, path);
-}
+ALX_ALIAS_DECLARATION(basename_s, alx_basename_s);
 #endif
 
 

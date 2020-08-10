@@ -47,14 +47,17 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/extra/curl/fcurl/fopen.h"
 
 #include <errno.h>
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include <sys/types.h>
 
 #include <curl/curl.h>
 
@@ -68,7 +71,7 @@
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -88,7 +91,7 @@ int	url_fopen_r__	(ALX_URL_FILE *restrict stream,
 			 const char *restrict url);
 /* curl calls this routine to get more data */
 static
-size_t	url_write_cb__	(const void *restrict buf, size_t size, size_t nmemb,
+ssize_t	url_write_cb__	(const void *restrict buf, ssize_t size, ssize_t nmemb,
 			 void *restrict ostream);
 
 
@@ -119,6 +122,12 @@ err:
 	free(stream);
 	return	NULL;
 }
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+ALX_ALIAS_WEAK_DEF(url_fopen, alx_url_fopen);
 
 
 /******************************************************************************
@@ -188,14 +197,14 @@ clean_opt:
 }
 
 static
-size_t	url_write_cb__	(const void *restrict buf, size_t size, size_t nmemb,
+ssize_t	url_write_cb__	(const void *restrict buf, ssize_t size, ssize_t nmemb,
 			 void *restrict ostream)
 {
 	ALX_URL_FILE *stream;
 
-	if (!nmemb || !size)
+	if (nmemb <= 0 || size <= 0)
 		return	0;
-	if (nmemb  >  (SIZE_MAX / size))
+	if (nmemb  >=  (SSIZE_MAX / size))
 		return	0;
 
 	stream	= ostream;

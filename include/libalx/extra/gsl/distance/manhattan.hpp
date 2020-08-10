@@ -9,55 +9,74 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/gsl/distance/manhattan.hpp */
 
+#if !defined(__cplusplus)
+#warning	This header file should only be included in C++.  In C,	\
+		include the header file of the same name and `.h`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <cstdint>
 
+#include "libalx/base/compiler/attribute.hpp"
+
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define distance2D_manhattan_ldbl(dx, dy)				\
-	alx_gsl_distance2D_manhattan_ldbl(dx, dy)
-#define distance2D_manhattan(dx, dy)					\
-	alx_gsl_distance2D_manhattan(dx, dy)
-#define distance2D_manhattan_flt(dx, dy)				\
-	alx_gsl_distance2D_manhattan_flt(dx, dy)
-#define distance2D_manhattan_8b(dx, dy)					\
-	alx_gsl_distance2D_manhattan_8b(dx, dy)
-#define distance2D_manhattan_16b(dx, dy)				\
-	alx_gsl_distance2D_manhattan_16b(dx, dy)
-#define distance2D_manhattan_32b(dx, dy)				\
-	alx_gsl_distance2D_manhattan_32b(dx, dy)
-#define distance2D_manhattan_64b(dx, dy)				\
-	alx_gsl_distance2D_manhattan_64b(dx, dy)
-#endif	/* defined(ALX_NO_PREFIX) */
 
 
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-extern	"C"
-{
+extern "C" {
+
+
+/******************************************************************************
+ ******* struct / union *******************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* C prototypes *********************************************************
+ ******************************************************************************/
 [[gnu::const]]
-long double alx_gsl_distance2D_manhattan_ldbl	(long double dx, long double dy);
+long double alx_gsl_dist2D_manhattan_ldbl	(long double dx, long double dy);
 [[gnu::const]]
-double	alx_gsl_distance2D_manhattan		(double dx, double dy);
+double	alx_gsl_dist2D_manhattan		(double dx, double dy);
 [[gnu::const]]
-float	alx_gsl_distance2D_manhattan_flt	(float dx, float dy);
+float	alx_gsl_dist2D_manhattan_flt		(float dx, float dy);
 [[gnu::const]]
-float	alx_gsl_distance2D_manhattan_8b		(int8_t dx, int8_t dy);
+float	alx_gsl_dist2D_manhattan_8b		(int8_t dx, int8_t dy);
 [[gnu::const]]
-float	alx_gsl_distance2D_manhattan_16b	(int16_t dx, int16_t dy);
+float	alx_gsl_dist2D_manhattan_16b		(int16_t dx, int16_t dy);
 [[gnu::const]]
-double	alx_gsl_distance2D_manhattan_32b	(int32_t dx, int32_t dy);
+double	alx_gsl_dist2D_manhattan_32b		(int32_t dx, int32_t dy);
 [[gnu::const]]
-long double alx_gsl_distance2D_manhattan_64b	(int64_t dx, int64_t dy);
-}
+long double alx_gsl_dist2D_manhattan_64b	(int64_t dx, int64_t dy);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(dist2D_manhattan_ldbl,	alx_gsl_dist2D_manhattan_ldbl);
+ALX_ALIAS_DECLARATION(dist2D_manhattan,		alx_gsl_dist2D_manhattan);
+ALX_ALIAS_DECLARATION(dist2D_manhattan_flt,	alx_gsl_dist2D_manhattan_flt);
+ALX_ALIAS_DECLARATION(dist2D_manhattan_8b,	alx_gsl_dist2D_manhattan_8b);
+ALX_ALIAS_DECLARATION(dist2D_manhattan_16b,	alx_gsl_dist2D_manhattan_16b);
+ALX_ALIAS_DECLARATION(dist2D_manhattan_32b,	alx_gsl_dist2D_manhattan_32b);
+ALX_ALIAS_DECLARATION(dist2D_manhattan_64b,	alx_gsl_dist2D_manhattan_64b);
+#endif
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+}	/* extern "C" */
 
 
 /******************************************************************************
@@ -69,11 +88,6 @@ namespace gsl {
 
 /******************************************************************************
  ******* enum *****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* struct / union *******************************************************
  ******************************************************************************/
 
 

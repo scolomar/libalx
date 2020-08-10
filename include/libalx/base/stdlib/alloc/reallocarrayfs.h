@@ -9,6 +9,12 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/stdlib/alloc/reallocarrayfs.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
  ******* about ****************************************************************
@@ -58,31 +64,28 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* inlcude **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 
+#include <sys/types.h>
+
+#include "libalx/base/compiler/size.h"
 #include "libalx/base/compiler/unused.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-#define alx_reallocarrayfs(ptr, nmemb)	(				\
+#define alx_reallocarrayfs(ptr, nmemb)	__extension__(			\
 {									\
 	__auto_type	ptr_	= (ptr);				\
 	int		err_;						\
 									\
-	*ptr_	= alx_reallocarrayfs__(*ptr_, nmemb, sizeof(**ptr_), &err_); \
+	*ptr_	= alx_reallocarrayfs__(*ptr_, nmemb, ssizeof(**ptr_), &err_); \
 	alx_warn_unused_int(err_);					\
 }									\
 )
-
-
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define reallocarrayfs(ptr, nmemb)	alx_reallocarrayfs(ptr, nmemb)
-#endif
 
 
 /******************************************************************************
@@ -100,7 +103,7 @@
  ******************************************************************************/
 /*
  * [[gnu::nonnull]] [[gnu::warn_unused_result]]
- * void	*alx_reallocarrayfs__(void *restrict ptr, ptrdiff_t nmemb, size_t size,
+ * void	*alx_reallocarrayfs__(void *restrict ptr, ptrdiff_t nmemb, ssize_t size,
  *			      int *restrict error);
  *
  * Helper function for `reallocarrayfs()`.
@@ -123,9 +126,17 @@
  * - Upon failure, the passed pointer is freed.
  * - error is non-zero if the result is NULL.
  */
-__attribute__((nonnull, warn_unused_result))
+[[gnu::nonnull]] [[gnu::warn_unused_result]]
 void	*alx_reallocarrayfs__	(void *restrict ptr, ptrdiff_t nmemb,
-				 size_t size, int *restrict error);
+				 ssize_t size, int *restrict error);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+#define reallocarrayfs(ptr, nmemb)	alx_reallocarrayfs(ptr, nmemb)
+#endif
 
 
 /******************************************************************************

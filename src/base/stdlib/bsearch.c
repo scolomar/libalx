@@ -5,18 +5,18 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/base/stdlib/bsearch.h"
 
 #include <stddef.h>
 #include <stdint.h>
 
-#include "libalx/base/stdlib/average.h"
+#include "libalx/base/stdlib/avg.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -33,6 +33,8 @@
 /******************************************************************************
  ******* global functions *****************************************************
  ******************************************************************************/
+//#pragma GCC diagnostic push	/* Overflow is avoided with a wide cast */
+//#pragma GCC diagnostic ignored	"-Wsign-conversion"
 ptrdiff_t	alx_bsearch_uint(ptrdiff_t nmemb,
 				 const unsigned arr[static restrict nmemb],
 				 unsigned x)
@@ -272,6 +274,22 @@ ptrdiff_t	alx_bsearch_s64	(ptrdiff_t nmemb,
 
 	return	-1;
 }
+//#pragma GCC diagnostic pop
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+ALX_ALIAS_WEAK_DEF(bsearch_uint,	alx_bsearch_uint);
+ALX_ALIAS_WEAK_DEF(bsearch_int,		alx_bsearch_int);
+ALX_ALIAS_WEAK_DEF(bsearch_u8,		alx_bsearch_u8);
+ALX_ALIAS_WEAK_DEF(bsearch_s8,		alx_bsearch_s8);
+ALX_ALIAS_WEAK_DEF(bsearch_u16,		alx_bsearch_u16);
+ALX_ALIAS_WEAK_DEF(bsearch_s16,		alx_bsearch_s16);
+ALX_ALIAS_WEAK_DEF(bsearch_u32,		alx_bsearch_u32);
+ALX_ALIAS_WEAK_DEF(bsearch_s32,		alx_bsearch_s32);
+ALX_ALIAS_WEAK_DEF(bsearch_u64,		alx_bsearch_u64);
+ALX_ALIAS_WEAK_DEF(bsearch_s64,		alx_bsearch_s64);
 
 
 /******************************************************************************

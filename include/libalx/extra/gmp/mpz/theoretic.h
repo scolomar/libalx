@@ -9,15 +9,22 @@
  ******************************************************************************/
 #pragma once	/* libalx/extra/gmp/mpz/theoretic.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stdint.h>
 
 #include <gmp.h>
 
-#include "libalx/base/assert/assert.h"
+#include "libalx/base/assert/stdint.h"
+#include "libalx/base/compiler/attribute.h"
 
 
 /******************************************************************************
@@ -27,27 +34,8 @@ alx_Static_assert_stdint_types();
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define mpz_gcd_u64(rop, op1, op2)	alx_mpz_gcd_u64(rop, op1, op2)
-#define mpz_lcm_u64(rop, op1, op2)	alx_mpz_lcm_u64(rop, op1, op2)
-#define mpz_kronecker_s64(a, b)		alx_mpz_kronecker_s64(a, b)
-#define mpz_kronecker_u64(a, b)		alx_mpz_kronecker_u64(a, b)
-#define mpz_s64_kronecker(a, b)		alx_mpz_s64_kronecker(a, b)
-#define mpz_u64_kronecker(a, b)		alx_mpz_u64_kronecker(a, b)
-#define mpz_fac_u64(rop, n)		alx_mpz_fac_u64(rop, n)
-#define mpz_2fac_u64(rop, n)		alx_mpz_2fac_u64(rop, n)
-#define mpz_mfac_u64(rop, n, m)		alx_mpz_mfac_u64(rop, n, m)
-#define mpz_primorial_u64(rop, n)	alx_mpz_primorial_u64(rop, n)
-#define mpz_bin_u64(rop, n, k)		alx_mpz_bin_u64(rop, n, k)
-#define mpz_bin_u64u64(rop, n, k)	alx_mpz_bin_u64u64(rop, n, k)
-#define mpz_fib_u64(fn, n)		alx_mpz_fib_u64(fn, n)
-#define mpz_fib2_u64(fn, fnsub1, n)	alx_mpz_fib2_u64(fn, fnsub1, n)
-#define mpz_lucnum_u64(ln, n)		alx_mpz_lucnum_u64(ln, n)
-#define mpz_lucnum2_u64(ln, lnsub1, n)	alx_mpz_lucnum2_u64(ln, lnsub1, n)
-#endif
 
 
 /******************************************************************************
@@ -101,6 +89,29 @@ inline
 void	alx_mpz_lucnum_u64	(mpz_t ln, uint64_t n);
 inline
 void	alx_mpz_lucnum2_u64	(mpz_t ln, mpz_t lnsub1, uint64_t n);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(mpz_gcd_u64,		alx_mpz_gcd_u64);
+ALX_ALIAS_DECLARATION(mpz_lcm_u64,		alx_mpz_lcm_u64);
+ALX_ALIAS_DECLARATION(mpz_kronecker_s64,	alx_mpz_kronecker_s64);
+ALX_ALIAS_DECLARATION(mpz_kronecker_u64,	alx_mpz_kronecker_u64);
+ALX_ALIAS_DECLARATION(mpz_s64_kronecker,	alx_mpz_s64_kronecker);
+ALX_ALIAS_DECLARATION(mpz_u64_kronecker,	alx_mpz_u64_kronecker);
+ALX_ALIAS_DECLARATION(mpz_fac_u64,		alx_mpz_fac_u64);
+ALX_ALIAS_DECLARATION(mpz_2fac_u64,		alx_mpz_2fac_u64);
+ALX_ALIAS_DECLARATION(mpz_mfac_u64,		alx_mpz_mfac_u64);
+ALX_ALIAS_DECLARATION(mpz_primorial_u64,	alx_mpz_primorial_u64);
+ALX_ALIAS_DECLARATION(mpz_bin_u64,		alx_mpz_bin_u64);
+ALX_ALIAS_DECLARATION(mpz_bin_u64u64,		alx_mpz_bin_u64u64);
+ALX_ALIAS_DECLARATION(mpz_fib_u64,		alx_mpz_fib_u64);
+ALX_ALIAS_DECLARATION(mpz_fib2_u64,		alx_mpz_fib2_u64);
+ALX_ALIAS_DECLARATION(mpz_lucnum_u64,		alx_mpz_lucnum_u64);
+ALX_ALIAS_DECLARATION(mpz_lucnum2_u64,		alx_mpz_lucnum2_u64);
+#endif
 
 
 /******************************************************************************

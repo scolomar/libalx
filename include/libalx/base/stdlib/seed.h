@@ -8,9 +8,15 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/stdlib/seed.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stdint.h>
 #include <stdlib.h>
@@ -19,9 +25,11 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -43,29 +51,17 @@ void	alx_prsrand	(void);
 inline
 uint32_t alx_prseed	(void);
 /*	Robert Jenkins' 96 bit Mix Function	*/
-__attribute__((const))
+[[gnu::const]]
 uint32_t alx_seed_mix	(uint32_t a, uint32_t b, uint32_t c);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline))
-inline
-void	prsrand		(void)
-{
-	alx_prsrand();
-}
-
-__attribute__((always_inline))
-inline
-uint32_t prseed		(void)
-{
-	return	alx_prseed();
-}
-#endif	/* defined(ALX_NO_PREFIX) */
+ALX_ALIAS_DECLARATION(prsrand,	alx_prsrand);
+ALX_ALIAS_DECLARATION(prseed,	alx_prseed);
+#endif
 
 
 /******************************************************************************
@@ -80,7 +76,8 @@ void	alx_prsrand	(void)
 inline
 uint32_t alx_prseed	(void)
 {
-	return	alx_seed_mix(clock(), time(NULL), getpid());
+	return	alx_seed_mix((uint32_t)clock(), (uint32_t)time(NULL),
+							(uint32_t)getpid());
 }
 
 

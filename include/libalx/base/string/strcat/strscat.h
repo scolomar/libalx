@@ -9,15 +9,23 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/string/strcat/strscat.h */
 
+#if defined(__cplusplus)
+#warning	This header file should only be included in C.  In C++,	\
+		include the header file of the same name and `.hpp`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <stddef.h>
 
+#include "libalx/base/compiler/attribute.h"
+
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -34,25 +42,17 @@
 /******************************************************************************
  ******* prototypes ***********************************************************
  ******************************************************************************/
-__attribute__((nonnull))
+[[gnu::nonnull]]
 ptrdiff_t alx_strscat		(ptrdiff_t size,
 				 char dest[static restrict size],
 				 const char src[static restrict size]);
 
 
 /******************************************************************************
- ******* always_inline ********************************************************
+ ******* alias ****************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
 #if defined(ALX_NO_PREFIX)
-__attribute__((always_inline, nonnull))
-inline
-ptrdiff_t strscat		(ptrdiff_t size,
-				 char dest[static restrict size],
-				 const char src[static restrict size])
-{
-	return	alx_strscat(size, dest, src);
-}
+ALX_ALIAS_DECLARATION(strscat, alx_strscat);
 #endif
 
 

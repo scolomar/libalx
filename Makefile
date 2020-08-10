@@ -1,4 +1,18 @@
-#! /usr/bin/make -f
+#!/usr/bin/make -f
+
+################################################################################
+VERSION		= 1
+PATCHLEVEL	= 0
+SUBLEVEL	=
+EXTRAVERSION	= ~b24
+NAME		=
+
+export	VERSION
+export	PATCHLEVEL
+export	SUBLEVEL
+
+LIBVERSION	= $(VERSION)$(if $(PATCHLEVEL),.$(PATCHLEVEL)$(if $(SUBLEVEL),.$(SUBLEVEL)))$(EXTRAVERSION)
+export	LIBVERSION
 
 ################################################################################
 # Copyright (C) 2019	Alejandro Colomar Andrés
@@ -63,35 +77,35 @@ MAKEFLAGS += --no-print-directory
 
 LIBALX_DIR	= $(CURDIR)
 
+BIN_DIR		= $(LIBALX_DIR)/bin
 INC_DIR		= $(LIBALX_DIR)/include
 SRC_DIR		= $(LIBALX_DIR)/src
 LIB_DIR		= $(LIBALX_DIR)/lib
 ETC_DIR		= $(LIBALX_DIR)/etc
 SHARE_DIR	= $(LIBALX_DIR)/share
-MK_DIR		= $(LIBALX_DIR)/mk
-MK_TMP_DIR	= $(MK_DIR)/tmp
-MK_LIB_DIR	= $(MK_DIR)/lib
 BUILD_DIR	= $(LIBALX_DIR)/build
 BUILD_TMP_DIR	= $(BUILD_DIR)/tmp
 BUILD_LIB_DIR	= $(BUILD_DIR)/lib
+BUILD_A_DIR	= $(BUILD_LIB_DIR)/static
+BUILD_SO_DIR	= $(BUILD_LIB_DIR)/shared
 
 export	LIBALX_DIR
 
+export	BIN_DIR
 export	INC_DIR
 export	SRC_DIR
 export	LIB_DIR
 export	ETC_DIR
 export	SHARE_DIR
-export	MK_DIR
-export	MK_TMP_DIR
-export	MK_LIB_DIR
 export	BUILD_DIR
 export	BUILD_TMP_DIR
 export	BUILD_LIB_DIR
+export	BUILD_A_DIR
+export	BUILD_SO_DIR
 
-# XXX: make ... LOCAL=local to build in /usr/local/
+## XXX: make ... LOCAL= to build in /usr/
 ifndef LOCAL
-  LOCAL			=
+  LOCAL			= local
 endif
 ifeq ("$(LOCAL)","local")
   INSTALL_ETC_DIR	= /usr/local/etc
@@ -101,18 +115,18 @@ endif
 INSTALL_INC_DIR		= /usr/$(LOCAL)/include
 INSTALL_LIB_DIR		= /usr/$(LOCAL)/lib
 INSTALL_SHARE_DIR	= /usr/$(LOCAL)/share
-INSTALL_PKGCONFIG_DIR	= $(INSTALL_LIB_DIR)/pkgconfig
+INSTALL_PC_DIR		= $(INSTALL_LIB_DIR)/pkgconfig
 
 export	INSTALL_ETC_DIR
 export	INSTALL_INC_DIR
 export	INSTALL_LIB_DIR
 export	INSTALL_SHARE_DIR
-export	INSTALL_PKGCONFIG_DIR
+export	INSTALL_PC_DIR
 
 ################################################################################
 # Make variables (CC, etc...)
-  CC	= gcc
-  CXX	= g++
+  CC	= gcc-10
+  CXX	= g++-10
   AS	= as
   AR	= ar
   LD	= ld
@@ -127,15 +141,20 @@ export	SZ
 
 ################################################################################
 # cflags
-CFLAGS_STD	= -std=gnu17
+CFLAGS_STD	= -std=gnu2x
 
 CFLAGS_OPT	= -O3
-CFLAGS_OPT     += -march=native
-CFLAGS_OPT     += -flto
+## XXX: optimize for native if portability is not needed
+#CFLAGS_OPT     += -march=native
+#CFLAGS_OPT     += -flto
 
 CFLAGS_W	= -Wall
 CFLAGS_W       += -Wextra
 CFLAGS_W       += -Wstrict-prototypes
+CFLAGS_W       += -Wpedantic
+CFLAGS_W       += -pedantic-errors
+CFLAGS_W       += -fno-common
+CFLAGS_W       += -fanalyzer
 CFLAGS_W       += -Werror
 
 CFLAGS_D	= -D _GNU_SOURCE
@@ -155,7 +174,7 @@ CFLAGS         += $(CFLAGS_I)
 
 export	CFLAGS
 
-CFLAGS_A	= $(CFLAGS)
+CFLAGS_A	= $(CFLAGS) -flto
 CFLAGS_SO	= $(CFLAGS) -fpic
 
 export	CFLAGS_A
@@ -163,14 +182,18 @@ export	CFLAGS_SO
 
 ################################################################################
 # c++flags
-CXXFLAGS_STD	= -std=gnu++17
+CXXFLAGS_STD	= -std=gnu++20
 
 CXXFLAGS_OPT	= -O3
-CXXFLAGS_OPT   += -march=native
-CXXFLAGS_OPT   += -flto
+## XXX: optimize for native if portability is not needed
+#CXXFLAGS_OPT   += -march=native
+#CXXFLAGS_OPT   += -flto
 
 CXXFLAGS_W	= -Wall
 CXXFLAGS_W     += -Wextra
+CXXFLAGS_W     += -Wpedantic
+CXXFLAGS_W     += -pedantic-errors
+CXXFLAGS_W     += -fno-common
 CXXFLAGS_W     += -Werror
 
 CXXFLAGS_D	= -D _GNU_SOURCE
@@ -190,7 +213,7 @@ CXXFLAGS       += $(CXXFLAGS_I)
 
 export	CXXFLAGS
 
-CXXFLAGS_A	= $(CXXFLAGS)
+CXXFLAGS_A	= $(CXXFLAGS) -flto
 CXXFLAGS_SO	= $(CXXFLAGS) -fpic
 
 export	CXXFLAGS_A
@@ -199,14 +222,19 @@ export	CXXFLAGS_SO
 ################################################################################
 # libs
 LDFLAGS_OPT	= -O3
-LDFLAGS_OPT    += -march=native
-LDFLAGS_OPT    += -flto
-LDFLAGS_OPT    += -fuse-linker-plugin
+#LDFLAGS_OPT    += -flto
+#LDFLAGS_OPT    += -fuse-linker-plugin
+
+LDFLAGS_W	= -Wall
+LDFLAGS_W	+= -Wextra
+LDFLAGS_W	+= -fno-common
+LDFLAGS_W	+= -Werror
 
 LDFLAGS_L	= -L $(BUILD_LIB_DIR)/libalx/
 
 LDFLAGS		= -shared
 LDFLAGS        += $(LDFLAGS_OPT)
+LDFLAGS        += $(LDFLAGS_W)
 LDFLAGS        += $(LDFLAGS_L)
 
 export	LDFLAGS
@@ -289,14 +317,15 @@ COMPILE_ACTUAL_TMP_TARGETS	= $(COMPILE_TARGETS:=_tmp)
 COMPILE_ACTUAL_LIB_TARGETS	= $(COMPILE_TARGETS:=_lib)
 
 $(filter-out base_lib, $(COMPILE_ACTUAL_LIB_TARGETS)): base_lib
+curl_lib: data-structures_lib
 cv_lib: gsl_lib
 
 PHONY	+= $(COMPILE_ACTUAL_TMP_TARGETS)
 $(COMPILE_ACTUAL_TMP_TARGETS): %_tmp:
-	$(Q)$(MAKE) $*		-C $(MK_TMP_DIR)
+	$(Q)$(MAKE) $*	-f tmp.mk	-C $(SRC_DIR)
 PHONY	+= $(COMPILE_ACTUAL_LIB_TARGETS)
 $(COMPILE_ACTUAL_LIB_TARGETS): %_lib: %_tmp
-	$(Q)$(MAKE) $*		-C $(MK_LIB_DIR)
+	$(Q)$(MAKE) $*	-f lib.mk	-C $(SRC_DIR)
 
 
 ################################################################################
@@ -372,7 +401,7 @@ install_extra: | install-zbar
 install_extra: | install-base
 
 PHONY	+= install-curl
-install-curl: | inst-inc-x-curl inst-libalx-curl install-base
+install-curl: | inst-inc-x-curl inst-libalx-curl install-base install-data-structures
 PHONY	+= install-cv
 install-cv: | inst-inc-x-cv inst-libalx-cv install-base install-gsl
 PHONY	+= install-gmp
@@ -405,7 +434,6 @@ inst-sh:
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/*"
 	$(Q)cp -rf $(v)		$(LIB_DIR)/libalx/sh/*			\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/sh/
-	@echo
 
 PHONY	+= inst-py
 inst-py:
@@ -413,7 +441,6 @@ inst-py:
 	@echo	"	CP -r	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/py/*"
 	$(Q)cp -rf $(v)		$(LIB_DIR)/libalx/py/*			\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/py/
-	@echo
 
 PHONY += inst-share
 inst-share:
@@ -459,22 +486,26 @@ PHONY += inst--lib%.a
 inst--lib%.a:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 	@echo	"	CP	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/lib$*.a"
-	$(Q)cp -f $(v)		$(BUILD_LIB_DIR)/libalx/lib$*.a		\
+	$(Q)cp -f $(v)		$(BUILD_A_DIR)/libalx/lib$*.a		\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 
 PHONY += inst--lib%.so
 inst--lib%.so:
 	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
-	@echo	"	CP	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/lib$*.so"
-	$(Q)cp -f $(v)		$(BUILD_LIB_DIR)/libalx/lib$*.so	\
+	@echo	"	CP	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/lib$*.so.$(LIBVERSION)"
+	$(Q)cp -f $(v)		$(BUILD_SO_DIR)/libalx/lib$*.so.$(LIBVERSION)	\
 					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
+	@echo	"	LN -s	$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/lib$*.so"
+	$(Q)ln -sf -T		lib$*.so.$(VERSION)			\
+					$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/lib$*.so
 
 PHONY += inst--lib%.pc
 inst--lib%.pc:
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
-	@echo	"	CP	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/lib$*.pc"
-	$(Q)cp -f $(v)		$(LIB_DIR)/pkgconfig/lib$*.pc		\
-					$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PC_DIR)/
+	@echo	"	CP	$(DESTDIR)/$(INSTALL_PC_DIR)/lib$*.pc"
+	$(Q)sed	"s/<version>/$(LIBVERSION)/"				\
+				$(LIB_DIR)/pkgconfig/lib$*.pc		\
+				>	$(DESTDIR)/$(INSTALL_PC_DIR)/lib$*.pc
 
 
 ################################################################################
@@ -483,7 +514,6 @@ inst--lib%.pc:
 PHONY += uninstall
 uninstall:
 	@echo	"	Uninstall:"
-	@echo
 	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/"
 	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_ETC_DIR)/libalx/
 	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_INC_DIR)/libalx/"
@@ -492,17 +522,18 @@ uninstall:
 	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_LIB_DIR)/libalx/
 	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/"
 	$(Q)rm -f -r		$(DESTDIR)/$(INSTALL_SHARE_DIR)/libalx/
-	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/libalx*.pc"
-	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/
-	$(Q)find		$(DESTDIR)/$(INSTALL_PKGCONFIG_DIR)/	\
+	@echo	"	RM -rf	$(DESTDIR)/$(INSTALL_PC_DIR)/libalx*.pc"
+	$(Q)mkdir -p		$(DESTDIR)/$(INSTALL_PC_DIR)/
+	$(Q)find		$(DESTDIR)/$(INSTALL_PC_DIR)/	\
 				-type f -name 'libalx*.pc' -exec rm '{}' '+'
+	@echo	"	LDCONFIG"
+	$(Q)ldconfig
 	@echo	"	RM	$(DESTDIR)/etc/ld.so.conf.d/libalx*.conf"
 	$(Q)find		$(DESTDIR)/etc/ld.so.conf.d/		\
 				-type f -name 'libalx*.conf' -exec rm '{}' '+'
 	@echo	"	LDCONFIG"
 	$(Q)ldconfig
 	@echo	"	Done"
-	@echo
 
 ################################################################################
 # ldconfig
@@ -512,11 +543,10 @@ conf_ld:
 	@echo	"	LDCONFIG"
 	$(Q)cp -r -f $(v)	$(ETC_DIR)/ld.so.conf.d/*		\
 					$(DESTDIR)/etc/ld.so.conf.d/
-	$(Q)ldconfig
-	@echo
+	$(Q)flock /tmp	-c ldconfig
 
 ################################################################################
-# test
+# clean
 
 PHONY += clean
 clean:

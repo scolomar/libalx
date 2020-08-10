@@ -9,39 +9,42 @@
  ******************************************************************************/
 #pragma once	/* libalx/base/stdlib/search.hpp */
 
+#if !defined(__cplusplus)
+#warning	This header file should only be included in C++.  In C,	\
+		include the header file of the same name and `.h`	\
+		extension instead.
+#endif
+
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include <cstddef>
 #include <cstdint>
 
+#include "libalx/base/compiler/attribute.hpp"
 #include "libalx/base/compiler/restrict.hpp"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
-/* Rename without alx_ prefix */
-#if defined(ALX_NO_PREFIX)
-#define search_uint(nmemb, arr, x)	alx_search_uint(nmemb, arr, x)
-#define search_int(nmemb, arr, x)	alx_search_int(nmemb, arr, x)
-#define search_u8(nmemb, arr, x)	alx_search_u8(nmemb, arr, x)
-#define search_s8(nmemb, arr, x)	alx_search_s8(nmemb, arr, x)
-#define search_u16(nmemb, arr, x)	alx_search_u16(nmemb, arr, x)
-#define search_s16(nmemb, arr, x)	alx_search_s16(nmemb, arr, x)
-#define search_u32(nmemb, arr, x)	alx_search_u32(nmemb, arr, x)
-#define search_s32(nmemb, arr, x)	alx_search_s32(nmemb, arr, x)
-#define search_u64(nmemb, arr, x)	alx_search_u64(nmemb, arr, x)
-#define search_s64(nmemb, arr, x)	alx_search_s64(nmemb, arr, x)
-#endif
 
 
 /******************************************************************************
  ******* extern "C" ***********************************************************
  ******************************************************************************/
-extern	"C"
-{
+extern "C" {
+
+
+/******************************************************************************
+ ******* struct / union *******************************************************
+ ******************************************************************************/
+
+
+/******************************************************************************
+ ******* C prototypes *********************************************************
+ ******************************************************************************/
 [[gnu::nonnull]][[gnu::pure]]
 ptrdiff_t	alx_search_uint	(ptrdiff_t nmemb,
 				 const unsigned *restrict arr,
@@ -82,7 +85,29 @@ ptrdiff_t	alx_search_u64	(ptrdiff_t nmemb,
 ptrdiff_t	alx_search_s64	(ptrdiff_t nmemb,
 				 const int64_t *restrict arr,
 				 int64_t x);
-}
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
+#if defined(ALX_NO_PREFIX)
+ALX_ALIAS_DECLARATION(search_uint,	alx_search_uint);
+ALX_ALIAS_DECLARATION(search_int,	alx_search_int);
+ALX_ALIAS_DECLARATION(search_u8,	alx_search_u8);
+ALX_ALIAS_DECLARATION(search_s8,	alx_search_s8);
+ALX_ALIAS_DECLARATION(search_u16,	alx_search_u16);
+ALX_ALIAS_DECLARATION(search_s16,	alx_search_s16);
+ALX_ALIAS_DECLARATION(search_u32,	alx_search_u32);
+ALX_ALIAS_DECLARATION(search_s32,	alx_search_s32);
+ALX_ALIAS_DECLARATION(search_u64,	alx_search_u64);
+ALX_ALIAS_DECLARATION(search_s64,	alx_search_s64);
+#endif
+
+
+/******************************************************************************
+ ******* extern "C" ***********************************************************
+ ******************************************************************************/
+}	/* extern "C" */
 
 
 /******************************************************************************
@@ -93,11 +118,6 @@ namespace alx {
 
 /******************************************************************************
  ******* enum *****************************************************************
- ******************************************************************************/
-
-
-/******************************************************************************
- ******* struct / union *******************************************************
  ******************************************************************************/
 
 

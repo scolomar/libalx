@@ -5,13 +5,13 @@
 
 
 /******************************************************************************
- ******* headers **************************************************************
+ ******* include **************************************************************
  ******************************************************************************/
 #include "libalx/extra/gsl/distributions/uniform.h"
 
 
 /******************************************************************************
- ******* macros ***************************************************************
+ ******* define ***************************************************************
  ******************************************************************************/
 
 
@@ -29,18 +29,23 @@
  ******* global functions *****************************************************
  ******************************************************************************/
 extern
-long double	alx_gsl_dist_uniform_E_ldbl	(long double a, long double b);
+long double	alx_gsl_distr_uniform_E_ldbl	(long double a, long double b);
 extern
-double		alx_gsl_dist_uniform_E		(double a, double b);
+double		alx_gsl_distr_uniform_E		(double a, double b);
 extern
-float		alx_gsl_dist_uniform_E_flt	(float a, float b);
+float		alx_gsl_distr_uniform_E_flt	(float a, float b);
 
 extern
-long double	alx_gsl_dist_uniform_Var_ldbl	(long double a, long double b);
+long double	alx_gsl_distr_uniform_Var_ldbl	(long double a, long double b);
 extern
-double		alx_gsl_dist_uniform_Var	(double a, double b);
+double		alx_gsl_distr_uniform_Var	(double a, double b);
 extern
-float		alx_gsl_dist_uniform_Var_flt	(float a, float b);
+float		alx_gsl_distr_uniform_Var_flt	(float a, float b);
+
+
+/******************************************************************************
+ ******* alias ****************************************************************
+ ******************************************************************************/
 
 
 /******************************************************************************
